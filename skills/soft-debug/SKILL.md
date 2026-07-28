@@ -1,0 +1,104 @@
+---
+name: soft-debug
+description: "Investigate and fix bugs, failing tests, regressions, build failures, or unexpected behavior using evidence and bounded hypotheses. Use before speculative patching."
+---
+
+# Soft Debug
+
+Find the causal mechanism, then fix it with the least risky change. Be systematic without forcing a four-phase ceremony onto an obvious compiler error.
+
+## 1. Define the failure
+
+Capture:
+
+- Observed behavior
+- Expected behavior
+- Reproduction path
+- Environment or data conditions
+- First known bad version or recent relevant changes, when available
+
+Read the complete error, stack trace, failed assertion, logs, or browser console output. Do not summarize away the line that identifies the failing boundary.
+
+If the failure is already precise and local, move directly to tracing it.
+
+## 2. Reproduce or gather evidence
+
+Prefer the cheapest reliable reproducer:
+
+- A focused existing test
+- A new regression test
+- A minimal command or script
+- A deterministic UI sequence
+- A targeted log or state inspection
+
+When the problem crosses components, inspect inputs and outputs at the boundaries. Add temporary instrumentation only where it distinguishes hypotheses. Remove it after the issue is understood unless it is useful production observability.
+
+If reproduction is intermittent, record frequency and conditions. Avoid treating one successful run as proof.
+
+## 3. Trace the cause
+
+Trace bad state backward:
+
+- Where is the incorrect value or transition first observable?
+- Which caller, event, mutation, or external response produced it?
+- What assumption changed?
+- Is there a nearby working path to compare?
+- Could several visible failures share one upstream cause?
+
+State one active hypothesis:
+
+> X is causing Y because evidence Z distinguishes it from the alternatives.
+
+Test the smallest discriminating change or observation. Avoid changing several variables at once.
+
+## Hypothesis budget
+
+- One active hypothesis at a time.
+- After a failed hypothesis, record what the result ruled out.
+- After two failed attempts built on the same assumption, reset and reread the evidence.
+- After three materially different failed fixes, or when each fix exposes shared-state coupling elsewhere, question the architecture before applying another patch.
+
+This is a guard against thrashing, not a reason to stop at an arbitrary number when new evidence is strong.
+
+## 4. Fix the source
+
+Prefer the narrowest change that restores the intended invariant.
+
+- Fix the origin of invalid state rather than every downstream symptom.
+- Avoid opportunistic refactors unless the current design prevents a safe fix.
+- Add validation at boundaries when it prevents recurrence.
+- Preserve compatibility unless the user approved a change.
+- For an external or environmental cause, improve handling, diagnostics, retry behavior, or error messages as appropriate.
+
+## 5. Prove the fix
+
+Use a regression test when practical. Prefer strict red-green when the failure sharpens a behavior contract; use test-alongside when the change is mostly styling, configuration, or simple wiring.
+
+Verify:
+
+- The original reproducer now succeeds.
+- The regression test fails against the old behavior when that can be demonstrated safely.
+- Nearby behavior remains intact.
+- Temporary diagnostics and experimental changes are removed.
+- The final diff contains one understandable causal fix.
+
+Before declaring the issue fixed, rerun the original reproducer after the final relevant edit, run the focused regression checks, and broaden verification when shared state, public contracts, data, security, or multiple consumers changed.
+
+## Confidence labels
+
+Use precise language:
+
+- **Confirmed root cause:** direct evidence links cause to failure and the reproducer is fixed.
+- **Probable cause:** evidence is strong but the environment prevents full reproduction.
+- **Unknown:** investigation narrowed the space but did not establish causality.
+
+Do not turn a probable explanation into a certainty.
+
+## Avoid
+
+- “It is probably X” followed immediately by a patch
+- Re-running the same command without changing evidence
+- Broad dependency upgrades as a first move
+- Multiple unrelated fixes in one attempt
+- Fixing a timeout with a longer arbitrary timeout when a condition can be observed
+- Declaring a flaky issue solved after one passing run

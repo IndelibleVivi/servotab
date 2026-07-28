@@ -1,0 +1,54 @@
+# Changelog
+
+## 0.2.0-rc1 — 2026-07-28
+
+Activation and progressive-disclosure redesign.
+
+- Made `softpowers` the only implicitly discoverable skill.
+- Kept all 11 leaf skills explicit-only as direct shortcuts and eval controls.
+- Replaced the old router’s unsupported “load another skill” promise with 11 router-owned `references/*.md` playbooks.
+- Reduced the implicit router to roughly 550 words and instructed it to remain silent about activation and internal task labels.
+- Added staged reference loading: zero references for clear local work, zero or one primary reference initially, at most one supporting reference before first action, and later reads only on genuine phase changes or new evidence.
+- Removed cross-skill invocation language from standalone method bodies so every leaf remains self-contained.
+- Added canonical `methods/*.md`, deterministic skill generation, and source/generated sync validation.
+- Added activation metadata to `PACK_MANIFEST.json`; the install payload now covers 12 skills and 11 router references.
+- Added auto-detection that upgrades an existing v0.1.x `~/.codex/skills` install in place while using `~/.agents/skills` for fresh current-path installs.
+- Added positive, contextual, explicit, and negative activation probes.
+- Preserved v0.1.2 transaction, rollback, LIFO manifest, edit-snapshot, and standard-library-only installation guarantees.
+
+## 0.1.2 — 2026-07-27
+
+Final packaging hardening after release-candidate review.
+
+- Refused explicit non-LIFO uninstall requests before any filesystem mutation; `--manifest` must match `.softpowers-current-manifest`.
+- Added a regression self-test proving rejected non-LIFO uninstalls leave the pointer, manifests, backups, and active skills untouched.
+- Removed PyYAML from the user installation and uninstall path.
+- Added release-generated `PACK_MANIFEST.json` with the exact 12-skill payload, file sizes, and SHA-256 digests.
+- Added standard-library runtime payload validation for source, staging, and installed targets.
+- Kept real YAML parsing as a maintainer release gate through `scripts/validate.py` and `scripts/generate_pack_manifest.py`.
+- Added a no-site-packages install/uninstall smoke test.
+
+## 0.1.1 — 2026-07-27
+
+Packaging and contract hardening after isolated Codex review.
+
+- Fixed invalid YAML in `soft-finish` frontmatter and switched validation to PyYAML for both frontmatter and `agents/openai.yaml`.
+- Changed the default personal skill root to `${CODEX_HOME:-$HOME/.codex}/skills`.
+- Made installed-directory validation target only the 12 Softpowers directories, allowing unrelated skills to coexist.
+- Replaced the copy loop with staged transactional installation and rollback.
+- Added install manifests, content digests, and restoration of replaced same-named skills during uninstall.
+- Preserved user-modified installed skills during uninstall instead of silently deleting them.
+- Aligned `soft-execute` and Behavioral Probe 1 with applicable user, repository, and global Git instructions.
+- Added isolated packaging self-tests for YAML parsing, coexistence, restoration, and rollback.
+
+## 0.1.0 — 2026-07-27
+
+Initial private pack.
+
+- Added explicit risk router with Quick / Deliberate / Deep modes.
+- Added 11 focused engineering skills.
+- Added risk-based TDD and verification ladders.
+- Bounded subagents to independent domains with no nested delegation.
+- Combined requirement and quality review into one findings-first pass.
+- Made worktree, planning documents, Git integration, and destructive cleanup conditional.
+- Added installer, uninstaller, validator, and behavioral probes.

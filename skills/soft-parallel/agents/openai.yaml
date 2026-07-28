@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft Parallel"
+  short_description: "Delegate only genuinely independent work"
+  default_prompt: "Use $soft-parallel to identify independent domains, dispatch a small bounded set of subagents, and integrate their results safely."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

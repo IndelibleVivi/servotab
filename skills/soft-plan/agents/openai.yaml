@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft Plan"
+  short_description: "Create a practical implementation plan"
+  default_prompt: "Use $soft-plan to produce a concise, repository-grounded implementation plan sized to this change."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

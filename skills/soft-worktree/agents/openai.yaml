@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft Worktree"
+  short_description: "Use Git isolation only when it adds value"
+  default_prompt: "Use $soft-worktree to create or select a safe isolated workspace for this task and report its baseline state."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

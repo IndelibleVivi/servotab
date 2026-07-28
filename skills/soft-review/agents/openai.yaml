@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft Review"
+  short_description: "Actionable code review without invented findings"
+  default_prompt: "Use $soft-review to inspect the requested diff or implementation and report only verified, actionable P0-P2 findings."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

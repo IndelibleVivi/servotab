@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft TDD"
+  short_description: "Risk-based test-driven development"
+  default_prompt: "Use $soft-tdd to choose the appropriate testing mode and implement this behavior with high-signal regression evidence."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

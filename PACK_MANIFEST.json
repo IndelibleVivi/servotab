@@ -1,0 +1,214 @@
+{
+  "schema_version": 2,
+  "pack": "softpowers-pack",
+  "version": "0.2.0-rc1",
+  "skills": [
+    "softpowers",
+    "soft-brainstorm",
+    "soft-plan",
+    "soft-execute",
+    "soft-debug",
+    "soft-tdd",
+    "soft-review",
+    "soft-receive-review",
+    "soft-verify",
+    "soft-worktree",
+    "soft-parallel",
+    "soft-finish"
+  ],
+  "activation": {
+    "implicit": [
+      "softpowers"
+    ],
+    "explicit_only": [
+      "soft-brainstorm",
+      "soft-plan",
+      "soft-execute",
+      "soft-debug",
+      "soft-tdd",
+      "soft-review",
+      "soft-receive-review",
+      "soft-verify",
+      "soft-worktree",
+      "soft-parallel",
+      "soft-finish"
+    ]
+  },
+  "files": [
+    {
+      "path": "skills/soft-brainstorm/SKILL.md",
+      "size": 3976,
+      "sha256": "65a04c14307e034b739bd488f09301747a04c1dbc045b46b64952c17828f04b6"
+    },
+    {
+      "path": "skills/soft-brainstorm/agents/openai.yaml",
+      "size": 329,
+      "sha256": "c19da58c145523cd050319fbb4c079cc37fc64ade38b02c41462b2e8465a4d3c"
+    },
+    {
+      "path": "skills/soft-debug/SKILL.md",
+      "size": 4334,
+      "sha256": "713ef637f1bd0bfa0a32afaac448d0b258b1aa438a94c6846e3356474d7ce898"
+    },
+    {
+      "path": "skills/soft-debug/agents/openai.yaml",
+      "size": 316,
+      "sha256": "52bc919ccb616087e30b763656f2b28cbaa023d97aab49bdb340fcbab2bbfe56"
+    },
+    {
+      "path": "skills/soft-execute/SKILL.md",
+      "size": 4344,
+      "sha256": "cfe07c1a777d175560b7c1d80b9c1f2e478ea0be9767bc1f5965f6636965ebc2"
+    },
+    {
+      "path": "skills/soft-execute/agents/openai.yaml",
+      "size": 324,
+      "sha256": "ec1eb1b3d5d8c6e214ad36ae14f164fe9f565d861ee32b8a07b3a4ce0ef66ef8"
+    },
+    {
+      "path": "skills/soft-finish/SKILL.md",
+      "size": 3213,
+      "sha256": "6d87b09b7112f8f887b5cd697676f46a00f0fcdca27e5cd12cc3be4aceab7091"
+    },
+    {
+      "path": "skills/soft-finish/agents/openai.yaml",
+      "size": 315,
+      "sha256": "a59549f67acabb840c764d00a3ff9f989d691d8ec9ca14dda4ad327ed86cc9c5"
+    },
+    {
+      "path": "skills/soft-parallel/SKILL.md",
+      "size": 3057,
+      "sha256": "7780297f1f1fd86c9f5343b840c72dad7909c0f1e97a5bb946f9c282a9d18441"
+    },
+    {
+      "path": "skills/soft-parallel/agents/openai.yaml",
+      "size": 325,
+      "sha256": "d851be67344598b042f207323df7b1238ba2ddfdf41446257baa65932e729a04"
+    },
+    {
+      "path": "skills/soft-plan/SKILL.md",
+      "size": 3689,
+      "sha256": "3b52b208c09bc4aa312c6aa8bbb6ad486c3a0b24e3c09c47e10064e1491ca931"
+    },
+    {
+      "path": "skills/soft-plan/agents/openai.yaml",
+      "size": 287,
+      "sha256": "934b6dd3468106fb87db34d8f26356262bfaf4bebe54c0d5d9ece614aceb3b7e"
+    },
+    {
+      "path": "skills/soft-receive-review/SKILL.md",
+      "size": 3100,
+      "sha256": "2148fdd6a55bd49e1051011afff1af5ac549e15b97f82e4bf611b84e785b0b2a"
+    },
+    {
+      "path": "skills/soft-receive-review/agents/openai.yaml",
+      "size": 333,
+      "sha256": "78936e52317ec945eb2a45dd5e07bc1df855475d07e61fbc6c1d24215c829a60"
+    },
+    {
+      "path": "skills/soft-review/SKILL.md",
+      "size": 3526,
+      "sha256": "5b638386429bb426f44d02156ff41446b415c4fb2cda9be44af96bd7e8ca154c"
+    },
+    {
+      "path": "skills/soft-review/agents/openai.yaml",
+      "size": 318,
+      "sha256": "d68b130081ef5219050e3d2cc7348b40146bc0e2e0534f1d0a51f7856b669ee2"
+    },
+    {
+      "path": "skills/soft-tdd/SKILL.md",
+      "size": 3589,
+      "sha256": "0228c7661d169bbc26ee2a6cb74830969ecff3c6a66649c61705f26d64dadeda"
+    },
+    {
+      "path": "skills/soft-tdd/agents/openai.yaml",
+      "size": 302,
+      "sha256": "dcdc7f7a59ffcc75d0a4b5ddd4ec675cac62d4a67d20369009a9b97ea17b5dda"
+    },
+    {
+      "path": "skills/soft-verify/SKILL.md",
+      "size": 3199,
+      "sha256": "3223bf148fb4e725872dc394145ec32e369c19722f7b60ce5f59ec8fbe06d140"
+    },
+    {
+      "path": "skills/soft-verify/agents/openai.yaml",
+      "size": 286,
+      "sha256": "29918bc050dc4540ae96978f98bc45512d3f60fba0350c7edd2ae7fbbe8b1843"
+    },
+    {
+      "path": "skills/soft-worktree/SKILL.md",
+      "size": 3157,
+      "sha256": "ab3096a77da16cc4165488dddfd43d41c4f7ffb435bae5a844fbd964c6596e59"
+    },
+    {
+      "path": "skills/soft-worktree/agents/openai.yaml",
+      "size": 305,
+      "sha256": "121ca7f08d4916a3d433a25b08d1b60fe805c92a8137d04b18e127b035b61ed4"
+    },
+    {
+      "path": "skills/softpowers/SKILL.md",
+      "size": 3988,
+      "sha256": "163e33c129d62269ea2a68889954bcc3aac352073538518a1ac03364da27783a"
+    },
+    {
+      "path": "skills/softpowers/agents/openai.yaml",
+      "size": 324,
+      "sha256": "dabfabf06da480f4a31771c83a5f5d509939d504b9773d1f4a25d5f3dfeb2c1d"
+    },
+    {
+      "path": "skills/softpowers/references/brainstorm.md",
+      "size": 3758,
+      "sha256": "66b3565da6e13e470c149ef1a503b5e834a8617769b52dbbc2eed77b4278fc05"
+    },
+    {
+      "path": "skills/softpowers/references/debug.md",
+      "size": 4128,
+      "sha256": "34579e4916ebd2c6ae7ec284010e86c95c5ddde0c33c086f0b0dcb5962885b84"
+    },
+    {
+      "path": "skills/softpowers/references/execute.md",
+      "size": 4126,
+      "sha256": "c5ece46d2150fd330f9dcd93c7d1ce1ce0d68277baddd26e55ab9512b415dbe6"
+    },
+    {
+      "path": "skills/softpowers/references/finish.md",
+      "size": 2998,
+      "sha256": "8a6a661f1b65e26e73d13f5cf2003865b4a3fd5e57ea2fb86a1f59cea327625e"
+    },
+    {
+      "path": "skills/softpowers/references/parallel.md",
+      "size": 2821,
+      "sha256": "286686d8ef34f325b542e19a9f435fa1ca031905c807de72b955034c3210d87c"
+    },
+    {
+      "path": "skills/softpowers/references/plan.md",
+      "size": 3462,
+      "sha256": "59a989b42ff8134768600f07da0f5dff2d79327b3b332dda1d533b5de554c5c5"
+    },
+    {
+      "path": "skills/softpowers/references/receive-review.md",
+      "size": 2851,
+      "sha256": "2e101dd0a176b22f59f6b6b9835da2380c7e9f49cc94d3bdc6544fbc6ce3f1be"
+    },
+    {
+      "path": "skills/softpowers/references/review.md",
+      "size": 3292,
+      "sha256": "57446220cc6def0f9e98ba7bc07437310b0068f6726f36bb73547720c9dd7d11"
+    },
+    {
+      "path": "skills/softpowers/references/tdd.md",
+      "size": 3345,
+      "sha256": "13993768897362d997ea7dacabd341839d7c5ba305f8b450844e715b314f07b6"
+    },
+    {
+      "path": "skills/softpowers/references/verify.md",
+      "size": 2987,
+      "sha256": "4d7a3fbe3712c10a89f19d66d22af642baeaad83f123ae0af782b2aa9562d506"
+    },
+    {
+      "path": "skills/softpowers/references/worktree.md",
+      "size": 2932,
+      "sha256": "d559951de269c856c21bb50904cb2c72293533f6d6c2f00da6bd2bafa0fa2308"
+    }
+  ]
+}

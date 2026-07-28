@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft Verify"
+  short_description: "Fresh verification matched to risk"
+  default_prompt: "Use $soft-verify to prove the relevant completion claims with fresh, appropriately scoped evidence."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

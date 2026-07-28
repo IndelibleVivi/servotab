@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft Finish"
+  short_description: "Verify and close a development change safely"
+  default_prompt: "Use $soft-finish to inspect the final tree, run risk-matched checks, and perform only the requested Git or PR actions."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

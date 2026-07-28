@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft Execute"
+  short_description: "Execute a settled plan in coherent slices"
+  default_prompt: "Use $soft-execute to implement the settled request or plan, verify each meaningful slice, and finish without unnecessary process."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false
