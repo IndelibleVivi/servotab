@@ -1,6 +1,6 @@
 ---
 name: soft-debug
-description: "Investigate and fix bugs, failing tests, regressions, build failures, or unexpected behavior using evidence and bounded hypotheses. Use before speculative patching."
+description: "Investigate and fix bugs, failing tests, regressions, build failures, or unexpected behavior using boundary localization, evidence, and bounded hypotheses. Use before speculative patching, especially for hidden-state or cross-component failures."
 ---
 
 # Soft Debug
@@ -45,6 +45,8 @@ Trace bad state backward:
 - Is there a nearby working path to compare?
 - Could several visible failures share one upstream cause?
 
+For an unclear cross-boundary failure, sketch only the shortest relevant path. At each boundary, name the assumption about input shape, identity, version, configuration, state, ordering, availability, or output. Compare cheap boundary evidence with a known-good case when available, and stop at the first violated assumption. Do not map the whole architecture before inspecting the failing path.
+
 State one active hypothesis:
 
 > X is causing Y because evidence Z distinguishes it from the alternatives.
@@ -55,10 +57,12 @@ Test the smallest discriminating change or observation. Avoid changing several v
 
 - One active hypothesis at a time.
 - After a failed hypothesis, record what the result ruled out.
-- After two failed attempts built on the same assumption, reset and reread the evidence.
+- After two failed hypotheses, reconsider the chosen boundary and hidden assumptions before broadening the search or adding another patch.
 - After three materially different failed fixes, or when each fix exposes shared-state coupling elsewhere, question the architecture before applying another patch.
 
 This is a guard against thrashing, not a reason to stop at an arbitrary number when new evidence is strong.
+
+Do not delegate a vague symptom. Delegate only after localization reveals distinct evidence questions, then verify returned claims against the primary artifacts.
 
 ## 4. Fix the source
 
@@ -68,7 +72,7 @@ Prefer the narrowest change that restores the intended invariant.
 - Avoid opportunistic refactors unless the current design prevents a safe fix.
 - Add validation at boundaries when it prevents recurrence.
 - Preserve compatibility unless the user approved a change.
-- For an external or environmental cause, improve handling, diagnostics, retry behavior, or error messages as appropriate.
+- For an external or environmental cause, improve diagnostics or error handling first. Add retries or fallback behavior only when the observed failure and product contract justify them.
 
 ## 5. Prove the fix
 

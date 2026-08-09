@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0-rc2 — 2026-08-09
+
+Evidence-economy and failure-localization refinement.
+
+- Added a router-level complexity and evidence budget so direct work avoids unsupported abstractions, fallback paths, repeated reads, unused hashes, and duplicate proof.
+- Added the same current-job test to explicit `soft-execute` and claim-driven stopping rules to `soft-verify`.
+- Consolidated the unique boundary-mapping behavior from the local `trace-complex-failures` experiment into `soft-debug`, including first-violated-assumption localization and a stronger reset after two failed hypotheses.
+- Tightened retry and fallback guidance so external failures receive direct diagnostics unless observed evidence and the product contract justify machinery.
+- Recast parallel dispatch as a compact Outcome / Scope / Context / Authority / Return contract, preserved permission boundaries, prevented ambiguous duplicate dispatch, and discouraged routine polling.
+- Added activation and behavioral pressure cases for cross-boundary bugs, fallback temptation, public security requirements, and stopping after sufficient proof.
+- Documented a cleaner pairwise evaluation protocol; no token-savings percentage is claimed without uncontaminated repeated runs.
+
 ## 0.2.0-rc1 — 2026-07-28
 
 Activation and progressive-disclosure redesign.

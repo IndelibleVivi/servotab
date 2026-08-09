@@ -21,12 +21,13 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 ## Default behavior
 
 - Follow applicable user, repository, and global instructions before this workflow.
-- Inspect the smallest repository context that can support a correct action.
+- Inspect the smallest repository context that can support a correct action. Expand only when the focused path cannot answer the question.
 - For clear, local, reversible work, proceed directly and read no reference.
+- Prefer one implementation path and one source of truth. Add abstractions, state, fallback, retry, compatibility, dependencies, hashes, or checks only for current behavior, an existing contract, observed evidence, or an applicable risk.
 - When the user asks for implementation, continue through implementation and verification. Stop at planning only when the user requested a plan or a material unresolved decision blocks safe progress.
 - Ask only when a choice is destructive, irreversible, externally visible, or materially changes architecture and cannot be resolved from context. Otherwise state a safe assumption briefly and proceed.
 - Do not create a worktree, design document, subagent, commit, push, PR, or merge merely because a method exists.
-- Make completion claims only from fresh evidence gathered after the final relevant change.
+- Make completion claims only from fresh, risk-matched evidence; do not repeat equivalent proof.
 
 ## Progressive disclosure
 

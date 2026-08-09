@@ -2,6 +2,8 @@
 
 Use subagents as a leverage tool, not a default unit of work. Each subagent consumes additional context, tool calls, and integration effort.
 
+Delegation changes the work surface, not the objective or permission. Keep one writer for every overlapping file or state surface.
+
 ## Parallelism gate
 
 Delegate only when all are true:
@@ -45,15 +47,15 @@ Increase the limit only when the task has clearly independent domains and the us
 
 Before dispatch, specify:
 
-- Scope
-- Goal
-- Relevant files or commands
-- Constraints and non-goals
-- Whether writing is allowed
-- Expected concise output
-- Verification responsibility
+- **Outcome:** the concrete result owned by this lane
+- **Scope:** included files, systems, questions, and non-goals
+- **Context:** the smallest canonical sources and current facts needed to begin
+- **Authority:** allowed reads, writes, external actions, and stop gates
+- **Return:** destination, required evidence, unknowns, and concise output shape
 
 Provide only the context each agent needs. Do not dump the entire conversation, plan, or repository.
+
+Create each lane once. If dispatch returns an ambiguous error or timeout, inspect existing agents once before retrying so duplicate workers do not compete for the same responsibility.
 
 ## Write safety
 
@@ -91,3 +93,5 @@ The main agent:
 6. Reports failures honestly.
 
 Do not run a second subagent wave by default. Dispatch again only when the first results reveal a new independent domain that justifies the cost.
+
+After confirmed dispatch, do not poll healthy agents through chat. Continue a non-overlapping main-agent responsibility or wait for an explicit return, concrete delivery problem, or user status request.

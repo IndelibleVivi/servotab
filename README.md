@@ -2,7 +2,7 @@
 
 给 Codex 使用的风险分级工程 skills。它保留 Superpowers 中真正有价值的骨架：设计收敛、计划、证据驱动调试、TDD、代码审阅、验证、worktree、并行代理和分支收口；同时让方法服务于任务，而不把每次改动拖进固定仪式。
 
-当前版本：`0.2.0-rc1`
+当前版本：`0.2.0-rc2`
 
 ## v0.2 的核心变化
 
@@ -19,6 +19,8 @@ v0.2 改成：
 - Bug、review、迁移等任务先读 0–1 个 primary reference；只有阶段真实变化或新证据出现时才加载下一份。
 - Router 不宣布自己被激活，也不向用户表演 Quick / Deliberate / Deep 分类。
 - 用户说正常语言即可。routing 是 Codex 的责任。
+- Router 现在同时约束 complexity 与 evidence budget：没有当前用途的 fallback、状态、hash、重复检查和第二轮 acceptance 不进入默认路径。
+- 复杂故障的 boundary localization 已并入 `soft-debug`；不再需要另一个重叠的 implicit debugging skill。
 
 ## 运行时结构
 
@@ -109,7 +111,7 @@ python3 scripts/validate_sync.py
 解压后：
 
 ```bash
-cd softpowers-pack-v0.2.0-rc1
+cd softpowers-pack-v0.2.0-rc2
 ./install.sh
 ```
 
@@ -243,7 +245,7 @@ python3 scripts/selftest.py
 
 ## RC 观察重点
 
-`0.2.0-rc1` 主要验证 activation 与 progressive disclosure。真实任务里观察：
+`0.2.0-rc2` 继续验证 activation 与 progressive disclosure，并加入 complexity / evidence budget 和复杂故障 boundary localization。真实任务里观察：
 
 - 该触发时是否触发；
 - 解释概念、简单找文件、闲聊时是否保持沉默；

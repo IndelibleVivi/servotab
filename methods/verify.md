@@ -16,6 +16,13 @@ List the claims that matter, such as:
 
 For each claim, identify the command, inspection, or manual scenario that proves it.
 
+## Evidence budget
+
+- Run a check only when its result supports a named claim or can change the next action.
+- Do not calculate hashes without an identity or integrity decision that will use them.
+- Do not rerun unchanged checks or add a second acceptance loop merely to restate existing proof.
+- Stop when every material claim has proportionate fresh evidence; more commands do not automatically create more confidence.
+
 ## Verification ladder
 
 ### Level 1: Focused

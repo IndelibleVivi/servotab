@@ -20,6 +20,13 @@ Perform one sanity check before editing:
 
 Correct small stale details yourself. Surface a concern only when it changes the approach materially.
 
+## Spend complexity on current work
+
+- Prefer one normal implementation path and one source of truth.
+- Give every new file, abstraction, state, fallback, retry, compatibility path, dependency, and check a present job. If removing it would not change the requested outcome or protect an applicable boundary, do not add it.
+- A second path needs a real caller or supported contract plus explicit precedence and failure behavior.
+- Choose each additional search or check because its result can change the implementation or confidence. Stop when the settled request and risk-matched proof are complete.
+
 ## Execute in coherent slices
 
 For each slice:

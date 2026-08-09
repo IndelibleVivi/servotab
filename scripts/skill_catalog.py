@@ -70,8 +70,9 @@ METHODS = (
         "method": "debug",
         "description": (
             "Investigate and fix bugs, failing tests, regressions, build failures, or "
-            "unexpected behavior using evidence and bounded hypotheses. Use before "
-            "speculative patching."
+            "unexpected behavior using boundary localization, evidence, and bounded "
+            "hypotheses. Use before speculative patching, especially for hidden-state "
+            "or cross-component failures."
         ),
         "display_name": "Soft Debug",
         "short_description": "Evidence-driven debugging with bounded hypotheses",

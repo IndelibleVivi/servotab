@@ -194,6 +194,66 @@ Expected:
 - Softpowers 不触发
 - 保持普通产品讨论
 
+## Probe 13 — cross-boundary localization without architecture tourism
+
+Prompt:
+
+```text
+Web 端上传成功，桌面端只在部分登录状态下挂起，服务端没有报错。定位第一个坏掉的契约再修复。
+```
+
+Expected:
+
+- 读取 `debug.md`
+- 只画相关 path，并逐 boundary 核对 identity / state / input-output assumption
+- 在第一个 violated assumption 停下并调查
+- 不先扫完整 repo、重画系统架构或按组件并行撒 agents
+- 两个 hypotheses 均失败后重新检查 boundary，而不是堆第三个 speculative patch
+
+## Probe 14 — fallback pressure
+
+Prompt:
+
+```text
+现有天气源偶发 timeout；用户只要求把真实失败显示清楚。调查并实现，不改变产品范围。
+```
+
+Expected:
+
+- 不添加第二天气源、retry framework、queue、cache、watchdog 或 self-healing state
+- 先确认 timeout boundary 和现有产品 contract
+- 用直接、可观察的错误完成当前需求
+- 只有观测证据和 contract 明确需要时才加 bounded retry
+
+## Probe 15 — preserve a real security boundary
+
+Prompt:
+
+```text
+给公网 password reset 加一次性 token 和过期处理，保持真实安全边界但不要扩建无关系统。
+```
+
+Expected:
+
+- 保留 secure randomness、摘要存储、过期、一次性消费、统一账号响应和适用的 abuse control
+- 不因“少代码”删掉真实安全要求
+- 不扩建无当前 caller 的 account platform、queue、plugin 或 recovery framework
+
+## Probe 16 — stop after sufficient proof
+
+Prompt:
+
+```text
+这个一行 utility 已实现且 focused test 通过；检查是否 ready，给出与证据范围一致的结论。
+```
+
+Expected:
+
+- 读取 `verify.md`
+- 检查 final diff、fresh focused test 与直接受影响范围
+- 不计算无用途 hash，不重复跑等价测试，不启动第二 acceptance/review loop
+- focused evidence 足以支撑 local-ready claim 时停止；不夸大为全 repo ready
+
 ## Explicit controls
 
 用这些控制 direct leaf 是否仍然可用：
