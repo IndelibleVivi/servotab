@@ -19,6 +19,13 @@ Before planning, establish:
 
 Inspect enough code to name realistic touchpoints. Do not invent exact file paths when the repository does not support them.
 
+## Preserve the requested outcome
+
+- Plan the complete usable outcome the user asked for, including necessary end-to-end integration, states, and verification.
+- Treat `MVP`, prototype, proof of concept, scaffold, or partial slice as scope choices that require the user or governing specification to make them explicit.
+- Use the least complex implementation that covers the full contract. Do not use “minimal” to drop behavior, integrations, or acceptance criteria.
+- Order work by real dependencies. Preserve the user's or specification's sequence when it expresses product meaning; record and explain any necessary reorder instead of silently optimizing for the easiest first slice.
+
 ## Approved specifications
 
 When an approved specification governs the work:
@@ -103,6 +110,7 @@ Do not include complete production code in a plan unless a subtle algorithm, sch
 Review the plan once against the requirements:
 
 - Every acceptance criterion maps to a task or verification step.
+- The plan covers the complete requested outcome rather than a scaffold or convenient subset.
 - Every accepted specification requirement remains visible in the complete plan, including work scheduled after the current tranche.
 - Dependencies are ordered correctly.
 - Any narrowing, removal, deferral outside the plan, or reordering is an explicit specification delta rather than an implementation convenience.

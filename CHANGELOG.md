@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0-rc4 — 2026-08-11
+
+Complete-outcome and Worker Lanes refinement.
+
+- Made the complete requested usable outcome the implementation default; simplicity now constrains mechanism rather than silently reducing product scope to an MVP, scaffold, placeholder, or convenient tranche.
+- Required plans to preserve end-to-end coverage and meaningful order, with MVP/prototype scope and material reordering treated as explicit decisions.
+- Routed product descriptions, tutorials, screenshots, examples, logs, and reviews by user intent and source authority (`inspiration`, `evidence`, or `normative`) instead of by artifact format.
+- Reworked `soft-parallel` around Requester / Coordinator / Task Worker / optional Helper responsibilities, bounded work orders, one-writer ownership, explicit return packets, and coordinator verification.
+- Allowed one clean worker lane when context isolation or coordinator attention materially helps, while retaining fewest-lanes, no-duplicate-worker, no-routine-polling, and authorization boundaries.
+- Added behavioral probes for anti-MVP regression, reference-led implementation, and a single bounded worker lane.
+
 ## 0.2.0-rc3 — 2026-08-10
 
 Specification-to-implementation continuity.

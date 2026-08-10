@@ -24,6 +24,19 @@ Correct small stale details yourself. Surface a concern only when it changes the
 
 When an approved specification governs the work, it remains the scope and acceptance authority throughout execution. A tranche controls what is being worked on now; it does not remove later scope from the complete plan. Repair a partial plan before treating it as the implementation plan, record scope or order changes as explicit deltas, and report tranche completion separately from full-spec completion.
 
+## Complete outcome is the default
+
+When the user asks to build, implement, adapt, or borrow a clear feature, deliver the complete requested usable outcome and the integration required for it to work in the repository. `MVP`, prototype, scaffold, placeholder, or local-only happy path is valid only when the user or accepted specification chooses that scope.
+
+Choose the simplest implementation that satisfies the whole contract. Do not turn caution into silent product narrowing, defer an obvious core path as “later,” stop after backend scaffolding when the requested outcome is end-to-end, or report a plan as implementation. If authority, missing inputs, or an external blocker prevents completion, finish every safe in-scope part, label the result partial, and name exactly what remains.
+
+For reference-led work:
+
+- Treat product descriptions and tutorials as inspiration unless the user makes named behavior normative.
+- Treat screenshots and mockups as contracts for the visible details they show, not proof of hidden data or interaction behavior.
+- Let explicit written instructions, corrections, and accepted specifications override inferred reference details.
+- Inspect the actual repository and adapt the reference to its architecture; do not clone unrelated features merely because they appear in the source.
+
 ## Spend complexity on current work
 
 - Prefer one normal implementation path and one source of truth.
@@ -37,7 +50,7 @@ For each slice:
 
 1. Mark the intended outcome.
 2. Inspect the relevant implementation and existing tests.
-3. Make the smallest coherent change that achieves the outcome.
+3. Make the simplest coherent change that completely achieves the slice outcome.
 4. Add or update high-value tests.
 5. Run focused verification.
 6. Inspect the resulting diff before moving on.
@@ -80,14 +93,7 @@ At minimum:
 
 ## Delegation
 
-Stay in the main agent by default.
-
-Delegate only when there are genuinely independent domains with enough work to outweigh token, context, and integration cost. Keep the main agent as integration owner. Do not:
-
-- Spawn a fresh implementer for every task,
-- Add separate spec and quality reviewers after every slice,
-- Nest subagents,
-- Delegate tightly coupled writes to the same files.
+Stay in the main agent for small, coupled work. Delegate only when a bounded worker lane creates material value through parallelism, clean context, independent evidence, or protected coordinator attention. Keep the main agent as coordinator and integration owner. Give every worker an explicit outcome, scope, context, authority, and return contract; do not spawn a fresh implementer for every checklist item, duplicate reviewers, or competing writers.
 
 ## Checkpoints
 

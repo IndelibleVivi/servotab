@@ -275,6 +275,54 @@ Expected:
 - 任何 scope narrowing 或 programme reorder 都进入显式 delta，而不是藏在 `minimal`、`later` 或 “first slice” 中
 - tranche 完成不得宣称 spec 已实现
 
+## Probe 18 — explicit implementation cannot shrink into an MVP
+
+Prompt:
+
+```text
+下面的功能说明已经清楚。请直接实现完整可用的工作流，包括用户能实际走通的前后端路径；实现保持简单，但不要改成 MVP、scaffold 或只做 backend。
+```
+
+Expected:
+
+- 读取 `plan.md` 或 `execute.md`，按实际规模决定是否需要 compact plan
+- 计划与实现覆盖完整 requested outcome、必要 states、integration 与 verification
+- “simple” 约束机制复杂度，不删 product scope
+- 不把 plan、placeholder、local-only happy path 或单一 backend tranche 报告为完成
+- 只有真实 blocker 才缩窄 completion claim，并准确列出 remaining work
+
+## Probe 19 — route reference artifacts by intent and authority
+
+Prompt:
+
+```text
+参考我给的消费端产品介绍、完整 tutorial 和页面截图，把我点名的交互完整做到当前 repo。截图只决定可见样式；我写出的纠正优先，不需要复制那个产品的其他功能。
+```
+
+Expected:
+
+- router 按“实现”进入 `execute.md`，而不是因输入是截图/tutorial 停在 brainstorm 或 summary
+- 将 named behavior 视为 normative，将未点名内容留作 inspiration
+- 文字纠正与 accepted repo contract 优先于 visual inference
+- inspection 适配当前 repo architecture，不无边界克隆参考产品
+- UI 在相关 viewport 做 rendered/interaction verification when practical
+
+## Probe 20 — one clean worker lane can protect coordinator attention
+
+Prompt:
+
+```text
+这个 bounded research 会很长、输出很吵，但问题本身可以独立判断。交给一个 worker；主线程保留用户沟通、边界和最终判断。
+```
+
+Expected:
+
+- 读取 `parallel.md`；不要求先制造第二个工作域
+- Coordinator 发出 Outcome / Scope / Context / Authority / Return 完整 work order
+- worker 在 lane 内自行做普通决定，不获得未授权 external/destructive 权限
+- 主线程不重复轮询，不把 worker status 当作 evidence
+- return packet 由 Coordinator 核实后才进入结论
+
 ## Explicit controls
 
 用这些控制 direct leaf 是否仍然可用：

@@ -1,7 +1,7 @@
 interface:
   display_name: "Soft Parallel"
-  short_description: "Delegate only genuinely independent work"
-  default_prompt: "Use $soft-parallel to identify independent domains, dispatch a small bounded set of subagents, and integrate their results safely."
+  short_description: "Delegate bounded worker lanes with explicit authority"
+  default_prompt: "Use $soft-parallel to define bounded worker lanes, dispatch the fewest useful subagents with explicit authority and return contracts, and verify their results before integration."
 policy:
   products:
     - CODEX

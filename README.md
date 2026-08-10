@@ -2,7 +2,7 @@
 
 给 Codex 使用的风险分级工程 skills。它保留 Superpowers 中真正有价值的骨架：设计收敛、计划、证据驱动调试、TDD、代码审阅、验证、worktree、并行代理和分支收口；同时让方法服务于任务，而不把每次改动拖进固定仪式。
 
-当前版本：`0.2.0-rc3`
+当前版本：`0.2.0-rc4`
 
 ## v0.2 的核心变化
 
@@ -21,6 +21,9 @@ v0.2 改成：
 - 用户说正常语言即可。routing 是 Codex 的责任。
 - Router 现在同时约束 complexity 与 evidence budget：没有当前用途的 fallback、状态、hash、重复检查和第二轮 acceptance 不进入默认路径。
 - 复杂故障的 boundary localization 已并入 `soft-debug`；不再需要另一个重叠的 implicit debugging skill。
+- Implementation 默认交付完整 requested usable outcome；“简单”限制实现复杂度，不把明确需求偷换为 MVP、scaffold、placeholder 或局部 tranche。
+- 产品介绍、tutorial、截图、示例、log 与 review 按用户 intent 和 source authority 路由，而不是各造一个 leaf。
+- `soft-parallel` 使用 Requester / Coordinator / Task Worker / optional Helper 的 bounded Worker Lanes contract；主线程保留用户沟通、边界、整合与最终判断。
 
 ## 运行时结构
 
@@ -59,6 +62,12 @@ soft-review/                   # explicit shortcut
 
 Router 不尝试“调用”另一个 skill。`references/` 是它自己的 progressive-disclosure 资源，因此没有悬空的 skill-to-skill dependency。
 
+输入媒介本身不决定 route：
+
+- 消费端产品介绍、tutorial、截图或 example 可能只是 `inspiration`，也可能被用户指定为 `normative` behavior；显式文字纠正优先于视觉推断。
+- 用户明确说 build / adapt / borrow 时，保留该方向，只对真正影响实现的 open decision 做 brainstorm，然后继续实现。
+- Screenshot 约束它实际展示的可见细节，不自动证明隐藏数据与 interaction semantics；完整 tutorial 也不会自动变成整个项目 spec。
+
 ## 方法与门槛
 
 | 方法 | 进入条件 |
@@ -73,14 +82,14 @@ Router 不尝试“调用”另一个 skill。`references/` 是它自己的 prog
 | Receive Review | 外部 review 意见需要核实、接受、调整、拒绝或延期 |
 | Verify | 需要证明 bug 已修、要求已满足、测试通过或 branch ready |
 | Worktree | dirty state、风险、时长或并行写入让隔离真正有价值 |
-| Parallel | 至少两个有分量、上下文有界、无关键顺序依赖的独立工作域 |
+| Parallel | bounded worker lane 能通过并行、clean context、independent evidence 或保护 coordinator attention 带来实际价值 |
 | Finish | commit、push、PR、merge、branch/worktree cleanup 或最终集成决策 |
 
 硬门槛仍然存在：
 
 - 严格 red-green 优先用于 bug、领域规则、状态机、parser、契约、迁移、并发和安全敏感行为。
 - 样式、copy、简单 wiring、配置和生成物不强制低价值 unit test。
-- Subagent 默认最多 3 个，无嵌套；主线程始终负责整合和验证。
+- Task Worker 默认最多 3 个；只在 work order 与平台允许时增加一层 narrow Helper，不形成 delegation tree；主线程始终负责整合和验证。
 - Review 默认一轮，不制造 findings，不自动创建 spec reviewer + quality reviewer 双循环。
 - Verification 按 focused / adjacent / broad 分级。
 - worktree、design doc、commit、push、PR、merge 和 destructive cleanup 都不会因方法论自动发生；user request 与适用的 repository/global instructions 仍优先。
@@ -113,7 +122,7 @@ python3 scripts/validate_sync.py
 解压后：
 
 ```bash
-cd softpowers-pack-v0.2.0-rc3
+cd softpowers-pack-v0.2.0-rc4
 ./install.sh
 ```
 
@@ -251,7 +260,7 @@ python3 scripts/selftest.py
 
 ## RC 观察重点
 
-`0.2.0-rc3` 继续验证 activation、progressive disclosure、complexity / evidence budget 与复杂故障 boundary localization，并新增 approved spec 的完整 plan/execution continuity。真实任务里观察：
+`0.2.0-rc4` 继续验证 activation、progressive disclosure、complexity / evidence budget、复杂故障 boundary localization 与 approved spec continuity，并新增 complete-outcome、reference authority 与 Worker Lanes contract。真实任务里观察：
 
 - 该触发时是否触发；
 - 解释概念、简单找文件、闲聊时是否保持沉默；
@@ -259,6 +268,9 @@ python3 scripts/selftest.py
 - 第一次具体行动前是否只读 0–2 份必要材料；
 - 是否出现重复读取、全生命周期预加载、无意义 plan/TDD/worktree/subagent；
 - approved spec 是否始终保留完整 coverage，而没有被 current tranche 偷换；
+- 明确 implementation request 是否完整实现，而没有被偷换为 MVP、scaffold 或 plan-only；
+- 截图、tutorial 和产品介绍是否按 intent / authority 使用，而不是误触发 summary 或无边界克隆；
+- worker 是否收到 bounded authority/return contract，main coordinator 是否核实而非盲信回报；
 - result 与 fresh verification 是否更可靠；
 - token 与命令 thrashing 是否下降。
 

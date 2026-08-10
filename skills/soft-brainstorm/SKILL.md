@@ -18,6 +18,16 @@ Inspect the smallest useful set of materials:
 
 Do not scan the whole repository unless the decision is truly cross-cutting.
 
+## Classify reference material
+
+A product description, tutorial, screenshot, example implementation, log, or design document may be:
+
+- **Inspiration:** adopt only the qualities or behavior the user selected.
+- **Evidence:** use it to test a claim about current or desired behavior.
+- **Normative:** treat it as binding only when the user or repository makes it part of the accepted contract.
+
+Route by the requested outcome, not the artifact format. A screenshot does not automatically mean brainstorming, and a long tutorial does not automatically become the project specification. Explicit written instructions and corrections override inferred visual or tutorial details. Ask about the source's role only when the distinction materially changes the result and cannot be inferred safely.
+
 ## Reconstruct the problem
 
 State, in compact form:
@@ -29,6 +39,8 @@ State, in compact form:
 - Material unknowns
 
 Treat the user's existing direction as real input. Do not reopen settled choices simply to manufacture alternatives.
+
+When the user asks to build, adapt, or borrow a named behavior, preserve that direction and explore only the decisions still needed to implement it. Do not turn an implementation request into an open-ended product workshop.
 
 ## Explore the decision surface
 

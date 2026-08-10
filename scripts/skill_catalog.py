@@ -6,15 +6,16 @@ ROUTER = {
     "description": (
         "Use for hands-on software repository work: implementation, debugging, "
         "refactoring, testing, code review, or repository-grounded architecture "
-        "decisions. Silently choose the smallest useful method and keep clear local "
-        "work direct. Do not use for general technical explanations, simple file "
-        "lookup, casual discussion, or non-engineering writing."
+        "decisions. Silently choose a proportionate method, preserve the complete "
+        "requested outcome, and keep clear local work direct. Do not use for general "
+        "technical explanations, simple file lookup, casual discussion, or "
+        "non-engineering writing."
     ),
     "display_name": "Softpowers",
     "short_description": "Quiet risk-scaled routing for repository work",
     "default_prompt": (
-        "Use $softpowers to handle this repository task with the smallest useful "
-        "engineering method and fresh, risk-matched verification."
+        "Use $softpowers to deliver the complete requested repository outcome with a "
+        "proportionate engineering method and fresh, risk-matched verification."
     ),
     "implicit": True,
 }
@@ -178,15 +179,17 @@ METHODS = (
         "skill": "soft-parallel",
         "method": "parallel",
         "description": (
-            "Delegate independent engineering domains to a small number of subagents when "
-            "parallelism materially improves speed or context quality. Use selectively; "
-            "avoid for tiny or tightly coupled work."
+            "Delegate a small number of bounded engineering lanes to subagents when "
+            "parallelism, context isolation, independent review, or coordinator attention "
+            "materially improves the work. Use selectively; avoid for tiny or tightly "
+            "coupled work."
         ),
         "display_name": "Soft Parallel",
-        "short_description": "Delegate only genuinely independent work",
+        "short_description": "Delegate bounded worker lanes with explicit authority",
         "default_prompt": (
-            "Use $soft-parallel to identify independent domains, dispatch a small bounded "
-            "set of subagents, and integrate their results safely."
+            "Use $soft-parallel to define bounded worker lanes, dispatch the fewest useful "
+            "subagents with explicit authority and return contracts, and verify their "
+            "results before integration."
         ),
     },
     {

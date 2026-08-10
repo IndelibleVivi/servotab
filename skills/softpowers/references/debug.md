@@ -2,6 +2,8 @@
 
 Find the causal mechanism, then fix it with the least risky change. Be systematic without forcing a four-phase ceremony onto an obvious compiler error.
 
+A debug request restores the verified existing or requested contract. It does not authorize adjacent features, fallback systems, broad refactors, or extra infrastructure merely because they might make the system more robust.
+
 ## 1. Define the failure
 
 Capture:

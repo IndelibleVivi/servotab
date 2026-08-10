@@ -1,97 +1,65 @@
 # Soft Parallel
 
-Use subagents as a leverage tool, not a default unit of work. Each subagent consumes additional context, tool calls, and integration effort.
+Use worker lanes to move bounded responsibility into clean agent contexts without confusing delegation with permission. Use the fewest work surfaces that materially improve the outcome.
 
-Delegation changes the work surface, not the objective or permission. Keep one writer for every overlapping file or state surface.
+## Responsibility model
 
-## Parallelism gate
+- The **Requester** sets the objective and grants authority.
+- The current user-facing agent is the **Coordinator**. It decomposes the outcome, protects boundaries, remains the integration owner, and accepts or rejects returns.
+- A **Task Worker** owns one coherent engineering, research, audit, validation, or review lane and makes ordinary in-scope decisions.
+- An optional **Helper** handles one narrow temporary subtask for a worker when the platform, current instructions, and work order allow it. It returns only to that worker and never declares the whole task complete.
 
-Delegate only when all are true:
+These are responsibilities, not ranks. A fresh context is a clean workbench; it creates neither a new objective nor new permission. Keep the main conversation as the coordination and judgment surface rather than replacing it with a worker dashboard.
 
-- There are at least two substantial work domains.
-- The domains can be understood with bounded context.
-- They have no critical sequential dependency.
-- They will not edit the same state or files without isolation.
-- Parallel work is likely to save meaningful time or keep noisy investigation out of the main context.
+## Delegation gate
 
-Good uses:
+Use a lane when at least one brings material value:
 
-- Independent failing test groups with different likely causes
-- Read-only exploration of separate subsystems
-- One implementation stream plus one independent compatibility or security analysis
-- Platform-specific investigations
-- Distinct migration and frontend preparation with stable contracts
+- Two or more substantial domains can proceed independently.
+- A noisy research or long-running responsibility benefits from clean context.
+- An independent review would add genuinely different evidence.
+- The Coordinator's context or attention is becoming too full for clean judgment.
+- Parallel work saves meaningful time without write collisions.
 
-Poor uses:
+Keep the work in the Coordinator when it is small, reversible, tightly coupled, driven by one likely common cause, or easier to finish directly. Do not split one feature by file, create duplicate reviewers, or spawn workers merely because they are available.
 
-- One small feature split into mechanical pieces
-- Several symptoms likely caused by one upstream bug
-- Tasks that require constant shared design decisions
-- Multiple agents editing the same component
-- Duplicate reviewers asked the same question
-- Any workflow that spawns subagents merely because they are available
+Use at most three concurrent Task Workers by default. Add a Helper only when it is cheaper than finishing the subtask directly; permit at most one helper edge and no delegation tree. One independent review lane is normally enough.
 
-## Budget
+## Work-order contract
 
-Default limits:
+Give every Task Worker a compact order with:
 
-- At most three subagents at once.
-- No nested subagents.
-- One independent review agent at most unless the user requests a review panel.
-- Prefer read-heavy delegation over write-heavy delegation.
-- The main agent remains integration owner.
+- **Outcome:** the concrete result and completion condition for this lane.
+- **Scope:** included files, systems, questions, and explicit exclusions.
+- **Context:** the smallest canonical sources and known current facts needed to begin.
+- **Authority:** allowed reads, writes, tool side effects, external actions, approval gates, and stop conditions.
+- **Return:** destination, required evidence, unknowns, changed surfaces, and concise report shape.
 
-Increase the limit only when the task has clearly independent domains and the user values speed over token cost.
+The order must support independent judgment without hidden parent context. Delegation changes where authorized work happens, not what may happen. An instruction such as “if needed,” “if safe,” or “after approval” remains a gate. A worker that needs broader scope or authority stops the affected path and returns the exact conflict plus the smallest proposed correction.
 
-## Define domains
+Keep the order proportional: normally one to three bullets per field. Link canonical sources instead of restating whole plans or global rules, and include a constraint only when this lane needs it to judge or act correctly. A work order is not a second specification.
 
-Before dispatch, specify:
+Before dispatch, the Coordinator checks that outcome, acceptance criteria, dependencies, authority, stop conditions, writer ownership, and return evidence are compatible. Ask the worker to validate that chain at entry, then make normal in-scope decisions without escalating trivia.
 
-- **Outcome:** the concrete result owned by this lane
-- **Scope:** included files, systems, questions, and non-goals
-- **Context:** the smallest canonical sources and current facts needed to begin
-- **Authority:** allowed reads, writes, external actions, and stop gates
-- **Return:** destination, required evidence, unknowns, and concise output shape
+## Dispatch and write ownership
 
-Provide only the context each agent needs. Do not dump the entire conversation, plan, or repository.
+Create each lane once. If creation returns an error, timeout, or ambiguous result, inspect existing agents once before retrying; an error does not prove that no worker exists.
 
-Create each lane once. If dispatch returns an ambiguous error or timeout, inspect existing agents once before retrying so duplicate workers do not compete for the same responsibility.
+Keep one writer for every overlapping file, branch, database, or live-state surface. For concurrent writes, use non-overlapping ownership, separate worktrees or branches, or a stable interface fixed before dispatch. Otherwise sequence the work. Workers do not commit, push, merge, deploy, mutate production, or change public contracts unless the order explicitly grants that action.
 
-## Write safety
+After confirmed dispatch, continue a non-overlapping Coordinator responsibility or wait. Do not repeatedly poll healthy workers; resume on an explicit return, a concrete delivery problem, or a user status request.
 
-For parallel writes, use one of:
+## Return packet
 
-- Separate worktrees or branches
-- Non-overlapping file ownership
-- A stable interface agreed before dispatch
+Require one explicit return containing:
 
-If agents may touch the same files, keep the work sequential.
+- Outcome and completion status
+- Changed or inspected surfaces
+- Evidence and verification
+- Unknown or unverified items
+- Risks or blockers
+- Recommended next action
 
-Subagents should not commit, push, merge, or change public contracts unless explicitly assigned.
+Treat the packet as claims, not proof. The Coordinator checks source evidence, authority compliance, acceptance criteria, unknowns, and the combined diff or runtime state before integration. Resolve conflicting assumptions and run the narrowest meaningful integration check.
 
-## Result contract
-
-Ask each subagent to return:
-
-- What it inspected or changed
-- Evidence and commands
-- Files touched
-- Remaining uncertainty
-- Integration notes
-
-Require concise summaries rather than raw logs.
-
-## Integration
-
-The main agent:
-
-1. Verifies each result instead of trusting success claims.
-2. Resolves conflicting assumptions.
-3. Reviews the combined diff.
-4. Runs integration-level checks.
-5. Removes duplicate or incompatible changes.
-6. Reports failures honestly.
-
-Do not run a second subagent wave by default. Dispatch again only when the first results reveal a new independent domain that justifies the cost.
-
-After confirmed dispatch, do not poll healthy agents through chat. Continue a non-overlapping main-agent responsibility or wait for an explicit return, concrete delivery problem, or user status request.
+Do not run another worker wave by default. Dispatch again only when returned evidence reveals a new bounded responsibility whose value repays the coordination cost.
