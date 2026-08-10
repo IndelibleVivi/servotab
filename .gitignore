@@ -10,3 +10,6 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Local-only working continuity
+notes/
