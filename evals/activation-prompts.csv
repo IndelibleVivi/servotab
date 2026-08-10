@@ -6,6 +6,7 @@ implicit-review,true,review,"审查当前 dirty diff，只报告真实可操作�
 implicit-receive-review,true,receive-review,"逐项核实这份 code review，落实有效意见并对错误建议给出技术理由。"
 implicit-verify,true,verify,"检查当前 branch 是否 ready，并准确区分 verified 与 not verified。"
 implicit-contract,true,plan_or_execute,"把 source_chunk_id 贯穿 artifact contract、producer、consumer 和 projection。"
+implicit-spec-chain,true,spec-chain,"这份 approved spec 是大重构的 authority。写完整 implementation plan 并执行，不能拿当前阶段替代全部 scope。"
 implicit-common-cause,true,debug,"Dashboard、Chat、Memory 同时丢失用户状态，调查共享根因并修复。"
 implicit-parallel,true,parallel,"三个独立平台 adapter 的测试组分别失败，并行只读调查后统一整合。"
 implicit-boundary-localization,true,debug,"Web 端上传成功，桌面端只在部分登录状态下挂起，服务端没有报错。定位第一个坏掉的契约再修复。"
@@ -19,3 +20,4 @@ negative-product-talk,false,none,"先不看代码，聊聊 Atria Home 应该给�
 negative-writing,false,none,"帮我把这段实习申请文字润色得更自然。"
 explicit-debug,true,debug,"$soft-debug 复现并修复这个状态 bug。"
 explicit-review,true,review,"$soft-review 审查当前 diff。"
+explicit-spec-chain,true,spec-chain,"$soft-spec-chain 按这份 approved spec 建立完整实现计划；当前 tranche 只能挂在完整计划下面。"

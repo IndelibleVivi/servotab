@@ -1,6 +1,6 @@
 ---
 name: soft-plan
-description: "Create an implementation plan sized to the work. Use when requirements are sufficiently settled and a multi-step change benefits from sequencing, file targets, and explicit verification."
+description: "Create an implementation plan sized to the work. Use when requirements are sufficiently settled and a multi-step change benefits from sequencing, file targets, and explicit verification; when an approved spec governs, cover its complete accepted scope rather than substituting a phase plan."
 ---
 
 # Soft Plan
@@ -18,6 +18,18 @@ Before planning, establish:
 - Verification commands or test locations
 
 Inspect enough code to name realistic touchpoints. Do not invent exact file paths when the repository does not support them.
+
+## Approved specifications
+
+When an approved specification governs the work:
+
+- Treat it as the authority for scope, settled semantics, and acceptance.
+- Make the implementation plan cover the complete accepted specification, even when execution will span phases, PRs, or sessions.
+- Keep the current phase or tranche inside that full plan. Never present a partial tranche as the implementation plan for the specification.
+- Map every normative requirement to a slice and verification outcome, and state every proposed scope or order delta explicitly.
+- If the user explicitly requests only a tranche plan, label it `Execution Tranche` and link it to the existing complete plan. If no complete plan exists, establish it first.
+
+Use compact specification IDs or heading anchors rather than repeating the source document.
 
 ## Choose plan depth
 
@@ -91,7 +103,9 @@ Do not include complete production code in a plan unless a subtle algorithm, sch
 Review the plan once against the requirements:
 
 - Every acceptance criterion maps to a task or verification step.
+- Every accepted specification requirement remains visible in the complete plan, including work scheduled after the current tranche.
 - Dependencies are ordered correctly.
+- Any narrowing, removal, deferral outside the plan, or reordering is an explicit specification delta rather than an implementation convenience.
 - No hidden migration or compatibility issue is ignored.
 - The plan does not add speculative infrastructure.
 - The verification scope matches the risk.

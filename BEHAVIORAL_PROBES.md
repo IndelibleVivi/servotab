@@ -254,6 +254,27 @@ Expected:
 - 不计算无用途 hash，不重复跑等价测试，不启动第二 acceptance/review loop
 - focused evidence 足以支撑 local-ready claim 时停止；不夸大为全 repo ready
 
+## Probe 17 — approved spec cannot collapse into a tranche
+
+Fixture:
+
+`evals/fixtures/spec-chain-regression.md`
+
+Prompt:
+
+```text
+这份 spec 已经 approved。请写 implementation plan；先集中做 backend 也可以，但计划必须准确。
+```
+
+Expected:
+
+- router 读取 `spec-chain.md`，不把普通 `plan.md` 当作更弱的替代
+- artifact 明确叫完整 implementation plan，并覆盖 REQ-1–REQ-5
+- backend 可以是 current execution tranche，但 workbench、import、migration、recovery/export 与 compatibility 仍保留在完整 programme 中
+- 第一次实现即保持一个 `hold(package)` 支持 1..10；不得改成 single-item first 或另造 batch operation
+- 任何 scope narrowing 或 programme reorder 都进入显式 delta，而不是藏在 `minimal`、`later` 或 “first slice” 中
+- tranche 完成不得宣称 spec 已实现
+
 ## Explicit controls
 
 用这些控制 direct leaf 是否仍然可用：

@@ -36,12 +36,29 @@ METHODS = (
         ),
     },
     {
+        "skill": "soft-spec-chain",
+        "method": "spec-chain",
+        "description": (
+            "Preserve an approved specification through a complete implementation plan "
+            "and execution. Use for major refactors, migrations, or multi-session work "
+            "when a confirmed spec is the authority; cover the whole spec and make scope "
+            "or order changes explicit. Avoid for ordinary work without an approved spec."
+        ),
+        "display_name": "Soft Spec Chain",
+        "short_description": "Carry an approved spec through full implementation",
+        "default_prompt": (
+            "Use $soft-spec-chain to turn this approved specification into a complete "
+            "implementation plan and preserve its scope through execution."
+        ),
+    },
+    {
         "skill": "soft-plan",
         "method": "plan",
         "description": (
             "Create an implementation plan sized to the work. Use when requirements are "
             "sufficiently settled and a multi-step change benefits from sequencing, file "
-            "targets, and explicit verification."
+            "targets, and explicit verification; when an approved spec governs, cover its "
+            "complete accepted scope rather than substituting a phase plan."
         ),
         "display_name": "Soft Plan",
         "short_description": "Create a practical implementation plan",
@@ -56,7 +73,8 @@ METHODS = (
         "description": (
             "Execute an existing implementation plan or settled multi-step request with "
             "coherent batches, targeted checks, and controlled plan drift. Use when the "
-            "design is already clear."
+            "design is already clear; preserve any approved spec as the scope and "
+            "acceptance authority across all tranches."
         ),
         "display_name": "Soft Execute",
         "short_description": "Execute a settled plan in coherent slices",

@@ -2,7 +2,7 @@
 
 给 Codex 使用的风险分级工程 skills。它保留 Superpowers 中真正有价值的骨架：设计收敛、计划、证据驱动调试、TDD、代码审阅、验证、worktree、并行代理和分支收口；同时让方法服务于任务，而不把每次改动拖进固定仪式。
 
-当前版本：`0.2.0-rc2`
+当前版本：`0.2.0-rc3`
 
 ## v0.2 的核心变化
 
@@ -13,8 +13,8 @@ v0.2 改成：
 > implicit discovery, non-mandatory execution
 
 - 只有 `softpowers` router 设置为 `allow_implicit_invocation: true`。
-- 11 个 leaf skills 继续 `allow_implicit_invocation: false`，作为显式快捷入口。
-- Router 内部拥有 11 份 `references/*.md` playbooks，并按任务阶段读取。
+- 12 个 leaf skills 继续 `allow_implicit_invocation: false`，作为显式快捷入口。
+- Router 内部拥有 12 份 `references/*.md` playbooks，并按任务阶段读取。
 - 清晰、局部、可逆的小任务读取 **0 个 reference**，直接实现并做 focused verification。
 - Bug、review、迁移等任务先读 0–1 个 primary reference；只有阶段真实变化或新证据出现时才加载下一份。
 - Router 不宣布自己被激活，也不向用户表演 Quick / Deliberate / Deep 分类。
@@ -30,6 +30,7 @@ softpowers/
 ├── agents/openai.yaml
 └── references/
     ├── brainstorm.md
+    ├── spec-chain.md
     ├── plan.md
     ├── execute.md
     ├── debug.md
@@ -43,7 +44,7 @@ softpowers/
 
 soft-debug/                    # explicit shortcut
 soft-review/                   # explicit shortcut
-...                            # 共 11 个 leaf skills
+...                            # 共 12 个 leaf skills
 ```
 
 正常路径：
@@ -63,6 +64,7 @@ Router 不尝试“调用”另一个 skill。`references/` 是它自己的 prog
 | 方法 | 进入条件 |
 |---|---|
 | Brainstorm | 产品、交互或架构仍有真正影响实现的开放决策 |
+| Spec Chain | 已确认的大型 spec 需要完整 implementation plan，并跨阶段执行而不丢 scope |
 | Plan | 需求已大致确定，工作需要多步排序或跨 session handoff |
 | Execute | 已有计划，或需求明确但需要多个 coherent slices |
 | Debug | Bug、失败测试、回归、构建失败、异常行为或性能退化 |
@@ -85,7 +87,7 @@ Router 不尝试“调用”另一个 skill。`references/` 是它自己的 prog
 
 ## Canonical source
 
-11 份方法正文只维护一份：
+12 份方法正文只维护一份：
 
 ```text
 methods/*.md
@@ -94,7 +96,7 @@ methods/*.md
 发布脚本从这些文件同时生成：
 
 - `skills/softpowers/references/*.md`
-- 11 个 standalone leaf `SKILL.md`
+- 12 个 standalone leaf `SKILL.md`
 
 因此 router references 与 `$soft-debug` 等显式入口不会逐渐漂移。
 
@@ -111,7 +113,7 @@ python3 scripts/validate_sync.py
 解压后：
 
 ```bash
-cd softpowers-pack-v0.2.0-rc2
+cd softpowers-pack-v0.2.0-rc3
 ./install.sh
 ```
 
@@ -142,9 +144,9 @@ cd softpowers-pack-v0.2.0-rc2
 安装器会：
 
 1. 用标准库读取 `PACK_MANIFEST.json`；
-2. 校验 12 个 skills、11 个 router references、文件大小和 SHA-256；
+2. 校验 13 个 skills、12 个 router references、文件大小和 SHA-256；
 3. 在目标 root 内 staging 并再次校验；
-4. 只替换 Softpowers 的 12 个目录，允许其他 skills 共存；
+4. 只替换 Softpowers 的 13 个目录，允许其他 skills 共存；
 5. 备份同名旧 skill；
 6. 中途失败时 rollback；
 7. 成功后写 install manifest 和 current pointer；
@@ -156,7 +158,7 @@ cd softpowers-pack-v0.2.0-rc2
 /skills
 ```
 
-`softpowers` 应为 implicit；11 个 leaf skills 可见但 explicit-only。客户端未刷新时重启 Codex。
+`softpowers` 应为 implicit；12 个 leaf skills 可见但 explicit-only。客户端未刷新时重启 Codex。
 
 ## 使用
 
@@ -180,6 +182,10 @@ $soft-tdd 为这个 stale cursor bug 建立严格 red-green 回归证据。
 
 ```text
 $soft-parallel 只读调查三个确定互不相关的测试组，主线程负责整合。
+```
+
+```text
+$soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；当前 tranche 不得替代完整 scope。
 ```
 
 ## 卸载与恢复
@@ -215,7 +221,7 @@ python3 scripts/selftest.py
 
 - router-only implicit activation metadata；
 - methods → references / leaves 同步；
-- 35 个安装 payload 文件的 size 与 digest；
+- 38 个安装 payload 文件的 size 与 digest；
 - 无 site-packages 的安装/卸载；
 - 新 `~/.agents/skills` root 与 legacy `~/.codex/skills` 原地升级；
 - 无关 skills 共存；
@@ -245,13 +251,14 @@ python3 scripts/selftest.py
 
 ## RC 观察重点
 
-`0.2.0-rc2` 继续验证 activation 与 progressive disclosure，并加入 complexity / evidence budget 和复杂故障 boundary localization。真实任务里观察：
+`0.2.0-rc3` 继续验证 activation、progressive disclosure、complexity / evidence budget 与复杂故障 boundary localization，并新增 approved spec 的完整 plan/execution continuity。真实任务里观察：
 
 - 该触发时是否触发；
 - 解释概念、简单找文件、闲聊时是否保持沉默；
 - 小改动是否读取 0 references；
 - 第一次具体行动前是否只读 0–2 份必要材料；
 - 是否出现重复读取、全生命周期预加载、无意义 plan/TDD/worktree/subagent；
+- approved spec 是否始终保留完整 coverage，而没有被 current tranche 偷换；
 - result 与 fresh verification 是否更可靠；
 - token 与命令 thrashing 是否下降。
 

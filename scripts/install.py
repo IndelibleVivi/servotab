@@ -171,7 +171,10 @@ def main() -> int:
     print(f"Installed {len(SKILL_NAMES)} Softpowers skills into {dest}")
     print(f"Install manifest: {manifest}")
     print("Existing unrelated skills were left untouched.")
-    print("Softpowers is the only implicit router; the 11 leaf skills remain explicit-only.")
+    print(
+        "Softpowers is the only implicit router; "
+        f"the {len(SKILL_NAMES) - 1} leaf skills remain explicit-only."
+    )
     print("Open Codex and run /skills. Restart Codex if the skill list is stale.")
     return 0
 

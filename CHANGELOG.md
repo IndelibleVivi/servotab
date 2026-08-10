@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0-rc3 — 2026-08-10
+
+Specification-to-implementation continuity.
+
+- Added `soft-spec-chain` for major approved specifications that must survive planning and multi-tranche execution without scope loss.
+- Required an implementation plan for an approved specification to cover the complete accepted scope; phase and tranche documents are execution views, not substitutes.
+- Added compact coverage-ledger, dependency-order, explicit-delta, and tranche-versus-full-completion rules while avoiding specification restatement.
+- Hardened generic Plan and Execute so explicit use cannot silently narrow an approved specification.
+- Added a behavioral regression fixture for unified 1..N package semantics, migration, UI/import/recovery coverage, and rejection of single-item transitional plans.
+
 ## 0.2.0-rc2 — 2026-08-09
 
 Evidence-economy and failure-localization refinement.

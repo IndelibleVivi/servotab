@@ -1,18 +1,18 @@
-# Packaging and Activation Audit — v0.2.0-rc1
+# Packaging and Activation Audit — v0.2.0-rc3
 
 This release preserves the v0.1.2 transaction layer and changes the runtime activation topology.
 
 ## Activation contract
 
 - `softpowers`: `allow_implicit_invocation: true`
-- 11 leaf skills: `allow_implicit_invocation: false`
+- 12 leaf skills: `allow_implicit_invocation: false`
 - Manifest records the same split under `activation`.
 - Router description contains both positive repository-work scope and negative controls.
 - Router instructions require quiet activation and prohibit process theatre.
 
 ## Progressive disclosure
 
-The implicit router owns exactly 11 references.
+The implicit router owns exactly 12 references.
 
 - Clear local work: 0 references.
 - Initial specialist routing: 0–1 primary reference.
@@ -21,7 +21,7 @@ The implicit router owns exactly 11 references.
 - No reference may route to another reference.
 - No repeated reference reads or lifecycle preloading.
 
-The router is 554 words, below the 650-word release gate.
+The router body is 587 words, below the 650-word release gate.
 
 ## Single source of truth
 
@@ -36,9 +36,9 @@ The router is 554 words, below the 650-word release gate.
 
 `PACK_MANIFEST.json` schema 2 records:
 
-- 12 skill directories
-- 11 router references
-- 35 exact payload files
+- 13 skill directories
+- 12 router references
+- 38 exact payload files
 - file sizes and SHA-256 digests
 - router-only implicit activation metadata
 

@@ -1,10 +1,11 @@
 {
   "schema_version": 2,
   "pack": "softpowers-pack",
-  "version": "0.2.0-rc2",
+  "version": "0.2.0-rc3",
   "skills": [
     "softpowers",
     "soft-brainstorm",
+    "soft-spec-chain",
     "soft-plan",
     "soft-execute",
     "soft-debug",
@@ -22,6 +23,7 @@
     ],
     "explicit_only": [
       "soft-brainstorm",
+      "soft-spec-chain",
       "soft-plan",
       "soft-execute",
       "soft-debug",
@@ -57,8 +59,8 @@
     },
     {
       "path": "skills/soft-execute/SKILL.md",
-      "size": 4945,
-      "sha256": "6272322f8511973bdc243d079e17d67f1d61e33f0a8091c3be56ebfcc90ae437"
+      "size": 6010,
+      "sha256": "d9d46e4bd6f13dc96cd5006189d6cc6e862befdd75352d9aa05a53269c14e30d"
     },
     {
       "path": "skills/soft-execute/agents/openai.yaml",
@@ -87,8 +89,8 @@
     },
     {
       "path": "skills/soft-plan/SKILL.md",
-      "size": 3689,
-      "sha256": "3b52b208c09bc4aa312c6aa8bbb6ad486c3a0b24e3c09c47e10064e1491ca931"
+      "size": 4892,
+      "sha256": "d2f065ec0777a3097ae094aae847af6506fe92ca548f9659432d88ec3ce8311a"
     },
     {
       "path": "skills/soft-plan/agents/openai.yaml",
@@ -114,6 +116,16 @@
       "path": "skills/soft-review/agents/openai.yaml",
       "size": 318,
       "sha256": "d68b130081ef5219050e3d2cc7348b40146bc0e2e0534f1d0a51f7856b669ee2"
+    },
+    {
+      "path": "skills/soft-spec-chain/SKILL.md",
+      "size": 6431,
+      "sha256": "cf751294e0b3a689c672c201a40656f84d9f5c48aaf768b5fa81f58007bb2113"
+    },
+    {
+      "path": "skills/soft-spec-chain/agents/openai.yaml",
+      "size": 341,
+      "sha256": "e8cb23dd55de1b3e4648baa28051b5dedbbc234ac2aa959dd442be8f4b70260b"
     },
     {
       "path": "skills/soft-tdd/SKILL.md",
@@ -147,8 +159,8 @@
     },
     {
       "path": "skills/softpowers/SKILL.md",
-      "size": 4293,
-      "sha256": "5542d1d02299622b1eb6539abd874358bd38c1ba9cd64da26bff3ef39ac740ee"
+      "size": 4532,
+      "sha256": "215ba6be601a0f761991b387868807149b18f558cd60c7f470bb9c4902ebd1cb"
     },
     {
       "path": "skills/softpowers/agents/openai.yaml",
@@ -167,8 +179,8 @@
     },
     {
       "path": "skills/softpowers/references/execute.md",
-      "size": 4727,
-      "sha256": "f4085d6f9367633d883e022b6bdf796db75ab8a78c7695a64d9e40eaab1e74ac"
+      "size": 5706,
+      "sha256": "7cd70fbd61d6cf27d8e65e34d4983ae3b0649c15f2d7ac5a31042ee51c1a22c9"
     },
     {
       "path": "skills/softpowers/references/finish.md",
@@ -182,8 +194,8 @@
     },
     {
       "path": "skills/softpowers/references/plan.md",
-      "size": 3462,
-      "sha256": "59a989b42ff8134768600f07da0f5dff2d79327b3b332dda1d533b5de554c5c5"
+      "size": 4561,
+      "sha256": "1b8b62a5e29cf1f7585d4350bd5a83bd761a26eabf0075fc0843adfe7e153db8"
     },
     {
       "path": "skills/softpowers/references/receive-review.md",
@@ -194,6 +206,11 @@
       "path": "skills/softpowers/references/review.md",
       "size": 3292,
       "sha256": "57446220cc6def0f9e98ba7bc07437310b0068f6726f36bb73547720c9dd7d11"
+    },
+    {
+      "path": "skills/softpowers/references/spec-chain.md",
+      "size": 6084,
+      "sha256": "704793a3db9579e7814a6b07f1e2b9ca7d9c3bc3c7cd408fe51b6b69ee7c1e8b"
     },
     {
       "path": "skills/softpowers/references/tdd.md",

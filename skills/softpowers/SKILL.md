@@ -32,8 +32,9 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 ## Reference index
 
 - Unsettled feature, interaction, or architecture decision: `references/brainstorm.md`
-- Settled multi-step work that needs sequencing: `references/plan.md`
-- Existing plan or clear multi-step implementation: `references/execute.md`
+- Approved spec needing complete planning or phased execution: `references/spec-chain.md` (prefer over plan/execute)
+- Settled multi-step work without an approved spec: `references/plan.md`
+- Existing plan or clear multi-step work without a spec chain: `references/execute.md`
 - Bug, failing test, regression, build failure, or unexplained behavior: `references/debug.md`
 - Behavior where test-first work improves the contract: `references/tdd.md`
 - Diff, commit, branch, PR, or implementation review: `references/review.md`
@@ -46,6 +47,7 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 ## Hard gates
 
 - Strict red-green is valuable for bugs, domain rules, state transitions, parsers, contracts, migrations, concurrency, and security-sensitive behavior. It is optional for styling, copy, simple wiring, or generated output.
+- A plan for an approved spec covers it completely; a phase or tranche cannot substitute for the full plan.
 - Parallel work requires independent domains, bounded context, non-overlapping writes or isolation, and enough benefit to repay token and integration cost. No nested subagents.
 - One integrated review is the default. Do not manufacture findings or create duplicate reviewer loops.
 - Verification scope follows blast radius: focused for local work, adjacent for shared code, broad for data, security, public contracts, migrations, or integration readiness.

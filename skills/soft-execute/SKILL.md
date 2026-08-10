@@ -1,6 +1,6 @@
 ---
 name: soft-execute
-description: "Execute an existing implementation plan or settled multi-step request with coherent batches, targeted checks, and controlled plan drift. Use when the design is already clear."
+description: "Execute an existing implementation plan or settled multi-step request with coherent batches, targeted checks, and controlled plan drift. Use when the design is already clear; preserve any approved spec as the scope and acceptance authority across all tranches."
 ---
 
 # Soft Execute
@@ -13,6 +13,7 @@ Read:
 
 - Applicable repository instructions
 - The plan or settled request
+- The accepted specification when the plan derives from one
 - Files and tests directly named by it
 - Any referenced schema or contract
 
@@ -22,8 +23,11 @@ Perform one sanity check before editing:
 - Is a dependency missing?
 - Would it cause data loss, a security regression, or a public compatibility break?
 - Has the requested behavior already been implemented differently?
+- If an approved specification exists, does the complete plan still cover all accepted requirements rather than only the current tranche?
 
 Correct small stale details yourself. Surface a concern only when it changes the approach materially.
+
+When an approved specification governs the work, it remains the scope and acceptance authority throughout execution. A tranche controls what is being worked on now; it does not remove later scope from the complete plan. Repair a partial plan before treating it as the implementation plan, record scope or order changes as explicit deltas, and report tranche completion separately from full-spec completion.
 
 ## Spend complexity on current work
 
@@ -55,6 +59,8 @@ Proceed and note the adjustment when:
 - An existing abstraction already solves part of the problem,
 - A test requires a nearby fixture update,
 - A smaller implementation satisfies the same contract.
+
+“Smaller” means less implementation complexity with equivalent specification coverage. It does not mean dropping accepted behavior, cardinality, migration, compatibility, or acceptance requirements.
 
 Pause or explicitly flag the choice when:
 
@@ -117,6 +123,7 @@ After all slices:
 - Review the combined diff for scope and accidental changes.
 - Run fresh verification at a scope justified by risk: focused checks for local changes, adjacent checks for shared code, and broad checks for migrations, security, public contracts, or integration readiness.
 - Update documentation only when behavior, interfaces, setup, or durable decisions changed.
+- When executing an approved specification, reconcile the final state against its complete coverage ledger; do not close the specification because one tranche finished.
 - Do not commit, push, merge, or open a PR unless the user requests it or applicable repository/global instructions delegate it.
 
 Report actual results, including checks not run.
