@@ -29,7 +29,7 @@ v0.2 改成：
 
 ```text
 softpowers/
-├── SKILL.md                   # 唯一 implicit router，约 550 words
+├── SKILL.md                   # 唯一 implicit router，约 630 words
 ├── agents/openai.yaml
 └── references/
     ├── brainstorm.md
