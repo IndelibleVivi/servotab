@@ -1,0 +1,91 @@
+name: Behavior feedback
+description: Report activation, routing, completeness, quality, or unnecessary overhead from a real task.
+title: "[Behavior] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing Softpowers on real work. Please keep the prompt and evidence minimal and public-safe.
+
+  - type: input
+    id: version
+    attributes:
+      label: Softpowers version or commit
+      placeholder: 0.2.0-rc4 or the output of git rev-parse --short HEAD
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Codex surface
+      options:
+        - Codex in the ChatGPT desktop app
+        - Codex CLI
+        - Codex IDE extension
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feedback-area
+    attributes:
+      label: What are you reporting?
+      options:
+        - Activation miss or false positive
+        - Wrong routing or reference choice
+        - Incomplete requested outcome
+        - Debugging or review quality
+        - Verification quality
+        - Unnecessary process or token overhead
+        - Explicit shortcut behaved incorrectly
+        - Other behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Sanitized prompt
+      description: Remove secrets, private source, personal data, account details, and private paths.
+      placeholder: Paste the smallest prompt that still shows the behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: What should Softpowers or Codex have done?
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      placeholder: What actually happened, including whether softpowers activated and which references were read if visible?
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Minimal evidence
+      description: Include only relevant, sanitized trace details, command counts, or output excerpts.
+      placeholder: Optional but useful. Do not upload a private transcript.
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment details
+      description: OS, Codex/model version when relevant, and repository type. Never include credentials.
+      placeholder: macOS 15, Codex desktop, private Python repo
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public-data check
+      options:
+        - label: I removed secrets, private source, personal data, account details, personal absolute paths, local notes, and full private Codex transcripts from this issue.
+          required: true

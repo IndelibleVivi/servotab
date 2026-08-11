@@ -1,35 +1,138 @@
-# Softpowers Pack
+# Softpowers for Codex
 
-给 Codex 使用的风险分级工程 skills。它保留 Superpowers 中真正有价值的骨架：设计收敛、计划、证据驱动调试、TDD、代码审阅、验证、worktree、并行代理和分支收口；同时让方法服务于任务，而不把每次改动拖进固定仪式。
+[![Validate](https://github.com/IndelibleVivi/softpowers/actions/workflows/validate.yml/badge.svg)](https://github.com/IndelibleVivi/softpowers/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-当前版本：`0.2.0-rc4`
+一个 community-maintained、非 OpenAI 官方的 Codex 工程 workflow pack：让方法跟着任务走，保留真正需要的设计、调试、测试、review 与 verification，同时避免把每个小改动都拖进固定仪式。
 
-## v0.2 的核心变化
+> Quiet, proportionate engineering workflows for Codex.
 
-v0.1.x 把 12 个 skills 全部锁为 explicit-only。安装很安全，但用户必须记住并手动输入 `$soft-debug`、`$soft-review` 等名称；`$softpowers` 也无法真正加载其他锁住的 skills。
+当前版本：`0.2.0-rc4`（public release candidate）
 
-v0.2 改成：
+## 先看结论
+
+- 日常只需要正常描述任务，不必背 skill 名称。
+- Invocation metadata 只允许 `softpowers` router 被 implicit invocation；其余 12 个 leaf skills 都是 explicit-only shortcuts，不会自己抢活。
+- 安装完整 pack 不等于每个 skill 都会频繁运行。`spec-chain`、`worktree`、`parallel` 等本来就是特定情境工具，低频是设计的一部分。
+- 清晰、局部、可逆的小任务直接做；复杂任务才按需读取一份 playbook。
+- Softpowers 不覆盖你的 prompt、`AGENTS.md`、repo 规则、权限边界或 Git 决策。
+
+如果你愿意试用，最有价值的不是一句“好用”，而是告诉我们：它有没有在该出现时出现、有没有绕路、有没有漏掉完整 outcome。见 [反馈](#反馈)。
+
+## 快速安装
+
+需要：Git、Bash、Python 3.10+，以及支持 local skills 的 Codex desktop app、CLI 或 IDE extension。
+
+```bash
+git clone https://github.com/IndelibleVivi/softpowers.git
+cd softpowers
+./install.sh
+```
+
+安装后在 Codex 运行：
+
+```text
+/skills
+```
+
+你应当看到：
+
+- `softpowers`：具备 implicit-invocation eligibility 的 router；
+- 12 个 `soft-*` skills：explicit-only；
+- 如果列表没有刷新，重启 Codex。
+
+这是 source-distributed release candidate，还不是 plugin-directory 安装包。安装脚本只使用 Python 标准库，不会联网下载 dependency。
+
+当前 CI 覆盖 Ubuntu 的 Python 3.10 / 3.13 与 macOS 的 Python 3.13；native Windows 尚未验证。Invocation metadata、packaging 与 filesystem transaction 可以确定性校验，但真实 implicit routing 仍可能随 Codex client、model、prompt 与 repo context 变化。这正是 RC 想收集 behavior feedback 的部分。
+
+### 更新
+
+回到 clone 的 repo：
+
+```bash
+git pull --ff-only
+./install.sh
+```
+
+当前 installer 每次运行都会形成一个可回滚层，即使 payload 没有变化。只在 `git pull --ff-only` 实际拿到新 pack 后重新安装，不要把无变化 reinstall 当成日常检查；也不要直接热改已安装副本。
+
+### 卸载或回滚一层
+
+```bash
+./uninstall.sh
+```
+
+卸载器会恢复安装前被替换的同名 skills；如果你手改过已安装副本，它会先把修改保存到 snapshot，而不是静默删除。
+
+## 怎么用
+
+日常直接说任务：
+
+```text
+修复移动端输入时消息气泡上移的问题，找到根因后直接实现并验证。
+```
+
+设计上，router 会把它识别为 debug 工作并按需读取 `debug.md`。你不需要先写 `$soft-debug`，也不需要指定所谓 Quick / Deliberate / Deep mode；如果实际 routing 不符合这个 expectation，请提交 behavior feedback。
+
+明确 feature request 默认仍是完整的 requested usable outcome：
+
+```text
+按照这份产品说明实现批量导入，保留多文件、失败重试、进度和历史记录，并跑相关测试。
+```
+
+“简单”限制实现复杂度，不会把已经明确的需求偷换成 MVP、scaffold、placeholder 或只有 happy path 的局部 tranche。
+
+当你想强制某个方法时，再显式点名：
+
+```text
+$soft-review 审查当前 dirty diff，只报告可操作的 P0–P2 findings。
+```
+
+```text
+$soft-tdd 为这个 stale cursor bug 建立严格 red-green 回归证据。
+```
+
+```text
+$soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；当前 tranche 不得替代完整 scope。
+```
+
+## 不是每个 skill 都要经常用
+
+这 13 个 skills 不是一排等权按钮。更准确的理解是三层：
+
+| 层 | Skills | 什么时候需要关心 |
+|---|---|---|
+| 默认入口 | `softpowers` | 日常 repo work；通常只说自然语言 |
+| 精确控制 | `soft-debug`, `soft-review`, `soft-verify`, `soft-execute`, `soft-tdd` | 你明确想固定 diagnosis、review、verification、execution 或 red-green 方法时 |
+| 特定情境 | `soft-brainstorm`, `soft-plan`, `soft-receive-review`, `soft-finish`, `soft-spec-chain`, `soft-worktree`, `soft-parallel` | 开放设计、多步 handoff、外部 review、大型 approved spec、隔离 workspace 或 bounded delegation 真正有价值时 |
+
+完整 pack 保留这些 leaf skills，是为了让显式控制、eval 和少见但高价值的工程情境都有稳定入口。它们全部是 explicit-only；没有必要为了“都装了”而刻意调用它们。
+
+当前 installer 仍按一个事务安装完整 pack。暂不增加 router-only / selective profile，因为它会扩大 manifest、rollback 与 uninstall 状态空间，而不会改善 implicit runtime：默认真正自动触发的本来就只有 router。
+
+## Softpowers 的行为原则
+
+`v0.2` 的核心是：
 
 > implicit discovery, non-mandatory execution
 
-- 只有 `softpowers` router 设置为 `allow_implicit_invocation: true`。
-- 12 个 leaf skills 继续 `allow_implicit_invocation: false`，作为显式快捷入口。
-- Router 内部拥有 12 份 `references/*.md` playbooks，并按任务阶段读取。
-- 清晰、局部、可逆的小任务读取 **0 个 reference**，直接实现并做 focused verification。
-- Bug、review、迁移等任务先读 0–1 个 primary reference；只有阶段真实变化或新证据出现时才加载下一份。
-- Router 不宣布自己被激活，也不向用户表演 Quick / Deliberate / Deep 分类。
-- 用户说正常语言即可。routing 是 Codex 的责任。
-- Router 现在同时约束 complexity 与 evidence budget：没有当前用途的 fallback、状态、hash、重复检查和第二轮 acceptance 不进入默认路径。
-- 复杂故障的 boundary localization 已并入 `soft-debug`；不再需要另一个重叠的 implicit debugging skill。
-- Implementation 默认交付完整 requested usable outcome；“简单”限制实现复杂度，不把明确需求偷换为 MVP、scaffold、placeholder 或局部 tranche。
-- 产品介绍、tutorial、截图、示例、log 与 review 按用户 intent 和 source authority 路由，而不是各造一个 leaf。
-- `soft-parallel` 使用 Requester / Coordinator / Task Worker / optional Helper 的 bounded Worker Lanes contract；主线程保留用户沟通、边界、整合与最终判断。
+- Router 负责 routing，但不宣布自己被激活，也不向用户表演内部分类。
+- 小任务读取 0 个 reference，直接实现并做 focused verification。
+- Bug、review、迁移等任务先读 0–1 个 primary reference；只有阶段真实变化或新证据出现时才读取下一份。
+- 没有当前用途的 fallback、state、hash、重复检查和第二轮 acceptance 不进入默认路径。
+- 产品介绍、tutorial、截图、示例、log 与 review 按用户 intent 和 source authority 使用，而不是各造一个 workflow。
+- 严格 red-green 优先用于 bug、领域规则、状态机、parser、契约、迁移、并发和安全敏感行为；样式、copy 和简单 wiring 不强制低价值 unit test。
+- Review 默认一轮，不制造 findings，也不自动创建重复 reviewer loops。
+- Verification 按 blast radius 选择 focused / adjacent / broad evidence。
+- Worktree、design doc、commit、push、PR、merge 与 destructive cleanup 都不会仅仅因为某个方法存在而自动发生。
+
+`soft-parallel` 采用 bounded Worker Lanes contract：Requester / Coordinator / Task Worker / optional Helper。每个 worker 收到紧凑的 `Outcome / Scope / Context / Authority / Return`，主线程保留用户沟通、权限边界、整合与最终判断。
 
 ## 运行时结构
 
 ```text
 softpowers/
-├── SKILL.md                   # 唯一 implicit router，约 630 words
+├── SKILL.md                   # 唯一 implicit router
 ├── agents/openai.yaml
 └── references/
     ├── brainstorm.md
@@ -62,39 +165,51 @@ soft-review/                   # explicit shortcut
 
 Router 不尝试“调用”另一个 skill。`references/` 是它自己的 progressive-disclosure 资源，因此没有悬空的 skill-to-skill dependency。
 
-输入媒介本身不决定 route：
+## 安装与恢复细节
 
-- 消费端产品介绍、tutorial、截图或 example 可能只是 `inspiration`，也可能被用户指定为 `normative` behavior；显式文字纠正优先于视觉推断。
-- 用户明确说 build / adapt / borrow 时，保留该方向，只对真正影响实现的 open decision 做 brainstorm，然后继续实现。
-- Screenshot 约束它实际展示的可见细节，不自动证明隐藏数据与 interaction semantics；完整 tutorial 也不会自动变成整个项目 spec。
+安装目标按这个顺序解析：
 
-## 方法与门槛
+1. `--dest /path/to/skills`
+2. `SOFTPOWERS_SKILLS_DIR`（兼容 `AGENTS_SKILLS_DIR`）
+3. `${CODEX_HOME}/skills`
+4. 若 `~/.agents/skills` 或 legacy `~/.codex/skills` 中已有 Softpowers，在原位置升级
+5. Softpowers 对全新安装默认选择 Codex USER skill root：`~/.agents/skills`
+6. 若只有 legacy `~/.codex/skills` 已存在，则继续使用它
 
-| 方法 | 进入条件 |
-|---|---|
-| Brainstorm | 产品、交互或架构仍有真正影响实现的开放决策 |
-| Spec Chain | 已确认的大型 spec 需要完整 implementation plan，并跨阶段执行而不丢 scope |
-| Plan | 需求已大致确定，工作需要多步排序或跨 session handoff |
-| Execute | 已有计划，或需求明确但需要多个 coherent slices |
-| Debug | Bug、失败测试、回归、构建失败、异常行为或性能退化 |
-| TDD | 失败测试能澄清行为契约或防止高价值回归 |
-| Review | 审 diff、commit、branch、PR 或实现结果 |
-| Receive Review | 外部 review 意见需要核实、接受、调整、拒绝或延期 |
-| Verify | 需要证明 bug 已修、要求已满足、测试通过或 branch ready |
-| Worktree | dirty state、风险、时长或并行写入让隔离真正有价值 |
-| Parallel | bounded worker lane 能通过并行、clean context、independent evidence 或保护 coordinator attention 带来实际价值 |
-| Finish | commit、push、PR、merge、branch/worktree cleanup 或最终集成决策 |
+如果两个 root 都已经存在 Softpowers，安装器会拒绝猜测并要求显式 `--dest`。当前 USER skill root 与其他 scope 见 [OpenAI Codex skill documentation](https://developers.openai.com/codex/build-skills#where-codex-loads-local-skills)。
 
-硬门槛仍然存在：
+安装器会：
 
-- 严格 red-green 优先用于 bug、领域规则、状态机、parser、契约、迁移、并发和安全敏感行为。
-- 样式、copy、简单 wiring、配置和生成物不强制低价值 unit test。
-- Task Worker 默认最多 3 个；只在 work order 与平台允许时增加一层 narrow Helper，不形成 delegation tree；主线程始终负责整合和验证。
-- Review 默认一轮，不制造 findings，不自动创建 spec reviewer + quality reviewer 双循环。
-- Verification 按 focused / adjacent / broad 分级。
-- worktree、design doc、commit、push、PR、merge 和 destructive cleanup 都不会因方法论自动发生；user request 与适用的 repository/global instructions 仍优先。
+1. 校验 `PACK_MANIFEST.json` 中 13 个 skills、12 个 router references、文件大小与 SHA-256；
+2. 在目标 root 内 staging 并再次校验；
+3. 只替换 Softpowers 的 13 个目录，保留其他 skills；
+4. 备份同名旧 skill；
+5. 中途失败时 rollback；
+6. 写入 install manifest 与 current pointer；
+7. 记录每个安装目录 digest，供安全卸载。
 
-## Canonical source
+从 `v0.1.x` 升级时，直接运行当前 `./install.sh` 即可。第一次运行 v0.2 的 `./uninstall.sh` 会恢复升级前的 legacy skills 与 manifest pointer；若还要继续删除恢复出的 v0.1.x layer，请 checkout 对应 v0.1.x source 并使用当时的 uninstaller。当前 v0.2 uninstaller 会拒绝把 12-skill legacy manifest 当成 13-skill v0.2 manifest。Current-schema manifest stack 要求 LIFO，不会跳层删除。
+
+## 反馈
+
+Softpowers 还是 RC。我们尤其想知道真实任务中的 activation、完整性与 overhead，而不是只收抽象 feature wish。
+
+- [提交 behavior feedback](https://github.com/IndelibleVivi/softpowers/issues/new?template=behavior-feedback.yml)：该不该触发、route 对不对、有没有绕圈或漏 outcome。
+- [报告 install / uninstall bug](https://github.com/IndelibleVivi/softpowers/issues/new?template=installer-bug.yml)：目标目录、rollback、manifest 或跨平台问题。
+- 想直接改代码或方法：先读 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+一份高质量 feedback 最好包含：
+
+- Softpowers version 或 commit；
+- Codex surface（desktop / CLI / IDE）与基本环境；
+- 已脱敏的原始 prompt；
+- 你期望发生什么、实际发生什么；
+- 是否触发、读取了哪些 reference（如果看得到）；
+- 最终 outcome 是否完整，以及有没有多余 plan、test、hash、tool call 或 subagent。
+
+请先删掉 repo secrets、tokens、私有路径、聊天、账号信息与不能公开的 source/output。Issue 是公开的。
+
+## Maintainer workflow
 
 12 份方法正文只维护一份：
 
@@ -102,141 +217,18 @@ Router 不尝试“调用”另一个 skill。`references/` 是它自己的 prog
 methods/*.md
 ```
 
-发布脚本从这些文件同时生成：
+发布脚本从这些 canonical sources 同时生成：
 
 - `skills/softpowers/references/*.md`
 - 12 个 standalone leaf `SKILL.md`
 
-因此 router references 与 `$soft-debug` 等显式入口不会逐渐漂移。
+不要直接修改 generated skill copies。
 
-```bash
-python3 scripts/build_skills.py
-python3 scripts/build_skills.py --check
-python3 scripts/validate_sync.py
-```
-
-## 安装
-
-用户安装只需要 Python 3 标准库，不需要 PyYAML，也不会联网安装依赖。
-
-解压后：
-
-```bash
-cd softpowers-pack-v0.2.0-rc4
-./install.sh
-```
-
-目标目录解析顺序：
-
-1. `--dest /path/to/skills`
-2. `SOFTPOWERS_SKILLS_DIR`（兼容 `AGENTS_SKILLS_DIR`）
-3. `${CODEX_HOME}/skills`
-4. 若 `~/.agents/skills` 或 `~/.codex/skills` 中已有 Softpowers，原地升级该安装
-5. 新安装默认使用当前官方 user skill root：`~/.agents/skills`
-6. 若只有 legacy `~/.codex/skills` 已存在，则继续使用它
-
-如果两个 root 都存在 Softpowers，安装器会拒绝猜测并要求显式 `--dest`。
-
-### 从 v0.1.2 升级
-
-直接运行 v0.2 安装器即可。它会识别现有 v0.1.x root，在同一位置事务升级：
-
-- v0.1.2 的 12 个目录会进入 timestamped backup；
-- v0.2 成为新的 manifest stack 顶层；
-- 运行一次 v0.2 的 `./uninstall.sh` 会完整恢复 v0.1.2 和旧 pointer；
-- 再运行一次旧层卸载，才会移除 v0.1.2。
-
-不要直接热改已安装副本。安装文件有 manifest digests；用新 release 覆盖，回滚路径才完整。
-
-### 安装安全行为
-
-安装器会：
-
-1. 用标准库读取 `PACK_MANIFEST.json`；
-2. 校验 13 个 skills、12 个 router references、文件大小和 SHA-256；
-3. 在目标 root 内 staging 并再次校验；
-4. 只替换 Softpowers 的 13 个目录，允许其他 skills 共存；
-5. 备份同名旧 skill；
-6. 中途失败时 rollback；
-7. 成功后写 install manifest 和 current pointer；
-8. 记录每个安装目录 digest，供安全卸载。
-
-安装后运行：
-
-```text
-/skills
-```
-
-`softpowers` 应为 implicit；12 个 leaf skills 可见但 explicit-only。客户端未刷新时重启 Codex。
-
-## 使用
-
-日常无需记技能名：
-
-```text
-修复移动端输入时消息气泡上移的问题，找到根因后直接实现并验证。
-```
-
-Router 应自行读取 `debug.md`；猫猫无需写 `$soft-debug`。
-
-显式入口仍可用于测试、强制方法或精确控制：
-
-```text
-$soft-review 审查当前 dirty diff，只报告可操作的 P0–P2 findings。
-```
-
-```text
-$soft-tdd 为这个 stale cursor bug 建立严格 red-green 回归证据。
-```
-
-```text
-$soft-parallel 只读调查三个确定互不相关的测试组，主线程负责整合。
-```
-
-```text
-$soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；当前 tranche 不得替代完整 scope。
-```
-
-## 卸载与恢复
-
-```bash
-./uninstall.sh
-```
-
-卸载器会：
-
-- 删除当前安装层；
-- 恢复该层安装前的同名 skills；
-- 不触碰无关 skills；
-- 将安装后被手改的 skill 保存到 `.softpowers-uninstall-snapshots/`；
-- 仅允许 LIFO 卸载，旧 manifest 请求会在 mutation 前拒绝。
-
-也可显式指定：
-
-```bash
-./uninstall.sh --dest /path/to/skills
-./uninstall.sh --manifest /path/to/current-manifest.json
-```
-
-## 校验
-
-普通用户可直接运行：
+普通用户可运行标准库 self-test：
 
 ```bash
 python3 scripts/selftest.py
 ```
-
-覆盖：
-
-- router-only implicit activation metadata；
-- methods → references / leaves 同步；
-- 38 个安装 payload 文件的 size 与 digest；
-- 无 site-packages 的安装/卸载；
-- 新 `~/.agents/skills` root 与 legacy `~/.codex/skills` 原地升级；
-- 无关 skills 共存；
-- backup/restore、manifest stack、non-LIFO rejection；
-- 用户修改保全；
-- partial install rollback。
 
 Maintainer release gate 需要 PyYAML：
 
@@ -247,9 +239,12 @@ python3 scripts/validate_sync.py
 python3 scripts/validate.py --exact skills
 python3 scripts/generate_pack_manifest.py --check
 python3 scripts/selftest.py
+python3 scripts/audit_public_tree.py
+python3 -m py_compile scripts/*.py
+bash -n install.sh uninstall.sh
 ```
 
-修改 `methods/` 后：
+修改 `methods/` 后先 regenerate：
 
 ```bash
 python3 scripts/build_skills.py
@@ -258,26 +253,12 @@ python3 scripts/generate_pack_manifest.py
 python3 scripts/selftest.py
 ```
 
-## RC 观察重点
+Behavioral probes 与 eval seed set 见 [BEHAVIORAL_PROBES.md](BEHAVIORAL_PROBES.md) 和 [evals/activation-prompts.csv](evals/activation-prompts.csv)。不要为了通过 eval 把 router 扩成无边界的万能匹配器。
 
-`0.2.0-rc4` 继续验证 activation、progressive disclosure、complexity / evidence budget、复杂故障 boundary localization 与 approved spec continuity，并新增 complete-outcome、reference authority 与 Worker Lanes contract。真实任务里观察：
+`scripts/audit_public_tree.py` 会 fail closed，并检查 tracked/candidate public files 中的 private namespaces、symlink、personal absolute paths、常见 secret patterns、environment files 与 macOS junk。它证明的是当前 public tree，不会把 Git history 描述成从未含过任何 local material；release 仍应从 clean tagged checkout 构建。
 
-- 该触发时是否触发；
-- 解释概念、简单找文件、闲聊时是否保持沉默；
-- 小改动是否读取 0 references；
-- 第一次具体行动前是否只读 0–2 份必要材料；
-- 是否出现重复读取、全生命周期预加载、无意义 plan/TDD/worktree/subagent；
-- approved spec 是否始终保留完整 coverage，而没有被 current tranche 偷换；
-- 明确 implementation request 是否完整实现，而没有被偷换为 MVP、scaffold 或 plan-only；
-- 截图、tutorial 和产品介绍是否按 intent / authority 使用，而不是误触发 summary 或无边界克隆；
-- worker 是否收到 bounded authority/return contract，main coordinator 是否核实而非盲信回报；
-- result 与 fresh verification 是否更可靠；
-- token 与命令 thrashing 是否下降。
+## 设计来源与 license
 
-样例见 `BEHAVIORAL_PROBES.md` 与 `evals/activation-prompts.csv`。
+Softpowers 是独立重写，理念上受 Jesse Vincent / obra 的 [`superpowers`](https://github.com/obra/superpowers) 启发；Worker Lanes contract 参考了 Luluane 与 Astrean-Codex 的 [`astrean-worker-lanes`](https://github.com/LuluaneS/astrean-worker-lanes)。没有复制原项目的强制 bootstrap、固定完整流水线或逐 task 双 review 机制。
 
-## 设计来源
-
-本项目是独立重写，理念上受 Jesse Vincent / obra 的 `superpowers` 启发。原项目采用 MIT License。Softpowers 没有复制其强制 bootstrap、固定完整流水线或逐 task 双 review 机制。
-
-详见 `THIRD_PARTY_NOTICES.md`。
+具体 attribution 与 license 边界见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。Softpowers 本身使用 [MIT License](LICENSE)。

@@ -1,5 +1,7 @@
 # Packaging and Activation Audit — v0.2.0-rc4
 
+This is a maintainer self-audit, not an independent security or compliance assurance.
+
 This release preserves the v0.1.2 transaction layer and changes the runtime activation topology.
 
 ## Activation contract
@@ -52,6 +54,7 @@ The user installation path uses only Python standard library.
 - Fresh installs default to current `~/.agents/skills`.
 - Legacy `~/.codex/skills` remains supported.
 - Dual active roots are treated as ambiguity and rejected.
+- Restoring a v0.1.x layer is supported; removing that restored legacy layer requires the matching legacy uninstaller because the v0.2 uninstaller intentionally rejects a 12-skill manifest.
 
 ## Retained transaction guarantees
 
@@ -59,7 +62,7 @@ The user installation path uses only Python standard library.
 - Coexistence with unrelated skills
 - Same-name backup and restoration
 - Complete rollback after injected partial install failure
-- LIFO manifest stack
+- LIFO current-schema manifest stack
 - Non-LIFO rejection before mutation
 - Snapshot preservation of post-install edits
 - Install/uninstall under `python -S`
@@ -75,4 +78,5 @@ The user installation path uses only Python standard library.
 - Default current-root install
 - Legacy-root in-place upgrade and restore
 - Coexistence, stack, rollback, edit preservation, and no-site-packages tests
-- Final archive traversal, symlink, local-path, secret-pattern, and macOS-junk audit
+- Visible current-tree private-namespace, symlink, local-path, secret-pattern, environment-file, and macOS-junk audit via `scripts/audit_public_tree.py`
+- Ubuntu Python 3.10 / 3.13 and macOS Python 3.13 CI matrix
