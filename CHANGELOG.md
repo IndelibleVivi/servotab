@@ -1,16 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.2.0-rc4 — 2026-08-11
+
+Complete-outcome and Worker Lanes refinement.
 
 - Reworked the public README around clone/install/update, everyday natural-language use, and the distinction between the implicit router and situational explicit-only leaf skills.
 - Added public behavior and installer feedback forms with privacy-safe reporting guidance.
 - Added contributor guidance for canonical method sources, generated outputs, and release verification.
 - Documented exact Bash/Python/platform support, evidence-bounded implicit routing, no-change reinstall layers, and the legacy-uninstaller boundary after a v0.1.x rollback.
 - Added a fail-closed public-tree audit and expanded CI across Ubuntu Python 3.10/3.13 and macOS Python 3.13.
-
-## 0.2.0-rc4 — 2026-08-11
-
-Complete-outcome and Worker Lanes refinement.
 
 - Made the complete requested usable outcome the implementation default; simplicity now constrains mechanism rather than silently reducing product scope to an MVP, scaffold, placeholder, or convenient tranche.
 - Required plans to preserve end-to-end coverage and meaningful order, with MVP/prototype scope and material reordering treated as explicit decisions.
