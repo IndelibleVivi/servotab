@@ -29,13 +29,27 @@ State, in compact form:
 
 - Desired user or system outcome
 - Current behavior
-- Constraints and non-goals
+- Hard constraints and non-goals
+- Proposed mechanism and the assumptions behind it
 - Decisions already made by the user
 - Material unknowns
 
 Treat the user's existing direction as real input. Do not reopen settled choices simply to manufacture alternatives.
 
+A proposed mechanism is not automatically a settled decision. Unless the user explicitly makes it a requirement, preserve the outcome and constraints while independently evaluating whether that mechanism is the best supported route. Do not agree into avoidable complexity, and do not replace the proposal merely because another design is more familiar.
+
 When the user asks to build, adapt, or borrow a named behavior, preserve that direction and explore only the decisions still needed to implement it. Do not turn an implementation request into an open-ended product workshop.
+
+## Check the capability boundary
+
+Before designing a new integration, transport, fallback, or abstraction, verify the assumption that makes it necessary:
+
+- What exact current capability or policy blocks the outcome?
+- Is that limitation directly observed, or inherited from one mode, old version, or earlier attempt?
+- Does the repository, installed runtime, local help, or authoritative platform documentation already expose a direct supported route?
+- How many owners, transports, profiles, persistent states, and trust boundaries does each viable route add?
+
+Use readily available world knowledge to generate alternatives, then verify drift-prone technical facts when the result could change the architecture. Prefer the supported route that removes a boundary while preserving the complete outcome. When a small smoke test can settle the decision cheaply, run it before building the bridge.
 
 ## Explore the decision surface
 
@@ -101,6 +115,7 @@ Before finishing, check:
 - What existing behavior could regress?
 - What happens with stale, partial, duplicate, or missing data?
 - What is the simplest path that still supports the real use case?
+- Did the chosen mechanism survive comparison with the platform's direct supported paths?
 - Is the design creating infrastructure for an imagined future?
 - Can the decision be reversed later?
 - What evidence will show the implementation works?

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0-rc5 — 2026-08-13
+
+Independent mechanism judgment and evidence maturity.
+
+- Separated requested outcome and hard constraints from a user-proposed implementation mechanism unless that mechanism is explicitly locked.
+- Required drift-prone platform assumptions that could change architecture to be checked against current repository/runtime evidence and authoritative sources.
+- Added a capability-boundary pass that prefers a complete direct supported route over a bridge with extra owners, transports, persistent states, or trust boundaries.
+- Made cross-boundary patch cascades trigger an architecture reset before another locally plausible fix; passing components and sunk cost no longer count as topology evidence.
+- Distinguished configured capability, reachable routing, current exercise, same-task repair, and later comparable improvement without introducing scores, ledgers, background audits, extra reviewers, or an external dependency.
+- Added behavioral and activation probes for challenging a proposed mechanism, resetting after whack-a-mole failures, and refusing unsupported longitudinal claims.
+- Reviewed Better Harness as an external evidence-model reference only; it is not installed, invoked, integrated, or adopted as Softpowers workflow authority.
+
 ## 0.2.0-rc4 — 2026-08-11
 
 Complete-outcome and Worker Lanes refinement.

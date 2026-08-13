@@ -15,6 +15,7 @@ Capture:
 
 - Observed behavior
 - Expected behavior
+- The required outcome independent of the current implementation mechanism
 - Reproduction path
 - Environment or data conditions
 - First known bad version or recent relevant changes, when available
@@ -60,11 +61,24 @@ Test the smallest discriminating change or observation. Avoid changing several v
 - One active hypothesis at a time.
 - After a failed hypothesis, record what the result ruled out.
 - After two failed hypotheses, reconsider the chosen boundary and hidden assumptions before broadening the search or adding another patch.
-- After three materially different failed fixes, or when each fix exposes shared-state coupling elsewhere, question the architecture before applying another patch.
+- If each fix exposes a new failure in another owner, transport, or state boundary, treat the cascade itself as architecture evidence and reset before applying another patch.
+- Three materially different failed fixes are a hard stop for re-evaluating the mechanism, even when every individual patch is locally plausible.
 
 This is a guard against thrashing, not a reason to stop at an arbitrary number when new evidence is strong.
 
 Do not delegate a vague symptom. Delegate only after localization reveals distinct evidence questions, then verify returned claims against the primary artifacts.
+
+## Reset the mechanism when patches multiply
+
+Debugging does not require preserving an optional implementation choice. When fixes behave like whack-a-mole across components:
+
+1. Stop patching and separate the required outcome from the currently chosen mechanism.
+2. Sketch the shortest relevant topology: owners, transports, persistent state, trust boundaries, and the observed failure at each hop.
+3. Verify the assumption that originally ruled out a simpler path using current source, runtime help, a bounded probe, or authoritative documentation.
+4. Compare at least one direct supported route. Prefer it when it removes moving parts and still satisfies the full contract.
+5. If the existing mechanism remains necessary, state the evidence that makes its additional boundaries unavoidable before resuming fixes.
+
+Sunk implementation cost, passing component tests, or a fix for the latest symptom does not prove the topology is sound.
 
 ## 4. Fix the source
 

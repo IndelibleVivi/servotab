@@ -11,7 +11,7 @@ body:
     id: version
     attributes:
       label: Softpowers version or commit
-      placeholder: 0.2.0-rc4 or the output of git rev-parse --short HEAD
+      placeholder: 0.2.0-rc5 or the output of git rev-parse --short HEAD
     validations:
       required: true
 

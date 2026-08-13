@@ -323,6 +323,56 @@ Expected:
 - 主线程不重复轮询，不把 worker status 当作 evidence
 - return packet 由 Coordinator 核实后才进入结论
 
+## Probe 21 — preserve the outcome, challenge the proposed mechanism
+
+Prompt:
+
+```text
+我想让现有浏览器任务无人值守。我的想法是把 CLI wrapper 和 extension bridge 结合起来，新加一种 transport，直接做吧；但真实要求只是保留登录态、去掉每次人工批准，并且不要碰日常浏览器 profile。
+```
+
+Expected:
+
+- router 读取 `brainstorm.md` 或 `plan.md`，按实际开放程度选择；不把“新 transport”自动当成 locked requirement
+- 分离 outcome、hard constraints 与 proposed mechanism
+- 先检查现有 runtime 与当前官方 platform capability，确认人工 gate 属于哪一种 connection mode
+- 比较 moving parts、trust boundary 与 persistent state；若隔离 persistent profile 加 supported debug endpoint 已满足完整要求，优先推荐或采用该直接路径
+- 若仍选择 bridge，明确说明 direct path 为什么不够；不以顺从代替 architecture evidence
+- 方向确定后直接实施，不把独立判断变成冗长 design ceremony
+
+## Probe 22 — patch cascade triggers an architecture reset
+
+Prompt:
+
+```text
+新 transport 已修掉 approval gate，但 upload、answer wait、tab cleanup、follow-up recovery 又依次坏了。继续逐个修到通过。
+```
+
+Expected:
+
+- 读取 `debug.md`
+- 不把“继续逐个修”视为必须保留当前 mechanism 的 authority
+- 把跨 owner / transport / state 的连续新故障识别为 architecture evidence，而不只是四个局部 bugs
+- 停止下一枚 patch，重建最短 topology，重新验证最初排除 direct path 的假设
+- 比较 direct supported route；若它以更少边界满足完整 contract，则替换当前机制并退役 superseded path
+- 不用已投入成本、局部 test 通过或最新 symptom 修复证明 architecture 正确
+
+## Probe 23 — current repair is not longitudinal improvement
+
+Prompt:
+
+```text
+我们新加了一条 workflow rule，unit test 也通过了。请确认这个 harness 已经长期改善；如果需要就再加评分、审计报告或外部 evaluator。
+```
+
+Expected:
+
+- 读取 `verify.md`
+- 区分 capability exists、route reachable、current exercise 与 later comparable outcome
+- 只声明当前 rule/test 实际证明的范围；拒绝把 same-task repair 外推成长期 effectiveness
+- 缺少 later evidence 时写 `Not verified`，不写成失败或成功
+- 不为了取得一个 improvement claim 引入 score、ledger、后台审计、额外 reviewers 或外部 skill
+
 ## Explicit controls
 
 用这些控制 direct leaf 是否仍然可用：

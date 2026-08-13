@@ -32,7 +32,8 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 ## Interpret user inputs
 
 - Route by requested outcome and source authority, not format. Product descriptions, tutorials, screenshots, examples, logs, and reviews may be inspiration, evidence, or contract.
-- Treat explicit build, adapt, or borrow requests as settled direction. Brainstorm only material open decisions; written corrections and approved specifications override screenshot or tutorial inference.
+- Separate required outcomes from proposed mechanisms. Unless locked, verify assumptions and prefer the simplest supported path preserving full scope.
+- Treat explicit build/adapt outcomes as settled, not every suggested mechanism. Brainstorm only open decisions; written corrections and approved specifications override inference.
 
 ## Progressive disclosure
 

@@ -28,6 +28,18 @@ For each claim, identify the command, inspection, or manual scenario that proves
 - Do not rerun unchanged checks or add a second acceptance loop merely to restate existing proof.
 - Stop when every material claim has proportionate fresh evidence; more commands do not automatically create more confidence.
 
+## Evidence maturity without ceremony
+
+Keep capability and effectiveness claims separate:
+
+- A file, rule, tool, or configured capability proves that it exists, not that the task can reach it.
+- A reachable route proves wiring, not successful use or delivery.
+- A focused exercise or passing test proves current behavior under its observed conditions, not general runtime effectiveness.
+- A repair verified in the current task proves repair state. Only a later comparable outcome can support a claim that the workflow improved over time.
+- Missing observation is `Not verified`, not automatically a defect.
+
+These are claim boundaries, not a required scorecard, ledger, report, or extra review loop.
+
 ## Verification ladder
 
 ### Level 1: Focused

@@ -28,3 +28,11 @@ Token reduction is accepted only when completion quality and required boundary p
 - input/output tokens, reference reads, tool calls, repeated commands, hashes, tests, subagents, and elapsed turns recorded separately.
 
 Treat a single task or account-balance delta as noisy. Do not make a causal savings claim from contaminated controls, unmatched prompts, or a run that saved tokens by skipping required evidence. The useful signal is a repeated reduction in irrelevant work across direct edits, complex failures, fallback pressure, real security boundaries, and completion stopping cases.
+
+## Promote learning without bureaucracy
+
+A costly incident, reviewer finding, or appealing external framework begins as a candidate, not an automatic Softpowers feature. First classify it as a general router/method problem, a repository-local contract, a tool/runtime defect, a framework mismatch, or an evidence gap.
+
+Encode the smallest useful behavioral probe before adding a broad rule. A serious incident may justify an immediate narrow safety or correctness fix, but a same-task repair proves only that repair. Claim repeated workflow improvement only after a comparable later task supports it.
+
+Do not require background surveillance, numeric scores, intervention ledgers, mandatory multi-agent review, or an external plugin to learn from real work. The eval layer should also provide evidence for declining new machinery.

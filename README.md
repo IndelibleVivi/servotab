@@ -7,7 +7,7 @@
 
 > Quiet, proportionate engineering workflows for Codex.
 
-当前版本：`0.2.0-rc4`（public release candidate）
+当前版本：`0.2.0-rc5`（public release candidate）
 
 ## 先看结论
 
@@ -121,9 +121,12 @@ $soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；�
 - Bug、review、迁移等任务先读 0–1 个 primary reference；只有阶段真实变化或新证据出现时才读取下一份。
 - 没有当前用途的 fallback、state、hash、重复检查和第二轮 acceptance 不进入默认路径。
 - 产品介绍、tutorial、截图、示例、log 与 review 按用户 intent 和 source authority 使用，而不是各造一个 workflow。
+- Outcome、hard constraints 与 proposed mechanism 分开理解；除非用户明确锁定 mechanism，否则先用 repo/runtime evidence、当前 platform capabilities 与 authoritative sources 挑战其假设，再选择满足完整 outcome 的最短 supported path。
+- 跨 owner、transport 或 persistent-state 的 patch cascade 会触发 architecture reset；局部 patch 通过和 sunk cost 都不能替选中的 topology 背书。
 - 严格 red-green 优先用于 bug、领域规则、状态机、parser、契约、迁移、并发和安全敏感行为；样式、copy 和简单 wiring 不强制低价值 unit test。
 - Review 默认一轮，不制造 findings，也不自动创建重复 reviewer loops。
 - Verification 按 blast radius 选择 focused / adjacent / broad evidence。
+- 配置存在、当前路径被 exercise、同 task repair 与 later comparable improvement 是不同强度的 claims；这条边界不要求 score、ledger、后台审计或额外 reviewer。
 - Worktree、design doc、commit、push、PR、merge 与 destructive cleanup 都不会仅仅因为某个方法存在而自动发生。
 
 `soft-parallel` 采用 bounded Worker Lanes contract：Requester / Coordinator / Task Worker / optional Helper。每个 worker 收到紧凑的 `Outcome / Scope / Context / Authority / Return`，主线程保留用户沟通、权限边界、整合与最终判断。
@@ -259,6 +262,6 @@ Behavioral probes 与 eval seed set 见 [BEHAVIORAL_PROBES.md](BEHAVIORAL_PROBES
 
 ## 设计来源与 license
 
-Softpowers 是独立重写，理念上受 Jesse Vincent / obra 的 [`superpowers`](https://github.com/obra/superpowers) 启发；Worker Lanes contract 参考了 Luluane 与 Astrean-Codex 的 [`astrean-worker-lanes`](https://github.com/LuluaneS/astrean-worker-lanes)。没有复制原项目的强制 bootstrap、固定完整流水线或逐 task 双 review 机制。
+Softpowers 是独立重写，理念上受 Jesse Vincent / obra 的 [`superpowers`](https://github.com/obra/superpowers) 启发，但没有复制其强制 bootstrap、固定完整流水线或逐 task 双 review 机制。Worker Lanes contract 参考了 Luluane 与 Astrean-Codex 的 [`astrean-worker-lanes`](https://github.com/LuluaneS/astrean-worker-lanes)。`rc5` 还把 QoderAI [`better-harness`](https://github.com/QoderAI/better-harness) 的 evidence-state distinction 当作批判性参考，但不安装、调用、依赖或吸收其 audit workflow、scores、agents、reports 与 repair ledger。
 
 具体 attribution 与 license 边界见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。Softpowers 本身使用 [MIT License](LICENSE)。

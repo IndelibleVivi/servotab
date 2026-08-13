@@ -1,8 +1,8 @@
-# Packaging and Activation Audit — v0.2.0-rc4
+# Packaging and Activation Audit — v0.2.0-rc5
 
 This is a maintainer self-audit, not an independent security or compliance assurance.
 
-This release preserves the v0.1.2 transaction layer and changes the runtime activation topology.
+This release preserves the v0.1.2 transaction layer and the v0.2 router-only implicit activation topology.
 
 ## Activation contract
 
@@ -23,7 +23,7 @@ The implicit router owns exactly 12 references.
 - No reference may route to another reference.
 - No repeated reference reads or lifecycle preloading.
 
-The router body is 629 words, below the 650-word release gate.
+The router body is 645 words, below the 650-word release gate.
 
 ## Single source of truth
 
