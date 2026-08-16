@@ -1,0 +1,8 @@
+interface:
+  display_name: "Soft Eval"
+  short_description: "Run reproducible Softpowers behavior canaries"
+  default_prompt: "Use $soft-eval to select the smallest relevant Softpowers canary set, run it with explicit identity and permissions, and report the saved evidence."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

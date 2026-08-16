@@ -2,7 +2,7 @@
 
 Status: `DECIDED`
 
-这些 samples 示范当前选中来源怎样进入 Softpowers 的长期 intake。它们记录可吸收 kernel、调整方式、拒绝边界、可能的 probe 与 apply 后验证。当前文件本身不修改 router、methods、installer 或 runtime behavior。
+这些 samples 示范当前选中来源怎样进入 Softpowers 的长期 intake。它们记录可吸收 kernel、调整方式、拒绝边界、可能的 probe 与 apply 后验证。`0.3.0-rc2` 已把其中一部分落实为 `soft-eval`、薄 runner 与三个 canaries；本文件仍只是 provenance/decision surface，不是 runtime authority。
 
 ## 1. Clean verifier and executable canaries
 
@@ -57,7 +57,7 @@ Programmatic assertions 检查 diff、tests、file scope、trace event 与 compl
 
 ### Result
 
-`ADAPT` approved for a future eval tranche. No runtime method change is authorized by this sample.
+Initial `ADAPT` applied in `0.3.0-rc2`: three canaries, deterministic known-fail/known-pass checks, atomic per-attempt artifacts and case-boundary resume. Clean candidate-vs-verifier isolation, repeated three-run comparison and semantic grading remain deliberately deferred.
 
 ---
 
@@ -238,7 +238,7 @@ LLM judgment嵌入由普通软件掌管的 state、permissions、execution 与 r
 
 ### Local signal
 
-未来 Softpowers eval runner 需要可检查、可恢复、容易 debug 的 control flow。日常 Softpowers 已依赖 host-native agent behavior，不应被外部 orchestrator 接管。
+Softpowers eval runner 需要可检查、可恢复、容易 debug 的 control flow。日常 Softpowers 仍依赖 host-native agent behavior，不应被外部 orchestrator 接管。
 
 ### Existing coverage
 
@@ -253,7 +253,7 @@ LLM judgment嵌入由普通软件掌管的 state、permissions、execution 与 r
 - Accepted kernel: maintainer tooling 自己掌管 state、run identity、resume、error compaction。
 - Excluded machinery: 把每个 coding task 编译成固定 DAG；用 deterministic stages 夺走 agent 的局部判断；要求用户管理 workflow engine。
 - Landing plane: eval runner architecture。
-- Smallest useful delta: future runner 使用显式 state machine 和 append-only trace，Softpowers runtime 保持 host-native。
+- Smallest useful delta: runner 使用显式 run/case/attempt state 和 append-only raw trace，Softpowers runtime 保持 host-native。
 
 ### Probe
 
@@ -271,7 +271,7 @@ deterministic unit/integration tests 足够；无需 model run，除非 runner �
 
 ### Result
 
-Runtime principle is `ALREADY COVERED`. Runner implementation guidance is `ADAPT`.
+Runtime principle remains `ALREADY COVERED`. Initial runner guidance was applied in `0.3.0-rc2` through explicit run identity, atomic result writes, preserved stderr/errors and case-boundary resume. Mid-attempt checkpoint reuse remains deferred because a Codex process cannot be resumed safely from a partial JSONL stream.
 
 ---
 
@@ -320,7 +320,7 @@ Softpowers 需要行为 evidence，但核心价值仍是 methods 与 routing。�
 
 ### Result
 
-`ADAPT` approved as implementation style only.
+`ADAPT` applied as implementation style in `0.3.0-rc2`: the standard-library runner keeps one inspectable subprocess boundary, preserves raw JSONL and malformed/unknown events, and derives compact telemetry without becoming an agent framework.
 
 ---
 
@@ -365,7 +365,7 @@ deterministic cache-key tests、regrade tests、metadata redaction tests；无�
 
 ### Result
 
-`ADAPT` approved for future eval identity contract.
+Initial `ADAPT` applied in `0.3.0-rc2`: artifacts record run/case/attempt, subject label, runner identity, fixture Git tree, case/prompt digests, model, sandbox, CLI version and host metadata. Source-mode runs also record commit plus dirty state. Honest cache reuse and offline re-grading remain deferred; `subject-id` is explicitly not presented as an isolation mechanism.
 
 ---
 

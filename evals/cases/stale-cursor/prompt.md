@@ -1,0 +1,1 @@
+Fix the stale-cursor regression in this repository. Reproduce the failing test, identify the violated consistency-window invariant, repair the canonical source without weakening or deleting tests, and run the focused regression suite. Keep the change scoped to the bug.

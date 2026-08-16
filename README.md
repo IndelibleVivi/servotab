@@ -7,12 +7,12 @@
 
 > Quiet, proportionate engineering workflows for Codex.
 
-当前版本：`0.3.0-rc1`（public release candidate）
+当前版本：`0.3.0-rc2`（public release candidate）
 
 ## 先看结论
 
 - 日常只需要正常描述任务，不必背 skill 名称。
-- Invocation metadata 只允许 `softpowers` router 被 implicit invocation；其余 12 个 leaf skills 都是 explicit-only shortcuts，不会自己抢活。
+- Invocation metadata 只允许 `softpowers` router 被 implicit invocation；其余 13 个 leaf skills 都是 explicit-only shortcuts，不会自己抢活。
 - 安装完整 pack 不等于每个 skill 都会频繁运行。`spec-chain`、`worktree`、`parallel` 等本来就是特定情境工具，低频是设计的一部分。
 - 清晰、局部、可逆的小任务直接做；复杂任务才按需读取一份 playbook。
 - Softpowers 不覆盖你的 prompt、`AGENTS.md`、repo 规则、权限边界或 Git 决策。
@@ -38,7 +38,7 @@ cd softpowers
 你应当看到：
 
 - `softpowers`：具备 implicit-invocation eligibility 的 router；
-- 12 个 `soft-*` skills：explicit-only；
+- 13 个 `soft-*` skills：explicit-only；
 - 如果列表没有刷新，重启 Codex。
 
 这是 source-distributed release candidate，还不是 plugin-directory 安装包。安装脚本只使用 Python 标准库，不会联网下载 dependency。
@@ -98,13 +98,14 @@ $soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；�
 
 ## 不是每个 skill 都要经常用
 
-这 13 个 skills 不是一排等权按钮。更准确的理解是三层：
+这 14 个 skills 不是一排等权按钮。更准确的理解是四层：
 
 | 层 | Skills | 什么时候需要关心 |
 |---|---|---|
 | 默认入口 | `softpowers` | 日常 repo work；通常只说自然语言 |
 | 精确控制 | `soft-debug`, `soft-review`, `soft-verify`, `soft-execute`, `soft-tdd` | 你明确想固定 diagnosis、review、verification、execution 或 red-green 方法时 |
 | 特定情境 | `soft-brainstorm`, `soft-plan`, `soft-receive-review`, `soft-finish`, `soft-spec-chain`, `soft-worktree`, `soft-parallel` | 开放设计、多步 handoff、外部 review、大型 approved spec、隔离 workspace 或 bounded delegation 真正有价值时 |
+| Maintainer evidence | `soft-eval` | 明确要跑 behavior canary、release evidence 或调查 routing/workflow behavior 时 |
 
 完整 pack 保留这些 leaf skills，是为了让显式控制、eval 和少见但高价值的工程情境都有稳定入口。它们全部是 explicit-only；没有必要为了“都装了”而刻意调用它们。
 
@@ -131,6 +132,36 @@ $soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；�
 
 `soft-parallel` 采用 bounded Worker Lanes contract：Requester / Coordinator / Task Worker / optional Helper。每个 worker 收到紧凑的 `Outcome / Scope / Context / Authority / Return`，主线程保留用户沟通、权限边界、整合与最终判断。
 
+## 可执行 behavior eval
+
+`0.3.0-rc2` 新增 explicit-only `soft-eval`。它把现有 behavior principles 变成一条可运行、可恢复、可检查的 maintainer evidence lane，但不会让普通 repo task 自动花 model quota。
+
+Source checkout 中先跑不调用 model 的 gate：
+
+```bash
+python3 -S evals/run_behavior_evals.py list
+python3 -S evals/run_behavior_evals.py selftest
+```
+
+当前 bundled canaries 是：
+
+- `tiny-copy`：小 copy change，限制 plan、subagent 与 command overhead；
+- `stale-cursor`：修复 consistency invariant 并执行 regression test；
+- `spec-chain`：把 approved spec 完整转换为 implementation plan，不能用局部 tranche 冒充 full scope。
+
+只有明确需要 live evidence 时才运行 Codex：
+
+```bash
+python3 -S evals/run_behavior_evals.py run \
+  --case tiny-copy \
+  --subject-id current-cli-environment \
+  --model <exact-model-id>
+```
+
+每次 attempt 把 prompt、case contract、raw JSONL、stderr、final message、Git diff、metadata 和 deterministic verification 原子写入 `.softpowers-evals/runs/`。使用同一个 `--run-id` 加 `--resume` 可以从未完成的 case boundary 恢复；已完成 attempt 不会重跑。
+
+Subject identity 必须如实描述当前 CLI 实际加载的 skills。Codex 会同时发现同名 repo-level 与 user-level skill，因此存在 identity collision 时，不要声称 candidate 被单独隔离。Runner 的第一版支持 matched prompt/fixture/model/sandbox/repeat 和明确 `subject-id`，但不把未经隔离的两次运行包装成可信 A/B。
+
 ## 运行时结构
 
 ```text
@@ -147,13 +178,15 @@ softpowers/
     ├── review.md
     ├── receive-review.md
     ├── verify.md
+    ├── eval.md
     ├── worktree.md
     ├── parallel.md
     └── finish.md
 
 soft-debug/                    # explicit shortcut
 soft-review/                   # explicit shortcut
-...                            # 共 12 个 leaf skills
+soft-eval/                     # explicit eval method + bundled runner/cases/schemas
+...                            # 共 13 个 leaf skills
 ```
 
 正常路径：
@@ -183,9 +216,9 @@ Router 不尝试“调用”另一个 skill。`references/` 是它自己的 prog
 
 安装器会：
 
-1. 校验 `PACK_MANIFEST.json` 中 13 个 skills、12 个 router references、文件大小与 SHA-256；
+1. 校验 `PACK_MANIFEST.json` 中 14 个 skills、13 个 router references、文件大小与 SHA-256；
 2. 在目标 root 内 staging 并再次校验；
-3. 只替换 Softpowers 的 13 个目录，保留其他 skills；
+3. 只替换 Softpowers 的 14 个目录，保留其他 skills；
 4. 备份同名旧 skill；
 5. 中途失败时 rollback；
 6. 写入 install manifest 与 current pointer；
@@ -214,7 +247,7 @@ Softpowers 还是 RC。我们尤其想知道真实任务中的 activation、完�
 
 ## Maintainer workflow
 
-12 份方法正文只维护一份：
+13 份方法正文只维护一份：
 
 ```text
 methods/*.md
@@ -223,7 +256,9 @@ methods/*.md
 发布脚本从这些 canonical sources 同时生成：
 
 - `skills/softpowers/references/*.md`
-- 12 个 standalone leaf `SKILL.md`
+- 13 个 standalone leaf `SKILL.md`
+
+Eval runner、schemas 与 cases 的 canonical sources 在 `evals/`；同一生成步骤把它们投影进 `skills/soft-eval/`，供安装后的 skill 直接使用。
 
 不要直接修改 generated skill copies。
 
@@ -243,7 +278,7 @@ python3 scripts/validate.py --exact skills
 python3 scripts/generate_pack_manifest.py --check
 python3 scripts/selftest.py
 python3 scripts/audit_public_tree.py
-python3 -m py_compile scripts/*.py
+python3 -m py_compile scripts/*.py evals/*.py
 bash -n install.sh uninstall.sh
 ```
 

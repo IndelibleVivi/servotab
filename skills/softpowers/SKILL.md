@@ -5,7 +5,7 @@ description: "Use for hands-on software repository work: implementation, debuggi
 
 # Softpowers
 
-The user describes the work in ordinary language. Routing is your responsibility.
+Route ordinary-language repository requests.
 
 Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep label, or an internal playbook name unless that information materially helps the user.
 
@@ -45,6 +45,7 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 - Diff, commit, branch, PR, or implementation review: `references/review.md`
 - External review feedback to validate and apply: `references/receive-review.md`
 - Completion, readiness, or regression claims needing broader proof: `references/verify.md`
+- Softpowers behavior evals or release evidence: `references/eval.md`
 - Isolation justified by dirty state, risk, duration, or parallel writes: `references/worktree.md`
 - Bounded delegation where parallelism, context isolation, independent review, or coordinator attention materially helps: `references/parallel.md`
 - Branch, PR, commit, cleanup, or final integration decisions: `references/finish.md`

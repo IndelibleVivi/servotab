@@ -1,4 +1,4 @@
-# Packaging and Activation Audit — v0.2.0-rc5
+# Packaging and Activation Audit — v0.3.0-rc2
 
 This is a maintainer self-audit, not an independent security or compliance assurance.
 
@@ -7,14 +7,14 @@ This release preserves the v0.1.2 transaction layer and the v0.2 router-only imp
 ## Activation contract
 
 - `softpowers`: `allow_implicit_invocation: true`
-- 12 leaf skills: `allow_implicit_invocation: false`
+- 13 leaf skills: `allow_implicit_invocation: false`
 - Manifest records the same split under `activation`.
 - Router description contains both positive repository-work scope and negative controls.
 - Router instructions require quiet activation and prohibit process theatre.
 
 ## Progressive disclosure
 
-The implicit router owns exactly 12 references.
+The implicit router owns exactly 13 references.
 
 - Clear local work: 0 references.
 - Initial specialist routing: 0–1 primary reference.
@@ -32,15 +32,19 @@ The router body is 645 words, below the 650-word release gate.
 - `skills/softpowers/references/*.md`
 - leaf `skills/soft-*/SKILL.md` bodies
 
+`evals/run_behavior_evals.py`, `evals/schemas/`, and `evals/cases/` are the
+canonical behavior-eval sources. The same generator projects them into the
+installed `soft-eval` skill's `scripts/` and `assets/` directories.
+
 `build_skills.py --check` and `validate_sync.py` fail on drift or unexpected payload files. Leaf method bodies are rejected if they contain `$soft-` cross-skill invocations.
 
 ## Install payload
 
 `PACK_MANIFEST.json` schema 2 records:
 
-- 13 skill directories
-- 12 router references
-- 38 exact payload files
+- 14 skill directories
+- 13 router references
+- 60 exact payload files
 - file sizes and SHA-256 digests
 - router-only implicit activation metadata
 
@@ -74,6 +78,8 @@ The user installation path uses only Python standard library.
 - Router/leaf invocation-policy validation
 - Reference set and no-cross-skill validation
 - Manifest freshness and digest validation
+- Three repository-owned eval canaries with known-fail/known-pass assertions
+- Installed-layout eval runner discovery and JSONL trace-parser self-test
 - Python compilation and shell syntax
 - Default current-root install
 - Legacy-root in-place upgrade and restore

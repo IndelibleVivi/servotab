@@ -6,7 +6,14 @@ import json
 from pathlib import Path
 from typing import Any
 
-from common import PACK_ROOT, REFERENCE_NAMES, ROUTER_NAME, SKILL_NAMES, VERSION
+from common import (
+    BUNDLED_RESOURCE_TARGETS,
+    PACK_ROOT,
+    REFERENCE_NAMES,
+    ROUTER_NAME,
+    SKILL_NAMES,
+    VERSION,
+)
 
 PACK_MANIFEST = PACK_ROOT / "PACK_MANIFEST.json"
 
@@ -20,6 +27,7 @@ def expected_payload_files() -> frozenset[str]:
     files |= {
         f"skills/{ROUTER_NAME}/references/{reference}" for reference in REFERENCE_NAMES
     }
+    files |= {f"skills/{relative}" for relative in BUNDLED_RESOURCE_TARGETS}
     return frozenset(files)
 
 

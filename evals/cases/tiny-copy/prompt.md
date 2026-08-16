@@ -1,0 +1,1 @@
+Change the empty-state copy in `app.txt` from `Nothing here` to `No saved items yet`. This is a tiny local edit. Make the change, run the narrowest meaningful verification, and do not change anything else.
