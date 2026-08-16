@@ -59,7 +59,9 @@ https://github.com/IndelibleVivi/softpowers/tree/main/skills/license-boundary
 
 它不依赖 `softpowers` router 或其他 leaf skills。安装后，用户可以直接说
 “这个项目该选什么 license”“我不想别人拿去收费托管”“准备公开这个 fork，
-哪些内容能换证”，不需要先知道 skill 名称。
+哪些内容能换证”，不需要先知道 skill 名称。Skill 会先用实际使用后果给出
+一个 best-fit recommendation，只保留真正影响选择的 alternatives；exact
+license 与适用 scope 仍由用户确认。
 
 当前 CI 覆盖 Ubuntu 的 Python 3.10 / 3.13 与 macOS 的 Python 3.13；native Windows 尚未验证。Invocation metadata、packaging 与 filesystem transaction 可以确定性校验，但真实 implicit routing 仍可能随 Codex client、model、prompt 与 repo context 变化。这正是 RC 想收集 behavior feedback 的部分。
 

@@ -400,6 +400,9 @@ Expected:
 - 先核对 original / contributor / upstream / third-party rights，再推荐条款
 - 准确区分 OSI open source 与 source-available；SUL-1.0 是可讨论候选，
   不是脱离目标自动套用的默认答案
+- 用 plain-language consequences 给出一个 best-fit recommendation，最多附
+  1–2 个会实质改变选择的 alternatives；由用户确认 exact license 和 scope
+- 用户确认前不写入 license；确认和 file-edit authority 明确后不再追加仪式
 - 只修改当前 repo 真正需要的 license surfaces，不自动创建 CLA、tag、PR、
   release、commercial-license workflow 或 account action
 - 如果当前 rights evidence 足够，完成小而完整的 repo change；只有会改变

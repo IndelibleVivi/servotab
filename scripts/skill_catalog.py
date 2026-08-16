@@ -223,8 +223,9 @@ METHODS = (
         "short_description": "Choose repository licenses from goals and rights",
         "default_prompt": (
             "Use $license-boundary to inspect this project's permission goals and rights "
-            "evidence, then recommend the smallest correct licensing boundary. Edit files "
-            "only when the user's request authorizes it."
+            "evidence. Recommend one best-fit license and scope in plain language, with only "
+            "material alternatives. Treat the exact choice as the user's; edit only after "
+            "explicit selection and file-edit authorization."
         ),
         "implicit": True,
         "router_reference": False,

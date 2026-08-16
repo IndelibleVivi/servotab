@@ -11,6 +11,9 @@ Standalone repository licensing boundary.
 - Added path, contributor, upstream/derivative, third-party, layered-license,
   and forward-only transition boundaries without prescribing one license for
   every developer.
+- Kept user mental load low with one plain-language best-fit recommendation,
+  only material alternatives, and an explicit user choice before legal terms
+  are written.
 - Made the skill individually installable from its repository path as well as
   part of the transactional Softpowers pack.
 

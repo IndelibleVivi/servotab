@@ -41,13 +41,13 @@
   "files": [
     {
       "path": "skills/license-boundary/SKILL.md",
-      "size": 9107,
-      "sha256": "d6676329cd3ec43579eb3ad6d6db2ba885bacd794cd0c3e06ebb80f931fcd10e"
+      "size": 10395,
+      "sha256": "dc30dcc76ca60d7c982bacb3fcef3f21af7688b809117e0c5858a6d11328f8fc"
     },
     {
       "path": "skills/license-boundary/agents/openai.yaml",
-      "size": 401,
-      "sha256": "ee693893e222a4f5e102a9d33615fe25d022fd1660d90af6032c16decbcd4114"
+      "size": 485,
+      "sha256": "6b1a247ad987e7c5bf68ec6099c4bc85d8cbff795b6660be9e09c69c5e987e69"
     },
     {
       "path": "skills/soft-brainstorm/SKILL.md",

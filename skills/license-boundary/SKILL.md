@@ -29,6 +29,30 @@ request or project. Common decisive questions are whether commercial use,
 internal business use, paid distribution or hosted provision, modification,
 redistribution, and reciprocal source sharing should be permitted.
 
+## Make the user's choice easy
+
+Do not require license vocabulary from the user. State the practical outcome
+first: who may use the material internally, sell copies, charge for hosting,
+modify or redistribute it, and which notice, source-sharing, adaptation, or
+ShareAlike conditions follow.
+
+Lead with one best-fit recommendation and a short reason. Offer at most one or
+two materially different alternatives, and only when their tradeoff could
+plausibly change the choice. If the user already names an exact license and
+scope, verify that it fits instead of reteaching the whole decision tree.
+
+Choose by governed material, not by the repository label. A repository whose
+main public artifact is a guide, publication, diagram set, or other authored
+content may need a content license even when it also contains scripts; map
+functional code separately when necessary.
+
+The user retains the final licensing choice. Before adding or changing public
+license terms, obtain explicit selection of the exact license or licenses and
+their scope unless the current request already supplies that selection. A
+request to help choose or recommend authorizes a recommendation, not silent
+finalization. Once the choice and file-edit authority are clear, implement it
+without another approval ritual.
+
 ## Establish the rights boundary
 
 Inspect the current target branch and relevant history before editing. Classify
