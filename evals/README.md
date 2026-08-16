@@ -36,3 +36,13 @@ A costly incident, reviewer finding, or appealing external framework begins as a
 Encode the smallest useful behavioral probe before adding a broad rule. A serious incident may justify an immediate narrow safety or correctness fix, but a same-task repair proves only that repair. Claim repeated workflow improvement only after a comparable later task supports it.
 
 Do not require background surveillance, numeric scores, intervention ledgers, mandatory multi-agent review, or an external plugin to learn from real work. The eval layer should also provide evidence for declining new machinery.
+
+## External pattern intake
+
+External repositories enter Softpowers through a pinned, evidence-bound candidate process:
+
+- governance and verification scope: [`../docs/pattern-intake.md`](../docs/pattern-intake.md)
+- pinned source registry: [`../docs/external-patterns.md`](../docs/external-patterns.md)
+- candidate template and decided samples: [`candidates/`](candidates/)
+
+A source review may end in `ADOPT`, `ADAPT`, `REJECT`, `DEFER`, or `ALREADY COVERED`. Documentation-only decisions do not require model runs. Any applied method, routing, packaging, or runner change receives fresh verification matched to its blast radius.
