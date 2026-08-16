@@ -183,8 +183,8 @@
     },
     {
       "path": "skills/soft-eval/scripts/run_behavior_evals.py",
-      "size": 53519,
-      "sha256": "14b236c7e5d854bbe1c2f39f12525c9e05444c9a3b9aad4d3dd09f3bc733eadf"
+      "size": 53745,
+      "sha256": "31530428f0b7291b98165d1fd1546d5ab2ab1eebd549449f4d42ba809163f7ee"
     },
     {
       "path": "skills/soft-execute/SKILL.md",

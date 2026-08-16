@@ -15,6 +15,7 @@ import sys
 import tempfile
 import time
 import uuid
+from collections.abc import Iterator
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -68,6 +69,16 @@ def atomic_write_json(path: Path, value: object) -> None:
 
 def sha256_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+@contextlib.contextmanager
+def change_directory(path: Path) -> Iterator[None]:
+    previous = Path.cwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(previous)
 
 
 def fixture_tree_digest(root: Path) -> str:
@@ -1114,7 +1125,7 @@ for event in events:
             timeout_seconds=30,
             keep_workspace=False,
         )
-        with contextlib.chdir(base), contextlib.redirect_stdout(io.StringIO()):
+        with change_directory(base), contextlib.redirect_stdout(io.StringIO()):
             if run_batch(fake_args, isolated_cases_root, schemas_root) != 0:
                 raise AssertionError("fake Codex end-to-end run failed")
             fake_args.resume = True
