@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "pack": "softpowers-pack",
-  "version": "0.3.0-rc2",
+  "version": "0.3.0-rc3",
   "skills": [
     "softpowers",
     "soft-brainstorm",
@@ -13,6 +13,7 @@
     "soft-review",
     "soft-receive-review",
     "soft-verify",
+    "soft-eval",
     "soft-worktree",
     "soft-parallel",
     "soft-finish",
@@ -33,6 +34,7 @@
       "soft-review",
       "soft-receive-review",
       "soft-verify",
+      "soft-eval",
       "soft-worktree",
       "soft-parallel",
       "soft-finish"
@@ -68,6 +70,111 @@
       "path": "skills/soft-debug/agents/openai.yaml",
       "size": 316,
       "sha256": "52bc919ccb616087e30b763656f2b28cbaa023d97aab49bdb340fcbab2bbfe56"
+    },
+    {
+      "path": "skills/soft-eval/SKILL.md",
+      "size": 3626,
+      "sha256": "3682de201a2f97c7f321bf84f0802412ba05dc0577ea1e479a69a96fd999a803"
+    },
+    {
+      "path": "skills/soft-eval/agents/openai.yaml",
+      "size": 343,
+      "sha256": "598a67c90ea14df0e6180c82d80a73c70396a82c9a51535747a50b1308603461"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/spec-chain/case.json",
+      "size": 1213,
+      "sha256": "a3573d233225a9dc29f193491fc273348caeb42120ffb718e85ccf248c7e9362"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/spec-chain/expected/IMPLEMENTATION_PLAN.md",
+      "size": 881,
+      "sha256": "13dc7c1a4f6673d2318776c4c00b3387a94844f1528d2bc9efce6e881e3caa14"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/spec-chain/fixture/SPEC.md",
+      "size": 672,
+      "sha256": "736667ccdf09130e36b85b7e2602bed652c97c2b210a54ce5d63e017aa99ebd7"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/spec-chain/fixture/notes.py",
+      "size": 202,
+      "sha256": "380a19852e597e6a4e5af8603e99ceb69cdc1e5338c3655bca5497372d236e2b"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/spec-chain/prompt.md",
+      "size": 339,
+      "sha256": "95a73e5f8b915323df6f1c40e25edc678a5f0d8dac85fc0b7dbc0a1c0a0d7af2"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/stale-cursor/case.json",
+      "size": 773,
+      "sha256": "2a20f9427cff1e73ef1ba9571c5a37e1ce71d11b0c28658bbbb5ba6494bc1dce"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/stale-cursor/expected/cursor_window.py",
+      "size": 277,
+      "sha256": "2cbc4354390b0e2634f55df03d461dcade11b3349dd5d478e09a8f8c1e5b9c89"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/stale-cursor/fixture/.gitignore",
+      "size": 13,
+      "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/stale-cursor/fixture/cursor_window.py",
+      "size": 235,
+      "sha256": "210283b4d9c59ff554bc23820000cefa45780fc253fedf4cca3da05a5709ae65"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/stale-cursor/fixture/test_cursor_window.py",
+      "size": 555,
+      "sha256": "0d3922d57c40446653de5bdd1b111d6cc977d563ae3ea8ee54c068b0872093f9"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/stale-cursor/prompt.md",
+      "size": 270,
+      "sha256": "0b93b1aa203cb50ebbeb8fc70caf7d91a110d788ad9a3067c885c612b099fc1b"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/tiny-copy/case.json",
+      "size": 667,
+      "sha256": "91f90a0e04e387bfec56107eb49eef99f5350f916a6e995b081c1a3bbab49855"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/tiny-copy/expected/app.txt",
+      "size": 31,
+      "sha256": "2bd975c0df42426ccfd7075c7271e315f913b6ee253807542f072479aa65061f"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/tiny-copy/fixture/app.txt",
+      "size": 25,
+      "sha256": "b067c1771ccb669f39f627f9e86a53d82b244f9cad0b76f520b33151cf82a784"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/tiny-copy/fixture/check.py",
+      "size": 205,
+      "sha256": "1d448a71966390ed1b5a974737b56602b36d19ee86c7b5d88c64160a74ac665d"
+    },
+    {
+      "path": "skills/soft-eval/assets/cases/tiny-copy/prompt.md",
+      "size": 206,
+      "sha256": "8116101a672ebfcc75a602fe4dcfeba468dd54bde29fbc9577f9cd52bd0cfe0a"
+    },
+    {
+      "path": "skills/soft-eval/assets/schemas/case.schema.json",
+      "size": 3704,
+      "sha256": "97cc4e5811d66b83a27ee0d75fc8e236c786fcc7f8ba0b109e250f1a78c8c583"
+    },
+    {
+      "path": "skills/soft-eval/assets/schemas/result.schema.json",
+      "size": 1775,
+      "sha256": "44648b210f5909e55e71ae8d8a531e98357d467361188d5b3624cd369bd89cfe"
+    },
+    {
+      "path": "skills/soft-eval/scripts/run_behavior_evals.py",
+      "size": 49064,
+      "sha256": "c2280da6b8cc7487e00a92dbcbf311490a99376d637f5c847ebe4078dad5bb6e"
     },
     {
       "path": "skills/soft-execute/SKILL.md",
@@ -171,8 +278,8 @@
     },
     {
       "path": "skills/softpowers/SKILL.md",
-      "size": 5150,
-      "sha256": "e24ce8213ce59d66b9383d93bb98619608400a23013dd6854bfd659c4fcbeb73"
+      "size": 5183,
+      "sha256": "295553d3d4478313e51c91517ecab040e0ea55c59232c83e8cacabda75f40ac3"
     },
     {
       "path": "skills/softpowers/agents/openai.yaml",
@@ -188,6 +295,11 @@
       "path": "skills/softpowers/references/debug.md",
       "size": 6197,
       "sha256": "1a9898e09436bd8f2e02d732ef88076756654809735de2a6a61048d91149f926"
+    },
+    {
+      "path": "skills/softpowers/references/eval.md",
+      "size": 3257,
+      "sha256": "bdfe509a2d8265aab4221ebc460c03cc6db0b8a6adc39f721afffe21c86570fa"
     },
     {
       "path": "skills/softpowers/references/execute.md",

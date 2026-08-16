@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "case_id": "tiny-copy",
+  "description": "A one-file copy edit should remain direct, focused, and free of planning or delegation overhead.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 300,
+  "assertions": [
+    {
+      "type": "file_equals",
+      "path": "app.txt",
+      "value": "empty_state=No saved items yet\n"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": ["app.txt"]
+    },
+    {
+      "type": "command",
+      "argv": ["python3", "check.py"]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 8,
+    "max_plan_updates": 0,
+    "max_subagent_events": 0
+  }
+}

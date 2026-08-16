@@ -41,7 +41,17 @@ Canonical method source 在：
 methods/*.md
 ```
 
-`skills/softpowers/references/*.md` 与 13 个 leaf `SKILL.md` 是 generated output。不要只改 generated copy。
+`skills/softpowers/references/*.md` 与 14 个 leaf `SKILL.md` 是 generated output。不要只改 generated copy。
+
+Behavior eval 的 canonical runner、schemas 与 cases 在：
+
+```text
+evals/run_behavior_evals.py
+evals/schemas/
+evals/cases/
+```
+
+`skills/soft-eval/scripts/` 与 `skills/soft-eval/assets/` 是同一 build step 生成的安装 payload；不要直接修改。
 
 Router metadata、leaf catalog 与 display strings 在：
 
@@ -56,6 +66,7 @@ python3 scripts/build_skills.py
 python3 scripts/validate_sync.py
 python3 scripts/generate_pack_manifest.py
 python3 scripts/selftest.py
+python3 -S evals/run_behavior_evals.py selftest
 ```
 
 提交前完整 maintainer gate：
@@ -67,7 +78,7 @@ python3 scripts/validate.py --exact skills
 python3 scripts/generate_pack_manifest.py --check
 python3 scripts/selftest.py
 python3 scripts/audit_public_tree.py
-python3 -m py_compile scripts/*.py
+python3 -m py_compile scripts/*.py evals/*.py
 bash -n install.sh uninstall.sh
 ```
 

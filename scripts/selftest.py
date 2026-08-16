@@ -69,6 +69,22 @@ def main() -> int:
             f"{name} has the wrong implicit policy",
         )
 
+    eval_env = os.environ.copy()
+    eval_env["PYTHONDONTWRITEBYTECODE"] = "1"
+    eval_result = subprocess.run(
+        [sys.executable, "-S", str(root / "evals" / "run_behavior_evals.py"), "selftest"],
+        cwd=root,
+        env=eval_env,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    assert_true(
+        eval_result.returncode == 0,
+        f"behavior eval self-test failed: {eval_result.stdout}{eval_result.stderr}",
+    )
+
     with tempfile.TemporaryDirectory(prefix="softpowers-selftest-") as raw:
         base = Path(raw)
 

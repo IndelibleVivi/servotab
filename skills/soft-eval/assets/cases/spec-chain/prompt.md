@@ -1,0 +1,1 @@
+`SPEC.md` is an approved specification and the complete scope authority. Inspect the repository and write `IMPLEMENTATION_PLAN.md`; do not implement the product yet. The plan must cover every requirement, preserve dependency order, name concrete file and verification targets, and distinguish execution tranches from full-spec completion.
