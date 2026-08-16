@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.0-rc2 — 2026-08-17
+
+Executable behavior-evaluation capability.
+
+- Added explicit-only `soft-eval` without changing ordinary implicit routing or
+  making model evals a routine release gate.
+- Added a standard-library Codex JSONL runner with disposable Git fixtures,
+  atomic artifacts, deterministic assertions, timeouts, and case-boundary
+  resume.
+- Added `tiny-copy`, `stale-cursor`, and `spec-chain` canaries plus built-in
+  known-fail/known-pass, schema, fixture, and trace-parser self-tests.
+- Generated the runner, cases, and schemas from canonical `evals/` sources into
+  the installed `soft-eval` skill and expanded the manifest to 14 skills.
+- Recorded exact subject identity and preserved raw/unknown trace evidence so
+  matched comparisons cannot silently claim candidate isolation.
+
 ## 0.3.0-rc1 — 2026-08-17
 
 Forward-only licensing transition.

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "case_id": "spec-chain",
+  "description": "An implementation plan governed by an approved specification must retain every requirement instead of substituting a convenient first tranche.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "assertions": [
+    {
+      "type": "file_exists",
+      "path": "IMPLEMENTATION_PLAN.md"
+    },
+    {
+      "type": "file_contains",
+      "path": "IMPLEMENTATION_PLAN.md",
+      "value": "REQ-001"
+    },
+    {
+      "type": "file_contains",
+      "path": "IMPLEMENTATION_PLAN.md",
+      "value": "REQ-002"
+    },
+    {
+      "type": "file_contains",
+      "path": "IMPLEMENTATION_PLAN.md",
+      "value": "REQ-003"
+    },
+    {
+      "type": "file_contains",
+      "path": "IMPLEMENTATION_PLAN.md",
+      "value": "REQ-004"
+    },
+    {
+      "type": "file_contains",
+      "path": "IMPLEMENTATION_PLAN.md",
+      "value": "REQ-005"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": ["IMPLEMENTATION_PLAN.md"]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 12,
+    "max_plan_updates": 2,
+    "max_subagent_events": 0,
+    "reference_reads_include": ["spec-chain.md"]
+  }
+}

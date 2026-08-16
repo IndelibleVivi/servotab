@@ -64,6 +64,22 @@ def main() -> int:
         leaf_yaml = (source / name / "agents" / "openai.yaml").read_text(encoding="utf-8")
         assert_true("allow_implicit_invocation: false" in leaf_yaml, f"{name} is not explicit-only")
 
+    eval_env = os.environ.copy()
+    eval_env["PYTHONDONTWRITEBYTECODE"] = "1"
+    eval_result = subprocess.run(
+        [sys.executable, "-S", str(root / "evals" / "run_behavior_evals.py"), "selftest"],
+        cwd=root,
+        env=eval_env,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    assert_true(
+        eval_result.returncode == 0,
+        f"behavior eval self-test failed: {eval_result.stdout}{eval_result.stderr}",
+    )
+
     with tempfile.TemporaryDirectory(prefix="softpowers-selftest-") as raw:
         base = Path(raw)
 

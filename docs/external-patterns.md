@@ -2,19 +2,19 @@
 
 这份 registry 记录 Softpowers 当前主动关注的外部来源、pinned ref、已选 pattern、decision 与 reopen condition。它承担增量复查入口；不构成 dependency list，也不表示代码或文本已被复制进 Softpowers。
 
-Review date：`2026-08-16`
+Review date：`2026-08-17`
 
 ## Current sources
 
 | Source | Pinned ref | License / reuse note | Current decision | Landing plane |
 |---|---|---|---|---|
-| `anthropics/defending-code-reference-harness` | `d3bea6b5793b5f3d59a75ebe69a58efa88383145` | Apache-2.0 | `ADAPT` verifier/canary/artifact patterns；`REJECT` daily full pipeline | Eval / maintainer |
-| `anthropics/skills` — `skill-creator` | `f6656c1256d5a8adfa37db9110046ef20bac644c` | `skill-creator` Apache-2.0 | `ADAPT` paired evals、objective assertions、qualitative review | Eval / maintainer |
+| `anthropics/defending-code-reference-harness` | `d3bea6b5793b5f3d59a75ebe69a58efa88383145` | Apache-2.0 | `ADAPT` applied in rc2: canaries、artifacts、atomic result/resume；`REJECT` daily full pipeline | Eval / maintainer |
+| `anthropics/skills` — `skill-creator` | `f6656c1256d5a8adfa37db9110046ef20bac644c` | `skill-creator` Apache-2.0 | `ADAPT` objective assertions applied；isolated paired evals and qualitative viewer remain deferred | Eval / maintainer |
 | `obra/superpowers` | `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` | MIT | `ADAPT` distribution maturity；`REJECT` mandatory lifecycle | Packaging / docs |
 | `QoderAI/better-harness` | `36c85c40ffb7596d413cc14bfbc8e66c741c182e` | MIT | `ALREADY COVERED` claim maturity core；`ADAPT` eval vocabulary only | Verify / eval |
-| `humanlayer/12-factor-agents` | `d20c728368bf9c189d6d7aab704744decb6ec0cc` | Code Apache-2.0；content CC BY-SA-4.0 | `ALREADY COVERED` control principles；`ADAPT` runner architecture guidance | Architecture docs |
-| `SWE-agent/mini-swe-agent` | `a83fcae82d2a08f0ee0c688f9d137b3566c097f8` | MIT | `ADAPT` thin runner / linear trace style | Eval implementation |
-| `SWE-bench/SWE-bench` | `ca6e4e0d252f32f8762625b73575d5dee49d0a5a` | MIT | `ADAPT` fixture identity、reproducibility、cache semantics | Eval implementation |
+| `humanlayer/12-factor-agents` | `d20c728368bf9c189d6d7aab704744decb6ec0cc` | Code Apache-2.0；content CC BY-SA-4.0 | `ALREADY COVERED` control principles；`ADAPT` explicit run identity and case-boundary resume applied | Architecture docs / eval |
+| `SWE-agent/mini-swe-agent` | `a83fcae82d2a08f0ee0c688f9d137b3566c097f8` | MIT | `ADAPT` thin runner / linear raw JSONL trace applied | Eval implementation |
+| `SWE-bench/SWE-bench` | `ca6e4e0d252f32f8762625b73575d5dee49d0a5a` | MIT | `ADAPT` fixture and subject identity metadata applied；cache/regrade remains deferred | Eval implementation |
 | `UKGovernmentBEIS/inspect_ai` | `286163f12aa627af22051bd95321bc6404e237ae` | Inspect repository license applies; verify exact reused component before copying | `DEFER` framework dependency；`ADAPT` task/solver/scorer separation conceptually | Eval architecture |
 | `openai/plugins` | `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` | No repository-level license file at this ref；inspect each plugin manifest before reuse | `DEFER` generated plugin projection until distribution need is real | Packaging / distribution |
 | `trailofbits/overtly-malicious-skills` | `4ffbf9461ef0505f9ce76a0d3694a18ec33ea531` | No license file at this ref；security research reference only; never install | `ADAPT` adversarial audit ideas；`REJECT` executing upstream payloads | Security tests |
@@ -89,7 +89,7 @@ Review:
 - reproducible environment and cache keys；
 - re-grading saved outputs。
 
-Keep Softpowers runtime host-native. These patterns belong to the future eval runner.
+Keep Softpowers runtime host-native. The rc2 local runner applies the thin-process, fixture-identity and raw-artifact kernels without importing either framework; richer cache/regrade semantics remain deferred.
 
 ### Inspect AI
 

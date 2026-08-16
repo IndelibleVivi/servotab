@@ -161,6 +161,23 @@ METHODS = (
         ),
     },
     {
+        "skill": "soft-eval",
+        "method": "eval",
+        "description": (
+            "Run reproducible Softpowers behavior evaluations with repository-owned "
+            "canaries, JSONL traces, deterministic assertions, and evidence-bounded "
+            "comparisons. Use explicitly for maintainer evals, release evidence, or "
+            "investigating routing and workflow behavior; do not run model evals as a "
+            "routine gate for ordinary repository work."
+        ),
+        "display_name": "Soft Eval",
+        "short_description": "Run reproducible Softpowers behavior canaries",
+        "default_prompt": (
+            "Use $soft-eval to select the smallest relevant Softpowers canary set, run "
+            "it with explicit identity and permissions, and report the saved evidence."
+        ),
+    },
+    {
         "skill": "soft-worktree",
         "method": "worktree",
         "description": (
@@ -213,3 +230,15 @@ METHOD_BY_SKILL = {entry["skill"]: entry["method"] for entry in METHODS}
 SKILL_BY_METHOD = {entry["method"]: entry["skill"] for entry in METHODS}
 SKILL_NAMES = (ROUTER["name"],) + tuple(entry["skill"] for entry in METHODS)
 METHOD_NAMES = tuple(entry["method"] for entry in METHODS)
+
+# Canonical eval resources are projected into the installed soft-eval skill. The
+# source paths remain the only authoring authority; skills/ is generated output.
+BUNDLED_RESOURCE_FILES = (
+    ("evals/run_behavior_evals.py", "soft-eval/scripts/run_behavior_evals.py"),
+    ("evals/schemas/case.schema.json", "soft-eval/assets/schemas/case.schema.json"),
+    ("evals/schemas/result.schema.json", "soft-eval/assets/schemas/result.schema.json"),
+)
+
+BUNDLED_RESOURCE_TREES = (
+    ("evals/cases", "soft-eval/assets/cases"),
+)

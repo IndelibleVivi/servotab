@@ -64,5 +64,5 @@ jobs:
 
       - name: Check script syntax
         run: |
-          python -m py_compile scripts/*.py
+          python -m py_compile scripts/*.py evals/*.py
           bash -n install.sh uninstall.sh

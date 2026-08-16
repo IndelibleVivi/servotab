@@ -1,4 +1,50 @@
-# Activation eval notes
+# Softpowers behavior evals
+
+`evals/` 现在同时保存 behavior-eval source of truth 与较宽的 activation seed set：
+
+- `run_behavior_evals.py`：standard-library runner；
+- `cases/`：repository-owned disposable Git fixtures 与 assertions；
+- `schemas/`：case/result JSON contracts；
+- `activation-prompts.csv`：尚未全部自动化的 routing seed set；
+- `candidates/`：外部 pattern intake decisions，不是 runtime authority。
+
+`scripts/build_skills.py` 会把 runner、cases 与 schemas 投影进 generated `skills/soft-eval/`。Source 与 installed payload 不能各自演化。
+
+## Deterministic gate
+
+这些命令不调用 model：
+
+```bash
+python3 -S evals/run_behavior_evals.py list
+python3 -S evals/run_behavior_evals.py selftest
+```
+
+Self-test 对每个 case 执行 known-fail fixture 与 known-pass expected overlay，并覆盖 schema contract、Git fixture、deterministic assertions 和 synthetic Codex JSONL parser。它是普通 pack self-test 的一部分。
+
+## Live run
+
+Live eval 必须显式选择 `--case` 或 `--all`；runner 不会因存在而自动花 model quota：
+
+```bash
+python3 -S evals/run_behavior_evals.py run \
+  --case stale-cursor \
+  --subject-id current-cli-environment \
+  --model <exact-model-id>
+```
+
+Runner 在 disposable Git workspace 中调用 `codex exec --json --ephemeral`。Source run 默认把 prompt、case contract、raw JSONL、stderr、final message、Git diff、metadata 与 verification 写到 `.softpowers-evals/runs/<run-id>/`；installed runner 默认写到 `${CODEX_HOME:-~/.codex}/softpowers-evals/runs/<run-id>/`。也可以显式传 `--output-root`。同一个 `--run-id` 加 `--resume` 会跳过已有完整 result 的 attempts，并重新执行未完成 attempts；若 case、subject、model 或 repeat 不一致则拒绝续跑。
+
+`subject-id` 是 evidence label，不是 isolation mechanism。Codex 可能同时发现同名 repo-level 与 user-level skill；这种情况下只能把 subject 描述为当前 CLI environment，不能宣称某个 candidate 或 release 被单独加载。做比较时还要固定 prompt、fixture、model、effort、sandbox、permissions 与 repeat count。
+
+当前 canaries：
+
+- `tiny-copy`：小改动的 scope 与 overhead；
+- `stale-cursor`：consistency invariant 与 regression evidence；
+- `spec-chain`：approved spec 的 end-to-end coverage。
+
+Raw trace 是 authority；derived telemetry 只记录观察到的 commands、plan updates、reference reads、subagent-like events、usage、malformed lines 与 unknown events。缺失 telemetry 不能反向证明某个动作没有发生。
+
+## Activation seed set
 
 `activation-prompts.csv` 是小型 seed set，覆盖：
 
