@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0-rc2 — 2026-08-17
+
+Standalone repository licensing boundary.
+
+- Added `license-boundary`, a self-contained skill that starts from a user's
+  concrete permission goals and current rights evidence.
+- Kept activation narrow to concrete repository licensing decisions while
+  allowing plain-language implicit use without the Softpowers router.
+- Added path, contributor, upstream/derivative, third-party, layered-license,
+  and forward-only transition boundaries without prescribing one license for
+  every developer.
+- Made the skill individually installable from its repository path as well as
+  part of the transactional Softpowers pack.
+
 ## 0.3.0-rc1 — 2026-08-17
 
 Forward-only licensing transition.

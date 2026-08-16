@@ -17,7 +17,7 @@ except ImportError as exc:  # pragma: no cover - environment dependent
     )
     raise SystemExit(3) from exc
 
-from common import EXPECTED, REFERENCE_NAMES, ROUTER_NAME
+from common import EXPECTED, IMPLICIT_SKILL_NAMES, REFERENCE_NAMES, ROUTER_NAME
 
 FRONTMATTER_RE = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n", re.DOTALL)
 
@@ -122,7 +122,7 @@ def validate_skill(skill_dir: Path) -> list[str]:
     if isinstance(default_prompt, str) and f"${name}" not in default_prompt:
         errors.append(f"{name}: default_prompt does not explicitly invoke ${name}")
 
-    expected_implicit = name == ROUTER_NAME
+    expected_implicit = name in IMPLICIT_SKILL_NAMES
     if policy.get("allow_implicit_invocation") is not expected_implicit:
         errors.append(
             f"{name}: allow_implicit_invocation must be "

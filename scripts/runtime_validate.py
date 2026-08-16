@@ -6,7 +6,14 @@ import json
 from pathlib import Path
 from typing import Any
 
-from common import PACK_ROOT, REFERENCE_NAMES, ROUTER_NAME, SKILL_NAMES, VERSION
+from common import (
+    IMPLICIT_SKILL_NAMES,
+    PACK_ROOT,
+    REFERENCE_NAMES,
+    ROUTER_NAME,
+    SKILL_NAMES,
+    VERSION,
+)
 
 PACK_MANIFEST = PACK_ROOT / "PACK_MANIFEST.json"
 
@@ -59,8 +66,8 @@ def load_pack_manifest(path: Path = PACK_MANIFEST) -> dict[str, Any]:
 
     activation = data.get("activation")
     expected_activation = {
-        "implicit": [ROUTER_NAME],
-        "explicit_only": [name for name in SKILL_NAMES if name != ROUTER_NAME],
+        "implicit": list(IMPLICIT_SKILL_NAMES),
+        "explicit_only": [name for name in SKILL_NAMES if name not in IMPLICIT_SKILL_NAMES],
     }
     if activation != expected_activation:
         raise ValueError("pack manifest activation contract does not match this release")

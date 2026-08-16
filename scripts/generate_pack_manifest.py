@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 from build_skills import check as check_generated
-from common import PACK_ROOT, ROUTER_NAME, SKILL_NAMES, VERSION
+from common import IMPLICIT_SKILL_NAMES, PACK_ROOT, SKILL_NAMES, VERSION
 from runtime_validate import EXPECTED_PAYLOAD_FILES, file_sha256
 from validate import validate_directory
 
@@ -42,8 +42,10 @@ def build_manifest() -> dict[str, object]:
         "version": VERSION,
         "skills": list(SKILL_NAMES),
         "activation": {
-            "implicit": [ROUTER_NAME],
-            "explicit_only": [name for name in SKILL_NAMES if name != ROUTER_NAME],
+            "implicit": list(IMPLICIT_SKILL_NAMES),
+            "explicit_only": [
+                name for name in SKILL_NAMES if name not in IMPLICIT_SKILL_NAMES
+            ],
         },
         "files": files,
     }

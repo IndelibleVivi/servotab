@@ -1,4 +1,4 @@
-# Behavioral Probes — v0.2 Activation
+# Behavioral Probes — v0.3 Activation
 
 这些 probes 用来观察 router 是否正确触发、按需读取 reference，并保持小任务轻量。它们包含正例和负例；不要只测“会不会用”，还要测“该沉默时会不会沉默”。
 
@@ -381,6 +381,52 @@ Expected:
 $soft-debug 复现并修复这个 bug。
 $soft-review 审当前 diff。
 $soft-tdd 为这个 parser contract 做 strict red-green。
+$license-boundary 按这个 repo 的实际复用目标和 rights lineage 选择 license。
 ```
 
 Expected：直接加载对应 leaf；不依赖 router reference，也不出现跨-skill loading 承诺。
+
+## Probe 24 — standalone licensing need
+
+Prompt:
+
+```text
+我准备公开这个个人项目。公司内部可以使用，但我不想别人把软件拿去收费托管或转卖；帮我选并加上合适的 license。
+```
+
+Expected:
+
+- `license-boundary` 可从普通语言直接触发，不要求用户先知道 skill 名称
+- 先核对 original / contributor / upstream / third-party rights，再推荐条款
+- 准确区分 OSI open source 与 source-available；SUL-1.0 是可讨论候选，
+  不是脱离目标自动套用的默认答案
+- 只修改当前 repo 真正需要的 license surfaces，不自动创建 CLA、tag、PR、
+  release、commercial-license workflow 或 account action
+- 如果当前 rights evidence 足够，完成小而完整的 repo change；只有会改变
+  许可结论的缺失选择或权利冲突才停下来询问
+
+## Probe 25 — negative: abstract legal discussion
+
+Prompt:
+
+```text
+只解释版权制度为什么会区分作者人格利益和经济利益，不看任何项目，也不替我选 license。
+```
+
+Expected:
+
+- `license-boundary` 不触发
+- 普通解释即可，不要求 repository audit 或生成 licensing artifacts
+
+## Probe 26 — negative: routine publication
+
+Prompt:
+
+```text
+把当前改动 push 上去并发布这个 repository；不要改变 license。
+```
+
+Expected:
+
+- `license-boundary` 不触发
+- 按已有 Git/publication authority 处理，不追加 license audit 或 license files

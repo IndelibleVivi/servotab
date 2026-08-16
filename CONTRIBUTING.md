@@ -41,7 +41,7 @@ Canonical method source 在：
 methods/*.md
 ```
 
-`skills/softpowers/references/*.md` 与 12 个 leaf `SKILL.md` 是 generated output。不要只改 generated copy。
+`skills/softpowers/references/*.md` 与 13 个 leaf `SKILL.md` 是 generated output。不要只改 generated copy。
 
 Router metadata、leaf catalog 与 display strings 在：
 

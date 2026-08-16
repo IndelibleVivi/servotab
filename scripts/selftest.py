@@ -10,7 +10,7 @@ import tempfile
 from pathlib import Path
 
 from build_skills import check as check_generated
-from common import REFERENCE_NAMES, ROUTER_NAME, SKILL_NAMES
+from common import IMPLICIT_SKILL_NAMES, REFERENCE_NAMES, ROUTER_NAME, SKILL_NAMES
 from install import install_pack
 from runtime_validate import PACK_MANIFEST, load_pack_manifest, validate_payload
 from uninstall import uninstall_pack
@@ -49,20 +49,25 @@ def main() -> int:
     assert_true(not source_errors, f"source payload invalid: {source_errors}")
 
     pack_manifest = load_pack_manifest(PACK_MANIFEST)
-    assert_true(pack_manifest["activation"]["implicit"] == [ROUTER_NAME], "router not implicit")
+    assert_true(
+        pack_manifest["activation"]["implicit"] == list(IMPLICIT_SKILL_NAMES),
+        "implicit activation contract is wrong",
+    )
     assert_true(
         pack_manifest["activation"]["explicit_only"]
-        == [name for name in SKILL_NAMES if name != ROUTER_NAME],
+        == [name for name in SKILL_NAMES if name not in IMPLICIT_SKILL_NAMES],
         "leaf activation contract is wrong",
     )
 
     router_yaml = (source / ROUTER_NAME / "agents" / "openai.yaml").read_text(encoding="utf-8")
     assert_true("allow_implicit_invocation: true" in router_yaml, "router implicit policy missing")
     for name in SKILL_NAMES:
-        if name == ROUTER_NAME:
-            continue
         leaf_yaml = (source / name / "agents" / "openai.yaml").read_text(encoding="utf-8")
-        assert_true("allow_implicit_invocation: false" in leaf_yaml, f"{name} is not explicit-only")
+        expected = "true" if name in IMPLICIT_SKILL_NAMES else "false"
+        assert_true(
+            f"allow_implicit_invocation: {expected}" in leaf_yaml,
+            f"{name} has the wrong implicit policy",
+        )
 
     with tempfile.TemporaryDirectory(prefix="softpowers-selftest-") as raw:
         base = Path(raw)
@@ -299,7 +304,7 @@ def main() -> int:
         assert_true(not (no_site_home / "skills" / ROUTER_NAME).exists(), "no-site uninstall failed")
 
     print(
-        "Softpowers packaging self-test passed: router-only activation metadata, generated-source "
+        "Softpowers packaging self-test passed: bounded implicit activation metadata, generated-source "
         "sync, reference digests, coexistence, default-root selection, legacy-root upgrade, "
         "dual-root rejection, manifest stacking, non-LIFO rejection, edit preservation, "
         "restore, rollback, and "

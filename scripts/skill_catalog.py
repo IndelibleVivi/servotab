@@ -8,8 +8,8 @@ ROUTER = {
         "refactoring, testing, code review, or repository-grounded architecture "
         "decisions. Silently choose a proportionate method, preserve the complete "
         "requested outcome, and keep clear local work direct. Do not use for general "
-        "technical explanations, simple file lookup, casual discussion, or "
-        "non-engineering writing."
+        "technical explanations, simple file lookup, casual discussion, repository "
+        "license selection, or non-engineering writing."
     ),
     "display_name": "Softpowers",
     "short_description": "Quiet risk-scaled routing for repository work",
@@ -207,9 +207,37 @@ METHODS = (
             "perform only the requested Git or PR actions."
         ),
     },
+    {
+        "skill": "license-boundary",
+        "method": "license-boundary",
+        "description": (
+            "Choose, audit, add, or change licensing for a concrete repository from wanted "
+            "permissions and available rights. Trigger for a LICENSE file, which license, "
+            "open source versus source-available or no license, commercial use, resale or "
+            "paid hosting, code versus docs/assets, forks, third-party or contributor rights, "
+            "or forward-only relicensing. Do not trigger for routine publish, push, release, "
+            "or deploy work without a licensing decision, or abstract legal questions "
+            "unrelated to a concrete project."
+        ),
+        "display_name": "License Boundary",
+        "short_description": "Choose repository licenses from goals and rights",
+        "default_prompt": (
+            "Use $license-boundary to inspect this project's permission goals and rights "
+            "evidence, then recommend the smallest correct licensing boundary. Edit files "
+            "only when the user's request authorizes it."
+        ),
+        "implicit": True,
+        "router_reference": False,
+    },
 )
 
 METHOD_BY_SKILL = {entry["skill"]: entry["method"] for entry in METHODS}
 SKILL_BY_METHOD = {entry["method"]: entry["skill"] for entry in METHODS}
 SKILL_NAMES = (ROUTER["name"],) + tuple(entry["skill"] for entry in METHODS)
 METHOD_NAMES = tuple(entry["method"] for entry in METHODS)
+REFERENCE_METHOD_NAMES = tuple(
+    entry["method"] for entry in METHODS if entry.get("router_reference", True)
+)
+IMPLICIT_SKILL_NAMES = (ROUTER["name"],) + tuple(
+    entry["skill"] for entry in METHODS if entry.get("implicit", False)
+)

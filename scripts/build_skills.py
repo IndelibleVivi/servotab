@@ -108,13 +108,16 @@ def expected_files() -> dict[Path, str]:
         method_body = method_path.read_text(encoding="utf-8")
         if not method_body.endswith("\n"):
             method_body += "\n"
-        files[router_dir / "references" / f"{method_name}.md"] = method_body
+        if entry.get("router_reference", True):
+            files[router_dir / "references" / f"{method_name}.md"] = method_body
 
         skill_dir = SKILLS_DIR / str(entry["skill"])
         files[skill_dir / "SKILL.md"] = frontmatter(
             str(entry["skill"]), str(entry["description"])
         ) + method_body
-        files[skill_dir / "agents" / "openai.yaml"] = openai_yaml(entry, implicit=False)
+        files[skill_dir / "agents" / "openai.yaml"] = openai_yaml(
+            entry, implicit=bool(entry.get("implicit", False))
+        )
     return files
 
 
@@ -174,8 +177,13 @@ def main() -> int:
         return 0
 
     write()
-    count = len(METHODS)
-    print(f"Generated router, {count} router references, and {count} explicit leaf skills.")
+    reference_count = sum(bool(entry.get("router_reference", True)) for entry in METHODS)
+    implicit_leaf_count = sum(bool(entry.get("implicit", False)) for entry in METHODS)
+    explicit_leaf_count = len(METHODS) - implicit_leaf_count
+    print(
+        f"Generated router, {reference_count} router references, "
+        f"{implicit_leaf_count} implicit specialist, and {explicit_leaf_count} explicit leaf skills."
+    )
     return 0
 
 

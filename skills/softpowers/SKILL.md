@@ -1,6 +1,6 @@
 ---
 name: softpowers
-description: "Use for hands-on software repository work: implementation, debugging, refactoring, testing, code review, or repository-grounded architecture decisions. Silently choose a proportionate method, preserve the complete requested outcome, and keep clear local work direct. Do not use for general technical explanations, simple file lookup, casual discussion, or non-engineering writing."
+description: "Use for hands-on software repository work: implementation, debugging, refactoring, testing, code review, or repository-grounded architecture decisions. Silently choose a proportionate method, preserve the complete requested outcome, and keep clear local work direct. Do not use for general technical explanations, simple file lookup, casual discussion, repository license selection, or non-engineering writing."
 ---
 
 # Softpowers

@@ -1,15 +1,19 @@
-# Packaging and Activation Audit — v0.2.0-rc5
+# Packaging and Activation Audit — v0.3.0-rc2
 
 This is a maintainer self-audit, not an independent security or compliance assurance.
 
-This release preserves the v0.1.2 transaction layer and the v0.2 router-only implicit activation topology.
+This release preserves the v0.1.2 transaction layer and adds one narrowly scoped
+implicit specialist beside the engineering router.
 
 ## Activation contract
 
 - `softpowers`: `allow_implicit_invocation: true`
-- 12 leaf skills: `allow_implicit_invocation: false`
+- `license-boundary`: `allow_implicit_invocation: true`
+- 12 `soft-*` leaf skills: `allow_implicit_invocation: false`
 - Manifest records the same split under `activation`.
 - Router description contains both positive repository-work scope and negative controls.
+- `license-boundary` is self-contained and excludes abstract legal questions
+  unrelated to a concrete project.
 - Router instructions require quiet activation and prohibit process theatre.
 
 ## Progressive disclosure
@@ -34,15 +38,22 @@ The router body is 645 words, below the 650-word release gate.
 
 `build_skills.py --check` and `validate_sync.py` fail on drift or unexpected payload files. Leaf method bodies are rejected if they contain `$soft-` cross-skill invocations.
 
+## Standalone specialist
+
+`skills/license-boundary/` contains its complete `SKILL.md` and invocation
+metadata. It may be installed directly from that repository path without the
+Softpowers router or pack installer. The transactional pack includes the same
+canonical generated folder; there is no second implementation.
+
 ## Install payload
 
 `PACK_MANIFEST.json` schema 2 records:
 
-- 13 skill directories
+- 14 skill directories
 - 12 router references
-- 38 exact payload files
+- 40 exact payload files
 - file sizes and SHA-256 digests
-- router-only implicit activation metadata
+- two-surface implicit activation metadata
 
 The user installation path uses only Python standard library.
 

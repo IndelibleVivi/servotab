@@ -7,12 +7,14 @@
 
 > Quiet, proportionate engineering workflows for Codex.
 
-当前版本：`0.3.0-rc1`（public release candidate）
+当前版本：`0.3.0-rc2`（public release candidate）
 
 ## 先看结论
 
 - 日常只需要正常描述任务，不必背 skill 名称。
-- Invocation metadata 只允许 `softpowers` router 被 implicit invocation；其余 12 个 leaf skills 都是 explicit-only shortcuts，不会自己抢活。
+- Invocation metadata 允许 `softpowers` router 与窄域 specialist
+  `license-boundary` 被 implicit invocation；其余 12 个 `soft-*` leaf skills
+  都是 explicit-only shortcuts，不会自己抢活。
 - 安装完整 pack 不等于每个 skill 都会频繁运行。`spec-chain`、`worktree`、`parallel` 等本来就是特定情境工具，低频是设计的一部分。
 - 清晰、局部、可逆的小任务直接做；复杂任务才按需读取一份 playbook。
 - Softpowers 不覆盖你的 prompt、`AGENTS.md`、repo 规则、权限边界或 Git 决策。
@@ -37,11 +39,27 @@ cd softpowers
 
 你应当看到：
 
-- `softpowers`：具备 implicit-invocation eligibility 的 router；
+- `softpowers`：具备 implicit-invocation eligibility 的工程 router；
+- `license-boundary`：只处理 concrete repository licensing decisions
+  的 standalone implicit specialist；
 - 12 个 `soft-*` skills：explicit-only；
 - 如果列表没有刷新，重启 Codex。
 
 这是 source-distributed release candidate，还不是 plugin-directory 安装包。安装脚本只使用 Python 标准库，不会联网下载 dependency。
+
+### 只安装 licensing skill
+
+不想安装 Softpowers pack 的用户，可以直接让 Codex 的 system installer
+安装这个 self-contained folder：
+
+```text
+Use $skill-installer to install
+https://github.com/IndelibleVivi/softpowers/tree/main/skills/license-boundary
+```
+
+它不依赖 `softpowers` router 或其他 leaf skills。安装后，用户可以直接说
+“这个项目该选什么 license”“我不想别人拿去收费托管”“准备公开这个 fork，
+哪些内容能换证”，不需要先知道 skill 名称。
 
 当前 CI 覆盖 Ubuntu 的 Python 3.10 / 3.13 与 macOS 的 Python 3.13；native Windows 尚未验证。Invocation metadata、packaging 与 filesystem transaction 可以确定性校验，但真实 implicit routing 仍可能随 Codex client、model、prompt 与 repo context 变化。这正是 RC 想收集 behavior feedback 的部分。
 
@@ -96,19 +114,24 @@ $soft-tdd 为这个 stale cursor bug 建立严格 red-green 回归证据。
 $soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；当前 tranche 不得替代完整 scope。
 ```
 
+```text
+$license-boundary 按这个 repo 的实际复用目标和 rights lineage 选择并落实 license。
+```
+
 ## 不是每个 skill 都要经常用
 
-这 13 个 skills 不是一排等权按钮。更准确的理解是三层：
+这 14 个 skills 不是一排等权按钮。更准确的理解是四层：
 
 | 层 | Skills | 什么时候需要关心 |
 |---|---|---|
 | 默认入口 | `softpowers` | 日常 repo work；通常只说自然语言 |
+| 独立 specialist | `license-boundary` | 选择、添加、审计或迁移 repo license；可单独安装并用自然语言触发 |
 | 精确控制 | `soft-debug`, `soft-review`, `soft-verify`, `soft-execute`, `soft-tdd` | 你明确想固定 diagnosis、review、verification、execution 或 red-green 方法时 |
 | 特定情境 | `soft-brainstorm`, `soft-plan`, `soft-receive-review`, `soft-finish`, `soft-spec-chain`, `soft-worktree`, `soft-parallel` | 开放设计、多步 handoff、外部 review、大型 approved spec、隔离 workspace 或 bounded delegation 真正有价值时 |
 
-完整 pack 保留这些 leaf skills，是为了让显式控制、eval 和少见但高价值的工程情境都有稳定入口。它们全部是 explicit-only；没有必要为了“都装了”而刻意调用它们。
+完整 pack 保留这些 leaf skills，是为了让显式控制、eval 和少见但高价值的工程情境都有稳定入口。12 个 `soft-*` leaf 全部是 explicit-only；`license-boundary` 只在 concrete licensing need 上具备 implicit eligibility。没有必要为了“都装了”而刻意调用任何 skill。
 
-当前 installer 仍按一个事务安装完整 pack。暂不增加 router-only / selective profile，因为它会扩大 manifest、rollback 与 uninstall 状态空间，而不会改善 implicit runtime：默认真正自动触发的本来就只有 router。
+当前 installer 仍按一个事务安装完整 pack。`license-boundary` 另有直接 repo-path 安装方式，因此不需要为了这一项扩大 pack installer 的 selective-profile、rollback 与 uninstall 状态空间。
 
 ## Softpowers 的行为原则
 
@@ -151,9 +174,13 @@ softpowers/
     ├── parallel.md
     └── finish.md
 
+license-boundary/              # self-contained implicit specialist
+├── SKILL.md
+└── agents/openai.yaml
+
 soft-debug/                    # explicit shortcut
 soft-review/                   # explicit shortcut
-...                            # 共 12 个 leaf skills
+...                            # 共 12 个 explicit `soft-*` leaf skills
 ```
 
 正常路径：
@@ -183,9 +210,9 @@ Router 不尝试“调用”另一个 skill。`references/` 是它自己的 prog
 
 安装器会：
 
-1. 校验 `PACK_MANIFEST.json` 中 13 个 skills、12 个 router references、文件大小与 SHA-256；
+1. 校验 `PACK_MANIFEST.json` 中 14 个 skills、12 个 router references、文件大小与 SHA-256；
 2. 在目标 root 内 staging 并再次校验；
-3. 只替换 Softpowers 的 13 个目录，保留其他 skills；
+3. 只替换 Softpowers 的 14 个目录，保留其他 skills；
 4. 备份同名旧 skill；
 5. 中途失败时 rollback；
 6. 写入 install manifest 与 current pointer；
@@ -214,7 +241,7 @@ Softpowers 还是 RC。我们尤其想知道真实任务中的 activation、完�
 
 ## Maintainer workflow
 
-12 份方法正文只维护一份：
+13 份方法正文只维护一份：
 
 ```text
 methods/*.md
@@ -222,8 +249,8 @@ methods/*.md
 
 发布脚本从这些 canonical sources 同时生成：
 
-- `skills/softpowers/references/*.md`
-- 12 个 standalone leaf `SKILL.md`
+- `skills/softpowers/references/*.md`（12 个工程 router references）
+- 13 个 standalone leaf `SKILL.md`，包括可独立安装的 `license-boundary`
 
 不要直接修改 generated skill copies。
 

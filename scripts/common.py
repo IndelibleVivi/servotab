@@ -5,13 +5,19 @@ import hashlib
 import os
 from pathlib import Path
 
-from skill_catalog import METHOD_BY_SKILL, METHOD_NAMES, ROUTER, SKILL_NAMES
+from skill_catalog import (
+    IMPLICIT_SKILL_NAMES,
+    METHOD_BY_SKILL,
+    REFERENCE_METHOD_NAMES,
+    ROUTER,
+    SKILL_NAMES,
+)
 
 PACK_ROOT = Path(__file__).resolve().parents[1]
 VERSION = (PACK_ROOT / "VERSION").read_text(encoding="utf-8").strip()
 ROUTER_NAME = str(ROUTER["name"])
 EXPECTED = frozenset(SKILL_NAMES)
-REFERENCE_NAMES = tuple(f"{name}.md" for name in METHOD_NAMES)
+REFERENCE_NAMES = tuple(f"{name}.md" for name in REFERENCE_METHOD_NAMES)
 
 
 def _has_softpowers_install(skills_dir: Path) -> bool:

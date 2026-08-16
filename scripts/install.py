@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from common import (
+    IMPLICIT_SKILL_NAMES,
     SKILL_NAMES,
     VERSION,
     assert_child,
@@ -172,8 +173,9 @@ def main() -> int:
     print(f"Install manifest: {manifest}")
     print("Existing unrelated skills were left untouched.")
     print(
-        "Softpowers is the only implicit router; "
-        f"the {len(SKILL_NAMES) - 1} leaf skills remain explicit-only."
+        f"Implicit surfaces: {', '.join(IMPLICIT_SKILL_NAMES)}; "
+        f"the {len(SKILL_NAMES) - len(IMPLICIT_SKILL_NAMES)} soft-* leaf skills "
+        "remain explicit-only."
     )
     print("Open Codex and run /skills. Restart Codex if the skill list is stale.")
     return 0
