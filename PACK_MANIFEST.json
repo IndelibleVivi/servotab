@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "pack": "softpowers-pack",
-  "version": "0.2.0-rc5",
+  "version": "0.3.0-rc1",
   "skills": [
     "softpowers",
     "soft-brainstorm",

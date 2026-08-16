@@ -81,4 +81,19 @@ bash -n install.sh uninstall.sh
 - Router 保持 quiet；leaf skills 保持 explicit-only，除非一个 release proposal 明确改变 activation topology。
 - Public docs、packaging 与 feedback assets 可以进 repo；`notes/`、`.local/`、`*.private.md`、private eval traces 与 account state 不应提交。`.gitignore` 只是预防误操作，不是 privacy boundary。
 
+## Contribution license
+
+提交 contribution 表示你有权提交该内容，并按
+[LICENSING.md](LICENSING.md) 中适用于目标文件的 license 提供该
+contribution：
+
+- functional materials 使用 Sustainable Use License v1.0；
+- documentation 使用 CC BY-NC-SA 4.0；
+- third-party material 必须保留其原始 license、notice 与 attribution。
+
+这不是 copyright assignment，也不会把第三方权利转给项目。若一个
+change 跨越多个 licensing surfaces，请拆分或在 PR 中逐项说明。任何超出
+public licenses 的 commercial permission 只能由相关 rights holder 另行书面授予；
+普通 PR 不自动给 maintainer 提供替贡献者重新授权的权力。
+
 Pull request 请说明 changed contract、fresh verification，以及任何 deliberately deferred work。

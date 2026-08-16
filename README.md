@@ -1,13 +1,13 @@
 # Softpowers for Codex
 
 [![Validate](https://github.com/IndelibleVivi/softpowers/actions/workflows/validate.yml/badge.svg)](https://github.com/IndelibleVivi/softpowers/actions/workflows/validate.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: layered](https://img.shields.io/badge/license-SUL--1.0%20%2B%20CC%20BY--NC--SA%204.0-blue.svg)](LICENSING.md)
 
 一个 community-maintained、非 OpenAI 官方的 Codex 工程 workflow pack：让方法跟着任务走，保留真正需要的设计、调试、测试、review 与 verification，同时避免把每个小改动都拖进固定仪式。
 
 > Quiet, proportionate engineering workflows for Codex.
 
-当前版本：`0.2.0-rc5`（public release candidate）
+当前版本：`0.3.0-rc1`（public release candidate）
 
 ## 先看结论
 
@@ -260,8 +260,24 @@ Behavioral probes 与 eval seed set 见 [BEHAVIORAL_PROBES.md](BEHAVIORAL_PROBES
 
 `scripts/audit_public_tree.py` 会 fail closed，并检查 tracked/candidate public files 中的 private namespaces、symlink、personal absolute paths、常见 secret patterns、environment files 与 macOS junk。它证明的是当前 public tree，不会把 Git history 描述成从未含过任何 local material；release 仍应从 clean tagged checkout 构建。
 
-## 设计来源与 license
+## 设计来源、创作与 license
 
 Softpowers 是独立重写，理念上受 Jesse Vincent / obra 的 [`superpowers`](https://github.com/obra/superpowers) 启发，但没有复制其强制 bootstrap、固定完整流水线或逐 task 双 review 机制。Worker Lanes contract 参考了 Luluane 与 Astrean-Codex 的 [`astrean-worker-lanes`](https://github.com/LuluaneS/astrean-worker-lanes)。`rc5` 还把 QoderAI [`better-harness`](https://github.com/QoderAI/better-harness) 的 evidence-state distinction 当作批判性参考，但不安装、调用、依赖或吸收其 audit workflow、scores、agents、reports 与 repair ledger。
 
-具体 attribution 与 license 边界见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。Softpowers 本身使用 [MIT License](LICENSE)。
+具体 attribution 与第三方边界见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+Created by Faye & Cove. Faye
+([@IndelibleVivi](https://github.com/IndelibleVivi)) maintains the project and
+is the legal licensor for project-original material she controls. External
+contributors license their own contributions under the applicable target-file
+license.
+
+从 `0.3.0-rc1` 起，functional materials 使用
+[Sustainable Use License v1.0](LICENSE)，原创 documentation 使用
+[CC BY-NC-SA 4.0](LICENSE-DOCUMENTATION.md)。这是 source-available /
+fair-code 分发，不是 OSI open source。SUL-1.0 允许 internal business use，
+但不允许为了收费或商业目的向他人分发或提供 covered functional materials；
+required licensing 与 copyright notices 不得移除或遮蔽。
+
+逐路径适用范围与第三方例外见 [LICENSING.md](LICENSING.md)，旧 MIT
+版本边界见 [LICENSE-HISTORY.md](LICENSE-HISTORY.md)。

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0-rc1 — 2026-08-17
+
+Forward-only licensing transition.
+
+- Licensed original functional materials under Sustainable Use License v1.0.
+- Licensed original documentation under CC BY-NC-SA 4.0.
+- Added a path-level licensing map, preserved third-party terms, and recorded
+  the last MIT revision without rewriting prior releases or Git history.
+- Kept Faye & Cove authorship credit while naming Faye as the legal licensor
+  for project-original material she controls.
+
 ## 0.2.0-rc5 — 2026-08-13
 
 Independent mechanism judgment and evidence maturity.
