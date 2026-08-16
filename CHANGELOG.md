@@ -2,7 +2,7 @@
 
 ## 0.3.0-rc3 — 2026-08-17
 
-Standalone repository licensing boundary.
+Standalone repository licensing boundary and integrated release hardening.
 
 - Added `license-boundary`, a self-contained skill that starts from a user's
   concrete permission goals and current rights evidence.
@@ -14,8 +14,18 @@ Standalone repository licensing boundary.
 - Kept user mental load low with one plain-language best-fit recommendation,
   only material alternatives, and an explicit user choice before legal terms
   are written.
-- Made the skill individually installable from its repository path as well as
-  part of the transactional Softpowers pack.
+- Published `IndelibleVivi/license-boundary` as the canonical standalone skill
+  at `v0.1.0-rc2`; the transactional Softpowers pack now carries an exact
+  offline-verified projection, including complete packaged license terms and a
+  project notice, instead of a second authoring source.
+- Hardened behavior-eval resumption so completed attempts are reused only when
+  the original inputs, runner, Codex executable/version, model, and execution
+  settings still match.
+- Made disposable fixture commits independent of global GPG-signing settings,
+  normalized relative Codex executable paths, and fixed NUL-delimited rename
+  status parsing.
+- Made external-pattern samples schema-valid and auditable with one primary
+  decision, optional per-component outcomes, exact reviewed files, and dates.
 
 ## 0.3.0-rc2 — 2026-08-17
 

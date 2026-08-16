@@ -30,6 +30,8 @@ Softpowers 可以持续学习外部仓库，同时保持现有 routing、方法�
 
 Decision 必须同时写明 accepted kernel 与 excluded machinery。`REJECT`、`DEFER` 和 `ALREADY COVERED` 都属于有效学习结果。
 
+每条 record 的顶层 `Decision` 必须只使用一个 vocabulary value。一个来源同时含有不同可拆分 component 时，保留一个代表当前 record landing 的顶层 decision，并用可选的 `Component outcomes` 逐项记录其他 outcome；不要把多个 value 拼成一个无法验证的 composite string。
+
 ## Intake lifecycle
 
 ### 1. Pin the source
@@ -97,10 +99,12 @@ Decision record 至少包含：
 Source
 Pinned ref
 Reviewed files
+Review date
 Distilled pattern
 Observed local problem
 Landing plane
 Decision
+Component outcomes (optional; one vocabulary value per named component)
 Accepted kernel
 Excluded machinery
 Probe

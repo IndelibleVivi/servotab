@@ -21,6 +21,7 @@ from common import (
     BUNDLED_RESOURCE_TARGETS,
     EXPECTED,
     IMPLICIT_SKILL_NAMES,
+    PINNED_PROJECTION_TARGETS,
     REFERENCE_NAMES,
     ROUTER_NAME,
 )
@@ -53,6 +54,11 @@ def expected_payload_files(name: str) -> set[str]:
     files.update(
         relative.removeprefix(prefix)
         for relative in BUNDLED_RESOURCE_TARGETS
+        if relative.startswith(prefix)
+    )
+    files.update(
+        relative.removeprefix(prefix)
+        for relative in PINNED_PROJECTION_TARGETS
         if relative.startswith(prefix)
     )
     return files

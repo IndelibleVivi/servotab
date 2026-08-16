@@ -224,40 +224,32 @@ METHODS = (
             "perform only the requested Git or PR actions."
         ),
     },
+)
+
+PINNED_PROJECTIONS = (
     {
         "skill": "license-boundary",
-        "method": "license-boundary",
-        "description": (
-            "Choose, audit, add, or change licensing for a concrete repository from wanted "
-            "permissions and available rights. Trigger for a LICENSE file, which license, "
-            "open source versus source-available or no license, commercial use, resale or "
-            "paid hosting, code versus docs/assets, forks, third-party or contributor rights, "
-            "or forward-only relicensing. Do not trigger for routine publish, push, release, "
-            "or deploy work without a licensing decision, or abstract legal questions "
-            "unrelated to a concrete project."
-        ),
-        "display_name": "License Boundary",
-        "short_description": "Choose repository licenses from goals and rights",
-        "default_prompt": (
-            "Use $license-boundary to inspect this project's permission goals and rights "
-            "evidence. Recommend one best-fit license and scope in plain language, with only "
-            "material alternatives. Treat the exact choice as the user's; edit only after "
-            "explicit selection and file-edit authorization."
-        ),
+        "manifest": "sources/license-boundary.json",
+        "files": ("SKILL.md", "agents/openai.yaml", "LICENSE.txt", "NOTICE.md"),
         "implicit": True,
-        "router_reference": False,
     },
 )
 
 METHOD_BY_SKILL = {entry["skill"]: entry["method"] for entry in METHODS}
 SKILL_BY_METHOD = {entry["method"]: entry["skill"] for entry in METHODS}
-SKILL_NAMES = (ROUTER["name"],) + tuple(entry["skill"] for entry in METHODS)
+SKILL_NAMES = (
+    (ROUTER["name"],)
+    + tuple(entry["skill"] for entry in METHODS)
+    + tuple(entry["skill"] for entry in PINNED_PROJECTIONS)
+)
 METHOD_NAMES = tuple(entry["method"] for entry in METHODS)
 REFERENCE_METHOD_NAMES = tuple(
     entry["method"] for entry in METHODS if entry.get("router_reference", True)
 )
 IMPLICIT_SKILL_NAMES = (ROUTER["name"],) + tuple(
     entry["skill"] for entry in METHODS if entry.get("implicit", False)
+) + tuple(
+    entry["skill"] for entry in PINNED_PROJECTIONS if entry.get("implicit", False)
 )
 
 # Canonical eval resources are projected into the installed soft-eval skill. The

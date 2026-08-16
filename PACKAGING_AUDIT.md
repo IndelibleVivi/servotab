@@ -31,7 +31,8 @@ The router body is 645 words, below the 650-word release gate.
 
 ## Single source of truth
 
-`methods/*.md` is canonical. `scripts/build_skills.py` generates both:
+`methods/*.md` is canonical for the 13 `soft-*` engineering leaves.
+`scripts/build_skills.py` generates both:
 
 - `skills/softpowers/references/*.md`
 - leaf `skills/soft-*/SKILL.md` bodies
@@ -40,14 +41,23 @@ The router body is 645 words, below the 650-word release gate.
 canonical behavior-eval sources. The same generator projects them into the
 installed `soft-eval` skill's `scripts/` and `assets/` directories.
 
+The separate
+[`IndelibleVivi/license-boundary`](https://github.com/IndelibleVivi/license-boundary)
+repository is canonical for `license-boundary`. This pack contains an exact
+projection pinned by `sources/license-boundary.json` to release
+`v0.1.0-rc2`, commit `70a0e653c3948e10b78a2c9c1caebada8c735860`, and four
+file digests. The installed artifact therefore carries the complete SUL-1.0
+terms and project notice. Build and validation stay offline and fail on
+projection drift.
+
 `build_skills.py --check` and `validate_sync.py` fail on drift or unexpected payload files. Leaf method bodies are rejected if they contain `$soft-` cross-skill invocations.
 
 ## Standalone specialist
 
-`skills/license-boundary/` contains its complete `SKILL.md` and invocation
-metadata. It may be installed directly from that repository path without the
-Softpowers router or pack installer. The transactional pack includes the same
-canonical generated folder; there is no second implementation.
+`skills/license-boundary/` contains the complete pinned `SKILL.md` and
+invocation metadata. It may be installed from its standalone repository
+without the Softpowers router or pack installer. Softpowers does not author or
+generate a parallel implementation.
 
 ## Install payload
 
@@ -55,7 +65,7 @@ canonical generated folder; there is no second implementation.
 
 - 15 skill directories
 - 13 router references
-- 62 exact payload files
+- 64 exact payload files
 - file sizes and SHA-256 digests
 - two-surface implicit activation metadata
 
@@ -89,6 +99,7 @@ The user installation path uses only Python standard library.
 - Router/leaf invocation-policy validation
 - Reference set and no-cross-skill validation
 - Manifest freshness and digest validation
+- Standalone-source identity and pinned-projection digest validation
 - Three repository-owned eval canaries with known-fail/known-pass assertions
 - Installed-layout eval runner discovery and JSONL trace-parser self-test
 - Python compilation and shell syntax

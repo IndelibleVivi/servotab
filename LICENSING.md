@@ -15,7 +15,7 @@ Created by Faye & Cove.
 The [Sustainable Use License v1.0](LICENSE) applies to the project's original
 functional materials, including:
 
-- `install.sh`, `uninstall.sh`, `scripts/`, `methods/`, and `skills/`;
+- `install.sh`, `uninstall.sh`, `scripts/`, `methods/`, `sources/`, and `skills/`;
 - `PACK_MANIFEST.json`, `VERSION`, `.gitignore`, and `.github/`;
 - `evals/activation-prompts.csv` and `evals/fixtures/`; and
 - any other original functional file not explicitly assigned another license

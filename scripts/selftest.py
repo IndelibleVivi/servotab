@@ -9,7 +9,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from build_skills import check as check_generated
+from build_skills import check as check_generated, pinned_projection_status
 from common import IMPLICIT_SKILL_NAMES, REFERENCE_NAMES, ROUTER_NAME, SKILL_NAMES
 from install import install_pack
 from runtime_validate import PACK_MANIFEST, load_pack_manifest, validate_payload
@@ -87,6 +87,34 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory(prefix="softpowers-selftest-") as raw:
         base = Path(raw)
+
+        # The standalone specialist is usable offline but pinned against source drift.
+        projection_root = base / "projection-root"
+        (projection_root / "sources").mkdir(parents=True)
+        shutil.copy2(
+            root / "sources" / "license-boundary.json",
+            projection_root / "sources" / "license-boundary.json",
+        )
+        shutil.copytree(
+            source / "license-boundary",
+            projection_root / "skills" / "license-boundary",
+        )
+        _, projection_errors = pinned_projection_status(
+            root=projection_root,
+            skills_dir=projection_root / "skills",
+        )
+        assert_true(not projection_errors, f"clean pinned projection failed: {projection_errors}")
+        projected_skill = projection_root / "skills" / "license-boundary" / "SKILL.md"
+        projected_payload = projected_skill.read_bytes()
+        projected_skill.write_bytes(b"X" + projected_payload[1:])
+        _, projection_errors = pinned_projection_status(
+            root=projection_root,
+            skills_dir=projection_root / "skills",
+        )
+        assert_true(
+            any("sha256 mismatch" in error for error in projection_errors),
+            "pinned projection drift was accepted",
+        )
 
         # Coexistence + backup restoration.
         dest = base / "coexist" / "skills"
@@ -321,7 +349,7 @@ def main() -> int:
 
     print(
         "Softpowers packaging self-test passed: bounded implicit activation metadata, generated-source "
-        "sync, reference digests, coexistence, default-root selection, legacy-root upgrade, "
+        "sync, pinned-projection and reference digests, coexistence, default-root selection, legacy-root upgrade, "
         "dual-root rejection, manifest stacking, non-LIFO rejection, edit preservation, "
         "restore, rollback, and "
         "no-site-packages install/uninstall."

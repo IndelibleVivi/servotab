@@ -11,7 +11,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print("Canonical methods, router references, and explicit leaf skills are in sync.")
+    print("Canonical methods, router references, leaves, and pinned projections are in sync.")
     return 0
 
 

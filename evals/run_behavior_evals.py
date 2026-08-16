@@ -18,6 +18,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from unittest import mock
 
 
 SCHEMA_VERSION = 1
@@ -67,6 +68,33 @@ def atomic_write_json(path: Path, value: object) -> None:
 
 def sha256_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def fixture_tree_digest(root: Path) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+        relative = path.relative_to(root).as_posix().encode("utf-8")
+        if path.is_symlink():
+            kind = b"symlink"
+            payload = os.readlink(path).encode("utf-8")
+        elif path.is_file():
+            kind = b"executable" if path.stat().st_mode & 0o111 else b"file"
+            payload = path.read_bytes()
+        else:
+            continue
+        digest.update(kind + b"\0" + relative + b"\0")
+        digest.update(len(payload).to_bytes(8, "big") + payload)
+    return digest.hexdigest()
+
+
+def case_input_identity(case_dir: Path, case: dict[str, Any]) -> dict[str, str]:
+    prompt = (case_dir / str(case["prompt_file"])).read_text(encoding="utf-8").strip()
+    case_text = json.dumps(case, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return {
+        "case_sha256": sha256_text(case_text),
+        "fixture_tree": fixture_tree_digest(case_dir / "fixture"),
+        "prompt_sha256": sha256_text(prompt),
+    }
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -273,7 +301,11 @@ def initialize_fixture(fixture: Path, workspace: Path) -> None:
         check=True,
     )
     run_command(["git", "add", "--all"], cwd=workspace, check=True)
-    run_command(["git", "commit", "-q", "-m", "fixture baseline"], cwd=workspace, check=True)
+    run_command(
+        ["git", "commit", "--no-gpg-sign", "-q", "-m", "fixture baseline"],
+        cwd=workspace,
+        check=True,
+    )
 
 
 def apply_expected(expected: Path, workspace: Path) -> None:
@@ -291,14 +323,19 @@ def changed_files(workspace: Path) -> list[str]:
         cwd=workspace,
         check=True,
     )
+    fields = result.stdout.split("\0")
     paths: list[str] = []
-    for entry in result.stdout.split("\0"):
+    index = 0
+    while index < len(fields):
+        entry = fields[index]
         if not entry:
+            index += 1
             continue
-        path = entry[3:]
-        if " -> " in path:
-            path = path.split(" -> ", 1)[1]
-        paths.append(path)
+        if len(entry) < 4 or entry[2] != " ":
+            raise EvalConfigError("git status returned an invalid porcelain v1 record")
+        status = entry[:2]
+        paths.append(entry[3:])
+        index += 2 if "R" in status or "C" in status else 1
     return sorted(set(paths))
 
 
@@ -608,6 +645,7 @@ def runner_identity(script_path: Path, codex_version: str) -> dict[str, Any]:
         "python": platform.python_version(),
         "platform": platform.platform(),
         "codex": codex_version,
+        "runner_sha256": hashlib.sha256(script.read_bytes()).hexdigest(),
     }
     source_root = script.parent.parent
     version_path = source_root / "VERSION"
@@ -799,7 +837,8 @@ def run_attempt(
     subject_id: str,
     model: str | None,
     codex_path: str,
-    codex_version: str,
+    runner: dict[str, Any],
+    inputs: dict[str, str],
     timeout_override: int | None,
     keep_workspace: bool,
 ) -> dict[str, Any]:
@@ -807,10 +846,6 @@ def run_attempt(
     workspace = attempt_dir / "workspace"
     initialize_fixture(case_dir / "fixture", workspace)
     prompt = (case_dir / str(case["prompt_file"])).read_text(encoding="utf-8").strip()
-    case_text = json.dumps(case, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    fixture_tree = run_command(
-        ["git", "rev-parse", "HEAD^{tree}"], cwd=workspace, check=True
-    ).stdout.strip()
     atomic_write_text(attempt_dir / "prompt.md", prompt + "\n")
     atomic_write_text(
         attempt_dir / "case.json",
@@ -836,12 +871,8 @@ def run_attempt(
         "repeat": repeat,
         "started_at": utc_now(),
         "updated_at": utc_now(),
-        "inputs": {
-            "case_sha256": sha256_text(case_text),
-            "fixture_tree": fixture_tree,
-            "prompt_sha256": sha256_text(prompt),
-        },
-        "runner": runner_identity(Path(__file__), codex_version),
+        "inputs": inputs,
+        "runner": runner,
         "execution": {
             "model": model,
             "sandbox": case["sandbox"],
@@ -932,6 +963,27 @@ def selftest(cases_root: Path, schemas_root: Path) -> int:
             failed = [item for item in after if not item["passed"]]
             if failed:
                 raise AssertionError(f"{case_id}: expected overlay failed assertions: {failed}")
+
+        signed_workspace = base / "signed-fixture"
+        with mock.patch.dict(
+            os.environ,
+            {
+                "GIT_CONFIG_COUNT": "1",
+                "GIT_CONFIG_KEY_0": "commit.gpgSign",
+                "GIT_CONFIG_VALUE_0": "true",
+            },
+        ):
+            initialize_fixture(cases["tiny-copy"][0] / "fixture", signed_workspace)
+
+        rename_workspace = base / "rename-fixture"
+        initialize_fixture(cases["tiny-copy"][0] / "fixture", rename_workspace)
+        run_command(
+            ["git", "mv", "app.txt", "renamed-app.txt"],
+            cwd=rename_workspace,
+            check=True,
+        )
+        if changed_files(rename_workspace) != ["renamed-app.txt"]:
+            raise AssertionError("rename status parsing did not preserve the destination path")
 
         trace_path = base / "trace.jsonl"
         trace_path.write_text(
@@ -1047,33 +1099,64 @@ for event in events:
             encoding="utf-8",
         )
         fake_codex.chmod(0o755)
+        isolated_cases_root = base / "cases"
+        shutil.copytree(cases_root, isolated_cases_root)
         fake_args = argparse.Namespace(
             all=False,
             case=["tiny-copy"],
             repeat=1,
             subject_id="selftest-subject",
             model=None,
-            codex_bin=str(fake_codex),
+            codex_bin="./fake-codex",
             output_root=str(base / "fake-output"),
             run_id="selftest-run",
             resume=False,
             timeout_seconds=30,
             keep_workspace=False,
         )
-        with contextlib.redirect_stdout(io.StringIO()):
-            if run_batch(fake_args, cases_root, schemas_root) != 0:
+        with contextlib.chdir(base), contextlib.redirect_stdout(io.StringIO()):
+            if run_batch(fake_args, isolated_cases_root, schemas_root) != 0:
                 raise AssertionError("fake Codex end-to-end run failed")
             fake_args.resume = True
-            if run_batch(fake_args, cases_root, schemas_root) != 0:
+            if run_batch(fake_args, isolated_cases_root, schemas_root) != 0:
                 raise AssertionError("completed-attempt resume failed")
+
+            def expect_resume_identity_mismatch(label: str) -> None:
+                try:
+                    run_batch(fake_args, isolated_cases_root, schemas_root)
+                except EvalConfigError as exc:
+                    if "resume identity mismatch" not in str(exc):
+                        raise AssertionError(f"{label} mismatch failed for the wrong reason") from exc
+                else:
+                    raise AssertionError(f"resume accepted changed {label}")
+
+            prompt_path = isolated_cases_root / "tiny-copy" / "prompt.md"
+            original_prompt = prompt_path.read_text(encoding="utf-8")
+            prompt_path.write_text(original_prompt + "\nChanged after interruption.\n", encoding="utf-8")
+            expect_resume_identity_mismatch("prompt input")
+            prompt_path.write_text(original_prompt, encoding="utf-8")
+
+            fixture_marker = isolated_cases_root / "tiny-copy" / "fixture" / "identity-marker.txt"
+            fixture_marker.write_text("changed\n", encoding="utf-8")
+            expect_resume_identity_mismatch("fixture input")
+            fixture_marker.unlink()
+
+            fake_args.timeout_seconds = 31
+            expect_resume_identity_mismatch("timeout configuration")
+            fake_args.timeout_seconds = 30
+
+            original_fake_codex = fake_codex.read_text(encoding="utf-8")
+            fake_codex.write_text(
+                original_fake_codex.replace("fake-selftest", "fake-selftest-updated"),
+                encoding="utf-8",
+            )
+            fake_codex.chmod(0o755)
+            expect_resume_identity_mismatch("Codex executable version")
+            fake_codex.write_text(original_fake_codex, encoding="utf-8")
+            fake_codex.chmod(0o755)
+
             fake_args.model = "different-model"
-            try:
-                run_batch(fake_args, cases_root, schemas_root)
-            except EvalConfigError as exc:
-                if "resume identity mismatch" not in str(exc):
-                    raise AssertionError("resume mismatch failed for the wrong reason") from exc
-            else:
-                raise AssertionError("resume accepted a mismatched model")
+            expect_resume_identity_mismatch("model")
 
     print(
         f"Softpowers eval self-test passed: {len(cases)} cases, known-fail/known-pass "
@@ -1107,9 +1190,10 @@ def run_batch(args: argparse.Namespace, cases_root: Path, schemas_root: Path) ->
     if args.timeout_seconds is not None and not 30 <= args.timeout_seconds <= 3600:
         raise EvalConfigError("--timeout-seconds must be 30..3600")
 
-    codex_path = shutil.which(args.codex_bin)
-    if not codex_path:
+    discovered_codex_path = shutil.which(args.codex_bin)
+    if not discovered_codex_path:
         raise EvalConfigError(f"Codex CLI not found: {args.codex_bin}")
+    codex_path = os.path.abspath(os.path.expanduser(discovered_codex_path))
     codex_version = codex_identity(codex_path)
     run_id = args.run_id or default_run_id()
     if not RUN_ID_RE.fullmatch(run_id):
@@ -1130,6 +1214,26 @@ def run_batch(args: argparse.Namespace, cases_root: Path, schemas_root: Path) ->
     if args.resume and not summary_path.is_file():
         raise EvalConfigError(f"cannot resume without an existing summary: {summary_path}")
 
+    input_identity = {
+        case_id: case_input_identity(cases[case_id][0], cases[case_id][1])
+        for case_id in selected
+    }
+    current_identity = {
+        "inputs": input_identity,
+        "runner": runner_identity(Path(__file__), codex_version),
+        "execution": {
+            "codex_path": codex_path,
+            "codex_version": codex_version,
+            "model": args.model,
+            "timeout_override_seconds": args.timeout_seconds,
+            "effective_timeout_seconds": {
+                case_id: args.timeout_seconds or cases[case_id][1]["timeout_seconds"]
+                for case_id in selected
+            },
+            "keep_workspace": args.keep_workspace,
+        },
+    }
+
     batch_summary: dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
         "state": "running",
@@ -1138,6 +1242,7 @@ def run_batch(args: argparse.Namespace, cases_root: Path, schemas_root: Path) ->
         "model": args.model,
         "cases": selected,
         "repeat": args.repeat,
+        "identity": current_identity,
         "started_at": utc_now(),
         "updated_at": utc_now(),
         "attempts": [],
@@ -1150,6 +1255,7 @@ def run_batch(args: argparse.Namespace, cases_root: Path, schemas_root: Path) ->
             "model": args.model,
             "cases": selected,
             "repeat": args.repeat,
+            "identity": current_identity,
         }
         mismatches = {
             key: {"existing": previous.get(key), "requested": value}
@@ -1188,7 +1294,8 @@ def run_batch(args: argparse.Namespace, cases_root: Path, schemas_root: Path) ->
                     subject_id=args.subject_id,
                     model=args.model,
                     codex_path=codex_path,
-                    codex_version=codex_version,
+                    runner=current_identity["runner"],
+                    inputs=input_identity[case_id],
                     timeout_override=args.timeout_seconds,
                     keep_workspace=args.keep_workspace,
                 )

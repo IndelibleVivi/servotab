@@ -19,7 +19,7 @@ python3 -S evals/run_behavior_evals.py list
 python3 -S evals/run_behavior_evals.py selftest
 ```
 
-Self-test 对每个 case 执行 known-fail fixture 与 known-pass expected overlay，并覆盖 schema contract、Git fixture、deterministic assertions 和 synthetic Codex JSONL parser。它是普通 pack self-test 的一部分。
+Self-test 对每个 case 执行 known-fail fixture 与 known-pass expected overlay，并覆盖 schema contract、Git fixture、rename status parsing、GPG-signing isolation、relative Codex executable resolution、strict resume identity 和 synthetic Codex JSONL parser。它是普通 pack self-test 的一部分。
 
 ## Live run
 
@@ -32,7 +32,7 @@ python3 -S evals/run_behavior_evals.py run \
   --model <exact-model-id>
 ```
 
-Runner 在 disposable Git workspace 中调用 `codex exec --json --ephemeral`。Source run 默认把 prompt、case contract、raw JSONL、stderr、final message、Git diff、metadata 与 verification 写到 `.softpowers-evals/runs/<run-id>/`；installed runner 默认写到 `${CODEX_HOME:-~/.codex}/softpowers-evals/runs/<run-id>/`。也可以显式传 `--output-root`。同一个 `--run-id` 加 `--resume` 会跳过已有完整 result 的 attempts，并重新执行未完成 attempts；若 case、subject、model 或 repeat 不一致则拒绝续跑。
+Runner 在 disposable Git workspace 中调用 `codex exec --json --ephemeral`。Source run 默认把 prompt、case contract、raw JSONL、stderr、final message、Git diff、metadata 与 verification 写到 `.softpowers-evals/runs/<run-id>/`；installed runner 默认写到 `${CODEX_HOME:-~/.codex}/softpowers-evals/runs/<run-id>/`。也可以显式传 `--output-root`。同一个 `--run-id` 加 `--resume` 会跳过已有完整 result 的 attempts，并重新执行未完成 attempts；若 case/prompt/fixture digests、subject、runner、resolved Codex executable/version、model、timeout、workspace-retention setting 或 repeat 不一致则拒绝续跑，避免把不同 inputs 的 attempts 合并成一份 evidence。
 
 `subject-id` 是 evidence label，不是 isolation mechanism。Codex 可能同时发现同名 repo-level 与 user-level skill；这种情况下只能把 subject 描述为当前 CLI environment，不能宣称某个 candidate 或 release 被单独加载。做比较时还要固定 prompt、fixture、model、effort、sandbox、permissions 与 repeat count。
 

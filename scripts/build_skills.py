@@ -2,11 +2,18 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
 
-from skill_catalog import BUNDLED_RESOURCE_FILES, BUNDLED_RESOURCE_TREES, METHODS, ROUTER
+from skill_catalog import (
+    BUNDLED_RESOURCE_FILES,
+    BUNDLED_RESOURCE_TREES,
+    METHODS,
+    PINNED_PROJECTIONS,
+    ROUTER,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 METHODS_DIR = ROOT / "methods"
@@ -95,6 +102,77 @@ def openai_yaml(entry: dict[str, object], *, implicit: bool) -> str:
     )
 
 
+def pinned_projection_status(
+    *,
+    root: Path = ROOT,
+    skills_dir: Path = SKILLS_DIR,
+) -> tuple[set[Path], list[str]]:
+    targets: set[Path] = set()
+    errors: list[str] = []
+
+    for entry in PINNED_PROJECTIONS:
+        skill = str(entry["skill"])
+        required_files = {str(relative) for relative in entry["files"]}
+        manifest_path = root / str(entry["manifest"])
+        label = f"pinned projection {skill}"
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            if set(manifest) != {"schema_version", "skill", "source", "files"}:
+                raise ValueError("invalid manifest fields")
+            if manifest["schema_version"] != 1 or manifest["skill"] != skill:
+                raise ValueError("invalid schema version or skill identity")
+
+            source = manifest["source"]
+            if not isinstance(source, dict) or set(source) != {
+                "repository",
+                "ref",
+                "commit",
+                "path",
+            }:
+                raise ValueError("invalid source identity")
+            if any(not isinstance(source[field], str) for field in source):
+                raise ValueError("source identity fields must be strings")
+            if not source["repository"].startswith("https://github.com/"):
+                raise ValueError("source repository must be a GitHub URL")
+            if not source["ref"] or not source["path"]:
+                raise ValueError("source ref and path must be non-empty")
+            commit = source["commit"]
+            if len(commit) != 40 or any(char not in "0123456789abcdef" for char in commit):
+                raise ValueError("source commit must be a lowercase full SHA")
+            source_path = Path(source["path"])
+            if source_path.is_absolute() or ".." in source_path.parts:
+                raise ValueError("source path must be repository-relative")
+
+            files = manifest["files"]
+            if not isinstance(files, list) or any(
+                not isinstance(item, dict) or set(item) != {"path", "size", "sha256"}
+                for item in files
+            ):
+                raise ValueError("invalid file entries")
+            files_by_path = {item["path"]: item for item in files}
+            if set(files_by_path) != required_files or len(files_by_path) != len(files):
+                raise ValueError("projection file set does not match the registered package")
+
+            for relative_text, file_entry in files_by_path.items():
+                relative = Path(relative_text)
+                if relative.is_absolute() or ".." in relative.parts:
+                    raise ValueError(f"unsafe projected path {relative_text!r}")
+                target = skills_dir / skill / relative
+                targets.add(target)
+                if not target.is_file() or target.is_symlink():
+                    raise ValueError(f"missing projected file {target.relative_to(root)}")
+                payload = target.read_bytes()
+                digest = file_entry["sha256"]
+                if file_entry["size"] != len(payload):
+                    raise ValueError(f"size mismatch for {target.relative_to(root)}")
+                if not isinstance(digest, str) or hashlib.sha256(payload).hexdigest() != digest:
+                    raise ValueError(f"sha256 mismatch for {target.relative_to(root)}")
+        except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
+            errors.append(f"{label}: {exc}")
+
+    return targets, errors
+
+
 def expected_files() -> dict[Path, str]:
     files: dict[Path, str] = {}
     router_dir = SKILLS_DIR / str(ROUTER["name"])
@@ -138,6 +216,8 @@ def expected_files() -> dict[Path, str]:
 def check() -> list[str]:
     errors: list[str] = []
     expected = expected_files()
+    projection_targets, projection_errors = pinned_projection_status()
+    errors.extend(projection_errors)
     for path, content in expected.items():
         if not path.is_file():
             errors.append(f"missing generated file: {path.relative_to(ROOT)}")
@@ -146,7 +226,9 @@ def check() -> list[str]:
         if current != content:
             errors.append(f"generated file is stale: {path.relative_to(ROOT)}")
 
-    allowed = {path.resolve() for path in expected}
+    allowed = {path.resolve() for path in expected} | {
+        path.resolve() for path in projection_targets
+    }
     for skill_dir in SKILLS_DIR.iterdir():
         if not skill_dir.is_dir() or skill_dir.name.startswith("."):
             continue
@@ -158,11 +240,16 @@ def check() -> list[str]:
 
 def write() -> None:
     expected = expected_files()
+    projection_targets, projection_errors = pinned_projection_status()
+    if projection_errors:
+        raise RuntimeError("pinned projection validation failed:\n- " + "\n- ".join(projection_errors))
     for path, content in expected.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content, encoding="utf-8")
 
-    allowed = {path.resolve() for path in expected}
+    allowed = {path.resolve() for path in expected} | {
+        path.resolve() for path in projection_targets
+    }
     for skill_dir in SKILLS_DIR.iterdir():
         if not skill_dir.is_dir() or skill_dir.name.startswith("."):
             continue
@@ -175,7 +262,9 @@ def write() -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Generate the implicit router, references, and explicit leaf skills from methods/."
+        description=(
+            "Generate canonical Softpowers methods and preserve verified pinned skill projections."
+        )
     )
     parser.add_argument("--check", action="store_true", help="Fail if generated files are stale")
     args = parser.parse_args()
@@ -187,16 +276,23 @@ def main() -> int:
             for error in errors:
                 print(f"- {error}", file=sys.stderr)
             return 1
-        print("Generated router, references, and leaf skills match canonical methods.")
+        print("Generated methods and verified pinned skill projections are in sync.")
         return 0
 
-    write()
+    try:
+        write()
+    except RuntimeError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
     reference_count = sum(bool(entry.get("router_reference", True)) for entry in METHODS)
-    implicit_leaf_count = sum(bool(entry.get("implicit", False)) for entry in METHODS)
-    explicit_leaf_count = len(METHODS) - implicit_leaf_count
+    implicit_specialist_count = sum(
+        bool(entry.get("implicit", False)) for entry in PINNED_PROJECTIONS
+    )
+    explicit_leaf_count = len(METHODS)
     print(
         f"Generated router, {reference_count} router references, "
-        f"{implicit_leaf_count} implicit specialist, and {explicit_leaf_count} explicit leaf skills."
+        f"preserved {implicit_specialist_count} pinned implicit specialist, and "
+        f"generated {explicit_leaf_count} explicit leaf skills."
     )
     return 0
 

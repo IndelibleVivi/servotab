@@ -42,14 +42,24 @@
   },
   "files": [
     {
+      "path": "skills/license-boundary/LICENSE.txt",
+      "size": 4182,
+      "sha256": "bf7e4e57324549ef56253b8af2a2712b884c17bdcb998ec089231c5fff1a9872"
+    },
+    {
+      "path": "skills/license-boundary/NOTICE.md",
+      "size": 375,
+      "sha256": "820bba58739d3fdf8715ba1c4f42863fc220d2cccd48464c35b0a5bcb0b2a1a9"
+    },
+    {
       "path": "skills/license-boundary/SKILL.md",
-      "size": 10395,
-      "sha256": "dc30dcc76ca60d7c982bacb3fcef3f21af7688b809117e0c5858a6d11328f8fc"
+      "size": 10432,
+      "sha256": "29b821d46afe54dc990aa707ce59aca0b77230ba3d022f54f63a33e51751fd62"
     },
     {
       "path": "skills/license-boundary/agents/openai.yaml",
-      "size": 485,
-      "sha256": "6b1a247ad987e7c5bf68ec6099c4bc85d8cbff795b6660be9e09c69c5e987e69"
+      "size": 618,
+      "sha256": "1f76db4299204243ed9488377541f0ed8c03429dcfc533ed4f2abb299017c3bc"
     },
     {
       "path": "skills/soft-brainstorm/SKILL.md",
@@ -173,8 +183,8 @@
     },
     {
       "path": "skills/soft-eval/scripts/run_behavior_evals.py",
-      "size": 49064,
-      "sha256": "c2280da6b8cc7487e00a92dbcbf311490a99376d637f5c847ebe4078dad5bb6e"
+      "size": 53519,
+      "sha256": "14b236c7e5d854bbe1c2f39f12525c9e05444c9a3b9aad4d3dd09f3bc733eadf"
     },
     {
       "path": "skills/soft-execute/SKILL.md",

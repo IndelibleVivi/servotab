@@ -13,7 +13,8 @@ Decision: `ADAPT`
 - Repository: `anthropics/defending-code-reference-harness`
 - Pinned ref: `d3bea6b5793b5f3d59a75ebe69a58efa88383145`
 - License: Apache-2.0
-- Reviewed surfaces: `docs/best-practices.md`, `docs/pipeline.md`, `docs/security.md`, `harness/artifacts.py`, `.claude/skills/_lib/checkpoint.py`, captured canary outputs
+- Reviewed files: `docs/pipeline.md`, `docs/security.md`, `harness/artifacts.py`, `.claude/skills/_lib/checkpoint.py`, `targets/canary/README.md`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -71,7 +72,8 @@ Decision: `ADAPT`
 - Component: `skills/skill-creator`
 - Pinned ref: `f6656c1256d5a8adfa37db9110046ef20bac644c`
 - License: Apache-2.0
-- Reviewed surfaces: `SKILL.md`, eval schemas, benchmark aggregation and review workflow
+- Reviewed files: `skills/skill-creator/SKILL.md`, `skills/skill-creator/references/schemas.md`, `skills/skill-creator/scripts/run_eval.py`, `skills/skill-creator/scripts/aggregate_benchmark.py`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -119,14 +121,21 @@ Softpowers 计划证明 routing 与 methods 是否减少无意义流程，同时
 
 ## 3. Cross-host distribution without mandatory lifecycle
 
-Decision: `ADAPT` + `REJECT` + `ALREADY COVERED`
+Decision: `ADAPT`
+
+Component outcomes:
+
+- Cross-host packaging and installation clarity: `ADAPT`
+- Mandatory lifecycle and per-task ceremony: `REJECT`
+- Existing method domains: `ALREADY COVERED`
 
 ### Source
 
 - Repository: `obra/superpowers`
 - Pinned ref: `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`
 - License: MIT
-- Reviewed surfaces: README workflow and host installation model
+- Reviewed files: `README.md`, `.codex-plugin/plugin.json`, `skills/using-superpowers/SKILL.md`, `skills/subagent-driven-development/SKILL.md`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -174,14 +183,20 @@ Method domains are `ALREADY COVERED`. Distribution pattern is `ADAPT`. Mandatory
 
 ## 4. Evidence maturity without default scorecards
 
-Decision: `ALREADY COVERED` + narrow `ADAPT`
+Decision: `ALREADY COVERED`
+
+Component outcomes:
+
+- Existing claim-maturity boundary: `ALREADY COVERED`
+- Future eval evidence-state vocabulary: `ADAPT`
 
 ### Source
 
 - Repository: `QoderAI/better-harness`
 - Pinned ref: `36c85c40ffb7596d413cc14bfbc8e66c741c182e`
 - License: MIT
-- Reviewed surfaces: Agent Work Loop model and evidence-state distinctions
+- Reviewed files: `models/agent-work-loop.md`, `docs/docs/concepts/findings-and-evidence.md`, `docs/docs/reference/architecture.md`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -223,14 +238,20 @@ Current runtime method remains unchanged. This source mainly validates an existi
 
 ## 5. Own control flow without turning work into a DAG
 
-Decision: `ALREADY COVERED` + `ADAPT`
+Decision: `ALREADY COVERED`
+
+Component outcomes:
+
+- Runtime control principles: `ALREADY COVERED`
+- Eval-runner state and recovery boundaries: `ADAPT`
 
 ### Source
 
 - Repository: `humanlayer/12-factor-agents`
 - Pinned ref: `d20c728368bf9c189d6d7aab704744decb6ec0cc`
 - License: code Apache-2.0；content CC BY-SA-4.0
-- Reviewed concepts: own prompts、own context、own control flow、pause/resume、compact errors、small focused agents
+- Reviewed files: `content/factor-02-own-your-prompts.md`, `content/factor-03-own-your-context-window.md`, `content/factor-05-unify-execution-state.md`, `content/factor-06-launch-pause-resume.md`, `content/factor-08-own-your-control-flow.md`, `content/factor-09-compact-errors.md`, `content/factor-10-small-focused-agents.md`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -284,7 +305,8 @@ Decision: `ADAPT`
 - Repository: `SWE-agent/mini-swe-agent`
 - Pinned ref: `a83fcae82d2a08f0ee0c688f9d137b3566c097f8`
 - License: MIT
-- Reviewed pattern: minimal control loop、linear history、independent subprocess actions、easy sandbox substitution
+- Reviewed files: `src/minisweagent/agents/default.py`, `src/minisweagent/environments/local.py`, `src/minisweagent/utils/log.py`, `src/minisweagent/run/benchmarks/utils/common.py`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -333,7 +355,8 @@ Decision: `ADAPT`
 - Repository: `SWE-bench/SWE-bench`
 - Pinned ref: `ca6e4e0d252f32f8762625b73575d5dee49d0a5a`
 - License: MIT
-- Reviewed pattern: fixed repository snapshots、containerized evaluation、saved logs、run identity、re-grading outputs
+- Reviewed files: `docs/guides/evaluation.md`, `swebench/harness/run_evaluation.py`, `swebench/harness/reporting.py`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -365,20 +388,26 @@ deterministic cache-key tests、regrade tests、metadata redaction tests；无�
 
 ### Result
 
-Initial `ADAPT` applied in `0.3.0-rc2`: artifacts record run/case/attempt, subject label, runner identity, fixture Git tree, case/prompt digests, model, sandbox, CLI version and host metadata. Source-mode runs also record commit plus dirty state. Honest cache reuse and offline re-grading remain deferred; `subject-id` is explicitly not presented as an isolation mechanism.
+Initial `ADAPT` applied in `0.3.0-rc2`: artifacts record run/case/attempt, subject label, runner identity, fixture content-tree digest, case/prompt digests, model, sandbox, CLI version and host metadata. Source-mode runs also record commit plus dirty state. Completed attempts are now reused only under an exact resume identity; general cache reuse and offline re-grading remain deferred, and `subject-id` is explicitly not presented as an isolation mechanism.
 
 ---
 
 ## 8. Task / solver / scorer separation without an early framework dependency
 
-Decision: `DEFER` + conceptual `ADAPT`
+Decision: `DEFER`
+
+Component outcomes:
+
+- Inspect framework dependency: `DEFER`
+- Task / solver / scorer interface separation: `ADAPT`
 
 ### Source
 
 - Repository: `UKGovernmentBEIS/inspect_ai`
 - Pinned ref: `286163f12aa627af22051bd95321bc6404e237ae`
 - License: verify the exact reused component before copying code
-- Reviewed pattern: dataset/task、solver、scorer、sandbox、approval、log separation
+- Reviewed files: `docs/tasks.qmd`, `docs/solvers.qmd`, `docs/scorers.qmd`, `docs/sandboxing.qmd`, `docs/eval-logs.qmd`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -414,14 +443,20 @@ Dependency remains `DEFER`. Interface separation is accepted conceptually.
 
 ## 9. Generated plugin projection with canonical ownership preserved
 
-Decision: `DEFER` + planned `ADAPT`
+Decision: `DEFER`
+
+Component outcomes:
+
+- Immediate plugin migration: `DEFER`
+- Future generated host projection: `ADAPT`
 
 ### Source
 
 - Repository: `openai/plugins`
 - Pinned ref: `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9`
 - Reuse note: no repository-level license file exists at this ref；inspect each plugin manifest and component before copying
-- Reviewed pattern: `.codex-plugin/plugin.json` plus skills、agents、commands、hooks、MCP and assets
+- Reviewed files: `README.md`, `.agents/skills/plugin-creator/references/plugin-json-spec.md`, `plugins/github/.codex-plugin/plugin.json`
+- Review date: `2026-08-17`
 
 ### Distilled pattern
 
@@ -460,13 +495,20 @@ schema、generation check、install smoke、host discovery、existing pack selft
 
 ## 10. Adversarial packaging fixtures without importing malicious payloads
 
-Decision: `ADAPT` + `REJECT`
+Decision: `ADAPT`
+
+Component outcomes:
+
+- Inert adversarial audit fixtures: `ADAPT`
+- Installing or executing upstream payloads: `REJECT`
 
 ### Source
 
 - Repository: `trailofbits/overtly-malicious-skills`
 - Pinned ref: `4ffbf9461ef0505f9ce76a0d3694a18ec33ea531`
 - License/reuse note: no license file exists at this ref；security research reference only
+- Reviewed files: `README.md`, `skills/context-loader/SKILL.md`, `skills/csv-summarizer/scripts/summarize.py`, `skills/dev-env-setup/scripts/bootstrap.sh`, `skills/simple-formatter/SKILL.md`
+- Review date: `2026-08-17`
 - Safety boundary: do not install or execute upstream skills
 
 ### Distilled pattern

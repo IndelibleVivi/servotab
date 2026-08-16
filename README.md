@@ -49,12 +49,12 @@ cd softpowers
 
 ### 只安装 licensing skill
 
-不想安装 Softpowers pack 的用户，可以直接让 Codex 的 system installer
-安装这个 self-contained folder：
+不想安装 Softpowers pack 的用户，可以直接从 canonical standalone repo
+安装这个 self-contained skill：
 
 ```text
-Use $skill-installer to install
-https://github.com/IndelibleVivi/softpowers/tree/main/skills/license-boundary
+Use $skill-installer to install skills/license-boundary from
+IndelibleVivi/license-boundary at v0.1.0-rc2.
 ```
 
 它不依赖 `softpowers` router 或其他 leaf skills。安装后，用户可以直接说
@@ -62,6 +62,12 @@ https://github.com/IndelibleVivi/softpowers/tree/main/skills/license-boundary
 哪些内容能换证”，不需要先知道 skill 名称。Skill 会先用实际使用后果给出
 一个 best-fit recommendation，只保留真正影响选择的 alternatives；exact
 license 与适用 scope 仍由用户确认。
+
+Standalone [`IndelibleVivi/license-boundary`](https://github.com/IndelibleVivi/license-boundary)
+是 authoring authority。Softpowers 只携带 `v0.1.0-rc2` 的 exact pinned
+projection，包括完整的 packaged SUL terms 与 project notice，并通过
+`sources/license-boundary.json` 离线验证 source commit、path、size 与
+digest；pack build 不在网络上临时拉取 skill。
 
 当前 CI 覆盖 Ubuntu 的 Python 3.10 / 3.13 与 macOS 的 Python 3.13；native Windows 尚未验证。Invocation metadata、packaging 与 filesystem transaction 可以确定性校验，但真实 implicit routing 仍可能随 Codex client、model、prompt 与 repo context 变化。这正是 RC 想收集 behavior feedback 的部分。
 
@@ -183,7 +189,7 @@ python3 -S evals/run_behavior_evals.py run \
   --model <exact-model-id>
 ```
 
-每次 attempt 把 prompt、case contract、raw JSONL、stderr、final message、Git diff、metadata 和 deterministic verification 原子写入 `.softpowers-evals/runs/`。使用同一个 `--run-id` 加 `--resume` 可以从未完成的 case boundary 恢复；已完成 attempt 不会重跑。
+每次 attempt 把 prompt、case contract、raw JSONL、stderr、final message、Git diff、metadata 和 deterministic verification 原子写入 `.softpowers-evals/runs/`。使用同一个 `--run-id` 加 `--resume` 可以从未完成的 case boundary 恢复；只有 case/prompt/fixture digests、runner identity、resolved Codex executable/version、model、timeout 与 workspace-retention setting 全部仍一致时，已完成 attempt 才会被复用。
 
 Subject identity 必须如实描述当前 CLI 实际加载的 skills。Codex 会同时发现同名 repo-level 与 user-level skill，因此存在 identity collision 时，不要声称 candidate 被单独隔离。Runner 的第一版支持 matched prompt/fixture/model/sandbox/repeat 和明确 `subject-id`，但不把未经隔离的两次运行包装成可信 A/B。
 

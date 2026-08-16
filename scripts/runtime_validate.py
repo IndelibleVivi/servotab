@@ -10,6 +10,7 @@ from common import (
     BUNDLED_RESOURCE_TARGETS,
     IMPLICIT_SKILL_NAMES,
     PACK_ROOT,
+    PINNED_PROJECTION_TARGETS,
     REFERENCE_NAMES,
     ROUTER_NAME,
     SKILL_NAMES,
@@ -29,6 +30,7 @@ def expected_payload_files() -> frozenset[str]:
         f"skills/{ROUTER_NAME}/references/{reference}" for reference in REFERENCE_NAMES
     }
     files |= {f"skills/{relative}" for relative in BUNDLED_RESOURCE_TARGETS}
+    files |= {f"skills/{relative}" for relative in PINNED_PROJECTION_TARGETS}
     return frozenset(files)
 
 
