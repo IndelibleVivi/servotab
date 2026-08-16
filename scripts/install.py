@@ -43,6 +43,36 @@ def atomic_write_text(path: Path, text: str) -> None:
             temp.unlink()
 
 
+def active_manifest_retired_skills(dest: Path) -> tuple[str, ...]:
+    pointer = dest / ".softpowers-current-manifest"
+    if not pointer.is_file():
+        return ()
+    raw = pointer.read_text(encoding="utf-8").strip()
+    if not raw:
+        raise RuntimeError(f"Current manifest pointer is empty: {pointer}")
+    manifest_path = Path(raw).expanduser().resolve()
+    assert_child(manifest_path, dest / ".softpowers-manifests")
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"Cannot inspect active Softpowers manifest: {manifest_path}") from exc
+    if (
+        not isinstance(manifest, dict)
+        or manifest.get("pack") != "softpowers-pack"
+        or manifest.get("status") != "installed"
+        or not isinstance(manifest.get("skills"), list)
+    ):
+        raise RuntimeError(f"Invalid active Softpowers manifest: {manifest_path}")
+    names = []
+    for entry in manifest["skills"]:
+        if not isinstance(entry, dict) or not isinstance(entry.get("name"), str):
+            raise RuntimeError(f"Malformed skill entry in active manifest: {manifest_path}")
+        names.append(entry["name"])
+    if len(names) != len(set(names)):
+        raise RuntimeError(f"Duplicate skill entries in active manifest: {manifest_path}")
+    return tuple(sorted(set(names) - set(SKILL_NAMES)))
+
+
 def install_pack(
     source: Path,
     dest: Path,
@@ -55,6 +85,22 @@ def install_pack(
     errors = validate_payload(source, manifest_path=PACK_MANIFEST, allow_other_skills=False)
     if errors:
         raise RuntimeError("Source validation failed:\n- " + "\n- ".join(errors))
+
+    retired = active_manifest_retired_skills(dest)
+    if retired:
+        names = ", ".join(retired)
+        guidance = (
+            " The License Boundary skill must be installed independently from "
+            "IndelibleVivi/license-boundary at v0.1.0-rc3."
+            if "license-boundary" in retired
+            else ""
+        )
+        raise RuntimeError(
+            "The active historical Softpowers layer still manages retired skill(s): "
+            f"{names}. Run this release's `./uninstall.sh --dest <skills-dir>`; repeat "
+            "while this message appears, then run the installer again."
+            + guidance
+        )
 
     dest.mkdir(parents=True, exist_ok=True)
     stamp = timestamp_slug()

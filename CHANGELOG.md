@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0-rc4 — 2026-08-17
+
+Standalone-only License Boundary distribution and safe historical migration.
+
+- Removed `license-boundary` from the Softpowers payload so the standalone
+  repository exclusively owns its installation, upgrades, and release cadence.
+- Kept License Boundary `v0.1.0-rc3` as a tested recommended companion without
+  bundling or replacing its installed bytes.
+- Made uninstall manifest-driven across historical 12/13/14/15-skill layers
+  while retaining exact target, backup, digest, duplicate, and LIFO checks.
+- Made install stop before staging when the active historical layer still
+  manages a skill retired from the current pack, with an explicit repeatable
+  uninstall-first migration path.
+- Added a historical-layer regression proving the retired skill is restored,
+  the new 14-skill pack leaves it independently owned, and later uninstall does
+  not remove it.
+- Retained repository licensing as a negative-routing seed so the engineering
+  router does not claim the companion specialist's domain.
+
 ## 0.3.0-rc3 — 2026-08-17
 
 Standalone repository licensing boundary and integrated release hardening.

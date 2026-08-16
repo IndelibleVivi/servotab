@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "pack": "softpowers-pack",
-  "version": "0.3.0-rc3",
+  "version": "0.3.0-rc4",
   "skills": [
     "softpowers",
     "soft-brainstorm",
@@ -16,13 +16,11 @@
     "soft-eval",
     "soft-worktree",
     "soft-parallel",
-    "soft-finish",
-    "license-boundary"
+    "soft-finish"
   ],
   "activation": {
     "implicit": [
-      "softpowers",
-      "license-boundary"
+      "softpowers"
     ],
     "explicit_only": [
       "soft-brainstorm",
@@ -41,26 +39,6 @@
     ]
   },
   "files": [
-    {
-      "path": "skills/license-boundary/LICENSE.txt",
-      "size": 4182,
-      "sha256": "bf7e4e57324549ef56253b8af2a2712b884c17bdcb998ec089231c5fff1a9872"
-    },
-    {
-      "path": "skills/license-boundary/NOTICE.md",
-      "size": 375,
-      "sha256": "820bba58739d3fdf8715ba1c4f42863fc220d2cccd48464c35b0a5bcb0b2a1a9"
-    },
-    {
-      "path": "skills/license-boundary/SKILL.md",
-      "size": 10432,
-      "sha256": "29b821d46afe54dc990aa707ce59aca0b77230ba3d022f54f63a33e51751fd62"
-    },
-    {
-      "path": "skills/license-boundary/agents/openai.yaml",
-      "size": 618,
-      "sha256": "1f76db4299204243ed9488377541f0ed8c03429dcfc533ed4f2abb299017c3bc"
-    },
     {
       "path": "skills/soft-brainstorm/SKILL.md",
       "size": 6390,

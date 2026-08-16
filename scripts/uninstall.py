@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from common import SKILL_NAMES, assert_child, directory_digest, path_exists, resolve_skills_dir
+from common import assert_child, directory_digest, path_exists, resolve_skills_dir
 from install import atomic_write_text, timestamp_slug
 
 
@@ -21,6 +21,65 @@ def load_manifest(path: Path) -> dict[str, Any]:
     if not isinstance(data.get("skills"), list):
         raise ValueError(f"Manifest has no skills list: {path}")
     return data
+
+
+def validated_entries(manifest: dict[str, Any], dest: Path) -> list[dict[str, Any]]:
+    raw_entries = manifest["skills"]
+    if not raw_entries:
+        raise RuntimeError("Install manifest has no skill entries")
+
+    entries: list[dict[str, Any]] = []
+    names: set[str] = set()
+    backups: set[Path] = set()
+    backup_root = dest / ".softpowers-backups"
+    for raw_entry in raw_entries:
+        if not isinstance(raw_entry, dict) or not isinstance(raw_entry.get("name"), str):
+            raise RuntimeError("Malformed skill entry in install manifest")
+        name = raw_entry["name"]
+        if not name or Path(name).name != name or name in {".", ".."} or name.startswith("."):
+            raise RuntimeError(f"Unsafe skill name in install manifest: {name!r}")
+        if name in names:
+            raise RuntimeError(f"Duplicate skill entry in install manifest: {name}")
+        names.add(name)
+
+        target_value = raw_entry.get("target")
+        if not isinstance(target_value, str) or not target_value:
+            raise RuntimeError(f"Malformed target for historical skill {name}")
+        target = Path(target_value).expanduser().resolve(strict=False)
+        assert_child(target, dest)
+        if target != (dest / name).resolve(strict=False):
+            raise RuntimeError(f"Manifest target does not match expected skill path for {name}: {target}")
+
+        digest = raw_entry.get("installed_sha256")
+        if (
+            not isinstance(digest, str)
+            or len(digest) != 64
+            or any(char not in "0123456789abcdef" for char in digest)
+        ):
+            raise RuntimeError(f"Invalid installed digest for historical skill {name}")
+
+        backup_value = raw_entry.get("backup")
+        backup: Path | None = None
+        if backup_value is not None:
+            if not isinstance(backup_value, str) or not backup_value:
+                raise RuntimeError(f"Malformed backup for historical skill {name}")
+            backup = Path(backup_value).expanduser().resolve(strict=False)
+            assert_child(backup, backup_root)
+            if backup in backups:
+                raise RuntimeError(f"Duplicate backup path in install manifest: {backup}")
+            backups.add(backup)
+            if not path_exists(backup):
+                raise RuntimeError(f"Required backup is missing: {backup}")
+
+        entries.append(
+            {
+                **raw_entry,
+                "name": name,
+                "target": str(target),
+                "backup": str(backup) if backup else None,
+            }
+        )
+    return entries
 
 
 def uninstall_pack(dest: Path, manifest_path: Path | None = None) -> tuple[Path, list[Path]]:
@@ -36,6 +95,7 @@ def uninstall_pack(dest: Path, manifest_path: Path | None = None) -> tuple[Path,
     if not current_raw:
         raise RuntimeError(f"Current manifest pointer is empty: {pointer_path}")
     current_manifest = Path(current_raw).expanduser().resolve()
+    assert_child(current_manifest, dest / ".softpowers-manifests")
 
     if manifest_path is None:
         manifest_path = current_manifest
@@ -55,25 +115,14 @@ def uninstall_pack(dest: Path, manifest_path: Path | None = None) -> tuple[Path,
     if manifest.get("status") != "installed":
         raise RuntimeError(f"Manifest status is {manifest.get('status')!r}, expected 'installed'")
 
-    entries = manifest["skills"]
-    names = [entry.get("name") for entry in entries if isinstance(entry, dict)]
-    if len(entries) != len(SKILL_NAMES) or set(names) != set(SKILL_NAMES) or len(names) != len(set(names)):
-        raise RuntimeError("Manifest skill set does not exactly match this Softpowers pack")
-
-    for entry in entries:
-        if not isinstance(entry, dict) or not isinstance(entry.get("name"), str):
-            raise RuntimeError("Malformed skill entry in install manifest")
-        name = entry["name"]
-        target = Path(str(entry.get("target", ""))).resolve(strict=False)
-        assert_child(target, dest)
-        if target != (dest / name).resolve(strict=False):
-            raise RuntimeError(f"Manifest target does not match expected skill path for {name}: {target}")
-        backup_value = entry.get("backup")
-        if backup_value:
-            backup = Path(str(backup_value)).resolve(strict=False)
-            assert_child(backup, dest)
-            if not path_exists(backup):
-                raise RuntimeError(f"Required backup is missing: {backup}")
+    entries = validated_entries(manifest, dest)
+    previous_manifest = manifest.get("previous_manifest")
+    previous_path = None
+    if previous_manifest:
+        if not isinstance(previous_manifest, str):
+            raise RuntimeError("Malformed previous manifest path")
+        previous_path = Path(previous_manifest).expanduser().resolve()
+        assert_child(previous_path, dest / ".softpowers-manifests")
 
     stamp = timestamp_slug()
     staging = dest / f".softpowers-uninstall-staging-{stamp}"
@@ -117,9 +166,8 @@ def uninstall_pack(dest: Path, manifest_path: Path | None = None) -> tuple[Path,
                 moved_snapshots[name] = preserved_path
                 preserved.append(preserved_path)
 
-        previous_manifest = manifest.get("previous_manifest")
-        if previous_manifest and Path(str(previous_manifest)).is_file():
-            atomic_write_text(pointer_path, str(previous_manifest) + "\n")
+        if previous_path and previous_path.is_file():
+            atomic_write_text(pointer_path, str(previous_path) + "\n")
         elif pointer_path.exists():
             pointer_path.unlink()
 

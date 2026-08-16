@@ -1,19 +1,18 @@
-# Packaging and Activation Audit — v0.3.0-rc3
+# Packaging and Activation Audit — v0.3.0-rc4
 
 This is a maintainer self-audit, not an independent security or compliance assurance.
 
-This release preserves the v0.1.2 transaction layer and adds one narrowly scoped
-implicit specialist beside the engineering router.
+This release preserves the transaction layer while returning the install
+payload to one engineering router plus its explicit method leaves.
 
 ## Activation contract
 
 - `softpowers`: `allow_implicit_invocation: true`
-- `license-boundary`: `allow_implicit_invocation: true`
 - 13 `soft-*` leaf skills: `allow_implicit_invocation: false`
 - Manifest records the same split under `activation`.
 - Router description contains both positive repository-work scope and negative controls.
-- `license-boundary` is self-contained and excludes abstract legal questions
-  unrelated to a concrete project.
+- Repository license selection is explicitly outside router scope and retained
+  as a negative-routing seed.
 - Router instructions require quiet activation and prohibit process theatre.
 
 ## Progressive disclosure
@@ -41,33 +40,24 @@ The router body is 645 words, below the 650-word release gate.
 canonical behavior-eval sources. The same generator projects them into the
 installed `soft-eval` skill's `scripts/` and `assets/` directories.
 
-The separate
-[`IndelibleVivi/license-boundary`](https://github.com/IndelibleVivi/license-boundary)
-repository is canonical for `license-boundary`. This pack contains an exact
-projection pinned by `sources/license-boundary.json` to release
-`v0.1.0-rc2`, commit `70a0e653c3948e10b78a2c9c1caebada8c735860`, and four
-file digests. The installed artifact therefore carries the complete SUL-1.0
-terms and project notice. Build and validation stay offline and fail on
-projection drift.
-
 `build_skills.py --check` and `validate_sync.py` fail on drift or unexpected payload files. Leaf method bodies are rejected if they contain `$soft-` cross-skill invocations.
 
-## Standalone specialist
+## Recommended companion
 
-`skills/license-boundary/` contains the complete pinned `SKILL.md` and
-invocation metadata. It may be installed from its standalone repository
-without the Softpowers router or pack installer. Softpowers does not author or
-generate a parallel implementation.
+[`IndelibleVivi/license-boundary`](https://github.com/IndelibleVivi/license-boundary)
+`v0.1.0-rc3` is the tested licensing companion. Its standalone repository is
+both authoring and distribution authority. Softpowers carries no same-named
+directory, source projection, manifest entry, backup ownership, or updater.
 
 ## Install payload
 
 `PACK_MANIFEST.json` schema 2 records:
 
-- 15 skill directories
+- 14 skill directories
 - 13 router references
-- 64 exact payload files
+- 60 exact payload files
 - file sizes and SHA-256 digests
-- two-surface implicit activation metadata
+- router-only implicit activation metadata
 
 The user installation path uses only Python standard library.
 
@@ -79,7 +69,10 @@ The user installation path uses only Python standard library.
 - Fresh installs default to current `~/.agents/skills`.
 - Legacy `~/.codex/skills` remains supported.
 - Dual active roots are treated as ambiguity and rejected.
-- Restoring a v0.1.x layer is supported; removing that restored legacy layer requires the matching legacy uninstaller because the v0.2 uninstaller intentionally rejects a 12-skill manifest.
+- Historical manifests are validated from their own entries, so current code can
+  safely restore old 12/13/14/15-skill layers.
+- Install stops before staging when the active historical layer still manages a
+  skill retired from the current pack; the user must uninstall that layer first.
 
 ## Retained transaction guarantees
 
@@ -87,7 +80,7 @@ The user installation path uses only Python standard library.
 - Coexistence with unrelated skills
 - Same-name backup and restoration
 - Complete rollback after injected partial install failure
-- LIFO current-schema manifest stack
+- LIFO manifest stack across historical skill sets
 - Non-LIFO rejection before mutation
 - Snapshot preservation of post-install edits
 - Install/uninstall under `python -S`
@@ -99,7 +92,7 @@ The user installation path uses only Python standard library.
 - Router/leaf invocation-policy validation
 - Reference set and no-cross-skill validation
 - Manifest freshness and digest validation
-- Standalone-source identity and pinned-projection digest validation
+- Historical retired-skill migration and independent-ownership validation
 - Three repository-owned eval canaries with known-fail/known-pass assertions
 - Installed-layout eval runner discovery and JSONL trace-parser self-test
 - Python compilation and shell syntax

@@ -43,13 +43,11 @@ methods/*.md
 
 `skills/softpowers/references/*.md` 与 13 个 `soft-*` leaf `SKILL.md` 是 generated output。不要只改 generated copy。
 
-`license-boundary` 的 authoring authority 是独立仓库
-[`IndelibleVivi/license-boundary`](https://github.com/IndelibleVivi/license-boundary)。
-Softpowers 中的 `skills/license-boundary/` 是 pinned projection；
-`sources/license-boundary.json` 记录 exact release ref、commit、source path、
-size 与 digests。更新 projection 时，先在 standalone repo 发布并验证版本，
-再 exact-copy registered payload files 并更新 source manifest；不要在 Softpowers
-中单独改写 skill，也不要让 build 临时联网下载。
+`license-boundary` 是独立 companion，不属于 Softpowers payload。它的
+authoring、distribution、release 与 installed bytes 全部由
+[`IndelibleVivi/license-boundary`](https://github.com/IndelibleVivi/license-boundary)
+负责；这里可以更新 tested-compatible version 和 negative routing evidence，
+但不要复制或生成同名 skill directory。
 
 Behavior eval 的 canonical runner、schemas 与 cases 在：
 
@@ -61,7 +59,7 @@ evals/cases/
 
 `skills/soft-eval/scripts/` 与 `skills/soft-eval/assets/` 是同一 build step 生成的安装 payload；不要直接修改。
 
-Router metadata、generated leaf catalog 与 pinned-projection registration 在：
+Router metadata 与 generated leaf catalog 在：
 
 ```text
 scripts/skill_catalog.py

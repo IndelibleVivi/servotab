@@ -9,7 +9,6 @@ from skill_catalog import (
     BUNDLED_RESOURCE_FILES,
     BUNDLED_RESOURCE_TREES,
     IMPLICIT_SKILL_NAMES,
-    PINNED_PROJECTIONS,
     REFERENCE_METHOD_NAMES,
     ROUTER,
     SKILL_NAMES,
@@ -33,12 +32,6 @@ def bundled_resource_targets() -> tuple[str, ...]:
 
 
 BUNDLED_RESOURCE_TARGETS = bundled_resource_targets()
-
-PINNED_PROJECTION_TARGETS = tuple(
-    f"{entry['skill']}/{relative}"
-    for entry in PINNED_PROJECTIONS
-    for relative in entry["files"]
-)
 
 
 def _has_softpowers_install(skills_dir: Path) -> bool:

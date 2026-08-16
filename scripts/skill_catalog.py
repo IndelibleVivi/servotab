@@ -226,30 +226,15 @@ METHODS = (
     },
 )
 
-PINNED_PROJECTIONS = (
-    {
-        "skill": "license-boundary",
-        "manifest": "sources/license-boundary.json",
-        "files": ("SKILL.md", "agents/openai.yaml", "LICENSE.txt", "NOTICE.md"),
-        "implicit": True,
-    },
-)
-
 METHOD_BY_SKILL = {entry["skill"]: entry["method"] for entry in METHODS}
 SKILL_BY_METHOD = {entry["method"]: entry["skill"] for entry in METHODS}
-SKILL_NAMES = (
-    (ROUTER["name"],)
-    + tuple(entry["skill"] for entry in METHODS)
-    + tuple(entry["skill"] for entry in PINNED_PROJECTIONS)
-)
+SKILL_NAMES = (ROUTER["name"],) + tuple(entry["skill"] for entry in METHODS)
 METHOD_NAMES = tuple(entry["method"] for entry in METHODS)
 REFERENCE_METHOD_NAMES = tuple(
     entry["method"] for entry in METHODS if entry.get("router_reference", True)
 )
 IMPLICIT_SKILL_NAMES = (ROUTER["name"],) + tuple(
     entry["skill"] for entry in METHODS if entry.get("implicit", False)
-) + tuple(
-    entry["skill"] for entry in PINNED_PROJECTIONS if entry.get("implicit", False)
 )
 
 # Canonical eval resources are projected into the installed soft-eval skill. The

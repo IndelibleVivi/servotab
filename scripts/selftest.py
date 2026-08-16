@@ -9,8 +9,14 @@ import sys
 import tempfile
 from pathlib import Path
 
-from build_skills import check as check_generated, pinned_projection_status
-from common import IMPLICIT_SKILL_NAMES, REFERENCE_NAMES, ROUTER_NAME, SKILL_NAMES
+from build_skills import check as check_generated
+from common import (
+    IMPLICIT_SKILL_NAMES,
+    REFERENCE_NAMES,
+    ROUTER_NAME,
+    SKILL_NAMES,
+    directory_digest,
+)
 from install import install_pack
 from runtime_validate import PACK_MANIFEST, load_pack_manifest, validate_payload
 from uninstall import uninstall_pack
@@ -36,6 +42,45 @@ def clean_root_env(base: dict[str, str], home: Path) -> dict[str, str]:
     for key in ("CODEX_HOME", "SOFTPOWERS_SKILLS_DIR", "AGENTS_SKILLS_DIR"):
         env.pop(key, None)
     return env
+
+
+def create_historical_layer(source: Path, dest: Path, retired_name: str) -> Path:
+    for name in SKILL_NAMES:
+        shutil.copytree(source / name, dest / name)
+    write_old_skill(dest / retired_name, "historical pack copy")
+
+    backup = dest / ".softpowers-backups" / "historical-test" / retired_name
+    write_old_skill(backup, "standalone copy")
+    entries = [
+        {
+            "name": name,
+            "target": str(dest / name),
+            "backup": str(backup) if name == retired_name else None,
+            "installed_sha256": directory_digest(dest / name),
+        }
+        for name in (*SKILL_NAMES, retired_name)
+    ]
+    manifest = dest / ".softpowers-manifests" / "softpowers-historical-test.json"
+    manifest.parent.mkdir(parents=True)
+    manifest.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "pack": "softpowers-pack",
+                "version": "historical-test",
+                "status": "installed",
+                "installed_at": "2026-08-17T00:00:00+00:00",
+                "destination": str(dest),
+                "previous_manifest": None,
+                "skills": entries,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (dest / ".softpowers-current-manifest").write_text(str(manifest) + "\n", encoding="utf-8")
+    return manifest
 
 
 def main() -> int:
@@ -88,32 +133,47 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="softpowers-selftest-") as raw:
         base = Path(raw)
 
-        # The standalone specialist is usable offline but pinned against source drift.
-        projection_root = base / "projection-root"
-        (projection_root / "sources").mkdir(parents=True)
-        shutil.copy2(
-            root / "sources" / "license-boundary.json",
-            projection_root / "sources" / "license-boundary.json",
-        )
-        shutil.copytree(
-            source / "license-boundary",
-            projection_root / "skills" / "license-boundary",
-        )
-        _, projection_errors = pinned_projection_status(
-            root=projection_root,
-            skills_dir=projection_root / "skills",
-        )
-        assert_true(not projection_errors, f"clean pinned projection failed: {projection_errors}")
-        projected_skill = projection_root / "skills" / "license-boundary" / "SKILL.md"
-        projected_payload = projected_skill.read_bytes()
-        projected_skill.write_bytes(b"X" + projected_payload[1:])
-        _, projection_errors = pinned_projection_status(
-            root=projection_root,
-            skills_dir=projection_root / "skills",
-        )
+        # A removed skill must be retired through its historical manifest before
+        # the new pack installs, then remain independently owned afterward.
+        historical_dest = base / "historical" / "skills"
+        retired_name = "license-boundary"
+        historical_manifest = create_historical_layer(source, historical_dest, retired_name)
+        pointer = historical_dest / ".softpowers-current-manifest"
+        pointer_before = pointer.read_text(encoding="utf-8")
+        router_before = (historical_dest / ROUTER_NAME / "SKILL.md").read_bytes()
+        try:
+            install_pack(source, historical_dest)
+        except RuntimeError as exc:
+            assert_true(
+                "active historical Softpowers layer" in str(exc),
+                "unexpected historical-layer install error",
+            )
+            assert_true("v0.1.0-rc3" in str(exc), "standalone migration guidance missing")
+        else:
+            raise AssertionError("install replaced a pack while it still managed a retired skill")
+        assert_true(pointer.read_text(encoding="utf-8") == pointer_before, "blocked install changed pointer")
         assert_true(
-            any("sha256 mismatch" in error for error in projection_errors),
-            "pinned projection drift was accepted",
+            (historical_dest / ROUTER_NAME / "SKILL.md").read_bytes() == router_before,
+            "blocked install changed active skills",
+        )
+
+        uninstall_pack(historical_dest)
+        assert_true(manifest_status(historical_manifest) == "uninstalled", "historical layer stayed active")
+        assert_true(
+            (historical_dest / retired_name / "OLD_MARKER.txt").read_text(encoding="utf-8")
+            == "standalone copy",
+            "historical uninstall did not restore the independently owned skill",
+        )
+        migrated_manifest = install_pack(source, historical_dest)
+        assert_true(
+            (historical_dest / retired_name / "OLD_MARKER.txt").read_text(encoding="utf-8")
+            == "standalone copy",
+            "new install replaced the independently owned skill",
+        )
+        uninstall_pack(historical_dest, migrated_manifest)
+        assert_true(
+            (historical_dest / retired_name / "OLD_MARKER.txt").is_file(),
+            "new uninstall removed the independently owned skill",
         )
 
         # Coexistence + backup restoration.
@@ -349,7 +409,7 @@ def main() -> int:
 
     print(
         "Softpowers packaging self-test passed: bounded implicit activation metadata, generated-source "
-        "sync, pinned-projection and reference digests, coexistence, default-root selection, legacy-root upgrade, "
+        "sync, reference digests, historical-manifest migration, coexistence, default-root selection, legacy-root upgrade, "
         "dual-root rejection, manifest stacking, non-LIFO rejection, edit preservation, "
         "restore, rollback, and "
         "no-site-packages install/uninstall."
