@@ -75,7 +75,7 @@ Candidate 至少对应一项本地信号：
 | Plane | 典型内容 | Admission threshold |
 |---|---|---|
 | Runtime methods | router 与日常 brainstorm/debug/review/verify 行为 | 最高；需要重复或严重的本地证据 |
-| Eval / maintainer | canary、runner、grader、trace、checkpoint、comparison | 大多数 harness 经验的首选落点 |
+| Field Lab / maintainer | canary、runner、grader、trace、checkpoint、comparison | 大多数 harness 经验的首选落点；通用 machinery 不回流 Softpowers payload |
 | Packaging / distribution | installer、plugin projection、manifest、release 与 supply-chain checks | 明确 compatibility 或 trust need |
 | Docs / provenance | source registry、decision rationale、操作说明、attribution | 不改变 runtime behavior |
 
@@ -119,7 +119,7 @@ Reopen condition
 - 一条新的 behavioral probe；
 - 对现有 method 的窄幅澄清；
 - router metadata 的局部调整；
-- eval runner 的一种能力；
+- standalone Field Lab / eval companion 的一种能力；
 - packaging check；
 - docs / provenance 记录。
 
@@ -159,7 +159,7 @@ Pattern 进入 runtime method 前，至少满足一项：
 | Shared closure / verification contract | 覆盖受影响 task classes 的 representative canaries |
 | Generator / canonical projection | build、sync、exact manifest、generated-tree checks |
 | Installer / uninstaller | transaction、rollback、digest、ambiguity、filesystem tests |
-| Eval runner / grader | deterministic parser/schema tests + known pass/fail fixtures |
+| Field Lab runner / grader | 在 companion repo 做 deterministic parser/schema tests + known pass/fail fixtures |
 | Release candidate | full deterministic gate + representative behavior suite |
 
 Documentation-only intake decision 通常不需要 model run。局部 method edit 也无需自动重跑完整 behavior suite。Router 与 shared contract 的 blast radius 更大，验证随之扩大。

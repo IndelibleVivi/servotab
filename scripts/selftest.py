@@ -44,18 +44,26 @@ def clean_root_env(base: dict[str, str], home: Path) -> dict[str, str]:
     return env
 
 
-def create_historical_layer(source: Path, dest: Path, retired_name: str) -> Path:
+def create_historical_layer(
+    source: Path,
+    dest: Path,
+    retired_name: str,
+    *,
+    backup_marker: str | None,
+) -> Path:
     for name in SKILL_NAMES:
         shutil.copytree(source / name, dest / name)
     write_old_skill(dest / retired_name, "historical pack copy")
 
-    backup = dest / ".softpowers-backups" / "historical-test" / retired_name
-    write_old_skill(backup, "standalone copy")
+    backup: Path | None = None
+    if backup_marker is not None:
+        backup = dest / ".softpowers-backups" / "historical-test" / retired_name
+        write_old_skill(backup, backup_marker)
     entries = [
         {
             "name": name,
             "target": str(dest / name),
-            "backup": str(backup) if name == retired_name else None,
+            "backup": str(backup) if name == retired_name and backup is not None else None,
             "installed_sha256": directory_digest(dest / name),
         }
         for name in (*SKILL_NAMES, retired_name)
@@ -114,22 +122,6 @@ def main() -> int:
             f"{name} has the wrong implicit policy",
         )
 
-    eval_env = os.environ.copy()
-    eval_env["PYTHONDONTWRITEBYTECODE"] = "1"
-    eval_result = subprocess.run(
-        [sys.executable, "-S", str(root / "evals" / "run_behavior_evals.py"), "selftest"],
-        cwd=root,
-        env=eval_env,
-        check=False,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    assert_true(
-        eval_result.returncode == 0,
-        f"behavior eval self-test failed: {eval_result.stdout}{eval_result.stderr}",
-    )
-
     with tempfile.TemporaryDirectory(prefix="softpowers-selftest-") as raw:
         base = Path(raw)
 
@@ -137,7 +129,12 @@ def main() -> int:
         # the new pack installs, then remain independently owned afterward.
         historical_dest = base / "historical" / "skills"
         retired_name = "license-boundary"
-        historical_manifest = create_historical_layer(source, historical_dest, retired_name)
+        historical_manifest = create_historical_layer(
+            source,
+            historical_dest,
+            retired_name,
+            backup_marker="standalone copy",
+        )
         pointer = historical_dest / ".softpowers-current-manifest"
         pointer_before = pointer.read_text(encoding="utf-8")
         router_before = (historical_dest / ROUTER_NAME / "SKILL.md").read_bytes()
@@ -174,6 +171,48 @@ def main() -> int:
         assert_true(
             (historical_dest / retired_name / "OLD_MARKER.txt").is_file(),
             "new uninstall removed the independently owned skill",
+        )
+
+        # A retired skill that belonged only to the old pack must disappear
+        # after its historical layer is uninstalled and stay outside new layers.
+        retired_eval_dest = base / "retired-soft-eval" / "skills"
+        retired_eval_manifest = create_historical_layer(
+            source,
+            retired_eval_dest,
+            "soft-eval",
+            backup_marker=None,
+        )
+        eval_pointer = retired_eval_dest / ".softpowers-current-manifest"
+        eval_pointer_before = eval_pointer.read_text(encoding="utf-8")
+        try:
+            install_pack(source, retired_eval_dest)
+        except RuntimeError as exc:
+            assert_true("soft-eval" in str(exc), "retired soft-eval was not identified")
+        else:
+            raise AssertionError("install replaced a layer that still managed soft-eval")
+        assert_true(
+            eval_pointer.read_text(encoding="utf-8") == eval_pointer_before,
+            "blocked soft-eval migration changed the manifest pointer",
+        )
+
+        uninstall_pack(retired_eval_dest)
+        assert_true(
+            manifest_status(retired_eval_manifest) == "uninstalled",
+            "retired soft-eval layer stayed active",
+        )
+        assert_true(
+            not (retired_eval_dest / "soft-eval").exists(),
+            "historical uninstall left manifest-owned soft-eval behind",
+        )
+        migrated_eval_manifest = install_pack(source, retired_eval_dest)
+        assert_true(
+            not (retired_eval_dest / "soft-eval").exists(),
+            "new pack reclaimed retired soft-eval",
+        )
+        uninstall_pack(retired_eval_dest, migrated_eval_manifest)
+        assert_true(
+            not (retired_eval_dest / "soft-eval").exists(),
+            "new uninstall recreated retired soft-eval",
         )
 
         # Coexistence + backup restoration.

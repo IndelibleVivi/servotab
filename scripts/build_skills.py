@@ -6,12 +6,7 @@ import json
 import sys
 from pathlib import Path
 
-from skill_catalog import (
-    BUNDLED_RESOURCE_FILES,
-    BUNDLED_RESOURCE_TREES,
-    METHODS,
-    ROUTER,
-)
+from skill_catalog import METHODS, ROUTER
 
 ROOT = Path(__file__).resolve().parents[1]
 METHODS_DIR = ROOT / "methods"
@@ -59,7 +54,6 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 - Diff, commit, branch, PR, or implementation review: `references/review.md`
 - External review feedback to validate and apply: `references/receive-review.md`
 - Completion, readiness, or regression claims needing broader proof: `references/verify.md`
-- Softpowers behavior evals or release evidence: `references/eval.md`
 - Isolation justified by dirty state, risk, duration, or parallel writes: `references/worktree.md`
 - Bounded delegation where parallelism, context isolation, independent review, or coordinator attention materially helps: `references/parallel.md`
 - Branch, PR, commit, cleanup, or final integration decisions: `references/finish.md`
@@ -125,18 +119,6 @@ def expected_files() -> dict[Path, str]:
             entry, implicit=bool(entry.get("implicit", False))
         )
 
-    for source_text, target_text in BUNDLED_RESOURCE_FILES:
-        source = ROOT / source_text
-        files[SKILLS_DIR / target_text] = source.read_text(encoding="utf-8")
-
-    for source_text, target_text in BUNDLED_RESOURCE_TREES:
-        source_root = ROOT / source_text
-        target_root = SKILLS_DIR / target_text
-        for source in sorted(source_root.rglob("*")):
-            if source.is_file():
-                files[target_root / source.relative_to(source_root)] = source.read_text(
-                    encoding="utf-8"
-                )
     return files
 
 

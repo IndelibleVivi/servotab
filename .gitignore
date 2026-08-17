@@ -10,7 +10,8 @@ dist/
 .env
 .env.*
 !.env.example
-.softpowers-evals/
+.fieldlab/
+.fieldlab-subjects/
 
 # Local-only working continuity
 notes/

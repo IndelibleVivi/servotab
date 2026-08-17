@@ -7,7 +7,6 @@ from pathlib import Path
 from typing import Any
 
 from common import (
-    BUNDLED_RESOURCE_TARGETS,
     IMPLICIT_SKILL_NAMES,
     PACK_ROOT,
     REFERENCE_NAMES,
@@ -28,7 +27,6 @@ def expected_payload_files() -> frozenset[str]:
     files |= {
         f"skills/{ROUTER_NAME}/references/{reference}" for reference in REFERENCE_NAMES
     }
-    files |= {f"skills/{relative}" for relative in BUNDLED_RESOURCE_TARGETS}
     return frozenset(files)
 
 

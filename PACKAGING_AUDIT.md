@@ -1,4 +1,4 @@
-# Packaging and Activation Audit — v0.3.0-rc4
+# Packaging and Activation Audit — v0.3.0-rc5
 
 This is a maintainer self-audit, not an independent security or compliance assurance.
 
@@ -8,7 +8,7 @@ payload to one engineering router plus its explicit method leaves.
 ## Activation contract
 
 - `softpowers`: `allow_implicit_invocation: true`
-- 13 `soft-*` leaf skills: `allow_implicit_invocation: false`
+- 12 `soft-*` leaf skills: `allow_implicit_invocation: false`
 - Manifest records the same split under `activation`.
 - Router description contains both positive repository-work scope and negative controls.
 - Repository license selection is explicitly outside router scope and retained
@@ -17,7 +17,7 @@ payload to one engineering router plus its explicit method leaves.
 
 ## Progressive disclosure
 
-The implicit router owns exactly 13 references.
+The implicit router owns exactly 12 references.
 
 - Clear local work: 0 references.
 - Initial specialist routing: 0–1 primary reference.
@@ -30,15 +30,16 @@ The router body is 645 words, below the 650-word release gate.
 
 ## Single source of truth
 
-`methods/*.md` is canonical for the 13 `soft-*` engineering leaves.
+`methods/*.md` is canonical for the 12 `soft-*` engineering leaves.
 `scripts/build_skills.py` generates both:
 
 - `skills/softpowers/references/*.md`
 - leaf `skills/soft-*/SKILL.md` bodies
 
-`evals/run_behavior_evals.py`, `evals/schemas/`, and `evals/cases/` are the
-canonical behavior-eval sources. The same generator projects them into the
-installed `soft-eval` skill's `scripts/` and `assets/` directories.
+`fieldlab-pack.json` and `evals/cases/` are Softpowers-owned subject material.
+The generic runner, schemas, process containment, receipt contracts, and spend
+gate belong to the optional standalone Skill Field Lab companion. They are not
+generated into or installed by Softpowers.
 
 `build_skills.py --check` and `validate_sync.py` fail on drift or unexpected payload files. Leaf method bodies are rejected if they contain `$soft-` cross-skill invocations.
 
@@ -49,13 +50,17 @@ installed `soft-eval` skill's `scripts/` and `assets/` directories.
 both authoring and distribution authority. Softpowers carries no same-named
 directory, source projection, manifest entry, backup ownership, or updater.
 
+Skill Field Lab is separately maintained local tooling at this release. It can
+validate the committed subject pack without target-model invocations, but it is
+not a Softpowers runtime dependency or public distribution surface.
+
 ## Install payload
 
 `PACK_MANIFEST.json` schema 2 records:
 
-- 14 skill directories
-- 13 router references
-- 60 exact payload files
+- 13 skill directories
+- 12 router references
+- 38 exact payload files
 - file sizes and SHA-256 digests
 - router-only implicit activation metadata
 
@@ -93,8 +98,9 @@ The user installation path uses only Python standard library.
 - Reference set and no-cross-skill validation
 - Manifest freshness and digest validation
 - Historical retired-skill migration and independent-ownership validation
-- Three repository-owned eval canaries with known-fail/known-pass assertions
-- Installed-layout eval runner discovery and JSONL trace-parser self-test
+- Standard-library transaction self-test without a Field Lab dependency
+- Optional Field Lab validation of three repository-owned canaries with
+  known-fail/known-pass assertions and zero target-model invocations
 - Python compilation and shell syntax
 - Default current-root install
 - Legacy-root in-place upgrade and restore

@@ -35,13 +35,13 @@ GitHub Issues 是公开的。提交前请删除：
 
 ## Code 与 method changes
 
-13 个 `soft-*` engineering leaf 的 canonical method source 在：
+12 个 `soft-*` engineering leaf 的 canonical method source 在：
 
 ```text
 methods/*.md
 ```
 
-`skills/softpowers/references/*.md` 与 13 个 `soft-*` leaf `SKILL.md` 是 generated output。不要只改 generated copy。
+`skills/softpowers/references/*.md` 与 12 个 `soft-*` leaf `SKILL.md` 是 generated output。不要只改 generated copy。
 
 `license-boundary` 是独立 companion，不属于 Softpowers payload。它的
 authoring、distribution、release 与 installed bytes 全部由
@@ -49,15 +49,20 @@ authoring、distribution、release 与 installed bytes 全部由
 负责；这里可以更新 tested-compatible version 和 negative routing evidence，
 但不要复制或生成同名 skill directory。
 
-Behavior eval 的 canonical runner、schemas 与 cases 在：
+Softpowers 自己的 Field Lab subject material 在：
 
 ```text
-evals/run_behavior_evals.py
-evals/schemas/
+fieldlab-pack.json
 evals/cases/
+evals/candidates/
+evals/claims/
+evals/receipts/
+evals/decisions/
 ```
 
-`skills/soft-eval/scripts/` 与 `skills/soft-eval/assets/` 是同一 build step 生成的安装 payload；不要直接修改。
+通用 runner、schemas、process containment 与 quota gate 属于 optional standalone
+Skill Field Lab companion。不要把它们复制回 Softpowers payload，也不要让
+Softpowers installer 管理 Field Lab CLI 或 controller skills。
 
 Router metadata 与 generated leaf catalog 在：
 
@@ -72,7 +77,6 @@ python3 scripts/build_skills.py
 python3 scripts/validate_sync.py
 python3 scripts/generate_pack_manifest.py
 python3 scripts/selftest.py
-python3 -S evals/run_behavior_evals.py selftest
 ```
 
 提交前完整 maintainer gate：
@@ -84,8 +88,16 @@ python3 scripts/validate.py --exact skills
 python3 scripts/generate_pack_manifest.py --check
 python3 scripts/selftest.py
 python3 scripts/audit_public_tree.py
-python3 -m py_compile scripts/*.py evals/*.py
+python3 -m py_compile scripts/*.py
 bash -n install.sh uninstall.sh
+```
+
+若本机另行安装了 `fieldlab`，对 subject pack 再运行 no-spend gate：
+
+```bash
+fieldlab validate fieldlab-pack.json
+fieldlab selftest-pack fieldlab-pack.json
+fieldlab list fieldlab-pack.json
 ```
 
 `scripts/validate.py` 与 manifest generation 的 exact YAML gate 需要 PyYAML；用户 install/uninstall 不需要第三方 dependency。

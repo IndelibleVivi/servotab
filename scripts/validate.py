@@ -18,7 +18,6 @@ except ImportError as exc:  # pragma: no cover - environment dependent
     raise SystemExit(3) from exc
 
 from common import (
-    BUNDLED_RESOURCE_TARGETS,
     EXPECTED,
     IMPLICIT_SKILL_NAMES,
     REFERENCE_NAMES,
@@ -49,12 +48,6 @@ def expected_payload_files(name: str) -> set[str]:
     files = {"SKILL.md", "agents/openai.yaml"}
     if name == ROUTER_NAME:
         files.update(f"references/{reference}" for reference in REFERENCE_NAMES)
-    prefix = f"{name}/"
-    files.update(
-        relative.removeprefix(prefix)
-        for relative in BUNDLED_RESOURCE_TARGETS
-        if relative.startswith(prefix)
-    )
     return files
 
 

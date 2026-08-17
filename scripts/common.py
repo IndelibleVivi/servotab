@@ -6,8 +6,6 @@ import os
 from pathlib import Path
 
 from skill_catalog import (
-    BUNDLED_RESOURCE_FILES,
-    BUNDLED_RESOURCE_TREES,
     IMPLICIT_SKILL_NAMES,
     REFERENCE_METHOD_NAMES,
     ROUTER,
@@ -19,19 +17,6 @@ VERSION = (PACK_ROOT / "VERSION").read_text(encoding="utf-8").strip()
 ROUTER_NAME = str(ROUTER["name"])
 EXPECTED = frozenset(SKILL_NAMES)
 REFERENCE_NAMES = tuple(f"{name}.md" for name in REFERENCE_METHOD_NAMES)
-
-
-def bundled_resource_targets() -> tuple[str, ...]:
-    targets = [target for _, target in BUNDLED_RESOURCE_FILES]
-    for source_text, target_text in BUNDLED_RESOURCE_TREES:
-        source_root = PACK_ROOT / source_text
-        for source in sorted(source_root.rglob("*")):
-            if source.is_file():
-                targets.append((Path(target_text) / source.relative_to(source_root)).as_posix())
-    return tuple(targets)
-
-
-BUNDLED_RESOURCE_TARGETS = bundled_resource_targets()
 
 
 def _has_softpowers_install(skills_dir: Path) -> bool:

@@ -89,7 +89,11 @@ Review:
 - reproducible environment and cache keys；
 - re-grading saved outputs。
 
-Keep Softpowers runtime host-native. The rc2 local runner applies the thin-process, fixture-identity and raw-artifact kernels without importing either framework; richer cache/regrade semantics remain deferred.
+Keep Softpowers runtime host-native. The rc2 embedded runner applied the
+thin-process, fixture-identity and raw-artifact kernels without importing either
+framework; rc5 moved that generic machinery into standalone Skill Field Lab and
+kept only the Softpowers subject cases here. Richer cache/regrade semantics
+remain deferred.
 
 ### Inspect AI
 
@@ -100,7 +104,8 @@ Review when Softpowers needs a richer eval engine:
 - logs and re-scoring；
 - model-graded evaluation boundaries。
 
-A direct dependency stays deferred until a thin local runner demonstrably fails to meet current needs.
+A direct Inspect AI dependency stays deferred until the standalone Field Lab
+runner demonstrably fails to meet current needs.
 
 ### OpenAI plugins
 

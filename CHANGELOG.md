@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.0-rc5 — 2026-08-17
+
+Standalone Field Lab migration for maintainer behavior evidence.
+
+- Retired the bundled `soft-eval` skill, embedded runner, schemas, and generated
+  assets so Softpowers returns to one router plus 12 explicit engineering leaves.
+- Kept `tiny-copy`, `stale-cursor`, and `spec-chain` as Softpowers-owned subject
+  cases and added `fieldlab-pack.json` for the optional standalone companion.
+- Added project-owned claim, receipt, and decision surfaces while keeping raw
+  traces and run artifacts local-only.
+- Removed behavior-eval execution from the ordinary Softpowers self-test and
+  release payload; validation, planning, installation, and normal repo work do
+  not start target-model invocations.
+- Documented that Skill Field Lab owns the generic runner, schemas, process
+  containment, receipt contracts, and explicit quota gate without becoming a
+  Softpowers runtime or installation dependency.
+
 ## 0.3.0-rc4 — 2026-08-17
 
 Standalone-only License Boundary distribution and safe historical migration.

@@ -17,7 +17,9 @@ functional materials, including:
 
 - `install.sh`, `uninstall.sh`, `scripts/`, `methods/`, and `skills/`;
 - `PACK_MANIFEST.json`, `VERSION`, `.gitignore`, and `.github/`;
-- `evals/activation-prompts.csv` and `evals/fixtures/`; and
+- `fieldlab-pack.json`, `evals/activation-prompts.csv`, `evals/cases/`, and
+  machine-readable records under `evals/claims/`, `evals/receipts/`, and
+  `evals/decisions/`; and
 - any other original functional file not explicitly assigned another license
   in this document.
 
@@ -35,7 +37,8 @@ licensed under
 - `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`;
 - `LICENSING.md`, `LICENSE-DOCUMENTATION.md`, and `LICENSE-HISTORY.md`;
 - `BEHAVIORAL_PROBES.md`, `PACKAGING_AUDIT.md`;
-- `evals/README.md` and `evals/candidates/`;
+- `evals/README.md`, `evals/candidates/`, and the `README.md` files under
+  `evals/claims/`, `evals/receipts/`, and `evals/decisions/`;
 - `docs/`; and
 - `THIRD_PARTY_NOTICES.md`, excluding third-party material and notices
   described below.

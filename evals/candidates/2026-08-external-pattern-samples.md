@@ -2,7 +2,7 @@
 
 Status: `DECIDED`
 
-这些 samples 示范当前选中来源怎样进入 Softpowers 的长期 intake。它们记录可吸收 kernel、调整方式、拒绝边界、可能的 probe 与 apply 后验证。`0.3.0-rc2` 已把其中一部分落实为 `soft-eval`、薄 runner 与三个 canaries；本文件仍只是 provenance/decision surface，不是 runtime authority。
+这些 samples 示范当前选中来源怎样进入 Softpowers 的长期 intake。它们记录可吸收 kernel、调整方式、拒绝边界、可能的 probe 与 apply 后验证。`0.3.0-rc2` 曾把其中一部分落实为 bundled `soft-eval`、薄 runner 与三个 canaries；`0.3.0-rc5` 已把通用 execution machinery forward-only 迁到 standalone Skill Field Lab，只在本 repo 保留 Softpowers-owned subject cases 与 decisions。本文件仍只是 provenance/decision surface，不是 runtime authority。
 
 ## 1. Clean verifier and executable canaries
 

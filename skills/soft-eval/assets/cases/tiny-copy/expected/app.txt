@@ -1,1 +1,0 @@
-empty_state=No saved items yet
