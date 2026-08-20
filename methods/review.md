@@ -11,6 +11,7 @@ Determine:
 - Applicable repository instructions
 - Relevant tests, schemas, or contracts
 - Baseline branch when needed
+- The owner-approved goal and programme authority when the change can reorder work, widen a trust boundary, or introduce generalized infrastructure
 
 Inspect enough surrounding code to understand the change. Do not review a diff in isolation when its correctness depends on state or callers.
 
@@ -60,6 +61,17 @@ Look for:
 
 Ignore cosmetic style unless it obscures behavior, violates an enforced convention, or creates maintainability risk.
 
+## Goal integrity
+
+For a substantial implementation, record one verdict:
+
+- **advances:** the change directly advances the owner-approved goal for a present consumer.
+- **research-only:** the work is technically useful evidence but is not an accepted product dependency or current programme step.
+- **diverges:** the change contradicts, displaces, or self-reorders the owner-approved programme.
+- **authority unclear:** available artifacts conflict and no evidenced owner decision resolves product meaning or trust boundaries.
+
+Agent-authored specifications, decision logs, handoffs, PR descriptions, and implementation commits do not approve themselves. Review implementation quality and goal integrity separately: clean code and green CI can still be `research-only` or `diverges`.
+
 ## Validate each finding
 
 Before reporting an issue:
@@ -107,6 +119,7 @@ Start with findings ordered by severity.
 
 Then include, only when useful:
 
+- Goal-integrity verdict
 - Questions or assumptions
 - Verification gaps
 - A compact overall assessment

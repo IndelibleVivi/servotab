@@ -169,7 +169,7 @@ $soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；�
 
 ## Optional maintainer field lab
 
-Softpowers 仍拥有 `tiny-copy`、`stale-cursor`、`spec-chain` 三个 canaries，
+Softpowers 仍拥有 `tiny-copy`、`stale-cursor`、`spec-chain`、`owner-controlled-migration`、`programme-reorder-review` 五个 canaries，
 但从 `0.3.0-rc5` 起不再 bundle 通用 runner、schemas 或 explicit `soft-eval`
 skill。可执行 evidence machinery 已迁移到独立维护的 Skill Field Lab；它不是
 Softpowers runtime dependency，也不会由 Softpowers installer 管理。

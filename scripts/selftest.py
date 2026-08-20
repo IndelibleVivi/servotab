@@ -95,6 +95,35 @@ def main() -> int:
     root = Path(__file__).resolve().parents[1]
     source = root / "skills"
 
+    router_source = (root / "scripts" / "build_skills.py").read_text(encoding="utf-8")
+    assert_true(
+        "## Goal authority" in router_source
+        and "present consumer" in router_source
+        and "owner-approved authority" in router_source,
+        "router goal-authority contract missing",
+    )
+    execute_method = (root / "methods" / "execute.md").read_text(encoding="utf-8")
+    assert_true(
+        "programme order" in execute_method
+        and "trust model" in execute_method
+        and "present consumer" in execute_method,
+        "execute goal-integrity stop conditions missing",
+    )
+    review_method = (root / "methods" / "review.md").read_text(encoding="utf-8")
+    for verdict in ("advances", "research-only", "diverges", "authority unclear"):
+        assert_true(verdict in review_method, f"review goal-integrity verdict missing: {verdict}")
+    spec_chain_method = (root / "methods" / "spec-chain.md").read_text(encoding="utf-8")
+    assert_true(
+        "Agent-authored" in spec_chain_method
+        and "does not become approved authority" in spec_chain_method,
+        "spec-chain derived-authority boundary missing",
+    )
+    for case_id in ("owner-controlled-migration", "programme-reorder-review"):
+        assert_true(
+            (root / "evals" / "cases" / case_id / "case.json").is_file(),
+            f"goal-integrity behavior case missing: {case_id}",
+        )
+
     sync_errors = check_generated()
     assert_true(not sync_errors, f"generated payload is stale: {sync_errors}")
 

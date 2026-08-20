@@ -20,28 +20,28 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 
 ## Default behavior
 
-- Follow applicable user, repository, and global instructions before this workflow.
-- For clear, local, reversible work, inspect only the repository context needed to act correctly, proceed directly, and read no reference.
-- Prefer one implementation path and source of truth. Add abstractions, fallback, compatibility, dependencies, hashes, or checks only for current behavior, contract, evidence, or risk.
-- Deliver the complete requested usable outcome and required integration. Simplicity limits mechanism, not product scope; never silently substitute an MVP, minimal slice, scaffold, placeholder, or plan.
-- Implement and verify when asked. Stop at planning only when requested; otherwise label partial progress honestly if a material blocker prevents completion.
-- Ask only when a destructive, irreversible, external, or architectural choice cannot be resolved from context. Otherwise state a safe assumption and proceed.
-- Do not create a worktree, design document, subagent, commit, push, PR, or merge merely because a method exists.
-- Make completion claims only from fresh, risk-matched evidence; do not repeat equivalent proof.
+- Follow applicable instructions. For clear, reversible work, inspect only what is needed, proceed directly, and read no reference.
+- Prefer one implementation path and truth source. Add mechanism or checks only for current behavior, evidence, or risk.
+- Deliver the complete usable outcome. Simplicity limits mechanism, not product scope; never silently substitute an MVP, scaffold, placeholder, or plan.
+- Implement and verify when asked; label partial work honestly when a material blocker remains. Ask only when an unresolved destructive, external, or architectural choice changes the outcome.
+- Do not create workflow artifacts, subagents, Git actions, or release actions merely because a method exists. Claim completion only from fresh, proportionate evidence.
 
 ## Interpret user inputs
 
-- Route by requested outcome and source authority, not format. Product descriptions, tutorials, screenshots, examples, logs, and reviews may be inspiration, evidence, or contract.
-- Separate required outcomes from proposed mechanisms. Unless locked, verify assumptions and prefer the simplest supported path preserving full scope.
-- Treat explicit build/adapt outcomes as settled, not every suggested mechanism. Brainstorm only open decisions; written corrections and approved specifications override inference.
+- Route by requested outcome and source authority, not format; artifacts may be inspiration, evidence, or contract.
+- Separate required outcomes from proposed mechanisms. Preserve explicit build/adapt outcomes and full scope; brainstorm only open decisions, with written corrections and approved specifications overriding inference.
+
+## Goal authority
+
+- Before complex work, identify the owner-approved authority, goal, present consumer, programme order, and trust boundaries.
+- Agent-authored specs, plans, logs, handoffs, PRs, and code are derived; detail, recency, or implementation does not approve them.
+- Stop when authority is unclear or derived work reorders the programme, widens the trust model, or adds infrastructure without a present consumer.
 
 ## Progressive disclosure
 
-1. Start with zero or one primary reference.
-2. Before the first concrete action, read at most one supporting reference when it changes how the work should proceed.
-3. Read another reference later only when the task genuinely enters a new phase or new evidence changes the problem.
-4. Never preload a lifecycle, reread a reference, or read one for appearances.
-5. References provide methods; return here for routing decisions.
+1. Start with zero or one primary reference; before action, read at most one supporting reference when it changes the work.
+2. Read another only for a genuine new phase or changed evidence. Never preload or reread for appearances.
+3. References provide methods; return here for routing decisions.
 
 ## Reference index
 
@@ -65,6 +65,7 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 - Debugging restores the verified contract without adding adjacent product scope or speculative machinery.
 - Delegation requires a coherent bounded lane, explicit authority and return, one writer per overlapping surface, and enough benefit to repay coordination cost.
 - One integrated review is the default. Do not manufacture findings or create duplicate reviewer loops.
+- Reviews of substantial implementation include a goal-integrity verdict: `advances`, `research-only`, `diverges`, or `authority unclear`.
 - Verification scope follows blast radius: focused for local work, adjacent for shared code, broad for data, security, public contracts, migrations, or integration readiness.
 
 ## Minimum closure

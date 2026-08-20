@@ -6,7 +6,7 @@ containment、receipt contract 与 quota gate 已由 standalone Skill Field Lab 
 
 Softpowers 继续拥有：
 
-- `cases/`：三个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
+- `cases/`：五个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
 - `activation-prompts.csv`：较宽的 routing seed set；
 - `candidates/`：外部 pattern intake 与 provenance decisions；
 - `claims/`、`receipts/`、`decisions/`：项目自己的 evidence lifecycle；
@@ -34,6 +34,8 @@ fieldlab list fieldlab-pack.json
 - `tiny-copy`：小改动的 scope 与 overhead；
 - `stale-cursor`：consistency invariant 与 regression evidence；
 - `spec-chain`：approved spec 的 end-to-end coverage。
+- `owner-controlled-migration`：generic protocol 不能取代有 present consumer 的 owner-controlled path；
+- `programme-reorder-review`：implementation PR 不能通过自写 decision log 批准 programme reorder。
 
 任何 synthetic live attempt 都必须先生成 saved plan，再显式跨过 Field Lab 的
 `run --live --max-invocations N` gate。Softpowers 不把 live model eval 设为普通

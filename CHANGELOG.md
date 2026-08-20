@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added language-neutral goal-authority routing so derived specifications and implementation artifacts cannot silently reorder an owner-approved programme or widen its trust model.
+- Added goal-integrity stop conditions to execution and `advances`, `research-only`, `diverges`, and `authority unclear` review verdicts.
+- Added owner-controlled migration and self-authorized programme-reorder behavioral canaries.
+
 ## 0.3.0-rc5 — 2026-08-17
 
 Standalone Field Lab migration for maintainer behavior evidence.
