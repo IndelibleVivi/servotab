@@ -137,18 +137,49 @@ def main() -> int:
         "programme-reorder-review": "Goal-integrity verdict: diverges.",
         "adopted-foundation-review": "Goal-integrity verdict: advances.",
     }
+    all_verdicts = {
+        "Goal-integrity verdict: advances.",
+        "Goal-integrity verdict: research-only.",
+        "Goal-integrity verdict: diverges.",
+        "Goal-integrity verdict: authority unclear.",
+    }
     for case_id, expected_verdict in expected_case_verdicts.items():
         case_path = root / "evals" / "cases" / case_id / "case.json"
         assert_true(case_path.is_file(), f"goal-integrity behavior case missing: {case_id}")
         case = json.loads(case_path.read_text(encoding="utf-8"))
-        asserted_values = {
+        assertions = case.get("assertions", [])
+        expected_assertions = [
+            assertion
+            for assertion in assertions
+            if assertion.get("type") == "file_contains"
+            and assertion.get("value") == expected_verdict
+        ]
+        assert_true(
+            len(expected_assertions) == 1,
+            f"goal-integrity verdict assertion is not exact: {case_id}",
+        )
+        verdict_path = expected_assertions[0].get("path")
+        prohibited_verdicts = {
+            assertion.get("value")
+            for assertion in assertions
+            if assertion.get("type") == "file_not_contains"
+            and assertion.get("path") == verdict_path
+        }
+        missing_prohibitions = all_verdicts - {expected_verdict} - prohibited_verdicts
+        assert_true(
+            not missing_prohibitions,
+            f"goal-integrity contradictory verdicts are not excluded: {case_id}: "
+            f"{sorted(missing_prohibitions)}",
+        )
+        asserted_verdicts = {
             assertion.get("value")
             for assertion in case.get("assertions", [])
             if assertion.get("type") == "file_contains"
+            and assertion.get("value") in all_verdicts
         }
         assert_true(
-            expected_verdict in asserted_values,
-            f"goal-integrity verdict assertion is not exact: {case_id}",
+            asserted_verdicts == {expected_verdict},
+            f"goal-integrity case contains contradictory positive verdicts: {case_id}",
         )
 
     sync_errors = check_generated()

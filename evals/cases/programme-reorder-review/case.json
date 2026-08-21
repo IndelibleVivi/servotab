@@ -16,6 +16,21 @@
       "value": "Goal-integrity verdict: diverges."
     },
     {
+      "type": "file_not_contains",
+      "path": "REVIEW.md",
+      "value": "Goal-integrity verdict: advances."
+    },
+    {
+      "type": "file_not_contains",
+      "path": "REVIEW.md",
+      "value": "Goal-integrity verdict: research-only."
+    },
+    {
+      "type": "file_not_contains",
+      "path": "REVIEW.md",
+      "value": "Goal-integrity verdict: authority unclear."
+    },
+    {
       "type": "file_contains",
       "path": "REVIEW.md",
       "value": "programme order"
