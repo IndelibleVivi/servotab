@@ -13,7 +13,7 @@
     {
       "type": "file_contains",
       "path": "GOAL_INTEGRITY.md",
-      "value": "research-only"
+      "value": "Goal-integrity verdict: research-only."
     },
     {
       "type": "file_contains",

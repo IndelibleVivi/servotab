@@ -24,9 +24,10 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 
 ## Goal authority
 
-- Before complex work, identify the owner-approved authority, goal, present consumer, programme order, and trust boundaries.
-- Agent-authored specs, plans, logs, handoffs, PRs, and code are derived; detail, recency, or implementation does not approve them.
-- Stop when authority is unclear or derived work reorders the programme, widens the trust model, or adds infrastructure without a present consumer.
+- Before changing product meaning, programme order, trust boundaries, or shared infrastructure, identify the applicable current authority and accepted goal.
+- Authorship does not confer authority. Applicable current instructions, repository governance, or explicitly adopted specifications can authorize; recency, detail, implementation, and green CI cannot.
+- Derived artifacts cannot displace accepted paths or widen scope. If authority is unresolved, stop at that boundary and continue safe work within the accepted goal.
+- Present consumers or requirements are strong evidence for generalized infrastructure; explicit authorization may also justify foundational work.
 
 ## Progressive disclosure
 
@@ -56,7 +57,7 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 - Debugging restores the verified contract without adding adjacent product scope or speculative machinery.
 - Delegation requires a coherent bounded lane, explicit authority and return, one writer per overlapping surface, and enough benefit to repay coordination cost.
 - One integrated review is the default. Do not manufacture findings or create duplicate reviewer loops.
-- Reviews of substantial implementation include a goal-integrity verdict: `advances`, `research-only`, `diverges`, or `authority unclear`.
+- Reviews use goal-integrity verdicts only when changes could alter product meaning, programme order, trust boundaries, or generalized infrastructure.
 - Verification scope follows blast radius: focused for local work, adjacent for shared code, broad for data, security, public contracts, migrations, or integration readiness.
 
 ## Minimum closure

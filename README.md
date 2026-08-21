@@ -16,6 +16,7 @@
   其余 12 个 `soft-*` leaf skills 都是 explicit-only shortcuts，不会自己抢活。
 - 安装完整 pack 不等于每个 skill 都会频繁运行。`spec-chain`、`worktree`、`parallel` 等本来就是特定情境工具，低频是设计的一部分。
 - 清晰、局部、可逆的小任务直接做；复杂任务才按需读取一份 playbook。
+- 当工作可能改变 product meaning、programme order、trust boundaries 或 shared infrastructure 时，Softpowers 会区分 applicable authority 与 derived artifacts；agent 写出的 spec、PR、代码和绿色 CI 不能自我授权。
 - Softpowers 不覆盖你的 prompt、`AGENTS.md`、repo 规则、权限边界或 Git 决策。
 
 如果你愿意试用，最有价值的不是一句“好用”，而是告诉我们：它有没有在该出现时出现、有没有绕路、有没有漏掉完整 outcome。见 [反馈](#反馈)。

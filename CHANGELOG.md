@@ -2,9 +2,10 @@
 
 ## Unreleased
 
-- Added language-neutral goal-authority routing so derived specifications and implementation artifacts cannot silently reorder an owner-approved programme or widen its trust model.
-- Added goal-integrity stop conditions to execution and `advances`, `research-only`, `diverges`, and `authority unclear` review verdicts.
-- Added owner-controlled migration and self-authorized programme-reorder behavioral canaries.
+- Added authority-aware goal routing so derived specifications and implementation artifacts cannot silently reorder an accepted programme or widen its trust model, while explicitly authorized foundational work remains possible without a present consumer.
+- Carried the goal-authority invariant through direct `plan`, `receive-review`, and `finish` leaves instead of relying on implicit router activation.
+- Scoped `advances`, `research-only`, `diverges`, and `authority unclear` review verdicts to changes that can alter product meaning, programme order, trust boundaries, or generalized infrastructure.
+- Tightened negative verdict assertions and added an explicitly adopted foundation canary to catch both permissive and over-blocking regressions.
 
 ## 0.3.0-rc5 — 2026-08-17
 

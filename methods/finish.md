@@ -23,11 +23,12 @@ Map the final implementation to the requested behavior:
 - Completed acceptance criteria
 - Intentionally omitted items
 - Plan deviations
+- Alignment with the applicable authorized goal and current programme
 - Compatibility or migration status
 - Documentation or setup changes
 - Remaining risks
 
-Do this once. Do not reopen design decisions that the implementation already settled unless evidence shows a defect.
+Do this once. Do not reopen accepted design decisions without evidence. Treat implementation deviations as evidence to review, not as authority that settles product meaning. Before integration, require applicable approval for any change to programme order, trust boundaries, or accepted product scope.
 
 ## 3. Verify
 

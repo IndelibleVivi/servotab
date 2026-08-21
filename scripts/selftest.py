@@ -98,8 +98,9 @@ def main() -> int:
     router_source = (root / "scripts" / "build_skills.py").read_text(encoding="utf-8")
     assert_true(
         "## Goal authority" in router_source
-        and "present consumer" in router_source
-        and "owner-approved authority" in router_source,
+        and "strong evidence for generalized infrastructure" in router_source
+        and "applicable current authority" in router_source
+        and "foundational work" in router_source,
         "router goal-authority contract missing",
     )
     execute_method = (root / "methods" / "execute.md").read_text(encoding="utf-8")
@@ -112,16 +113,42 @@ def main() -> int:
     review_method = (root / "methods" / "review.md").read_text(encoding="utf-8")
     for verdict in ("advances", "research-only", "diverges", "authority unclear"):
         assert_true(verdict in review_method, f"review goal-integrity verdict missing: {verdict}")
+    assert_true(
+        "When a change could alter product meaning" in review_method
+        and "Omit the verdict" in review_method,
+        "review goal-integrity trigger is overbroad",
+    )
     spec_chain_method = (root / "methods" / "spec-chain.md").read_text(encoding="utf-8")
     assert_true(
-        "Agent-authored" in spec_chain_method
+        "agent-authored" in spec_chain_method
         and "does not become approved authority" in spec_chain_method,
         "spec-chain derived-authority boundary missing",
     )
-    for case_id in ("owner-controlled-migration", "programme-reorder-review"):
+    for method_name, required_text in {
+        "plan": "recording the delta does not approve it",
+        "receive-review": "not authority by authorship or placement alone",
+        "finish": "implementation deviations as evidence to review",
+    }.items():
+        method = (root / "methods" / f"{method_name}.md").read_text(encoding="utf-8")
+        assert_true(required_text in method, f"{method_name} goal-authority boundary missing")
+
+    expected_case_verdicts = {
+        "owner-controlled-migration": "Goal-integrity verdict: research-only.",
+        "programme-reorder-review": "Goal-integrity verdict: diverges.",
+        "adopted-foundation-review": "Goal-integrity verdict: advances.",
+    }
+    for case_id, expected_verdict in expected_case_verdicts.items():
+        case_path = root / "evals" / "cases" / case_id / "case.json"
+        assert_true(case_path.is_file(), f"goal-integrity behavior case missing: {case_id}")
+        case = json.loads(case_path.read_text(encoding="utf-8"))
+        asserted_values = {
+            assertion.get("value")
+            for assertion in case.get("assertions", [])
+            if assertion.get("type") == "file_contains"
+        }
         assert_true(
-            (root / "evals" / "cases" / case_id / "case.json").is_file(),
-            f"goal-integrity behavior case missing: {case_id}",
+            expected_verdict in asserted_values,
+            f"goal-integrity verdict assertion is not exact: {case_id}",
         )
 
     sync_errors = check_generated()
