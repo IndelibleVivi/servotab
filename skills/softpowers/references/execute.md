@@ -19,6 +19,8 @@ Perform one sanity check before editing:
 - Would it cause data loss, a security regression, or a public compatibility break?
 - Has the requested behavior already been implemented differently?
 - If an approved specification exists, does the complete plan still cover all accepted requirements rather than only the current tranche?
+- Does the plan preserve the accepted programme order and trust model under the applicable current authority?
+- What present consumer, current requirement, or explicit authorization justifies any generalized protocol or infrastructure it introduces?
 
 Correct small stale details yourself. Surface a concern only when it changes the approach materially.
 
@@ -77,8 +79,12 @@ Pause or explicitly flag the choice when:
 - Data migration becomes necessary,
 - Security or privacy assumptions change,
 - The plan's central architecture is invalid.
+- A derived artifact changes programme order or widens the trust model without applicable approval.
+- Infrastructure displaces a narrower accepted path without applicable authorization, especially when it has no present consumer or current requirement.
 
 When a safe reversible choice exists, take it and continue.
+
+Do not treat already-written code as authority to cross these boundaries. Preserve it as `research-only` evidence when useful, return to the applicable authorized baseline, and continue only within the accepted goal.
 
 ## Testing
 

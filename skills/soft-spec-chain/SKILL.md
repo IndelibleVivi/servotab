@@ -10,6 +10,7 @@ Preserve an approved specification from planning through execution. The specific
 ## Authority
 
 - Treat the accepted specification as the canonical authority for **what** must be implemented, **why** it exists, and **how completion is accepted**.
+- Agent-authored specifications, plans, decision logs, handoffs, PR descriptions, and implementation commits are derived material. An agent-authored artifact does not become approved authority merely because it is newer, more detailed, executable, or already implemented; require evidenced applicable approval when it changes programme order, trust boundaries, or product meaning.
 - An implementation plan for that specification must cover its entire accepted implementation scope.
 - A phase, milestone, or current tranche may subdivide execution, but it may not replace the complete implementation plan or be presented as though it covers the whole specification.
 - Keep explicit non-goals excluded. Keep unresolved decisions inside the full plan as decision-closing prerequisites or blockers; do not make them disappear by narrowing the plan.
@@ -24,10 +25,13 @@ Before planning or editing, identify:
 - Approval state and any named open decisions
 - Repository baseline the specification was grounded against
 - Current implementation state where it may have moved
+- Present consumer, current requirement, and authorization provenance when the specification proposes a generalized protocol, new infrastructure, or a programme reorder
 
 Use a stable path plus revision or commit. Do not calculate a hash unless an actual identity or integrity decision needs it.
 
 If several documents contribute requirements, name one primary specification and list the exact normative companions. Do not silently choose whichever document makes the next slice smaller.
+
+If artifacts disagree, resolve their authority rather than using recency or implementation completeness as a proxy for approval. A research implementation may remain valuable evidence while staying outside the accepted product programme.
 
 ## Build the complete implementation plan
 

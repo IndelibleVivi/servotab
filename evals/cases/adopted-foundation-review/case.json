@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "case_id": "adopted-foundation-review",
+  "description": "An agent-authored foundation proposal explicitly adopted by repository governance can advance before it has a present consumer.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "assertions": [
+    {
+      "type": "file_exists",
+      "path": "REVIEW.md"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "Goal-integrity verdict: advances."
+    },
+    {
+      "type": "file_not_contains",
+      "path": "REVIEW.md",
+      "value": "Goal-integrity verdict: research-only."
+    },
+    {
+      "type": "file_not_contains",
+      "path": "REVIEW.md",
+      "value": "Goal-integrity verdict: diverges."
+    },
+    {
+      "type": "file_not_contains",
+      "path": "REVIEW.md",
+      "value": "Goal-integrity verdict: authority unclear."
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "explicitly adopted"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": ["REVIEW.md"]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 12,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0,
+    "reference_reads_include": ["review.md"]
+  }
+}

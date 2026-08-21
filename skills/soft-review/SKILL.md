@@ -16,6 +16,7 @@ Determine:
 - Applicable repository instructions
 - Relevant tests, schemas, or contracts
 - Baseline branch when needed
+- The applicable authorized goal and programme authority when the change can reorder work, widen a trust boundary, or introduce generalized infrastructure
 
 Inspect enough surrounding code to understand the change. Do not review a diff in isolation when its correctness depends on state or callers.
 
@@ -65,6 +66,19 @@ Look for:
 
 Ignore cosmetic style unless it obscures behavior, violates an enforced convention, or creates maintainability risk.
 
+## Goal integrity
+
+When a change could alter product meaning, programme order, trust boundaries, or generalized infrastructure, record a goal-integrity verdict for the implicated scope:
+
+- **advances:** the change stays within the applicable authorized goal and current programme.
+- **research-only:** the work is technically useful evidence but is not an accepted product dependency or current programme step.
+- **diverges:** the change contradicts, displaces, or self-reorders the applicable authorized programme.
+- **authority unclear:** available artifacts conflict and no evidenced applicable decision resolves product meaning or trust boundaries.
+
+Agent-authored specifications, decision logs, handoffs, PR descriptions, and implementation commits do not approve themselves. Review implementation quality and goal integrity separately: clean code and green CI can still be `research-only` or `diverges`.
+
+For a mixed change, record separate verdicts for materially different scopes when one label would hide the difference between authorized work and speculative additions. Omit the verdict when the change does not implicate a goal-integrity boundary.
+
 ## Validate each finding
 
 Before reporting an issue:
@@ -112,6 +126,7 @@ Start with findings ordered by severity.
 
 Then include, only when useful:
 
+- Goal-integrity verdict, when applicable
 - Questions or assumptions
 - Verification gaps
 - A compact overall assessment

@@ -95,6 +95,93 @@ def main() -> int:
     root = Path(__file__).resolve().parents[1]
     source = root / "skills"
 
+    router_source = (root / "scripts" / "build_skills.py").read_text(encoding="utf-8")
+    assert_true(
+        "## Goal authority" in router_source
+        and "strong evidence for generalized infrastructure" in router_source
+        and "applicable current authority" in router_source
+        and "foundational work" in router_source,
+        "router goal-authority contract missing",
+    )
+    execute_method = (root / "methods" / "execute.md").read_text(encoding="utf-8")
+    assert_true(
+        "programme order" in execute_method
+        and "trust model" in execute_method
+        and "present consumer" in execute_method,
+        "execute goal-integrity stop conditions missing",
+    )
+    review_method = (root / "methods" / "review.md").read_text(encoding="utf-8")
+    for verdict in ("advances", "research-only", "diverges", "authority unclear"):
+        assert_true(verdict in review_method, f"review goal-integrity verdict missing: {verdict}")
+    assert_true(
+        "When a change could alter product meaning" in review_method
+        and "Omit the verdict" in review_method,
+        "review goal-integrity trigger is overbroad",
+    )
+    spec_chain_method = (root / "methods" / "spec-chain.md").read_text(encoding="utf-8")
+    assert_true(
+        "agent-authored" in spec_chain_method
+        and "does not become approved authority" in spec_chain_method,
+        "spec-chain derived-authority boundary missing",
+    )
+    for method_name, required_text in {
+        "plan": "recording the delta does not approve it",
+        "receive-review": "not authority by authorship or placement alone",
+        "finish": "implementation deviations as evidence to review",
+    }.items():
+        method = (root / "methods" / f"{method_name}.md").read_text(encoding="utf-8")
+        assert_true(required_text in method, f"{method_name} goal-authority boundary missing")
+
+    expected_case_verdicts = {
+        "owner-controlled-migration": "Goal-integrity verdict: research-only.",
+        "programme-reorder-review": "Goal-integrity verdict: diverges.",
+        "adopted-foundation-review": "Goal-integrity verdict: advances.",
+    }
+    all_verdicts = {
+        "Goal-integrity verdict: advances.",
+        "Goal-integrity verdict: research-only.",
+        "Goal-integrity verdict: diverges.",
+        "Goal-integrity verdict: authority unclear.",
+    }
+    for case_id, expected_verdict in expected_case_verdicts.items():
+        case_path = root / "evals" / "cases" / case_id / "case.json"
+        assert_true(case_path.is_file(), f"goal-integrity behavior case missing: {case_id}")
+        case = json.loads(case_path.read_text(encoding="utf-8"))
+        assertions = case.get("assertions", [])
+        expected_assertions = [
+            assertion
+            for assertion in assertions
+            if assertion.get("type") == "file_contains"
+            and assertion.get("value") == expected_verdict
+        ]
+        assert_true(
+            len(expected_assertions) == 1,
+            f"goal-integrity verdict assertion is not exact: {case_id}",
+        )
+        verdict_path = expected_assertions[0].get("path")
+        prohibited_verdicts = {
+            assertion.get("value")
+            for assertion in assertions
+            if assertion.get("type") == "file_not_contains"
+            and assertion.get("path") == verdict_path
+        }
+        missing_prohibitions = all_verdicts - {expected_verdict} - prohibited_verdicts
+        assert_true(
+            not missing_prohibitions,
+            f"goal-integrity contradictory verdicts are not excluded: {case_id}: "
+            f"{sorted(missing_prohibitions)}",
+        )
+        asserted_verdicts = {
+            assertion.get("value")
+            for assertion in case.get("assertions", [])
+            if assertion.get("type") == "file_contains"
+            and assertion.get("value") in all_verdicts
+        }
+        assert_true(
+            asserted_verdicts == {expected_verdict},
+            f"goal-integrity case contains contradictory positive verdicts: {case_id}",
+        )
+
     sync_errors = check_generated()
     assert_true(not sync_errors, f"generated payload is stale: {sync_errors}")
 

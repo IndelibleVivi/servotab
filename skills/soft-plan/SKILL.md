@@ -38,6 +38,12 @@ When an approved specification governs the work:
 
 Use compact specification IDs or heading anchors rather than repeating the source document.
 
+## Goal authority
+
+- Before a plan changes product meaning, programme order, trust boundaries, or shared infrastructure, identify the applicable current authority and accepted goal.
+- A plan may propose and explain a programme or scope delta, but recording the delta does not approve it. Direct current instructions, repository governance, or an explicitly adopted specification may provide the required authority.
+- When authority for a material delta is unresolved, keep it as an explicit decision gate and preserve the accepted baseline in every executable slice.
+
 ## Choose plan depth
 
 ### Inline plan
