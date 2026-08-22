@@ -6,6 +6,7 @@
 - Carried the goal-authority invariant through direct `plan`, `receive-review`, and `finish` leaves instead of relying on implicit router activation.
 - Scoped `advances`, `research-only`, `diverges`, and `authority unclear` review verdicts to changes that can alter product meaning, programme order, trust boundaries, or generalized infrastructure.
 - Tightened verdict assertions so each canary requires its expected verdict and excludes the other three, and added an explicitly adopted foundation canary to catch both permissive and over-blocking regressions.
+- Made the verdict taxonomy mutually exclusive by precedence: unclear authority first, then programme divergence, authorized advancement, and finally compatible but unadopted research.
 
 ## 0.3.0-rc5 — 2026-08-17
 

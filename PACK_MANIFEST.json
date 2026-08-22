@@ -109,8 +109,8 @@
     },
     {
       "path": "skills/soft-review/SKILL.md",
-      "size": 4883,
-      "sha256": "61c527e9e612b6c01a13e22b6e87d35285a6cdf2d630500368958fadf46751d4"
+      "size": 5075,
+      "sha256": "ec970b20f5c23763c7415231a2fcf36944d6d75c91539a2cc21a419299d23c69"
     },
     {
       "path": "skills/soft-review/agents/openai.yaml",
@@ -204,8 +204,8 @@
     },
     {
       "path": "skills/softpowers/references/review.md",
-      "size": 4649,
-      "sha256": "1099714351234925a1033f11620d9d45533b90548adeb8dd2e7ac21a19199322"
+      "size": 4841,
+      "sha256": "f385f1dc7b3e2e56b4d5ae280a7919b3cde2563fe5e12024312c6b0ed7844c0a"
     },
     {
       "path": "skills/softpowers/references/spec-chain.md",

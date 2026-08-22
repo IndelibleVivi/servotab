@@ -113,10 +113,21 @@ def main() -> int:
     review_method = (root / "methods" / "review.md").read_text(encoding="utf-8")
     for verdict in ("advances", "research-only", "diverges", "authority unclear"):
         assert_true(verdict in review_method, f"review goal-integrity verdict missing: {verdict}")
+    verdict_precedence = [
+        "**authority unclear:**",
+        "**diverges:**",
+        "**advances:**",
+        "**research-only:**",
+    ]
+    verdict_positions = [review_method.find(marker) for marker in verdict_precedence]
     assert_true(
         "When a change could alter product meaning" in review_method
-        and "Omit the verdict" in review_method,
-        "review goal-integrity trigger is overbroad",
+        and "choose exactly one goal-integrity verdict" in review_method
+        and "Apply the first matching verdict" in review_method
+        and "Do not combine verdicts for the same scope" in review_method
+        and all(position >= 0 for position in verdict_positions)
+        and verdict_positions == sorted(verdict_positions),
+        "review goal-integrity trigger or verdict precedence is invalid",
     )
     spec_chain_method = (root / "methods" / "spec-chain.md").read_text(encoding="utf-8")
     assert_true(
@@ -133,7 +144,7 @@ def main() -> int:
         assert_true(required_text in method, f"{method_name} goal-authority boundary missing")
 
     expected_case_verdicts = {
-        "owner-controlled-migration": "Goal-integrity verdict: research-only.",
+        "owner-controlled-migration": "Goal-integrity verdict: diverges.",
         "programme-reorder-review": "Goal-integrity verdict: diverges.",
         "adopted-foundation-review": "Goal-integrity verdict: advances.",
     }

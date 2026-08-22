@@ -63,16 +63,16 @@ Ignore cosmetic style unless it obscures behavior, violates an enforced conventi
 
 ## Goal integrity
 
-When a change could alter product meaning, programme order, trust boundaries, or generalized infrastructure, record a goal-integrity verdict for the implicated scope:
+When a change could alter product meaning, programme order, trust boundaries, or generalized infrastructure, choose exactly one goal-integrity verdict for each implicated scope. Apply the first matching verdict in this order:
 
-- **advances:** the change stays within the applicable authorized goal and current programme.
-- **research-only:** the work is technically useful evidence but is not an accepted product dependency or current programme step.
-- **diverges:** the change contradicts, displaces, or self-reorders the applicable authorized programme.
-- **authority unclear:** available artifacts conflict and no evidenced applicable decision resolves product meaning or trust boundaries.
+- **authority unclear:** the governing authority or accepted goal cannot be determined from the available evidence.
+- **diverges:** authority is known and the change contradicts, displaces, or self-reorders the applicable authorized programme.
+- **advances:** authority is known and the change stays within the applicable authorized goal and current programme.
+- **research-only:** authority is known and the work is technically useful and compatible with the current programme, but has not been adopted as a product dependency or current programme step.
 
 Agent-authored specifications, decision logs, handoffs, PR descriptions, and implementation commits do not approve themselves. Review implementation quality and goal integrity separately: clean code and green CI can still be `research-only` or `diverges`.
 
-For a mixed change, record separate verdicts for materially different scopes when one label would hide the difference between authorized work and speculative additions. Omit the verdict when the change does not implicate a goal-integrity boundary.
+Do not combine verdicts for the same scope. For a mixed change, record separate verdicts for materially different scopes when one label would hide the difference between authorized work and speculative additions. Omit the verdict when the change does not implicate a goal-integrity boundary.
 
 ## Validate each finding
 

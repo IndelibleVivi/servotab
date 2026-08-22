@@ -13,7 +13,7 @@
     {
       "type": "file_contains",
       "path": "GOAL_INTEGRITY.md",
-      "value": "Goal-integrity verdict: research-only."
+      "value": "Goal-integrity verdict: diverges."
     },
     {
       "type": "file_not_contains",
@@ -23,7 +23,7 @@
     {
       "type": "file_not_contains",
       "path": "GOAL_INTEGRITY.md",
-      "value": "Goal-integrity verdict: diverges."
+      "value": "Goal-integrity verdict: research-only."
     },
     {
       "type": "file_not_contains",
