@@ -34,7 +34,7 @@ fieldlab list fieldlab-pack.json
 - `tiny-copy`：小改动的 scope 与 overhead；
 - `stale-cursor`：consistency invariant 与 regression evidence；
 - `spec-chain`：approved spec 的 end-to-end coverage。
-- `owner-controlled-migration`：generic protocol 不能取代有 present consumer 的 owner-controlled path；
+- `owner-controlled-migration`：generic protocol 即使有研究价值，只要试图取代 authorized owner-controlled path 就判定为 `diverges`；
 - `programme-reorder-review`：implementation PR 不能通过自写 decision log 批准 programme reorder。
 - `adopted-foundation-review`：明确 adopted 的 foundational work 不因尚无 present consumer 被误判为越权。
 
