@@ -2,7 +2,7 @@
 
 这份 registry 记录 Softpowers 当前主动关注的外部来源、pinned ref、已选 pattern、decision 与 reopen condition。它承担增量复查入口；不构成 dependency list，也不表示代码或文本已被复制进 Softpowers。
 
-Review date：`2026-08-19`
+Review date：`2026-08-24`
 
 ## Current sources
 
@@ -12,6 +12,7 @@ Review date：`2026-08-19`
 | `anthropics/skills` — `skill-creator` | `f6656c1256d5a8adfa37db9110046ef20bac644c` | `skill-creator` Apache-2.0 | `ADAPT` objective assertions applied；isolated paired evals and qualitative viewer remain deferred | Eval / maintainer |
 | `mattpocock/skills` — `grill-me` / `grilling` | `1bb95954ef0d06ba4d64a9c267fb75f57c614a1f` | MIT | `ADAPT` dependency-aware decision frontier into a shadow probe；`REJECT` mandatory exhaustive interviewing ([record](../evals/candidates/2026-08-19-matt-grilling-frontier.md)) | Brainstorm / eval |
 | `affaan-m/ECC` — `search-first` | `06c5e118c4d3e6c3b7f9445f973a2194c82de193` | MIT | `ADAPT` internal-first reuse and search-channel honesty into a shadow probe；`REJECT` universal research stage and full-harness adoption ([record](../evals/candidates/2026-08-19-ecc-search-first.md)) | Execute / eval |
+| `ennisaaaaaaaa-stack/session-spoor` | `6651a92da19f74c557684f5ccd319efdcc2ef9d8` | PolyForm Noncommercial 1.0.0；clean-room mechanism summary only, with no code or wording copied | `ADAPT` task-scoped session-boundary open-loop recovery into a maintainer shadow probe；`REJECT` the full continuity system and global surveillance ([record](../evals/candidates/2026-08-24-session-spoor-continuity.md)) | Field Lab / maintainer |
 | `obra/superpowers` | `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` | MIT | `ADAPT` distribution maturity；`REJECT` mandatory lifecycle | Packaging / docs |
 | `QoderAI/better-harness` | `36c85c40ffb7596d413cc14bfbc8e66c741c182e` | MIT | `ALREADY COVERED` claim maturity core；`ADAPT` eval vocabulary only | Verify / eval |
 | `humanlayer/12-factor-agents` | `d20c728368bf9c189d6d7aab704744decb6ec0cc` | Code Apache-2.0；content CC BY-SA-4.0 | `ALREADY COVERED` control principles；`ADAPT` explicit run identity and case-boundary resume applied | Architecture docs / eval |
@@ -69,6 +70,18 @@ Review only material changes around:
 - changes that make the skill less tied to one harness or hard-coded ecosystem list。
 
 Do not treat growth elsewhere in ECC's agents, hooks, memory, rules, MCP configuration, or lifecycle as a Softpowers requirement. Retain the rejection of universal research stages and full-harness adoption for this narrow behavior.
+
+### session-spoor
+
+Review only material changes around:
+
+- separation of replaceable current state from durable decisions, confirmed pitfalls, and pending-review traces；
+- task-scoped open-loop discovery at real session-resume or agent-handoff boundaries；
+- advisory reminders attached to existing start, finish, or state-read actions；
+- evidence that a retained trace has a real future caller；
+- false-positive pressure on ordinary single-session work。
+
+Retain the rejection of its MCP servers, storage hierarchy, archive, FTS, dashboard, ledger, fixed timers, background daemon, global PR surveillance, runtime topology, and dependencies. Treat `Dying Will` process ownership as a separate future candidate that requires its own local signal.
 
 ### Superpowers
 
