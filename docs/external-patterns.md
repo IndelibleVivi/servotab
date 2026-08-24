@@ -2,7 +2,7 @@
 
 这份 registry 记录 Softpowers 当前主动关注的外部来源、pinned ref、已选 pattern、decision 与 reopen condition。它承担增量复查入口；不构成 dependency list，也不表示代码或文本已被复制进 Softpowers。
 
-Review date：`2026-08-17`
+Review date：`2026-08-19`
 
 ## Current sources
 
@@ -10,6 +10,8 @@ Review date：`2026-08-17`
 |---|---|---|---|---|
 | `anthropics/defending-code-reference-harness` | `d3bea6b5793b5f3d59a75ebe69a58efa88383145` | Apache-2.0 | `ADAPT` applied in rc2: canaries、artifacts、atomic result/resume；`REJECT` daily full pipeline | Eval / maintainer |
 | `anthropics/skills` — `skill-creator` | `f6656c1256d5a8adfa37db9110046ef20bac644c` | `skill-creator` Apache-2.0 | `ADAPT` objective assertions applied；isolated paired evals and qualitative viewer remain deferred | Eval / maintainer |
+| `mattpocock/skills` — `grill-me` / `grilling` | `1bb95954ef0d06ba4d64a9c267fb75f57c614a1f` | MIT | `ADAPT` dependency-aware decision frontier into a shadow probe；`REJECT` mandatory exhaustive interviewing ([record](../evals/candidates/2026-08-19-matt-grilling-frontier.md)) | Brainstorm / eval |
+| `affaan-m/ECC` — `search-first` | `06c5e118c4d3e6c3b7f9445f973a2194c82de193` | MIT | `ADAPT` internal-first reuse and search-channel honesty into a shadow probe；`REJECT` universal research stage and full-harness adoption ([record](../evals/candidates/2026-08-19-ecc-search-first.md)) | Execute / eval |
 | `obra/superpowers` | `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` | MIT | `ADAPT` distribution maturity；`REJECT` mandatory lifecycle | Packaging / docs |
 | `QoderAI/better-harness` | `36c85c40ffb7596d413cc14bfbc8e66c741c182e` | MIT | `ALREADY COVERED` claim maturity core；`ADAPT` eval vocabulary only | Verify / eval |
 | `humanlayer/12-factor-agents` | `d20c728368bf9c189d6d7aab704744decb6ec0cc` | Code Apache-2.0；content CC BY-SA-4.0 | `ALREADY COVERED` control principles；`ADAPT` explicit run identity and case-boundary resume applied | Architecture docs / eval |
@@ -44,6 +46,29 @@ Review:
 - iteration without replacing user judgment。
 
 Do not import a requirement that every subjective task be numerically graded.
+
+### Matt Pocock skills
+
+Review only material changes around:
+
+- decision-tree and frontier ordering semantics；
+- the split between facts the agent should inspect and decisions the user should make；
+- branch-local blocking while an environmental investigation remains open；
+- the relationship between the explicit `grill-me` entry point and reusable `grilling` discipline。
+
+Retain the current rejection of mandatory exhaustive interviews, fixed question formatting, full-tree traversal for clear work, and a new wrapper-to-core invocation topology inside Softpowers.
+
+### ECC search-first
+
+Review only material changes around:
+
+- repository and installed-dependency search before external discovery；
+- honest claims when registries, GitHub, MCP, or local catalogs are unavailable；
+- adopt / extend / compose / build closure；
+- candidate evaluation that includes maintenance, compatibility, license, dependency cost, and a current caller；
+- changes that make the skill less tied to one harness or hard-coded ecosystem list。
+
+Do not treat growth elsewhere in ECC's agents, hooks, memory, rules, MCP configuration, or lifecycle as a Softpowers requirement. Retain the rejection of universal research stages and full-harness adoption for this narrow behavior.
 
 ### Superpowers
 
