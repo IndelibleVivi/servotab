@@ -69,6 +69,7 @@ Prefer tests that:
 - Use real code through stable boundaries
 - Survive internal refactoring
 - Cover important edge and error paths
+- For optional host capabilities, distinguish absence (no doomed action plus useful degradation), rejection, cancellation, policy denial, and success when those are separate observable results
 
 Avoid:
 

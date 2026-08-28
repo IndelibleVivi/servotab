@@ -49,8 +49,8 @@
     },
     {
       "path": "skills/soft-debug/SKILL.md",
-      "size": 6484,
-      "sha256": "db926fa9af409793f5929aeb12f823021a888b67389d1eb3526f03d6727c48bd"
+      "size": 8540,
+      "sha256": "4c99276c179edc686b772df4e0505ec53d7da5dbca7737810c43ea6a9bc522c8"
     },
     {
       "path": "skills/soft-debug/agents/openai.yaml",
@@ -69,8 +69,8 @@
     },
     {
       "path": "skills/soft-finish/SKILL.md",
-      "size": 3468,
-      "sha256": "f1ed2a3399978b8afed38594537b6d3c2e0ca97bace985ee27293e6f4d3f4a1f"
+      "size": 3962,
+      "sha256": "2547d00980fa72f494e4af916e2816dd52a4c6d4ace10c8673d312a53f2df2cd"
     },
     {
       "path": "skills/soft-finish/agents/openai.yaml",
@@ -129,8 +129,8 @@
     },
     {
       "path": "skills/soft-tdd/SKILL.md",
-      "size": 3589,
-      "sha256": "0228c7661d169bbc26ee2a6cb74830969ecff3c6a66649c61705f26d64dadeda"
+      "size": 3782,
+      "sha256": "d9ff8b7168ee178d97fa6c6955ba7399580a51ab5e2807fbf5fee81cfba616ff"
     },
     {
       "path": "skills/soft-tdd/agents/openai.yaml",
@@ -139,8 +139,8 @@
     },
     {
       "path": "skills/soft-verify/SKILL.md",
-      "size": 4322,
-      "sha256": "fa392b2b82bd5f2f791c899f9e77d94a4a6ffece00e5f7f63f90e02601e71213"
+      "size": 5371,
+      "sha256": "d754db5b068e42fe34e6b629ebf6b2e29bae638f4b0e806e3e26a505988de9d6"
     },
     {
       "path": "skills/soft-verify/agents/openai.yaml",
@@ -174,8 +174,8 @@
     },
     {
       "path": "skills/softpowers/references/debug.md",
-      "size": 6197,
-      "sha256": "1a9898e09436bd8f2e02d732ef88076756654809735de2a6a61048d91149f926"
+      "size": 8253,
+      "sha256": "c84805bd2771d0cea8a117f6eeb5eea511cd0cf83440e79242109f5bdcfb884e"
     },
     {
       "path": "skills/softpowers/references/execute.md",
@@ -184,8 +184,8 @@
     },
     {
       "path": "skills/softpowers/references/finish.md",
-      "size": 3253,
-      "sha256": "a948db83262067b64d2d9db6b7f6c4f5d5682283d16d17cd11e4cc546a6a5a6b"
+      "size": 3747,
+      "sha256": "c90cb82e9de6dde4deb302e214cffaa705d2cd5d229982e9013a290e93fcf04b"
     },
     {
       "path": "skills/softpowers/references/parallel.md",
@@ -214,13 +214,13 @@
     },
     {
       "path": "skills/softpowers/references/tdd.md",
-      "size": 3345,
-      "sha256": "13993768897362d997ea7dacabd341839d7c5ba305f8b450844e715b314f07b6"
+      "size": 3538,
+      "sha256": "c8560623a00676cb922067b6b06b2738a7e4a748fc17f451fd206b2c36c8c43e"
     },
     {
       "path": "skills/softpowers/references/verify.md",
-      "size": 4110,
-      "sha256": "406e6195219f10895d437453b05004e4394c338a28ceb62f2c34ce6984c00334"
+      "size": 5159,
+      "sha256": "94b4f56cbba238082f77a99d169c2fe614d75e395a7aeb9ae67e4a4d534bd94d"
     },
     {
       "path": "skills/softpowers/references/worktree.md",

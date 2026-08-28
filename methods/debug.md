@@ -13,9 +13,12 @@ Capture:
 - The required outcome independent of the current implementation mechanism
 - Reproduction path
 - Environment or data conditions
+- Exact error plus transport, status, and capability provenance when the failure crosses a boundary
 - First known bad version or recent relevant changes, when available
 
 Read the complete error, stack trace, failed assertion, logs, or browser console output. Do not summarize away the line that identifies the failing boundary.
+
+Do not group failures merely because the UI renders the same red box. A route `404`, template admission rejection, asset-plane failure, playback capability failure, and download capability failure are separate boundary hypotheses until evidence connects them.
 
 If the failure is already precise and local, move directly to tracing it.
 
@@ -32,6 +35,8 @@ Prefer the cheapest reliable reproducer:
 When the problem crosses components, inspect inputs and outputs at the boundaries. Add temporary instrumentation only where it distinguishes hypotheses. Remove it after the issue is understood unless it is useful production observability.
 
 If reproduction is intermittent, record frequency and conditions. Avoid treating one successful run as proof.
+
+Local or dev-browser behavior and behavior in a named host are separate observations. When the contract is host-specific, use the exact host surface as the reproducer; local checks may isolate a layer, but cannot close the host claim.
 
 ## 3. Trace the cause
 
@@ -55,9 +60,9 @@ Test the smallest discriminating change or observation. Avoid changing several v
 
 - One active hypothesis at a time.
 - After a failed hypothesis, record what the result ruled out.
-- After two failed hypotheses, reconsider the chosen boundary and hidden assumptions before broadening the search or adding another patch.
+- After two failed repairs on the same user-visible surface, reconsider the chosen boundary and hidden assumptions before another patch.
 - If each fix exposes a new failure in another owner, transport, or state boundary, treat the cascade itself as architecture evidence and reset before applying another patch.
-- Three materially different failed fixes are a hard stop for re-evaluating the mechanism, even when every individual patch is locally plausible.
+- No later than a third materially different failed fix, perform the topology/authority reset below even when every patch is locally plausible.
 
 This is a guard against thrashing, not a reason to stop at an arbitrary number when new evidence is strong.
 
@@ -68,7 +73,7 @@ Do not delegate a vague symptom. Delegate only after localization reveals distin
 Debugging does not require preserving an optional implementation choice. When fixes behave like whack-a-mole across components:
 
 1. Stop patching and separate the required outcome from the currently chosen mechanism.
-2. Sketch the shortest relevant topology: owners, transports, persistent state, trust boundaries, and the observed failure at each hop.
+2. Make a compact topology/authority map for the relevant layers: source, package, built artifact or image, activated runtime, tunnel or edge, host discovery or cache, iframe sandbox, optional host capability, and owner-side acceptance. For each, name the real authority, current identity or state, and fresh evidence; mark unknowns instead of inheriting the previous hypothesis.
 3. Verify the assumption that originally ruled out a simpler path using current source, runtime help, a bounded probe, or authoritative documentation.
 4. Compare at least one direct supported route. Prefer it when it removes moving parts and still satisfies the full contract.
 5. If the existing mechanism remains necessary, state the evidence that makes its additional boundaries unavoidable before resuming fixes.
@@ -83,6 +88,8 @@ Prefer the narrowest change that restores the intended invariant.
 - Avoid opportunistic refactors unless the current design prevents a safe fix.
 - Add validation at boundaries when it prevents recurrence.
 - Preserve compatibility unless the user approved a change.
+- Before exposing an optional host action, check its capability. When absent, omit the action and preserve an honest useful degradation instead of rendering a button that must fail.
+- Replace the canonical path coherently. Remove superseded helpers, flags, tests, and documentation claims once no evidenced caller needs them; do not layer the fix beside a dead implementation.
 - For an external or environmental cause, improve diagnostics or error handling first. Add retries or fallback behavior only when the observed failure and product contract justify them.
 
 ## 5. Prove the fix
@@ -94,10 +101,13 @@ Verify:
 - The original reproducer now succeeds.
 - The regression test fails against the old behavior when that can be demonstrated safely.
 - Nearby behavior remains intact.
+- Optional-capability behavior distinguishes absent, rejected, cancelled, and policy-denied outcomes where the host exposes them; do not collapse their provenance into one generic error.
 - Temporary diagnostics and experimental changes are removed.
 - The final diff contains one understandable causal fix.
 
 Before declaring the issue fixed, rerun the original reproducer after the final relevant edit, run the focused regression checks, and broaden verification when shared state, public contracts, data, security, or multiple consumers changed.
+
+For a host-specific fix, deployment of the latest code is part of the experiment, not a ceremony that can be postponed indefinitely. The external or production mutation still requires applicable authorization; once that exact deployment is authorized and needed to test the fix, do not invent an additional repository gate. Require fresh acceptance on the named host after the final relevant deployment. Close claims in this order: source contract -> process-level test -> built artifact or image identity -> activated runtime identity -> exact named-host surface -> owner-observed behavior; each rung proves only itself and the next investigation step.
 
 ## Confidence labels
 

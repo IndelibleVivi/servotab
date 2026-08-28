@@ -13,8 +13,11 @@ Check:
 - Debug logging, TODOs, fixtures, snapshots, or local config accidentally changed
 - Secrets or sensitive data
 - Whether unrelated user changes are present
+- The canonical active path and its callers, including any superseded helper, flag, test, or documentation claim left by the replacement
 
 Do not modify or discard unrelated changes.
+
+When replacement is complete, remove the superseded path in the same change. Retain compatibility only for an evidenced current caller or staged boundary, and name the reason and removal condition; an inert parallel implementation is not a rollback plan.
 
 ## 2. Check requirements
 
@@ -38,6 +41,7 @@ Use a risk-matched verification ladder:
 - Adjacent suite or build for shared code
 - Broad checks for integration, migration, security, or public contracts
 - Manual or visual verification where relevant
+- Fresh named-host acceptance after the final relevant deployment when the behavior is host-specific
 
 Run checks after the final relevant edit. State exactly what passed and what was not run.
 

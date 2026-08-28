@@ -35,6 +35,19 @@ Keep capability and effectiveness claims separate:
 
 These are claim boundaries, not a required scorecard, ledger, report, or extra review loop.
 
+## Host-boundary evidence ladder
+
+For a host-specific claim, keep these rungs distinct:
+
+1. Source contract
+2. Process-level behavior test
+3. Built artifact or image identity
+4. Activated runtime identity
+5. Exact named-host surface
+6. Owner-observed behavior
+
+Each rung supports the next investigation step, not the claim above it. Local or dev-browser success is not named-host acceptance; a successful build is not proof that the intended runtime is active; deployment is not owner-observed behavior. After the final relevant change, verify the artifact and activated runtime identities, then obtain fresh acceptance on the exact named host when that is the contract. If the required deployment or owner observation is not authorized or available, mark the higher claim `Not verified`.
+
 ## Verification ladder
 
 ### Level 1: Focused
@@ -93,6 +106,8 @@ Inspect:
 - Documentation when public behavior or setup changed
 
 For UI work, include a real rendered or interaction check when practical. Unit tests alone may not prove layout or input behavior.
+
+For optional host actions, verify the negative capability path before exposure as well as success. Preserve distinct absent, rejected, cancelled, and policy-denied results when the host distinguishes them; a generic error does not prove correct degradation.
 
 ## Regression evidence
 
