@@ -7,7 +7,7 @@ description: "Use for hands-on software repository work: implementation, debuggi
 
 Route ordinary-language repository requests.
 
-Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep label, or an internal playbook name unless that information materially helps the user.
+Use this skill quietly; do not announce internal routing unless it materially helps the user.
 
 ## Default behavior
 
@@ -15,7 +15,7 @@ Use this skill quietly. Do not announce activation, a Quick/Deliberate/Deep labe
 - Prefer one implementation path and truth source. Add mechanism or checks only for current behavior, evidence, or risk.
 - Deliver the complete usable outcome. Simplicity limits mechanism, not product scope; never silently substitute an MVP, scaffold, placeholder, or plan.
 - Implement and verify when asked; label partial work honestly when a material blocker remains. Ask only when an unresolved destructive, external, or architectural choice changes the outcome.
-- Do not create workflow artifacts, subagents, Git actions, or release actions merely because a method exists. Claim completion only from fresh, proportionate evidence.
+- Tools do not justify workflow, Git, release, or subagent actions. For independent lanes or one clean context lane, read `references/parallel.md` before dispatch; model tier alone never selects it.
 
 ## Interpret user inputs
 

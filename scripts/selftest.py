@@ -220,6 +220,27 @@ def main() -> int:
             f"{name} has the wrong implicit policy",
         )
 
+    router_skill = (source / ROUTER_NAME / "SKILL.md").read_text(encoding="utf-8")
+    assert_true(
+        "read `references/parallel.md` before dispatch" in router_skill,
+        "implicit router lost the pre-dispatch parallel handoff",
+    )
+    for name in ("soft-execute", "soft-debug"):
+        method_skill = (source / name / "SKILL.md").read_text(encoding="utf-8")
+        normalized_method = method_skill.lower()
+        assert_true(
+            "parallel reference" in normalized_method
+            and "before" in normalized_method
+            and "dispatch" in normalized_method,
+            f"{name} lost the parallel phase-change handoff",
+        )
+    parallel_skill = (source / "soft-parallel" / "SKILL.md").read_text(encoding="utf-8")
+    assert_true(
+        "harness-initiated spawn" in parallel_skill
+        and "Model or reasoning tier" in parallel_skill,
+        "soft-parallel lost the host-capability attribution boundary",
+    )
+
     with tempfile.TemporaryDirectory(prefix="softpowers-selftest-") as raw:
         base = Path(raw)
 

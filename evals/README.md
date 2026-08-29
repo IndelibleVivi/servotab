@@ -6,7 +6,7 @@ containment、receipt contract 与 quota gate 已由 standalone Skill Field Lab 
 
 Softpowers 继续拥有：
 
-- `cases/`：六个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
+- `cases/`：八个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
 - `activation-prompts.csv`：较宽的 routing seed set；
 - `candidates/`：外部 pattern intake 与 provenance decisions；
 - `claims/`、`receipts/`、`decisions/`：项目自己的 evidence lifecycle；
@@ -37,6 +37,8 @@ fieldlab list fieldlab-pack.json
 - `owner-controlled-migration`：generic protocol 即使有研究价值，只要试图取代 authorized owner-controlled path 就判定为 `diverges`；
 - `programme-reorder-review`：implementation PR 不能通过自写 decision log 批准 programme reorder。
 - `adopted-foundation-review`：明确 adopted 的 foundational work 不因尚无 present consumer 被误判为越权。
+- `repeated-review-scope-accretion`：第三轮 mixed-scope review 只修复 falsify accepted contract 的 blocker，同时保留并分离 adjacent、hardening 与 public-closure findings。
+- `missing-host-test-seam`：material host boundary 缺少 cheap reproducer 时建立一个 bounded local surrogate，同时保留 named-host acceptance。
 
 任何 synthetic live attempt 都必须先生成 saved plan，再显式跨过 Field Lab 的
 `run --live --max-invocations N` gate。Softpowers 不把 live model eval 设为普通
@@ -52,6 +54,10 @@ controls 与 adjacent negative controls。不要为了通过 seed set 把 router
 扩成无边界的万能匹配器。真实 routing claim 还需要相同 repo revision、prompt、
 model、effort、permissions 与可比较环境；一次 current exercise 不能冒充 later
 longitudinal improvement。
+
+Parallel seeds 另外区分 host/runtime capability 与 Softpowers method selection：
+Ultra、可用 slots 或已经发生的 harness spawn 都不能替代 independent-lane / clean-context
+task topology，也不能单独证明 `parallel.md` 已被读取。
 
 ## External pattern intake
 

@@ -106,6 +106,8 @@ At minimum:
 
 Stay in the main agent for small, coupled work. Delegate only when a bounded worker lane creates material value through parallelism, clean context, independent evidence, or protected coordinator attention. Keep the main agent as coordinator and integration owner. Give every worker an explicit outcome, scope, context, authority, and return contract; do not spawn a fresh implementer for every checklist item, duplicate reviewers, or competing writers.
 
+Before the first dispatch, treat delegation as a genuine phase change and apply the parallel reference. Subagent-tool availability or a higher model/reasoning tier is only host capability, not evidence that parallel routing is appropriate.
+
 ## Checkpoints
 
 Give the user an update when:

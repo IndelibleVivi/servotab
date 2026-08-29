@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "case_id": "missing-host-test-seam",
+  "description": "A repository with green unit contracts but no executable embedded-host seam should add one bounded local surrogate instead of continuing opaque remote patch loops.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "assertions": [
+    {
+      "type": "file_exists",
+      "path": "TEST_TOPOLOGY.md"
+    },
+    {
+      "type": "file_exists",
+      "path": "host_surrogate.py"
+    },
+    {
+      "type": "file_exists",
+      "path": "test_host_surrogate.py"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": [
+        "TEST_TOPOLOGY.md",
+        "embedded_app.py",
+        "host_surrogate.py",
+        "test_host_surrogate.py"
+      ]
+    },
+    {
+      "type": "command",
+      "argv": [
+        "python3",
+        "-c",
+        "from embedded_app import choose_export; assert choose_export({'chat_file': {'state': 'available'}}) == 'chat-file'; assert choose_export({'chat_file': {'state': 'denied'}}) == 'portable'; assert choose_export({}) == 'portable'"
+      ]
+    },
+    {
+      "type": "command",
+      "argv": [
+        "python3",
+        "-c",
+        "from host_surrogate import host_capabilities; assert host_capabilities('available') == {'chat_file': {'state': 'available'}}; assert host_capabilities('denied') == {'chat_file': {'state': 'denied'}}; assert host_capabilities('missing') == {}"
+      ]
+    },
+    {
+      "type": "command",
+      "argv": ["python3", "-m", "unittest", "-q"]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 14,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0
+  }
+}

@@ -31,6 +31,8 @@ GitHub Issues 是公开的。提交前请删除：
 6. outcome 是否完整；
 7. 是否出现多余 plan、reference reads、tests、hashes、tool calls、subagents 或重复 verification。
 
+报告 parallel behavior 时，请分开记录 host/runtime 是否提供 subagent tools、是否读取 `parallel.md`、以及 task topology 是否真的有 independent lanes。Subagent event 本身不证明 `soft-parallel` leaf 或 method 被 Softpowers 选中。
+
 不要只用 token 总量判断好坏。先判断 outcome 与必要边界是否保留，再比较 overhead。
 
 ## Code 与 method changes

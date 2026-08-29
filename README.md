@@ -14,7 +14,7 @@
 - 日常只需要正常描述任务，不必背 skill 名称。
 - Invocation metadata 只允许 `softpowers` router 被 implicit invocation；
   其余 12 个 `soft-*` leaf skills 都是 explicit-only shortcuts，不会自己抢活。
-- 安装完整 pack 不等于每个 skill 都会频繁运行。`spec-chain`、`worktree`、`parallel` 等本来就是特定情境工具，低频是设计的一部分。
+- 12 个 leaf 是否在 UI 中显式出现，与 router 是否采用其 method 是两件事；尤其 `soft-parallel` 的自然语言路径由 implicit router 读取 reference，不能从一次 harness spawn 或 Ultra model tier 反推 leaf activation。
 - 清晰、局部、可逆的小任务直接做；复杂任务才按需读取一份 playbook。
 - 当工作可能改变 product meaning、programme order、trust boundaries 或 shared infrastructure 时，Softpowers 会区分 applicable authority 与 derived artifacts；agent 写出的 spec、PR、代码和绿色 CI 不能自我授权。
 - Softpowers 不覆盖你的 prompt、`AGENTS.md`、repo 规则、权限边界或 Git 决策。
@@ -145,7 +145,7 @@ $soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；�
 | 精确控制 | `soft-debug`, `soft-review`, `soft-verify`, `soft-execute`, `soft-tdd` | 你明确想固定 diagnosis、review、verification、execution 或 red-green 方法时 |
 | 特定情境 | `soft-brainstorm`, `soft-plan`, `soft-receive-review`, `soft-finish`, `soft-spec-chain`, `soft-worktree`, `soft-parallel` | 开放设计、多步 handoff、外部 review、大型 approved spec、隔离 workspace 或 bounded delegation 真正有价值时 |
 
-完整 pack 保留这些 leaf skills，是为了让显式控制和少见但高价值的工程情境都有稳定入口。12 个 `soft-*` leaf 全部是 explicit-only；没有必要为了“都装了”而刻意调用任何 skill。License Boundary 与 Skill Field Lab 都是 standalone companions，不计入这 13 个目录，也不由 Softpowers transaction 管理。
+完整 pack 保留这些 leaf skills，是为了让显式控制和少见但高价值的工程情境都有稳定入口。12 个 `soft-*` leaf 全部是 explicit-only；普通自然语言任务由 `softpowers` router 选择并读取相应 reference，不会再产生一次可见的 leaf invocation。没有必要为了“都装了”而刻意调用任何 skill。License Boundary 与 Skill Field Lab 都是 standalone companions，不计入这 13 个目录，也不由 Softpowers transaction 管理。
 
 ## Softpowers 的行为原则
 
@@ -154,23 +154,25 @@ $soft-spec-chain 依据这份 approved spec 建立完整 implementation plan；�
 > implicit discovery, non-mandatory execution
 
 - Router 负责 routing，但不宣布自己被激活，也不向用户表演内部分类。
+- Host/runtime 决定 subagent tools 与 concurrency 是否存在；Softpowers 只根据 task topology 决定何时值得使用以及怎样约束 lanes。Ultra、空闲 slots 或 harness 自发 dispatch 本身都不是 parallel routing evidence。
 - 小任务读取 0 个 reference，直接实现并做 focused verification。
 - Bug、review、迁移等任务先读 0–1 个 primary reference；只有阶段真实变化或新证据出现时才读取下一份。
 - 没有当前用途的 fallback、state、hash、重复检查和第二轮 acceptance 不进入默认路径。
 - 产品介绍、tutorial、截图、示例、log 与 review 按用户 intent 和 source authority 使用，而不是各造一个 workflow。
 - Outcome、hard constraints 与 proposed mechanism 分开理解；除非用户明确锁定 mechanism，否则先用 repo/runtime evidence、当前 platform capabilities 与 authoritative sources 挑战其假设，再选择满足完整 outcome 的最短 supported path。
 - 跨 owner、transport 或 persistent-state 的 patch cascade 会触发 architecture reset；局部 patch 通过和 sunk cost 都不能替选中的 topology 背书。
+- material boundary 没有 cheap reliable reproducer 时，把缺失 seam 当作 testability problem，建立或交接最小 local surrogate / diagnostic；named host 仍是最终 acceptance，不复制 production 或扩建通用 testing programme。
 - 严格 red-green 优先用于 bug、领域规则、状态机、parser、契约、迁移、并发和安全敏感行为；样式、copy 和简单 wiring 不强制低价值 unit test。
 - Review 默认一轮，不制造 findings，也不自动创建重复 reviewer loops。
 - Verification 按 blast radius 选择 focused / adjacent / broad evidence。
 - 配置存在、当前路径被 exercise、同 task repair 与 later comparable improvement 是不同强度的 claims；这条边界不要求 score、ledger、后台审计或额外 reviewer。
 - Worktree、design doc、commit、push、PR、merge 与 destructive cleanup 都不会仅仅因为某个方法存在而自动发生。
 
-`soft-parallel` 采用 bounded Worker Lanes contract：Requester / Coordinator / Task Worker / optional Helper。每个 worker 收到紧凑的 `Outcome / Scope / Context / Authority / Return`，主线程保留用户沟通、权限边界、整合与最终判断。
+当任务出现至少两个 independent substantial lanes，或一个 noisy/long-running lane 能实质保护 coordinator attention 时，router 会在 first dispatch 前把 delegation 视为 phase change 并读取 `parallel.md`。`soft-parallel` 采用 bounded Worker Lanes contract：Requester / Coordinator / Task Worker / optional Helper。每个 worker 收到紧凑的 `Outcome / Scope / Context / Authority / Return`，主线程保留用户沟通、权限边界、整合与最终判断。若当前 host 或指令不允许 delegation，就保留相同 ownership boundary 并顺序执行，不声称发生了 parallel execution。
 
 ## Optional maintainer field lab
 
-Softpowers 仍拥有 `tiny-copy`、`stale-cursor`、`spec-chain`、`owner-controlled-migration`、`programme-reorder-review`、`adopted-foundation-review` 六个 canaries；最后一个 case 证明明确 adopted 的 foundational work 不会因尚无 present consumer 被误判为越权。
+Softpowers 仍拥有 `tiny-copy`、`stale-cursor`、`spec-chain`、`owner-controlled-migration`、`programme-reorder-review`、`adopted-foundation-review`、`repeated-review-scope-accretion`、`missing-host-test-seam` 八个 canaries；后两项分别约束 repeated review 的 tranche scope 与缺失 host seam 的 bounded testability escalation。
 但从 `0.3.0-rc5` 起不再 bundle 通用 runner、schemas 或 explicit `soft-eval`
 skill。可执行 evidence machinery 已迁移到独立维护的 Skill Field Lab；它不是
 Softpowers runtime dependency，也不会由 Softpowers installer 管理。

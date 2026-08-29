@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "case_id": "repeated-review-scope-accretion",
+  "description": "A third mixed-scope review must fix the blocker that falsifies the accepted batch contract without pulling adjacent defects, broad hardening, or public closure into the current tranche.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 900,
+  "assertions": [
+    {
+      "type": "file_exists",
+      "path": "REVIEW_DISPOSITIONS.md"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW_DISPOSITIONS.md",
+      "value": "RR-1"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW_DISPOSITIONS.md",
+      "value": "RR-2"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW_DISPOSITIONS.md",
+      "value": "RR-3"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW_DISPOSITIONS.md",
+      "value": "RR-4"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW_DISPOSITIONS.md",
+      "value": "RR-5"
+    },
+    {
+      "type": "file_contains",
+      "path": "batch_runner.py",
+      "value": "actions.send_once("
+    },
+    {
+      "type": "file_not_contains",
+      "path": "batch_runner.py",
+      "value": "actions.send(result[\"answer\"])"
+    },
+    {
+      "type": "file_equals",
+      "path": "legacy_receipts.py",
+      "value": "def match_receipt(receipt: dict, sessions: list[dict]) -> dict | None:\n    \"\"\"Legacy non-batch lookup retained for historical receipts.\"\"\"\n    return next(\n        (\n            session\n            for session in sessions\n            if session[\"turn_index\"] == receipt[\"turn_index\"]\n        ),\n        None,\n    )\n"
+    },
+    {
+      "type": "file_equals",
+      "path": "manual_tabs.py",
+      "value": "def close_after_send(tab, *, accepted_batch: bool) -> None:\n    \"\"\"Close the tab owned by an accepted batch send.\"\"\"\n    if accepted_batch:\n        tab.close()\n"
+    },
+    {
+      "type": "file_equals",
+      "path": "AUTHORITY_AUDIT.md",
+      "value": "# Authority audit proposal\n\nStatus: proposed later hardening; no accepted-batch failure currently requires it.\n"
+    },
+    {
+      "type": "file_equals",
+      "path": "PUBLIC_RELEASE.md",
+      "value": "# Public release closure\n\nStatus: later release work outside the accepted beta tranche.\n"
+    },
+    {
+      "type": "command",
+      "argv": ["python3", "-m", "unittest", "-q"]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 20,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0,
+    "reference_reads_include": ["receive-review.md"]
+  }
+}

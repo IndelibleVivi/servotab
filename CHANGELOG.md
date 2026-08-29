@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Distinguished host-provided subagent capability from Softpowers parallel routing, and made `execute` / `debug` load the bounded Worker Lanes contract before a justified first dispatch without changing the router-only implicit activation topology.
+- Escalated material boundaries without a cheap reliable reproducer into one bounded testability seam while keeping named-host acceptance separate, and added a portable host-surrogate canary without creating a new testing leaf or routing surface.
 - Added authority-aware goal routing so derived specifications and implementation artifacts cannot silently reorder an accepted programme or widen its trust model, while explicitly authorized foundational work remains possible without a present consumer.
 - Carried the goal-authority invariant through direct `plan`, `receive-review`, and `finish` leaves instead of relying on implicit router activation.
 - Scoped `advances`, `research-only`, `diverges`, and `authority unclear` review verdicts to changes that can alter product meaning, programme order, trust boundaries, or generalized infrastructure.

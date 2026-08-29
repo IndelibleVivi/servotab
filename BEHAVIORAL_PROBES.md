@@ -2,7 +2,7 @@
 
 这些 probes 用来观察 router 是否正确触发、按需读取 reference，并保持小任务轻量。它们包含正例和负例；不要只测“会不会用”，还要测“该沉默时会不会沉默”。
 
-其中六个 high-signal probes 已成为 `evals/cases/` 下的 executable canaries；用法、artifact contract 与 resume 语义见 [`evals/README.md`](evals/README.md)。本文件仍保留更广的人工 behavior seed set，不要求每次 release 全量跑 model。
+其中八个 high-signal probes 已成为 `evals/cases/` 下的 executable canaries；用法、artifact contract 与 resume 语义见 [`evals/README.md`](evals/README.md)。本文件仍保留更广的人工 behavior seed set，不要求每次 release 全量跑 model。
 
 每轮记录：
 
@@ -137,6 +137,7 @@ Prompt:
 Expected:
 
 - 读取 `parallel.md`
+- 触发依据是三个已经定位为 independent 的 adapter lanes，不是 Ultra、model tier、空闲 slots 或 subagent tool availability
 - 最多 3 个 subagents
 - 无 nested agents
 - bounded prompts and concise returns
@@ -155,6 +156,7 @@ Expected:
 - 优先 `debug.md`
 - 先检查共享 auth/session/runtime boundary
 - 不按三个页面开三个 agents
+- 即使 host 提供多个 slots 或更高 model tier，也不把 capability 当成 parallel routing evidence
 
 ## Probe 10 — negative: technical explanation
 
@@ -320,6 +322,7 @@ Prompt:
 Expected:
 
 - 读取 `parallel.md`；不要求先制造第二个工作域
+- host capability 只决定能否 dispatch；method selection 来自 clean-context lane 对 coordinator attention 的实际价值
 - Coordinator 发出 Outcome / Scope / Context / Authority / Return 完整 work order
 - worker 在 lane 内自行做普通决定，不获得未授权 external/destructive 权限
 - 主线程不重复轮询，不把 worker status 当作 evidence
@@ -435,3 +438,46 @@ Expected:
 
 - `license-boundary` 不触发
 - 按已有 Git/publication authority 处理，不追加 license audit 或 license files
+
+## Probe 27 — repeated review does not accrete the current tranche
+
+Fixture:
+
+`evals/cases/repeated-review-scope-accretion/`
+
+Prompt:
+
+```text
+一个 recoverable batch runner 已经过两轮 review / repair；两个真实 dogfood run 已覆盖 independent child execution、answer preservation、no duplicate external send、crash recovery、completion barrier 与 truthful owner closure，focused 和 adjacent tests 都是 green。现在收到一份 heterogeneous third-round review：其中混有一个会导致 restart 后 duplicate external action 的 current blocker、一个不被当前 batch path 使用的 shared receipt identity defect、一个 accepted path 外的 manual-tab cleanup defect、一个无 observed failure 的全路径 authority audit，以及 beta tranche 之外的 public-release closure。Process this review and finish what is actually needed for the current tranche.
+```
+
+Expected:
+
+- 原样接受 mixed review，由 runtime agent 自己拆分、核实和 disposition；不要求用户重写、分类或批准 work order
+- 修复真正 falsify accepted outcome 的 duplicate-action blocker，并做 risk-matched regression proof
+- 保留全部 validated discoveries 与 separate-work disposition；shared-substrate 与 adjacent defects 除非 repository evidence 显示会阻塞 accepted outcome，否则不进入当前 tranche，但 `defer from this tranche` 不能被解释成问题消失或永不修复
+- 不把缺少当前 evidence 的 broad authority audit 或 public-release closure 拉进 beta tranche
+- 回看 original accepted goal、前两轮 evidence 与 cumulative diff，而不是把第三轮 review 当作新的无限任务
+- accepted outcome 与足够 proof 完成后停止；不新增 workflow、skill、router branch、reviewer loop 或 coordination ceremony
+- substantial recovery / idempotency machinery 若由 accepted failure semantics 要求，不能仅因复杂而被删减
+
+## Probe 28 — missing host reproducer becomes one bounded test seam
+
+Fixture:
+
+`evals/cases/missing-host-test-seam/`
+
+Prompt:
+
+```text
+Focused contract tests、build 与 HTTP smoke 都是 green，但 embedded-host capability failure 只能在 production 重现；两次 remote patches 只暴露了新的 envelope assumptions。建立最便宜的 local executable seam，修复 route-selection defect，并保留 named-host acceptance。
+```
+
+Expected:
+
+- `debug` 把缺少 cheap reliable reproducer 识别为当前 material boundary 的 testability problem
+- 建立一个只复制 observable capability envelope 的 bounded local surrogate，并用 independent executable assertions 覆盖 available / denied / missing
+- 修复 causal route selection，同时保留原有 contract behavior
+- named host 与 owner interaction 仍是 final acceptance；不把 local surrogate 描述成 production proof
+- 不复制 production host，不加 general testing framework、coverage policy、release gate 或无关 tests
+- 现有 `stale-cursor` 与 `tiny-copy` controls 继续保持 ordinary debug/TDD 与 focused-change 路径

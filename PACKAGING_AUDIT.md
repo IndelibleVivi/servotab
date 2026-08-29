@@ -10,6 +10,10 @@ payload to one engineering router plus its explicit method leaves.
 - `softpowers`: `allow_implicit_invocation: true`
 - 12 `soft-*` leaf skills: `allow_implicit_invocation: false`
 - Manifest records the same split under `activation`.
+- Natural-language parallel work stays on the implicit router path: the router reads
+  `parallel.md`, while the explicit `soft-parallel` leaf remains a manual shortcut.
+- Host-provided subagent tools, concurrency, and model tier are capability inputs,
+  not evidence that Softpowers selected the parallel method.
 - Router description contains both positive repository-work scope and negative controls.
 - Repository license selection is explicitly outside router scope and retained
   as a negative-routing seed.
@@ -26,7 +30,7 @@ The implicit router owns exactly 12 references.
 - No reference may route to another reference.
 - No repeated reference reads or lifecycle preloading.
 
-The router body is 645 words, below the 650-word release gate.
+The router body is 647 words, below the 650-word release gate.
 
 ## Single source of truth
 
@@ -99,7 +103,7 @@ The user installation path uses only Python standard library.
 - Manifest freshness and digest validation
 - Historical retired-skill migration and independent-ownership validation
 - Standard-library transaction self-test without a Field Lab dependency
-- Optional Field Lab validation of three repository-owned canaries with
+- Optional Field Lab validation of eight repository-owned canaries with
   known-fail/known-pass assertions and zero target-model invocations
 - Python compilation and shell syntax
 - Default current-root install

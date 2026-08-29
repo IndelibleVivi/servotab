@@ -12,6 +12,7 @@ implicit-reference-build,true,execute,"参考这份消费端产品介绍、tutor
 implicit-common-cause,true,debug,"Dashboard、Chat、Memory 同时丢失用户状态，调查共享根因并修复。"
 implicit-parallel,true,parallel,"三个独立平台 adapter 的测试组分别失败，并行只读调查后统一整合。"
 implicit-context-lane,true,parallel,"这个研究任务很长而且会污染主线程，请给一个 worker 明确 bounded lane，主线程保留协调和最终判断。"
+implicit-parallel-tier-control,true,debug,"Dashboard、Chat、Memory 同时丢失用户状态，根因还没定位；现在开了 Ultra 而且有多个 subagent slots，先调查并修复。"
 implicit-boundary-localization,true,debug,"Web 端上传成功，桌面端只在部分登录状态下挂起，服务端没有报错。定位第一个坏掉的契约再修复。"
 implicit-fallback-pressure,true,debug,"现有天气源偶发 timeout；用户只要求把真实失败显示清楚。调查并实现，不改变产品范围。"
 implicit-security-boundary,true,execute,"给公网 password reset 加一次性 token 和过期处理，保持真实安全边界但不要扩建无关系统。"

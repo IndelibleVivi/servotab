@@ -7,6 +7,13 @@ description: "Delegate a small number of bounded engineering lanes to subagents 
 
 Use worker lanes to move bounded responsibility into clean agent contexts without confusing delegation with permission. Use the fewest work surfaces that materially improve the outcome.
 
+## Capability and routing boundary
+
+- The host and current instructions decide whether subagent tools exist, how much concurrency is available, and whether delegation is permitted. Softpowers cannot create or override that capability.
+- Select this method from task topology: independent substantial lanes, one noisy responsibility that benefits from clean context, distinct evidence questions after localization, or a genuinely useful independent review. Model or reasoning tier, idle slots, and a harness-initiated spawn are not evidence that this method was selected.
+- In ordinary-language work, the implicit `softpowers` router reads this reference and applies its contract. The explicit `soft-parallel` leaf is a manual entry point; its name need not appear in the UI for the method to govern a delegation.
+- If delegation is unavailable or forbidden, keep the same ownership boundaries while sequencing the work locally. Do not claim a parallel execution that did not occur.
+
 ## Responsibility model
 
 - The **Requester** sets the objective and grants authority.
@@ -18,7 +25,7 @@ These are responsibilities, not ranks. A fresh context is a clean workbench; it 
 
 ## Delegation gate
 
-Use a lane when at least one brings material value:
+When delegation is available, use a lane when at least one brings material value:
 
 - Two or more substantial domains can proceed independently.
 - A noisy research or long-running responsibility benefits from clean context.

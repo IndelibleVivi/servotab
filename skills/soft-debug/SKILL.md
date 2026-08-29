@@ -43,6 +43,8 @@ If reproduction is intermittent, record frequency and conditions. Avoid treating
 
 Local or dev-browser behavior and behavior in a named host are separate observations. When the contract is host-specific, use the exact host surface as the reproducer; local checks may isolate a layer, but cannot close the host claim.
 
+If a material boundary has no cheap reliable reproducer, treat that absence as a testability problem instead of continuing remote patch/deploy attempts that do not narrow the hypothesis space. Establish—or hand off as one bounded structural slice—the smallest stable executable seam, local contract surrogate, or diagnostic needed to reveal the first violated boundary. Keep the exact named host as final acceptance; do not duplicate production, create a general testing programme, or add harness work unrelated to the current failure.
+
 ## 3. Trace the cause
 
 Trace bad state backward:
@@ -71,7 +73,7 @@ Test the smallest discriminating change or observation. Avoid changing several v
 
 This is a guard against thrashing, not a reason to stop at an arbitrary number when new evidence is strong.
 
-Do not delegate a vague symptom. Delegate only after localization reveals distinct evidence questions, then verify returned claims against the primary artifacts.
+Do not delegate a vague symptom. Delegate only after localization reveals distinct evidence questions; before dispatch, treat that as a phase change and apply the parallel reference. Then verify returned claims against the primary artifacts.
 
 ## Reset the mechanism when patches multiply
 
