@@ -1,8 +1,0 @@
-interface:
-  display_name: "Soft Spec Chain"
-  short_description: "Carry an approved spec through full implementation"
-  default_prompt: "Use $soft-spec-chain to turn this approved specification into a complete implementation plan and preserve its scope through execution."
-policy:
-  products:
-    - CODEX
-  allow_implicit_invocation: false

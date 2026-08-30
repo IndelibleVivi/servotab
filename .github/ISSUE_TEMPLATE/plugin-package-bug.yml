@@ -1,0 +1,86 @@
+name: Plugin package bug
+description: Report marketplace discovery, plugin validation, installation, update, or package-asset problems.
+title: "[Plugin package] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Servotab is distributed as a Codex plugin package. Please preserve the failing marketplace or plugin-validation output and keep all evidence public-safe.
+
+  - type: input
+    id: version
+    attributes:
+      label: Servotab version or commit
+      placeholder: 0.4.0-rc1 or the output of git rev-parse --short HEAD
+    validations:
+      required: true
+
+  - type: input
+    id: platform
+    attributes:
+      label: Codex surface and platform
+      placeholder: Codex desktop on macOS 15.6
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Failing package surface
+      options:
+        - Marketplace discovery
+        - Plugin validation
+        - Plugin install or update
+        - Skill activation
+        - Composer icon or logo
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command or UI action
+      description: Replace personal paths with placeholders and remove environment values.
+      render: shell
+      placeholder: Describe the exact plugin action or paste the sanitized validation command.
+    validations:
+      required: true
+
+  - type: textarea
+    id: package-source
+    attributes:
+      label: Package source
+      description: Identify the repository ref, release artifact, or configured marketplace without including a personal absolute path.
+      placeholder: IndelibleVivi/servotab at commit abc1234
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed result and redacted error output
+      description: Include the full relevant error, but remove private paths, usernames, tokens, and unrelated content.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation evidence
+      description: Include the relevant plugin or marketplace validation result. Do not paste unrelated skill listings or account data.
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public-data check
+      options:
+        - label: I removed secrets, account details, private source, personal absolute paths, local notes, and full private Codex transcripts from this issue.
+          required: true

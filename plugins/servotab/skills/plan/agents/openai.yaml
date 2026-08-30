@@ -1,0 +1,7 @@
+interface:
+  display_name: "Plan"
+  short_description: "Create a practical implementation plan"
+  default_prompt: "Use $plan to produce a concise, repository-grounded implementation plan sized to this change."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

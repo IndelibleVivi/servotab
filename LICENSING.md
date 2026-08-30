@@ -1,9 +1,9 @@
 # Licensing
 
-Softpowers uses layered licensing beginning with version `0.3.0-rc1`.
-This map determines which public license applies to project-authored material
-in current repository paths. Governing license texts and third-party material
-remain under their own terms.
+Servotab continues the layered licensing introduced for Softpowers beginning
+with version `0.3.0-rc1`. This map determines which public license applies to
+project-authored material in the paths it expressly covers. Governing license
+texts and third-party material remain under their own terms.
 
 Copyright (c) 2026 Faye (@IndelibleVivi) for project-original material she controls.
 Contributor and third-party rights remain with their respective rights holders.
@@ -15,7 +15,10 @@ Created by Faye & Cove.
 The [Sustainable Use License v1.0](LICENSE) applies to the project's original
 functional materials, including:
 
-- `install.sh`, `uninstall.sh`, `scripts/`, `methods/`, and `skills/`;
+- `scripts/`, `methods/`, and the generated skill projection under
+  `plugins/servotab/skills/`;
+- plugin and marketplace manifests under `plugins/servotab/` and
+  `.agents/plugins/`;
 - `PACK_MANIFEST.json`, `VERSION`, `.gitignore`, and `.github/`;
 - `fieldlab-pack.json`, `evals/activation-prompts.csv`, `evals/cases/`, and
   machine-readable records under `evals/claims/`, `evals/receipts/`, and
@@ -37,6 +40,7 @@ licensed under
 - `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`;
 - `LICENSING.md`, `LICENSE-DOCUMENTATION.md`, and `LICENSE-HISTORY.md`;
 - `BEHAVIORAL_PROBES.md`, `PACKAGING_AUDIT.md`;
+- `AGENTS.md`, `assets/README.md`, and `site/README.md`;
 - `evals/README.md`, `evals/candidates/`, and the `README.md` files under
   `evals/claims/`, `evals/receipts/`, and `evals/decisions/`;
 - `docs/`; and
@@ -54,11 +58,21 @@ third-party material. [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) records
 material attribution already incorporated into the public package.
 [docs/external-patterns.md](docs/external-patterns.md) records comparative
 sources reviewed without treating those repositories as dependencies or
-relicensing their contents.
+  relicensing their contents.
+
+## Identity assets and website expression
+
+This license map does not currently offer the Servotab name, mark geometry,
+raster identity exports under `assets/` or `plugins/servotab/assets/`, or the
+original public-facing prose and visual compositions under `site/src/` for
+third-party reuse. Their presence in the public repository or on the Servotab
+website is not a separate trademark, copyright, or reuse grant. A future
+path-level grant requires an explicit rights decision by the relevant rights
+holder; none is inferred here.
 
 Where a file contains third-party material under a compatible or separate
 license, that material remains under its original terms. Entries described as
-conceptual references do not become part of Softpowers merely because the
+conceptual references do not become part of Servotab merely because the
 project links to or discusses them.
 
 ## Separate permissions

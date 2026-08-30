@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+---
+
+<BaseLayout
+  title="Privacy"
+  description="The current privacy boundary for the static Servotab website and public support surfaces."
+>
+  <PageIntro
+    index="05 / Privacy"
+    title="A static site with a small data surface."
+    description="Servotab.com has no account system, backend, database, analytics, advertising, or first-party tracking. Hosting and external services retain their own boundaries."
+  />
+
+  <article class="legal-document shell">
+    <div class="legal-grid">
+      <aside class="legal-aside">Last updated<br />30 August 2026</aside>
+      <div class="legal-prose">
+        <section>
+          <h2>The website</h2>
+          <p>
+            This site is delivered as static files. It does not provide sign-in,
+            user accounts, a product database, a first-party feedback form,
+            analytics, advertising, tracking pixels, or first-party tracking cookies.
+          </p>
+        </section>
+
+        <section>
+          <h2>Hosting and ordinary request data</h2>
+          <p>
+            The site is intended to be served through Cloudflare. Like an ordinary
+            hosting and security layer, Cloudflare may process request information
+            such as network address, user agent, requested URL, and timestamps to
+            deliver and protect the site or maintain service logs. Cloudflare’s
+            settings, policies, and retention practices govern that provider-side
+            processing; this page does not promise a specific provider retention period.
+          </p>
+        </section>
+
+        <section>
+          <h2>The Servotab product</h2>
+          <p>
+            Servotab’s planned public form is a skills-only engineering method layer.
+            It does not add a Servotab account or product dashboard. Codex, repositories,
+            browsers, terminals, tools, and external services used during engineering
+            work remain governed by their own settings, permissions, and privacy terms.
+          </p>
+        </section>
+
+        <section>
+          <h2>Public support</h2>
+          <p>
+            Support links lead to a public GitHub issue tracker. Information submitted
+            there is shared with GitHub and may be visible to anyone. Remove secrets,
+            private code, personal data, account details, local paths, and private
+            transcripts before posting. See the <a href="/support">support guide</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2>External links</h2>
+          <p>
+            Links to GitHub, OpenAI, Cloudflare, or other sites leave servotab.com.
+            Those services apply their own terms and privacy practices.
+          </p>
+        </section>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

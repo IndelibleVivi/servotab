@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { PROJECT_LINKS, repoFile } from "../config";
+---
+
+<BaseLayout
+  title="Lineage"
+  description="The conceptual, repository, and licensing lineage from Softpowers to Servotab."
+>
+  <PageIntro
+    index="03 / Lineage"
+    title="Softpowers found the exponent. Servotab found how it applies force."
+    description="Servotab keeps the strongest construction insight from Softpowers while giving the public product its own mechanism, name, domain, and visual world."
+  />
+
+  <section class="content-band" aria-labelledby="lineage-statement">
+    <div class="shell">
+      <h2 id="lineage-statement" class="lineage-statement">
+        The task stays the base. <span>Method remains raised and conditional.</span>
+      </h2>
+
+      <div class="lineage-grid">
+        <article>
+          <span class="rail-label">inherit / Softpowers</span>
+          <h2>Raised method</h2>
+          <p>
+            Softpowers established the task as the base and method as a smaller,
+            raised operator. Servotab preserves that hierarchy, day-first clarity,
+            evidence-scoped claims, and proportionate depth.
+          </p>
+        </article>
+        <article>
+          <span class="rail-label">thesis / durable</span>
+          <h2>Exponent, not machinery</h2>
+          <p>
+            Method modifies the work without replacing it. The user’s task,
+            repository, permissions, and requested outcome remain authoritative.
+          </p>
+        </article>
+        <article>
+          <span class="rail-label">transform / Servotab</span>
+          <h2>Controlled leverage</h2>
+          <p>
+            The raised <span class="mono">p</span> becomes a raised <span class="mono">t</span>:
+            both notation and a real tab—attached, directional, bounded, and able
+            to change a larger trajectory before settling.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band" aria-labelledby="independent-lineage-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Independent lineage</p>
+      <div class="content-prose">
+        <h2 id="independent-lineage-heading">Shared problem domains. Independently written methods.</h2>
+        <p>
+          The project began as an independent rewrite inspired by{" "}
+          <a href="https://github.com/obra/superpowers">obra/superpowers</a>.
+          It works across familiar engineering domains while independently defining
+          its activation model, progressive disclosure, workflow thresholds, testing
+          policy, review shape, delegation contract, and verification scope.
+        </p>
+        <p>
+          Additional method references and retained terminology are recorded in{" "}
+          the repository’s <a href={repoFile("THIRD_PARTY_NOTICES.md")}>Third-Party Notices</a>.
+          The <a href={repoFile("LICENSE-HISTORY.md")}>License History</a> preserves
+          the forward-only licensing boundary across earlier revisions.
+        </p>
+        <p><a href={PROJECT_LINKS.source}>Inspect the preceding public source and history</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band content-band-ink" aria-labelledby="retired-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Retired identity</p>
+      <div class="content-prose">
+        <h2 id="retired-heading">The lineage stays visible. The product moves forward.</h2>
+        <p>
+          Servotab is not presented as a lighter “power-up,” a cockpit, or a fixed
+          workflow system. The exponent survives because it still explains the
+          relationship between task and method; the new tab explains how that
+          small method acts with bounded force.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

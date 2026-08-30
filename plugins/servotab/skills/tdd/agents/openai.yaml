@@ -1,0 +1,7 @@
+interface:
+  display_name: "TDD"
+  short_description: "Risk-based test-driven development"
+  default_prompt: "Use $tdd to choose the appropriate testing mode and implement this behavior with high-signal regression evidence."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

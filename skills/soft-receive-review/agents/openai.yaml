@@ -1,8 +1,0 @@
-interface:
-  display_name: "Soft Receive Review"
-  short_description: "Evaluate review feedback before applying it"
-  default_prompt: "Use $soft-receive-review to verify each review item against the repository, implement valid feedback, and push back where needed."
-policy:
-  products:
-    - CODEX
-  allow_implicit_invocation: false

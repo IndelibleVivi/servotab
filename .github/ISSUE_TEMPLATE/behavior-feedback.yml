@@ -5,13 +5,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for testing Softpowers on real work. Please keep the prompt and evidence minimal and public-safe.
+        Thanks for testing Servotab on real work. Please keep the prompt and evidence minimal and public-safe.
 
   - type: input
     id: version
     attributes:
-      label: Softpowers version or commit
-      placeholder: 0.3.0-rc5 or the output of git rev-parse --short HEAD
+      label: Servotab version or commit
+      placeholder: 0.4.0-rc1 or the output of git rev-parse --short HEAD
     validations:
       required: true
 
@@ -56,7 +56,7 @@ body:
     id: expected
     attributes:
       label: Expected behavior
-      placeholder: What should Softpowers or Codex have done?
+      placeholder: What should Servotab or Codex have done?
     validations:
       required: true
 
@@ -64,7 +64,7 @@ body:
     id: observed
     attributes:
       label: Observed behavior
-      placeholder: What actually happened, including whether softpowers activated and which references were read if visible?
+      placeholder: What actually happened, including whether servotab activated and which references were read if visible?
     validations:
       required: true
 

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Finish"
+  short_description: "Verify and close a development change safely"
+  default_prompt: "Use $finish to inspect the final tree, run risk-matched checks, and perform only the requested Git or PR actions."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

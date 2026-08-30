@@ -1,6 +1,6 @@
 # External Pattern Registry
 
-这份 registry 记录 Softpowers 当前主动关注的外部来源、pinned ref、已选 pattern、decision 与 reopen condition。它承担增量复查入口；不构成 dependency list，也不表示代码或文本已被复制进 Softpowers。
+这份 registry 记录 Servotab 当前主动关注的外部来源、pinned ref、已选 pattern、decision 与 reopen condition。它承担增量复查入口；不构成 dependency list，也不表示代码或文本已被复制进 Servotab。
 
 Review date：`2026-08-30`
 
@@ -19,9 +19,9 @@ Review date：`2026-08-30`
 | `SWE-agent/mini-swe-agent` | `a83fcae82d2a08f0ee0c688f9d137b3566c097f8` | MIT | `ADAPT` thin runner / linear raw JSONL trace applied | Eval implementation |
 | `SWE-bench/SWE-bench` | `ca6e4e0d252f32f8762625b73575d5dee49d0a5a` | MIT | `ADAPT` fixture and subject identity metadata applied；cache/regrade remains deferred | Eval implementation |
 | `UKGovernmentBEIS/inspect_ai` | `286163f12aa627af22051bd95321bc6404e237ae` | Inspect repository license applies; verify exact reused component before copying | `DEFER` framework dependency；`ADAPT` task/solver/scorer separation conceptually | Eval architecture |
-| `openai/plugins` | `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` | No repository-level license file at this ref；inspect each plugin manifest before reuse | `DEFER` generated plugin projection until distribution need is real | Packaging / distribution |
+| `openai/plugins` | `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` | No repository-level license file at this ref；inspect each plugin manifest before reuse | `ADAPT` plugin-native package + repo marketplace applied in 0.4.0-rc1；directory submission remains owner-gated | Packaging / distribution |
 | `trailofbits/overtly-malicious-skills` | `4ffbf9461ef0505f9ce76a0d3694a18ec33ea531` | No license file at this ref；security research reference only; never install | `ADAPT` adversarial audit ideas；`REJECT` executing upstream payloads | Security tests |
-| `openai/codex` native review | `63d213884daea50e4f74efc192cdc44f549b67d5` | Apache-2.0；host behavior authority, not a Softpowers dependency | `ALREADY_COVERED` generic target/rubric behavior by the host；attribution control only, not the ordinary Soft Review workflow or its replacement ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Host baseline / eval |
+| `openai/codex` native review | `63d213884daea50e4f74efc192cdc44f549b67d5` | Apache-2.0；host behavior authority, not a Servotab dependency | `ALREADY_COVERED` generic target/rubric behavior by the host；attribution control only, not Servotab's ordinary `review` method or its replacement ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Host baseline / eval |
 | `SathiaAI/adversarial-review` | `343861548fbf58fb1d69c521d33ea38d2ea6f00b` | MIT；case shapes independently rewritten | `ADAPT` labeled defect + clean controls into one Field Lab canary；`REJECT` panel, scoring, rebuttal and release verdict ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Review eval |
 | `shakacode/agent-workflows` review skills | `1614b6758735cb3d5a02c3a4313af4e0eb2db4a8` | MIT；conceptual comparison only | `ALREADY_COVERED` target resolution and finding verification；`REJECT` mandatory loops, receipts and lens proliferation ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Review contrast |
 
@@ -37,7 +37,7 @@ Review only material changes around:
 - enforced sandbox and capability boundary；
 - claims grounded in executable witnesses。
 
-Ignore ordinary expansion of its security-specific stages unless Softpowers later gains a matching high-risk use case.
+Ignore ordinary expansion of its security-specific stages unless Servotab later gains a matching high-risk use case.
 
 ### Anthropic skill-creator
 
@@ -60,7 +60,7 @@ Review only material changes around:
 - branch-local blocking while an environmental investigation remains open；
 - the relationship between the explicit `grill-me` entry point and reusable `grilling` discipline。
 
-Retain the current rejection of mandatory exhaustive interviews, fixed question formatting, full-tree traversal for clear work, and a new wrapper-to-core invocation topology inside Softpowers.
+Retain the current rejection of mandatory exhaustive interviews, fixed question formatting, full-tree traversal for clear work, and a new wrapper-to-core invocation topology inside Servotab.
 
 ### ECC search-first
 
@@ -72,7 +72,7 @@ Review only material changes around:
 - candidate evaluation that includes maintenance, compatibility, license, dependency cost, and a current caller；
 - changes that make the skill less tied to one harness or hard-coded ecosystem list。
 
-Do not treat growth elsewhere in ECC's agents, hooks, memory, rules, MCP configuration, or lifecycle as a Softpowers requirement. Retain the rejection of universal research stages and full-harness adoption for this narrow behavior.
+Do not treat growth elsewhere in ECC's agents, hooks, memory, rules, MCP configuration, or lifecycle as a Servotab requirement. Retain the rejection of universal research stages and full-harness adoption for this narrow behavior.
 
 ### session-spoor
 
@@ -130,15 +130,15 @@ Review:
 - reproducible environment and cache keys；
 - re-grading saved outputs。
 
-Keep Softpowers runtime host-native. The rc2 embedded runner applied the
+Keep Servotab runtime host-native. The historical Softpowers rc2 embedded runner applied the
 thin-process, fixture-identity and raw-artifact kernels without importing either
 framework; rc5 moved that generic machinery into standalone Skill Field Lab and
-kept only the Softpowers subject cases here. Richer cache/regrade semantics
+kept only the project-owned subject cases here. Richer cache/regrade semantics
 remain deferred.
 
 ### Inspect AI
 
-Review when Softpowers needs a richer eval engine:
+Review when Servotab needs a richer eval engine:
 
 - task / solver / scorer separation；
 - sandbox and approval abstractions；
@@ -152,11 +152,12 @@ runner demonstrably fails to meet current needs.
 
 Review when:
 
-- Softpowers prepares official plugin distribution；
+- OpenAI's plugin package or marketplace contract changes materially；
+- Servotab receives explicit authority to prepare an official directory submission；
 - plugin manifest or marketplace contract changes；
 - skills, agents, commands, hooks or MCP surfaces become relevant to one package。
 
-Canonical `methods/*.md` and the Softpowers catalog remain source of truth. Plugin metadata should be generated projection.
+Canonical `methods/*.md` and `scripts/skill_catalog.py` remain source of truth for method content and activation metadata. `plugins/servotab/skills/**` is generated projection；the manifest and repo marketplace are explicit package surfaces. A validated package does not prove directory submission or publication.
 
 ### Trail of Bits malicious skills
 
@@ -181,7 +182,7 @@ leaf proliferation.
 
 A new repository enters this registry when at least one condition holds:
 
-- it addresses a recent real Softpowers failure；
+- it addresses a recent real Servotab failure；
 - it contains a mechanism absent from current methods and evals；
 - it provides reproducible evidence unavailable in current references；
 - it changes Codex skill/plugin compatibility or distribution；

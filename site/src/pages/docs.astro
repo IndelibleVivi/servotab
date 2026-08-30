@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { PROJECT_LINKS } from "../config";
+---
+
+<BaseLayout
+  title="Docs"
+  description="How Servotab calibrates method to repository risk, evidence, and the requested outcome."
+>
+  <PageIntro
+    index="01 / Docs"
+    title="Method stays subordinate to the work."
+    description="Servotab is a skills-only engineering method layer for Codex. It calibrates how much process a repository task receives without taking ownership away from the task, the repo, or the user."
+  />
+
+  <section class="content-band" aria-labelledby="working-model-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Working model</p>
+      <div class="content-prose">
+        <h2 id="working-model-heading">One router. A bounded set of methods.</h2>
+        <p>
+          Ordinary work begins in natural language. Servotab first asks whether
+          the task is already clear, local, and reversible. If it is, Codex should
+          work directly. If the task carries material uncertainty or risk, Servotab
+          selects the method that addresses that specific pressure.
+        </p>
+
+        <div class="direct-method-rail">
+          <article>
+            <span class="rail-label">clear / local</span>
+            <h3>Stay direct</h3>
+            <p>Inspect only what matters, make the coherent change, and verify the affected behavior.</p>
+          </article>
+          <article>
+            <span class="rail-label">uncertain / risky</span>
+            <h3>Invoke method</h3>
+            <p>Add design, planning, debugging, testing, review, isolation, delegation, or closure only where it protects the outcome.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band" aria-labelledby="sequence-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Sequence</p>
+      <div class="content-prose">
+        <h2 id="sequence-heading">Tab first. Response second. Receipt. Stop.</h2>
+        <p>
+          The motion grammar describes product behavior: intervention is small,
+          causal, and finite. Servotab does not add ambient “thinking” animation
+          or keep a task inside a process after the evidence has settled.
+        </p>
+
+        <div class="step-list">
+          <div class="step-row">
+            <span>01</span>
+            <div><h3>The base already exists.</h3><p>The requested task and repository remain the primary surface.</p></div>
+          </div>
+          <div class="step-row">
+            <span>02</span>
+            <div><h3>A method attaches locally.</h3><p>A bounded technique appears where it can materially change confidence or direction.</p></div>
+          </div>
+          <div class="step-row">
+            <span>03</span>
+            <div><h3>The larger work responds.</h3><p>The plan, implementation, diagnosis, or review changes in a way proportionate to the risk.</p></div>
+          </div>
+          <div class="step-row">
+            <span>04</span>
+            <div><h3>Fresh evidence settles the state.</h3><p>A named check or observed result supports the claim, and then the method stops.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band content-band-ink" aria-labelledby="boundaries-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Boundaries</p>
+      <div class="content-prose">
+        <h2 id="boundaries-heading">What Servotab does not claim.</h2>
+        <ul>
+          <li>It does not replace the user’s prompt, repository instructions, permissions, or Git decisions.</li>
+          <li>It does not make every task follow one mandatory end-to-end workflow.</li>
+          <li>It does not treat a green build as proof of deployment, runtime activation, or owner acceptance.</li>
+          <li>It does not turn an explicit complete request into a scaffold, placeholder, or unnamed partial result.</li>
+          <li>It does not make an OpenAI approval or availability claim. The public directory release is not live.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band" aria-labelledby="availability-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Availability</p>
+      <div class="content-prose">
+        <h2 id="availability-heading">Public release is still being prepared.</h2>
+        <p>
+          There is no installation button here because the OpenAI plugin directory
+          listing is not yet live. Exact installation and invocation guidance will
+          be documented only after the published package establishes those contracts.
+        </p>
+        <p>
+          The preceding public source and implementation history remain inspectable in
+          the <a href={PROJECT_LINKS.source}>historical project repository</a>. That
+          remote does not yet contain the current Servotab plugin or website candidate;
+          repository links will move to the Servotab identity when cutover is complete.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

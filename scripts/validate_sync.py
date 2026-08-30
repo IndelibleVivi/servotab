@@ -7,11 +7,11 @@ from build_skills import check
 def main() -> int:
     errors = check()
     if errors:
-        print("Softpowers source/generated sync failed:")
+        print("Servotab source/generated sync failed:")
         for error in errors:
             print(f"- {error}")
         return 1
-    print("Canonical methods, router references, and generated leaves are in sync.")
+    print("Canonical methods, Servotab router references, plugin leaves, and assets are in sync.")
     return 0
 
 

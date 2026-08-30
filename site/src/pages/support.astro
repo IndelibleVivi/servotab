@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { PROJECT_LINKS } from "../config";
+---
+
+<BaseLayout
+  title="Support"
+  description="Public-safe support and feedback guidance for Servotab."
+>
+  <PageIntro
+    index="04 / Support"
+    title="Bring the smallest public-safe evidence."
+    description="Use the public issue tracker for reproducible, sanitized reports about method behavior, completeness, documentation, or release packaging."
+  />
+
+  <section class="shell content-band" aria-labelledby="support-options-heading">
+    <h2 id="support-options-heading" class="visually-hidden">Support options</h2>
+    <div class="support-options">
+      <article>
+        <span class="rail-label">report / behavior</span>
+        <h2>Describe the mismatch.</h2>
+        <p>
+          Include what you expected, what happened, the relevant Servotab version
+          or commit, and a minimal reproduction when one can be shared safely.
+        </p>
+        <a class="text-link" href={PROJECT_LINKS.issues}>
+          Open the issue tracker
+          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M3 13 13 3M6 3h7v7" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+      <article>
+        <span class="rail-label">inspect / history</span>
+        <h2>Trace the public predecessor.</h2>
+        <p>
+          The linked repository still carries the preceding Softpowers source, release
+          history, licensing records, and issue tracker. It is not yet the current
+          Servotab implementation; that repository cutover remains separate.
+        </p>
+        <a class="text-link" href={PROJECT_LINKS.source}>
+          View historical source
+          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M3 13 13 3M6 3h7v7" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section class="content-band" aria-labelledby="include-heading">
+    <div class="shell content-layout">
+      <p class="section-index">What to include</p>
+      <div class="content-prose">
+        <h2 id="include-heading">Enough context to reproduce. Nothing private by default.</h2>
+        <ul>
+          <li>Servotab version or commit, if known.</li>
+          <li>Codex surface, operating system, and repository type when relevant.</li>
+          <li>A sanitized version of the original prompt.</li>
+          <li>Expected and observed behavior.</li>
+          <li>Visible method or reference routing, if the client exposes it.</li>
+          <li>Whether the final requested outcome remained complete.</li>
+          <li>The smallest logs, screenshots, or commands needed to support the report.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band content-band-ink" aria-labelledby="public-warning-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Public boundary</p>
+      <div class="content-prose">
+        <h2 id="public-warning-heading">GitHub Issues are public.</h2>
+        <p>
+          Remove credentials, tokens, private source, personal data, account details,
+          private paths, local notes, and full private Codex transcripts before posting.
+          If the evidence cannot be made public safely, do not put it in an issue.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

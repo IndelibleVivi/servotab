@@ -1,0 +1,7 @@
+interface:
+  display_name: "Verify"
+  short_description: "Match fresh verification to actual risk"
+  default_prompt: "Use $verify to prove the relevant completion claims with fresh, appropriately scoped evidence."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

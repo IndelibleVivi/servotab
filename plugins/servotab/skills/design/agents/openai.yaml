@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design"
+  short_description: "Turn rough ideas into implementable designs"
+  default_prompt: "Use $design to inspect the current context, resolve the real design decisions, and recommend an implementable direction."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

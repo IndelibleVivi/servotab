@@ -1,19 +1,18 @@
 {
-  "schema_version": 1,
-  "pack_id": "softpowers",
-  "description": "Softpowers behavior canaries executed by the optional standalone Skill Field Lab companion.",
+  "schema_version": 2,
+  "lab_id": "servotab",
+  "description": "Servotab behavior canaries executed by the optional standalone Skill Field Lab companion.",
   "cases_root": "evals/cases",
   "subjects": {
-    "softpowers-source": {
-      "label": "Current generated Softpowers skill tree",
-      "attribution": "repo_scoped",
-      "overlays": [
-        {
-          "source": "skills",
-          "target": ".agents/skills"
-        }
-      ],
-      "notes": "Build and validate the generated skills tree before creating an evidence plan."
+    "servotab-source": {
+      "kind": "agent-skill",
+      "label": "Current generated Servotab plugin skill tree",
+      "source": {
+        "type": "local-path",
+        "path": "plugins/servotab/skills"
+      },
+      "mount": ".agents/skills",
+      "notes": "Run the repository generation and validation checks before creating an evidence plan."
     }
   },
   "defaults": {
@@ -24,7 +23,8 @@
     "keep_workspace": false
   },
   "metadata": {
-    "migration_base_revision": "b2d1631c9bbfad0822d062fadd5adb1a04324fe9",
+    "source_schema_version": 2,
+    "runtime_projection": "plugins/servotab/skills",
     "activation_seed_file": "evals/activation-prompts.csv"
   }
 }

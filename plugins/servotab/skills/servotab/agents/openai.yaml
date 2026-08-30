@@ -1,0 +1,7 @@
+interface:
+  display_name: "Servotab"
+  short_description: "Quiet, risk-scaled engineering methods"
+  default_prompt: "Use $servotab to deliver the complete repository outcome with proportional method and fresh, risk-matched verification."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: true

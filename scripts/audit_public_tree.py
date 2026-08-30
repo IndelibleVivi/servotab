@@ -42,10 +42,25 @@ def candidate_files(root: Path) -> list[str]:
     if result.returncode != 0:
         message = result.stderr.decode("utf-8", errors="replace").strip()
         raise RuntimeError(f"git ls-files failed: {message}")
+    deleted = subprocess.run(
+        ["git", "ls-files", "--deleted", "-z"],
+        cwd=root,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if deleted.returncode != 0:
+        message = deleted.stderr.decode("utf-8", errors="replace").strip()
+        raise RuntimeError(f"git ls-files --deleted failed: {message}")
+    deleted_paths = {
+        item.decode("utf-8", errors="surrogateescape")
+        for item in deleted.stdout.split(b"\0")
+        if item
+    }
     return sorted(
         item.decode("utf-8", errors="surrogateescape")
         for item in result.stdout.split(b"\0")
-        if item
+        if item and item.decode("utf-8", errors="surrogateescape") not in deleted_paths
     )
 
 
