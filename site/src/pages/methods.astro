@@ -6,16 +6,16 @@ import { methods } from "../data/methods";
 
 <BaseLayout
   title="Methods"
-  description="The twelve candidate plugin-native methods in Servotab, from design through verified closure."
+  description="The twelve plugin-native methods in the current Servotab source candidate, from design through verified closure."
 >
   <PageIntro
     index="02 / Methods"
     title="Twelve methods. None mandatory by default."
-    description="These candidate plugin-native names describe distinct engineering pressures. Natural-language work may stay direct or route into one method; a person can also choose a method explicitly once the package contract is published."
+    description="These plugin-native names describe distinct engineering pressures. Natural-language work may stay direct or route into one method; a person using the source-checkout candidate can also choose a method explicitly."
   />
 
   <section class="shell content-band" aria-labelledby="method-list-heading">
-    <h2 id="method-list-heading" class="visually-hidden">Candidate Servotab methods</h2>
+    <h2 id="method-list-heading" class="visually-hidden">Servotab methods</h2>
     <div class="methods-list">
       {methods.map((method, index) => (
         <article class="method-row">

@@ -27,10 +27,10 @@ The site has no backend, database, account system, analytics, or first-party tra
 
 ## Public URLs
 
-The canonical domain is defined in `astro.config.mjs` and `src/config.ts`. The current source and issue tracker URLs are centralized in `src/config.ts`; update both values together after the GitHub repository cutover.
+The canonical domain is defined in `astro.config.mjs` and `src/config.ts`. The current Servotab source and issue tracker URLs are centralized in `src/config.ts` and must stay on the same repository identity.
 
 ## Design authority
 
 The implementation uses the approved Servotab `sᵗ` geometry and the v0 day-first identity: Paper `#FAF9F5`, Surface `#FFFFFF`, Ink `#151922`, Control blue `#315EFB`, open rails, raised controls, and bounded `tab → response → receipt → stop` motion. Reduced-motion users receive the final visual state without staged transitions.
 
-Do not add an installation action or runtime invocation syntax until the public plugin package establishes those contracts. Servotab is not currently listed in the OpenAI plugin directory.
+The website documents the source-checkout repository marketplace route for the current candidate. Keep that route explicitly separate from a tagged release, OpenAI plugin directory submission or listing, and OpenAI approval.
