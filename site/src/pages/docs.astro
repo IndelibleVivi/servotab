@@ -95,17 +95,18 @@ import { PROJECT_LINKS } from "../config";
     <div class="shell content-layout">
       <p class="section-index">Availability</p>
       <div class="content-prose">
-        <h2 id="availability-heading">Public release is still being prepared.</h2>
+        <h2 id="availability-heading">Source checkout is available. Directory publication is not.</h2>
         <p>
-          There is no installation button here because the OpenAI plugin directory
-          listing is not yet live. Exact installation and invocation guidance will
-          be documented only after the published package establishes those contracts.
+          The current Servotab source candidate is available in the{" "}
+          <a href={PROJECT_LINKS.source}>public repository</a>. Clone that repository and,
+          from its root, run <code>codex plugin marketplace add .</code> followed by{" "}
+          <code>codex plugin add servotab@personal</code> to use the repository marketplace route.
         </p>
         <p>
-          The preceding public source and implementation history remain inspectable in
-          the <a href={PROJECT_LINKS.source}>historical project repository</a>. That
-          remote does not yet contain the current Servotab plugin or website candidate;
-          repository links will move to the Servotab identity when cutover is complete.
+          This is source-checkout installation of the candidate, not a tagged release,
+          an OpenAI plugin directory listing, or evidence of OpenAI approval. The same
+          repository preserves the earlier Softpowers commits, release records, licensing
+          history, and provenance without relabelling those historical versions as Servotab.
         </p>
       </div>
     </div>
