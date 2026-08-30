@@ -6,10 +6,10 @@ export const SITE = {
     "Adaptive engineering methods for planning, implementation, debugging, review, and verification in Codex.",
 } as const;
 
-// Update these two values together when the GitHub cutover is complete.
+// Keep the public source and issue tracker on the same repository identity.
 export const PROJECT_LINKS = {
-  source: "https://github.com/IndelibleVivi/softpowers",
-  issues: "https://github.com/IndelibleVivi/softpowers/issues",
+  source: "https://github.com/IndelibleVivi/servotab",
+  issues: "https://github.com/IndelibleVivi/servotab/issues",
 } as const;
 
 export const repoFile = (path: string) =>

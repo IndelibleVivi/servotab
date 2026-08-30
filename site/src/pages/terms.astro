@@ -6,7 +6,7 @@ import { repoFile } from "../config";
 
 <BaseLayout
   title="Terms"
-  description="Servotab project status, website rights boundary, and historical source licensing context."
+  description="Servotab project status, website rights boundary, and layered source licensing context."
 >
   <PageIntro
     index="06 / Terms"
@@ -16,7 +16,7 @@ import { repoFile } from "../config";
 
   <article class="legal-document shell">
     <div class="legal-grid">
-      <aside class="legal-aside">Last updated<br />30 August 2026</aside>
+      <aside class="legal-aside">Last updated<br />31 August 2026</aside>
       <div class="legal-prose">
         <section>
           <h2>Project status and affiliation</h2>
@@ -30,29 +30,31 @@ import { repoFile } from "../config";
         <section>
           <h2>Source-package licensing</h2>
           <p>
-            Servotab does not currently distribute a source package from this website.
-            When source is published, the path-level licensing map and governing texts
-            shipped with those exact files control. The linked{" "}
-            <a href={repoFile("LICENSING.md")}>historical licensing map</a> governs the
-            preceding public Softpowers repository, not this uncutover Servotab candidate.
+            The public Servotab repository contains the current source candidate; it is
+            not a tagged release or an OpenAI directory publication. The path-level{" "}
+            <a href={repoFile("LICENSING.md")}>licensing map</a>, governing license texts,
+            package-local notices, and third-party terms shipped with those exact files
+            control. Repository access does not collapse those layers into one license.
           </p>
         </section>
 
         <section>
           <h2>Functional materials</h2>
           <p>
-            Earlier public functional materials identified by the historical map are
-            governed by the <a href={repoFile("LICENSE")}>Sustainable Use License v1.0</a>.
-            Current Servotab implementation files are not offered for download here;
-            do not infer a source-code grant from access to the website.
+            Project-original functional materials expressly identified by the current
+            map—including methods, scripts, the generated skill projection, manifests,
+            and behavior fixtures—are governed by the{" "}
+            <a href={repoFile("LICENSE")}>Sustainable Use License v1.0</a>. Public source
+            visibility does not expand that license or turn the repository into an OSI
+            open-source distribution.
           </p>
         </section>
 
         <section>
           <h2>Documentation</h2>
           <p>
-            Earlier public documentation specifically identified by the historical
-            map is governed by{" "}
+            Project-original expression in the documentation paths specifically identified
+            by the current map is governed by{" "}
             <a href={repoFile("LICENSE-DOCUMENTATION.md")}>CC BY-NC-SA 4.0</a>.
             That license does not automatically apply to this website, identity assets,
             functional source, methods, scripts, manifests, fixtures, or other materials.
@@ -82,11 +84,11 @@ import { repoFile } from "../config";
         <section>
           <h2>Current product information</h2>
           <p>
-            Pages on this site describe the current public product model, website, and
-            release status. Exact installation and invocation contracts will be documented
-            only when a public package is available. Until repository cutover, repository
-            links point to the preceding public Softpowers source for history and provenance;
-            they are not the current Servotab implementation authority.
+            Pages on this site describe the current public product model, source-candidate
+            availability, website, and release status. The Servotab repository is the current
+            source authority and preserves the earlier Softpowers commits, release records,
+            and provenance. Source-checkout installation remains distinct from a tagged
+            release, OpenAI directory submission, directory publication, and OpenAI approval.
           </p>
         </section>
       </div>

@@ -1,13 +1,13 @@
 # Servotab for Codex
 
-[![Validate](https://github.com/IndelibleVivi/softpowers/actions/workflows/validate.yml/badge.svg)](https://github.com/IndelibleVivi/softpowers/actions/workflows/validate.yml)
+[![Validate](https://github.com/IndelibleVivi/servotab/actions/workflows/validate.yml/badge.svg)](https://github.com/IndelibleVivi/servotab/actions/workflows/validate.yml)
 [![License: layered](https://img.shields.io/badge/license-SUL--1.0%20%2B%20CC%20BY--NC--SA%204.0-blue.svg)](LICENSING.md)
 
 Servotab 是一个 independent、community-maintained 的 Codex engineering plugin：清楚的改动保持直接，风险和不确定性升高时才加载更强的方法，最后用 fresh evidence 关闭真实 outcome。
 
 > Method as exponent, not machinery.
 
-当前 source candidate：`0.4.0-rc1`。Servotab 不是 OpenAI 官方产品，也尚未提交或列入 OpenAI plugin directory；directory submission 与 publication 仍是 owner-controlled release gate。实时的 package、GitHub、website 与 Cloudflare 状态见 [docs/current-state.md](docs/current-state.md)。
+当前 source candidate：`0.4.0-rc1`。Public repository 提供 source-checkout installation，但当前 candidate 尚未 tagged 或创建 GitHub Release。Servotab 不是 OpenAI 官方产品，也尚未提交或列入 OpenAI plugin directory；directory submission 与 publication 仍是 owner-controlled release gate。实时的 package、GitHub、website 与 Cloudflare 状态见 [docs/current-state.md](docs/current-state.md)。
 
 ## 它做什么
 
@@ -22,19 +22,20 @@ Servotab 保持四个稳定承诺：
 
 Servotab 也不会把日志、截图、review、旧计划或 generated artifact 自动当成指令。它们可能是 evidence；当前用户意图、accepted specification 与 canonical source 才决定工作方向。
 
-## 本地 checkout 验证（maintainer only）
+## 安装（public source checkout）
 
-当前 `0.4.0-rc1` candidate 还没有 commit 或 push 到现有 public remote；历史 GitHub URL 仍提供 Softpowers `0.3.0-rc5`，不能 clone 后当成 Servotab 安装。只有已经持有这个精确本地 checkout 的 maintainer 才应运行下面的 package-discovery commands：
+当前 public route 是 repository marketplace/source checkout：
 
 ```bash
-cd /path/to/servotab
+git clone https://github.com/IndelibleVivi/servotab.git
+cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal
 ```
 
 `.agents/plugins/marketplace.json` 定义 repo marketplace `personal`，它指向 `plugins/servotab/`。`servotab@personal` 是当前 selector。
 
-这条 plugin-native 路径取代旧版 `install.sh` / root `skills/` global installer。当前 maintainer environment 已从本 checkout 添加 marketplace `personal`，并把 `servotab@personal` 重新安装为最终 43-file candidate；source/cache exact diff 与 fresh-process prompt-input probe 都已通过，后者只暴露按 policy 允许 implicit invocation 的 namespaced router `servotab:servotab`。它不是当前的 public install recipe；真实任务行为、其他机器安装、Git publication 与 OpenAI directory availability 仍是不同的 acceptance boundary。
+这条 plugin-native 路径取代旧版 `install.sh` / root `skills/` global installer。当前 maintainer environment 已从精确 checkout 添加 marketplace `personal`，并把 `servotab@personal` 重新安装为最终 43-file candidate；source/cache exact diff、fresh-process prompt-input 和一条 representative fresh-task behavior smoke 都已通过。Source-checkout install 不是 OpenAI plugin directory install，也不把 candidate 自动变成 tag、GitHub Release 或其他机器上的 acceptance receipt。
 
 如果其他本机仍有 manifest-owned Softpowers `0.3.0-rc5` 或更早 global layer，请先读 [迁移指南](docs/migration-from-softpowers.md) 和 [current state](docs/current-state.md)。当前 maintainer roots 已完成 manifest-driven retirement 并验证为 clear；不要把这条 receipt 当成手动删除其他机器旧目录的许可。
 
@@ -152,10 +153,8 @@ Website 的独立 build contract 见 [site/README.md](site/README.md)。
 
 ## Feedback
 
-Repository 的当前 GitHub URL 仍是历史地址，直到独立 rename gate 完成：
-
-- [Behavior feedback](https://github.com/IndelibleVivi/softpowers/issues/new?template=behavior-feedback.yml)：activation、routing、完整 outcome、debug/review/verification 质量或无意义 overhead；
-- [Plugin package bug](https://github.com/IndelibleVivi/softpowers/issues/new?template=plugin-package-bug.yml)：marketplace discovery、manifest validation、install/update、activation 或 package assets。
+- [Behavior feedback](https://github.com/IndelibleVivi/servotab/issues/new?template=behavior-feedback.yml)：activation、routing、完整 outcome、debug/review/verification 质量或无意义 overhead；
+- [Plugin package bug](https://github.com/IndelibleVivi/servotab/issues/new?template=plugin-package-bug.yml)：marketplace discovery、manifest validation、install/update、activation 或 package assets。
 
 GitHub Issues 是公开的。请删掉 credentials、tokens、private source、聊天、个人数据、account details、local absolute paths 与无关 trace；保留最小可复现 evidence。
 

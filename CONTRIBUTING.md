@@ -4,10 +4,8 @@
 
 ## 先选择反馈类型
 
-当前 GitHub repository 尚未执行从历史 `softpowers` URL 到 `servotab` 的 rename，因此下面的 links 暂时保留旧 repo path：
-
-- [Behavior feedback](https://github.com/IndelibleVivi/softpowers/issues/new?template=behavior-feedback.yml)：routing、activation、complete outcome、debug/review/verification 质量或无意义 overhead；
-- [Plugin package bug](https://github.com/IndelibleVivi/softpowers/issues/new?template=plugin-package-bug.yml)：marketplace discovery、plugin validation、installation/update、activation 或 package asset；
+- [Behavior feedback](https://github.com/IndelibleVivi/servotab/issues/new?template=behavior-feedback.yml)：routing、activation、complete outcome、debug/review/verification 质量或无意义 overhead；
+- [Plugin package bug](https://github.com/IndelibleVivi/servotab/issues/new?template=plugin-package-bug.yml)：marketplace discovery、plugin validation、installation/update、activation 或 package asset；
 - 其他明确 proposal 可以开普通 issue；请说明它解决的真实任务，而不只是提出一个新 method name。
 
 ## Public issue 的隐私边界
