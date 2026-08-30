@@ -163,7 +163,7 @@ As of this source candidate:
 - a fresh Codex process exposes only the namespaced implicit router at baseline; a normal newly opened worktree task then exercised an ordinary-language router path and a structured explicit `$review` leaf path without mutating the checkout, while other-machine installation remains a separate runtime check;
 - after independent review closed with no actionable P0–P2 findings, all 13 reachable legacy Softpowers layers were retired one at a time with fresh preflight evidence; both supported roots are clear, while inactive historical receipts remain preserved;
 - the website deployment and custom-domain state are tracked separately in `docs/current-state.md`;
-- the GitHub repository still uses its historical `softpowers` URL and has not been renamed;
+- the GitHub repository has been renamed in place to `IndelibleVivi/servotab`, while publication of the migration branch to remote `main` remains a separate PR/CI/merge boundary;
 - OpenAI directory submission has not been made and remains owner-gated.
 
-A green source gate proves package consistency; the separate maintainer source/cache, fresh-process, and fresh-task receipts prove only the named local installation and behavior boundaries. They do not prove other-machine installation, general behavior quality, final custom-domain acceptance, GitHub cutover, or OpenAI review.
+A green source gate proves package consistency; the separate maintainer source/cache, fresh-process, and fresh-task receipts prove only the named local installation and behavior boundaries. They do not prove other-machine installation, general behavior quality, migration merge to public `main`, final clean-commit deployment, or OpenAI review.

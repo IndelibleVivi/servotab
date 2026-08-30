@@ -246,6 +246,19 @@ def main() -> int:
         mutate_json(identity_manifest, lambda data: data.__setitem__("name", "not-servotab"))
         assert_detected(validate_plugin_manifest(identity_root), "broken plugin identity was accepted")
 
+        repository_root = contract_copy(ROOT, base / "repository-url")
+        repository_manifest = repository_root / "plugins/servotab/.codex-plugin/plugin.json"
+        mutate_json(
+            repository_manifest,
+            lambda data: data.__setitem__(
+                "repository", "https://github.com/IndelibleVivi/not-servotab"
+            ),
+        )
+        assert_detected(
+            validate_plugin_manifest(repository_root),
+            "broken plugin repository URL was accepted",
+        )
+
         prompt_root = contract_copy(ROOT, base / "default-prompt")
         prompt_manifest = prompt_root / "plugins/servotab/.codex-plugin/plugin.json"
         mutate_json(

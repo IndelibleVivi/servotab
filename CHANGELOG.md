@@ -9,6 +9,8 @@
 - Added a read-only-by-default legacy ownership helper with explicit one-layer retirement for active manifest-owned Softpowers installations; removed the old install/uninstall entry points from current source.
 - Migrated the repository-owned Field Lab subject pack to schema v2 and pointed it at the generated Servotab plugin skill tree without making live model evaluation a release gate.
 - Added the Astro static website, public product/legal/support routes, identity assets, and Cloudflare Pages configuration while keeping website deployment separate from OpenAI directory submission.
+- Renamed the public GitHub repository in place to `IndelibleVivi/servotab`, preserving the old `/softpowers` redirect and repository history, and added the repository-marketplace source-checkout installation route.
+- Made the generator fail closed when the retired root `skills/` path reappears, with a disposable sentinel regression proving unrelated contents are not recursively deleted.
 - Distinguished host-provided subagent capability from Servotab delegation routing, and made `execute` / `debug` load the bounded Worker Lanes contract before a justified first dispatch without changing the router-only implicit activation topology.
 - Escalated material boundaries without a cheap reliable reproducer into one bounded testability seam while keeping named-host acceptance separate, and added a portable host-surrogate canary without creating a new testing leaf or routing surface.
 - Added authority-aware goal routing so derived specifications and implementation artifacts cannot silently reorder an accepted programme or widen its trust model, while explicitly authorized foundational work remains possible without a present consumer.

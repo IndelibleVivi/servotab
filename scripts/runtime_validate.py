@@ -130,12 +130,24 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
         errors.append("plugin manifest skills path must be ./skills/")
     if manifest.get("description") != "A quiet, risk-scaled engineering method layer for Codex.":
         errors.append("plugin manifest description drifted from the product contract")
+    expected_public_urls = {
+        "homepage": "https://servotab.com",
+        "repository": "https://github.com/IndelibleVivi/servotab",
+    }
+    for field, expected in expected_public_urls.items():
+        if manifest.get(field) != expected:
+            errors.append(f"plugin manifest {field} must be {expected!r}")
     for name in LEGAL_FILES:
         if not (plugin_root / name).is_file():
             errors.append(f"plugin package is missing {name}")
     author = manifest.get("author")
-    if not isinstance(author, dict) or author.get("name") != "Faye & Cove":
-        errors.append("plugin manifest author credit must be Faye & Cove")
+    if not isinstance(author, dict):
+        errors.append("plugin manifest author must be an object")
+    else:
+        if author.get("name") != "Faye & Cove":
+            errors.append("plugin manifest author credit must be Faye & Cove")
+        if author.get("url") != "https://servotab.com":
+            errors.append("plugin manifest author.url must be 'https://servotab.com'")
 
     interface = manifest.get("interface")
     if not isinstance(interface, dict):

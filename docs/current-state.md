@@ -9,7 +9,7 @@ This is the volatile status surface. It records what has actually crossed each b
 | Surface | Current state | Evidence boundary |
 |---|---|---|
 | Product identity | `Servotab` adopted | Current source, manifest, assets, site, and docs use the new identity |
-| Source candidate | `0.4.0-rc1` assembled | Working-tree candidate; do not infer commit, push, tag, or release |
+| Source candidate | `0.4.0-rc1` locally committed | Core migration commit `5ecee14`; GitHub identity/package reconciliation is complete locally, with branch push, PR, merge, tag, and release still separate |
 | Canonical methods | 12 current methods | `methods/*.md` plus `scripts/skill_catalog.py` |
 | Plugin package | Generated candidate | `plugins/servotab/` with one router, 12 leaves, and curated assets |
 | Deterministic package gate | Green on integrated 43-file payload | Generation/sync, YAML, manifest, expanded migration selftest, public-tree audit, and Python compilation passed locally |
@@ -21,8 +21,8 @@ This is the volatile status surface. It records what has actually crossed each b
 | Cloudflare Pages | Production candidate live | Direct-upload deployment `0380fdb1-5782-45af-af1e-b8bc947484ca`; automatic deployments disabled; Dashboard reports the historical Git connection is disconnected |
 | `servotab.com` | Active; SSL enabled | Proxied apex DNS, Pages custom-domain status, public HTTPS, strict headers, interaction smoke, and true 404 all verified |
 | Canonical redirects | Active | `www.servotab.com` and `servotab.pages.dev` return 301 to `https://servotab.com` while preserving path suffix and query string |
-| GitHub repository | Historical URL still active | `https://github.com/IndelibleVivi/softpowers`; rename has not been executed |
-| Git publication | Not closed | No claim that this migration is committed, pushed, tagged, or released |
+| GitHub repository | Renamed to `IndelibleVivi/servotab` | New URL is live and the old `/softpowers` URL returns a 301 redirect; remote `main` still contains the preceding Softpowers source until the migration PR merges |
+| Git publication | Local commits only | Core migration and post-rename package/state reconciliation are committed on `migration/servotab`; branch push, PR, merge, tag, and release are not yet claimed |
 | OpenAI directory | Not submitted | Submission and publication remain owner-gated |
 
 ## Source and package
@@ -73,31 +73,25 @@ The apex has a proxied CNAME to `servotab.pages.dev`. Pages reports the custom d
 
 Cloudflare account configuration now contains the two-entry list `servotab_canonical_hosts` and enabled rule `servotab_canonical_redirects`. A proxied `www` trigger record is present. Fresh edge requests prove both `www.servotab.com` and `servotab.pages.dev` return 301 to the apex while preserving subpaths and query strings; following either redirect reaches a 200 response on `servotab.com`.
 
-The deployed site labels the still-public Softpowers repository as historical/preceding source and explicitly states that it is not the current Servotab implementation authority. Domain-level redirects remain Cloudflare account configuration, not `site/public/_redirects` behavior.
+The deployed site still labels the repository as historical/preceding source because the renamed GitHub `main` and cutover copy have not yet been merged and redeployed. Domain-level redirects remain Cloudflare account configuration, not `site/public/_redirects` behavior.
 
 ## GitHub and publication
 
-The repository has not yet been renamed. Source and issue links therefore still point to:
+The public repository was renamed in place and now resolves at:
 
 ```text
-https://github.com/IndelibleVivi/softpowers
+https://github.com/IndelibleVivi/servotab
 ```
 
-After an authorized rename, update at least:
+The local `origin` now uses `git@github-faye:IndelibleVivi/servotab.git`. GitHub returns a 301 from the old `/softpowers` URL, preserving the historical route. The rename retains repository history and issues, but the remote default branch remains at the preceding Softpowers commit until the current migration branch passes PR/CI and merges.
 
-- the Git remote and any clone instructions;
-- README badges and support links;
-- `plugins/servotab/.codex-plugin/plugin.json` repository URL;
-- `site/src/config.ts` source and issue URLs;
-- issue-template placeholders where applicable;
-- this current-state file.
-
-Do not describe a GitHub rename, commit, push, tag, release, OpenAI submission, or OpenAI listing until that exact action and result are verified.
+Plugin metadata and this volatile status now use the renamed repository identity. Public source-checkout installation and website cutover copy are deliberately reserved for a post-merge documentation PR, so clone commands and `blob/HEAD` legal links cannot claim the Servotab package before remote `main` actually contains it. Do not describe branch push, PR merge, tag, release, OpenAI submission, or OpenAI listing until that exact action and result are verified.
 
 ## Remaining acceptance work
 
 1. Retain the inactive legacy manifests, backups, and transitional helper until the documented recovery/operator dependency is deliberately retired; do not manually clean historical receipts.
-2. Execute the owner-authorized GitHub rename and Git publication actions; reconnect or deliberately replace the Cloudflare Git integration only after that source boundary is settled, then reconcile all repository links after cutover.
-3. Stop before OpenAI directory submission until the owner explicitly opens that gate.
+2. Push `migration/servotab`, open the core migration PR, wait for that exact head's CI, and merge only after the named evidence is green.
+3. After public `main` contains Servotab, commit the prepared source-install and website cutover copy, close it through a follow-up PR/CI/merge, then reconnect or deliberately replace the Cloudflare Git integration and deploy a clean merged commit. Keep automatic production deployments disabled unless separately chosen.
+4. Stop before OpenAI directory submission until the owner explicitly opens that gate.
 
 Update this file by replacing superseded facts, not by appending a development diary.
