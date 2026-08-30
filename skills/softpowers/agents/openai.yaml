@@ -1,8 +1,0 @@
-interface:
-  display_name: "Softpowers"
-  short_description: "Quiet risk-scaled routing for repository work"
-  default_prompt: "Use $softpowers to deliver the complete requested repository outcome with a proportionate engineering method and fresh, risk-matched verification."
-policy:
-  products:
-    - CODEX
-  allow_implicit_invocation: true

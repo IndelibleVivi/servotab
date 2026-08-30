@@ -26,7 +26,7 @@ Decision: ADOPT | ADAPT | REJECT | DEFER | ALREADY COVERED
 
 ## Local signal
 
-<Observed Softpowers failure, repeated friction, evidence gap, compatibility change, or concrete caller.>
+<Observed Servotab failure, repeated friction, evidence gap, compatibility change, or concrete caller.>
 
 ## Existing coverage
 
@@ -67,7 +67,7 @@ Decision: ADOPT | ADAPT | REJECT | DEFER | ALREADY COVERED
 
 - Pin before interpreting.
 - Test the behavior claim, not the source project's vocabulary.
-- Prefer `ALREADY COVERED` when current Softpowers reaches the same outcome.
+- Prefer `ALREADY COVERED` when current Servotab reaches the same outcome.
 - Record rejected machinery explicitly.
 - Apply to the lowest plane that solves the problem.
 - Every code or method change receives fresh, blast-radius-matched verification.

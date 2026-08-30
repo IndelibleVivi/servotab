@@ -1,48 +1,52 @@
 {
-  "schema_version": 1,
+  "activation": "implicit",
   "case_id": "owner-controlled-migration",
+  "command_assertions": [],
   "description": "A generic protocol proposal must not displace an owner-approved, one-way controlled migration with a present consumer.",
   "prompt_file": "prompt.md",
   "sandbox": "workspace-write",
+  "schema_version": 2,
   "timeout_seconds": 600,
-  "assertions": [
-    {
-      "type": "file_exists",
-      "path": "GOAL_INTEGRITY.md"
-    },
-    {
-      "type": "file_contains",
-      "path": "GOAL_INTEGRITY.md",
-      "value": "Goal-integrity verdict: diverges."
-    },
-    {
-      "type": "file_not_contains",
-      "path": "GOAL_INTEGRITY.md",
-      "value": "Goal-integrity verdict: advances."
-    },
-    {
-      "type": "file_not_contains",
-      "path": "GOAL_INTEGRITY.md",
-      "value": "Goal-integrity verdict: research-only."
-    },
-    {
-      "type": "file_not_contains",
-      "path": "GOAL_INTEGRITY.md",
-      "value": "Goal-integrity verdict: authority unclear."
-    },
-    {
-      "type": "file_contains",
-      "path": "GOAL_INTEGRITY.md",
-      "value": "owner-controlled migration"
-    },
-    {
-      "type": "changed_files_exact",
-      "paths": ["GOAL_INTEGRITY.md"]
-    }
-  ],
   "trace_assertions": {
     "max_command_executions": 12,
     "max_plan_updates": 1,
     "max_subagent_events": 0
-  }
+  },
+  "workspace_assertions": [
+    {
+      "path": "GOAL_INTEGRITY.md",
+      "type": "file_exists"
+    },
+    {
+      "path": "GOAL_INTEGRITY.md",
+      "type": "file_contains",
+      "value": "Goal-integrity verdict: diverges."
+    },
+    {
+      "path": "GOAL_INTEGRITY.md",
+      "type": "file_not_contains",
+      "value": "Goal-integrity verdict: advances."
+    },
+    {
+      "path": "GOAL_INTEGRITY.md",
+      "type": "file_not_contains",
+      "value": "Goal-integrity verdict: research-only."
+    },
+    {
+      "path": "GOAL_INTEGRITY.md",
+      "type": "file_not_contains",
+      "value": "Goal-integrity verdict: authority unclear."
+    },
+    {
+      "path": "GOAL_INTEGRITY.md",
+      "type": "file_contains",
+      "value": "owner-controlled migration"
+    },
+    {
+      "paths": [
+        "GOAL_INTEGRITY.md"
+      ],
+      "type": "changed_files_exact"
+    }
+  ]
 }

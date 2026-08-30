@@ -1,113 +1,169 @@
-# Packaging and Activation Audit — v0.3.0-rc5
+# Packaging and Activation Audit — Servotab 0.4.0-rc1
 
-This is a maintainer self-audit, not an independent security or compliance assurance.
+This is a maintainer self-audit of the source candidate. It is not an independent security, compliance, installed-runtime, Cloudflare, or OpenAI directory assurance.
 
-This release preserves the transaction layer while returning the install
-payload to one engineering router plus its explicit method leaves.
+## Package identity
+
+- Plugin id: `servotab`
+- Candidate version: `0.4.0-rc1`
+- Plugin root: `plugins/servotab/`
+- Plugin manifest: `plugins/servotab/.codex-plugin/plugin.json`
+- Repo marketplace: `.agents/plugins/marketplace.json`
+- Marketplace name: `personal`
+- Install selector: `servotab@personal`
+- Exact package manifest: `PACK_MANIFEST.json`
+
+The plugin manifest describes Servotab as an independent engineering method layer, uses the approved `#315EFB` brand color, and points to the current website, privacy, terms, and curated package assets. It does not claim OpenAI approval or directory availability.
 
 ## Activation contract
 
-- `softpowers`: `allow_implicit_invocation: true`
-- 12 `soft-*` leaf skills: `allow_implicit_invocation: false`
-- Manifest records the same split under `activation`.
-- Natural-language parallel work stays on the implicit router path: the router reads
-  `parallel.md`, while the explicit `soft-parallel` leaf remains a manual shortcut.
-- Host-provided subagent tools, concurrency, and model tier are capability inputs,
-  not evidence that Softpowers selected the parallel method.
-- Router description contains both positive repository-work scope and negative controls.
-- Repository license selection is explicitly outside router scope and retained
-  as a negative-routing seed.
+- `servotab`: `allow_implicit_invocation: true`
+- 12 semantic leaf skills: `allow_implicit_invocation: false`
+- `PACK_MANIFEST.json` records the same split under `activation`.
+- Ordinary-language work may stay direct or route through the implicit router's own references.
+- Explicit leaves are stable shortcuts and evaluation controls; the router does not invoke another skill.
+- Host-provided subagent tools, concurrency, and model tier are capability inputs, not evidence that Servotab selected `delegate`.
+- Repository license selection remains outside router scope.
 - Router instructions require quiet activation and prohibit process theatre.
 
-## Progressive disclosure
+The exact leaf set is:
 
-The implicit router owns exactly 12 references.
+```text
+design
+spec-chain
+plan
+execute
+debug
+tdd
+review
+review-feedback
+verify
+worktree
+delegate
+finish
+```
 
-- Clear local work: 0 references.
-- Initial specialist routing: 0–1 primary reference.
-- Before first concrete action: at most 1 supporting reference.
-- Later reads require a genuine phase change or new evidence.
-- No reference may route to another reference.
-- No repeated reference reads or lifecycle preloading.
+Retired active identifiers `brainstorm`, `receive-review`, and `parallel` remain only where historical or migration provenance requires them. They are rejected from the current generated package.
 
-The router body is 647 words, below the 650-word release gate.
+## Canonical and derived boundaries
 
-## Single source of truth
+`methods/*.md` is canonical for the 12 method bodies. `scripts/skill_catalog.py` is canonical for plugin skill names, descriptions, prompts, and activation metadata.
 
-`methods/*.md` is canonical for the 12 `soft-*` engineering leaves.
-`scripts/build_skills.py` generates both:
+`scripts/build_skills.py` generates:
 
-- `skills/softpowers/references/*.md`
-- leaf `skills/soft-*/SKILL.md` bodies
+- `plugins/servotab/skills/servotab/SKILL.md`;
+- 12 router references under `plugins/servotab/skills/servotab/references/`;
+- 12 explicit leaf packages under `plugins/servotab/skills/`;
+- each skill's `agents/openai.yaml`;
+- two curated package assets, `composer-icon.png` and `logo.png`, copied from root `assets/`.
 
-`fieldlab-pack.json` and `evals/cases/` are Softpowers-owned subject material.
-The generic runner, schemas, process containment, receipt contracts, and spend
-gate belong to the optional standalone Skill Field Lab companion. They are not
-generated into or installed by Softpowers.
+Root `skills/` is retired. `build_skills.py --check` and `validate_sync.py` fail on missing, unexpected, or stale generated files; they also reject a reintroduced root projection.
 
-`build_skills.py --check` and `validate_sync.py` fail on drift or unexpected payload files. Leaf method bodies are rejected if they contain `$soft-` cross-skill invocations.
+`PACK_MANIFEST.json` schema 1 records:
 
-## Recommended companion
+- 13 skill directories;
+- 12 router references;
+- 43 exact payload files: one plugin manifest, two plugin-local rights files, two curated assets, and the generated skill tree;
+- file sizes and SHA-256 digests;
+- one implicit router and 12 explicit-only leaves.
 
-[`IndelibleVivi/license-boundary`](https://github.com/IndelibleVivi/license-boundary)
-`v0.1.0-rc3` is the tested licensing companion. Its standalone repository is
-both authoring and distribution authority. Softpowers carries no same-named
-directory, source projection, manifest entry, backup ownership, or updater.
+The digest manifest is used to decide source/package identity. It is not used as a ritual runtime health claim.
 
-Skill Field Lab is separately maintained local tooling at this release. It can
-validate the committed subject pack without target-model invocations, but it is
-not a Softpowers runtime dependency or public distribution surface.
+## Plugin and marketplace contract
 
-## Install payload
+The repo marketplace contains exactly one entry:
 
-`PACK_MANIFEST.json` schema 2 records:
+```text
+personal → servotab → ./plugins/servotab
+```
 
-- 13 skill directories
-- 12 router references
-- 38 exact payload files
-- file sizes and SHA-256 digests
-- router-only implicit activation metadata
+`scripts/runtime_validate.py` checks:
 
-The user installation path uses only Python standard library.
+- exact plugin name, version, description, author credit, package path, public URLs, brand color, prompts, and asset targets;
+- presence and manifest inclusion of plugin-local `LICENSE` and `NOTICE.md`, which preserve the functional-material and identity-asset rights split inside the installable package;
+- exact marketplace source, policy, category, and display name;
+- exact manifest file set and digests;
+- absence of retired global-installer and method paths.
 
-## Skill-root compatibility
+The source candidate can be discovered with:
 
-- Explicit `--dest` and environment overrides remain highest priority.
-- `CODEX_HOME` remains supported.
-- Existing Softpowers in `~/.agents/skills` or `~/.codex/skills` is upgraded in place.
-- Fresh installs default to current `~/.agents/skills`.
-- Legacy `~/.codex/skills` remains supported.
-- Dual active roots are treated as ambiguity and rejected.
-- Historical manifests are validated from their own entries, so current code can
-  safely restore old 12/13/14/15-skill layers.
-- Install stops before staging when the active historical layer still manages a
-  skill retired from the current pack; the user must uninstall that layer first.
+```bash
+codex plugin marketplace add .
+codex plugin add servotab@personal
+```
 
-## Retained transaction guarantees
+Those commands are the current CLI contract. In the maintainer environment, marketplace `personal` has been added from this checkout and `servotab@personal` `0.4.0-rc1` is installed and enabled. A final remove/add refresh produced an exact recursive match between the 43-file source package and the installed cache. A fresh-process prompt-input probe exposes the implicit router as `servotab:servotab` and exposes no legacy Softpowers skill. Those local receipts do not generalize to other machines or prove representative natural-language routing and structured explicit-leaf behavior.
 
-- Staging before replacement
-- Coexistence with unrelated skills
-- Same-name backup and restoration
-- Complete rollback after injected partial install failure
-- LIFO manifest stack across historical skill sets
-- Non-LIFO rejection before mutation
-- Snapshot preservation of post-install edits
-- Install/uninstall under `python -S`
+## Legacy ownership boundary
 
-## Release checks
+The current repo no longer carries `install.sh`, `uninstall.sh`, `scripts/install.py`, `scripts/uninstall.py`, or an active root `skills/` package.
 
-- Deterministic generation and sync check
-- Real YAML parsing of all SKILL frontmatter and `openai.yaml`
-- Router/leaf invocation-policy validation
-- Reference set and no-cross-skill validation
-- Manifest freshness and digest validation
-- Historical retired-skill migration and independent-ownership validation
-- Standard-library transaction self-test without a Field Lab dependency
-- Optional Field Lab validation of eight repository-owned canaries with
-  known-fail/known-pass assertions and zero target-model invocations
-- Python compilation and shell syntax
-- Default current-root install
-- Legacy-root in-place upgrade and restore
-- Coexistence, stack, rollback, edit preservation, and no-site-packages tests
-- Visible current-tree private-namespace, symlink, local-path, secret-pattern, environment-file, and macOS-junk audit via `scripts/audit_public_tree.py`
-- Ubuntu Python 3.10 / 3.13 and macOS Python 3.13 CI matrix
+`scripts/migrate_legacy_install.py` exists only to retire a manifest-owned Softpowers global layer safely:
+
+- default and `--dest` inspection are read-only;
+- an active layer returns status `2` and reports its version, manifest, previous layer, skill count, and modified-skill count;
+- mutation requires both an exact `--dest` and `--retire`;
+- retirement is one LIFO layer at a time;
+- same-name backups are restored;
+- post-install edits are preserved in a snapshot;
+- failure restores prior state;
+- a fresh preflight is required before retiring another revealed layer.
+
+The helper is transitional. Its removal condition is: every supported skill root has no active `.softpowers-current-manifest`, and the Servotab plugin migration has been accepted. It is not a new general installer or rollback manager.
+
+## Field Lab v2 subject pack
+
+`fieldlab-pack.json` uses schema version 2 and names `plugins/servotab/skills` as the `servotab-source` subject. It keeps repository-owned canaries and evidence metadata separate from the standalone Field Lab runtime.
+
+The no-spend maintainer commands are:
+
+```bash
+fieldlab validate fieldlab-pack.json
+fieldlab selftest fieldlab-pack.json
+fieldlab list fieldlab-pack.json
+```
+
+They do not start target-model invocations. A live Field Lab attempt requires its own plan and explicit invocation budget; live model behavior is not inferred from package validation.
+
+## Retained verification guarantees
+
+The deterministic gate covers:
+
+- source/generated skill and asset sync;
+- exact 13-skill and 12-reference topology;
+- real YAML parsing of `SKILL.md` frontmatter and `agents/openai.yaml`;
+- router-only implicit activation;
+- retired identifier and path exclusion;
+- plugin manifest and repo marketplace shape;
+- exact payload identity and asset integrity;
+- disposable tamper, missing-skill, wrong-marketplace, and wrong-identity controls;
+- fail-closed generation when the retired root `skills/` path reappears, with a disposable sentinel proving that its contents remain untouched;
+- read-only legacy ownership detection and explicit one-layer retirement in a disposable fixture;
+- Python syntax and visible current-tree public-safety audit;
+- CI matrix on Ubuntu Python 3.10 / 3.13 and macOS Python 3.13.
+
+Maintainer commands:
+
+```bash
+python3 scripts/build_skills.py --check
+python3 scripts/validate_sync.py
+uv run --with PyYAML==6.0.3 python3 scripts/validate.py plugins/servotab/skills
+uv run --with PyYAML==6.0.3 python3 scripts/generate_pack_manifest.py --check
+uv run --with PyYAML==6.0.3 python3 scripts/selftest.py
+python3 scripts/audit_public_tree.py
+python3 -m py_compile scripts/*.py
+```
+
+## Acceptance boundary
+
+As of this source candidate:
+
+- repository package generation and deterministic validation are implemented;
+- the local marketplace selector is defined, and the maintainer installation is enabled with an exact 43-file source/cache equality receipt;
+- a fresh Codex process exposes only the namespaced implicit router at baseline; a normal newly opened worktree task then exercised an ordinary-language router path and a structured explicit `$review` leaf path without mutating the checkout, while other-machine installation remains a separate runtime check;
+- after independent review closed with no actionable P0–P2 findings, all 13 reachable legacy Softpowers layers were retired one at a time with fresh preflight evidence; both supported roots are clear, while inactive historical receipts remain preserved;
+- the website deployment and custom-domain state are tracked separately in `docs/current-state.md`;
+- the GitHub repository still uses its historical `softpowers` URL and has not been renamed;
+- OpenAI directory submission has not been made and remains owner-gated.
+
+A green source gate proves package consistency; the separate maintainer source/cache, fresh-process, and fresh-task receipts prove only the named local installation and behavior boundaries. They do not prove other-machine installation, general behavior quality, final custom-domain acceptance, GitHub cutover, or OpenAI review.

@@ -1,6 +1,6 @@
 # External Pattern Intake
 
-Softpowers 可以持续学习外部仓库，同时保持现有 routing、方法边界和个人开发者取向稳定。外部工作提供 comparative evidence、candidate mechanism 与反例；只有本地任务、已观察失败、维护中的 contract 或经过验证的机会，才能批准一个 pattern 进入 Softpowers。
+Servotab 可以持续学习外部仓库，同时保持现有 routing、方法边界和个人开发者取向稳定。外部工作提供 comparative evidence、candidate mechanism 与反例；只有本地任务、已观察失败、维护中的 contract 或经过验证的机会，才能批准一个 pattern 进入 Servotab。
 
 这套流程属于 maintainer / eval plane。它不会给日常 repo work 增加前置 stage，不要求每次输出统一报告，也不会让外部框架获得修改 runtime routing 的默认权限。
 
@@ -16,17 +16,17 @@ Softpowers 可以持续学习外部仓库，同时保持现有 routing、方法�
 - configured capability、reachable wiring、current exercise 与 later effectiveness 是不同强度的 claims。
 - worktree、plan、TDD、subagent、review loop、checkpoint、score 与 ledger 都需要 present purpose。可用性本身不构成调用理由。
 
-与这些边界冲突的 candidate 通常进入 `REJECT`。只有 Softpowers、本地使用条件、host platform 或外部机制出现实质变化，才重开判断。
+与这些边界冲突的 candidate 通常进入 `REJECT`。只有 Servotab、本地使用条件、host platform 或外部机制出现实质变化，才重开判断。
 
 ## Decision vocabulary
 
 | Decision | 含义 |
 |---|---|
-| `ADOPT` | 机制与 Softpowers 高度吻合，只需很少结构调整。 |
+| `ADOPT` | 机制与 Servotab 高度吻合，只需很少结构调整。 |
 | `ADAPT` | 保留有效 invariant，重写 activation、scope、workflow 或 surface。 |
 | `REJECT` | 当前机制与本地证据、成本或稳定边界冲突。 |
 | `DEFER` | 可能有价值，当前缺少 caller、failure、host capability 或足够 evidence。 |
-| `ALREADY COVERED` | 现有 Softpowers 已达到同一有效 outcome，无需再增加机制。 |
+| `ALREADY COVERED` | 现有 Servotab 已达到同一有效 outcome，无需再增加机制。 |
 
 Decision 必须同时写明 accepted kernel 与 excluded machinery。`REJECT`、`DEFER` 和 `ALREADY COVERED` 都属于有效学习结果。
 
@@ -48,7 +48,7 @@ Decision 必须同时写明 accepted kernel 与 excluded machinery。`REJECT`、
 
 ### 2. Distill the pattern
 
-去掉产品名、营销语言和领域专用名词，写出可与 Softpowers 比较的机制。
+去掉产品名、营销语言和领域专用名词，写出可与 Servotab 比较的机制。
 
 例如：
 
@@ -68,15 +68,15 @@ Candidate 至少对应一项本地信号：
 - packaging、compatibility 或 supply-chain boundary；
 - host capability 变化导致更短 supported path 出现。
 
-找不到 local problem 时，使用 `DEFER`、`ALREADY COVERED` 或 `REJECT: no demonstrated need`。外部项目的名望不会自动创建 Softpowers requirement。
+找不到 local problem 时，使用 `DEFER`、`ALREADY COVERED` 或 `REJECT: no demonstrated need`。外部项目的名望不会自动创建 Servotab requirement。
 
 ### 4. Choose the landing plane
 
 | Plane | 典型内容 | Admission threshold |
 |---|---|---|
-| Runtime methods | router 与日常 brainstorm/debug/review/verify 行为 | 最高；需要重复或严重的本地证据 |
-| Field Lab / maintainer | canary、runner、grader、trace、checkpoint、comparison | 大多数 harness 经验的首选落点；通用 machinery 不回流 Softpowers payload |
-| Packaging / distribution | installer、plugin projection、manifest、release 与 supply-chain checks | 明确 compatibility 或 trust need |
+| Runtime methods | router 与日常 design/debug/review/verify 行为 | 最高；需要重复或严重的本地证据 |
+| Field Lab / maintainer | canary、runner、grader、trace、checkpoint、comparison | 大多数 harness 经验的首选落点；通用 machinery 不回流 Servotab payload |
+| Packaging / distribution | plugin package、marketplace、manifest、legacy migration、release 与 supply-chain checks | 明确 compatibility 或 trust need |
 | Docs / provenance | source registry、decision rationale、操作说明、attribution | 不改变 runtime behavior |
 
 优先选择能够解决问题的最低 plane。
@@ -133,7 +133,7 @@ Reopen condition
 candidate repair verified
 ```
 
-它证明本次 repair。更广泛的 “Softpowers 已经长期改善” 需要 later comparable task、matched repeated runs 或另一个 independent case。
+它证明本次 repair。更广泛的 “Servotab 已经长期改善” 需要 later comparable task、matched repeated runs 或另一个 independent case。
 
 ### 9. Promote cautiously
 
@@ -158,7 +158,7 @@ Pattern 进入 runtime method 前，至少满足一项：
 | Router description / activation topology | matched positive + negative cases；因 activation 有方差，需要重复运行 |
 | Shared closure / verification contract | 覆盖受影响 task classes 的 representative canaries |
 | Generator / canonical projection | build、sync、exact manifest、generated-tree checks |
-| Installer / uninstaller | transaction、rollback、digest、ambiguity、filesystem tests |
+| Plugin package / legacy migration | manifest、marketplace、digest、read-only preflight、explicit retirement 与 filesystem tests |
 | Field Lab runner / grader | 在 companion repo 做 deterministic parser/schema tests + known pass/fail fixtures |
 | Release candidate | full deterministic gate + representative behavior suite |
 
@@ -170,7 +170,7 @@ Activation 相关 change 可以从 positive/negative 各 3 次开始；争议较
 
 Recorded decision 在以下情况下重开：
 
-- comparable Softpowers task 再次出现同一 gap；
+- comparable Servotab task 再次出现同一 gap；
 - external source 对 reviewed mechanism 做了 material change；
 - Codex 或其他支持 host 改变 skill/plugin contract；
 - 新的 security、privacy 或 compatibility boundary 出现；

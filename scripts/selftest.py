@@ -8,23 +8,41 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from unittest import mock
 
+import migrate_legacy_install as legacy_migration
 from build_skills import check as check_generated
-from common import (
-    IMPLICIT_SKILL_NAMES,
-    REFERENCE_NAMES,
-    ROUTER_NAME,
-    SKILL_NAMES,
-    directory_digest,
+from build_skills import write as write_generated
+from migrate_legacy_install import directory_digest
+from runtime_validate import (
+    PACK_MANIFEST,
+    RETIRED_METHOD_FILES,
+    RETIRED_REPO_PATHS,
+    load_pack_manifest,
+    validate_marketplace,
+    validate_package,
+    validate_plugin_manifest,
 )
-from install import install_pack
-from runtime_validate import PACK_MANIFEST, load_pack_manifest, validate_payload
-from uninstall import uninstall_pack
+from skill_catalog import IMPLICIT_SKILL_NAMES, REFERENCE_METHOD_NAMES, SKILL_NAMES
+from validate import validate_directory
 
 
-def write_old_skill(path: Path, marker: str) -> None:
-    path.mkdir(parents=True, exist_ok=True)
-    (path / "OLD_MARKER.txt").write_text(marker, encoding="utf-8")
+ROOT = Path(__file__).resolve().parents[1]
+EXPECTED_SKILLS = (
+    "servotab",
+    "design",
+    "spec-chain",
+    "plan",
+    "execute",
+    "debug",
+    "tdd",
+    "review",
+    "review-feedback",
+    "verify",
+    "worktree",
+    "delegate",
+    "finish",
+)
 
 
 def assert_true(condition: bool, message: str) -> None:
@@ -32,545 +50,497 @@ def assert_true(condition: bool, message: str) -> None:
         raise AssertionError(message)
 
 
-def manifest_status(path: Path) -> str | None:
-    return json.loads(path.read_text(encoding="utf-8")).get("status")
+def assert_detected(errors: list[str], message: str) -> None:
+    assert_true(bool(errors), message)
 
 
-def clean_root_env(base: dict[str, str], home: Path) -> dict[str, str]:
-    env = base.copy()
-    env["HOME"] = str(home)
-    for key in ("CODEX_HOME", "SOFTPOWERS_SKILLS_DIR", "AGENTS_SKILLS_DIR"):
-        env.pop(key, None)
-    return env
+def contract_copy(source: Path, destination: Path) -> Path:
+    destination.mkdir(parents=True)
+    for directory in ("methods", "assets", "plugins", ".agents"):
+        shutil.copytree(source / directory, destination / directory)
+    for filename in ("PACK_MANIFEST.json", "VERSION"):
+        shutil.copy2(source / filename, destination / filename)
+    return destination
 
 
-def create_historical_layer(
-    source: Path,
-    dest: Path,
-    retired_name: str,
-    *,
-    backup_marker: str | None,
-) -> Path:
-    for name in SKILL_NAMES:
-        shutil.copytree(source / name, dest / name)
-    write_old_skill(dest / retired_name, "historical pack copy")
+def mutate_json(path: Path, callback) -> None:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    callback(payload)
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    backup: Path | None = None
-    if backup_marker is not None:
-        backup = dest / ".softpowers-backups" / "historical-test" / retired_name
-        write_old_skill(backup, backup_marker)
-    entries = [
-        {
-            "name": name,
-            "target": str(dest / name),
-            "backup": str(backup) if name == retired_name and backup is not None else None,
-            "installed_sha256": directory_digest(dest / name),
-        }
-        for name in (*SKILL_NAMES, retired_name)
-    ]
-    manifest = dest / ".softpowers-manifests" / "softpowers-historical-test.json"
-    manifest.parent.mkdir(parents=True)
-    manifest.write_text(
+
+def make_legacy_fixture(root: Path) -> Path:
+    skills_root = root / "skills"
+    skill = skills_root / "soft-debug"
+    skill.mkdir(parents=True)
+    (skill / "SKILL.md").write_text("legacy\n", encoding="utf-8")
+    manifests = skills_root / ".softpowers-manifests"
+    manifests.mkdir(parents=True)
+    manifest_path = manifests / "softpowers-test.json"
+    manifest_path.write_text(
         json.dumps(
             {
                 "schema_version": 1,
                 "pack": "softpowers-pack",
-                "version": "historical-test",
+                "version": "test",
                 "status": "installed",
-                "installed_at": "2026-08-17T00:00:00+00:00",
-                "destination": str(dest),
+                "destination": str(skills_root),
                 "previous_manifest": None,
-                "skills": entries,
+                "skills": [
+                    {
+                        "name": "soft-debug",
+                        "target": str(skill),
+                        "backup": None,
+                        "installed_sha256": directory_digest(skill),
+                    }
+                ],
             },
             indent=2,
         )
         + "\n",
         encoding="utf-8",
     )
-    (dest / ".softpowers-current-manifest").write_text(str(manifest) + "\n", encoding="utf-8")
-    return manifest
+    (skills_root / ".softpowers-current-manifest").write_text(
+        str(manifest_path) + "\n", encoding="utf-8"
+    )
+    return skills_root
+
+
+def make_two_layer_legacy_fixture(root: Path) -> tuple[Path, Path, Path]:
+    skills_root = root / "skills"
+    skill = skills_root / "soft-debug"
+    skill.mkdir(parents=True)
+    (skill / "SKILL.md").write_text("previous\n", encoding="utf-8")
+    manifests = skills_root / ".softpowers-manifests"
+    manifests.mkdir(parents=True)
+    previous_manifest = manifests / "softpowers-previous.json"
+    previous_manifest.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "pack": "softpowers-pack",
+                "version": "previous",
+                "status": "installed",
+                "destination": str(skills_root),
+                "previous_manifest": None,
+                "skills": [
+                    {
+                        "name": "soft-debug",
+                        "target": str(skill),
+                        "backup": None,
+                        "installed_sha256": directory_digest(skill),
+                    }
+                ],
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    backup = skills_root / ".softpowers-backups/current/soft-debug"
+    backup.parent.mkdir(parents=True)
+    os.replace(skill, backup)
+    skill.mkdir()
+    (skill / "SKILL.md").write_text("current\n", encoding="utf-8")
+    current_manifest = manifests / "softpowers-current.json"
+    current_manifest.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "pack": "softpowers-pack",
+                "version": "current",
+                "status": "installed",
+                "destination": str(skills_root),
+                "previous_manifest": str(previous_manifest),
+                "skills": [
+                    {
+                        "name": "soft-debug",
+                        "target": str(skill),
+                        "backup": str(backup),
+                        "installed_sha256": directory_digest(skill),
+                    }
+                ],
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (skills_root / ".softpowers-current-manifest").write_text(
+        str(current_manifest) + "\n", encoding="utf-8"
+    )
+    return skills_root, previous_manifest, current_manifest
+
+
+def run_legacy_helper(skills_root: Path, *, retire: bool = False) -> subprocess.CompletedProcess[str]:
+    command = [
+        sys.executable,
+        str(ROOT / "scripts/migrate_legacy_install.py"),
+        "--dest",
+        str(skills_root),
+    ]
+    if retire:
+        command.append("--retire")
+    return subprocess.run(
+        command,
+        cwd=ROOT,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
 
 
 def main() -> int:
-    root = Path(__file__).resolve().parents[1]
-    source = root / "skills"
+    plugin_root = ROOT / "plugins" / "servotab"
+    skills_root = plugin_root / "skills"
 
-    router_source = (root / "scripts" / "build_skills.py").read_text(encoding="utf-8")
+    assert_true(tuple(SKILL_NAMES) == EXPECTED_SKILLS, "catalog identity or skill count changed")
+    assert_true(IMPLICIT_SKILL_NAMES == ("servotab",), "implicit activation must be servotab only")
+    assert_true(len(REFERENCE_METHOD_NAMES) == 12, "router must expose exactly 12 references")
     assert_true(
-        "## Goal authority" in router_source
-        and "strong evidence for generalized infrastructure" in router_source
-        and "applicable current authority" in router_source
-        and "foundational work" in router_source,
-        "router goal-authority contract missing",
+        (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "0.4.0-rc1",
+        "candidate version must be 0.4.0-rc1",
     )
-    execute_method = (root / "methods" / "execute.md").read_text(encoding="utf-8")
-    assert_true(
-        "programme order" in execute_method
-        and "trust model" in execute_method
-        and "present consumer" in execute_method,
-        "execute goal-integrity stop conditions missing",
-    )
-    review_method = (root / "methods" / "review.md").read_text(encoding="utf-8")
+
+    method_files = {path.name for path in (ROOT / "methods").glob("*.md")}
+    expected_method_files = {f"{name}.md" for name in REFERENCE_METHOD_NAMES}
+    assert_true(method_files == expected_method_files, "canonical method file set drifted")
+    assert_true(not check_generated(), "generated plugin skills or assets are stale")
+    assert_true(not validate_directory(skills_root, exact=True), "generated skills are invalid")
+    assert_true(not validate_package(ROOT), "repository plugin package is invalid")
+
+    manifest = load_pack_manifest(PACK_MANIFEST)
+    assert_true(manifest["pack"] == "servotab", "pack identity drifted")
+    assert_true(manifest["skills"] == list(EXPECTED_SKILLS), "pack skill order drifted")
+    for path in RETIRED_REPO_PATHS:
+        assert_true(not (ROOT / path).exists(), f"retired global installer path remains: {path}")
+    for filename in RETIRED_METHOD_FILES:
+        assert_true(not (ROOT / "methods" / filename).exists(), f"retired method id remains: {filename}")
+
+    router = (skills_root / "servotab" / "SKILL.md").read_text(encoding="utf-8")
+    assert_true("# Servotab" in router, "router identity is wrong")
+    assert_true("references/delegate.md" in router, "router lost delegate routing")
+    assert_true("references/review-feedback.md" in router, "router lost feedback routing")
+    assert_true("references/design.md" in router, "router lost design routing")
+    assert_true("$soft" not in router and "Softpowers" not in router, "router retains old branding")
+
+    execute = (ROOT / "methods" / "execute.md").read_text(encoding="utf-8")
+    review = (ROOT / "methods" / "review.md").read_text(encoding="utf-8")
+    feedback = (ROOT / "methods" / "review-feedback.md").read_text(encoding="utf-8")
+    delegate = (ROOT / "methods" / "delegate.md").read_text(encoding="utf-8")
+    design = (ROOT / "methods" / "design.md").read_text(encoding="utf-8")
+    assert_true("`delegate` reference" in execute, "execute lost the delegation phase change")
     for verdict in ("advances", "research-only", "diverges", "authority unclear"):
-        assert_true(verdict in review_method, f"review goal-integrity verdict missing: {verdict}")
-    verdict_precedence = [
-        "**authority unclear:**",
-        "**diverges:**",
-        "**advances:**",
-        "**research-only:**",
-    ]
-    verdict_positions = [review_method.find(marker) for marker in verdict_precedence]
-    assert_true(
-        "When a change could alter product meaning" in review_method
-        and "choose exactly one goal-integrity verdict" in review_method
-        and "Apply the first matching verdict" in review_method
-        and "Do not combine verdicts for the same scope" in review_method
-        and all(position >= 0 for position in verdict_positions)
-        and verdict_positions == sorted(verdict_positions),
-        "review goal-integrity trigger or verdict precedence is invalid",
-    )
-    spec_chain_method = (root / "methods" / "spec-chain.md").read_text(encoding="utf-8")
-    assert_true(
-        "agent-authored" in spec_chain_method
-        and "does not become approved authority" in spec_chain_method,
-        "spec-chain derived-authority boundary missing",
-    )
-    for method_name, required_text in {
-        "plan": "recording the delta does not approve it",
-        "receive-review": "not authority by authorship or placement alone",
-        "finish": "implementation deviations as evidence to review",
-    }.items():
-        method = (root / "methods" / f"{method_name}.md").read_text(encoding="utf-8")
-        assert_true(required_text in method, f"{method_name} goal-authority boundary missing")
+        assert_true(verdict in review, f"review lost goal-integrity verdict: {verdict}")
+    assert_true("not authority by authorship" in feedback, "review-feedback lost authority boundary")
+    assert_true("harness-initiated spawn" in delegate, "delegate lost host attribution boundary")
+    assert_true("capability boundary" in design.lower(), "design lost supported-path pressure test")
 
-    expected_case_verdicts = {
-        "owner-controlled-migration": "Goal-integrity verdict: diverges.",
-        "programme-reorder-review": "Goal-integrity verdict: diverges.",
-        "adopted-foundation-review": "Goal-integrity verdict: advances.",
-    }
-    all_verdicts = {
-        "Goal-integrity verdict: advances.",
-        "Goal-integrity verdict: research-only.",
-        "Goal-integrity verdict: diverges.",
-        "Goal-integrity verdict: authority unclear.",
-    }
-    for case_id, expected_verdict in expected_case_verdicts.items():
-        case_path = root / "evals" / "cases" / case_id / "case.json"
-        assert_true(case_path.is_file(), f"goal-integrity behavior case missing: {case_id}")
-        case = json.loads(case_path.read_text(encoding="utf-8"))
-        assertions = case.get("assertions", [])
-        expected_assertions = [
-            assertion
-            for assertion in assertions
-            if assertion.get("type") == "file_contains"
-            and assertion.get("value") == expected_verdict
-        ]
-        assert_true(
-            len(expected_assertions) == 1,
-            f"goal-integrity verdict assertion is not exact: {case_id}",
-        )
-        verdict_path = expected_assertions[0].get("path")
-        prohibited_verdicts = {
-            assertion.get("value")
-            for assertion in assertions
-            if assertion.get("type") == "file_not_contains"
-            and assertion.get("path") == verdict_path
-        }
-        missing_prohibitions = all_verdicts - {expected_verdict} - prohibited_verdicts
-        assert_true(
-            not missing_prohibitions,
-            f"goal-integrity contradictory verdicts are not excluded: {case_id}: "
-            f"{sorted(missing_prohibitions)}",
-        )
-        asserted_verdicts = {
-            assertion.get("value")
-            for assertion in case.get("assertions", [])
-            if assertion.get("type") == "file_contains"
-            and assertion.get("value") in all_verdicts
-        }
-        assert_true(
-            asserted_verdicts == {expected_verdict},
-            f"goal-integrity case contains contradictory positive verdicts: {case_id}",
-        )
-
-    sync_errors = check_generated()
-    assert_true(not sync_errors, f"generated payload is stale: {sync_errors}")
-
-    source_errors = validate_payload(source, manifest_path=PACK_MANIFEST, allow_other_skills=False)
-    assert_true(not source_errors, f"source payload invalid: {source_errors}")
-
-    pack_manifest = load_pack_manifest(PACK_MANIFEST)
-    assert_true(
-        pack_manifest["activation"]["implicit"] == list(IMPLICIT_SKILL_NAMES),
-        "implicit activation contract is wrong",
-    )
-    assert_true(
-        pack_manifest["activation"]["explicit_only"]
-        == [name for name in SKILL_NAMES if name not in IMPLICIT_SKILL_NAMES],
-        "leaf activation contract is wrong",
-    )
-
-    router_yaml = (source / ROUTER_NAME / "agents" / "openai.yaml").read_text(encoding="utf-8")
-    assert_true("allow_implicit_invocation: true" in router_yaml, "router implicit policy missing")
-    for name in SKILL_NAMES:
-        leaf_yaml = (source / name / "agents" / "openai.yaml").read_text(encoding="utf-8")
-        expected = "true" if name in IMPLICIT_SKILL_NAMES else "false"
-        assert_true(
-            f"allow_implicit_invocation: {expected}" in leaf_yaml,
-            f"{name} has the wrong implicit policy",
-        )
-
-    router_skill = (source / ROUTER_NAME / "SKILL.md").read_text(encoding="utf-8")
-    assert_true(
-        "read `references/parallel.md` before dispatch" in router_skill,
-        "implicit router lost the pre-dispatch parallel handoff",
-    )
-    for name in ("soft-execute", "soft-debug"):
-        method_skill = (source / name / "SKILL.md").read_text(encoding="utf-8")
-        normalized_method = method_skill.lower()
-        assert_true(
-            "parallel reference" in normalized_method
-            and "before" in normalized_method
-            and "dispatch" in normalized_method,
-            f"{name} lost the parallel phase-change handoff",
-        )
-    parallel_skill = (source / "soft-parallel" / "SKILL.md").read_text(encoding="utf-8")
-    assert_true(
-        "harness-initiated spawn" in parallel_skill
-        and "Model or reasoning tier" in parallel_skill,
-        "soft-parallel lost the host-capability attribution boundary",
-    )
-
-    with tempfile.TemporaryDirectory(prefix="softpowers-selftest-") as raw:
+    with tempfile.TemporaryDirectory(prefix="servotab-selftest-") as raw:
         base = Path(raw)
 
-        # A removed skill must be retired through its historical manifest before
-        # the new pack installs, then remain independently owned afterward.
-        historical_dest = base / "historical" / "skills"
-        retired_name = "license-boundary"
-        historical_manifest = create_historical_layer(
-            source,
-            historical_dest,
-            retired_name,
-            backup_marker="standalone copy",
+        identity_root = contract_copy(ROOT, base / "identity")
+        identity_manifest = identity_root / "plugins/servotab/.codex-plugin/plugin.json"
+        mutate_json(identity_manifest, lambda data: data.__setitem__("name", "not-servotab"))
+        assert_detected(validate_plugin_manifest(identity_root), "broken plugin identity was accepted")
+
+        prompt_root = contract_copy(ROOT, base / "default-prompt")
+        prompt_manifest = prompt_root / "plugins/servotab/.codex-plugin/plugin.json"
+        mutate_json(
+            prompt_manifest,
+            lambda data: data["interface"].__setitem__(
+                "defaultPrompt", "Use $servotab with the wrong scalar shape."
+            ),
         )
-        pointer = historical_dest / ".softpowers-current-manifest"
-        pointer_before = pointer.read_text(encoding="utf-8")
-        router_before = (historical_dest / ROUTER_NAME / "SKILL.md").read_bytes()
+        assert_detected(
+            validate_plugin_manifest(prompt_root),
+            "scalar plugin defaultPrompt was accepted",
+        )
+
+        count_root = contract_copy(ROOT, base / "count")
+        shutil.rmtree(count_root / "plugins/servotab/skills/design")
+        assert_detected(
+            validate_directory(count_root / "plugins/servotab/skills", exact=True),
+            "missing explicit leaf was accepted",
+        )
+
+        sync_root = contract_copy(ROOT, base / "sync")
+        sync_skill = sync_root / "plugins/servotab/skills/debug/SKILL.md"
+        sync_skill.write_text(sync_skill.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+        assert_detected(check_generated(sync_root), "source/generated drift was accepted")
+
+        generator_root = contract_copy(ROOT, base / "generator-legacy-root")
+        legacy_projection = generator_root / "skills"
+        legacy_projection.mkdir()
+        legacy_sentinel = legacy_projection / "keep.txt"
+        legacy_sentinel.write_text("unrelated\n", encoding="utf-8")
         try:
-            install_pack(source, historical_dest)
-        except RuntimeError as exc:
+            write_generated(generator_root)
+        except FileExistsError as exc:
             assert_true(
-                "active historical Softpowers layer" in str(exc),
-                "unexpected historical-layer install error",
+                "retired root skills/ projection still exists" in str(exc),
+                "generator reported the wrong legacy-root failure",
             )
-            assert_true("v0.1.0-rc3" in str(exc), "standalone migration guidance missing")
         else:
-            raise AssertionError("install replaced a pack while it still managed a retired skill")
-        assert_true(pointer.read_text(encoding="utf-8") == pointer_before, "blocked install changed pointer")
+            raise AssertionError("generator deleted or accepted a retired root skills/ projection")
         assert_true(
-            (historical_dest / ROUTER_NAME / "SKILL.md").read_bytes() == router_before,
-            "blocked install changed active skills",
+            legacy_sentinel.read_text(encoding="utf-8") == "unrelated\n",
+            "generator mutated content under the retired root skills/ projection",
         )
 
-        uninstall_pack(historical_dest)
-        assert_true(manifest_status(historical_manifest) == "uninstalled", "historical layer stayed active")
-        assert_true(
-            (historical_dest / retired_name / "OLD_MARKER.txt").read_text(encoding="utf-8")
-            == "standalone copy",
-            "historical uninstall did not restore the independently owned skill",
+        legacy_root = contract_copy(ROOT, base / "legacy-id")
+        (legacy_root / "methods" / "brainstorm.md").write_text("retired\n", encoding="utf-8")
+        assert_detected(validate_package(legacy_root), "retired method id was accepted")
+
+        asset_root = contract_copy(ROOT, base / "asset-path")
+        asset_manifest = asset_root / "plugins/servotab/.codex-plugin/plugin.json"
+        mutate_json(
+            asset_manifest,
+            lambda data: data["interface"].__setitem__("composerIcon", "./assets/missing.png"),
         )
-        migrated_manifest = install_pack(source, historical_dest)
-        assert_true(
-            (historical_dest / retired_name / "OLD_MARKER.txt").read_text(encoding="utf-8")
-            == "standalone copy",
-            "new install replaced the independently owned skill",
+        assert_detected(validate_plugin_manifest(asset_root), "broken manifest asset path was accepted")
+
+        marketplace_root = contract_copy(ROOT, base / "marketplace")
+        marketplace_path = marketplace_root / ".agents/plugins/marketplace.json"
+        mutate_json(
+            marketplace_path,
+            lambda data: data["plugins"][0]["source"].__setitem__("path", "./plugins/wrong"),
         )
-        uninstall_pack(historical_dest, migrated_manifest)
+        assert_detected(validate_marketplace(marketplace_root), "broken marketplace path was accepted")
+
+        digest_root = contract_copy(ROOT, base / "digest")
+        digest_asset = digest_root / "plugins/servotab/assets/composer-icon.png"
+        digest_asset.write_bytes(digest_asset.read_bytes() + b"tamper")
+        assert_detected(validate_package(digest_root), "tampered package asset was accepted")
+
+        legacy_fixture = make_legacy_fixture(base / "legacy-helper")
+        before = directory_digest(legacy_fixture)
+        result = run_legacy_helper(legacy_fixture)
+        assert_true(result.returncode == 2, "legacy helper did not report active ownership")
+        assert_true(directory_digest(legacy_fixture) == before, "default legacy preflight mutated state")
+        pointer = legacy_fixture / ".softpowers-current-manifest"
+        manifest_path = Path(pointer.read_text(encoding="utf-8").strip())
+        retire = run_legacy_helper(legacy_fixture, retire=True)
+        assert_true(retire.returncode == 0, f"explicit legacy retirement failed: {retire.stderr}")
+        assert_true(not pointer.exists(), "explicit retirement left the active manifest pointer")
+        assert_true(not (legacy_fixture / "soft-debug").exists(), "explicit retirement left owned skill")
+        retired_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        assert_true(retired_manifest.get("status") == "uninstalled", "retirement status not recorded")
+
+        two_layer_fixture, previous_manifest, current_manifest = make_two_layer_legacy_fixture(
+            base / "legacy-two-layer"
+        )
+        two_layer_retire = run_legacy_helper(two_layer_fixture, retire=True)
         assert_true(
-            (historical_dest / retired_name / "OLD_MARKER.txt").is_file(),
-            "new uninstall removed the independently owned skill",
+            two_layer_retire.returncode == 0,
+            f"two-layer retirement failed: {two_layer_retire.stderr}",
+        )
+        two_layer_pointer = two_layer_fixture / ".softpowers-current-manifest"
+        assert_true(
+            Path(two_layer_pointer.read_text(encoding="utf-8").strip()).resolve()
+            == previous_manifest.resolve(),
+            "two-layer retirement did not promote the previous manifest",
+        )
+        assert_true(
+            (two_layer_fixture / "soft-debug/SKILL.md").read_text(encoding="utf-8")
+            == "previous\n",
+            "two-layer retirement did not restore the previous skill",
+        )
+        assert_true(
+            json.loads(current_manifest.read_text(encoding="utf-8")).get("status")
+            == "uninstalled",
+            "two-layer retirement did not close the current manifest",
+        )
+        assert_true(
+            json.loads(previous_manifest.read_text(encoding="utf-8")).get("status") == "installed",
+            "two-layer retirement modified the promoted manifest",
         )
 
-        # A retired skill that belonged only to the old pack must disappear
-        # after its historical layer is uninstalled and stay outside new layers.
-        retired_eval_dest = base / "retired-soft-eval" / "skills"
-        retired_eval_manifest = create_historical_layer(
-            source,
-            retired_eval_dest,
-            "soft-eval",
-            backup_marker=None,
+        symlink_fixture = make_legacy_fixture(base / "legacy-symlink-leaf")
+        symlink_skill = symlink_fixture / "soft-debug"
+        shutil.rmtree(symlink_skill)
+        unrelated = symlink_fixture / "unrelated"
+        unrelated.mkdir()
+        (unrelated / "keep.txt").write_text("unrelated\n", encoding="utf-8")
+        symlink_skill.symlink_to(unrelated, target_is_directory=True)
+        symlink_manifest_path = Path(
+            (symlink_fixture / ".softpowers-current-manifest").read_text(encoding="utf-8").strip()
         )
-        eval_pointer = retired_eval_dest / ".softpowers-current-manifest"
-        eval_pointer_before = eval_pointer.read_text(encoding="utf-8")
-        try:
-            install_pack(source, retired_eval_dest)
-        except RuntimeError as exc:
-            assert_true("soft-eval" in str(exc), "retired soft-eval was not identified")
-        else:
-            raise AssertionError("install replaced a layer that still managed soft-eval")
-        assert_true(
-            eval_pointer.read_text(encoding="utf-8") == eval_pointer_before,
-            "blocked soft-eval migration changed the manifest pointer",
+        mutate_json(
+            symlink_manifest_path,
+            lambda data: data["skills"][0].__setitem__(
+                "installed_sha256", directory_digest(symlink_skill)
+            ),
         )
-
-        uninstall_pack(retired_eval_dest)
+        symlink_retire = run_legacy_helper(symlink_fixture, retire=True)
         assert_true(
-            manifest_status(retired_eval_manifest) == "uninstalled",
-            "retired soft-eval layer stayed active",
+            symlink_retire.returncode == 0,
+            f"safe symlink-leaf retirement failed: {symlink_retire.stderr}",
         )
         assert_true(
-            not (retired_eval_dest / "soft-eval").exists(),
-            "historical uninstall left manifest-owned soft-eval behind",
-        )
-        migrated_eval_manifest = install_pack(source, retired_eval_dest)
-        assert_true(
-            not (retired_eval_dest / "soft-eval").exists(),
-            "new pack reclaimed retired soft-eval",
-        )
-        uninstall_pack(retired_eval_dest, migrated_eval_manifest)
-        assert_true(
-            not (retired_eval_dest / "soft-eval").exists(),
-            "new uninstall recreated retired soft-eval",
-        )
-
-        # Coexistence + backup restoration.
-        dest = base / "coexist" / "skills"
-        write_old_skill(dest / "unrelated-skill", "leave me alone")
-        write_old_skill(dest / "soft-debug", "restore me")
-
-        manifest = install_pack(source, dest)
-        assert_true((dest / "unrelated-skill" / "OLD_MARKER.txt").is_file(), "unrelated skill changed")
-        assert_true(
-            not validate_payload(dest, manifest_path=PACK_MANIFEST, allow_other_skills=True),
-            "installed target invalid",
-        )
-        assert_true(manifest.is_file(), "manifest missing")
-        for reference in REFERENCE_NAMES:
-            assert_true(
-                (dest / ROUTER_NAME / "references" / reference).is_file(),
-                f"router reference missing after install: {reference}",
-            )
-
-        uninstall_pack(dest)
-        assert_true((dest / "unrelated-skill" / "OLD_MARKER.txt").is_file(), "unrelated skill lost")
-        assert_true(
-            (dest / "soft-debug" / "OLD_MARKER.txt").read_text(encoding="utf-8") == "restore me",
-            "replaced skill was not restored",
-        )
-        assert_true(not (dest / ROUTER_NAME).exists(), "new router remained after uninstall")
-
-        # User edits after installation must survive uninstall as a snapshot.
-        edited_dest = base / "edited" / "skills"
-        install_pack(source, edited_dest)
-        edited_file = edited_dest / "soft-debug" / "USER_EDIT.txt"
-        edited_file.write_text("keep this", encoding="utf-8")
-        _, preserved = uninstall_pack(edited_dest)
-        assert_true(any(path.name == "soft-debug" for path in preserved), "edited skill not preserved")
-        preserved_debug = next(path for path in preserved if path.name == "soft-debug")
-        assert_true(
-            (preserved_debug / "USER_EDIT.txt").read_text(encoding="utf-8") == "keep this",
-            "edited content lost",
-        )
-
-        # Repeated installs form a reversible manifest stack.
-        stacked_dest = base / "stacked" / "skills"
-        first_manifest = install_pack(source, stacked_dest)
-        second_manifest = install_pack(source, stacked_dest)
-        assert_true(second_manifest != first_manifest, "stacked manifests collided")
-
-        # Explicit non-LIFO uninstall must be rejected before any mutation.
-        pointer = stacked_dest / ".softpowers-current-manifest"
-        pointer_before = pointer.read_text(encoding="utf-8")
-        active_digest_before = (stacked_dest / ROUTER_NAME / "SKILL.md").read_bytes()
-        try:
-            uninstall_pack(stacked_dest, first_manifest)
-        except RuntimeError as exc:
-            assert_true("Non-LIFO uninstall refused" in str(exc), "unexpected non-LIFO error")
-        else:
-            raise AssertionError("non-LIFO uninstall was not rejected")
-
-        assert_true(pointer.read_text(encoding="utf-8") == pointer_before, "non-LIFO attempt changed pointer")
-        assert_true(manifest_status(first_manifest) == "installed", "first manifest status changed")
-        assert_true(manifest_status(second_manifest) == "installed", "second manifest status changed")
-        assert_true(
-            (stacked_dest / ROUTER_NAME / "SKILL.md").read_bytes() == active_digest_before,
-            "non-LIFO attempt changed active skill",
-        )
-
-        uninstall_pack(stacked_dest)
-        assert_true(
-            pointer.read_text(encoding="utf-8").strip() == str(first_manifest),
-            "previous manifest pointer not restored",
-        )
-        assert_true((stacked_dest / ROUTER_NAME / "SKILL.md").is_file(), "previous pack not restored")
-        uninstall_pack(stacked_dest)
-        assert_true(not (stacked_dest / ROUTER_NAME).exists(), "first pack remained after stacked uninstall")
-
-        # Transaction rollback after partial replacement.
-        rollback_dest = base / "rollback" / "skills"
-        for name in SKILL_NAMES:
-            write_old_skill(rollback_dest / name, f"old:{name}")
-
-        try:
-            install_pack(source, rollback_dest, fail_after=4)
-        except RuntimeError as exc:
-            assert_true("Injected self-test failure" in str(exc), "unexpected rollback error")
-        else:
-            raise AssertionError("injected install failure did not fail")
-
-        for name in SKILL_NAMES:
-            marker = rollback_dest / name / "OLD_MARKER.txt"
-            assert_true(marker.is_file(), f"rollback did not restore {name}")
-
-        # Digest validation must reject a modified reference without parsing YAML.
-        tampered_source = base / "tampered-skills"
-        shutil.copytree(source, tampered_source)
-        tampered_file = tampered_source / ROUTER_NAME / "references" / "debug.md"
-        tampered_file.write_bytes(tampered_file.read_bytes() + b"\n")
-        tamper_errors = validate_payload(
-            tampered_source,
-            manifest_path=PACK_MANIFEST,
-            allow_other_skills=False,
-        )
-        assert_true(any("mismatch" in error for error in tamper_errors), "tampered reference was accepted")
-
-        # New installs follow the current ~/.agents/skills user root.
-        new_home = base / "new-home"
-        env = clean_root_env(os.environ, new_home)
-        subprocess.run(
-            [str(root / "install.sh")],
-            cwd=root,
-            env=env,
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
+            (unrelated / "keep.txt").read_text(encoding="utf-8") == "unrelated\n",
+            "legacy retirement mutated a symlink referent",
         )
         assert_true(
-            (new_home / ".agents" / "skills" / ROUTER_NAME / "SKILL.md").is_file(),
-            "fresh install did not use ~/.agents/skills",
-        )
-        subprocess.run(
-            [str(root / "uninstall.sh")],
-            cwd=root,
-            env=env,
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
+            not legacy_migration.path_exists(symlink_skill),
+            "legacy retirement left an owned symlink",
         )
 
-        # Existing v0.1.x-style ~/.codex/skills installs are upgraded in place.
-        legacy_home = base / "legacy-home"
-        legacy_root = legacy_home / ".codex" / "skills"
-        write_old_skill(legacy_root / ROUTER_NAME, "legacy router")
-        legacy_env = clean_root_env(os.environ, legacy_home)
-        subprocess.run(
-            [str(root / "install.sh")],
-            cwd=root,
-            env=legacy_env,
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
+        missing_fixture = make_legacy_fixture(base / "legacy-missing-previous")
+        missing_pointer = missing_fixture / ".softpowers-current-manifest"
+        missing_manifest = Path(missing_pointer.read_text(encoding="utf-8").strip())
+        missing_target = missing_fixture / "soft-debug"
+        missing_before = directory_digest(missing_fixture)
+        mutate_json(
+            missing_manifest,
+            lambda data: data.__setitem__(
+                "previous_manifest",
+                str(missing_fixture / ".softpowers-manifests/missing.json"),
+            ),
         )
+        missing_before = directory_digest(missing_fixture)
+        missing_retire = run_legacy_helper(missing_fixture, retire=True)
+        assert_true(missing_retire.returncode == 1, "missing predecessor was accepted")
+        assert_true(directory_digest(missing_fixture) == missing_before, "missing predecessor mutated state")
+        assert_true(missing_pointer.is_file() and missing_target.is_dir(), "missing predecessor retired ownership")
+
+        missing_key_fixture = make_legacy_fixture(base / "legacy-missing-previous-key")
+        missing_key_pointer = missing_key_fixture / ".softpowers-current-manifest"
+        missing_key_manifest = Path(missing_key_pointer.read_text(encoding="utf-8").strip())
+        mutate_json(
+            missing_key_manifest,
+            lambda data: data.pop("previous_manifest"),
+        )
+        missing_key_before = directory_digest(missing_key_fixture)
+        missing_key_retire = run_legacy_helper(missing_key_fixture, retire=True)
+        assert_true(missing_key_retire.returncode == 1, "missing predecessor key was accepted")
         assert_true(
-            (legacy_root / ROUTER_NAME / "references" / "debug.md").is_file(),
-            "legacy root was not upgraded in place",
-        )
-        assert_true(
-            not (legacy_home / ".agents" / "skills" / ROUTER_NAME).exists(),
-            "legacy upgrade unexpectedly installed a second copy",
-        )
-        subprocess.run(
-            [str(root / "uninstall.sh")],
-            cwd=root,
-            env=legacy_env,
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
-        assert_true(
-            (legacy_root / ROUTER_NAME / "OLD_MARKER.txt").read_text(encoding="utf-8") == "legacy router",
-            "legacy router was not restored",
+            directory_digest(missing_key_fixture) == missing_key_before,
+            "missing predecessor key mutated state",
         )
 
-        # Ambiguous dual roots must be rejected before any mutation.
-        dual_home = base / "dual-home"
-        for dual_root, marker in (
-            (dual_home / ".agents" / "skills", "official"),
-            (dual_home / ".codex" / "skills", "legacy"),
-        ):
-            write_old_skill(dual_root / ROUTER_NAME, marker)
-            (dual_root / ROUTER_NAME / "SKILL.md").write_text(marker, encoding="utf-8")
-        dual_env = clean_root_env(os.environ, dual_home)
-        dual_result = subprocess.run(
-            [str(root / "install.sh")],
-            cwd=root,
-            env=dual_env,
-            check=False,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
+        malformed_fixture = make_legacy_fixture(base / "legacy-malformed-previous")
+        malformed_pointer = malformed_fixture / ".softpowers-current-manifest"
+        malformed_manifest = Path(malformed_pointer.read_text(encoding="utf-8").strip())
+        malformed_previous = malformed_fixture / ".softpowers-manifests/malformed.json"
+        malformed_previous.write_text("{}\n", encoding="utf-8")
+        mutate_json(
+            malformed_manifest,
+            lambda data: data.__setitem__("previous_manifest", str(malformed_previous)),
         )
-        assert_true(dual_result.returncode == 1, "dual-root ambiguity was not rejected")
-        assert_true("both ~/.agents/skills and ~/.codex/skills" in dual_result.stderr, "wrong dual-root error")
+        malformed_before = directory_digest(malformed_fixture)
+        malformed_retire = run_legacy_helper(malformed_fixture, retire=True)
+        assert_true(malformed_retire.returncode == 1, "malformed predecessor was accepted")
         assert_true(
-            (dual_home / ".agents" / "skills" / ROUTER_NAME / "OLD_MARKER.txt").read_text(encoding="utf-8") == "official",
-            "dual-root rejection mutated official root",
-        )
-        assert_true(
-            (dual_home / ".codex" / "skills" / ROUTER_NAME / "OLD_MARKER.txt").read_text(encoding="utf-8") == "legacy",
-            "dual-root rejection mutated legacy root",
+            directory_digest(malformed_fixture) == malformed_before,
+            "malformed predecessor mutated state",
         )
 
-        # User-facing shell wrappers must work when python3 has site-packages disabled.
-        no_site_home = base / "no-site" / "codex"
-        fake_bin = base / "no-site" / "bin"
-        fake_bin.mkdir(parents=True, exist_ok=True)
-        fake_python = fake_bin / "python3"
-        fake_python.write_text(
-            '#!/usr/bin/env bash\nexec "$SOFTPOWERS_REAL_PYTHON" -S "$@"\n',
-            encoding="utf-8",
-        )
-        fake_python.chmod(0o755)
-
-        no_site_env = os.environ.copy()
-        no_site_env["CODEX_HOME"] = str(no_site_home)
-        no_site_env["SOFTPOWERS_REAL_PYTHON"] = sys.executable
-        no_site_env["PATH"] = str(fake_bin) + os.pathsep + no_site_env.get("PATH", "")
-        subprocess.run(
-            [str(root / "install.sh")],
-            cwd=root,
-            env=no_site_env,
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
+        manifest_link_fixture = make_legacy_fixture(base / "legacy-manifest-root-link")
+        manifest_root = manifest_link_fixture / ".softpowers-manifests"
+        outside_manifest_root = base / "outside-manifests"
+        os.replace(manifest_root, outside_manifest_root)
+        manifest_root.symlink_to(outside_manifest_root, target_is_directory=True)
+        manifest_link_before = directory_digest(manifest_link_fixture)
+        manifest_link_result = run_legacy_helper(manifest_link_fixture)
+        assert_true(manifest_link_result.returncode == 1, "symlinked manifest root was accepted")
         assert_true(
-            (no_site_home / "skills" / ROUTER_NAME / "references" / "debug.md").is_file(),
-            "no-site install failed",
+            directory_digest(manifest_link_fixture) == manifest_link_before,
+            "symlinked manifest-root preflight mutated state",
         )
-        subprocess.run(
-            [str(root / "uninstall.sh")],
-            cwd=root,
-            env=no_site_env,
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
+
+        backup_link_fixture = make_legacy_fixture(base / "legacy-backup-root-link")
+        backup_pointer = backup_link_fixture / ".softpowers-current-manifest"
+        backup_manifest = Path(backup_pointer.read_text(encoding="utf-8").strip())
+        outside_backup_root = base / "outside-backups"
+        outside_backup = outside_backup_root / "stamp/soft-debug"
+        outside_backup.mkdir(parents=True)
+        (outside_backup / "SKILL.md").write_text("older\n", encoding="utf-8")
+        (backup_link_fixture / ".softpowers-backups").symlink_to(
+            outside_backup_root, target_is_directory=True
         )
-        assert_true(not (no_site_home / "skills" / ROUTER_NAME).exists(), "no-site uninstall failed")
+        mutate_json(
+            backup_manifest,
+            lambda data: data["skills"][0].__setitem__(
+                "backup", str(backup_link_fixture / ".softpowers-backups/stamp/soft-debug")
+            ),
+        )
+        backup_link_before = directory_digest(backup_link_fixture)
+        backup_link_result = run_legacy_helper(backup_link_fixture)
+        assert_true(backup_link_result.returncode == 1, "symlinked backup root was accepted")
+        assert_true(
+            directory_digest(backup_link_fixture) == backup_link_before,
+            "symlinked backup-root preflight mutated state",
+        )
+
+        snapshot_link_fixture = make_legacy_fixture(base / "legacy-snapshot-root-link")
+        outside_snapshot_root = base / "outside-snapshots"
+        outside_snapshot_root.mkdir()
+        (snapshot_link_fixture / ".softpowers-retire-snapshots").symlink_to(
+            outside_snapshot_root, target_is_directory=True
+        )
+        snapshot_link_before = directory_digest(snapshot_link_fixture)
+        snapshot_link_result = run_legacy_helper(snapshot_link_fixture, retire=True)
+        assert_true(snapshot_link_result.returncode == 1, "symlinked snapshot root was accepted")
+        assert_true(
+            directory_digest(snapshot_link_fixture) == snapshot_link_before,
+            "symlinked snapshot-root retirement mutated state",
+        )
+
+        pointer_dir_fixture = make_legacy_fixture(base / "legacy-pointer-directory")
+        pointer_dir = pointer_dir_fixture / ".softpowers-current-manifest"
+        pointer_dir.unlink()
+        pointer_dir.mkdir()
+        pointer_dir_before = directory_digest(pointer_dir_fixture)
+        pointer_dir_result = run_legacy_helper(pointer_dir_fixture)
+        assert_true(pointer_dir_result.returncode == 1, "directory manifest pointer was reported clear")
+        assert_true(
+            directory_digest(pointer_dir_fixture) == pointer_dir_before,
+            "directory manifest-pointer preflight mutated state",
+        )
+
+        broken_pointer_fixture = make_legacy_fixture(base / "legacy-pointer-broken-link")
+        broken_pointer = broken_pointer_fixture / ".softpowers-current-manifest"
+        broken_pointer.unlink()
+        broken_pointer.symlink_to(broken_pointer_fixture / "missing-pointer-target")
+        broken_pointer_before = directory_digest(broken_pointer_fixture)
+        broken_pointer_result = run_legacy_helper(broken_pointer_fixture)
+        assert_true(broken_pointer_result.returncode == 1, "broken manifest pointer was reported clear")
+        assert_true(
+            directory_digest(broken_pointer_fixture) == broken_pointer_before,
+            "broken manifest-pointer preflight mutated state",
+        )
+
+        rollback_fixture = make_legacy_fixture(base / "legacy-rollback")
+        rollback_skill = rollback_fixture / "soft-debug/SKILL.md"
+        rollback_skill.write_text("locally modified\n", encoding="utf-8")
+        rollback_before = directory_digest(rollback_fixture)
+        original_atomic_write = legacy_migration.atomic_write_text
+
+        def fail_manifest_commit(path: Path, text: str) -> None:
+            if path.suffix == ".json":
+                raise RuntimeError("injected manifest commit failure")
+            original_atomic_write(path, text)
+
+        with mock.patch.object(legacy_migration, "atomic_write_text", fail_manifest_commit):
+            try:
+                legacy_migration.retire_current_layer(rollback_fixture)
+            except RuntimeError as exc:
+                assert_true("injected manifest commit failure" in str(exc), "wrong rollback failure")
+            else:
+                raise AssertionError("injected retirement failure did not fail")
+        assert_true(
+            directory_digest(rollback_fixture) == rollback_before,
+            "failed legacy retirement left rollback debris",
+        )
 
     print(
-        "Softpowers packaging self-test passed: bounded implicit activation metadata, generated-source "
-        "sync, reference digests, historical-manifest migration, coexistence, default-root selection, legacy-root upgrade, "
-        "dual-root rejection, manifest stacking, non-LIFO rejection, edit preservation, "
-        "restore, rollback, and "
-        "no-site-packages install/uninstall."
+        "Servotab packaging self-test passed: exact plugin identity and 13-skill topology, "
+        "source/generated sync, fail-closed retired-root handling, old-ID retirement, manifest "
+        "and asset integrity, marketplace routing, default read-only legacy ownership detection, "
+        "and explicit one-layer retirement."
     )
     return 0
 

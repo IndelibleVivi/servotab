@@ -1,8 +1,0 @@
-interface:
-  display_name: "Soft Debug"
-  short_description: "Evidence-driven debugging with bounded hypotheses"
-  default_prompt: "Use $soft-debug to reproduce this issue, identify the causal mechanism, implement the narrowest fix, and verify it."
-policy:
-  products:
-    - CODEX
-  allow_implicit_invocation: false

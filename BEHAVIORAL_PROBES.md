@@ -1,8 +1,8 @@
-# Behavioral Probes — v0.3 Activation
+# Behavioral Probes — Servotab 0.4 Activation
 
 这些 probes 用来观察 router 是否正确触发、按需读取 reference，并保持小任务轻量。它们包含正例和负例；不要只测“会不会用”，还要测“该沉默时会不会沉默”。
 
-其中八个 high-signal probes 已成为 `evals/cases/` 下的 executable canaries；用法、artifact contract 与 resume 语义见 [`evals/README.md`](evals/README.md)。本文件仍保留更广的人工 behavior seed set，不要求每次 release 全量跑 model。
+其中九个 high-signal probes 已成为 `evals/cases/` 下的 executable canaries；用法、artifact contract 与 resume 语义见 [`evals/README.md`](evals/README.md)。本文件仍保留更广的人工 behavior seed set，不要求每次 release 全量跑 model。
 
 每轮记录：
 
@@ -30,7 +30,7 @@ Expected:
 - 直接修改并跑 focused check
 - 不写 plan/design doc
 - 不创建 worktree/subagent
-- 不宣布“已使用 Softpowers”
+- 不宣布“已使用 Servotab”
 
 ## Probe 2 — local regression, debug primary
 
@@ -91,8 +91,8 @@ Prompt:
 
 Expected:
 
-- 读取 `receive-review.md`
-- 每项 Accept / Adjust / Verify / Reject / Defer
+- 读取 `review-feedback.md`
+- 每项 Accept / Accept with adjustment / Verify further / Reject / Defer
 - 不表演式全盘同意
 - 不为一个反馈列表自动启动多个 reviewer
 
@@ -136,7 +136,7 @@ Prompt:
 
 Expected:
 
-- 读取 `parallel.md`
+- 读取 `delegate.md`
 - 触发依据是三个已经定位为 independent 的 adapter lanes，不是 Ultra、model tier、空闲 slots 或 subagent tool availability
 - 最多 3 个 subagents
 - 无 nested agents
@@ -168,7 +168,7 @@ Prompt:
 
 Expected:
 
-- Softpowers 不触发
+- Servotab 不触发
 - 普通解释即可
 
 ## Probe 11 — negative: simple file lookup
@@ -181,7 +181,7 @@ Prompt:
 
 Expected:
 
-- Softpowers 通常不触发
+- Servotab 通常不触发
 - 直接定位并回答
 - 不启动 review/plan/debug
 
@@ -195,7 +195,7 @@ Prompt:
 
 Expected:
 
-- Softpowers 不触发
+- Servotab 不触发
 - 保持普通产品讨论
 
 ## Probe 13 — cross-boundary localization without architecture tourism
@@ -305,7 +305,7 @@ Prompt:
 
 Expected:
 
-- router 按“实现”进入 `execute.md`，而不是因输入是截图/tutorial 停在 brainstorm 或 summary
+- router 按“实现”进入 `execute.md`，而不是因输入是截图/tutorial 停在 design exploration 或 summary
 - 将 named behavior 视为 normative，将未点名内容留作 inspiration
 - 文字纠正与 accepted repo contract 优先于 visual inference
 - inspection 适配当前 repo architecture，不无边界克隆参考产品
@@ -321,7 +321,7 @@ Prompt:
 
 Expected:
 
-- 读取 `parallel.md`；不要求先制造第二个工作域
+- 读取 `delegate.md`；不要求先制造第二个工作域
 - host capability 只决定能否 dispatch；method selection 来自 clean-context lane 对 coordinator attention 的实际价值
 - Coordinator 发出 Outcome / Scope / Context / Authority / Return 完整 work order
 - worker 在 lane 内自行做普通决定，不获得未授权 external/destructive 权限
@@ -338,7 +338,7 @@ Prompt:
 
 Expected:
 
-- router 读取 `brainstorm.md` 或 `plan.md`，按实际开放程度选择；不把“新 transport”自动当成 locked requirement
+- router 读取 `design.md` 或 `plan.md`，按实际开放程度选择；不把“新 transport”自动当成 locked requirement
 - 分离 outcome、hard constraints 与 proposed mechanism
 - 先检查现有 runtime 与当前官方 platform capability，确认人工 gate 属于哪一种 connection mode
 - 比较 moving parts、trust boundary 与 persistent state；若隔离 persistent profile 加 supported debug endpoint 已满足完整要求，优先推荐或采用该直接路径
@@ -383,9 +383,9 @@ Expected:
 用这些控制 direct leaf 是否仍然可用：
 
 ```text
-$soft-debug 复现并修复这个 bug。
-$soft-review 审当前 diff。
-$soft-tdd 为这个 parser contract 做 strict red-green。
+$debug 复现并修复这个 bug。
+$review 审当前 diff。
+$tdd 为这个 parser contract 做 strict red-green。
 $license-boundary 按这个 repo 的实际复用目标和 rights lineage 选择 license。
 ```
 

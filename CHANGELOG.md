@@ -2,10 +2,17 @@
 
 ## Unreleased
 
-- Distinguished host-provided subagent capability from Softpowers parallel routing, and made `execute` / `debug` load the bounded Worker Lanes contract before a justified first dispatch without changing the router-only implicit activation topology.
+- Migrated the current product identity from Softpowers to Servotab while preserving the pre-`0.4` changelog, Git history, licensing boundary, and third-party provenance.
+- Replaced the global root-skills transaction installer with a plugin-native package at `plugins/servotab`, a repo marketplace entry at `.agents/plugins/marketplace.json`, and the selector `servotab@personal`.
+- Kept `servotab` as the sole implicit-eligible router and renamed the 12 explicit leaves to semantic ids, including `design`, `review-feedback`, and `delegate` in place of the retired `brainstorm`, `receive-review`, and `parallel` ids.
+- Established `methods/*.md` and `scripts/skill_catalog.py` as canonical source, generated the plugin skill tree and two curated assets, bundled plugin-local `LICENSE` / `NOTICE.md`, and added an exact 43-file package manifest for the `0.4.0-rc1` candidate.
+- Added a read-only-by-default legacy ownership helper with explicit one-layer retirement for active manifest-owned Softpowers installations; removed the old install/uninstall entry points from current source.
+- Migrated the repository-owned Field Lab subject pack to schema v2 and pointed it at the generated Servotab plugin skill tree without making live model evaluation a release gate.
+- Added the Astro static website, public product/legal/support routes, identity assets, and Cloudflare Pages configuration while keeping website deployment separate from OpenAI directory submission.
+- Distinguished host-provided subagent capability from Servotab delegation routing, and made `execute` / `debug` load the bounded Worker Lanes contract before a justified first dispatch without changing the router-only implicit activation topology.
 - Escalated material boundaries without a cheap reliable reproducer into one bounded testability seam while keeping named-host acceptance separate, and added a portable host-surrogate canary without creating a new testing leaf or routing surface.
 - Added authority-aware goal routing so derived specifications and implementation artifacts cannot silently reorder an accepted programme or widen its trust model, while explicitly authorized foundational work remains possible without a present consumer.
-- Carried the goal-authority invariant through direct `plan`, `receive-review`, and `finish` leaves instead of relying on implicit router activation.
+- Carried the goal-authority invariant through direct `plan`, `review-feedback`, and `finish` leaves instead of relying on implicit router activation.
 - Scoped `advances`, `research-only`, `diverges`, and `authority unclear` review verdicts to changes that can alter product meaning, programme order, trust boundaries, or generalized infrastructure.
 - Tightened verdict assertions so each canary requires its expected verdict and excludes the other three, and added an explicitly adopted foundation canary to catch both permissive and over-blocking regressions.
 - Made the verdict taxonomy mutually exclusive by precedence: unclear authority first, then programme divergence, authorized advancement, and finally compatible but unadopted research.

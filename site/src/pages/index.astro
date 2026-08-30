@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MethodMotion from "../components/MethodMotion.astro";
+import { methods } from "../data/methods";
+---
+
+<BaseLayout>
+  <section class="home-hero shell">
+    <div class="hero-copy">
+      <p class="category">Engineering method layer for Codex.</p>
+      <h1>Method as exponent. <span>Not machinery.</span></h1>
+      <p class="lede">
+        Servotab changes how Codex plans, builds, debugs, reviews, and verifies
+        repository work. Clear changes stay direct. Higher-risk work receives
+        stronger method and fresh evidence.
+      </p>
+      <div class="hero-actions">
+        <a class="action action-primary" href="/docs">Read the docs</a>
+        <a class="action action-secondary" href="/methods">Explore methods</a>
+      </div>
+    </div>
+    <MethodMotion />
+  </section>
+
+  <section class="home-section shell" aria-labelledby="two-paths-heading">
+    <div class="section-lead">
+      <p class="section-index">01 / Two paths</p>
+      <div>
+        <h2 id="two-paths-heading">Direct when clear. Deliberate when risk demands it.</h2>
+        <p class="lede">
+          Method follows the repository task. It never replaces the work or
+          turns every request into the same process.
+        </p>
+      </div>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-item">
+        <span class="path-number">path / direct</span>
+        <span class="path-accent" aria-hidden="true"></span>
+        <h3>Clear local change</h3>
+        <p>
+          A bounded, reversible edit stays on the shortest useful path: inspect
+          the relevant source, make the change, run the focused check, and close.
+        </p>
+      </article>
+      <article class="path-item">
+        <span class="path-number">path / method</span>
+        <span class="path-accent" aria-hidden="true"></span>
+        <h3>Risky repository change</h3>
+        <p>
+          A selected method adds the planning, diagnosis, isolation, review, or
+          verification the task genuinely needs—bounded to the real risk.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="home-section shell" aria-labelledby="promises-heading">
+    <div class="section-lead">
+      <p class="section-index">02 / Product promises</p>
+      <div>
+        <h2 id="promises-heading">Controlled leverage, without process theatre.</h2>
+        <p class="lede">
+          Four behaviors hold the line between useful method and unnecessary machinery.
+        </p>
+      </div>
+    </div>
+
+    <div class="promise-list">
+      <div class="promise-row"><span>direct</span><strong>Clear changes stay direct.</strong></div>
+      <div class="promise-row"><span>method</span><strong>Risk brings stronger method.</strong></div>
+      <div class="promise-row"><span>closure</span><strong>Fresh evidence closes the loop.</strong></div>
+      <div class="promise-row"><span>scope</span><strong>The requested outcome stays whole.</strong></div>
+    </div>
+  </section>
+
+  <section class="shell" aria-labelledby="methods-preview-heading">
+    <div class="method-preview">
+      <div>
+        <h2 id="methods-preview-heading">A small method, placed precisely.</h2>
+        <p>
+          Servotab’s candidate method set spans design, execution, debugging,
+          review, verification, isolation, delegation, and closure. The router
+          chooses depth proportionately; explicit method names remain available
+          when a person wants precise control.
+        </p>
+        <div class="method-line" aria-label="Candidate Servotab methods">
+          {methods.map((method) => <span>{method.name}</span>)}
+        </div>
+      </div>
+      <a class="action action-secondary" href="/methods">See all methods</a>
+    </div>
+
+    <div class="availability-note">
+      <span>availability</span>
+      <p>
+        Servotab is being prepared for public release. It is not currently listed
+        in the OpenAI plugin directory, so this site does not present an installation action.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

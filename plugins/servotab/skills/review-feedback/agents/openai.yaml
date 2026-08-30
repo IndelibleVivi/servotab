@@ -1,0 +1,7 @@
+interface:
+  display_name: "Review Feedback"
+  short_description: "Verify review feedback before applying it"
+  default_prompt: "Use $review-feedback to verify each review item against the repository, implement valid feedback, and push back where needed."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

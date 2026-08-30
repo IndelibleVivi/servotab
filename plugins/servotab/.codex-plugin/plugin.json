@@ -1,0 +1,39 @@
+{
+  "name": "servotab",
+  "version": "0.4.0-rc1",
+  "description": "A quiet, risk-scaled engineering method layer for Codex.",
+  "author": {
+    "name": "Faye & Cove",
+    "url": "https://servotab.com"
+  },
+  "homepage": "https://servotab.com",
+  "repository": "https://github.com/IndelibleVivi/softpowers",
+  "keywords": [
+    "codex",
+    "engineering",
+    "methods",
+    "verification"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Servotab",
+    "shortDescription": "Quiet, risk-scaled engineering methods",
+    "longDescription": "Servotab keeps clear changes direct, adds stronger method when risk or uncertainty requires it, and closes work with fresh evidence.",
+    "developerName": "Faye & Cove",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Repository engineering",
+      "Risk-scaled methods",
+      "Fresh verification"
+    ],
+    "websiteURL": "https://servotab.com",
+    "privacyPolicyURL": "https://servotab.com/privacy",
+    "termsOfServiceURL": "https://servotab.com/terms",
+    "defaultPrompt": [
+      "Use $servotab to handle this repository task with proportional method and fresh verification."
+    ],
+    "brandColor": "#315EFB",
+    "composerIcon": "./assets/composer-icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

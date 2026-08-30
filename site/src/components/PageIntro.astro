@@ -1,0 +1,15 @@
+---
+type Props = {
+  title: string;
+  description: string;
+  index?: string;
+};
+
+const { title, description, index } = Astro.props;
+---
+
+<section class="page-intro shell">
+  {index && <p class="section-index">{index}</p>}
+  <h1>{title}</h1>
+  <p class="lede">{description}</p>
+</section>

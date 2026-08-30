@@ -1,0 +1,7 @@
+interface:
+  display_name: "Debug"
+  short_description: "Debug with bounded, evidence-driven hypotheses"
+  default_prompt: "Use $debug to reproduce this issue, identify the causal mechanism, implement the narrowest fix, and verify it."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

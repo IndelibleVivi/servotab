@@ -7,25 +7,36 @@ import sys
 from pathlib import Path
 
 from build_skills import check as check_generated
-from common import IMPLICIT_SKILL_NAMES, PACK_ROOT, SKILL_NAMES, VERSION
-from runtime_validate import EXPECTED_PAYLOAD_FILES, file_sha256
+from runtime_validate import (
+    EXPECTED_PAYLOAD_FILES,
+    PLUGIN_RELATIVE,
+    ROOT,
+    VERSION,
+    file_sha256,
+    validate_marketplace,
+    validate_plugin_manifest,
+)
+from skill_catalog import IMPLICIT_SKILL_NAMES, SKILL_NAMES
 from validate import validate_directory
 
 
-def build_manifest() -> dict[str, object]:
-    skills_dir = PACK_ROOT / "skills"
-    sync_errors = check_generated()
+def build_manifest(root: Path = ROOT) -> dict[str, object]:
+    sync_errors = check_generated(root)
     if sync_errors:
-        raise RuntimeError("generated-skill sync failed:\n- " + "\n- ".join(sync_errors))
+        raise RuntimeError("source/generated sync failed:\n- " + "\n- ".join(sync_errors))
 
-    errors = validate_directory(skills_dir, exact=True)
-    if errors:
-        raise RuntimeError("YAML/source validation failed:\n- " + "\n- ".join(errors))
+    skills_dir = root / PLUGIN_RELATIVE / "skills"
+    skill_errors = validate_directory(skills_dir, exact=True)
+    if skill_errors:
+        raise RuntimeError("skill validation failed:\n- " + "\n- ".join(skill_errors))
+    contract_errors = validate_plugin_manifest(root) + validate_marketplace(root)
+    if contract_errors:
+        raise RuntimeError("plugin contract validation failed:\n- " + "\n- ".join(contract_errors))
 
     files: list[dict[str, object]] = []
     for relative_text in sorted(EXPECTED_PAYLOAD_FILES):
         relative = Path(relative_text)
-        absolute = PACK_ROOT / relative
+        absolute = root / relative
         if not absolute.is_file() or absolute.is_symlink():
             raise RuntimeError(f"invalid payload file: {relative.as_posix()}")
         files.append(
@@ -37,9 +48,10 @@ def build_manifest() -> dict[str, object]:
         )
 
     return {
-        "schema_version": 2,
-        "pack": "softpowers-pack",
-        "version": VERSION,
+        "schema_version": 1,
+        "pack": "servotab",
+        "version": (root / "VERSION").read_text(encoding="utf-8").strip(),
+        "plugin": PLUGIN_RELATIVE.as_posix(),
         "skills": list(SKILL_NAMES),
         "activation": {
             "implicit": list(IMPLICIT_SKILL_NAMES),
@@ -51,18 +63,17 @@ def build_manifest() -> dict[str, object]:
     }
 
 
-def serialized_manifest() -> str:
-    return json.dumps(build_manifest(), indent=2, ensure_ascii=False) + "\n"
+def serialized_manifest(root: Path = ROOT) -> str:
+    return json.dumps(build_manifest(root), indent=2, ensure_ascii=False) + "\n"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Generate or verify PACK_MANIFEST.json after sync and real YAML validation."
+        description="Generate or verify PACK_MANIFEST.json for the Servotab plugin package."
     )
-    parser.add_argument("--check", action="store_true", help="Verify the committed manifest is current")
+    parser.add_argument("--check", action="store_true", help="Verify the committed manifest")
     args = parser.parse_args()
-
-    manifest_path = PACK_ROOT / "PACK_MANIFEST.json"
+    manifest_path = ROOT / "PACK_MANIFEST.json"
     try:
         expected = serialized_manifest()
     except Exception as exc:
@@ -78,7 +89,7 @@ def main() -> int:
         if current != expected:
             print("ERROR: PACK_MANIFEST.json is stale; regenerate it.", file=sys.stderr)
             return 1
-        print("PACK_MANIFEST.json matches the synced, YAML-validated skill payload.")
+        print("PACK_MANIFEST.json matches the validated Servotab plugin payload.")
         return 0
 
     manifest_path.write_text(expected, encoding="utf-8")

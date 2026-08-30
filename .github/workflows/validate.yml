@@ -56,13 +56,11 @@ jobs:
 
       - name: Validate release payload
         run: |
-          python scripts/validate.py --exact skills
+          python scripts/validate.py plugins/servotab/skills
           python scripts/generate_pack_manifest.py --check
 
-      - name: Run standard-library self-test
-        run: python -S scripts/selftest.py
+      - name: Run packaging self-test
+        run: python scripts/selftest.py
 
       - name: Check script syntax
-        run: |
-          python -m py_compile scripts/*.py
-          bash -n install.sh uninstall.sh
+        run: python -m py_compile scripts/*.py

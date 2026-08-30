@@ -1,32 +1,32 @@
-# Softpowers field evidence pack
+# Servotab field evidence pack
 
-`evals/` 保存 Softpowers 自己的 subject evidence；通用 runner、schemas、process
+`evals/` 保存 Servotab 自己的 subject evidence；通用 runner、schemas、process
 containment、receipt contract 与 quota gate 已由 standalone Skill Field Lab companion
-负责，不再 bundle 或投影进 Softpowers installed skills。
+负责，不再 bundle 或投影进 Servotab plugin skills。
 
-Softpowers 继续拥有：
+Servotab 继续拥有：
 
 - `cases/`：九个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
 - `activation-prompts.csv`：较宽的 routing seed set；
 - `candidates/`：外部 pattern intake 与 provenance decisions；
 - `claims/`、`receipts/`、`decisions/`：项目自己的 evidence lifecycle；
-- 根目录 `fieldlab-pack.json`：把当前 generated `skills/` tree 声明为 Field Lab subject。
+- 根目录 `fieldlab-pack.json`：以 schema v2 `local-path` 直接声明当前 generated `plugins/servotab/skills/` tree，不复制第二份 runtime。
 
-Field Lab 是 optional maintainer companion。Softpowers 的安装、普通使用、release
-payload 与 CI 都不依赖它；Softpowers 也不安装、更新或卸载它的 CLI/controller
+Field Lab 是 optional maintainer companion。Servotab 的安装、普通使用、release
+payload 与 CI 都不依赖它；Servotab 也不安装、更新或卸载它的 CLI/controller
 skills。
 
 ## No-spend gate
 
-安装了 `fieldlab` CLI 的 maintainer 可以在 Softpowers 根目录运行：
+安装了当前 `fieldlab` CLI 的 maintainer 可以在 Servotab 根目录运行：
 
 ```bash
 fieldlab validate fieldlab-pack.json
-fieldlab selftest-pack fieldlab-pack.json
+fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-这三条命令不会启动 target model。`selftest-pack` 会证明每个 unresolved fixture
+这三条命令不会启动 target model。`selftest` 会证明每个 unresolved fixture
 至少失败一个 deterministic assertion，并在应用 `expected/` overlay 后全部通过。
 
 当前 cases：
@@ -42,7 +42,7 @@ fieldlab list fieldlab-pack.json
 - `review-evidence-boundaries`：同一 bounded review corpus 同时保护 clean control、negative-space spec omission、false-green test 与 conditional finding 的 evidence boundary。
 
 任何 synthetic live attempt 都必须先生成 saved plan，再显式跨过 Field Lab 的
-`run --live --max-invocations N` gate。Softpowers 不把 live model eval 设为普通
+`run --live --max-invocations N` gate。Servotab 不把 live model eval 设为普通
 release gate，也不自动增加 baseline、retry、repeat、full suite 或 LLM grader。
 
 Raw trace 是 authority；receipt 与 summary 是 derived evidence。只有经过脱敏、确有
@@ -56,13 +56,13 @@ controls 与 adjacent negative controls。不要为了通过 seed set 把 router
 model、effort、permissions 与可比较环境；一次 current exercise 不能冒充 later
 longitudinal improvement。
 
-Parallel seeds 另外区分 host/runtime capability 与 Softpowers method selection：
+Delegate seeds 另外区分 host/runtime capability 与 Servotab method selection：
 Ultra、可用 slots 或已经发生的 harness spawn 都不能替代 independent-lane / clean-context
-task topology，也不能单独证明 `parallel.md` 已被读取。
+task topology，也不能单独证明 `delegate.md` 已被读取。
 
 ## External pattern intake
 
-外部 repositories 通过 pinned、evidence-bound candidate process 进入 Softpowers：
+外部 repositories 通过 pinned、evidence-bound candidate process 进入 Servotab：
 
 - governance 与 verification scope：[`../docs/pattern-intake.md`](../docs/pattern-intake.md)
 - pinned source registry：[`../docs/external-patterns.md`](../docs/external-patterns.md)

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Delegate"
+  short_description: "Delegate bounded lanes with explicit ownership"
+  default_prompt: "Use $delegate to define bounded worker lanes, dispatch the fewest useful agents with explicit authority, and verify their returns before integration."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

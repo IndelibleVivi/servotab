@@ -1,8 +1,0 @@
-interface:
-  display_name: "Soft Brainstorm"
-  short_description: "Turn rough ideas into implementable designs"
-  default_prompt: "Use $soft-brainstorm to inspect the current context, resolve the real design decisions, and recommend an implementable direction."
-policy:
-  products:
-    - CODEX
-  allow_implicit_invocation: false

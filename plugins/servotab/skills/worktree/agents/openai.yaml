@@ -1,0 +1,7 @@
+interface:
+  display_name: "Worktree"
+  short_description: "Use Git isolation only when it adds value"
+  default_prompt: "Use $worktree to create or select a safe isolated workspace for this task and report its baseline state."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

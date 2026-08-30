@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { methods } from "../data/methods";
+---
+
+<BaseLayout
+  title="Methods"
+  description="The twelve candidate plugin-native methods in Servotab, from design through verified closure."
+>
+  <PageIntro
+    index="02 / Methods"
+    title="Twelve methods. None mandatory by default."
+    description="These candidate plugin-native names describe distinct engineering pressures. Natural-language work may stay direct or route into one method; a person can also choose a method explicitly once the package contract is published."
+  />
+
+  <section class="shell content-band" aria-labelledby="method-list-heading">
+    <h2 id="method-list-heading" class="visually-hidden">Candidate Servotab methods</h2>
+    <div class="methods-list">
+      {methods.map((method, index) => (
+        <article class="method-row">
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <h2>{method.name}</h2>
+          <div>
+            <p>{method.purpose}</p>
+            <p>{method.signal}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="content-band" aria-labelledby="selection-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Selection rule</p>
+      <div class="content-prose">
+        <h2 id="selection-heading">The risk chooses the depth.</h2>
+        <p>
+          Method names do not create permission or ceremony. The current task,
+          repository evidence, host capability, and user authority decide what is
+          useful. Clear work can still bypass the list entirely.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

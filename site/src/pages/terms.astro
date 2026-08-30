@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { repoFile } from "../config";
+---
+
+<BaseLayout
+  title="Terms"
+  description="Servotab project status, website rights boundary, and historical source licensing context."
+>
+  <PageIntro
+    index="06 / Terms"
+    title="Terms follow the material you receive."
+    description="This page states the website and identity boundary. Any source package is governed by the licensing files distributed with that package."
+  />
+
+  <article class="legal-document shell">
+    <div class="legal-grid">
+      <aside class="legal-aside">Last updated<br />30 August 2026</aside>
+      <div class="legal-prose">
+        <section>
+          <h2>Project status and affiliation</h2>
+          <p>
+            Servotab is an independent, community-maintained project. It is not an
+            official OpenAI product, is not currently listed in the OpenAI plugin
+            directory, and this website does not represent directory approval or availability.
+          </p>
+        </section>
+
+        <section>
+          <h2>Source-package licensing</h2>
+          <p>
+            Servotab does not currently distribute a source package from this website.
+            When source is published, the path-level licensing map and governing texts
+            shipped with those exact files control. The linked{" "}
+            <a href={repoFile("LICENSING.md")}>historical licensing map</a> governs the
+            preceding public Softpowers repository, not this uncutover Servotab candidate.
+          </p>
+        </section>
+
+        <section>
+          <h2>Functional materials</h2>
+          <p>
+            Earlier public functional materials identified by the historical map are
+            governed by the <a href={repoFile("LICENSE")}>Sustainable Use License v1.0</a>.
+            Current Servotab implementation files are not offered for download here;
+            do not infer a source-code grant from access to the website.
+          </p>
+        </section>
+
+        <section>
+          <h2>Documentation</h2>
+          <p>
+            Earlier public documentation specifically identified by the historical
+            map is governed by{" "}
+            <a href={repoFile("LICENSE-DOCUMENTATION.md")}>CC BY-NC-SA 4.0</a>.
+            That license does not automatically apply to this website, identity assets,
+            functional source, methods, scripts, manifests, fixtures, or other materials.
+          </p>
+        </section>
+
+        <section>
+          <h2>Third-party material and earlier revisions</h2>
+          <p>
+            Third-party material, names, terminology, and notices remain under their
+            respective rights and licenses. Historical attribution is recorded in the{" "}
+            <a href={repoFile("THIRD_PARTY_NOTICES.md")}>Third-Party Notices</a>, and
+            the earlier forward-only boundary is recorded in{" "}
+            <a href={repoFile("LICENSE-HISTORY.md")}>License History</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2>Website and identity</h2>
+          <p>
+            The Servotab name, mark, raster identity exports, and original prose and
+            visual compositions on this website are not offered for third-party reuse.
+            Their public visibility does not create a trademark, copyright, or reuse grant.
+          </p>
+        </section>
+
+        <section>
+          <h2>Current product information</h2>
+          <p>
+            Pages on this site describe the current public product model, website, and
+            release status. Exact installation and invocation contracts will be documented
+            only when a public package is available. Until repository cutover, repository
+            links point to the preceding public Softpowers source for history and provenance;
+            they are not the current Servotab implementation authority.
+          </p>
+        </section>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

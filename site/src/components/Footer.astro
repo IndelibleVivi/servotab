@@ -1,0 +1,40 @@
+---
+import BrandMark from "./BrandMark.astro";
+import { PROJECT_LINKS } from "../config";
+---
+
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div class="footer-identity">
+      <a class="brand-lockup" href="/" aria-label="Servotab home">
+        <BrandMark size={28} />
+        <span>servotab</span>
+      </a>
+      <p>Engineering method layer for Codex.</p>
+    </div>
+
+    <nav class="footer-links" aria-label="Product links">
+      <span>Product</span>
+      <a href="/docs">Docs</a>
+      <a href="/methods">Methods</a>
+      <a href="/lineage">Lineage</a>
+    </nav>
+
+    <nav class="footer-links" aria-label="Project links">
+      <span>Project</span>
+      <a href={PROJECT_LINKS.source}>Historical source</a>
+      <a href={PROJECT_LINKS.issues}>Issues</a>
+      <a href="/support">Support</a>
+    </nav>
+
+    <nav class="footer-links" aria-label="Legal links">
+      <span>Legal</span>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+  </div>
+  <div class="shell footer-base">
+    <p>Independent and community-maintained. Not an official OpenAI product or directory listing.</p>
+    <p>servotab.com</p>
+  </div>
+</footer>

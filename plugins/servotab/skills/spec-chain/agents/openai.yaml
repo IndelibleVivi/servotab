@@ -1,0 +1,7 @@
+interface:
+  display_name: "Spec Chain"
+  short_description: "Carry an approved spec through implementation"
+  default_prompt: "Use $spec-chain to turn this approved specification into a complete implementation plan and preserve its scope through execution."
+  brand_color: "#315EFB"
+policy:
+  allow_implicit_invocation: false

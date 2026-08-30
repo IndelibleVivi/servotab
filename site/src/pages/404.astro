@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The requested Servotab page could not be found."
+  noindex={true}
+>
+  <section class="not-found shell">
+    <p class="not-found-code">404 / not found</p>
+    <div>
+      <h1>That route isn’t here.</h1>
+      <p>Return to the product, documentation, or method index.</p>
+      <div class="hero-actions">
+        <a class="action action-primary" href="/">Home</a>
+        <a class="action action-secondary" href="/docs">Docs</a>
+        <a class="action action-secondary" href="/methods">Methods</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

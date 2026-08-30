@@ -1,34 +1,8 @@
 {
-  "schema_version": 1,
+  "activation": "implicit",
   "case_id": "missing-host-test-seam",
-  "description": "A repository with green unit contracts but no executable embedded-host seam should add one bounded local surrogate instead of continuing opaque remote patch loops.",
-  "prompt_file": "prompt.md",
-  "sandbox": "workspace-write",
-  "timeout_seconds": 600,
-  "assertions": [
+  "command_assertions": [
     {
-      "type": "file_exists",
-      "path": "TEST_TOPOLOGY.md"
-    },
-    {
-      "type": "file_exists",
-      "path": "host_surrogate.py"
-    },
-    {
-      "type": "file_exists",
-      "path": "test_host_surrogate.py"
-    },
-    {
-      "type": "changed_files_exact",
-      "paths": [
-        "TEST_TOPOLOGY.md",
-        "embedded_app.py",
-        "host_surrogate.py",
-        "test_host_surrogate.py"
-      ]
-    },
-    {
-      "type": "command",
       "argv": [
         "python3",
         "-c",
@@ -36,7 +10,6 @@
       ]
     },
     {
-      "type": "command",
       "argv": [
         "python3",
         "-c",
@@ -44,13 +17,45 @@
       ]
     },
     {
-      "type": "command",
-      "argv": ["python3", "-m", "unittest", "-q"]
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "-q"
+      ]
     }
   ],
+  "description": "A repository with green unit contracts but no executable embedded-host seam should add one bounded local surrogate instead of continuing opaque remote patch loops.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "schema_version": 2,
+  "timeout_seconds": 600,
   "trace_assertions": {
     "max_command_executions": 14,
     "max_plan_updates": 1,
     "max_subagent_events": 0
-  }
+  },
+  "workspace_assertions": [
+    {
+      "path": "TEST_TOPOLOGY.md",
+      "type": "file_exists"
+    },
+    {
+      "path": "host_surrogate.py",
+      "type": "file_exists"
+    },
+    {
+      "path": "test_host_surrogate.py",
+      "type": "file_exists"
+    },
+    {
+      "paths": [
+        "TEST_TOPOLOGY.md",
+        "embedded_app.py",
+        "host_surrogate.py",
+        "test_host_surrogate.py"
+      ],
+      "type": "changed_files_exact"
+    }
+  ]
 }

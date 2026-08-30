@@ -12,6 +12,9 @@ dist/
 !.env.example
 .fieldlab/
 .fieldlab-subjects/
+.wrangler/
+.dev.vars
+.dev.vars.*
 
 # Local-only working continuity
 notes/
