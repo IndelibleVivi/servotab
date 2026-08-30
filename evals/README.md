@@ -6,7 +6,7 @@ containment、receipt contract 与 quota gate 已由 standalone Skill Field Lab 
 
 Softpowers 继续拥有：
 
-- `cases/`：八个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
+- `cases/`：九个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
 - `activation-prompts.csv`：较宽的 routing seed set；
 - `candidates/`：外部 pattern intake 与 provenance decisions；
 - `claims/`、`receipts/`、`decisions/`：项目自己的 evidence lifecycle；
@@ -39,6 +39,7 @@ fieldlab list fieldlab-pack.json
 - `adopted-foundation-review`：明确 adopted 的 foundational work 不因尚无 present consumer 被误判为越权。
 - `repeated-review-scope-accretion`：第三轮 mixed-scope review 只修复 falsify accepted contract 的 blocker，同时保留并分离 adjacent、hardening 与 public-closure findings。
 - `missing-host-test-seam`：material host boundary 缺少 cheap reproducer 时建立一个 bounded local surrogate，同时保留 named-host acceptance。
+- `review-evidence-boundaries`：同一 bounded review corpus 同时保护 clean control、negative-space spec omission、false-green test 与 conditional finding 的 evidence boundary。
 
 任何 synthetic live attempt 都必须先生成 saved plan，再显式跨过 Field Lab 的
 `run --live --max-invocations N` gate。Softpowers 不把 live model eval 设为普通

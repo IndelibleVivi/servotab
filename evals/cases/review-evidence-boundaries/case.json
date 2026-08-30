@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "case_id": "review-evidence-boundaries",
+  "description": "A bounded review must stay clean on a permitted refactor while detecting a specification omission, false-green test, and real conditional defect without turning uncertainty into either pass or speculation.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 900,
+  "assertions": [
+    {
+      "type": "file_exists",
+      "path": "REVIEW.md"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "SR-01: CLEAN"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "SR-03: FINDING"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "export-data"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "SR-04: FINDING"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "gateway"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "SR-06: CONDITIONAL"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "X-Payload-Mode"
+    },
+    {
+      "type": "file_contains",
+      "path": "REVIEW.md",
+      "value": "unobserved"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": ["REVIEW.md"]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 16,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0,
+    "reference_reads_include": ["review.md"]
+  }
+}

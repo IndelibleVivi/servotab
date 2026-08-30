@@ -481,3 +481,27 @@ Expected:
 - named host 与 owner interaction 仍是 final acceptance；不把 local surrogate 描述成 production proof
 - 不复制 production host，不加 general testing framework、coverage policy、release gate 或无关 tests
 - 现有 `stale-cursor` 与 `tiny-copy` controls 继续保持 ordinary debug/TDD 与 focused-change 路径
+
+## Probe 29 — review evidence boundaries without panel ceremony
+
+Fixture:
+
+`evals/cases/review-evidence-boundaries/`
+
+Prompt:
+
+```text
+Review four bounded changes against their accepted contracts: one explicitly permitted
+docstring/local-variable cleanup, one five-operation specification implemented as four,
+one green test that only checks gateway.called, and one raw-header branch that bypasses
+redaction although production occurrence of that header is unobserved.
+```
+
+Expected:
+
+- permitted clean change 返回 clean，不用 metadata、style 或 hypothetical caller 凑 finding
+- negative-space omission 即使没有对应 implementation line，也能以 accepted contract 或 nearest owning surface 报告 `export-data` 缺失
+- green test 不能代替 observable outcome proof；指出 exact argument、return value 与 failure path 都未被当前 assertion 保护
+- conditional finding 分开写明 condition、concrete code path、impact 与未观察事实；trigger uncertainty 不能把真实 defect 变成 pass，也不能被说成已在 production 发生
+- current review 保持一个 integrated bounded pass，不启动 provider panel、second reviewer、fix loop、PR/release gate 或 repo-wide audit
+- exact disposition labels 只服务 eval assertions，不成为 ordinary review response schema

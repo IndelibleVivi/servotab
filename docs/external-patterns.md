@@ -2,7 +2,7 @@
 
 这份 registry 记录 Softpowers 当前主动关注的外部来源、pinned ref、已选 pattern、decision 与 reopen condition。它承担增量复查入口；不构成 dependency list，也不表示代码或文本已被复制进 Softpowers。
 
-Review date：`2026-08-24`
+Review date：`2026-08-30`
 
 ## Current sources
 
@@ -21,6 +21,9 @@ Review date：`2026-08-24`
 | `UKGovernmentBEIS/inspect_ai` | `286163f12aa627af22051bd95321bc6404e237ae` | Inspect repository license applies; verify exact reused component before copying | `DEFER` framework dependency；`ADAPT` task/solver/scorer separation conceptually | Eval architecture |
 | `openai/plugins` | `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` | No repository-level license file at this ref；inspect each plugin manifest before reuse | `DEFER` generated plugin projection until distribution need is real | Packaging / distribution |
 | `trailofbits/overtly-malicious-skills` | `4ffbf9461ef0505f9ce76a0d3694a18ec33ea531` | No license file at this ref；security research reference only; never install | `ADAPT` adversarial audit ideas；`REJECT` executing upstream payloads | Security tests |
+| `openai/codex` native review | `63d213884daea50e4f74efc192cdc44f549b67d5` | Apache-2.0；host behavior authority, not a Softpowers dependency | `ALREADY_COVERED` generic target/rubric behavior by the host；attribution control only, not the ordinary Soft Review workflow or its replacement ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Host baseline / eval |
+| `SathiaAI/adversarial-review` | `343861548fbf58fb1d69c521d33ea38d2ea6f00b` | MIT；case shapes independently rewritten | `ADAPT` labeled defect + clean controls into one Field Lab canary；`REJECT` panel, scoring, rebuttal and release verdict ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Review eval |
+| `shakacode/agent-workflows` review skills | `1614b6758735cb3d5a02c3a4313af4e0eb2db4a8` | MIT；conceptual comparison only | `ALREADY_COVERED` target resolution and finding verification；`REJECT` mandatory loops, receipts and lens proliferation ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Review contrast |
 
 ## Watch focus
 
@@ -158,6 +161,21 @@ Canonical `methods/*.md` and the Softpowers catalog remain source of truth. Plug
 ### Trail of Bits malicious skills
 
 Review only from source in a controlled research context. Extract scanner and packaging attack shapes into synthetic inert fixtures. Never install the upstream samples, execute their payloads, or make CI depend on them.
+
+### Review baselines and controls
+
+Review only material changes around:
+
+- Codex native review target composition, custom-instruction compatibility, diff-location
+  constraints, and built-in rubric only where they change host attribution;
+- Adversarial Review's labeled case design, clean controls, and semantic adjudication;
+- ShakaCode's target-resolution and finding-validation distinctions;
+- evidence that current Soft Review misses a material bounded finding, invents findings on
+  clean controls, or expands ordinary review scope.
+
+Retain the rejection of mandatory provider panels, loop-until-clean workflows, universal
+independent validation, numeric quality scores, release verdicts, large receipts, and review
+leaf proliferation.
 
 ## Adding an emerging source
 
