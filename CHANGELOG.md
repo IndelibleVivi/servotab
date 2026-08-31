@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Set the OpenAI package `author.name` and install-surface `developerName` to `Yifei Fang` while retaining the `Faye & Cove` creator credit in the repository and website, and regenerated the exact `0.4.0-rc1` package identity and submission artifact.
 - Made the root repository entrance English-first with a full Chinese edition and a factual-parity contract for installation, topology, availability, security/privacy, licensing, and public claims.
 - Added deterministic website CI, an observed Codex compatibility and post-install receipt, a private security-reporting policy, a 1200 × 630 social preview, and bounded mobile metadata/touch-target readability improvements without changing method bodies or OpenAI availability claims.
 - Hardened the pre-submission provenance and privacy boundary with package-local Superpowers lineage, one independently reworded TDD sentence, a fixed-ref text-comparison receipt, explicit publisher data-practice disclosures, and a freshly verified 43-file upload bundle without opening or claiming an OpenAI submission.
