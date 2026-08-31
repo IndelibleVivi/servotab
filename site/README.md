@@ -29,6 +29,11 @@ Cloudflare Pages build settings:
 
 The site has no backend, database, account system, analytics, or first-party tracking. Domain redirects belong to the Cloudflare account configuration and must not be added to `public/_redirects`.
 
+Open Graph and Twitter previews use the 1200 × 630
+`public/servotab-social-card.png` projection. Its editable source is
+`../assets/servotab-social-card.svg`; keep source and projection together and
+inspect the rendered card before changing metadata dimensions or alt text.
+
 ## Public URLs
 
 The canonical domain is defined in `astro.config.mjs` and `src/config.ts`. The current Servotab source and issue tracker URLs are centralized in `src/config.ts` and must stay on the same repository identity. Candidate-version copy derives from the plugin manifest rather than a website-local constant.

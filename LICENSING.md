@@ -37,7 +37,8 @@ The project's original expression in the following documentation paths is
 licensed under
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](LICENSE-DOCUMENTATION.md):
 
-- `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`;
+- `README.md`, `README.zh-CN.md`, `CHANGELOG.md`, `CONTRIBUTING.md`,
+  `SECURITY.md`;
 - `LICENSING.md`, `LICENSE-DOCUMENTATION.md`, and `LICENSE-HISTORY.md`;
 - `BEHAVIORAL_PROBES.md`, `PACKAGING_AUDIT.md`;
 - `AGENTS.md`, `assets/README.md`, and `site/README.md`;

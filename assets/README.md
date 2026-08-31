@@ -12,16 +12,22 @@ The remaining files are purpose-specific projections of the canonical mark:
   compatibility exports without changing the geometry;
 - `composer-icon.png` is the transparent 512 px local-plugin composer alias;
 - `logo.png` is the 1024 px blue-field directory tile candidate; and
-- `logo-transparent.png` is the 1024 px transparent raster fallback.
+- `logo-transparent.png` is the 1024 px transparent raster fallback; and
+- `servotab-social-card.svg` is the editable 1200 × 630 social-preview source.
 
 The blue-field exports use the v0 Control blue, `#315EFB`. Their presence does
 not make the host container part of the mark: the host still owns tile shape,
 padding, and background outside the prepared directory asset.
 
-Website favicons and manifest icons live under `site/public/` because their
-consumer and cache lifecycle differ from the plugin assets. README headers,
-social previews, Open Graph images, and other wide compositions must be
-designed for their actual surface rather than cropped from `logo.png`.
+Website favicons, manifest icons, and the rendered
+`site/public/servotab-social-card.png` projection live under `site/public/`
+because their consumer and cache lifecycle differ from plugin assets. The
+social-card source carries an exact fixed-color projection of the canonical
+mark geometry; it is a consumer, not a second mark authority. When the mark or
+card changes, render the SVG at exactly 1200 × 630, inspect the PNG, and update
+the source and projection together. README headers, social previews, Open Graph
+images, and other wide compositions must be designed for their actual surface
+rather than cropped from `logo.png`.
 
 [`../LICENSING.md`](../LICENSING.md) records the current path-level boundary:
 the identity assets are not presently offered for third-party reuse.

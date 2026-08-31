@@ -17,6 +17,10 @@ export const PROJECT_LINKS = {
     "https://github.com/IndelibleVivi/servotab/issues/new?template=behavior-feedback.yml",
   packageBug:
     "https://github.com/IndelibleVivi/servotab/issues/new?template=plugin-package-bug.yml",
+  securityPolicy:
+    "https://github.com/IndelibleVivi/servotab/blob/HEAD/SECURITY.md",
+  securityReport:
+    "https://github.com/IndelibleVivi/servotab/security/advisories/new",
 } as const;
 
 export const repoFile = (path: string) =>

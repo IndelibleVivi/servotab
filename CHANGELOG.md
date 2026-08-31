@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Made the root repository entrance English-first with a full Chinese edition and a factual-parity contract for installation, topology, availability, security/privacy, licensing, and public claims.
+- Added deterministic website CI, an observed Codex compatibility and post-install receipt, a private security-reporting policy, a 1200 × 630 social preview, and bounded mobile metadata/touch-target readability improvements without changing method bodies or OpenAI availability claims.
 - Migrated the current product identity from Softpowers to Servotab while preserving the pre-`0.4` changelog, Git history, licensing boundary, and third-party provenance.
 - Replaced the global root-skills transaction installer with a plugin-native package at `plugins/servotab`, a repo marketplace entry at `.agents/plugins/marketplace.json`, and the selector `servotab@personal`.
 - Kept `servotab` as the sole implicit-eligible router and renamed the 12 explicit leaves to semantic ids, including `design`, `review-feedback`, and `delegate` in place of the retired `brainstorm`, `receive-review`, and `parallel` ids.

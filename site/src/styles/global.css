@@ -1301,6 +1301,9 @@ h3 {
   }
 
   .mobile-nav summary {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
     padding: 0.35rem 0;
     cursor: pointer;
     font-family: var(--mono);
@@ -1325,7 +1328,7 @@ h3 {
 
   .mobile-nav nav {
     position: absolute;
-    top: 2.1rem;
+    top: calc(100% + 0.25rem);
     right: 0;
     display: flex;
     width: 12rem;
@@ -1381,6 +1384,15 @@ h3 {
   .motion-controls {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .motion-rail,
+  .motion-status,
+  .rail-label,
+  .footer-maker,
+  .footer-links span,
+  .footer-base {
+    font-size: 0.72rem;
   }
 
   .section-lead,
