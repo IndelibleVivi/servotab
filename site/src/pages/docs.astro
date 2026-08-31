@@ -46,6 +46,20 @@ codex plugin add servotab@personal</code></pre>
           </article>
         </div>
 
+        <h3>Confirm the current install.</h3>
+        <p>
+          Open a fresh Codex task or process after installation, then read back the
+          configured marketplace package instead of assuming the active process refreshed:
+        </p>
+        <pre><code>codex plugin list --marketplace personal</code></pre>
+        <p>
+          The receipt should show <code>servotab@personal</code> as
+          <code>installed, enabled</code> at version <code>{SITE.version}</code>. On
+          2026-08-31 this source-checkout route and fresh-process router discovery were
+          verified on macOS with <code>codex-cli 0.147.0</code>. That is an observed
+          compatibility receipt, not a guessed minimum-version guarantee.
+        </p>
+
         <h3>One implicit router. Twelve explicit shortcuts.</h3>
         <p>
           Describe ordinary repository work normally. Servotab may keep a clear change
@@ -174,6 +188,7 @@ codex plugin add servotab@personal</code></pre>
         <h2 id="boundaries-heading">What Servotab does not claim.</h2>
         <ul>
           <li>It does not replace the user’s prompt, repository instructions, permissions, or Git decisions.</li>
+          <li>A log, review, plan, or generated artifact may inform the work; it does not authorize itself.</li>
           <li>It does not make every task follow one mandatory end-to-end workflow.</li>
           <li>It does not treat a green build as proof of deployment, runtime activation, or owner acceptance.</li>
           <li>It does not turn an explicit complete request into a scaffold, placeholder, or unnamed partial result.</li>

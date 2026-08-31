@@ -1,60 +1,61 @@
 # Contributing to Servotab
 
-谢谢你愿意把真实任务里的 evidence 带回来。Servotab `0.4.0-rc1` 是 plugin-native source candidate；activation miss、false positive、错误 routing、scope 丢失、package failure 和没有必要的流程，都比泛泛的“再加一个 workflow”更有价值。
+Thank you for bringing evidence back from real work. Servotab `0.4.0-rc1` is a plugin-native source candidate. Activation misses, false positives, wrong routing, lost scope, package failures, and unnecessary process are more useful than an abstract request for another workflow.
 
-## 先选择反馈类型
+## Choose the right feedback path
 
-- [Behavior feedback](https://github.com/IndelibleVivi/servotab/issues/new?template=behavior-feedback.yml)：routing、activation、complete outcome、debug/review/verification 质量或无意义 overhead；
-- [Plugin package bug](https://github.com/IndelibleVivi/servotab/issues/new?template=plugin-package-bug.yml)：marketplace discovery、plugin validation、installation/update、activation 或 package asset；
-- 其他明确 proposal 可以开普通 issue；请说明它解决的真实任务，而不只是提出一个新 method name。
+- [Behavior feedback](https://github.com/IndelibleVivi/servotab/issues/new?template=behavior-feedback.yml): routing, activation, complete outcomes, review/debug/verification quality, or unnecessary overhead;
+- [Plugin package bug](https://github.com/IndelibleVivi/servotab/issues/new?template=plugin-package-bug.yml): marketplace discovery, plugin validation, installation/update, activation, or package assets;
+- [Security policy](SECURITY.md): vulnerabilities or trust-boundary failures that require private reporting;
+- another concrete proposal may use a normal issue, but explain the real task it improves rather than proposing only a new method name.
 
-## Public issue 的隐私边界
+## Keep public issues public-safe
 
-GitHub Issues 是公开的。提交前请删除：
+Before posting, remove:
 
-- credentials、tokens、cookies、`.env` 与 account details；
-- private repository source、客户/课程/申请材料或内部日志；
-- 私人聊天、真实个人数据与不能公开的 file path；
-- 与问题无关的 model output、完整 Codex transcript 或长篇 trace。
+- credentials, tokens, cookies, `.env` values, and account details;
+- private repository source, client/course/application material, or internal logs;
+- private chats, real personal data, and non-public filesystem paths;
+- unrelated model output, full Codex transcripts, or long traces.
 
-保留最小可复现 evidence。无法公开的材料不要上传；使用脱敏结构、placeholder 或小型 synthetic reproduction。
+Preserve the smallest reproduction that still supports the report. Use placeholders or a synthetic fixture when the original evidence cannot be disclosed safely. Do not upload sensitive material to a public issue.
 
-## Behavior feedback 应该包含什么
+## What a behavior report should contain
 
-尽量提供：
+When available, include:
 
-1. Servotab version 或 commit；
-2. Codex surface、model（如果相关）、OS 与 repo 类型；
-3. 已脱敏的原始 prompt；
-4. expected behavior 与 observed behavior；
-5. `servotab` 是否触发，以及看得到时读取了哪些 references；
-6. requested outcome 是否完整；
-7. 是否出现多余 plan、reference reads、tests、hashes、tool calls、subagents 或重复 verification。
+1. Servotab version or commit;
+2. Codex surface, relevant model, operating system, and repository type;
+3. a sanitized original prompt;
+4. expected and observed behavior;
+5. whether `servotab` activated and which references were visible;
+6. whether the complete requested outcome remained intact;
+7. any unnecessary plan, reference read, test, hash, tool call, subagent, or repeated verification.
 
-报告 delegation behavior 时，请分开记录：
+For delegation behavior, distinguish host capability from method selection:
 
-- host/runtime 是否提供 subagent tools；
-- router 是否读取 `delegate.md`；
-- task topology 是否真的有 independent lanes；
-- worker output 是否经过 coordinator verification。
+- whether the host/runtime exposed subagent tools;
+- whether the router read `delegate.md`;
+- whether the task actually contained independent lanes;
+- whether the coordinator verified worker output.
 
-Subagent event 本身不证明 `delegate` leaf 或 Servotab method 被选中。不要只按 token count 判断好坏；先看 outcome、authority 与必要边界是否被保留。
+A subagent event alone does not prove that Servotab selected the `delegate` method. Token count alone is not a quality verdict; first inspect whether the requested outcome, authority, and necessary boundaries survived.
 
-## Canonical source 与 generated package
+## Canonical source and generated package
 
-12 个 method bodies 的 canonical source 是：
+The twelve canonical method bodies live under:
 
 ```text
 methods/*.md
 ```
 
-Names、descriptions、default prompts 与 activation metadata 的 canonical catalog 是：
+Names, descriptions, default prompts, and activation metadata are canonical in:
 
 ```text
 scripts/skill_catalog.py
 ```
 
-`scripts/build_skills.py` 从这些 source 生成：
+`scripts/build_skills.py` generates:
 
 ```text
 plugins/servotab/skills/servotab/SKILL.md
@@ -64,31 +65,34 @@ plugins/servotab/skills/*/agents/openai.yaml
 plugins/servotab/assets/{composer-icon.png,logo.png}
 ```
 
-不要直接编辑 `plugins/servotab/skills/**` 或 curated plugin asset copy。修改 method、catalog 或 root canonical asset 后运行 generator，再检查 diff。Root `skills/`、`install.sh`、`uninstall.sh`、`scripts/install.py` 与 `scripts/uninstall.py` 已退出 current architecture；不要重新创建它们作为平行安装路径。
+Do not edit `plugins/servotab/skills/**` or curated plugin asset copies directly. Change the canonical method, catalog, or root asset, run the generator, and inspect canonical and generated diffs together.
 
-Plugin manifest 与 repo marketplace contract 分别位于：
+The retired root `skills/`, `install.sh`, `uninstall.sh`, `scripts/install.py`, and `scripts/uninstall.py` paths must not return as a parallel installation system.
+
+The plugin and marketplace contracts are:
 
 ```text
 plugins/servotab/.codex-plugin/plugin.json
 plugins/servotab/LICENSE
 plugins/servotab/NOTICE.md
 .agents/plugins/marketplace.json
+PACK_MANIFEST.json
 ```
 
-Plugin-local `LICENSE` 与 `NOTICE.md` 把 functional-material terms 和 identity-asset boundary 带进 installable package；修改它们需要对应 rights evidence 与 license-surface review。`PACK_MANIFEST.json` 记录 exact derived payload identity。它由 `scripts/generate_pack_manifest.py` 生成，不能手改 digest 或 file list 来掩盖 source/generated drift。
+`PACK_MANIFEST.json` is generated identity for the exact payload. Never hand-edit a path, size, or digest to conceal source/generated drift.
 
 ## Method changes
 
-- 让 method 服务于可观察的 engineering task，不为 method 自己制造 ceremony。
-- 保留明确要求的完整 usable outcome；不要默认缩成 MVP、scaffold、placeholder 或局部 tranche。
-- Logs、screenshots、reviews、plans 与 generated outputs 先按 current intent 和 authority 判断是 instruction、evidence 还是 inspiration。
-- 只为 observed failure、明确 contract 或真实 boundary 增加 guard、fallback、hash 与 test。
-- Router 保持 quiet；只有 `servotab` implicit eligible，12 个 leaves 保持 explicit-only，除非一个明确 release proposal 改变 activation topology。
-- `design`、`review-feedback` 与 `delegate` 是 current semantic IDs；不要把 retired `brainstorm`、`receive-review`、`parallel` identifiers 放回 active payload。
+- Make a method serve an observable engineering task rather than method ceremony.
+- Preserve the complete requested usable outcome; do not default it to an MVP, scaffold, placeholder, or convenient tranche.
+- Classify logs, screenshots, reviews, plans, and generated outputs as instruction, evidence, or inspiration under current intent and authority.
+- Add a guard, fallback, hash, or test only for an observed failure, explicit contract, or real boundary.
+- Keep the router quiet. Only `servotab` is implicit eligible; the twelve leaves remain explicit-only unless an authorized release proposal changes the topology.
+- Keep current semantic IDs such as `design`, `review-feedback`, and `delegate`. Do not restore the retired `brainstorm`, `receive-review`, or `parallel` IDs to current source.
 
-## Field Lab 与 behavior evidence
+## Field Lab and behavior evidence
 
-Servotab 自己的 subject material 位于：
+Servotab-owned subject material lives under:
 
 ```text
 fieldlab-pack.json
@@ -99,13 +103,13 @@ evals/receipts/
 evals/decisions/
 ```
 
-`fieldlab-pack.json` 使用 schema v2，并将 `plugins/servotab/skills` 作为 current source subject。通用 runner、schemas、process containment 与 quota gate 属于 optional standalone Skill Field Lab companion。不要把它们复制进 plugin payload，也不要让 Servotab 管理 Field Lab CLI 或 controller skills。
+The subject pack uses schema v2 and points at `plugins/servotab/skills`. Generic runners, schemas, containment, and quota controls belong to the optional standalone Skill Field Lab companion. Do not copy them into the Servotab plugin or make Servotab own the evaluator runtime.
 
 ## Website changes
 
-`site/` 是独立 Astro static application。它不属于 plugin payload，也不能改变 plugin installation 或 OpenAI directory status。Website copy 必须区分 source candidate、installed plugin、Cloudflare deployment、custom-domain activation 与 OpenAI publication。
+`site/` is a separate Astro static application. It is not part of the plugin payload and cannot change installation or OpenAI directory status.
 
-本地检查：
+Run:
 
 ```bash
 cd site
@@ -113,11 +117,11 @@ npm ci
 npm run build
 ```
 
-Cloudflare settings 与 domain-level redirect ownership 见 [site/README.md](site/README.md)。不要把 account-specific IDs、local cache 或 private deployment notes 加进 public tree。
+Website copy must distinguish source candidate, installed plugin, Cloudflare deployment, custom-domain activation, OpenAI verification, directory submission, and directory publication. Cloudflare account settings and canonical-host redirects remain outside the static source tree.
 
 ## Maintainer gate
 
-修改 method 或 catalog 后先 regenerate：
+After changing methods or catalog metadata, regenerate before the final check:
 
 ```bash
 python3 scripts/build_skills.py
@@ -125,7 +129,7 @@ uv run --with PyYAML==6.0.3 python3 scripts/validate.py plugins/servotab/skills
 python3 scripts/generate_pack_manifest.py
 ```
 
-提交前运行 fresh deterministic gate：
+Run the fresh deterministic gate before submission:
 
 ```bash
 python3 scripts/build_skills.py --check
@@ -137,7 +141,7 @@ python3 scripts/audit_public_tree.py
 python3 -m py_compile scripts/*.py
 ```
 
-若本机另行安装了 `fieldlab`，可以加跑不启动 target model 的 subject-pack gate：
+If the standalone `fieldlab` CLI is installed, maintainers may also run the no-target-model subject checks:
 
 ```bash
 fieldlab validate fieldlab-pack.json
@@ -145,25 +149,27 @@ fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-Live model eval、live plugin installation、Cloudflare deployment、GitHub rename、commit/push/release 与 OpenAI directory submission 都是不同的 action surface，不由 deterministic maintainer gate 自动触发。
+Live model evaluation, live plugin installation, Cloudflare deployment, GitHub settings, commit/push/release, and OpenAI directory submission are separate action surfaces. The deterministic gate does not authorize them.
 
 ## Documentation closure
 
-改变 package identity、method IDs、canonical/generated boundary、install route、website behavior 或 release state 时，更新相应 authority surface：
+Update the owning surface when package identity, method IDs, canonical/generated boundaries, installation, website behavior, security reporting, or release state changes:
 
-- `README.md`：durable user-facing product、installation、usage 与 limitations；
-- `AGENTS.md`：stable source/generated、verification 与 authorization contract；
-- `docs/current-state.md`：易变的 installed / deployed / live / rename / submission 状态；
-- `docs/migration-from-softpowers.md`：仍受支持的 legacy layer migration；
-- `CHANGELOG.md`：实际 shipped history 与未发布 changes；
-- `site/README.md` 和 site copy：网站当前可观察行为。
+- `README.md` and `README.zh-CN.md`: durable reader-facing product, installation, use, limitations, and support;
+- `AGENTS.md`: stable source/generated, verification, documentation, and authorization contract;
+- `docs/current-state.md`: volatile install, deployment, domain, repository, and submission facts;
+- `docs/migration-from-softpowers.md`: supported legacy-layer migration;
+- `CHANGELOG.md`: shipped history and unreleased changes;
+- `site/README.md` and site copy: current observable website behavior.
 
-历史 release 与 provenance 不要改写成 Servotab 当时已经存在。过渡说明应明确旧 Softpowers identifiers 属于 historical or migration context。
+The README editions require factual parity, not sentence-level translation. Reconcile installation, topology, version, availability, security/privacy, licensing, and public claims in both editions.
+
+Do not rewrite historical Softpowers releases as if Servotab existed at the time. Keep private Faye/Cove continuity outside the Git tree.
 
 ## Contribution license
 
-提交 contribution 表示你有权提交该内容，并按 [LICENSING.md](LICENSING.md) 中适用于目标 file 的 license 提供该 contribution。不要从 repository label 推导统一 terms，也不要用普通 PR 改写 third-party、external-contributor 或既有历史 rights。
+By contributing, you represent that you have the right to submit the material and provide it under the license mapped to the target path in [LICENSING.md](LICENSING.md). Repository visibility does not create one uniform license.
 
-如果 change 跨越多个 licensing surfaces，请在 PR 中逐项说明。任何超出 public licenses 的 commercial permission 只能由相关 rights holder 另行书面授予。
+If a change spans several licensing surfaces, identify them in the pull request. Rights outside the public licenses, including any commercial permission, can be granted only by the relevant rights holder in a separate written agreement.
 
-Pull request 请说明 changed contract、fresh verification、documentation impact，以及 deliberately deferred work。
+Pull requests should name the changed contract, fresh verification, documentation impact, and deliberately deferred work.

@@ -28,7 +28,8 @@ Servotab is independent and community-maintained. Do not claim it is an official
 | `PACK_MANIFEST.json` | Exact generated package identity; regenerate, do not hand-edit |
 | `fieldlab-pack.json` and `evals/` | Servotab-owned behavior subject and evidence surfaces |
 | `site/` | Static public website source; not plugin runtime authority |
-| `README.md` | Durable user-facing identity, installation, use, and limitations |
+| `README.md` | Canonical English user-facing identity, installation, use, and limitations |
+| `README.zh-CN.md` | Full Chinese reader edition; factual parity with `README.md`, not sentence-level identity |
 | `docs/current-state.md` | Volatile candidate, install, GitHub, deployment, domain, and submission state |
 | `docs/migration-from-softpowers.md` | Supported transition from manifest-owned legacy global layers |
 
@@ -160,6 +161,8 @@ Record volatile outcomes in `docs/current-state.md` only after observing them. D
 ## Documentation closure
 
 Update current-facing docs whenever method ids, plugin routes, install commands, supported surfaces, domain behavior, privacy boundaries, or status claims change. Preserve historical changelog and provenance wording; add a transition entry instead of rewriting old Softpowers releases as Servotab releases.
+
+The two README editions require factual parity, not mechanical translation. Reconcile installation, topology, version, availability, security/privacy, licensing, and public claims in both files while allowing each language to use natural structure and explanation.
 
 Before stage, commit, or push:
 

@@ -23,6 +23,28 @@ jobs:
       - name: Audit public tree
         run: python scripts/audit_public_tree.py
 
+  site-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: site/.node-version
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install website dependencies
+        run: npm ci
+        working-directory: site
+
+      - name: Build website
+        run: npm run build
+        working-directory: site
+
   validate:
     strategy:
       fail-fast: false
