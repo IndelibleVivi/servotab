@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { PROJECT_LINKS } from "../config";
+import { PROJECT_LINKS, repoFile, SITE } from "../config";
 ---
 
 <BaseLayout
@@ -13,6 +13,57 @@ import { PROJECT_LINKS } from "../config";
     title="Method stays subordinate to the work."
     description="Servotab is a skills-only engineering method layer for Codex. It calibrates how much process a repository task receives without taking ownership away from the task, the repo, or the user."
   />
+
+  <section class="content-band" aria-labelledby="get-started-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Get started</p>
+      <div class="content-prose">
+        <h2 id="get-started-heading">Install the candidate. Then ask for the work.</h2>
+        <p>
+          Servotab <code>{SITE.version}</code> is available through the public repository
+          marketplace route. This is source-checkout installation of an untagged candidate,
+          not an OpenAI plugin directory install.
+        </p>
+
+        <div class="quickstart-grid">
+          <article>
+            <span class="rail-label">01 / install</span>
+            <pre><code>git clone https://github.com/IndelibleVivi/servotab.git
+cd servotab
+codex plugin marketplace add .
+codex plugin add servotab@personal</code></pre>
+          </article>
+          <article>
+            <span class="rail-label">02 / ask</span>
+            <div class="quickstart-example">
+              <span>ordinary language</span>
+              <p>Fix the stale-cursor regression, identify the violated invariant, repair the canonical source, and run the focused suite.</p>
+            </div>
+            <div class="quickstart-example">
+              <span>precise control</span>
+              <p><code>$review</code> inspect this diff and report only verified, actionable P0–P2 findings.</p>
+            </div>
+          </article>
+        </div>
+
+        <h3>One implicit router. Twelve explicit shortcuts.</h3>
+        <p>
+          Describe ordinary repository work normally. Servotab may keep a clear change
+          direct or load one relevant method when risk or uncertainty warrants it. Use
+          names such as <code>$review</code>, <code>$tdd</code>, or <code>$spec-chain</code>
+          when you want precise control; the twelve method leaves are not implicit workflows.
+        </p>
+
+        <h3>A skills-only product boundary.</h3>
+        <p>
+          Servotab adds no Servotab account, backend, database, telemetry service, or
+          network endpoint, and the publisher does not receive repository contents through
+          the plugin. Codex and any repositories, browsers, terminals, tools, or external
+          services it uses remain governed by their own permissions and data practices.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <section class="content-band" aria-labelledby="working-model-heading">
     <div class="shell content-layout">
@@ -38,6 +89,47 @@ import { PROJECT_LINKS } from "../config";
             <p>Add design, planning, debugging, testing, review, isolation, delegation, or closure only where it protects the outcome.</p>
           </article>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band" aria-labelledby="task-shapes-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Task shapes</p>
+      <div class="content-prose">
+        <h2 id="task-shapes-heading">Proportionate, in concrete terms.</h2>
+        <p>
+          The method depth changes with the pressure in the work—not with a fixed ritual.
+          These three shapes mirror the public behavior cases maintained in the repository.
+        </p>
+
+        <div class="step-list">
+          <div class="step-row">
+            <span>01</span>
+            <div>
+              <h3>Change one empty-state string.</h3>
+              <p>One file, the narrowest meaningful check, no plan, and no delegation overhead.</p>
+            </div>
+          </div>
+          <div class="step-row">
+            <span>02</span>
+            <div>
+              <h3>Repair a stale-cursor regression.</h3>
+              <p>Reproduce the failure, locate the consistency-window invariant, repair canonical source, and run the focused regression suite.</p>
+            </div>
+          </div>
+          <div class="step-row">
+            <span>03</span>
+            <div>
+              <h3>Plan from an approved specification.</h3>
+              <p>Retain every requirement and dependency boundary; a convenient first tranche does not redefine completion.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="evidence-link">
+          <a href={repoFile("evals/README.md")}>Inspect the public behavior-evidence contract</a>.
+        </p>
       </div>
     </div>
   </section>
@@ -93,20 +185,28 @@ import { PROJECT_LINKS } from "../config";
 
   <section class="content-band" aria-labelledby="availability-heading">
     <div class="shell content-layout">
-      <p class="section-index">Availability</p>
+      <p class="section-index">Status &amp; evidence</p>
       <div class="content-prose">
-        <h2 id="availability-heading">Source checkout is available. Directory publication is not.</h2>
+        <h2 id="availability-heading">Verified to the boundary we can prove.</h2>
         <p>
-          The current Servotab source candidate is available in the{" "}
-          <a href={PROJECT_LINKS.source}>public repository</a>. Clone that repository and,
-          from its root, run <code>codex plugin marketplace add .</code> followed by{" "}
-          <code>codex plugin add servotab@personal</code> to use the repository marketplace route.
+          The current <code>{SITE.version}</code> source candidate is generated from canonical
+          method sources into an exact 43-file plugin package. Public checks cover
+          source/generated sync, skill validation, manifest freshness, package self-tests,
+          public-tree audit, and Python compilation. Those gates establish source and package
+          consistency; they do not prove behavior on every machine, OpenAI approval, or
+          directory availability.
         </p>
         <p>
-          This is source-checkout installation of the candidate, not a tagged release,
-          an OpenAI plugin directory listing, or evidence of OpenAI approval. The same
-          repository preserves the earlier Softpowers commits, release records, licensing
-          history, and provenance without relabelling those historical versions as Servotab.
+          Source-checkout installation is available. This candidate has no Servotab tag or
+          GitHub Release, and Servotab has not been submitted to or listed in the OpenAI
+          plugin directory. The same repository preserves the earlier Softpowers commits,
+          release records, licensing history, and provenance without relabelling those
+          historical versions.
+        </p>
+        <p class="evidence-link">
+          <a href={PROJECT_LINKS.source}>Source</a>{" · "}
+          <a href={repoFile("CHANGELOG.md")}>Changelog</a>{" · "}
+          <a href={repoFile("docs/current-state.md")}>Current state</a>
         </p>
       </div>
     </div>

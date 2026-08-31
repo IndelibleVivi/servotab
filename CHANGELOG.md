@@ -25,7 +25,9 @@
   claiming an OpenAI submission.
 - Polished the static site with branded share metadata, accurate source-install
   availability and privacy language, direct support forms, a clean noindex 404
-  boundary, and a stable accessible name for the mobile menu.
+  boundary, a stable accessible name for the mobile menu, a source-checkout
+  Quickstart, concrete task examples, explicit method invocation guidance, and
+  bounded candidate-evidence and maintainer context.
 
 ## 0.3.0-rc5 — 2026-08-17
 

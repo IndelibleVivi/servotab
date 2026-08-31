@@ -1,7 +1,10 @@
+import pluginManifest from "../../plugins/servotab/.codex-plugin/plugin.json";
+
 export const SITE = {
   name: "Servotab",
   wordmark: "servotab",
   origin: "https://servotab.com",
+  version: pluginManifest.version,
   description:
     "Adaptive engineering methods for planning, implementation, debugging, review, and verification in Codex.",
 } as const;
