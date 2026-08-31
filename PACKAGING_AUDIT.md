@@ -168,7 +168,7 @@ codex plugin marketplace add .
 codex plugin add servotab@personal
 ```
 
-Those commands are the current CLI contract. In the maintainer environment, marketplace `personal` has been added from this checkout and `servotab@personal` `0.4.0-rc1` is installed and enabled. A final remove/add refresh produced an exact recursive match between the 43-file source package and the installed cache. A fresh-process prompt-input probe exposes the implicit router as `servotab:servotab` and exposes no legacy Softpowers skill. Those local receipts do not generalize to other machines or prove representative natural-language routing and structured explicit-leaf behavior.
+Those commands are the current CLI contract. In the maintainer environment, marketplace `personal` has been added from this checkout and `servotab@personal` `0.4.0-rc1` is installed and enabled. A post-PR-#18 remove/add refresh produced an exact recursive match between the 43-file source package and the installed cache, with both installed publisher fields reading back as `Yifei Fang`. A fresh-process prompt-input probe on the unchanged skill tree exposes the implicit router as `servotab:servotab` and exposes no legacy Softpowers skill. Those local receipts do not generalize to other machines or prove representative natural-language routing and structured explicit-leaf behavior.
 
 ## Legacy ownership boundary
 
@@ -239,7 +239,7 @@ As of this source candidate:
 - a fresh Codex process exposes only the namespaced implicit router at baseline; a normal newly opened worktree task then exercised an ordinary-language router path and a structured explicit `$review` leaf path without mutating the checkout, while other-machine installation remains a separate runtime check;
 - after independent review closed with no actionable P0–P2 findings, all 13 reachable legacy Softpowers layers were retired one at a time with fresh preflight evidence; both supported roots are clear, while inactive historical receipts remain preserved;
 - the website deployment and custom-domain state are tracked separately in `docs/current-state.md`;
-- the GitHub repository has been renamed in place to `IndelibleVivi/servotab`; core migration PR #7 merged to public `main` as `f110fbcd`, public-availability PR #8 merged as `9e5213d`, and both post-merge Validate runs succeeded; no tag or GitHub Release is implied;
+- the GitHub repository has been renamed in place to `IndelibleVivi/servotab`; the final publisher-identity PR #18 merged to public `main` as `21dceba`, its post-merge Validate run `33368067114` succeeded, and no tag or GitHub Release is implied;
 - OpenAI directory submission has not been made and remains owner-gated.
 
 A green source gate proves package consistency; the separate maintainer source/cache, fresh-process, and fresh-task receipts prove only the named local installation and behavior boundaries. They do not prove other-machine installation, general behavior quality, or OpenAI review. Website deployment and Cloudflare topology remain separate facts tracked in `docs/current-state.md`.
