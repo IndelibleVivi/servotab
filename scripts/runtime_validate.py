@@ -11,6 +11,7 @@ from skill_catalog import IMPLICIT_SKILL_NAMES, REFERENCE_METHOD_NAMES, SKILL_NA
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+PUBLISHER_NAME = "Yifei Fang"
 PLUGIN_RELATIVE = Path("plugins/servotab")
 PLUGIN_ROOT = ROOT / PLUGIN_RELATIVE
 PACK_MANIFEST = ROOT / "PACK_MANIFEST.json"
@@ -145,8 +146,8 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
     if not isinstance(author, dict):
         errors.append("plugin manifest author must be an object")
     else:
-        if author.get("name") != "Faye & Cove":
-            errors.append("plugin manifest author credit must be Faye & Cove")
+        if author.get("name") != PUBLISHER_NAME:
+            errors.append(f"plugin manifest author.name must be {PUBLISHER_NAME!r}")
         if author.get("url") != "https://servotab.com":
             errors.append("plugin manifest author.url must be 'https://servotab.com'")
 
@@ -156,7 +157,7 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
     expected_values = {
         "displayName": "Servotab",
         "shortDescription": "Risk-scaled repository methods",
-        "developerName": "Faye & Cove",
+        "developerName": PUBLISHER_NAME,
         "websiteURL": "https://servotab.com",
         "supportURL": "https://servotab.com/support",
         "privacyPolicyURL": "https://servotab.com/privacy",

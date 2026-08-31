@@ -9,22 +9,22 @@ This is the volatile status surface. It records what has actually crossed each b
 | Surface | Current state | Evidence boundary |
 |---|---|---|
 | Product identity | `Servotab` adopted | Current source, manifest, assets, site, and docs use the new identity |
-| Source candidate | `0.4.0-rc1` on public `main` at `1356c1e` | PR #16 merged the submission-hardening package and policy changes; post-merge Validate run `33362683246` passed all five jobs; the package content is fixed at `fe2ec57`; no Servotab tag or GitHub Release exists |
+| Source candidate | `0.4.0-rc1` publisher-identity candidate at `0e715e7` | Package `author.name` and `interface.developerName` are fixed to the owner-selected `Yifei Fang` publisher identity; exact stale-identity controls pass; no Servotab tag or GitHub Release exists |
 | Canonical methods | 12 current methods | `methods/*.md` plus `scripts/skill_catalog.py` |
 | Plugin package | Generated candidate | `plugins/servotab/` with one router, 12 leaves, and curated assets |
-| Deterministic package gate | Green on integrated 43-file payload | Generation/sync, YAML, manifest, expanded migration selftest, public-tree audit, Python compilation, and the Astro production build passed locally and in post-merge CI run `33362683246` |
+| Deterministic package gate | Green locally on the identity-patched 43-file payload | Generation/sync, all 13 current `skill-validate` checks, exact YAML/topology validation, manifest freshness, expanded packaging/migration selftest, public-tree audit, Python compilation, and Field Lab v2 `validate` / `selftest` / `list` passed with zero target-agent invocations; protected-branch CI remains an integration gate |
 | Repo marketplace | Defined | `.agents/plugins/marketplace.json`; selector `servotab@personal` |
-| Live Codex install | Installed, enabled, and cache-exact | `servotab@personal` `0.4.0-rc1` was refreshed after PR #16; source/cache contain the exact final 43-file payload, fresh-process prompt input exposes one `servotab:servotab` router with no legacy or explicit-leaf baseline entries, and the earlier normal-task receipt covers implicit router plus explicit-leaf behavior |
+| Live Codex install | Installed and enabled; publisher-identity refresh pending | The installed `servotab@personal` `0.4.0-rc1` cache still carries the pre-patch `1356c1e` package identity; refresh and exact source/cache readback remain after protected integration, while the earlier behavior receipt remains valid for the unchanged skills |
 | Legacy global layer | Retired; both supported roots clear | Thirteen reachable LIFO layers under `~/.codex/skills` were retired one at a time after independent review; no active pointer or `soft-*` entrypoint remains |
 | Field Lab | Schema v2 source subject | `fieldlab-pack.json` points to `plugins/servotab/skills`; live model eval not run |
-| Submission materials | Exact upload bundle prepared; no portal draft or submission receipt | The 43-file archive generated from `1356c1e:plugins/servotab` passed ZIP integrity, manifest-path, and recursive byte-equality checks; listing metadata, three starter prompts, five positive and three negative reviewer cases, public policy URLs, and the fixed-ref provenance receipt are ready; identity selection, availability, attestations, and submission remain owner actions |
+| Submission materials | Final identity-patched upload bundle prepared; no portal draft or submission receipt | `servotab-0.4.0-rc1-openai-submission-0e715e7.zip`, generated from `0e715e7:plugins/servotab`, contains the exact 43-file payload and passed ZIP integrity, manifest-path, recursive byte-equality, and private-copy equality checks; the prior `1356c1e` archive is superseded and forbidden for final submission |
 | Website source | Astro static site implemented and polished | Homepage, source-checkout Quickstart and install receipt, task examples, social preview, security route, support, privacy, terms, and lineage are current on public `main` |
 | Cloudflare Pages | Production site live from exact merged source | Direct-upload deployment `f262501e-cd23-4f19-b779-3e42cb0703d6` was built and uploaded from merge commit `1356c1e`; deployment readback reports Production, branch `main`, and source `1356c1e`; automatic deployments remain disabled and the historical Git connection remains disconnected |
 | `servotab.com` | Active; SSL enabled; RUM injection disabled | Proxied apex DNS, Pages custom-domain status, public HTTPS, strict headers, live interaction and responsive checks, same-origin script/network proof, and true 404 all verified |
 | Canonical redirects | Active | `www.servotab.com` and `servotab.pages.dev` return 301 to `https://servotab.com` while preserving path suffix and query string |
 | GitHub repository | Renamed to `IndelibleVivi/servotab` | New URL is live, the old `/softpowers` URL returns a 301 redirect, and public `main` now contains the Servotab package and website source |
 | GitHub governance | Private reporting and protected `main` active | Private Vulnerability Reporting and merged-branch deletion are enabled; active ruleset `Protect main` requires PRs plus five current CI contexts and retains an explicit owner emergency bypass |
-| Git publication | Migration, public availability, deployment state, directory-readiness polish, site experience, and public-release hardening merged | The listed milestone PRs are on public `main`; PR #14 merged as `b2bacde` with post-merge Validate run `33359648427`; tag and GitHub Release remain separate |
+| Git publication | Previous release-hardening milestones merged; final publisher-identity patch awaiting protected integration | Package source commit `0e715e7` is locally fixed and fully validated; PR checks and merge remain separate from the artifact proof; tag and GitHub Release remain separate |
 | OpenAI directory | Not submitted | Submission and publication remain owner-gated |
 
 ## Source and package
@@ -44,9 +44,25 @@ methods/*.md + scripts/skill_catalog.py
 
 Current method ids are `design`, `spec-chain`, `plan`, `execute`, `debug`, `tdd`, `review`, `review-feedback`, `verify`, `worktree`, `delegate`, and `finish`. The only implicit-eligible skill is `servotab`.
 
-The old root `skills/` projection and transaction installer are retired from current source. The local marketplace `personal` has been added from this checkout, and `servotab@personal` `0.4.0-rc1` is installed and enabled. A post-PR-#16 remove/add refresh produced an exact final 43-file source/cache match with two curated assets and plugin-local rights files. Fresh-process discovery contains one implicit `servotab:servotab` entry, zero legacy Softpowers entries, and zero explicit Servotab leaves at baseline.
+The OpenAI package publisher fields are now deliberately separate from public
+creator credit: `.codex-plugin/plugin.json` uses `Yifei Fang` for both
+`author.name` and `interface.developerName`, while the repository, README
+editions, and website continue to credit `Faye & Cove`. The brand, product
+narrative, methods, version, and creator credit did not change.
 
-The integrated 43-file package passes source/generated sync, exact skill validation, manifest freshness, expanded packaging/migration selftests, public-tree audit, Python compilation, and Field Lab v2 `validate` / `selftest` / `list` with zero target-agent invocations. A bounded text-comparison pass at package commit `fe2ec57` against the recorded `obra/superpowers@b36e0829` ref covered all 41 Servotab text payload files and reported no normalized contiguous match of ten or more words and no near-exact paragraph candidate under the documented thresholds; `PACKAGING_AUDIT.md` records the scope and limits.
+The old root `skills/` projection and transaction installer are retired from current source. The local marketplace `personal` has been added from this checkout, and `servotab@personal` `0.4.0-rc1` is installed and enabled. Its last exact refresh predates the publisher-identity patch, so a post-integration refresh and source/cache equality readback remain open. Fresh-process discovery from the earlier identical skill tree contains one implicit `servotab:servotab` entry, zero legacy Softpowers entries, and zero explicit Servotab leaves at baseline.
+
+The identity-patched 43-file package passes source/generated sync, all 13 current `skill-validate` checks, exact skill/topology validation, manifest freshness, expanded packaging/migration selftests including two stale-publisher tamper controls, public-tree audit, Python compilation, and Field Lab v2 `validate` / `selftest` / `list` with zero target-agent invocations. A bounded text-comparison pass at package commit `fe2ec57` against the recorded `obra/superpowers@b36e0829` ref covered all 41 then-current Servotab text payload files and reported no normalized contiguous match of ten or more words and no near-exact paragraph candidate under the documented thresholds. The later publisher patch changes two manifest strings but no method, skill, notice, or asset; the fixed-ref comparison was not rerun, so `PACKAGING_AUDIT.md` keeps that receipt separate from the final ZIP's exact path-and-byte proof.
+
+The designated local upload artifact is
+`servotab-0.4.0-rc1-openai-submission-0e715e7.zip`, generated from
+`0e715e7226fb0e426d8632807414a3b3fa78bd3d:plugins/servotab`. It contains 43
+regular files under one `servotab/` root, is 109,499 bytes (106.9 KiB), and has
+SHA-256
+`149db94281c7bbc673e10fc2dac9cd7d5cfc8dc680cd73c86f8e5b95cc8afde7`.
+The prior `1356c1e` submission archive and its
+`cf0d3323b5a06f1a4a099308f75c0084660ae24b81bf2cc80ff8064069efca23`
+digest are superseded and must not be used for final submission.
 
 Independent review closed with no actionable P0–P2 findings in the repaired retirement helper. The verified 13-layer live chain was then retired against the exact root `~/.codex/skills`, one LIFO layer per invocation with a fresh read-only preflight before each layer. Both supported roots now report `CLEAR`; the active pointer and all top-level `softpowers` / `soft-*` entrypoints are absent. Nineteen historical manifest receipts remain with status `uninstalled`, and no modified-skill snapshot was needed.
 
@@ -93,13 +109,13 @@ The local `origin` uses `git@github-faye:IndelibleVivi/servotab.git`. GitHub ret
 
 Private Vulnerability Reporting is enabled and the repository security policy points to its active advisory route. Merged pull-request branches are deleted automatically. Repository ruleset `Protect main` (`21900625`) is active on the default branch: updates require a pull request, current strict checks are `public-tree`, `site-build`, both Ubuntu validation jobs, and the macOS validation job, review threads must be resolved, and the repository owner retains an explicit emergency bypass.
 
-The public default branch now contains `.agents/plugins/marketplace.json`, `plugins/servotab/`, the layered licensing files, and the merged README/website availability copy. Source-checkout clone commands and `blob/HEAD` legal links therefore resolve against current Servotab source. No tag or GitHub Release has been created, and no OpenAI submission or listing has occurred.
+The public default branch contains `.agents/plugins/marketplace.json`, `plugins/servotab/`, the layered licensing files, and the merged README/website availability copy. Source-checkout clone commands and `blob/HEAD` legal links therefore resolve against current Servotab source. The `0e715e7` publisher-identity candidate still requires protected PR integration. No tag or GitHub Release has been created, and no OpenAI submission or listing has occurred.
 
 ## Remaining boundaries
 
 1. Retain the inactive legacy manifests, backups, and transitional helper until the documented recovery/operator dependency is deliberately retired; do not manually clean historical receipts.
 2. Keep the current Cloudflare production path on clean manual direct deployments while the historical Git binding remains disconnected and stale. Repairing or replacing that binding, recreating the project, or re-enabling automatic deployments is a separate owner decision, not a hidden follow-up to this deployment.
 3. Tag and GitHub Release creation remain unperformed and separate from the merged source candidate.
-4. The OpenAI portal draft, developer-identity selection, regional availability, policy attestations, submission, approval, and publication remain owner-controlled. Preparing or uploading the local bundle does not cross any later state.
+4. The package publisher identity is owner-decided as `Yifei Fang`; selecting that verified individual in the correct portal organization/project, regional availability, policy attestations, draft creation, upload, submission, approval, and publication remain owner-controlled. Preparing the local bundle does not cross any later state.
 
 Update this file by replacing superseded facts, not by appending a development diary.

@@ -6,6 +6,8 @@ This is a maintainer self-audit of the source candidate. It is not an independen
 
 - Plugin id: `servotab`
 - Candidate version: `0.4.0-rc1`
+- OpenAI package publisher: `Yifei Fang`
+- Public creator credit: `Faye & Cove`
 - Plugin root: `plugins/servotab/`
 - Plugin manifest: `plugins/servotab/.codex-plugin/plugin.json`
 - Repo marketplace: `.agents/plugins/marketplace.json`
@@ -13,7 +15,7 @@ This is a maintainer self-audit of the source candidate. It is not an independen
 - Install selector: `servotab@personal`
 - Exact package manifest: `PACK_MANIFEST.json`
 
-The plugin manifest describes Servotab as an independent engineering method layer, uses the approved `#315EFB` brand color, and points to the current website, support, privacy, terms, and curated package assets. Its directory-facing short description stays within 30 characters, and its three starter prompts are distinct, single-line workflow examples within 128 characters. It does not claim OpenAI approval or directory availability.
+The plugin manifest describes Servotab as an independent engineering method layer, uses `Yifei Fang` for both the package `author.name` and install-surface `interface.developerName`, uses the approved `#315EFB` brand color, and points to the current website, support, privacy, terms, and curated package assets. The publisher fields match the owner-selected verified individual identity; they do not replace the `Faye & Cove` creator credit retained in the repository, README editions, and website. Its directory-facing short description stays within 30 characters, and its three starter prompts are distinct, single-line workflow examples within 128 characters. It does not claim OpenAI approval or directory availability.
 
 The standalone package `NOTICE.md` carries the attribution, source, and CC BY 4.0
 license link for the five retained Worker Lanes field labels used by `delegate`;
@@ -27,7 +29,7 @@ the cases were executed by OpenAI review.
 
 ### Bounded submission provenance receipt
 
-The final text-comparison pass fixed the Servotab package at commit
+The pre-identity-patch text-comparison pass fixed the Servotab package at commit
 `fe2ec57d84f6b158124c13d4ff79f1c76bc3fd53` and the recorded comparative
 source at `obra/superpowers@b36e0829c6d0140e93cfef2ca599b1b07d4a7797`.
 It compared all 41 UTF-8 text files in the exact 43-file Servotab payload with
@@ -51,9 +53,40 @@ inclusion boundary directly.
 
 This is a bounded maintainer receipt, not a legal opinion, a whole-history
 forensic audit, or a claim that general engineering ideas and terminology do not
-overlap. It supports the narrower submission statement that this fixed payload
+overlap. It supports the narrower submission statement that the compared payload
 contains no identified Superpowers code, documentation, artwork, or other
 licensed payload under the recorded comparison.
+
+The later publisher-identity commit `0e715e7` changes only the two publisher
+strings in `.codex-plugin/plugin.json`, the corresponding fail-closed validation
+expectations and tamper controls, and the derived manifest digest. It does not
+change any method body, router reference, skill instruction, package notice, or
+asset. The fixed-ref text comparison was not rerun, so its zero-match receipt
+belongs to the `fe2ec57` textual snapshot rather than serving as a byte-identity
+claim for the final ZIP. The final artifact's exact paths and bytes are proven
+separately below.
+
+### Final identity-patched submission artifact
+
+The designated local upload artifact was generated from
+`0e715e7226fb0e426d8632807414a3b3fa78bd3d:plugins/servotab` after the publisher
+identity patch:
+
+- filename: `servotab-0.4.0-rc1-openai-submission-0e715e7.zip`;
+- archive shape: one top-level `servotab/` directory;
+- regular files: 43, exactly matching the path set in `PACK_MANIFEST.json`;
+- size: 109,499 bytes (106.9 KiB); and
+- SHA-256: `149db94281c7bbc673e10fc2dac9cd7d5cfc8dc680cd73c86f8e5b95cc8afde7`.
+
+The archive passed ZIP integrity, manifest path-set equality, recursive
+source/archive byte equality, and byte equality between the Downloads copy and
+the private continuity copy. This receipt prepares a file for owner-controlled
+manual upload; it is not a portal draft, upload, submission, approval, or
+publication receipt.
+
+The earlier `servotab-0.4.0-rc1-openai-submission-1356c1e.zip` artifact, SHA-256
+`cf0d3323b5a06f1a4a099308f75c0084660ae24b81bf2cc80ff8064069efca23`, is
+superseded by the identity patch and must not be used for final submission.
 
 ## Activation contract
 
@@ -119,7 +152,7 @@ personal → servotab → ./plugins/servotab
 
 `scripts/runtime_validate.py` checks:
 
-- exact plugin name, version, description, author credit, package path, public URLs, brand color, prompts, and asset targets;
+- exact plugin name, version, description, publisher identity, package path, public URLs, brand color, prompts, and asset targets;
 - current final-directory constraints for the 30-character short description,
   non-empty long description, 1–3 unique single-line starter prompts of at most
   128 characters, and the absence of app `@mentions`;
