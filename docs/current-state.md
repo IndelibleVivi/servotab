@@ -9,7 +9,7 @@ This is the volatile status surface. It records what has actually crossed each b
 | Surface | Current state | Evidence boundary |
 |---|---|---|
 | Product identity | `Servotab` adopted | Current source, manifest, assets, site, and docs use the new identity |
-| Source candidate | `0.4.0-rc1` on public `main` | Core migration PR #7 merged as `f110fbcd`; public-availability PR #8 merged as `9e5213d`; no tag or GitHub Release exists |
+| Source candidate | `0.4.0-rc1` on public `main` | Current `main` is `c656ad7` from PR #11; exact merge-commit Validate run `33349866213` passed; no Servotab tag or GitHub Release exists |
 | Canonical methods | 12 current methods | `methods/*.md` plus `scripts/skill_catalog.py` |
 | Plugin package | Generated candidate | `plugins/servotab/` with one router, 12 leaves, and curated assets |
 | Deterministic package gate | Green on integrated 43-file payload | Generation/sync, YAML, manifest, expanded migration selftest, public-tree audit, and Python compilation passed locally |
@@ -17,12 +17,12 @@ This is the volatile status surface. It records what has actually crossed each b
 | Live Codex install | Installed, enabled, and cache-exact | `servotab@personal` `0.4.0-rc1` was freshly reinstalled from this checkout; source/cache contain the exact 43-file payload, fresh-process prompt input exposes `servotab:servotab`, and a fresh normal task exercised both implicit router and explicit-leaf behavior |
 | Legacy global layer | Retired; both supported roots clear | Thirteen reachable LIFO layers under `~/.codex/skills` were retired one at a time after independent review; no active pointer or `soft-*` entrypoint remains |
 | Field Lab | Schema v2 source subject | `fieldlab-pack.json` points to `plugins/servotab/skills`; live model eval not run |
-| Website source | Astro static site implemented | Source/build routes are separate from edge and custom-domain proof |
-| Cloudflare Pages | Production site live from clean merged source | Direct-upload deployment `fa58ada7-191a-4fe1-a1dc-7071d548654e` records source `9e5213d` with a clean workspace marker; automatic production and preview deployments are disabled, while the historical Git connection remains disconnected |
-| `servotab.com` | Active; SSL enabled | Proxied apex DNS, Pages custom-domain status, public HTTPS, strict headers, interaction smoke, and true 404 all verified |
+| Website source | Astro static site implemented and polished | Homepage, source-checkout Quickstart, task examples, method invocation guidance, candidate evidence, maker context, support, privacy, terms, and lineage are current on public `main` |
+| Cloudflare Pages | Production site live from clean merged source | Direct-upload deployment `7840a6ca-6661-4242-b812-3e222648b724` was built and uploaded from a clean `c656ad7` worktree; automatic production and preview deployments are disabled, while the historical Git connection remains disconnected |
+| `servotab.com` | Active; SSL enabled; RUM injection disabled | Proxied apex DNS, Pages custom-domain status, public HTTPS, strict headers, live interaction and responsive checks, same-origin script/network proof, and true 404 all verified |
 | Canonical redirects | Active | `www.servotab.com` and `servotab.pages.dev` return 301 to `https://servotab.com` while preserving path suffix and query string |
 | GitHub repository | Renamed to `IndelibleVivi/servotab` | New URL is live, the old `/softpowers` URL returns a 301 redirect, and public `main` now contains the Servotab package and website source |
-| Git publication | Core migration and public availability merged | PR #7 merged as `f110fbcd` with post-merge Validate run `33340000993`; PR #8 merged as `9e5213d` with post-merge run `33340162537`; tag and GitHub Release remain separate |
+| Git publication | Migration, public availability, deployment state, directory-readiness polish, and site experience merged | PRs #7–#11 are on public `main`; PR #11 merged as `c656ad7` with post-merge Validate run `33349866213`; tag and GitHub Release remain separate |
 | OpenAI directory | Not submitted | Submission and publication remain owner-gated |
 
 ## Source and package
@@ -69,13 +69,15 @@ The website source under `site/` contains the canonical static routes:
 
 Automatic production and preview deployments are disabled: `production_deployments_enabled` is `false`, `preview_deployment_setting` is `none`, and the deprecated aggregate deployment switch is also `false`. The Cloudflare Dashboard reports that the historical Git connection is disconnected, and the stored Git source label still references `IndelibleVivi/softpowers`. The existing Pages project was not disconnected, recreated, or switched to a different topology.
 
-Production deployment `fa58ada7-191a-4fe1-a1dc-7071d548654e` was uploaded with Wrangler 4.127.1 from an isolated clean worktree at merged commit `9e5213d80bae1339438efd7d0dd19c9810ad3a7d`, with `commit-dirty=false`. Cloudflare records source `9e5213d` and message `Deploy merged Servotab site from PR #8`; the deployment is live through `https://servotab.com`.
+Production deployment `7840a6ca-6661-4242-b812-3e222648b724` was uploaded with Wrangler 4.127.1 from an isolated clean worktree at merged commit `c656ad708f04fe7517eef2e7ced7a22a9f3229b6`, with explicit `commit-dirty=false` and message `Deploy merged Servotab site from PR #11`. The deployment-list readback records source `c656ad7`, and the deployment is live through `https://servotab.com`.
 
-The apex has a proxied CNAME to `servotab.pages.dev`. Pages reports the custom domain as active with SSL enabled. Fresh post-deployment public requests and rendered checks prove the canonical host, strict headers, current repository/install copy, desktop and 390-pixel no-overflow behavior, mobile-menu open/close behavior, and a true 404 with `no-store`. The PR #8 website change was limited to copy and repository configuration; motion and invoke-interaction code were unchanged from the preceding accepted receipt.
+The apex has a proxied CNAME to `servotab.pages.dev`. Pages reports the custom domain as active with SSL enabled. Fresh post-deployment public requests and rendered checks prove the canonical host, strict headers, current visitor-journey copy, 1280/1440-pixel desktop and 390-pixel mobile no-overflow behavior, mobile-menu navigation, invoke/return interaction, reduced-motion behavior, and a true 404 with `no-store`.
+
+Cloudflare Configuration Rule `servotab_disable_rum` is active for all incoming requests with action `disable RUM`. A fresh real-browser load exposes only the same-origin `/method-motion.js` script and same-origin page resources, with no Cloudflare Insights script or beacon request and zero console errors or warnings. The edge rule leaves the published `script-src 'self'` CSP, ordinary page caching, and fallback 404 caching contract unchanged.
 
 Cloudflare account configuration now contains the two-entry list `servotab_canonical_hosts` and enabled rule `servotab_canonical_redirects`. A proxied `www` trigger record is present. Fresh edge requests prove both `www.servotab.com` and `servotab.pages.dev` return 301 to the apex while preserving subpaths and query strings; following either redirect reaches a 200 response on `servotab.com`.
 
-The deployed site now points Source and Issues to `IndelibleVivi/servotab`, publishes the current source-checkout installation route, and keeps tag, GitHub Release, OpenAI listing, and OpenAI approval claims explicitly separate. Domain-level redirects remain Cloudflare account configuration, not `site/public/_redirects` behavior.
+The deployed site now points Source and Issues to `IndelibleVivi/servotab`, publishes a first-use source-checkout Quickstart, explains the one-router/twelve-explicit-leaf topology and skills-only trust boundary, links canonical method contracts and behavior-evidence scope, and keeps tag, GitHub Release, OpenAI listing, and OpenAI approval claims explicitly separate. Domain-level redirects and the RUM opt-out remain Cloudflare account configuration, not `site/public/_redirects` or `site/public/_headers` behavior.
 
 ## GitHub and publication
 
@@ -85,7 +87,7 @@ The public repository was renamed in place and now resolves at:
 https://github.com/IndelibleVivi/servotab
 ```
 
-The local `origin` uses `git@github-faye:IndelibleVivi/servotab.git`. GitHub returns a 301 from the old `/softpowers` URL, preserving the historical route. Core migration PR #7 merged to public `main` as `f110fbcd`, and its post-merge Validate run `33340000993` completed successfully. Public-availability PR #8 then merged as `9e5213d`, and post-merge Validate run `33340162537` also completed successfully.
+The local `origin` uses `git@github-faye:IndelibleVivi/servotab.git`. GitHub returns a 301 from the old `/softpowers` URL, preserving the historical route. Core migration PR #7 merged as `f110fbcd` with post-merge run `33340000993`; public-availability PR #8 merged as `9e5213d` with run `33340162537`; live-state PR #9 merged as `9085f56` with run `33342268739`; directory-readiness PR #10 merged as `e53dcbc` with run `33344979371`; and site-experience PR #11 merged as `c656ad7` with exact post-merge run `33349866213`. All listed runs completed successfully.
 
 The public default branch now contains `.agents/plugins/marketplace.json`, `plugins/servotab/`, the layered licensing files, and the merged README/website availability copy. Source-checkout clone commands and `blob/HEAD` legal links therefore resolve against current Servotab source. No tag or GitHub Release has been created, and no OpenAI submission or listing has occurred.
 
