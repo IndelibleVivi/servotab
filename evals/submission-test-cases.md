@@ -1,7 +1,9 @@
 # OpenAI directory test-case draft
 
-Status: prepared reviewer material for `0.4.0-rc1`. This document is not a
-portal receipt, review result, submission claim, or publication claim.
+Status: reviewer material originally prepared for the published `0.4.0-rc1`
+behavior payload and still applicable to the `0.5.0` icon update because method
+bodies are unchanged. This document is not an update-portal receipt, review
+result, update-submission claim, or update-publication claim.
 
 These cases translate existing Servotab behavior fixtures into the compact
 five-positive / three-negative format requested for directory review. The

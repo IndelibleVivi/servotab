@@ -10,10 +10,26 @@ The remaining files are purpose-specific projections of the canonical mark:
 
 - `servotab-mark-{accent,blue,ink,white}.svg` provide fixed-color
   compatibility exports without changing the geometry;
+- `servotab-mark-ink-400.png` is the transparent 400 px router-skill raster
+  paired with the fixed-ink SVG projection;
 - `composer-icon.png` is the transparent 512 px local-plugin composer alias;
 - `logo.png` is the 1024 px blue-field directory tile candidate; and
 - `logo-transparent.png` is the 1024 px transparent raster fallback; and
 - `servotab-social-card.svg` is the editable 1200 × 630 social-preview source.
+
+`skill-icons/<skill>/` contains Faye's v3 icon source for the twelve explicit
+method leaves. Each directory keeps an editable transparent `icon.svg`, its
+transparent 400 px `icon-400.png` projection, and an unselected
+`icon-paper-400.png` contrast fallback. The package generator copies only the
+transparent SVG and PNG into each generated skill. The paper fallback remains
+source-only unless real host-surface evidence shows that a neutral icon well is
+needed.
+
+The generated package gives all thirteen skills the same local asset contract:
+`./assets/icon.svg` and `./assets/icon-400.png`. The router files are generated
+from `servotab-mark-ink.svg` and `servotab-mark-ink-400.png`; the leaf files are
+generated from `skill-icons/`. Generated copies under
+`plugins/servotab/skills/**/assets/` are not a second source of truth.
 
 The blue-field exports use the v0 Control blue, `#315EFB`. Their presence does
 not make the host container part of the mark: the host still owns tile shape,

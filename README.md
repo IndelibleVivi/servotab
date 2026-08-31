@@ -9,7 +9,7 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Current source candidate: `0.4.0-rc1`. The public repository supports source-checkout installation, but this candidate has no Servotab tag or GitHub Release. Servotab is not an official OpenAI product and is not currently submitted to or listed in the OpenAI plugin directory. Directory submission and publication remain owner-controlled release gates. See [current state](docs/current-state.md) for the exact package, GitHub, website, and deployment boundaries.
+Current source candidate: `0.5.0`. Servotab is publicly available through its [official OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94), while remaining an independent, community-maintained project rather than an official OpenAI product. This repository candidate adds per-skill icons for a later owner-controlled directory update; it has no Servotab tag or GitHub Release. See [current state](docs/current-state.md) for the exact published, candidate, package, GitHub, website, and deployment boundaries.
 
 ## What Servotab changes
 
@@ -24,7 +24,11 @@ Describe ordinary repository work normally. The only implicit-eligible skill is 
 
 A log, screenshot, review, old plan, or generated artifact may be useful evidence. It does not authorize itself or silently become the current specification.
 
-## Install from the public source checkout
+## Install
+
+Open the [official Servotab listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) in ChatGPT to add the publicly available plugin.
+
+For source inspection or maintainer testing, install the separate current repository candidate from a public checkout:
 
 ```bash
 git clone https://github.com/IndelibleVivi/servotab.git
@@ -44,7 +48,7 @@ codex plugin list --marketplace personal
 The receipt should contain:
 
 ```text
-servotab@personal  installed, enabled  0.4.0-rc1
+servotab@personal  installed, enabled  0.5.0
 ```
 
 For a machine-readable discovery check on a system with `jq` and `rg`:
@@ -59,9 +63,9 @@ The command must return a skill entry named `servotab:servotab` from the install
 
 ### Tested compatibility receipt
 
-On 2026-08-31, the source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. This records one observed compatible surface; it is not a guessed minimum-version guarantee or a claim about every Codex client.
+On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. This records one observed compatible surface for that payload; it is not automatic acceptance of `0.5.0`, a guessed minimum-version guarantee, or a claim about every Codex client.
 
-This plugin-native route replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
+This source-checkout route is distinct from the officially published directory payload. It replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
 
 ## Use
 
@@ -129,7 +133,7 @@ plugins/servotab/
 PACK_MANIFEST.json                            exact derived payload identity
 ```
 
-The twelve method bodies under `methods/*.md` are canonical. `scripts/skill_catalog.py` owns names, descriptions, prompts, and activation metadata. `plugins/servotab/skills/**` is generated projection and must not be edited directly.
+The twelve method bodies under `methods/*.md` are canonical. `scripts/skill_catalog.py` owns names, descriptions, prompts, activation metadata, and skill-icon source routing. Root `assets/` owns the router projections and twelve leaf-glyph sources. `plugins/servotab/skills/**` is generated projection—including two icon assets per skill—and must not be edited directly. Paper-backed contrast fallbacks remain canonical source assets but are not shipped in the default runtime payload.
 
 Other surfaces have separate jobs:
 
@@ -141,9 +145,9 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The integrated candidate contains exactly 43 manifest-owned package files. Repository checks cover canonical/generated sync, exact skill validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, and the website production build.
+The integrated candidate contains exactly 69 manifest-owned package files, including two generated icon assets for each of its thirteen skills. Repository checks cover canonical/generated sync, exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, and the website production build.
 
-Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, an OpenAI approval, a plugin-directory listing, a deployment, or owner acceptance.
+Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, publication of this newer candidate, a deployment, or owner acceptance. The existing official listing is a separately observed public-distribution state.
 
 Maintainers with the standalone `fieldlab` CLI may inspect the source-owned subject pack without invoking a target model:
 

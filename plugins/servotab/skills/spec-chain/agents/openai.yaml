@@ -3,5 +3,7 @@ interface:
   short_description: "Carry an approved spec through implementation"
   default_prompt: "Use $spec-chain to turn this approved specification into a complete implementation plan and preserve its scope through execution."
   brand_color: "#315EFB"
+  icon_small: "./assets/icon-400.png"
+  icon_large: "./assets/icon.svg"
 policy:
   allow_implicit_invocation: false

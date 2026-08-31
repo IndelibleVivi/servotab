@@ -1,6 +1,6 @@
 # Contributing to Servotab
 
-Thank you for bringing evidence back from real work. Servotab `0.4.0-rc1` is a plugin-native source candidate. Activation misses, false positives, wrong routing, lost scope, package failures, and unnecessary process are more useful than an abstract request for another workflow.
+Thank you for bringing evidence back from real work. Servotab `0.5.0` is a plugin-native source candidate. Activation misses, false positives, wrong routing, lost scope, package or icon failures, and unnecessary process are more useful than an abstract request for another workflow.
 
 ## Choose the right feedback path
 
@@ -62,10 +62,11 @@ plugins/servotab/skills/servotab/SKILL.md
 plugins/servotab/skills/servotab/references/*.md
 plugins/servotab/skills/{design,...,finish}/SKILL.md
 plugins/servotab/skills/*/agents/openai.yaml
+plugins/servotab/skills/*/assets/{icon.svg,icon-400.png}
 plugins/servotab/assets/{composer-icon.png,logo.png}
 ```
 
-Do not edit `plugins/servotab/skills/**` or curated plugin asset copies directly. Change the canonical method, catalog, or root asset, run the generator, and inspect canonical and generated diffs together.
+Do not edit `plugins/servotab/skills/**` or curated plugin asset copies directly. Change the canonical method, catalog, or root asset—including `assets/skill-icons/*` for leaf glyphs—run the generator, and inspect canonical and generated diffs together.
 
 The retired root `skills/`, `install.sh`, `uninstall.sh`, `scripts/install.py`, and `scripts/uninstall.py` paths must not return as a parallel installation system.
 
@@ -107,7 +108,7 @@ The subject pack uses schema v2 and points at `plugins/servotab/skills`. Generic
 
 ## Website changes
 
-`site/` is a separate Astro static application. It is not part of the plugin payload and cannot change installation or OpenAI directory status.
+`site/` is a separate Astro static application. It is not part of the plugin payload and cannot change installation or OpenAI directory status. Its Methods catalog imports the canonical leaf SVGs from root `assets/skill-icons/*`; do not maintain a second website-only glyph set.
 
 Run:
 
@@ -117,7 +118,7 @@ npm ci
 npm run build
 ```
 
-Website copy must distinguish source candidate, installed plugin, Cloudflare deployment, custom-domain activation, OpenAI verification, directory submission, and directory publication. Cloudflare account settings and canonical-host redirects remain outside the static source tree.
+Website copy must distinguish source candidate, installed plugin, Cloudflare deployment, custom-domain activation, the currently published OpenAI listing, a later directory update submission, and publication of that update. Cloudflare account settings and canonical-host redirects remain outside the static source tree.
 
 ## Maintainer gate
 
@@ -149,7 +150,7 @@ fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-Live model evaluation, live plugin installation, Cloudflare deployment, GitHub settings, commit/push/release, and OpenAI directory submission are separate action surfaces. The deterministic gate does not authorize them.
+Live model evaluation, live plugin installation, Cloudflare deployment, GitHub settings, commit/push/release, and OpenAI directory update submission are separate action surfaces. The deterministic gate does not authorize them.
 
 ## Documentation closure
 

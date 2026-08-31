@@ -2,12 +2,13 @@
 
 This installed package contains two rights classes:
 
-- Original functional materials in `.codex-plugin/plugin.json` and `skills/`
-  are provided under the Sustainable Use License v1.0 in `LICENSE`.
-- The Servotab name and identity files in `assets/` are included for product
-  identification. They are not covered by the Sustainable Use License, and
-  this package does not grant a separate right to reuse, redistribute, modify,
-  or apply them outside Servotab.
+- Original functional materials in `.codex-plugin/plugin.json` and the Skill
+  instructions under `skills/` are provided under the Sustainable Use License
+  v1.0 in `LICENSE`.
+- The Servotab name and identity files in `assets/` and `skills/*/assets/` are
+  included for product and method identification. They are not covered by the
+  Sustainable Use License, and this package does not grant a separate right to
+  reuse, redistribute, modify, or apply them outside Servotab.
 
 ## Third-party attribution
 

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Advanced the source candidate to `0.5.0` and added Faye-authored, per-skill icon assets for the implicit router and all 12 explicit methods, with canonical source routing, generated local skill assets, exact interface validation, package-integrity controls, and a 69-file manifest-owned payload.
+- Recorded the live [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) as the published distribution surface while keeping Servotab independent and community-maintained, and kept the newer source candidate separate from the owner-controlled directory update.
+- Integrated the method glyphs into the website catalog and updated public availability, install, legal, and evidence copy without claiming that the `0.5.0` candidate is already published.
 - Set the OpenAI package `author.name` and install-surface `developerName` to `Yifei Fang` while retaining the `Faye & Cove` creator credit in the repository and website, and regenerated the exact `0.4.0-rc1` package identity and submission artifact.
 - Made the root repository entrance English-first with a full Chinese edition and a factual-parity contract for installation, topology, availability, security/privacy, licensing, and public claims.
 - Added deterministic website CI, an observed Codex compatibility and post-install receipt, a private security-reporting policy, a 1200 × 630 social preview, and bounded mobile metadata/touch-target readability improvements without changing method bodies or OpenAI availability claims.

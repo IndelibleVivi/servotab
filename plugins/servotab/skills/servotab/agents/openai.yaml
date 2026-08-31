@@ -3,5 +3,7 @@ interface:
   short_description: "Risk-scaled repository methods"
   default_prompt: "Use $servotab to deliver the complete repository outcome with proportional method and fresh, risk-matched verification."
   brand_color: "#315EFB"
+  icon_small: "./assets/icon-400.png"
+  icon_large: "./assets/icon.svg"
 policy:
   allow_implicit_invocation: true

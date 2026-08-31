@@ -12,7 +12,7 @@ import { methods } from "../data/methods";
   <PageIntro
     index="02 / Methods"
     title="Twelve methods. None mandatory by default."
-    description="These plugin-native names describe distinct engineering pressures. Natural-language work may stay direct or route into one method; a person using the source-checkout candidate can also choose a method explicitly."
+    description="These plugin-native names describe distinct engineering pressures. Natural-language work may stay direct or route into one method; a person can also choose any method explicitly."
   />
 
   <section class="shell content-band methods-catalog" aria-labelledby="method-list-heading">
@@ -24,12 +24,23 @@ import { methods } from "../data/methods";
     <div class="methods-list">
       {methods.map((method, index) => (
         <article class="method-row">
-          <span>{String(index + 1).padStart(2, "0")}</span>
+          <div class="method-key" aria-hidden="true">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <img
+              class="method-icon"
+              src={method.icon}
+              alt=""
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <h2>
             {method.name}
             <span class="method-invocation">invoke / ${method.name}</span>
           </h2>
-          <div>
+          <div class="method-copy">
             <p>{method.purpose}</p>
             <p>{method.signal}</p>
             <a class="method-contract" href={repoFile(`methods/${method.name}.md`)}>

@@ -9,7 +9,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-当前 source candidate：`0.4.0-rc1`。Public repository 提供 source-checkout installation，但当前 candidate 尚未 tagged 或创建 GitHub Release。Servotab 不是 OpenAI 官方产品，也尚未提交或列入 OpenAI plugin directory；directory submission 与 publication 仍是 owner-controlled release gate。实时的 package、GitHub、website 与 Cloudflare 状态见 [docs/current-state.md](docs/current-state.md)。
+当前 source candidate：`0.5.0`。Servotab 已通过[官方 OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94)公开上线，但仍是 independent、community-maintained project，不是 OpenAI 官方产品。本轮 repo candidate 加入每个 skill 各自的 icon，供 Faye 稍后手动提交 directory update；它尚未 tagged，也没有 GitHub Release。Published payload、candidate、package、GitHub、website 与 Cloudflare 的精确边界见 [docs/current-state.md](docs/current-state.md)。
 
 ## 它做什么
 
@@ -24,7 +24,11 @@ Servotab 保持四个稳定承诺：
 
 Servotab 也不会把日志、截图、review、旧计划或 generated artifact 自动当成指令。它们可能是 evidence；当前用户意图、accepted specification 与 canonical source 才决定工作方向。
 
-## 安装（public source checkout）
+## 安装
+
+在 ChatGPT 打开 [Servotab 官方 listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94)，即可添加已公开上线的 plugin。
+
+如果要 inspect source 或做 maintainer testing，再从 public checkout 安装当前、独立的 repository candidate：
 
 当前 public route 是 repository marketplace/source checkout：
 
@@ -46,7 +50,7 @@ codex plugin list --marketplace personal
 输出中应出现：
 
 ```text
-servotab@personal  installed, enabled  0.4.0-rc1
+servotab@personal  installed, enabled  0.5.0
 ```
 
 如果本机同时有 `jq` 与 `rg`，可以进一步检查 fresh-process prompt input：
@@ -57,9 +61,9 @@ codex debug prompt-input "Check Servotab discovery." \
   | rg 'servotab:servotab'
 ```
 
-命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，本轮在 macOS 与 `codex-cli 0.147.0` 上验证了 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。这是一条已观察 compatibility receipt，不是猜测的最低版本承诺，也不代表所有 Codex client 都已验收。
+命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，`0.4.0-rc1` 在 macOS 与 `codex-cli 0.147.0` 上完成过 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。这是一条针对当时 payload 的 compatibility receipt，不是对 `0.5.0` 的自动验收、猜测的最低版本承诺，也不代表所有 Codex client 都已验证。
 
-这条 plugin-native 路径取代旧版 `install.sh` / root `skills/` global installer。当前 maintainer environment 已从精确 checkout 添加 marketplace `personal`，并把 `servotab@personal` 重新安装为最终 43-file candidate；source/cache exact diff、fresh-process prompt-input 和一条 representative fresh-task behavior smoke 都已通过。Source-checkout install 不是 OpenAI plugin directory install，也不把 candidate 自动变成 tag、GitHub Release 或其他机器上的 acceptance receipt。
+这条 source-checkout 路径与已经公开的 directory payload 是两个状态；它取代旧版 `install.sh` / root `skills/` global installer。当前 maintainer environment 对 `0.4.0-rc1` 留有 43-file source/cache exact diff、fresh-process prompt-input 与 representative fresh-task behavior smoke receipt；这些历史 receipt 不会自动覆盖新的 69-file `0.5.0` candidate。Source-checkout install 也不会把 candidate 自动变成 directory update、tag、GitHub Release 或其他机器上的 acceptance receipt。
 
 如果其他本机仍有 manifest-owned Softpowers `0.3.0-rc5` 或更早 global layer，请先读 [迁移指南](docs/migration-from-softpowers.md) 和 [current state](docs/current-state.md)。当前 maintainer roots 已完成 manifest-driven retirement 并验证为 clear；不要把这条 receipt 当成手动删除其他机器旧目录的许可。
 
@@ -129,7 +133,7 @@ plugins/servotab/
 PACK_MANIFEST.json                            exact derived payload identity
 ```
 
-`methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions 与 invocation metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存项目的 canonical asset files；generator 只把 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。`logo-transparent.png` 仍是 repository asset，不是当前 plugin payload 或已接受的 dark-mode contract。
+`methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions、invocation 与 skill-icon source metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存 canonical identity assets 与十二枚 method glyph sources；generator 会把每个 skill 的透明 SVG / 400px PNG，以及 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。Paper-backed icon fallback 保留在 canonical assets 中，不进入默认 runtime payload。
 
 以下路径各有不同责任：
 
@@ -171,7 +175,7 @@ python3 scripts/audit_public_tree.py
 python3 -m py_compile scripts/*.py
 ```
 
-`scripts/selftest.py` 在 disposable fixtures 中检查 package identity、13-skill topology、source/generated sync、retired IDs、manifest/assets、marketplace route，以及 legacy helper 的 read-only preflight 与显式 one-layer retirement。它不安装 live plugin，也不提交 OpenAI directory。
+`scripts/selftest.py` 在 disposable fixtures 中检查 package identity、13-skill topology、source/generated sync、retired IDs、manifest、per-skill icon assets、marketplace route，以及 legacy helper 的 read-only preflight 与显式 one-layer retirement。它不安装 live plugin，也不提交 OpenAI directory update。
 
 Website 的独立 build contract 见 [site/README.md](site/README.md)。
 

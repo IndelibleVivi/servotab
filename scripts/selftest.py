@@ -207,8 +207,8 @@ def main() -> int:
     assert_true(IMPLICIT_SKILL_NAMES == ("servotab",), "implicit activation must be servotab only")
     assert_true(len(REFERENCE_METHOD_NAMES) == 12, "router must expose exactly 12 references")
     assert_true(
-        (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "0.4.0-rc1",
-        "candidate version must be 0.4.0-rc1",
+        (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "0.5.0",
+        "candidate version must be 0.5.0",
     )
 
     method_files = {path.name for path in (ROOT / "methods").glob("*.md")}
@@ -221,6 +221,7 @@ def main() -> int:
     manifest = load_pack_manifest(PACK_MANIFEST)
     assert_true(manifest["pack"] == "servotab", "pack identity drifted")
     assert_true(manifest["skills"] == list(EXPECTED_SKILLS), "pack skill order drifted")
+    assert_true(len(manifest["files"]) == 69, "v0.5 package must contain exactly 69 files")
     for path in RETIRED_REPO_PATHS:
         assert_true(not (ROOT / path).exists(), f"retired global installer path remains: {path}")
     for filename in RETIRED_METHOD_FILES:
@@ -378,6 +379,32 @@ def main() -> int:
             "missing explicit leaf was accepted",
         )
 
+        icon_metadata_root = contract_copy(ROOT, base / "icon-metadata")
+        icon_agent = (
+            icon_metadata_root
+            / "plugins/servotab/skills/design/agents/openai.yaml"
+        )
+        icon_agent.write_text(
+            icon_agent.read_text(encoding="utf-8").replace(
+                'icon_small: "./assets/icon-400.png"',
+                'icon_small: "../../assets/composer-icon.png"',
+            ),
+            encoding="utf-8",
+        )
+        assert_detected(
+            validate_directory(
+                icon_metadata_root / "plugins/servotab/skills", exact=True
+            ),
+            "out-of-skill icon metadata was accepted",
+        )
+
+        missing_icon_root = contract_copy(ROOT, base / "missing-icon")
+        (missing_icon_root / "plugins/servotab/skills/design/assets/icon-400.png").unlink()
+        assert_detected(
+            validate_directory(missing_icon_root / "plugins/servotab/skills", exact=True),
+            "missing generated skill icon was accepted",
+        )
+
         sync_root = contract_copy(ROOT, base / "sync")
         sync_skill = sync_root / "plugins/servotab/skills/debug/SKILL.md"
         sync_skill.write_text(sync_skill.read_text(encoding="utf-8") + "\n", encoding="utf-8")
@@ -426,6 +453,16 @@ def main() -> int:
         digest_asset = digest_root / "plugins/servotab/assets/composer-icon.png"
         digest_asset.write_bytes(digest_asset.read_bytes() + b"tamper")
         assert_detected(validate_package(digest_root), "tampered package asset was accepted")
+
+        icon_digest_root = contract_copy(ROOT, base / "icon-digest")
+        icon_digest_asset = (
+            icon_digest_root / "plugins/servotab/skills/debug/assets/icon-400.png"
+        )
+        icon_digest_asset.write_bytes(icon_digest_asset.read_bytes() + b"tamper")
+        assert_detected(
+            validate_package(icon_digest_root),
+            "tampered skill icon asset was accepted",
+        )
 
         legacy_fixture = make_legacy_fixture(base / "legacy-helper")
         before = directory_digest(legacy_fixture)
@@ -651,8 +688,8 @@ def main() -> int:
     print(
         "Servotab packaging self-test passed: exact plugin identity and 13-skill topology, "
         "source/generated sync, fail-closed retired-root handling, old-ID retirement, manifest "
-        "and asset integrity, marketplace routing, default read-only legacy ownership detection, "
-        "and explicit one-layer retirement."
+        "and per-skill icon integrity, marketplace routing, default read-only legacy ownership "
+        "detection, and explicit one-layer retirement."
     )
     return 0
 

@@ -12,6 +12,8 @@ export const SITE = {
 // Keep the public source and issue tracker on the same repository identity.
 export const PROJECT_LINKS = {
   source: "https://github.com/IndelibleVivi/servotab",
+  pluginDirectory:
+    "https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94",
   issues: "https://github.com/IndelibleVivi/servotab/issues",
   behaviorReport:
     "https://github.com/IndelibleVivi/servotab/issues/new?template=behavior-feedback.yml",

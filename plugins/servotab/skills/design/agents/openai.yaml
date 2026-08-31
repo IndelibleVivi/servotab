@@ -3,5 +3,7 @@ interface:
   short_description: "Turn rough ideas into implementable designs"
   default_prompt: "Use $design to inspect the current context, resolve the real design decisions, and recommend an implementable direction."
   brand_color: "#315EFB"
+  icon_small: "./assets/icon-400.png"
+  icon_large: "./assets/icon.svg"
 policy:
   allow_implicit_invocation: false

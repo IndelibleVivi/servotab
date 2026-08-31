@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import struct
 import sys
 from pathlib import Path
 from typing import Any
@@ -32,6 +33,21 @@ RETIRED_ACTIVE_TOKENS = (
     "references/receive-review.md",
     "references/parallel.md",
 )
+ICON_INTERFACE = {
+    "icon_small": "./assets/icon-400.png",
+    "icon_large": "./assets/icon.svg",
+}
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+FORBIDDEN_SVG_TOKENS = (
+    "<script",
+    "<foreignobject",
+    "href=",
+    "xlink:href",
+    "url(",
+    "<!doctype",
+    "<image",
+    "<use",
+)
 
 
 def load_yaml(text: str, label: str) -> dict[str, Any]:
@@ -58,7 +74,42 @@ def expected_payload_files() -> set[str]:
         f"{name}/agents/openai.yaml" for name in SKILL_NAMES
     }
     files |= {f"{ROUTER_NAME}/references/{name}" for name in REFERENCE_NAMES}
+    files |= {
+        f"{name}/assets/{asset}"
+        for name in SKILL_NAMES
+        for asset in ("icon.svg", "icon-400.png")
+    }
     return files
+
+
+def validate_icon_asset(path: Path, *, field: str) -> list[str]:
+    errors: list[str] = []
+    if path.is_symlink():
+        return [f"{field} asset must not be a symlink"]
+    if not path.is_file():
+        return [f"{field} points to a missing asset"]
+
+    if field == "icon_small":
+        data = path.read_bytes()
+        if len(data) < 26 or not data.startswith(PNG_SIGNATURE):
+            return ["icon_small must be a valid PNG"]
+        width, height, bit_depth, color_type = struct.unpack(">IIBB", data[16:26])
+        if (width, height) != (400, 400):
+            errors.append("icon_small PNG must be exactly 400 x 400 pixels")
+        if bit_depth != 8 or color_type != 6:
+            errors.append("icon_small PNG must be 8-bit RGBA with transparency")
+        return errors
+
+    try:
+        text = path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        return ["icon_large must be a UTF-8 SVG"]
+    normalized = text.lower()
+    if "<svg" not in normalized or "viewbox=" not in normalized:
+        errors.append("icon_large must contain an SVG root and viewBox")
+    if any(token in normalized for token in FORBIDDEN_SVG_TOKENS):
+        errors.append("icon_large SVG must not contain scripts or external resources")
+    return errors
 
 
 def validate_skill(skill_dir: Path) -> list[str]:
@@ -105,7 +156,13 @@ def validate_skill(skill_dir: Path) -> list[str]:
         errors.append(f"{name}: openai.yaml policy must be a mapping")
         policy = {}
 
-    required_interface = {"display_name", "short_description", "default_prompt", "brand_color"}
+    required_interface = {
+        "display_name",
+        "short_description",
+        "default_prompt",
+        "brand_color",
+        *ICON_INTERFACE,
+    }
     if set(interface) != required_interface:
         errors.append(f"{name}: openai.yaml interface fields do not match the package contract")
     for field in ("display_name", "short_description", "default_prompt"):
@@ -113,6 +170,20 @@ def validate_skill(skill_dir: Path) -> list[str]:
             errors.append(f"{name}: openai.yaml missing non-empty interface.{field}")
     if interface.get("brand_color") != "#315EFB":
         errors.append(f"{name}: interface.brand_color must be #315EFB")
+    for field, expected in ICON_INTERFACE.items():
+        raw = interface.get(field)
+        if raw != expected:
+            errors.append(f"{name}: interface.{field} must be {expected!r}")
+        if not isinstance(raw, str):
+            continue
+        relative = Path(raw)
+        if relative.is_absolute() or ".." in relative.parts:
+            errors.append(f"{name}: interface.{field} must stay inside the skill directory")
+            continue
+        target = skill_dir / relative
+        errors.extend(
+            f"{name}: {error}" for error in validate_icon_asset(target, field=field)
+        )
     default_prompt = interface.get("default_prompt", "")
     if isinstance(default_prompt, str) and f"${name}" not in default_prompt:
         errors.append(f"{name}: default_prompt does not explicitly invoke ${name}")
