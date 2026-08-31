@@ -17,8 +17,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Servotab",
-    "shortDescription": "Quiet, risk-scaled engineering methods",
-    "longDescription": "Servotab keeps clear changes direct, adds stronger method when risk or uncertainty requires it, and closes work with fresh evidence.",
+    "shortDescription": "Risk-scaled repository methods",
+    "longDescription": "Servotab helps Codex plan, implement, debug, review, and verify repository work. It keeps clear changes direct, adds stronger method only when risk or uncertainty requires it, and closes claims with fresh evidence while preserving the complete requested outcome.",
     "developerName": "Faye & Cove",
     "category": "Developer Tools",
     "capabilities": [
@@ -27,10 +27,13 @@
       "Fresh verification"
     ],
     "websiteURL": "https://servotab.com",
+    "supportURL": "https://servotab.com/support",
     "privacyPolicyURL": "https://servotab.com/privacy",
     "termsOfServiceURL": "https://servotab.com/terms",
     "defaultPrompt": [
-      "Use $servotab to handle this repository task with proportional method and fresh verification."
+      "Use $servotab to fix this repository bug, identify the root cause, implement the complete repair, and verify it.",
+      "Use $review to inspect this diff and report only verified, actionable correctness and regression findings.",
+      "Use $spec-chain to turn this approved specification into a complete implementation plan without shrinking its scope."
     ],
     "brandColor": "#315EFB",
     "composerIcon": "./assets/composer-icon.png",

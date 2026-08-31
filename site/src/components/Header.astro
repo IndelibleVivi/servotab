@@ -33,7 +33,7 @@ const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${
     </nav>
 
     <details class="mobile-nav">
-      <summary>Menu</summary>
+      <summary>Menu<span class="mobile-nav-indicator" aria-hidden="true"></span></summary>
       <nav aria-label="Mobile navigation">
         {links.map((link) => (
           <a href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>

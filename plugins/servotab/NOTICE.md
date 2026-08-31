@@ -9,9 +9,23 @@ This installed package contains two rights classes:
   this package does not grant a separate right to reuse, redistribute, modify,
   or apply them outside Servotab.
 
-No project-level license changes third-party rights. The repository's
-`THIRD_PARTY_NOTICES.md` records comparative method sources and provenance;
-the plugin payload does not include their code or artwork.
+## Third-party attribution
+
+No project-level license changes third-party rights. The five field labels
+`Outcome / Scope / Context / Authority / Return` used in the `delegate` method
+are adapted from the documentation of `LuluaneS/astrean-worker-lanes` by
+Luluane and Astrean-Codex:
+
+- Source: https://github.com/LuluaneS/astrean-worker-lanes
+- License: Creative Commons Attribution 4.0 International,
+  https://creativecommons.org/licenses/by/4.0/
+
+Servotab retains those attributed labels inside independently written,
+risk-scaled delegation instructions. This package does not include that
+project's code or artwork.
+
+The repository-level `THIRD_PARTY_NOTICES.md` records additional comparative
+method sources and provenance that are not included in this plugin payload.
 
 Rights outside these terms require permission from the relevant rights holder.
 Faye can be contacted through

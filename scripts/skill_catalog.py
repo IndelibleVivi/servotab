@@ -11,7 +11,7 @@ ROUTER = {
         "explanations, simple file lookup, casual discussion, or non-engineering writing."
     ),
     "display_name": "Servotab",
-    "short_description": "Quiet, risk-scaled engineering methods",
+    "short_description": "Risk-scaled repository methods",
     "default_prompt": (
         "Use $servotab to deliver the complete repository outcome with proportional method "
         "and fresh, risk-matched verification."

@@ -54,6 +54,13 @@ def assert_detected(errors: list[str], message: str) -> None:
     assert_true(bool(errors), message)
 
 
+def assert_error_contains(errors: list[str], expected: str, message: str) -> None:
+    assert_true(
+        any(expected in error for error in errors),
+        f"{message}; got {errors!r}",
+    )
+
+
 def contract_copy(source: Path, destination: Path) -> Path:
     destination.mkdir(parents=True)
     for directory in ("methods", "assets", "plugins", ".agents"):
@@ -270,6 +277,72 @@ def main() -> int:
         assert_detected(
             validate_plugin_manifest(prompt_root),
             "scalar plugin defaultPrompt was accepted",
+        )
+
+        directory_metadata_root = contract_copy(ROOT, base / "directory-metadata")
+        directory_metadata_manifest = (
+            directory_metadata_root / "plugins/servotab/.codex-plugin/plugin.json"
+        )
+        mutate_json(
+            directory_metadata_manifest,
+            lambda data: data["interface"].__setitem__(
+                "shortDescription", "Quiet, risk-scaled engineering methods"
+            ),
+        )
+        assert_error_contains(
+            validate_plugin_manifest(directory_metadata_root),
+            "must be no longer than 30 characters for final directory submission",
+            "overlong directory short description was accepted",
+        )
+
+        duplicate_prompt_root = contract_copy(ROOT, base / "duplicate-prompt")
+        duplicate_prompt_manifest = (
+            duplicate_prompt_root / "plugins/servotab/.codex-plugin/plugin.json"
+        )
+        mutate_json(
+            duplicate_prompt_manifest,
+            lambda data: data["interface"].__setitem__(
+                "defaultPrompt",
+                [
+                    "Use $servotab to fix this repository bug.",
+                    "  Use $servotab to fix this repository bug.  ",
+                ],
+            ),
+        )
+        assert_detected(
+            validate_plugin_manifest(duplicate_prompt_root),
+            "normalized duplicate plugin prompts were accepted",
+        )
+
+        multiline_prompt_root = contract_copy(ROOT, base / "multiline-prompt")
+        multiline_prompt_manifest = (
+            multiline_prompt_root / "plugins/servotab/.codex-plugin/plugin.json"
+        )
+        mutate_json(
+            multiline_prompt_manifest,
+            lambda data: data["interface"].__setitem__(
+                "defaultPrompt",
+                ["Use $servotab to fix this repository bug.\nThen verify it."],
+            ),
+        )
+        assert_detected(
+            validate_plugin_manifest(multiline_prompt_root),
+            "multiline plugin prompt was accepted",
+        )
+
+        app_mention_root = contract_copy(ROOT, base / "app-mention")
+        app_mention_manifest = (
+            app_mention_root / "plugins/servotab/.codex-plugin/plugin.json"
+        )
+        mutate_json(
+            app_mention_manifest,
+            lambda data: data["interface"].__setitem__(
+                "defaultPrompt", ["Use $servotab with @servotab to fix this bug."]
+            ),
+        )
+        assert_detected(
+            validate_plugin_manifest(app_mention_root),
+            "plugin app @mention was accepted",
         )
 
         count_root = contract_copy(ROOT, base / "count")

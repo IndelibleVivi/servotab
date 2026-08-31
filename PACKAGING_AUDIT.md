@@ -13,7 +13,17 @@ This is a maintainer self-audit of the source candidate. It is not an independen
 - Install selector: `servotab@personal`
 - Exact package manifest: `PACK_MANIFEST.json`
 
-The plugin manifest describes Servotab as an independent engineering method layer, uses the approved `#315EFB` brand color, and points to the current website, privacy, terms, and curated package assets. It does not claim OpenAI approval or directory availability.
+The plugin manifest describes Servotab as an independent engineering method layer, uses the approved `#315EFB` brand color, and points to the current website, support, privacy, terms, and curated package assets. Its directory-facing short description stays within 30 characters, and its three starter prompts are distinct, single-line workflow examples within 128 characters. It does not claim OpenAI approval or directory availability.
+
+The standalone package `NOTICE.md` carries the attribution, source, and CC BY 4.0
+license link for the five retained Worker Lanes field labels used by `delegate`;
+an uploaded ZIP therefore does not depend on the repository-level notice to
+explain that packaged provenance boundary.
+
+[`evals/submission-test-cases.md`](evals/submission-test-cases.md) prepares five
+positive and three negative reviewer cases from the repository-owned fixtures.
+It is preparation material, not evidence that a portal draft was opened or that
+the cases were executed by OpenAI review.
 
 ## Activation contract
 
@@ -80,6 +90,9 @@ personal → servotab → ./plugins/servotab
 `scripts/runtime_validate.py` checks:
 
 - exact plugin name, version, description, author credit, package path, public URLs, brand color, prompts, and asset targets;
+- current final-directory constraints for the 30-character short description,
+  non-empty long description, 1–3 unique single-line starter prompts of at most
+  128 characters, and the absence of app `@mentions`;
 - presence and manifest inclusion of plugin-local `LICENSE` and `NOTICE.md`, which preserve the functional-material and identity-asset rights split inside the installable package;
 - exact marketplace source, policy, category, and display name;
 - exact manifest file set and digests;

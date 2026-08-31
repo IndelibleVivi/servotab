@@ -40,8 +40,8 @@
   "files": [
     {
       "path": "plugins/servotab/.codex-plugin/plugin.json",
-      "size": 1281,
-      "sha256": "a32495985a8af31e3627d537f3f5602c83965f42d3a0621b37e986cb8ed784df"
+      "size": 1714,
+      "sha256": "4f14da573c96adddb06161d812cc547a4cd26ac5756621a79f0b384802ef75d8"
     },
     {
       "path": "plugins/servotab/LICENSE",
@@ -50,8 +50,8 @@
     },
     {
       "path": "plugins/servotab/NOTICE.md",
-      "size": 897,
-      "sha256": "4c02b665c060a2797a7b89a2a3896d3b33e189684a4c15e8ebaf577e9f6698da"
+      "size": 1465,
+      "sha256": "1fd910a92dc1788a0d0daf9623252e607ff1ffc3467bd16fca942215c6725de5"
     },
     {
       "path": "plugins/servotab/assets/composer-icon.png",
@@ -150,8 +150,8 @@
     },
     {
       "path": "plugins/servotab/skills/servotab/agents/openai.yaml",
-      "size": 307,
-      "sha256": "bdbdfdcb7a72d5dc1f1af7253169c937d196a78d402e7cefd4889483b3ba0b04"
+      "size": 299,
+      "sha256": "929bd4aee1d8f13d23b9c08662c93f980bb53c7185da019144a7795151418baf"
     },
     {
       "path": "plugins/servotab/skills/servotab/references/debug.md",
