@@ -40,8 +40,8 @@
   "files": [
     {
       "path": "plugins/servotab/.codex-plugin/plugin.json",
-      "size": 1714,
-      "sha256": "4f14da573c96adddb06161d812cc547a4cd26ac5756621a79f0b384802ef75d8"
+      "size": 1712,
+      "sha256": "dc935092df08e4e74c43bbe706b859760a84a0b8bb1ddc70e47429b5e80dd738"
     },
     {
       "path": "plugins/servotab/LICENSE",

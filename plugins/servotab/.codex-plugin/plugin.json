@@ -3,7 +3,7 @@
   "version": "0.4.0-rc1",
   "description": "A quiet, risk-scaled engineering method layer for Codex.",
   "author": {
-    "name": "Faye & Cove",
+    "name": "Yifei Fang",
     "url": "https://servotab.com"
   },
   "homepage": "https://servotab.com",
@@ -19,7 +19,7 @@
     "displayName": "Servotab",
     "shortDescription": "Risk-scaled repository methods",
     "longDescription": "Servotab helps Codex plan, implement, debug, review, and verify repository work. It keeps clear changes direct, adds stronger method only when risk or uncertainty requires it, and closes claims with fresh evidence while preserving the complete requested outcome.",
-    "developerName": "Faye & Cove",
+    "developerName": "Yifei Fang",
     "category": "Developer Tools",
     "capabilities": [
       "Repository engineering",

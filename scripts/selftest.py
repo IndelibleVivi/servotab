@@ -253,6 +253,32 @@ def main() -> int:
         mutate_json(identity_manifest, lambda data: data.__setitem__("name", "not-servotab"))
         assert_detected(validate_plugin_manifest(identity_root), "broken plugin identity was accepted")
 
+        author_root = contract_copy(ROOT, base / "publisher-author")
+        author_manifest = author_root / "plugins/servotab/.codex-plugin/plugin.json"
+        mutate_json(
+            author_manifest,
+            lambda data: data["author"].__setitem__("name", "Faye & Cove"),
+        )
+        assert_error_contains(
+            validate_plugin_manifest(author_root),
+            "plugin manifest author.name must be 'Yifei Fang'",
+            "stale creator credit was accepted as the package publisher",
+        )
+
+        developer_root = contract_copy(ROOT, base / "publisher-developer")
+        developer_manifest = developer_root / "plugins/servotab/.codex-plugin/plugin.json"
+        mutate_json(
+            developer_manifest,
+            lambda data: data["interface"].__setitem__(
+                "developerName", "Faye & Cove"
+            ),
+        )
+        assert_error_contains(
+            validate_plugin_manifest(developer_root),
+            "plugin manifest interface.developerName must be 'Yifei Fang'",
+            "stale creator credit was accepted as the install-surface developer",
+        )
+
         repository_root = contract_copy(ROOT, base / "repository-url")
         repository_manifest = repository_root / "plugins/servotab/.codex-plugin/plugin.json"
         mutate_json(
