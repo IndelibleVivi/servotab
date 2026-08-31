@@ -5,8 +5,9 @@ Contributor and third-party rights remain with their respective rights holders.
 
 The Sustainable Use License v1.0 below applies to the original functional
 materials in this plugin package, including `.codex-plugin/plugin.json` and
-`skills/`. It does not apply to the Servotab name or identity assets under
-`assets/`; their separate boundary is recorded in `NOTICE.md`.
+the Skill instructions under `skills/`. It does not apply to the Servotab name
+or identity assets under `assets/` and `skills/*/assets/`; their separate
+boundary is recorded in `NOTICE.md`.
 
 Created by Faye & Cove.
 

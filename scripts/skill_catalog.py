@@ -192,6 +192,20 @@ METHODS = (
     },
 )
 
+SKILL_ICON_SOURCES = {
+    str(ROUTER["name"]): {
+        "svg": "servotab-mark-ink.svg",
+        "png": "servotab-mark-ink-400.png",
+    },
+    **{
+        str(entry["skill"]): {
+            "svg": f"skill-icons/{entry['skill']}/icon.svg",
+            "png": f"skill-icons/{entry['skill']}/icon-400.png",
+        }
+        for entry in METHODS
+    },
+}
+
 METHOD_BY_SKILL = {entry["skill"]: entry["method"] for entry in METHODS}
 SKILL_BY_METHOD = {entry["method"]: entry["skill"] for entry in METHODS}
 SKILL_NAMES = (ROUTER["name"],) + tuple(entry["skill"] for entry in METHODS)

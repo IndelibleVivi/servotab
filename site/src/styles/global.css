@@ -976,12 +976,25 @@ h3 {
   border-bottom: 1px solid var(--hairline);
 }
 
-.method-row > span {
+.method-key {
+  display: flex;
+  min-height: 4.35rem;
+  flex-direction: column;
+  justify-content: space-between;
   padding-top: 0.25rem;
+}
+
+.method-key > span {
   color: var(--muted);
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0;
+}
+
+.method-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
 }
 
 .method-row h2 {
@@ -1484,11 +1497,20 @@ h3 {
   }
 
   .method-row {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-columns: 3rem minmax(0, 1fr);
     gap: 1rem;
   }
 
-  .method-row div {
+  .method-key {
+    min-height: 3.8rem;
+  }
+
+  .method-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .method-row .method-copy {
     grid-column: 1 / -1;
     margin-top: 0.2rem;
   }

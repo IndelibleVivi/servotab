@@ -19,7 +19,7 @@ Review date：`2026-08-30`
 | `SWE-agent/mini-swe-agent` | `a83fcae82d2a08f0ee0c688f9d137b3566c097f8` | MIT | `ADAPT` thin runner / linear raw JSONL trace applied | Eval implementation |
 | `SWE-bench/SWE-bench` | `ca6e4e0d252f32f8762625b73575d5dee49d0a5a` | MIT | `ADAPT` fixture and subject identity metadata applied；cache/regrade remains deferred | Eval implementation |
 | `UKGovernmentBEIS/inspect_ai` | `286163f12aa627af22051bd95321bc6404e237ae` | Inspect repository license applies; verify exact reused component before copying | `DEFER` framework dependency；`ADAPT` task/solver/scorer separation conceptually | Eval architecture |
-| `openai/plugins` | `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` | No repository-level license file at this ref；inspect each plugin manifest before reuse | `ADAPT` plugin-native package + repo marketplace applied in 0.4.0-rc1；directory submission remains owner-gated | Packaging / distribution |
+| `openai/plugins` | `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` | No repository-level license file at this ref；inspect each plugin manifest before reuse | `ADAPT` plugin-native package + repo marketplace applied in 0.4.0-rc1；later directory updates remain owner-gated | Packaging / distribution |
 | `trailofbits/overtly-malicious-skills` | `4ffbf9461ef0505f9ce76a0d3694a18ec33ea531` | No license file at this ref；security research reference only; never install | `ADAPT` adversarial audit ideas；`REJECT` executing upstream payloads | Security tests |
 | `openai/codex` native review | `63d213884daea50e4f74efc192cdc44f549b67d5` | Apache-2.0；host behavior authority, not a Servotab dependency | `ALREADY_COVERED` generic target/rubric behavior by the host；attribution control only, not Servotab's ordinary `review` method or its replacement ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Host baseline / eval |
 | `SathiaAI/adversarial-review` | `343861548fbf58fb1d69c521d33ea38d2ea6f00b` | MIT；case shapes independently rewritten | `ADAPT` labeled defect + clean controls into one Field Lab canary；`REJECT` panel, scoring, rebuttal and release verdict ([record](../evals/candidates/2026-08-30-soft-review-external-challenge.md)) | Review eval |
@@ -157,7 +157,7 @@ Review when:
 - plugin manifest or marketplace contract changes；
 - skills, agents, commands, hooks or MCP surfaces become relevant to one package。
 
-Canonical `methods/*.md` and `scripts/skill_catalog.py` remain source of truth for method content and activation metadata. `plugins/servotab/skills/**` is generated projection；the manifest and repo marketplace are explicit package surfaces. A validated package does not prove directory submission or publication.
+Canonical `methods/*.md` and `scripts/skill_catalog.py` remain source of truth for method content, activation metadata, and icon routing. `plugins/servotab/skills/**` is generated projection；the manifest and repo marketplace are explicit package surfaces. A validated candidate does not prove that a later directory update was submitted or published.
 
 ### Trail of Bits malicious skills
 

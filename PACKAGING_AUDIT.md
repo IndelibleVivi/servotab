@@ -1,11 +1,11 @@
-# Packaging and Activation Audit — Servotab 0.4.0-rc1
+# Packaging and Activation Audit — Servotab 0.5.0
 
-This is a maintainer self-audit of the source candidate. It is not an independent security, compliance, installed-runtime, Cloudflare, or OpenAI directory assurance.
+This is a maintainer self-audit of the `0.5.0` source candidate. It is not an independent security, compliance, installed-runtime, Cloudflare, or OpenAI directory-update assurance. The already-live public listing is recorded as a separate observed distribution state.
 
 ## Package identity
 
 - Plugin id: `servotab`
-- Candidate version: `0.4.0-rc1`
+- Candidate version: `0.5.0`
 - OpenAI package publisher: `Yifei Fang`
 - Public creator credit: `Faye & Cove`
 - Plugin root: `plugins/servotab/`
@@ -15,7 +15,7 @@ This is a maintainer self-audit of the source candidate. It is not an independen
 - Install selector: `servotab@personal`
 - Exact package manifest: `PACK_MANIFEST.json`
 
-The plugin manifest describes Servotab as an independent engineering method layer, uses `Yifei Fang` for both the package `author.name` and install-surface `interface.developerName`, uses the approved `#315EFB` brand color, and points to the current website, support, privacy, terms, and curated package assets. The publisher fields match the owner-selected verified individual identity; they do not replace the `Faye & Cove` creator credit retained in the repository, README editions, and website. Its directory-facing short description stays within 30 characters, and its three starter prompts are distinct, single-line workflow examples within 128 characters. It does not claim OpenAI approval or directory availability.
+The plugin manifest describes Servotab as an independent engineering method layer, uses `Yifei Fang` for both the package `author.name` and install-surface `interface.developerName`, uses the approved `#315EFB` brand color, and points to the current website, support, privacy, terms, and curated package assets. The publisher fields match the owner-selected verified individual identity; they do not replace the `Faye & Cove` creator credit retained in the repository, README editions, and website. Its directory-facing short description stays within 30 characters, and its three starter prompts are distinct, single-line workflow examples within 128 characters. Public documentation links the live listing while keeping directory availability separate from any claim that Servotab is an official OpenAI product.
 
 The standalone package `NOTICE.md` carries the attribution, source, and CC BY 4.0
 license link for the five retained Worker Lanes field labels used by `delegate`;
@@ -57,36 +57,38 @@ overlap. It supports the narrower submission statement that the compared payload
 contains no identified Superpowers code, documentation, artwork, or other
 licensed payload under the recorded comparison.
 
-The later publisher-identity commit `0e715e7` changes only the two publisher
+The later publisher-identity commit `0e715e7` changed only the two publisher
 strings in `.codex-plugin/plugin.json`, the corresponding fail-closed validation
-expectations and tamper controls, and the derived manifest digest. It does not
-change any method body, router reference, skill instruction, package notice, or
-asset. The fixed-ref text comparison was not rerun, so its zero-match receipt
-belongs to the `fe2ec57` textual snapshot rather than serving as a byte-identity
-claim for the final ZIP. The final artifact's exact paths and bytes are proven
-separately below.
+expectations and tamper controls, and the derived manifest digest. The `0.5.0`
+candidate adds owner-authored icon files, icon metadata and validation, a
+package-rights path clarification, and current publication-state copy; it does
+not change any method body or router reference. The fixed-ref text comparison
+was not rerun, so its zero-match result remains attached to the `fe2ec57`
+textual snapshot rather than being repurposed as provenance or byte-identity
+proof for the new ZIP. The new artifact's exact paths and bytes are proven
+separately after its immutable source commit exists.
 
-### Final identity-patched submission artifact
+### `0.5.0` update artifact
 
-The designated local upload artifact was generated from
-`0e715e7226fb0e426d8632807414a3b3fa78bd3d:plugins/servotab` after the publisher
-identity patch:
+The designated update artifact is
+`servotab-0.5.0-openai-submission-05434fa.zip`, archived from immutable source
+`05434fa841cccd8b7f9530791a49741e6cf53063:plugins/servotab`. It contains one
+top-level `servotab/` directory and exactly 69 regular files, is 134,331 bytes
+(131.2 KiB), and has SHA-256
+`08cf42f2561b9705be9d96f3d846fdf41cb16fc885c71c885922e71f79070153`.
 
-- filename: `servotab-0.4.0-rc1-openai-submission-0e715e7.zip`;
-- archive shape: one top-level `servotab/` directory;
-- regular files: 43, exactly matching the path set in `PACK_MANIFEST.json`;
-- size: 109,499 bytes (106.9 KiB); and
-- SHA-256: `149db94281c7bbc673e10fc2dac9cd7d5cfc8dc680cd73c86f8e5b95cc8afde7`.
+The archive passes ZIP integrity, safe-path, duplicate-member, and symlink
+checks. Its regular-file path set, sizes, and SHA-256 digests match
+`PACK_MANIFEST.json`; an independently extracted source archive from the same
+commit is recursively byte-equal; and the owner-facing download and private
+continuity copies are byte-identical.
 
-The archive passed ZIP integrity, manifest path-set equality, recursive
-source/archive byte equality, and byte equality between the Downloads copy and
-the private continuity copy. This receipt prepares a file for owner-controlled
-manual upload; it is not a portal draft, upload, submission, approval, or
-publication receipt.
-
-The earlier `servotab-0.4.0-rc1-openai-submission-1356c1e.zip` artifact, SHA-256
-`cf0d3323b5a06f1a4a099308f75c0084660ae24b81bf2cc80ff8064069efca23`, is
-superseded by the identity patch and must not be used for final submission.
+The earlier `servotab-0.4.0-rc1-openai-submission-0e715e7.zip` artifact, SHA-256
+`149db94281c7bbc673e10fc2dac9cd7d5cfc8dc680cd73c86f8e5b95cc8afde7`, and
+`servotab-0.4.0-rc1-openai-submission-1356c1e.zip`, SHA-256
+`cf0d3323b5a06f1a4a099308f75c0084660ae24b81bf2cc80ff8064069efca23`, are
+historical publication-era artifacts and must not be used for the `0.5.0`
+directory update.
 
 ## Activation contract
 
@@ -120,14 +122,14 @@ Retired active identifiers `brainstorm`, `receive-review`, and `parallel` remain
 
 ## Canonical and derived boundaries
 
-`methods/*.md` is canonical for the 12 method bodies. `scripts/skill_catalog.py` is canonical for plugin skill names, descriptions, prompts, and activation metadata.
+`methods/*.md` is canonical for the 12 method bodies. `scripts/skill_catalog.py` is canonical for plugin skill names, descriptions, prompts, activation metadata, and icon-source routing. Root `assets/servotab-mark-ink*` and `assets/skill-icons/*` are canonical for the router and leaf icon bytes.
 
 `scripts/build_skills.py` generates:
 
 - `plugins/servotab/skills/servotab/SKILL.md`;
 - 12 router references under `plugins/servotab/skills/servotab/references/`;
 - 12 explicit leaf packages under `plugins/servotab/skills/`;
-- each skill's `agents/openai.yaml`;
+- each skill's `agents/openai.yaml` and local `assets/icon.svg` / `assets/icon-400.png` pair;
 - two curated package assets, `composer-icon.png` and `logo.png`, copied from root `assets/`.
 
 Root `skills/` is retired. `build_skills.py --check` and `validate_sync.py` fail on missing, unexpected, or stale generated files; they also reject a reintroduced root projection.
@@ -136,7 +138,7 @@ Root `skills/` is retired. `build_skills.py --check` and `validate_sync.py` fail
 
 - 13 skill directories;
 - 12 router references;
-- 43 exact payload files: one plugin manifest, two plugin-local rights files, two curated assets, and the generated skill tree;
+- 69 exact payload files: one plugin manifest, two plugin-local rights files, two curated top-level assets, 26 local skill-icon files, and the generated instruction/reference tree;
 - file sizes and SHA-256 digests;
 - one implicit router and 12 explicit-only leaves.
 
@@ -158,7 +160,7 @@ personal → servotab → ./plugins/servotab
   128 characters, and the absence of app `@mentions`;
 - presence and manifest inclusion of plugin-local `LICENSE` and `NOTICE.md`, which preserve the functional-material and identity-asset rights split inside the installable package;
 - exact marketplace source, policy, category, and display name;
-- exact manifest file set and digests;
+- exact manifest file set and digests, including all 26 skill icons;
 - absence of retired global-installer and method paths.
 
 The source candidate can be discovered with:
@@ -168,7 +170,7 @@ codex plugin marketplace add .
 codex plugin add servotab@personal
 ```
 
-Those commands are the current CLI contract. In the maintainer environment, marketplace `personal` has been added from this checkout and `servotab@personal` `0.4.0-rc1` is installed and enabled. A post-PR-#18 remove/add refresh produced an exact recursive match between the 43-file source package and the installed cache, with both installed publisher fields reading back as `Yifei Fang`. A fresh-process prompt-input probe on the unchanged skill tree exposes the implicit router as `servotab:servotab` and exposes no legacy Softpowers skill. Those local receipts do not generalize to other machines or prove representative natural-language routing and structured explicit-leaf behavior.
+Those commands remain the source-checkout CLI contract. The maintainer environment still carries the earlier `servotab@personal` `0.4.0-rc1` installed/enabled and exact 43-file source/cache receipt; the official curated cache separately exposes the published `0.4.0-rc1` payload. Neither is an installed-runtime receipt for the new 69-file candidate, so host rendering of the new icons remains unverified.
 
 ## Legacy ownership boundary
 
@@ -201,6 +203,9 @@ fieldlab list fieldlab-pack.json
 
 They do not start target-model invocations. A live Field Lab attempt requires its own plan and explicit invocation budget; live model behavior is not inferred from package validation.
 
+The current `0.5.0` no-spend run passed all three commands with one source
+subject, nine cases, and zero target-agent invocations.
+
 ## Retained verification guarantees
 
 The deterministic gate covers:
@@ -211,11 +216,17 @@ The deterministic gate covers:
 - router-only implicit activation;
 - retired identifier and path exclusion;
 - plugin manifest and repo marketplace shape;
-- exact payload identity and asset integrity;
-- disposable tamper, missing-skill, wrong-marketplace, and wrong-identity controls;
+- exact 69-file payload identity, 26-icon path/format checks, and asset integrity;
+- disposable icon-metadata, missing-icon, icon-digest, missing-skill, wrong-marketplace, and wrong-identity controls;
 - fail-closed generation when the retired root `skills/` path reappears, with a disposable sentinel proving that its contents remain untouched;
 - read-only legacy ownership detection and explicit one-layer retirement in a disposable fixture;
 - Python syntax and visible current-tree public-safety audit;
+- all 13 generated skills passing the standalone `skill-validate` entrypoint;
+- Field Lab schema validation, fixture selftest, and subject listing with zero
+  target-agent invocations;
+- desktop/mobile rendered website checks covering the live-listing route, all
+  12 method glyphs, responsive sizing, navigation, overflow, console, and
+  resource-load state;
 - CI matrix on Ubuntu Python 3.10 / 3.13 and macOS Python 3.13.
 
 Maintainer commands:
@@ -235,11 +246,11 @@ python3 -m py_compile scripts/*.py
 As of this source candidate:
 
 - repository package generation and deterministic validation are implemented;
-- the local marketplace selector is defined, and the maintainer installation is enabled with an exact 43-file source/cache equality receipt;
+- the local marketplace selector is defined; the retained exact 43-file install receipt belongs to `0.4.0-rc1`, not the new candidate;
 - a fresh Codex process exposes only the namespaced implicit router at baseline; a normal newly opened worktree task then exercised an ordinary-language router path and a structured explicit `$review` leaf path without mutating the checkout, while other-machine installation remains a separate runtime check;
 - after independent review closed with no actionable P0–P2 findings, all 13 reachable legacy Softpowers layers were retired one at a time with fresh preflight evidence; both supported roots are clear, while inactive historical receipts remain preserved;
 - the website deployment and custom-domain state are tracked separately in `docs/current-state.md`;
 - the GitHub repository has been renamed in place to `IndelibleVivi/servotab`; the final publisher-identity PR #18 merged to public `main` as `21dceba`, its post-merge Validate run `33368067114` succeeded, and no tag or GitHub Release is implied;
-- OpenAI directory submission has not been made and remains owner-gated.
+- the OpenAI directory listing is publicly live at `plugins_6a952d7c729c819196646fda7ec9ad94`; manual upload, submission, review, and publication of the `0.5.0` update remain owner-gated.
 
-A green source gate proves package consistency; the separate maintainer source/cache, fresh-process, and fresh-task receipts prove only the named local installation and behavior boundaries. They do not prove other-machine installation, general behavior quality, or OpenAI review. Website deployment and Cloudflare topology remain separate facts tracked in `docs/current-state.md`.
+A green source gate proves package consistency; the retained maintainer source/cache, fresh-process, and fresh-task receipts prove only the named `0.4.0-rc1` local installation and behavior boundaries. They do not prove `0.5.0` installation, host icon rendering, other-machine behavior, or publication of the directory update. Website deployment and Cloudflare topology remain separate facts tracked in `docs/current-state.md`.

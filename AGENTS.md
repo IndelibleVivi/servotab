@@ -20,14 +20,15 @@ Servotab is independent and community-maintained. Do not claim it is an official
 | `scripts/skill_catalog.py` | Canonical skill ids, descriptions, prompts, and activation metadata |
 | `scripts/build_skills.py` | Canonical generation rules for plugin skills and curated package assets |
 | `plugins/servotab/skills/**` | Generated projection; never edit directly |
-| `assets/` | Canonical repository asset files and usage notes |
+| `assets/` | Canonical repository identity assets and usage notes; `servotab-mark-ink*` plus `skill-icons/*` own the 13 skill icon sources |
 | `plugins/servotab/assets/` | Generated curated package copies, not a second asset authority |
+| `plugins/servotab/skills/*/assets/` | Generated local skill-icon copies; never edit directly |
 | `plugins/servotab/.codex-plugin/plugin.json` | Plugin package metadata and public interface contract |
 | `plugins/servotab/LICENSE` and `NOTICE.md` | Package-local functional-material and identity-asset rights boundary |
 | `.agents/plugins/marketplace.json` | Repository marketplace route |
 | `PACK_MANIFEST.json` | Exact generated package identity; regenerate, do not hand-edit |
 | `fieldlab-pack.json` and `evals/` | Servotab-owned behavior subject and evidence surfaces |
-| `site/` | Static public website source; not plugin runtime authority |
+| `site/` | Static public website source; not plugin runtime authority; the Methods catalog imports canonical leaf SVGs from root `assets/skill-icons/*` |
 | `README.md` | Canonical English user-facing identity, installation, use, and limitations |
 | `README.zh-CN.md` | Full Chinese reader edition; factual parity with `README.md`, not sentence-level identity |
 | `docs/current-state.md` | Volatile candidate, install, GitHub, deployment, domain, and submission state |
@@ -73,7 +74,7 @@ For a method or metadata change:
 For a canonical package asset change:
 
 1. Edit or replace only the intended file under `assets/` with rights and provenance understood.
-2. Run `python3 scripts/build_skills.py` to update curated plugin copies.
+2. Run `python3 scripts/build_skills.py` to update curated plugin copies, including each skill's local SVG/PNG icon pair.
 3. Regenerate `PACK_MANIFEST.json` only after plugin validation passes.
 4. Inspect visual output and the exact package diff.
 

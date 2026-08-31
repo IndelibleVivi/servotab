@@ -7,7 +7,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from skill_catalog import METHODS, ROUTER
+from skill_catalog import METHODS, ROUTER, SKILL_ICON_SOURCES
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSET_NAMES = ("composer-icon.png", "logo.png")
@@ -93,19 +93,42 @@ def openai_yaml(entry: dict[str, object], *, implicit: bool) -> str:
         f"  short_description: {quote(str(entry['short_description']))}\n"
         f"  default_prompt: {quote(str(entry['default_prompt']))}\n"
         "  brand_color: \"#315EFB\"\n"
+        "  icon_small: \"./assets/icon-400.png\"\n"
+        "  icon_large: \"./assets/icon.svg\"\n"
         "policy:\n"
         f"  allow_implicit_invocation: {'true' if implicit else 'false'}\n"
     )
 
 
-def expected_files(root: Path = ROOT) -> dict[Path, str]:
+def add_skill_icons(
+    files: dict[Path, bytes],
+    *,
+    root: Path,
+    skill_dir: Path,
+    skill_name: str,
+) -> None:
+    sources = SKILL_ICON_SOURCES[skill_name]
+    for source_kind, output_name in (("svg", "icon.svg"), ("png", "icon-400.png")):
+        source = root / "assets" / sources[source_kind]
+        files[skill_dir / "assets" / output_name] = source.read_bytes()
+
+
+def expected_files(root: Path = ROOT) -> dict[Path, bytes]:
     methods_dir, skills_dir, _, _ = locations(root)
-    files: dict[Path, str] = {}
+    files: dict[Path, bytes] = {}
     router_dir = skills_dir / str(ROUTER["name"])
-    files[router_dir / "SKILL.md"] = frontmatter(
-        str(ROUTER["name"]), str(ROUTER["description"])
-    ) + ROUTER_BODY
-    files[router_dir / "agents" / "openai.yaml"] = openai_yaml(ROUTER, implicit=True)
+    files[router_dir / "SKILL.md"] = (
+        frontmatter(str(ROUTER["name"]), str(ROUTER["description"])) + ROUTER_BODY
+    ).encode("utf-8")
+    files[router_dir / "agents" / "openai.yaml"] = openai_yaml(
+        ROUTER, implicit=True
+    ).encode("utf-8")
+    add_skill_icons(
+        files,
+        root=root,
+        skill_dir=router_dir,
+        skill_name=str(ROUTER["name"]),
+    )
 
     for entry in METHODS:
         method_name = str(entry["method"])
@@ -114,14 +137,22 @@ def expected_files(root: Path = ROOT) -> dict[Path, str]:
         if not method_body.endswith("\n"):
             method_body += "\n"
         if entry.get("router_reference", True):
-            files[router_dir / "references" / f"{method_name}.md"] = method_body
+            files[router_dir / "references" / f"{method_name}.md"] = method_body.encode(
+                "utf-8"
+            )
 
         skill_dir = skills_dir / str(entry["skill"])
-        files[skill_dir / "SKILL.md"] = frontmatter(
-            str(entry["skill"]), str(entry["description"])
-        ) + method_body
+        files[skill_dir / "SKILL.md"] = (
+            frontmatter(str(entry["skill"]), str(entry["description"])) + method_body
+        ).encode("utf-8")
         files[skill_dir / "agents" / "openai.yaml"] = openai_yaml(
             entry, implicit=bool(entry.get("implicit", False))
+        ).encode("utf-8")
+        add_skill_icons(
+            files,
+            root=root,
+            skill_dir=skill_dir,
+            skill_name=str(entry["skill"]),
         )
     return files
 
@@ -132,12 +163,12 @@ def check(root: Path = ROOT) -> list[str]:
     try:
         expected = expected_files(root)
     except FileNotFoundError as exc:
-        return [f"missing canonical method source: {exc.filename}"]
+        return [f"missing canonical source: {exc.filename}"]
 
     for path, content in expected.items():
         if not path.is_file():
             errors.append(f"missing generated file: {path.relative_to(root)}")
-        elif path.read_text(encoding="utf-8") != content:
+        elif path.read_bytes() != content:
             errors.append(f"generated file is stale: {path.relative_to(root)}")
 
     allowed = {path.resolve() for path in expected}
@@ -176,7 +207,7 @@ def write(root: Path = ROOT) -> None:
     expected = expected_files(root)
     for path, content in expected.items():
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
+        path.write_bytes(content)
 
     allowed = {path.resolve() for path in expected}
     if skills_dir.is_dir():
@@ -224,7 +255,8 @@ def main() -> int:
         return 1
     print(
         f"Generated one implicit router, {len(METHODS)} explicit leaves, "
-        f"{len(METHODS)} router references, and {len(ASSET_NAMES)} plugin assets."
+        f"{len(METHODS)} router references, {2 * (len(METHODS) + 1)} skill icon assets, "
+        f"and {len(ASSET_NAMES)} plugin assets."
     )
     return 0
 

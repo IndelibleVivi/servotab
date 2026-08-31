@@ -3,5 +3,7 @@ interface:
   short_description: "Match fresh verification to actual risk"
   default_prompt: "Use $verify to prove the relevant completion claims with fresh, appropriately scoped evidence."
   brand_color: "#315EFB"
+  icon_small: "./assets/icon-400.png"
+  icon_large: "./assets/icon.svg"
 policy:
   allow_implicit_invocation: false

@@ -15,8 +15,9 @@ Created by Faye & Cove.
 The [Sustainable Use License v1.0](LICENSE) applies to the project's original
 functional materials, including:
 
-- `scripts/`, `methods/`, and the generated skill projection under
-  `plugins/servotab/skills/`;
+- `scripts/`, `methods/`, and the generated instruction/reference projection
+  under `plugins/servotab/skills/`, excluding the skill icon assets assigned
+  to the identity boundary below;
 - plugin and marketplace manifests under `plugins/servotab/` and
   `.agents/plugins/`;
 - `PACK_MANIFEST.json`, `VERSION`, `.gitignore`, and `.github/`;
@@ -64,12 +65,13 @@ sources reviewed without treating those repositories as dependencies or
 ## Identity assets and website expression
 
 This license map does not currently offer the Servotab name, mark geometry,
-raster identity exports under `assets/` or `plugins/servotab/assets/`, or the
+method glyphs, raster identity exports under `assets/`, package identity assets
+under `plugins/servotab/assets/` or `plugins/servotab/skills/*/assets/`, or the
 original public-facing prose and visual compositions under `site/src/` for
-third-party reuse. Their presence in the public repository or on the Servotab
-website is not a separate trademark, copyright, or reuse grant. A future
-path-level grant requires an explicit rights decision by the relevant rights
-holder; none is inferred here.
+third-party reuse. Their presence in the public repository, installed package,
+or Servotab website is not a separate trademark, copyright, or reuse grant. A
+future path-level grant requires an explicit rights decision by the relevant
+rights holder; none is inferred here.
 
 Where a file contains third-party material under a compatible or separate
 license, that material remains under its original terms. Entries described as

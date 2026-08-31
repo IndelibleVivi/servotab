@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MethodMotion from "../components/MethodMotion.astro";
-import { repoFile, SITE } from "../config";
+import { PROJECT_LINKS, repoFile, SITE } from "../config";
 import { methods } from "../data/methods";
 ---
 
@@ -16,7 +16,7 @@ import { methods } from "../data/methods";
         stronger method and fresh evidence.
       </p>
       <div class="hero-actions">
-        <a class="action action-primary" href="/docs#get-started-heading">Get started</a>
+        <a class="action action-primary" href={PROJECT_LINKS.pluginDirectory}>Open official listing</a>
         <a class="action action-secondary" href="/methods">Explore methods</a>
       </div>
     </div>
@@ -96,12 +96,12 @@ import { methods } from "../data/methods";
       <div>
         <h2 id="methods-preview-heading">A small method, placed precisely.</h2>
         <p>
-          Servotab’s candidate method set spans design, execution, debugging,
+          Servotab’s method set spans design, execution, debugging,
           review, verification, isolation, delegation, and closure. The router
           chooses depth proportionately; explicit method names remain available
           when a person wants precise control.
         </p>
-        <div class="method-line" aria-label="Candidate Servotab methods">
+        <div class="method-line" aria-label="Servotab methods">
           {methods.map((method) => <span>{method.name}</span>)}
         </div>
       </div>
@@ -111,9 +111,11 @@ import { methods } from "../data/methods";
     <div class="availability-note">
       <span>status / {SITE.version}</span>
       <p>
-        <strong>{SITE.version} source candidate.</strong> Source-checkout installation is
-        available. This candidate has no Servotab tag or GitHub Release, and Servotab is not
-        currently listed in the OpenAI plugin directory. <a href="/docs#get-started-heading">Get started</a>
+        <strong>Servotab is live in the OpenAI Plugins Directory.</strong> The public listing
+        is available now; this repository is preparing the separate {SITE.version} source
+        candidate with per-skill icons for an owner-controlled directory update. No Servotab
+        tag or GitHub Release exists. <a href={PROJECT_LINKS.pluginDirectory}>Open listing</a>
+        {" · "}<a href="/docs#get-started-heading">Source install</a>
         {" · "}<a href={repoFile("CHANGELOG.md")}>Changelog</a>
       </p>
     </div>

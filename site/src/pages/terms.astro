@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { repoFile } from "../config";
+import { PROJECT_LINKS, repoFile } from "../config";
 ---
 
 <BaseLayout
@@ -22,8 +22,10 @@ import { repoFile } from "../config";
           <h2>Project status and affiliation</h2>
           <p>
             Servotab is an independent, community-maintained project. It is not an
-            official OpenAI product, is not currently listed in the OpenAI plugin
-            directory, and this website does not represent directory approval or availability.
+            official OpenAI product. Servotab is publicly available through its{" "}
+            <a href={PROJECT_LINKS.pluginDirectory}>OpenAI Plugins Directory listing</a>;
+            that publication surface does not make the project OpenAI-authored or transfer
+            project ownership, maintenance, or source authority to OpenAI.
           </p>
         </section>
 
@@ -31,7 +33,8 @@ import { repoFile } from "../config";
           <h2>Source-package licensing</h2>
           <p>
             The public Servotab repository contains the current source candidate; it is
-            not a tagged release or an OpenAI directory publication. The path-level{" "}
+            not a tagged release and may be newer than the currently published directory
+            payload. The path-level{" "}
             <a href={repoFile("LICENSING.md")}>licensing map</a>, governing license texts,
             package-local notices, and third-party terms shipped with those exact files
             control. Repository access does not collapse those layers into one license.
@@ -88,7 +91,8 @@ import { repoFile } from "../config";
             availability, website, and release status. The Servotab repository is the current
             source authority and preserves the earlier Softpowers commits, release records,
             and provenance. Source-checkout installation remains distinct from a tagged
-            release, OpenAI directory submission, directory publication, and OpenAI approval.
+            release, the currently published directory payload, and any later directory
+            update submission or publication.
           </p>
         </section>
       </div>

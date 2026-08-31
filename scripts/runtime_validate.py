@@ -17,6 +17,7 @@ PLUGIN_ROOT = ROOT / PLUGIN_RELATIVE
 PACK_MANIFEST = ROOT / "PACK_MANIFEST.json"
 MARKETPLACE = ROOT / ".agents/plugins/marketplace.json"
 ASSET_NAMES = ("composer-icon.png", "logo.png")
+SKILL_ICON_NAMES = ("icon.svg", "icon-400.png")
 LEGAL_FILES = ("LICENSE", "NOTICE.md")
 RETIRED_METHOD_FILES = ("brainstorm.md", "receive-review.md", "parallel.md")
 RETIRED_REPO_PATHS = (
@@ -37,6 +38,11 @@ def expected_payload_files() -> frozenset[str]:
     }
     files |= {
         f"plugins/servotab/skills/{name}/agents/openai.yaml" for name in SKILL_NAMES
+    }
+    files |= {
+        f"plugins/servotab/skills/{name}/assets/{asset}"
+        for name in SKILL_NAMES
+        for asset in SKILL_ICON_NAMES
     }
     files |= {
         f"plugins/servotab/skills/servotab/references/{name}.md"

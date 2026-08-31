@@ -18,16 +18,18 @@ import { PROJECT_LINKS, repoFile, SITE } from "../config";
     <div class="shell content-layout">
       <p class="section-index">Get started</p>
       <div class="content-prose">
-        <h2 id="get-started-heading">Install the candidate. Then ask for the work.</h2>
+        <h2 id="get-started-heading">Add the public plugin. Or inspect the source candidate.</h2>
         <p>
-          Servotab <code>{SITE.version}</code> is available through the public repository
-          marketplace route. This is source-checkout installation of an untagged candidate,
-          not an OpenAI plugin directory install.
+          Servotab is publicly available in the official OpenAI Plugins Directory.{" "}
+          <a href={PROJECT_LINKS.pluginDirectory}>Open the Servotab listing</a> to add the
+          published plugin. The repository route below installs the separate, untagged
+          {" "}<code>{SITE.version}</code> source candidate for inspection or maintainer testing;
+          it is not a readback of the currently published directory payload.
         </p>
 
         <div class="quickstart-grid">
           <article>
-            <span class="rail-label">01 / install</span>
+            <span class="rail-label">01 / source checkout</span>
             <pre><code>git clone https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
@@ -53,7 +55,7 @@ codex plugin add servotab@personal</code></pre>
         </p>
         <pre><code>codex plugin list --marketplace personal</code></pre>
         <p>
-          The receipt should show <code>servotab@personal</code> as
+          The receipt should show <code>servotab@personal</code> as{" "}
           <code>installed, enabled</code> at version <code>{SITE.version}</code>. On
           2026-08-31 this source-checkout route and fresh-process router discovery were
           verified on macOS with <code>codex-cli 0.147.0</code>. That is an observed
@@ -64,7 +66,7 @@ codex plugin add servotab@personal</code></pre>
         <p>
           Describe ordinary repository work normally. Servotab may keep a clear change
           direct or load one relevant method when risk or uncertainty warrants it. Use
-          names such as <code>$review</code>, <code>$tdd</code>, or <code>$spec-chain</code>
+          names such as <code>$review</code>, <code>$tdd</code>, or <code>$spec-chain</code>{" "}
           when you want precise control; the twelve method leaves are not implicit workflows.
         </p>
 
@@ -192,7 +194,7 @@ codex plugin add servotab@personal</code></pre>
           <li>It does not make every task follow one mandatory end-to-end workflow.</li>
           <li>It does not treat a green build as proof of deployment, runtime activation, or owner acceptance.</li>
           <li>It does not turn an explicit complete request into a scaffold, placeholder, or unnamed partial result.</li>
-          <li>It does not make an OpenAI approval or availability claim. The public directory release is not live.</li>
+          <li>The public directory listing proves availability; it does not make Servotab an official OpenAI product or transfer repository authority to the directory surface.</li>
         </ul>
       </div>
     </div>
@@ -205,20 +207,22 @@ codex plugin add servotab@personal</code></pre>
         <h2 id="availability-heading">Verified to the boundary we can prove.</h2>
         <p>
           The current <code>{SITE.version}</code> source candidate is generated from canonical
-          method sources into an exact 43-file plugin package. Public checks cover
+          method and icon sources into an exact 69-file plugin package. Public checks cover
           source/generated sync, skill validation, manifest freshness, package self-tests,
           public-tree audit, and Python compilation. Those gates establish source and package
-          consistency; they do not prove behavior on every machine, OpenAI approval, or
-          directory availability.
+          consistency; they do not prove behavior on every machine or publication of this
+          newer candidate.
         </p>
         <p>
-          Source-checkout installation is available. This candidate has no Servotab tag or
-          GitHub Release, and Servotab has not been submitted to or listed in the OpenAI
-          plugin directory. The same repository preserves the earlier Softpowers commits,
-          release records, licensing history, and provenance without relabelling those
-          historical versions.
+          The <a href={PROJECT_LINKS.pluginDirectory}>official Servotab listing</a> is live.
+          The current <code>{SITE.version}</code> repository candidate adds per-skill icons
+          and remains distinct from that published payload until Faye manually submits and
+          OpenAI publishes the update. This candidate has no Servotab tag or GitHub Release.
+          The same repository preserves earlier Softpowers commits, release records,
+          licensing history, and provenance without relabelling those historical versions.
         </p>
         <p class="evidence-link">
+          <a href={PROJECT_LINKS.pluginDirectory}>Official listing</a>{" · "}
           <a href={PROJECT_LINKS.source}>Source</a>{" · "}
           <a href={repoFile("CHANGELOG.md")}>Changelog</a>{" · "}
           <a href={repoFile("docs/current-state.md")}>Current state</a>
