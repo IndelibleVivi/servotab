@@ -70,11 +70,18 @@ separately after its immutable source commit exists.
 
 ### `0.5.0` update artifact
 
-The designated `0.5.0` update artifact is pending an immutable package-source
-commit. It will contain one top-level `servotab/` directory and exactly 69
-regular files matching `PACK_MANIFEST.json`; ZIP integrity, manifest path-set
-equality, and recursive source/archive byte equality are required before its
-filename, size, and SHA-256 are recorded here.
+The designated update artifact is
+`servotab-0.5.0-openai-submission-05434fa.zip`, archived from immutable source
+`05434fa841cccd8b7f9530791a49741e6cf53063:plugins/servotab`. It contains one
+top-level `servotab/` directory and exactly 69 regular files, is 134,331 bytes
+(131.2 KiB), and has SHA-256
+`08cf42f2561b9705be9d96f3d846fdf41cb16fc885c71c885922e71f79070153`.
+
+The archive passes ZIP integrity, safe-path, duplicate-member, and symlink
+checks. Its regular-file path set, sizes, and SHA-256 digests match
+`PACK_MANIFEST.json`; an independently extracted source archive from the same
+commit is recursively byte-equal; and the owner-facing download and private
+continuity copies are byte-identical.
 
 The earlier `servotab-0.4.0-rc1-openai-submission-0e715e7.zip` artifact, SHA-256
 `149db94281c7bbc673e10fc2dac9cd7d5cfc8dc680cd73c86f8e5b95cc8afde7`, and
