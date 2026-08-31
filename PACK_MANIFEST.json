@@ -50,8 +50,8 @@
     },
     {
       "path": "plugins/servotab/NOTICE.md",
-      "size": 1465,
-      "sha256": "1fd910a92dc1788a0d0daf9623252e607ff1ffc3467bd16fca942215c6725de5"
+      "size": 1904,
+      "sha256": "1ecea7f86a19b6d059308483b588f258b6fd596c8dd87ff83e5e0f027141dc71"
     },
     {
       "path": "plugins/servotab/assets/composer-icon.png",
@@ -200,8 +200,8 @@
     },
     {
       "path": "plugins/servotab/skills/servotab/references/tdd.md",
-      "size": 3533,
-      "sha256": "b057c35b2b7c3d55666f328ea4e2abefd2d0a94b1357390bc31b80e085e2e20f"
+      "size": 3561,
+      "sha256": "861fe6415e1ddd1337f11bb966b3e029d036c472a70494029374d7066007d263"
     },
     {
       "path": "plugins/servotab/skills/servotab/references/verify.md",
@@ -225,8 +225,8 @@
     },
     {
       "path": "plugins/servotab/skills/tdd/SKILL.md",
-      "size": 3737,
-      "sha256": "c7aee17dd062e6b1bebf4d5446c55b66651eee8cf8cdb9467a602d2d19d19457"
+      "size": 3765,
+      "sha256": "c64e69fc106da1dbfad0787f5fc5c2bc1731c9f0fc001ce964921ffb32539e11"
     },
     {
       "path": "plugins/servotab/skills/tdd/agents/openai.yaml",

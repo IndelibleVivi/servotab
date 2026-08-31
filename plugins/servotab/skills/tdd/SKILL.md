@@ -25,7 +25,7 @@ Prefer for:
 Cycle:
 
 1. Write the smallest behavior-focused test.
-2. Run it and confirm it fails for the expected reason.
+2. Execute it once and verify that the failure matches the intended behavioral gap.
 3. Implement the minimum coherent change.
 4. Run the focused test and confirm it passes.
 5. Refactor while keeping it green.

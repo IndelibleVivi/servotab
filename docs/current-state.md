@@ -9,7 +9,7 @@ This is the volatile status surface. It records what has actually crossed each b
 | Surface | Current state | Evidence boundary |
 |---|---|---|
 | Product identity | `Servotab` adopted | Current source, manifest, assets, site, and docs use the new identity |
-| Source candidate | `0.4.0-rc1` on public `main` | Public-release hardening commit `0f7e73d` from PR #14 is present on public `main`; merge-commit Validate run `33359648427` passed all five jobs; no Servotab tag or GitHub Release exists |
+| Source candidate | `0.4.0-rc1`; submission-hardening candidate fixed at `fe2ec57` | Public-release hardening commit `0f7e73d` from PR #14 is present on public `main`; submission hardening independently rewrites the sole text-overlap hit, adds package-local comparative lineage, and expands the public privacy disclosure; no Servotab tag or GitHub Release exists |
 | Canonical methods | 12 current methods | `methods/*.md` plus `scripts/skill_catalog.py` |
 | Plugin package | Generated candidate | `plugins/servotab/` with one router, 12 leaves, and curated assets |
 | Deterministic package gate | Green on integrated 43-file payload | Generation/sync, YAML, manifest, expanded migration selftest, public-tree audit, Python compilation, and the Astro production build passed locally and in CI |
@@ -17,6 +17,7 @@ This is the volatile status surface. It records what has actually crossed each b
 | Live Codex install | Installed, enabled, and cache-exact | `servotab@personal` `0.4.0-rc1` was freshly reinstalled from this checkout; source/cache contain the exact 43-file payload, fresh-process prompt input exposes `servotab:servotab`, and a fresh normal task exercised both implicit router and explicit-leaf behavior |
 | Legacy global layer | Retired; both supported roots clear | Thirteen reachable LIFO layers under `~/.codex/skills` were retired one at a time after independent review; no active pointer or `soft-*` entrypoint remains |
 | Field Lab | Schema v2 source subject | `fieldlab-pack.json` points to `plugins/servotab/skills`; live model eval not run |
+| Submission materials | Prepared; no portal draft or submission receipt | Manifest listing metadata, three starter prompts, five positive and three negative reviewer cases, public website/support/privacy/terms URLs, and a fixed-ref provenance receipt are ready; identity selection, availability, attestations, and submission remain owner actions |
 | Website source | Astro static site implemented and polished | Homepage, source-checkout Quickstart and install receipt, task examples, social preview, security route, support, privacy, terms, and lineage are current on public `main` |
 | Cloudflare Pages | Production site live from clean merged source | Direct-upload deployment `6a6dc17d-70ac-4905-b6b3-baba93a8ad29` was built and uploaded from clean merge commit `b2bacde`; automatic production and preview deployments remain disabled, while the historical Git connection remains disconnected |
 | `servotab.com` | Active; SSL enabled; RUM injection disabled | Proxied apex DNS, Pages custom-domain status, public HTTPS, strict headers, live interaction and responsive checks, same-origin script/network proof, and true 404 all verified |
@@ -45,7 +46,7 @@ Current method ids are `design`, `spec-chain`, `plan`, `execute`, `debug`, `tdd`
 
 The old root `skills/` projection and transaction installer are retired from current source. The local marketplace `personal` has been added from this checkout, and `servotab@personal` `0.4.0-rc1` is installed and enabled. A final remove/add refresh produced an exact 43-file source/cache match with two curated assets and plugin-local rights files.
 
-The integrated 43-file package passes source/generated sync, exact skill validation, manifest freshness, expanded packaging/migration selftests, public-tree audit, Python compilation, and Field Lab v2 `validate` / `selftest` / `list` with zero target-agent invocations.
+The integrated 43-file package passes source/generated sync, exact skill validation, manifest freshness, expanded packaging/migration selftests, public-tree audit, Python compilation, and Field Lab v2 `validate` / `selftest` / `list` with zero target-agent invocations. A bounded text-comparison pass at package commit `fe2ec57` against the recorded `obra/superpowers@b36e0829` ref covered all 41 Servotab text payload files and reported no normalized contiguous match of ten or more words and no near-exact paragraph candidate under the documented thresholds; `PACKAGING_AUDIT.md` records the scope and limits.
 
 Independent review closed with no actionable P0–P2 findings in the repaired retirement helper. The verified 13-layer live chain was then retired against the exact root `~/.codex/skills`, one LIFO layer per invocation with a fresh read-only preflight before each layer. Both supported roots now report `CLEAR`; the active pointer and all top-level `softpowers` / `soft-*` entrypoints are absent. Nineteen historical manifest receipts remain with status `uninstalled`, and no modified-skill snapshot was needed.
 
@@ -78,7 +79,7 @@ Cloudflare Configuration Rule `servotab_disable_rum` is active for all incoming 
 
 Cloudflare account configuration now contains the two-entry list `servotab_canonical_hosts` and enabled rule `servotab_canonical_redirects`. A proxied `www` trigger record is present. Fresh edge requests prove both `www.servotab.com` and `servotab.pages.dev` return 301 to the apex while preserving subpaths and query strings; following either redirect reaches a 200 response on `servotab.com`.
 
-The deployed site now points Source and Issues to `IndelibleVivi/servotab`, publishes a first-use source-checkout Quickstart plus installed/enabled and observed `codex-cli 0.147.0` receipts, explains the one-router/twelve-explicit-leaf topology and skills-only trust boundary, links the active private security-reporting route, and serves the deterministic wide social preview. It keeps tag, GitHub Release, OpenAI listing, and OpenAI approval claims explicitly separate. Domain-level redirects and the RUM opt-out remain Cloudflare account configuration, not `site/public/_redirects` or `site/public/_headers` behavior.
+The deployed site now points Source and Issues to `IndelibleVivi/servotab`, publishes a first-use source-checkout Quickstart plus installed/enabled and observed `codex-cli 0.147.0` receipts, explains the one-router/twelve-explicit-leaf topology and skills-only trust boundary, links the active private security-reporting route, and serves the deterministic wide social preview. Submission hardening adds explicit publisher collection, purpose, recipient, retention, and user-control statements to the privacy source; live deployment of that policy remains a separate observed state. The site keeps tag, GitHub Release, OpenAI listing, and OpenAI approval claims explicitly separate. Domain-level redirects and the RUM opt-out remain Cloudflare account configuration, not `site/public/_redirects` or `site/public/_headers` behavior.
 
 ## GitHub and publication
 
@@ -99,6 +100,6 @@ The public default branch now contains `.agents/plugins/marketplace.json`, `plug
 1. Retain the inactive legacy manifests, backups, and transitional helper until the documented recovery/operator dependency is deliberately retired; do not manually clean historical receipts.
 2. Keep the current Cloudflare production path on clean manual direct deployments while the historical Git binding remains disconnected and stale. Repairing or replacing that binding, recreating the project, or re-enabling automatic deployments is a separate owner decision, not a hidden follow-up to this deployment.
 3. Tag and GitHub Release creation remain unperformed and separate from the merged source candidate.
-4. Stop before OpenAI directory submission until the owner explicitly opens that gate.
+4. The OpenAI portal draft, developer-identity selection, regional availability, policy attestations, submission, approval, and publication remain owner-controlled. Preparing or uploading the local bundle does not cross any later state.
 
 Update this file by replacing superseded facts, not by appending a development diary.
