@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MethodMotion from "../components/MethodMotion.astro";
+import { repoFile, SITE } from "../config";
 import { methods } from "../data/methods";
 ---
 
@@ -15,7 +16,7 @@ import { methods } from "../data/methods";
         stronger method and fresh evidence.
       </p>
       <div class="hero-actions">
-        <a class="action action-primary" href="/docs">Read the docs</a>
+        <a class="action action-primary" href="/docs#get-started-heading">Get started</a>
         <a class="action action-secondary" href="/methods">Explore methods</a>
       </div>
     </div>
@@ -53,6 +54,21 @@ import { methods } from "../data/methods";
           verification the task genuinely needs—bounded to the real risk.
         </p>
       </article>
+    </div>
+
+    <div class="task-example">
+      <p class="section-index">Example / ordinary language</p>
+      <div>
+        <blockquote>
+          “Fix the stale-cursor regression. Reproduce the failing test, identify the
+          violated invariant, repair the canonical source, and run the focused suite.”
+        </blockquote>
+        <p>
+          Servotab keeps the outcome and repository evidence in charge. It can attach
+          debugging and verification method where the unexplained failure requires it,
+          without turning the task into a fixed workflow.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -93,11 +109,12 @@ import { methods } from "../data/methods";
     </div>
 
     <div class="availability-note">
-      <span>availability</span>
+      <span>status / {SITE.version}</span>
       <p>
-        Servotab is being prepared for directory submission and is not currently
-        listed in the OpenAI plugin directory. Source-checkout installation remains
-        available in the <a href="/docs#availability-heading">Docs</a>.
+        <strong>{SITE.version} source candidate.</strong> Source-checkout installation is
+        available. This candidate has no Servotab tag or GitHub Release, and Servotab is not
+        currently listed in the OpenAI plugin directory. <a href="/docs#get-started-heading">Get started</a>
+        {" · "}<a href={repoFile("CHANGELOG.md")}>Changelog</a>
       </p>
     </div>
   </section>

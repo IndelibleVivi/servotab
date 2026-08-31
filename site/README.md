@@ -17,6 +17,10 @@ Create the production output in `dist/`:
 npm run build
 ```
 
+The build expects the full repository checkout. `src/config.ts` reads the current
+candidate version from `../plugins/servotab/.codex-plugin/plugin.json` so the
+website status rail and Quickstart do not maintain a second version string.
+
 Cloudflare Pages build settings:
 
 - Root directory: `site`
@@ -27,7 +31,7 @@ The site has no backend, database, account system, analytics, or first-party tra
 
 ## Public URLs
 
-The canonical domain is defined in `astro.config.mjs` and `src/config.ts`. The current Servotab source and issue tracker URLs are centralized in `src/config.ts` and must stay on the same repository identity.
+The canonical domain is defined in `astro.config.mjs` and `src/config.ts`. The current Servotab source and issue tracker URLs are centralized in `src/config.ts` and must stay on the same repository identity. Candidate-version copy derives from the plugin manifest rather than a website-local constant.
 
 ## Design authority
 

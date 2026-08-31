@@ -1,6 +1,6 @@
 ---
 import BrandMark from "./BrandMark.astro";
-import { PROJECT_LINKS } from "../config";
+import { PROJECT_LINKS, repoFile } from "../config";
 ---
 
 <footer class="site-footer">
@@ -10,7 +10,10 @@ import { PROJECT_LINKS } from "../config";
         <BrandMark size={28} />
         <span>servotab</span>
       </a>
-      <p>Engineering method layer for Codex.</p>
+      <p>
+        Engineering method layer for Codex.
+        <span class="footer-maker">Created by Faye &amp; Cove. Maintained by <a href="https://github.com/IndelibleVivi">Faye</a>.</span>
+      </p>
     </div>
 
     <nav class="footer-links" aria-label="Product links">
@@ -18,6 +21,7 @@ import { PROJECT_LINKS } from "../config";
       <a href="/docs">Docs</a>
       <a href="/methods">Methods</a>
       <a href="/lineage">Lineage</a>
+      <a href={repoFile("CHANGELOG.md")}>Changelog</a>
     </nav>
 
     <nav class="footer-links" aria-label="Project links">
@@ -25,6 +29,7 @@ import { PROJECT_LINKS } from "../config";
       <a href={PROJECT_LINKS.source}>Source</a>
       <a href={PROJECT_LINKS.issues}>Issues</a>
       <a href="/support">Support</a>
+      <a href={repoFile("CONTRIBUTING.md")}>Contribute</a>
     </nav>
 
     <nav class="footer-links" aria-label="Legal links">

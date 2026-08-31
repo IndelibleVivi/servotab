@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
+import { repoFile } from "../config";
 import { methods } from "../data/methods";
 ---
 
@@ -14,16 +15,26 @@ import { methods } from "../data/methods";
     description="These plugin-native names describe distinct engineering pressures. Natural-language work may stay direct or route into one method; a person using the source-checkout candidate can also choose a method explicitly."
   />
 
-  <section class="shell content-band" aria-labelledby="method-list-heading">
+  <section class="shell content-band methods-catalog" aria-labelledby="method-list-heading">
     <h2 id="method-list-heading" class="visually-hidden">Servotab methods</h2>
+    <div class="methods-usage">
+      <p><span>ordinary /</span> Describe the complete outcome normally. Servotab may keep the work direct.</p>
+      <p><span>explicit /</span> Use a name such as <code>$review</code> when you want precise control.</p>
+    </div>
     <div class="methods-list">
       {methods.map((method, index) => (
         <article class="method-row">
           <span>{String(index + 1).padStart(2, "0")}</span>
-          <h2>{method.name}</h2>
+          <h2>
+            {method.name}
+            <span class="method-invocation">invoke / ${method.name}</span>
+          </h2>
           <div>
             <p>{method.purpose}</p>
             <p>{method.signal}</p>
+            <a class="method-contract" href={repoFile(`methods/${method.name}.md`)}>
+              Read method contract ↗
+            </a>
           </div>
         </article>
       ))}
