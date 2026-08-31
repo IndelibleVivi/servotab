@@ -24,8 +24,20 @@ Servotab retains those attributed labels inside independently written,
 risk-scaled delegation instructions. This package does not include that
 project's code or artwork.
 
-The repository-level `THIRD_PARTY_NOTICES.md` records additional comparative
-method sources and provenance that are not included in this plugin payload.
+## Comparative lineage
+
+Servotab is an independent rewrite inspired conceptually by the software-
+development method domains in `obra/superpowers`, maintained by Jesse Vincent /
+Prime Radiant:
+
+- Source: https://github.com/obra/superpowers
+- License: MIT
+
+Servotab independently expresses its activation, testing, delegation, review,
+and verification contracts. This package does not include Superpowers code,
+documentation, artwork, or another licensed payload. The repository-level
+`THIRD_PARTY_NOTICES.md` records the fuller comparative lineage and the
+accepted/rejected pattern boundary.
 
 Rights outside these terms require permission from the relevant rights holder.
 Faye can be contacted through
