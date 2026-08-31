@@ -25,6 +25,36 @@ positive and three negative reviewer cases from the repository-owned fixtures.
 It is preparation material, not evidence that a portal draft was opened or that
 the cases were executed by OpenAI review.
 
+### Bounded submission provenance receipt
+
+The final text-comparison pass fixed the Servotab package at commit
+`fe2ec57d84f6b158124c13d4ff79f1c76bc3fd53` and the recorded comparative
+source at `obra/superpowers@b36e0829c6d0140e93cfef2ca599b1b07d4a7797`.
+It compared all 41 UTF-8 text files in the exact 43-file Servotab payload with
+all 194 tracked UTF-8 text files at that upstream ref; the two Servotab PNG
+identity assets were outside a text comparison.
+
+The automated pass reported:
+
+- zero normalized contiguous matches of 10 or more words; and
+- zero near-exact paragraph candidates after requiring 12–220-word blocks, a
+  minimum 0.55 length ratio, at least two shared four-word anchors, a word-level
+  sequence ratio of at least 0.72, and trigram Jaccard similarity of at least
+  0.30.
+
+An initial run found one common TDD sentence shared with two upstream design
+documents. The canonical Servotab wording was independently revised before the
+fixed commit, generated projections and `PACK_MANIFEST.json` were refreshed,
+and the comparison was rerun to the zero-match result above. Package-local
+`NOTICE.md` now names the Superpowers comparative lineage and states the
+inclusion boundary directly.
+
+This is a bounded maintainer receipt, not a legal opinion, a whole-history
+forensic audit, or a claim that general engineering ideas and terminology do not
+overlap. It supports the narrower submission statement that this fixed payload
+contains no identified Superpowers code, documentation, artwork, or other
+licensed payload under the recorded comparison.
+
 ## Activation contract
 
 - `servotab`: `allow_implicit_invocation: true`
