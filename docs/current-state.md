@@ -9,7 +9,7 @@ This is the volatile status surface. It records what has actually crossed each b
 | Surface | Current state | Evidence boundary |
 |---|---|---|
 | Product identity | `Servotab` adopted | Current source, manifest, assets, site, and docs use the new identity |
-| Source candidate | `0.4.0-rc1` on public `main` | Current `main` is `c656ad7` from PR #11; exact merge-commit Validate run `33349866213` passed; no Servotab tag or GitHub Release exists |
+| Source candidate | `0.4.0-rc1` on public `main` | Site-experience commit `c656ad7` from PR #11 is present on public `main`; its exact merge-commit Validate run `33349866213` passed; no Servotab tag or GitHub Release exists |
 | Canonical methods | 12 current methods | `methods/*.md` plus `scripts/skill_catalog.py` |
 | Plugin package | Generated candidate | `plugins/servotab/` with one router, 12 leaves, and curated assets |
 | Deterministic package gate | Green on integrated 43-file payload | Generation/sync, YAML, manifest, expanded migration selftest, public-tree audit, and Python compilation passed locally |
@@ -22,7 +22,7 @@ This is the volatile status surface. It records what has actually crossed each b
 | `servotab.com` | Active; SSL enabled; RUM injection disabled | Proxied apex DNS, Pages custom-domain status, public HTTPS, strict headers, live interaction and responsive checks, same-origin script/network proof, and true 404 all verified |
 | Canonical redirects | Active | `www.servotab.com` and `servotab.pages.dev` return 301 to `https://servotab.com` while preserving path suffix and query string |
 | GitHub repository | Renamed to `IndelibleVivi/servotab` | New URL is live, the old `/softpowers` URL returns a 301 redirect, and public `main` now contains the Servotab package and website source |
-| Git publication | Migration, public availability, deployment state, directory-readiness polish, and site experience merged | PRs #7–#11 are on public `main`; PR #11 merged as `c656ad7` with post-merge Validate run `33349866213`; tag and GitHub Release remain separate |
+| Git publication | Migration, public availability, deployment state, directory-readiness polish, and site experience merged | The listed milestone PRs are on public `main`; PR #11 merged as `c656ad7` with post-merge Validate run `33349866213`; tag and GitHub Release remain separate |
 | OpenAI directory | Not submitted | Submission and publication remain owner-gated |
 
 ## Source and package
