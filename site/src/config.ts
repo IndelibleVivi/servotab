@@ -10,6 +10,10 @@ export const SITE = {
 export const PROJECT_LINKS = {
   source: "https://github.com/IndelibleVivi/servotab",
   issues: "https://github.com/IndelibleVivi/servotab/issues",
+  behaviorReport:
+    "https://github.com/IndelibleVivi/servotab/issues/new?template=behavior-feedback.yml",
+  packageBug:
+    "https://github.com/IndelibleVivi/servotab/issues/new?template=plugin-package-bug.yml",
 } as const;
 
 export const repoFile = (path: string) =>

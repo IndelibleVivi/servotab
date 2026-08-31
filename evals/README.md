@@ -8,6 +8,8 @@ Servotab 继续拥有：
 
 - `cases/`：九个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
 - `activation-prompts.csv`：较宽的 routing seed set；
+- [`submission-test-cases.md`](submission-test-cases.md)：把现有 fixtures 整理成
+  reviewer-ready 的 5 positive / 3 negative draft；它不是 portal receipt 或 submission claim；
 - `candidates/`：外部 pattern intake 与 provenance decisions；
 - `claims/`、`receipts/`、`decisions/`：项目自己的 evidence lifecycle；
 - 根目录 `fieldlab-pack.json`：以 schema v2 `local-path` 直接声明当前 generated `plugins/servotab/skills/` tree，不复制第二份 runtime。

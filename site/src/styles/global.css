@@ -1090,13 +1090,13 @@ h3 {
     display: none;
   }
 
-  .mobile-nav summary::after {
+  .mobile-nav-indicator::after {
     margin-left: 0.55rem;
     color: var(--accent);
     content: "+";
   }
 
-  .mobile-nav[open] summary::after {
+  .mobile-nav[open] .mobile-nav-indicator::after {
     content: "−";
   }
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -154,8 +155,10 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
         return errors + ["plugin manifest interface must be an object"]
     expected_values = {
         "displayName": "Servotab",
+        "shortDescription": "Risk-scaled repository methods",
         "developerName": "Faye & Cove",
         "websiteURL": "https://servotab.com",
+        "supportURL": "https://servotab.com/support",
         "privacyPolicyURL": "https://servotab.com/privacy",
         "termsOfServiceURL": "https://servotab.com/terms",
         "brandColor": "#315EFB",
@@ -165,6 +168,17 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
     for field, expected in expected_values.items():
         if interface.get(field) != expected:
             errors.append(f"plugin manifest interface.{field} must be {expected!r}")
+    long_description = interface.get("longDescription")
+    if not isinstance(long_description, str) or not long_description.strip():
+        errors.append("plugin manifest interface.longDescription must be non-empty")
+    elif len(long_description) > 4000:
+        errors.append("plugin manifest interface.longDescription must be no longer than 4000 characters")
+    short_description = interface.get("shortDescription")
+    if isinstance(short_description, str) and len(short_description) > 30:
+        errors.append(
+            "plugin manifest interface.shortDescription must be no longer than "
+            "30 characters for final directory submission"
+        )
     default_prompts = interface.get("defaultPrompt")
     if (
         not isinstance(default_prompts, list)
@@ -173,15 +187,26 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
             not isinstance(prompt, str)
             or not prompt.strip()
             or len(prompt) > 128
+            or "\n" in prompt
+            or "\r" in prompt
             for prompt in default_prompts
         )
     ):
         errors.append(
             "plugin manifest interface.defaultPrompt must be an array of 1-3 "
-            "non-empty strings no longer than 128 characters"
+            "non-empty single-line strings no longer than 128 characters"
         )
     elif not any("$servotab" in prompt for prompt in default_prompts):
         errors.append("plugin manifest defaultPrompt must invoke $servotab")
+    else:
+        normalized_prompts = [
+            " ".join(unicodedata.normalize("NFKC", prompt).split())
+            for prompt in default_prompts
+        ]
+        if len(normalized_prompts) != len(set(normalized_prompts)):
+            errors.append("plugin manifest defaultPrompt entries must be unique")
+        if any("@" in prompt for prompt in default_prompts):
+            errors.append("plugin manifest defaultPrompt must not contain app @mentions")
     if "logoDark" in interface:
         errors.append("plugin manifest interface.logoDark must remain omitted until dark-mode acceptance")
     for field in ("composerIcon", "logo"):
