@@ -495,6 +495,12 @@ h3 {
   font-family: var(--mono);
   font-size: 0.67rem;
   letter-spacing: 0;
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.motion-status.is-switching {
+  opacity: 0;
+  transform: translateY(2px);
 }
 
 .home-section {
@@ -995,6 +1001,12 @@ h3 {
   width: 2rem;
   height: 2rem;
   object-fit: contain;
+  transition: transform 140ms ease;
+}
+
+.method-row:hover .method-icon,
+.method-row:focus-within .method-icon {
+  transform: translateY(-2px);
 }
 
 .method-row h2 {
@@ -1035,6 +1047,17 @@ h3 {
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0;
+}
+
+.contract-arrow {
+  display: inline-block;
+  margin-left: 0.35em;
+  transition: transform 140ms ease;
+}
+
+.method-row:hover .contract-arrow,
+.method-row:focus-within .contract-arrow {
+  transform: translateX(2px);
 }
 
 .lineage-statement {
