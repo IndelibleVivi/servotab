@@ -207,8 +207,8 @@ def main() -> int:
     assert_true(IMPLICIT_SKILL_NAMES == ("servotab",), "implicit activation must be servotab only")
     assert_true(len(REFERENCE_METHOD_NAMES) == 12, "router must expose exactly 12 references")
     assert_true(
-        (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "0.5.0",
-        "candidate version must be 0.5.0",
+        (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "0.6.0",
+        "candidate version must be 0.6.0",
     )
 
     method_files = {path.name for path in (ROOT / "methods").glob("*.md")}
@@ -221,7 +221,7 @@ def main() -> int:
     manifest = load_pack_manifest(PACK_MANIFEST)
     assert_true(manifest["pack"] == "servotab", "pack identity drifted")
     assert_true(manifest["skills"] == list(EXPECTED_SKILLS), "pack skill order drifted")
-    assert_true(len(manifest["files"]) == 69, "v0.5 package must contain exactly 69 files")
+    assert_true(len(manifest["files"]) == 69, "v0.6 package must contain exactly 69 files")
     for path in RETIRED_REPO_PATHS:
         assert_true(not (ROOT / path).exists(), f"retired global installer path remains: {path}")
     for filename in RETIRED_METHOD_FILES:

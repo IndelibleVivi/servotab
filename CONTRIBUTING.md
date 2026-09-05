@@ -115,6 +115,7 @@ Run:
 ```bash
 cd site
 npm ci
+npm test
 npm run build
 ```
 

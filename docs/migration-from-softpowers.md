@@ -1,6 +1,6 @@
 # Migrating from a legacy Softpowers install
 
-This guide moves an active, manifest-owned Softpowers `0.3.0-rc5` or earlier global-skill layer to the current Servotab `0.5.0` plugin package without manually deleting installed skills or rewriting legacy manifests.
+This guide moves an active, manifest-owned Softpowers `0.3.0-rc5` or earlier global-skill layer to the current Servotab `0.6.0` plugin package without manually deleting installed skills or rewriting legacy manifests.
 
 > **Maintainer migration receipt — 2026-08-30:** Independent integrated review closed with no actionable P0–P2 findings. `servotab@personal` was freshly reinstalled with an exact 43-file source/cache match, then all 13 reachable manifest-owned layers under `~/.codex/skills` were retired one at a time with a fresh preflight before each invocation. Both supported roots now report `CLEAR`; no modified-skill snapshot was needed. This is a receipt for the inspected maintainer machine, not blanket authority to retire an uninspected root elsewhere.
 
@@ -29,7 +29,7 @@ uv run --with PyYAML==6.0.3 python3 scripts/generate_pack_manifest.py --check
 uv run --with PyYAML==6.0.3 python3 scripts/selftest.py
 ```
 
-Expected candidate version: `0.5.0`. Do not continue from an unknown generated tree or stale manifest.
+Expected candidate version: `0.6.0`. Do not continue from an unknown generated tree or stale manifest.
 
 Close or pause active Codex tasks that could load or write the old skill directories during the cutover. Do not delete plugin caches, skill roots, manifests, backups, or snapshots by hand.
 
