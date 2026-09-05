@@ -1,27 +1,136 @@
 name: Release source review
-
 on:
   push:
     branches: ['release/0.6.1']
-
 permissions:
   contents: read
-
 jobs:
-  snapshot:
+  prepare:
+    if: github.repository == 'IndelibleVivi/servotab'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7
-      - name: Archive tracked public source
+        with:
+          ref: 262bfb03172618160f8186a2ba477f9cc0ba4c0c
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m pip install PyYAML==6.0.3
+      - name: Materialize reviewed public-source delta
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          python - <<'PYCODE'
+          import base64
+          import hashlib
+          import json
+          import os
+          from pathlib import Path, PurePosixPath
+          import subprocess
+          import urllib.request
+          import yaml
+
+          REPO = 'IndelibleVivi/servotab'
+          BASE = '262bfb03172618160f8186a2ba477f9cc0ba4c0c'
+          EXPECTED_TREE = 'c660c1b56b755f8b27073a9a3ab4101bc7068349'
+          BLOBS = ['0e4b5d1f577531f838639a3edebd1d06b0726af7','bec785c462ec7a4b1739e04c3f7fc42a8171b228','1b88456eb90689980bb08dd2db81d507cc3deeda','6afd62e8d32dac968cedb73d4691cb90a08f92a9','90e2e56374463471226096f317ea747c715e5da1','24c1af869619bdc1bda1ddac411e4210f72598fb','186b144d7bd6b57128722f9cb93b91b2272bf773','8ac3b3883b99977ccd565a15aa05f693e6f078a3']
+          assert os.environ['GITHUB_REPOSITORY'] == REPO
+          assert os.environ['GITHUB_REF'] == 'refs/heads/release/0.6.1'
+          def git(*args):
+              return subprocess.check_output(['git', *args]).decode().strip()
+          assert git('rev-parse','HEAD') == BASE
+          ops=[]
+          for sha in BLOBS:
+              req=urllib.request.Request(f'https://api.github.com/repos/{REPO}/git/blobs/{sha}',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  payload=json.load(response)
+              raw=base64.b64decode(payload['content'])
+              assert hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==sha
+              ops.extend(yaml.safe_load(raw))
+          assert len(ops)==47 and len({op['path'] for op in ops})==47
+          for op in ops:
+              rel=PurePosixPath(op['path'])
+              assert not rel.is_absolute() and '..' not in rel.parts and '.git' not in rel.parts
+              path=Path(op['path'])
+              if 'base_blob' in op:
+                  assert git('rev-parse',BASE+':'+op['path'])==op['base_blob']
+              else:
+                  assert not path.exists()
+              if op.get('delete'):
+                  path.unlink()
+              else:
+                  if 'content' in op:
+                      text=op['content']
+                  else:
+                      lines=path.read_text().splitlines(keepends=True)
+                      for start,end,text in reversed(op['line_edits']):
+                          assert 0<=start<=end<=len(lines)
+                          lines[start:end]=text.splitlines(keepends=True)
+                      text=''.join(lines)
+                  path.parent.mkdir(parents=True,exist_ok=True)
+                  path.write_text(text,encoding='utf-8')
+          subprocess.run(['git','add','--',*[op['path'] for op in ops]],check=True)
+          subprocess.run(['git','diff','--cached','--check'],check=True)
+          assert git('write-tree')==EXPECTED_TREE
+          Path(os.environ['RUNNER_TEMP'],'servotab-ops.json').write_text(json.dumps(ops))
+          print('Materialized exact reviewed tree:',EXPECTED_TREE)
+          PYCODE
+      - name: Validate materialized source
+        run: |
+          python -m pip install -r requirements-dev.txt
+          python scripts/build_skills.py --check
+          python scripts/validate_sync.py
+          python scripts/validate.py plugins/servotab/skills
+          python scripts/generate_pack_manifest.py --check
+          python scripts/selftest.py
+          python -m unittest discover -s scripts -p 'test_*.py' -q
           python scripts/audit_public_tree.py
-          git archive --format=tar HEAD > "$RUNNER_TEMP/servotab-source.tar"
-          git rev-parse HEAD > "$RUNNER_TEMP/source-commit.txt"
+          python -m py_compile scripts/*.py
+      - name: Prepare exact Git objects without moving refs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PYCODE'
+          import concurrent.futures
+          import json
+          import os
+          from pathlib import Path
+          import subprocess
+          import urllib.request
+
+          REPO='IndelibleVivi/servotab'
+          EXPECTED_TREE='c660c1b56b755f8b27073a9a3ab4101bc7068349'
+          assert os.environ['GITHUB_REPOSITORY']==REPO
+          assert os.environ['GITHUB_REF']=='refs/heads/release/0.6.1'
+          def git(*args):
+              return subprocess.check_output(['git',*args]).decode().strip()
+          assert git('write-tree')==EXPECTED_TREE
+          subprocess.run(['git','diff','--exit-code'],check=True)
+          ops=json.loads(Path(os.environ['RUNNER_TEMP'],'servotab-ops.json').read_text())
+          def upload(op):
+              path=op['path']
+              if op.get('delete'):
+                  return {'path':path,'mode':'100644','type':'blob','sha':None}
+              mode,expected,stage=git('ls-files','--stage','--',path).split('\t')[0].split()
+              assert stage=='0' and mode in ('100644','100755')
+              body=json.dumps({'content':Path(path).read_text(),'encoding':'utf-8'}).encode()
+              req=urllib.request.Request(f'https://api.github.com/repos/{REPO}/git/blobs',data=body,method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=30) as response:
+                  result=json.load(response)
+              assert result['sha']==expected
+              return {'path':path,'mode':mode,'type':'blob','sha':expected}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+              entries=list(pool.map(upload,ops))
+          receipt={'source_base':'262bfb03172618160f8186a2ba477f9cc0ba4c0c','base_tree':'0f61d406380c208421a8886c7cea231493f05564','expected_tree':EXPECTED_TREE,'workflow_commit':os.environ['GITHUB_SHA'],'tree_elements':entries}
+          Path(os.environ['RUNNER_TEMP'],'prepared-tree.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          print('Prepared reviewed Git blobs only; no ref, tag, release or deployment changed.')
+          PYCODE
       - uses: actions/upload-artifact@v4
         with:
-          name: servotab-release-source
-          path: |
-            ${{ runner.temp }}/servotab-source.tar
-            ${{ runner.temp }}/source-commit.txt
+          name: servotab-prepared-tree
+          path: ${{ runner.temp }}/prepared-tree.json
           retention-days: 3
           if-no-files-found: error
