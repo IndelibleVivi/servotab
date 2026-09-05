@@ -1,0 +1,31 @@
+{
+  "schema_version": 2,
+  "case_id": "local-reuse",
+  "description": "Reuse an existing normalizer for a local behavior change without adding general machinery or a second implementation.",
+  "activation": "implicit",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 300,
+  "command_assertions": [
+    {
+      "argv": [
+        "python3",
+        "-c",
+        "import importlib; import normalization; import search; from unittest.mock import patch; assert search.find_labels([\" A  B \", \"other\", \"a b\"], \"a B\") == [\" A  B \", \"a b\"]; assert search.find_labels([], \"x\") == []; replacement=lambda text: text.replace(\"-\", \"\").lower(); scope=patch.object(normalization, \"normalize_label\", side_effect=replacement); scope.start(); importlib.reload(search); assert search.find_labels([\"A-B\", \"c\"], \"ab\") == [\"A-B\"]; scope.stop()"
+      ]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 12,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0
+  },
+  "workspace_assertions": [
+    {
+      "type": "changed_files_exact",
+      "paths": [
+        "search.py"
+      ]
+    }
+  ]
+}

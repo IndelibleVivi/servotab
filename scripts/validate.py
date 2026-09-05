@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import argparse
 import re
-import struct
 import sys
 from pathlib import Path
 from typing import Any
@@ -13,10 +12,12 @@ try:
 except ImportError as exc:  # pragma: no cover - environment dependent
     print(
         "ERROR: PyYAML is required for maintainer validation. Run with "
-        "`uv run --with PyYAML==6.0.3 python scripts/validate.py`.",
+        "`python -m pip install -r requirements-dev.txt`.",
         file=sys.stderr,
     )
     raise SystemExit(3) from exc
+
+from asset_validation import validate_png, validate_svg
 
 from skill_catalog import IMPLICIT_SKILL_NAMES, REFERENCE_METHOD_NAMES, ROUTER, SKILL_NAMES
 
@@ -37,25 +38,29 @@ ICON_INTERFACE = {
     "icon_small": "./assets/icon-400.png",
     "icon_large": "./assets/icon.svg",
 }
-PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
-FORBIDDEN_SVG_TOKENS = (
-    "<script",
-    "<foreignobject",
-    "href=",
-    "xlink:href",
-    "url(",
-    "<!doctype",
-    "<image",
-    "<use",
-)
-SVG_ROOT_RE = re.compile(r"<svg\b[^>]*>", re.IGNORECASE)
-SVG_VIEWBOX_RE = re.compile(r"\bviewbox\s*=\s*['\"]([^'\"]+)['\"]", re.IGNORECASE)
-MIN_SVG_DIMENSION = 48.0
+class UniqueKeyLoader(yaml.SafeLoader):
+    """Reject duplicate mapping keys instead of silently changing policy."""
+
+
+def unique_mapping(loader, node, deep=False):
+    result = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        try:
+            if key in result:
+                raise yaml.constructor.ConstructorError(None, None, "duplicate mapping key", key_node.start_mark)
+            result[key] = loader.construct_object(value_node, deep=deep)
+        except TypeError as exc:
+            raise yaml.constructor.ConstructorError(None, None, "unhashable mapping key", key_node.start_mark) from exc
+    return result
+
+
+UniqueKeyLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, unique_mapping)
 
 
 def load_yaml(text: str, label: str) -> dict[str, Any]:
     try:
-        parsed = yaml.safe_load(text)
+        parsed = yaml.load(text, Loader=UniqueKeyLoader)
     except yaml.YAMLError as exc:
         raise ValueError(f"{label}: invalid YAML: {exc}") from exc
     if not isinstance(parsed, dict):
@@ -86,59 +91,11 @@ def expected_payload_files() -> set[str]:
 
 
 def validate_icon_asset(path: Path, *, field: str) -> list[str]:
-    errors: list[str] = []
-    if path.is_symlink():
-        return [f"{field} asset must not be a symlink"]
-    if not path.is_file():
-        return [f"{field} points to a missing asset"]
-
     if field == "icon_small":
-        data = path.read_bytes()
-        if len(data) < 26 or not data.startswith(PNG_SIGNATURE):
-            return ["icon_small must be a valid PNG"]
-        width, height, bit_depth, color_type = struct.unpack(">IIBB", data[16:26])
-        if (width, height) != (400, 400):
-            errors.append("icon_small PNG must be exactly 400 x 400 pixels")
-        if bit_depth != 8 or color_type != 6:
-            errors.append("icon_small PNG must be 8-bit RGBA with transparency")
-        return errors
-
-    try:
-        text = path.read_text(encoding="utf-8")
-    except UnicodeDecodeError:
-        return ["icon_large must be a UTF-8 SVG"]
-    normalized = text.lower()
-    root_match = SVG_ROOT_RE.search(text)
-    viewbox_match = SVG_VIEWBOX_RE.search(text)
-    if root_match is None or viewbox_match is None:
-        errors.append("icon_large must contain an SVG root and viewBox")
-    else:
-        root = root_match.group(0)
-        try:
-            viewbox = [float(value) for value in viewbox_match.group(1).split()]
-        except ValueError:
-            viewbox = []
-
-        canvas_is_undersized = (
-            len(viewbox) != 4 or min(viewbox[2], viewbox[3]) < MIN_SVG_DIMENSION
-        )
-        for name in ("width", "height"):
-            match = re.search(
-                rf"\b{name}\s*=\s*['\"]([0-9]+(?:\.[0-9]+)?)(?:px)?['\"]",
-                root,
-                re.IGNORECASE,
-            )
-            if match and float(match.group(1)) < MIN_SVG_DIMENSION:
-                canvas_is_undersized = True
-
-        if canvas_is_undersized:
-            errors.append(
-                "icon_large SVG viewBox and explicit dimensions must be at least "
-                "48 x 48 pixels"
-            )
-    if any(token in normalized for token in FORBIDDEN_SVG_TOKENS):
-        errors.append("icon_large SVG must not contain scripts or external resources")
-    return errors
+        return validate_png(path, (400, 400))
+    if field == "icon_large":
+        return validate_svg(path)
+    return [f"unknown icon field: {field}"]
 
 
 def validate_skill(skill_dir: Path) -> list[str]:
@@ -288,7 +245,7 @@ def main() -> int:
         help="Allow unrelated sibling skill directories (not for the plugin package)",
     )
     args = parser.parse_args()
-    skills_dir = Path(args.skills_dir).expanduser().resolve()
+    skills_dir = Path(args.skills_dir).expanduser().absolute()
     errors = validate_directory(skills_dir, exact=not args.allow_extra)
     if errors:
         print("Servotab skill validation failed:")

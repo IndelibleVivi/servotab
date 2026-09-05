@@ -1,6 +1,6 @@
 # Contributing to Servotab
 
-Thank you for bringing evidence back from real work. Servotab `0.6.0` is a plugin-native source candidate. Activation misses, false positives, wrong routing, lost scope, package or icon failures, and unnecessary process are more useful than an abstract request for another workflow.
+Thank you for bringing evidence back from real work. Servotab `0.6.1` is a plugin-native source candidate. Activation misses, false positives, wrong routing, lost scope, package or icon failures, and unnecessary process are more useful than an abstract request for another workflow.
 
 ## Choose the right feedback path
 
@@ -127,7 +127,7 @@ After changing methods or catalog metadata, regenerate before the final check:
 
 ```bash
 python3 scripts/build_skills.py
-uv run --with PyYAML==6.0.3 python3 scripts/validate.py plugins/servotab/skills
+uv run --with-requirements requirements-dev.txt python3 scripts/validate.py plugins/servotab/skills
 python3 scripts/generate_pack_manifest.py
 ```
 
@@ -136,9 +136,10 @@ Run the fresh deterministic gate before submission:
 ```bash
 python3 scripts/build_skills.py --check
 python3 scripts/validate_sync.py
-uv run --with PyYAML==6.0.3 python3 scripts/validate.py plugins/servotab/skills
-uv run --with PyYAML==6.0.3 python3 scripts/generate_pack_manifest.py --check
-uv run --with PyYAML==6.0.3 python3 scripts/selftest.py
+uv run --with-requirements requirements-dev.txt python3 scripts/validate.py plugins/servotab/skills
+uv run --with-requirements requirements-dev.txt python3 scripts/generate_pack_manifest.py --check
+uv run --with-requirements requirements-dev.txt python3 scripts/selftest.py
+uv run --with-requirements requirements-dev.txt python3 -m unittest discover -s scripts -p 'test_*.py' -q
 python3 scripts/audit_public_tree.py
 python3 -m py_compile scripts/*.py
 ```
@@ -175,3 +176,9 @@ By contributing, you represent that you have the right to submit the material an
 If a change spans several licensing surfaces, identify them in the pull request. Rights outside the public licenses, including any commercial permission, can be granted only by the relevant rights holder in a separate written agreement.
 
 Pull requests should name the changed contract, fresh verification, documentation impact, and deliberately deferred work.
+
+## Preparing a release
+
+Use the pinned maintainer dependencies in `requirements-dev.txt`. Asset validation uses real XML parsing and Pillow PNG decoding; these dependencies are not shipped in the plugin. Run the deterministic regression suite as part of the existing validation gate. New behavior fixtures must distinguish the original failure from an expected repair without being described as target-model results.
+
+Follow [Releasing](docs/releasing.md) for reproducible archives, exact-source receipts, and draft/publish boundaries. Do not upload the complete source ZIP to the plugin directory. Do not use a version bump as evidence of installation, deployment, publication, or improved model behavior.

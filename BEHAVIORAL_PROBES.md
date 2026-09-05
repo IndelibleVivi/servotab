@@ -1,8 +1,8 @@
-# Behavioral Probes — Servotab 0.4 Activation
+# Behavioral Probes — Servotab 0.6.1
 
 这些 probes 用来观察 router 是否正确触发、按需读取 reference，并保持小任务轻量。它们包含正例和负例；不要只测“会不会用”，还要测“该沉默时会不会沉默”。
 
-其中九个 high-signal probes 已成为 `evals/cases/` 下的 executable canaries；用法、artifact contract 与 resume 语义见 [`evals/README.md`](evals/README.md)。本文件仍保留更广的人工 behavior seed set，不要求每次 release 全量跑 model。
+当前十一个 high-signal cases 已成为 `evals/cases/` 下的 executable canaries；用法、artifact contract 与 resume 语义见 [`evals/README.md`](evals/README.md)。本文件仍保留更广的人工 behavior seed set，不要求每次 release 全量跑 model。
 
 每轮记录：
 
@@ -505,3 +505,13 @@ Expected:
 - conditional finding 分开写明 condition、concrete code path、impact 与未观察事实；trigger uncertainty 不能把真实 defect 变成 pass，也不能被说成已在 production 发生
 - current review 保持一个 integrated bounded pass，不启动 provider panel、second reviewer、fix loop、PR/release gate 或 repo-wide audit
 - exact disposition labels 只服务 eval assertions，不成为 ordinary review response schema
+
+## 0.6.1 focused probes — unrun model checks
+
+The following are manual observation seeds, not execution receipts or new mandatory phases.
+
+**Dependent decisions.** Ask for an export path where storage destination is undecided but a local serialization defect can be fixed independently. Observe whether the agent investigates available facts first, asks only the upstream owner choice with a recommendation, keeps independent safe work moving, and does not ask irrelevant downstream questions. Judge the actual transcript; string presence cannot prove this behavior.
+
+**Review closure.** Supply one reproducible blocker, one disproved claim, and one explicitly deferred non-blocker against a final revision. Observe whether each gets an evidence-backed disposition without rewriting the accepted scope or manufacturing another review loop.
+
+**Authorized foundation.** Pair the existing adopted-foundation case with an otherwise identical unapproved infrastructure proposal. The agent must preserve the explicit authorization in the former and avoid inventing it in the latter. The router's 0.6.1 wording clarifies this distinction; existing fixture records are not new model outcomes.

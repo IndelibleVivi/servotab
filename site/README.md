@@ -56,3 +56,5 @@ documents the source-checkout repository marketplace route for the current
 candidate. Keep the published directory payload, a later directory update,
 source-checkout installation, and any tagged GitHub release as separate states.
 Directory availability does not make Servotab an official OpenAI product.
+
+Release availability is read from GitHub Releases; a source version must not be accompanied by a permanent "no tag/release exists" claim. A website source or build change does not deploy the public domain or update the plugin directory.

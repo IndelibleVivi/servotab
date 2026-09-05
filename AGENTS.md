@@ -81,20 +81,21 @@ For a canonical package asset change:
 Shipped skill SVGs must declare a `viewBox` of at least 48 × 48 px, because the
 OpenAI upload scanner derives its size from that canvas even when explicit
 `width` and `height` are larger. Any explicit dimensions must also be at least
-48 × 48 px. `scripts/validate.py` owns this submission-facing check.
+48 × 48 px. `scripts/validate.py` delegates XML parsing, passive geometry checks, and complete PNG decoding to `scripts/asset_validation.py`. These are package checks, not a generic SVG sanitizer or named-host acceptance.
 
 Do not infer a public license for an asset from its presence in the repository. Existing license texts, the path map, third-party terms, and actual rights evidence control what may be distributed.
 
 ## Verification
 
-The complete deterministic source/package gate is:
+The complete deterministic source/package gate uses Python 3.10+ and the pinned maintainer-only dependencies in `requirements-dev.txt` (PyYAML and Pillow). Neither dependency is part of the installed skills payload:
 
 ```bash
 python3 scripts/build_skills.py --check
 python3 scripts/validate_sync.py
-uv run --with PyYAML==6.0.3 python3 scripts/validate.py plugins/servotab/skills
-uv run --with PyYAML==6.0.3 python3 scripts/generate_pack_manifest.py --check
-uv run --with PyYAML==6.0.3 python3 scripts/selftest.py
+uv run --with-requirements requirements-dev.txt python3 scripts/validate.py plugins/servotab/skills
+uv run --with-requirements requirements-dev.txt python3 scripts/generate_pack_manifest.py --check
+uv run --with-requirements requirements-dev.txt python3 scripts/selftest.py
+uv run --with-requirements requirements-dev.txt python3 -m unittest discover -s scripts -p 'test_*.py' -q
 python3 scripts/audit_public_tree.py
 python3 -m py_compile scripts/*.py
 ```
@@ -118,6 +119,8 @@ fieldlab list fieldlab-pack.json
 ```
 
 Do not run a live Field Lab attempt without an explicit plan and invocation budget.
+
+For release preparation, use `scripts/build_release.py` on a clean commit and verify its four outputs with `--check`. See `docs/releasing.md`. The builder performs no publication or deployment. Keep release receipts outside the source tree; never insert a self-referential commit hash or label fixture checks as live model evaluation.
 
 ## Legacy migration
 

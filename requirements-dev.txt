@@ -1,0 +1,3 @@
+# Maintainer validation only; neither dependency is shipped in the skill payload.
+PyYAML==6.0.3
+Pillow==12.3.0

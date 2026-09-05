@@ -49,6 +49,15 @@ jobs:
         run: npm run build
         working-directory: site
 
+      - name: Retain built site for source-bound review
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: servotab-site
+          path: site/dist/
+          retention-days: 7
+          if-no-files-found: error
+
   validate:
     strategy:
       fail-fast: false
@@ -72,8 +81,8 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Install maintainer dependency
-        run: python -m pip install PyYAML==6.0.3
+      - name: Install pinned maintainer dependencies
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Check generated skills
         run: |
@@ -88,5 +97,37 @@ jobs:
       - name: Run packaging self-test
         run: python scripts/selftest.py
 
+      - name: Run deterministic release regressions
+        run: python -m unittest discover -s scripts -p 'test_*.py' -q
+
       - name: Check script syntax
         run: python -m py_compile scripts/*.py
+
+  release-artifacts:
+    if: github.event_name == 'push'
+    needs: [public-tree, site-build, validate]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact source
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install pinned maintainer dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Build and verify exact-source release assets
+        run: |
+          python scripts/build_release.py --output dist/release
+          python scripts/build_release.py --output dist/release --check
+
+      - name: Retain release preparation artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: servotab-release
+          path: dist/release/*
+          retention-days: 14
+          if-no-files-found: error

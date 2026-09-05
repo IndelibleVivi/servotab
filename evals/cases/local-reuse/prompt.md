@@ -1,0 +1,1 @@
+Make label search ignore case and repeated/leading/trailing whitespace using the repository's existing normalization behavior. Preserve the original returned labels and order. Implement and verify; do not add dependencies or a second normalizer.

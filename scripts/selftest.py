@@ -207,8 +207,8 @@ def main() -> int:
     assert_true(IMPLICIT_SKILL_NAMES == ("servotab",), "implicit activation must be servotab only")
     assert_true(len(REFERENCE_METHOD_NAMES) == 12, "router must expose exactly 12 references")
     assert_true(
-        (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "0.6.0",
-        "candidate version must be 0.6.0",
+        (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "0.6.1",
+        "candidate version must be 0.6.1",
     )
 
     method_files = {path.name for path in (ROOT / "methods").glob("*.md")}

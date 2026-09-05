@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+## 0.6.1 — release preparation, 2026-09-05
+
+- Parse passive SVGs as XML, reject malformed/non-finite or active/resource-bearing content, and verify/decode exact 8-bit RGBA PNGs with a pinned maintainer-only Pillow dependency.
+- Reject duplicate YAML/JSON keys, invalid manifest digests/sizes, unowned package entries, non-skill manifest extensions, and symlinks and unowned generated content before generator mutation.
+- Clarify the existing test-criterion heuristic without introducing a fixed mutation-testing or reviewer stage; retain explicit authorization for foundational work.
+- Add deterministic package/release regressions and two public behavior fixtures (reuse and false-green evidence); no live target-model result is claimed.
+- Add clean-commit, reproducible plugin/source ZIPs, a source-bound receipt, checksums, and a validation-gated CI artifact; preparation does not publish, install, or deploy.
+- Reconcile current release evidence and documentation, retaining historical installation/provenance observations at their original versions.
+
+GitHub Releases and their exact tags record publication. This source entry alone does not assert publication of 0.6.1 or an OpenAI directory update.
+
+## Earlier Servotab source candidates — historical integration notes
+
+The following notes retain the 0.4–0.6 candidate history; they do not relabel those candidates as tagged releases.
+
 - Advanced the source candidate to `0.6.0`, strengthening ordinary-language routing, dependency-ordered decisions, reuse research, falsifiable verification, and review closure in the canonical router plus the `design`, `execute`, and `verify` methods without changing the one-router/twelve-leaf topology.
 - Fixed the homepage method-motion timer race, made in-flight reduced-motion changes settle deterministically, added nine behavior tests with strict DOM/accessibility contracts, and wired those tests into website CI before the production build.
 - Declared a 48 × 48 `viewBox` and intrinsic canvas for all 12 leaf SVGs without changing their glyph render, and added package validation plus selftest regressions for the OpenAI upload scanner's effective directory minimum.

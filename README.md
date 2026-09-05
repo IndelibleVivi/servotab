@@ -9,7 +9,7 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Current source candidate: `0.6.0`. Servotab is publicly available through its [official OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94), while remaining an independent, community-maintained project rather than an official OpenAI product. This repository candidate strengthens natural-language method selection, dependent-decision and reuse reasoning, and evidence closure; it retains the per-skill icons and adds race-safe, tested reduced-motion website behavior. It has no Servotab tag or GitHub Release and has not been submitted as a directory update. See [current state](docs/current-state.md) for the exact published, candidate, package, GitHub, website, and deployment boundaries.
+Source version in this checkout: `0.6.1`. This patch hardens asset and package validation, clarifies evidence checks, and adds reproducible release archives. The [GitHub Releases page](https://github.com/IndelibleVivi/servotab/releases) records tagged distribution; the [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) is a separate distribution surface. A source version or GitHub release does not prove that the directory payload has been updated. Servotab remains independent and community-maintained. See [current state](docs/current-state.md) and the [0.6.1 notes](docs/releases/0.6.1.md) for evidence and limits.
 
 ## What Servotab changes
 
@@ -45,10 +45,10 @@ Open a fresh Codex task or process after installation so skill discovery is rebu
 codex plugin list --marketplace personal
 ```
 
-The receipt should contain:
+For a checkout whose `VERSION` is `0.6.1`, the receipt should contain:
 
 ```text
-servotab@personal  installed, enabled  0.6.0
+servotab@personal  installed, enabled  0.6.1
 ```
 
 For a machine-readable discovery check on a system with `jq` and `rg`:
@@ -63,7 +63,7 @@ The command must return a skill entry named `servotab:servotab` from the install
 
 ### Tested compatibility receipt
 
-On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. These are bounded compatibility and discovery receipts for the named payloads; they are not a guessed minimum-version guarantee, proof of implicit use in every task, or a claim about every Codex client.
+On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. Neither historical receipt verifies installation or model behavior for `0.6.1`. These are bounded compatibility and discovery receipts for the named payloads; they are not a guessed minimum-version guarantee, proof of implicit use in every task, or a claim about every Codex client.
 
 This source-checkout route is distinct from the officially published directory payload. It replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
 
@@ -145,7 +145,7 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The integrated candidate contains exactly 69 manifest-owned package files, including two generated icon assets for each of its thirteen skills. Repository checks cover canonical/generated sync, exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, website motion behavior tests, and the website production build.
+The integrated candidate contains exactly 69 manifest-owned package files, including two generated icon assets for each of its thirteen skills. Repository checks cover canonical/generated sync, exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
 
 Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, publication of this newer candidate, a deployment, or owner acceptance. The existing official listing is a separately observed public-distribution state.
 
@@ -157,7 +157,13 @@ fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-Any live synthetic attempt requires its own plan and explicit invocation budget.
+The source pack now contains eleven cases. The two new reuse and false-green fixtures have deterministic baseline/expected-overlay checks; those checks do not execute a target model. Any live synthetic attempt requires its own plan and explicit invocation budget.
+
+## Release artifacts
+
+Use the source checkout or the `servotab-0.6.1-source.zip` asset for the repository marketplace route. `servotab-0.6.1-plugin.zip` contains only the 69-file plugin payload for an owner-controlled directory upload; it has no repository marketplace. Neither archive installs dependencies or changes a host automatically.
+
+`release-receipt.json` binds both archives to one source commit/tree and the package manifest. `SHA256SUMS` covers both ZIPs and the receipt. Checksums establish consistency, not publisher authentication. Verify the release source and GitHub provenance as well. Maintainer preparation and draft/publish steps are in [Releasing](docs/releasing.md).
 
 ## Feedback, support, and security
 
@@ -171,12 +177,15 @@ Servotab is skills-only. It adds no Servotab account, backend, database, telemet
 
 ## Maintainer checks
 
+Use Python 3.10+ and the pinned `requirements-dev.txt` (PyYAML and Pillow), or the `uv` commands below. These are maintainer dependencies; the skills-only plugin ships neither package.
+
 ```bash
 python3 scripts/build_skills.py --check
 python3 scripts/validate_sync.py
-uv run --with PyYAML==6.0.3 python3 scripts/validate.py plugins/servotab/skills
-uv run --with PyYAML==6.0.3 python3 scripts/generate_pack_manifest.py --check
-uv run --with PyYAML==6.0.3 python3 scripts/selftest.py
+uv run --with-requirements requirements-dev.txt python3 scripts/validate.py plugins/servotab/skills
+uv run --with-requirements requirements-dev.txt python3 scripts/generate_pack_manifest.py --check
+uv run --with-requirements requirements-dev.txt python3 scripts/selftest.py
+uv run --with-requirements requirements-dev.txt python3 -m unittest discover -s scripts -p 'test_*.py' -q
 python3 scripts/audit_public_tree.py
 python3 -m py_compile scripts/*.py
 ```

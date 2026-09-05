@@ -52,3 +52,9 @@ the identity assets are not presently offered for third-party reuse.
 [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md) preserves external
 attribution. This usage guide does not create a separate trademark, copyright,
 or reuse grant.
+
+## Maintainer validation
+
+`asset_validation.py` parses SVG as XML and accepts only the package's passive geometry/paint subset. Real root dimensions must be finite and at least 48 × 48; scripts, event attributes, external resources, declarations, and malformed XML fail validation. This is a narrow asset contract, not a general sanitizer.
+
+Pillow verifies and decodes each PNG, with source 8-bit RGBA, exact dimensions, one frame, complete termination, and bounded file size required. Skill icons are 400 × 400; release preparation also checks the 512 × 512 composer and 1024 × 1024 logo. These checks supplement source/generated identity; they do not replace visual or named-host inspection.
