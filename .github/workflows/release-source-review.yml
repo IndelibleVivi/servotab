@@ -1,0 +1,27 @@
+name: Release source review
+
+on:
+  push:
+    branches: ['release/0.6.1']
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Archive tracked public source
+        run: |
+          python scripts/audit_public_tree.py
+          git archive --format=tar HEAD > "$RUNNER_TEMP/servotab-source.tar"
+          git rev-parse HEAD > "$RUNNER_TEMP/source-commit.txt"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: servotab-release-source
+          path: |
+            ${{ runner.temp }}/servotab-source.tar
+            ${{ runner.temp }}/source-commit.txt
+          retention-days: 3
+          if-no-files-found: error
