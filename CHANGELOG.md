@@ -4,7 +4,7 @@
 
 - Advanced the source candidate to `0.6.0`, strengthening ordinary-language routing, dependency-ordered decisions, reuse research, falsifiable verification, and review closure in the canonical router plus the `design`, `execute`, and `verify` methods without changing the one-router/twelve-leaf topology.
 - Fixed the homepage method-motion timer race, made in-flight reduced-motion changes settle deterministically, added nine behavior tests with strict DOM/accessibility contracts, and wired those tests into website CI before the production build.
-- Declared a 48 × 48 intrinsic canvas for all 12 leaf SVGs without changing their 32 × 32 glyph geometry, and added a package validation plus selftest regression for the OpenAI directory minimum.
+- Declared a 48 × 48 `viewBox` and intrinsic canvas for all 12 leaf SVGs without changing their glyph render, and added package validation plus selftest regressions for the OpenAI upload scanner's effective directory minimum.
 - Established the earlier `0.5.0` candidate with Faye-authored, per-skill icon assets for the implicit router and all 12 explicit methods, canonical source routing, generated local skill assets, exact interface validation, package-integrity controls, and a 69-file manifest-owned payload.
 - Recorded the live [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) as the published distribution surface while keeping Servotab independent and community-maintained, and kept the newer source candidate separate from the owner-controlled directory update.
 - Integrated the method glyphs into the website catalog and updated public availability, install, legal, and evidence copy without claiming that the `0.5.0` candidate is already published.
