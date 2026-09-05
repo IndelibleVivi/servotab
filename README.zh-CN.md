@@ -9,7 +9,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-此 checkout 的源码版本：`0.6.1`。本次补丁加强图标与包结构校验，澄清验证判据，并加入可重复构建的发布归档。[GitHub Releases](https://github.com/IndelibleVivi/servotab/releases) 记录带 tag 的分发；[OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 是独立的分发渠道。源码版本或 GitHub release 均不能证明目录中的包已更新。Servotab 继续保持独立、社区维护的定位。具体证据和边界见 [current state](docs/current-state.md) 与 [0.6.1 更新说明](docs/releases/0.6.1.md)。
+此 checkout 的源码版本：`0.6.1`。0.6.1 release 加强图标与包结构校验，澄清验证判据，并加入可重复构建的发布归档；带 tag 的 [Servotab 0.6.1 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.1) 已公开。[OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 是独立的分发渠道；源码版本或 GitHub Release 均不能证明目录中的包已更新。Servotab 继续保持独立、社区维护的定位。具体证据和边界见 [current state](docs/current-state.md) 与 [0.6.1 更新说明](docs/releases/0.6.1.md)。
 
 ## 它做什么
 
@@ -28,12 +28,10 @@ Servotab 也不会把日志、截图、review、旧计划或 generated artifact 
 
 在 ChatGPT 打开 [Servotab 官方 listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94)，即可添加已公开上线的 plugin。
 
-如果要 inspect source 或做 maintainer testing，再从 public checkout 安装当前、独立的 repository candidate：
-
-当前 public route 是 repository marketplace/source checkout：
+如果要 inspect source 或做 maintainer testing，可以从 public checkout 通过 repository marketplace 安装同一份 0.6.1 package：
 
 ```bash
-git clone https://github.com/IndelibleVivi/servotab.git
+git clone --branch v0.6.1 --depth 1 https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal
@@ -61,9 +59,9 @@ codex debug prompt-input "Check Servotab discovery." \
   | rg 'servotab:servotab'
 ```
 
-命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，`0.4.0-rc1` 在 macOS 与 `codex-cli 0.147.0` 上完成过 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。2026-09-05，当前 maintainer machine 又安装了 `0.6.0` source candidate，取得 69-file source/cache exact match，并在 fresh-process prompt input 中观察到 `servotab:servotab`。这些历史记录不验证 `0.6.1` 的安装或模型行为；它们只是针对具名 payload 的 compatibility / discovery receipts，不是猜测的最低版本承诺、每个任务都发生 implicit use 的证明，也不代表所有 Codex client 都已验证。
+命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，`0.4.0-rc1` 在 macOS 与 `codex-cli 0.147.0` 上完成过 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。2026-09-05，当前 maintainer machine 又安装了 `0.6.0` source candidate，取得 69-file source/cache exact match，并在 fresh-process prompt input 中观察到 `servotab:servotab`。2026-09-06，同一台机器从 clean 的 0.6.1 release source 刷新 `servotab@personal`，核验 installed/enabled version 0.6.1、无 symlink 的 69-file source/cache exact match，以及 fresh-process `servotab:servotab` discovery。这些都是针对具名 payload 与具名机器的有限 compatibility / discovery receipts，不是猜测的最低版本承诺、implicit use 或模型效果的证明，也不代表所有 Codex client 都已验证。
 
-这条 source-checkout 路径与已经公开的 directory payload 是两个状态；它取代旧版 `install.sh` / root `skills/` global installer。当前 maintainer environment 对 `0.4.0-rc1` 留有 43-file source/cache exact diff 与 representative fresh-task behavior smoke receipt；这些历史 receipt 不会自动覆盖新的 69-file `0.6.1` candidate。Source-checkout install 也不会把 candidate 自动变成 directory update、tag、GitHub Release 或其他机器上的 acceptance receipt。
+这条 source-checkout 路径与已经公开的 directory payload 是两个状态；它取代旧版 `install.sh` / root `skills/` global installer。Source-checkout install、本机 acceptance、GitHub Release 与 directory publication 也是彼此独立的状态；前述 receipt 不会外推到其他机器，也不会证明 directory payload 已更新。
 
 如果其他本机仍有 manifest-owned Softpowers `0.3.0-rc5` 或更早 global layer，请先读 [迁移指南](docs/migration-from-softpowers.md) 和 [current state](docs/current-state.md)。当前 maintainer roots 已完成 manifest-driven retirement 并验证为 clear；不要把这条 receipt 当成手动删除其他机器旧目录的许可。
 
@@ -139,7 +137,7 @@ PACK_MANIFEST.json                            exact derived payload identity
 
 - `evals/` 与 `fieldlab-pack.json`：Servotab-owned behavior cases 和 Field Lab schema v2 subject pack；
 - `site/`：Astro static website source，独立于 plugin runtime；
-- `docs/current-state.md`：易变的 candidate / installed / deployed / live 状态；
+- `docs/current-state.md`：易变的 release / installed / deployed / live 状态；
 - `docs/migration-from-softpowers.md`：旧 global installer layer 的一次性迁移；
 - `AGENTS.md`：canonical / generated / release / authorization 的稳定 repo contract。
 
