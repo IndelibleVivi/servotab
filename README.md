@@ -31,7 +31,7 @@ Open the [official Servotab listing](https://chatgpt.com/plugins/plugins_6a952d7
 For source inspection or maintainer testing, install the same 0.6.1 package from a public checkout:
 
 ```bash
-git clone https://github.com/IndelibleVivi/servotab.git
+git clone --branch v0.6.1 --depth 1 https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal

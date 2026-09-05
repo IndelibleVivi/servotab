@@ -31,7 +31,7 @@ Servotab 也不会把日志、截图、review、旧计划或 generated artifact 
 如果要 inspect source 或做 maintainer testing，可以从 public checkout 通过 repository marketplace 安装同一份 0.6.1 package：
 
 ```bash
-git clone https://github.com/IndelibleVivi/servotab.git
+git clone --branch v0.6.1 --depth 1 https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal
