@@ -9,7 +9,7 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Source version in this checkout: `0.6.1`. This patch hardens asset and package validation, clarifies evidence checks, and adds reproducible release archives. The [GitHub Releases page](https://github.com/IndelibleVivi/servotab/releases) records tagged distribution; the [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) is a separate distribution surface. A source version or GitHub release does not prove that the directory payload has been updated. Servotab remains independent and community-maintained. See [current state](docs/current-state.md) and the [0.6.1 notes](docs/releases/0.6.1.md) for evidence and limits.
+Source version in this checkout: `0.6.1`. Release 0.6.1 hardens asset and package validation, clarifies evidence checks, and adds reproducible release archives. The tagged [Servotab 0.6.1 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.1) is public; the [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) is a separate distribution surface. A source version or GitHub release does not prove that the directory payload has been updated. Servotab remains independent and community-maintained. See [current state](docs/current-state.md) and the [0.6.1 notes](docs/releases/0.6.1.md) for evidence and limits.
 
 ## What Servotab changes
 
@@ -28,7 +28,7 @@ A log, screenshot, review, old plan, or generated artifact may be useful evidenc
 
 Open the [official Servotab listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) in ChatGPT to add the publicly available plugin.
 
-For source inspection or maintainer testing, install the separate current repository candidate from a public checkout:
+For source inspection or maintainer testing, install the same 0.6.1 package from a public checkout:
 
 ```bash
 git clone https://github.com/IndelibleVivi/servotab.git
@@ -63,7 +63,7 @@ The command must return a skill entry named `servotab:servotab` from the install
 
 ### Tested compatibility receipt
 
-On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. Neither historical receipt verifies installation or model behavior for `0.6.1`. These are bounded compatibility and discovery receipts for the named payloads; they are not a guessed minimum-version guarantee, proof of implicit use in every task, or a claim about every Codex client.
+On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. On 2026-09-06, that machine refreshed `servotab@personal` from the clean 0.6.1 release source and verified installed/enabled version 0.6.1, an exact 69-file source/cache match with no symlinks, and fresh-process `servotab:servotab` discovery. These are bounded compatibility and discovery receipts for the named payloads on the inspected machine; they are not a guessed minimum-version guarantee, proof of implicit use or model effectiveness, or a claim about every Codex client.
 
 This source-checkout route is distinct from the officially published directory payload. It replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
 
@@ -139,15 +139,15 @@ Other surfaces have separate jobs:
 
 - `evals/` and `fieldlab-pack.json`: Servotab-owned behavior cases and optional Field Lab subject pack;
 - `site/`: Astro static website source, not plugin runtime authority;
-- `docs/current-state.md`: volatile candidate, install, deployment, and publication facts;
+- `docs/current-state.md`: volatile release, install, deployment, and publication facts;
 - `docs/migration-from-softpowers.md`: supported migration from manifest-owned legacy layers;
 - `AGENTS.md`: stable canonical/generated, verification, documentation, and authorization contract.
 
 ## Evidence and claim boundaries
 
-The integrated candidate contains exactly 69 manifest-owned package files, including two generated icon assets for each of its thirteen skills. Repository checks cover canonical/generated sync, exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
+The 0.6.1 release contains exactly 69 manifest-owned package files, including two generated icon assets for each of its thirteen skills. Repository checks cover canonical/generated sync, exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
 
-Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, publication of this newer candidate, a deployment, or owner acceptance. The existing official listing is a separately observed public-distribution state.
+Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, a website deployment, an OpenAI directory update, or owner acceptance on those separate surfaces. The GitHub Release is public; the existing official directory listing remains a separately observed distribution state.
 
 Maintainers with the standalone `fieldlab` CLI may inspect the source-owned subject pack without invoking a target model:
 
