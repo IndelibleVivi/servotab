@@ -9,7 +9,7 @@ This is the volatile status surface. It records what has actually crossed each b
 | Surface | Current state | Evidence boundary |
 |---|---|---|
 | Product identity | `Servotab` adopted | Current source, manifest, assets, site, and docs use the new identity |
-| Source candidate | `0.6.0` prepared on local branch `feat/servotab-0.6-astra`; not pushed or integrated into public `main` | The candidate strengthens the router plus `design`, `execute`, and `verify`, retains the 69-file icon-bearing topology, and repairs the homepage motion timer race; no Servotab tag or GitHub Release exists |
+| Source candidate | `0.6.0` candidate at `d01e950` on `feat/servotab-0.6-astra`; public `main` remains `0.5.0` until integration | The candidate strengthens the router plus `design`, `execute`, and `verify`, retains the 69-file icon-bearing topology, and repairs the homepage motion timer race; no Servotab tag or GitHub Release exists |
 | Canonical methods and icons | 12 current methods plus the revised router and 13 skill icon pairs | `methods/*.md`, `scripts/build_skills.py`, `scripts/skill_catalog.py`, `assets/servotab-mark-ink*`, and `assets/skill-icons/*`; paper-backed leaf fallbacks remain source-only |
 | Plugin package | Generated 69-file `0.6.0` candidate | `plugins/servotab/` contains one router, 12 leaves, two local icon assets per skill, two top-level plugin assets, and package-local rights files |
 | Deterministic package gate | Green locally on the 69-file `0.6.0` branch candidate; protected-branch CI still reflects public `0.5.0` | Fresh generation/sync, exact YAML/topology/icon validation, manifest freshness, packaging/migration selftest, public-tree audit, Python compilation, all 13 standalone `skill-validate` checks, nine website behavior tests, production build, and real-browser motion/responsive QA passed locally; latest public post-merge run remains `33856781309` |
@@ -24,7 +24,7 @@ This is the volatile status surface. It records what has actually crossed each b
 | Canonical redirects | Active | `www.servotab.com` and `servotab.pages.dev` return 301 to `https://servotab.com` while preserving path suffix and query string |
 | GitHub repository | Renamed to `IndelibleVivi/servotab` | New URL is live, the old `/softpowers` URL returns a 301 redirect, and public `main` now contains the Servotab package and website source |
 | GitHub governance | Private reporting and protected `main` active | Private Vulnerability Reporting and merged-branch deletion are enabled; active ruleset `Protect main` requires PRs plus five current CI contexts and retains an explicit owner emergency bypass |
-| Git publication | Public `main` remains the `0.5.0` package/site state; the `0.6.0` branch is local-only | Immutable package source `05434fa` and artifact receipt `8db4e95` remain public ancestors; `0.6.0` has not been pushed, opened as a PR, tagged, or released |
+| Git publication | Public `main` remains the `0.5.0` package/site state until the `0.6.0` candidate is integrated | Candidate commit `d01e950` is prepared on `feat/servotab-0.6-astra`; it is not yet in public `main`, tagged, or released |
 | OpenAI directory | Public listing live at published `0.4.0-rc1`; `0.6.0` not submitted | Owner publication report, listing route `plugins_6a952d7c729c819196646fda7ec9ad94`, and the official local curated cache establish the published state; upload and publication of the current update remain owner-controlled |
 
 ## Source and package
@@ -104,13 +104,13 @@ The local `origin` uses `git@github-faye:IndelibleVivi/servotab.git`. GitHub ret
 
 Private Vulnerability Reporting is enabled and the repository security policy points to its active advisory route. Merged pull-request branches are deleted automatically. Repository ruleset `Protect main` (`21900625`) is active on the default branch: updates require a pull request, current strict checks are `public-tree`, `site-build`, both Ubuntu validation jobs, and the macOS validation job, review threads must be resolved, and the repository owner retains an explicit emergency bypass.
 
-The public default branch contains the `0.5.0` 69-file package candidate, its canonical/generated icon assets, exact artifact receipt, live website motion polish, repository marketplace, final publisher identity, and layered licensing files. The local `feat/servotab-0.6-astra` branch contains the newer candidate but has not been pushed or opened as a PR. No tag or GitHub Release has been created. The OpenAI listing is live at the recorded route, while neither the superseding `0.6.0` candidate nor its absent submission archive has been submitted.
+The public default branch contains the `0.5.0` 69-file package candidate, its canonical/generated icon assets, exact artifact receipt, live website motion polish, repository marketplace, final publisher identity, and layered licensing files. Candidate commit `d01e950` on `feat/servotab-0.6-astra` contains the newer source and remains outside `main` until the normal protected-branch integration completes. No tag or GitHub Release has been created. The OpenAI listing is live at the recorded route, while neither the superseding `0.6.0` candidate nor its absent submission archive has been submitted.
 
 ## Remaining boundaries
 
 1. Retain the inactive legacy manifests, backups, and transitional helper until the documented recovery/operator dependency is deliberately retired; do not manually clean historical receipts.
 2. Keep the current Cloudflare production path on clean manual direct deployments while the historical Git binding remains disconnected and stale. Repairing or replacing that binding, recreating the project, or re-enabling automatic deployments is a separate owner decision, not a hidden follow-up to this deployment.
-3. Push, PR creation, tag, and GitHub Release creation for `0.6.0` remain unperformed and separate from the local source candidate.
+3. Protected-branch integration, tag, and GitHub Release creation for `0.6.0` remain separate publication states from the candidate commit.
 4. The package publisher identity remains owner-decided as `Yifei Fang`. The first public listing is live; creating a `0.6.0` archive or update draft, uploading it, policy attestations, submission, review, and publication remain Faye-controlled. Local installation and instruction delivery do not cross any of those later states.
 
 Update this file by replacing superseded facts, not by appending a development diary.
