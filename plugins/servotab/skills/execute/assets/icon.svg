@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 32 32" role="img" aria-labelledby="title desc" shape-rendering="crispEdges">
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title desc" shape-rendering="crispEdges">
   <title id="title">Execute</title>
   <desc id="desc">Settled work moving through one forward stream.</desc>
+  <g transform="scale(1.5)">
   <rect x="26" y="2" width="2" height="2" fill="#315EFB"/>
   <rect x="4" y="10" width="8" height="2" fill="#151922"/>
   <rect x="20" y="10" width="2" height="2" fill="#151922"/>
@@ -9,4 +10,5 @@
   <rect x="22" y="16" width="2" height="2" fill="#151922"/>
   <rect x="4" y="18" width="8" height="2" fill="#151922"/>
   <rect x="20" y="18" width="2" height="2" fill="#151922"/>
+  </g>
 </svg>

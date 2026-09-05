@@ -23,9 +23,9 @@ transparent 400 px `icon-400.png` projection, and an unselected
 `icon-paper-400.png` contrast fallback. The package generator copies only the
 transparent SVG and PNG into each generated skill. The paper fallback remains
 source-only unless real host-surface evidence shows that a neutral icon well is
-needed. Each shipped SVG declares an intrinsic canvas of at least 48 × 48 px;
-the leaf glyphs keep their 32 × 32 internal coordinate system so this packaging
-requirement does not alter their geometry.
+needed. Each shipped SVG declares 48 × 48 px or larger intrinsic dimensions and
+`viewBox`; the leaf glyphs retain their original 32 × 32 geometry inside a
+scaled group so the directory-facing canvas change does not alter their render.
 
 The generated package gives all thirteen skills the same local asset contract:
 `./assets/icon.svg` and `./assets/icon-400.png`. The router files are generated

@@ -411,7 +411,7 @@ def main() -> int:
         )
         undersized_icon.write_text(
             undersized_icon.read_text(encoding="utf-8").replace(
-                ' width="48" height="48"', ""
+                'viewBox="0 0 48 48"', 'viewBox="0 0 32 32"'
             ),
             encoding="utf-8",
         )

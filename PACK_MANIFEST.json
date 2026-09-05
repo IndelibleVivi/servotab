@@ -80,8 +80,8 @@
     },
     {
       "path": "plugins/servotab/skills/debug/assets/icon.svg",
-      "size": 1337,
-      "sha256": "810df0efed59423bd08af14dce5b9990d2a4a5fe793d04de5c2d3e34ec27af2f"
+      "size": 1373,
+      "sha256": "8ce3ab99ffb0e5cdffbc9747a3e716ea194105ec6a6e8aa9c63eccb0cee78124"
     },
     {
       "path": "plugins/servotab/skills/delegate/SKILL.md",
@@ -100,8 +100,8 @@
     },
     {
       "path": "plugins/servotab/skills/delegate/assets/icon.svg",
-      "size": 1646,
-      "sha256": "b650b8d5f292e32b2b8c2df3375c9c69a4503f436b8e245b3e00e84c3909caa3"
+      "size": 1682,
+      "sha256": "f07c1d6d676f4af713af1f0dce8d8c15f1d786bd4b365375ddbed2fb855b8560"
     },
     {
       "path": "plugins/servotab/skills/design/SKILL.md",
@@ -120,8 +120,8 @@
     },
     {
       "path": "plugins/servotab/skills/design/assets/icon.svg",
-      "size": 1093,
-      "sha256": "67d9a8147177ad37bb1cf8048619ede1fadc940b0bdb584d79e9a02c8248607f"
+      "size": 1129,
+      "sha256": "2b01d9764284ff44807f4969e02241aae1621f935b6d350a8fe2694014eed896"
     },
     {
       "path": "plugins/servotab/skills/execute/SKILL.md",
@@ -140,8 +140,8 @@
     },
     {
       "path": "plugins/servotab/skills/execute/assets/icon.svg",
-      "size": 746,
-      "sha256": "5302979b4e0f89241e81ccf136ab2e1efb8596bff9d984154c9f1a6ad03c2f1f"
+      "size": 782,
+      "sha256": "5262ec7470d56bc832c419b7100cb24608b12152e7a20c8bbe380d9461819ae2"
     },
     {
       "path": "plugins/servotab/skills/finish/SKILL.md",
@@ -160,8 +160,8 @@
     },
     {
       "path": "plugins/servotab/skills/finish/assets/icon.svg",
-      "size": 1040,
-      "sha256": "f9b30ebaf3e94995bb5223177b819374e9e9653f550d760f2d1fac1e067ce3a4"
+      "size": 1076,
+      "sha256": "68f3d503fce11780abfc42f6eded0634924fa77405c5b53a8a77a49e57c45953"
     },
     {
       "path": "plugins/servotab/skills/plan/SKILL.md",
@@ -180,8 +180,8 @@
     },
     {
       "path": "plugins/servotab/skills/plan/assets/icon.svg",
-      "size": 1023,
-      "sha256": "801012f6fc4016c1b5b6ec8f50cb92178a59d494e09f90842dc7371951eb58c2"
+      "size": 1059,
+      "sha256": "44cdbd7057f4a6e25595ee87937e15e3bcf048ac1697e7f861f18605c354e9cb"
     },
     {
       "path": "plugins/servotab/skills/review-feedback/SKILL.md",
@@ -200,8 +200,8 @@
     },
     {
       "path": "plugins/servotab/skills/review-feedback/assets/icon.svg",
-      "size": 1348,
-      "sha256": "1db63356250ffe35d9adcd6735779928dc731d56526e551371a19d726a0cb448"
+      "size": 1384,
+      "sha256": "af9125a64b19fe901b4f30f3e58e7417eee895f96fbd39f8fef8272096700bae"
     },
     {
       "path": "plugins/servotab/skills/review/SKILL.md",
@@ -220,8 +220,8 @@
     },
     {
       "path": "plugins/servotab/skills/review/assets/icon.svg",
-      "size": 1753,
-      "sha256": "4da5f75bfdc034f590cf6d7a23766fdad95c25de24f15dfde1309d8fee8e04cc"
+      "size": 1789,
+      "sha256": "c190b1c3d3336c7a11550e979bc080ea5da7c69fa935223c8bd6bac077a2c8ce"
     },
     {
       "path": "plugins/servotab/skills/servotab/SKILL.md",
@@ -320,8 +320,8 @@
     },
     {
       "path": "plugins/servotab/skills/spec-chain/assets/icon.svg",
-      "size": 1046,
-      "sha256": "ebb879a9008b100cef14efe38ec328d934a1240f7fe340fd24efee089aac7775"
+      "size": 1082,
+      "sha256": "83563ffffed231ab370fcd85bce4e6307ba7b870826c275cc8e7d34434f23379"
     },
     {
       "path": "plugins/servotab/skills/tdd/SKILL.md",
@@ -340,8 +340,8 @@
     },
     {
       "path": "plugins/servotab/skills/tdd/assets/icon.svg",
-      "size": 1877,
-      "sha256": "f3ad1e112736e686c9054239e2f509d51a029e02f26ab49ead21ea829fa547ac"
+      "size": 1913,
+      "sha256": "79e00c806f7ec9028a40dae8457ae72e08a393fe90e3278d7ebf3244f16b32dd"
     },
     {
       "path": "plugins/servotab/skills/verify/SKILL.md",
@@ -360,8 +360,8 @@
     },
     {
       "path": "plugins/servotab/skills/verify/assets/icon.svg",
-      "size": 1753,
-      "sha256": "69207ba14308867537207d33dc93048dd36cadd03278927c9a1bff987feb45ad"
+      "size": 1789,
+      "sha256": "40623e4c0bc8e76bc9c2580f97efbe90c98c5eab27fe9e93377e85334f53dfbd"
     },
     {
       "path": "plugins/servotab/skills/worktree/SKILL.md",
@@ -380,8 +380,8 @@
     },
     {
       "path": "plugins/servotab/skills/worktree/assets/icon.svg",
-      "size": 1517,
-      "sha256": "906b09edc8065477f4d369e28726756d188d6669c60f0d6fce7c5de413494f78"
+      "size": 1553,
+      "sha256": "84e4adee0962164c484b7002cd20dc215262aa22a7b843e166499dd9eb4a8d5a"
     }
   ]
 }

@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 32 32" role="img" aria-labelledby="title desc" shape-rendering="crispEdges">
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title desc" shape-rendering="crispEdges">
   <title id="title">Verify</title>
   <desc id="desc">A checked claim inside an evidence boundary.</desc>
+  <g transform="scale(1.5)">
   <rect x="26" y="2" width="2" height="2" fill="#315EFB"/>
   <rect x="6" y="6" width="20" height="2" fill="#151922"/>
   <rect x="6" y="8" width="2" height="2" fill="#151922"/>
@@ -26,4 +27,5 @@
   <rect x="6" y="22" width="2" height="2" fill="#151922"/>
   <rect x="24" y="22" width="2" height="2" fill="#151922"/>
   <rect x="6" y="24" width="20" height="2" fill="#151922"/>
+  </g>
 </svg>
