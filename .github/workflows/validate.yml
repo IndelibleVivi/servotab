@@ -41,6 +41,10 @@ jobs:
         run: npm ci
         working-directory: site
 
+      - name: Test website behavior
+        run: npm test
+        working-directory: site
+
       - name: Build website
         run: npm run build
         working-directory: site

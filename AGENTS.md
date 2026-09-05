@@ -98,6 +98,7 @@ When the website changes, also run from `site/`:
 
 ```bash
 npm ci
+npm test
 npm run build
 ```
 

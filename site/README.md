@@ -14,8 +14,14 @@ npm run dev
 Create the production output in `dist/`:
 
 ```bash
+npm test
 npm run build
 ```
+
+`npm test` exercises the homepage method-motion state machine, including rapid
+repeated activation, timer cancellation, reduced-motion preference changes,
+DOM selector contracts, and accessible button/status state. The repository CI
+job runs these behavior checks before the production build.
 
 The build expects the full repository checkout. `src/config.ts` reads the current
 candidate version from `../plugins/servotab/.codex-plugin/plugin.json` so the

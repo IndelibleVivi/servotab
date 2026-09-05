@@ -9,7 +9,7 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Current source candidate: `0.5.0`. Servotab is publicly available through its [official OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94), while remaining an independent, community-maintained project rather than an official OpenAI product. This repository candidate adds per-skill icons for a later owner-controlled directory update; it has no Servotab tag or GitHub Release. See [current state](docs/current-state.md) for the exact published, candidate, package, GitHub, website, and deployment boundaries.
+Current source candidate: `0.6.0`. Servotab is publicly available through its [official OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94), while remaining an independent, community-maintained project rather than an official OpenAI product. This repository candidate strengthens natural-language method selection, dependent-decision and reuse reasoning, and evidence closure; it retains the per-skill icons and adds race-safe, tested reduced-motion website behavior. It has no Servotab tag or GitHub Release and has not been submitted as a directory update. See [current state](docs/current-state.md) for the exact published, candidate, package, GitHub, website, and deployment boundaries.
 
 ## What Servotab changes
 
@@ -48,7 +48,7 @@ codex plugin list --marketplace personal
 The receipt should contain:
 
 ```text
-servotab@personal  installed, enabled  0.5.0
+servotab@personal  installed, enabled  0.6.0
 ```
 
 For a machine-readable discovery check on a system with `jq` and `rg`:
@@ -63,7 +63,7 @@ The command must return a skill entry named `servotab:servotab` from the install
 
 ### Tested compatibility receipt
 
-On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. This records one observed compatible surface for that payload; it is not automatic acceptance of `0.5.0`, a guessed minimum-version guarantee, or a claim about every Codex client.
+On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. These are bounded compatibility and discovery receipts for the named payloads; they are not a guessed minimum-version guarantee, proof of implicit use in every task, or a claim about every Codex client.
 
 This source-checkout route is distinct from the officially published directory payload. It replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
 
@@ -145,7 +145,7 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The integrated candidate contains exactly 69 manifest-owned package files, including two generated icon assets for each of its thirteen skills. Repository checks cover canonical/generated sync, exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, and the website production build.
+The integrated candidate contains exactly 69 manifest-owned package files, including two generated icon assets for each of its thirteen skills. Repository checks cover canonical/generated sync, exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, website motion behavior tests, and the website production build.
 
 Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, publication of this newer candidate, a deployment, or owner acceptance. The existing official listing is a separately observed public-distribution state.
 
@@ -186,6 +186,7 @@ For the website:
 ```bash
 cd site
 npm ci
+npm test
 npm run build
 ```
 

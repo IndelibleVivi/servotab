@@ -44,6 +44,16 @@ For reference-led work:
 - Let explicit written instructions, corrections, and accepted specifications override inferred reference details.
 - Inspect the actual repository and adapt the reference to its architecture; do not clone unrelated features merely because they appear in the source.
 
+## Close the reuse decision before introducing common machinery
+
+For a new generic helper, dependency, adapter, integration, parser, validator, queue, or fallback, inspect the existing implementation and its current caller first. Then check installed dependencies and supported runtime or platform surfaces. Consult current official documentation or maintained external implementations only for gaps that can change the decision.
+
+Close on reuse, extension, composition, or justified custom code. Compare behavior coverage, compatibility, maintenance and dependency cost, security and privacy boundaries, and the present consumer. Popularity alone does not settle fit. Adapting a mechanism need not import its whole framework.
+
+Stop when evidence settles the decision. Do not browse registries for a domain-specific invariant with no useful package boundary. Distinguish searched, unavailable, and unnecessary channels; do not claim ecosystem absence from incomplete access. External queries must omit private code, credentials, and identifying context not needed for the search.
+
+Use a short inline rationale or the existing design record for a consequential choice. Do not add a mandatory research artifact. Research does not authorize dependency installation, external side effects, or changes to accepted behavior.
+
 ## Spend complexity on current work
 
 - Prefer one normal implementation path and one source of truth.

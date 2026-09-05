@@ -77,6 +77,16 @@ For each real decision:
 
 Do not provide three cosmetic variants merely to satisfy a format.
 
+## Work the decision frontier
+
+Use dependency ordering when decisions remain unsettled. Track only material decisions for the current outcome, their prerequisites, and facts that could invalidate them. Keep settled owner choices separate from provisional mechanisms and reversible choices delegated to the agent.
+
+First investigate facts available from the repository, installed runtime, tools, and relevant authoritative documentation. Present only decisions whose prerequisites are settled, with a recommendation grounded in that evidence. Ask dependent questions after the upstream choice is resolved; continue independent work while another branch lacks evidence. Delegation is optional and requires its own value justification.
+
+After each answer or material new fact, revisit only the affected descendants. In a continuing task, update the existing decision or plan record rather than reopening the whole interview. Stop when the current approach and acceptance criteria can be chosen without silently guessing a material owner decision. Unrelated future branches may remain deferred.
+
+For authorized best-effort work, make reversible assumptions and proceed. An explicit request for design only remains design only; discovering a good solution does not grant implementation authority.
+
 ## Questions
 
 Ask a question only when the answer:

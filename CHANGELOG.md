@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-- Advanced the source candidate to `0.5.0` and added Faye-authored, per-skill icon assets for the implicit router and all 12 explicit methods, with canonical source routing, generated local skill assets, exact interface validation, package-integrity controls, and a 69-file manifest-owned payload.
+- Advanced the source candidate to `0.6.0`, strengthening ordinary-language routing, dependency-ordered decisions, reuse research, falsifiable verification, and review closure in the canonical router plus the `design`, `execute`, and `verify` methods without changing the one-router/twelve-leaf topology.
+- Fixed the homepage method-motion timer race, made in-flight reduced-motion changes settle deterministically, added nine behavior tests with strict DOM/accessibility contracts, and wired those tests into website CI before the production build.
+- Established the earlier `0.5.0` candidate with Faye-authored, per-skill icon assets for the implicit router and all 12 explicit methods, canonical source routing, generated local skill assets, exact interface validation, package-integrity controls, and a 69-file manifest-owned payload.
 - Recorded the live [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) as the published distribution surface while keeping Servotab independent and community-maintained, and kept the newer source candidate separate from the owner-controlled directory update.
 - Integrated the method glyphs into the website catalog and updated public availability, install, legal, and evidence copy without claiming that the `0.5.0` candidate is already published.
 - Set the OpenAI package `author.name` and install-surface `developerName` to `Yifei Fang` while retaining the `Faye & Cove` creator credit in the repository and website, and regenerated the exact `0.4.0-rc1` package identity and submission artifact.

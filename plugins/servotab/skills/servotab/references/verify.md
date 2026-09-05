@@ -113,6 +113,16 @@ For optional host actions, verify the negative capability path before exposure a
 
 For a bug fix, prefer a reproducer or test that would fail under the old behavior. Revert or mutation proof is useful when safe and efficient, but it is not mandatory when it would destabilize the workspace.
 
+## Check the oracle and review closure
+
+Before relying on a green result, identify a plausible incorrect implementation that this check would reject. Schema presence, file signatures, compilation, a mocked success path, and expected-output updates can all miss the behavior being claimed. Use the nearest available behavioral check or full parser where that is the contract. Keep static checks as static evidence.
+
+For timing, ownership, recovery, or optional-host changes, inspect the relevant repeated, interrupted, stale, malformed, denied, or accessibility path. Select from these by the actual changed boundary; this is not an exhaustive test matrix for every task.
+
+Resolve material review findings against the exact final revision. A finding may be fixed and checked, rejected with a concrete counterexample, or explicitly deferred under applicable authority. Record its disposition in the existing review or task surface. CI green or a merge does not itself resolve a reviewer-identified failure. Reproduce disputed findings instead of trusting either the reviewer or implementer by title.
+
+For reusable instructions, distinguish discovery, context delivery, method use, and task outcome. Self-reported loading is supporting evidence only. A static assertion about prompt text cannot establish natural-language activation or improved model behavior.
+
 ## Blocked verification
 
 When a check cannot run:
