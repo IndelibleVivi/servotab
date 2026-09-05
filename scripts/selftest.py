@@ -405,6 +405,40 @@ def main() -> int:
             "missing generated skill icon was accepted",
         )
 
+        undersized_icon_root = contract_copy(ROOT, base / "undersized-icon")
+        undersized_icon = (
+            undersized_icon_root / "plugins/servotab/skills/design/assets/icon.svg"
+        )
+        undersized_icon.write_text(
+            undersized_icon.read_text(encoding="utf-8").replace(
+                ' width="48" height="48"', ""
+            ),
+            encoding="utf-8",
+        )
+        assert_detected(
+            validate_directory(
+                undersized_icon_root / "plugins/servotab/skills", exact=True
+            ),
+            "undersized SVG skill icon was accepted",
+        )
+
+        zero_size_icon_root = contract_copy(ROOT, base / "zero-size-icon")
+        zero_size_icon = (
+            zero_size_icon_root / "plugins/servotab/skills/design/assets/icon.svg"
+        )
+        zero_size_icon.write_text(
+            zero_size_icon.read_text(encoding="utf-8")
+            .replace('width="48"', 'width="0"')
+            .replace('height="48"', 'height="0"'),
+            encoding="utf-8",
+        )
+        assert_detected(
+            validate_directory(
+                zero_size_icon_root / "plugins/servotab/skills", exact=True
+            ),
+            "zero-sized SVG skill icon was accepted",
+        )
+
         sync_root = contract_copy(ROOT, base / "sync")
         sync_skill = sync_root / "plugins/servotab/skills/debug/SKILL.md"
         sync_skill.write_text(sync_skill.read_text(encoding="utf-8") + "\n", encoding="utf-8")

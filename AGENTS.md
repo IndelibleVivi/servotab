@@ -78,6 +78,11 @@ For a canonical package asset change:
 3. Regenerate `PACK_MANIFEST.json` only after plugin validation passes.
 4. Inspect visual output and the exact package diff.
 
+Shipped skill SVGs must declare an intrinsic canvas of at least 48 × 48 px;
+`scripts/validate.py` owns this submission-facing check. A smaller internal
+`viewBox` may remain when explicit width and height preserve the original glyph
+geometry.
+
 Do not infer a public license for an asset from its presence in the repository. Existing license texts, the path map, third-party terms, and actual rights evidence control what may be distributed.
 
 ## Verification

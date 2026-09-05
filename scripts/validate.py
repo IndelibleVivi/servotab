@@ -48,6 +48,9 @@ FORBIDDEN_SVG_TOKENS = (
     "<image",
     "<use",
 )
+SVG_ROOT_RE = re.compile(r"<svg\b[^>]*>", re.IGNORECASE)
+SVG_VIEWBOX_RE = re.compile(r"\bviewbox\s*=\s*['\"]([^'\"]+)['\"]", re.IGNORECASE)
+MIN_SVG_DIMENSION = 48.0
 
 
 def load_yaml(text: str, label: str) -> dict[str, Any]:
@@ -105,8 +108,39 @@ def validate_icon_asset(path: Path, *, field: str) -> list[str]:
     except UnicodeDecodeError:
         return ["icon_large must be a UTF-8 SVG"]
     normalized = text.lower()
-    if "<svg" not in normalized or "viewbox=" not in normalized:
+    root_match = SVG_ROOT_RE.search(text)
+    viewbox_match = SVG_VIEWBOX_RE.search(text)
+    if root_match is None or viewbox_match is None:
         errors.append("icon_large must contain an SVG root and viewBox")
+    else:
+        root = root_match.group(0)
+        dimensions: list[float | None] = []
+        for name in ("width", "height"):
+            match = re.search(
+                rf"\b{name}\s*=\s*['\"]([0-9]+(?:\.[0-9]+)?)(?:px)?['\"]",
+                root,
+                re.IGNORECASE,
+            )
+            dimensions.append(float(match.group(1)) if match else None)
+
+        if any(dimension is None for dimension in dimensions):
+            try:
+                viewbox = [float(value) for value in viewbox_match.group(1).split()]
+            except ValueError:
+                viewbox = []
+            if len(viewbox) == 4:
+                dimensions = [
+                    viewbox[2] if dimensions[0] is None else dimensions[0],
+                    viewbox[3] if dimensions[1] is None else dimensions[1],
+                ]
+
+        if (
+            len(dimensions) != 2
+            or any(dimension is None for dimension in dimensions)
+            or min(dimension for dimension in dimensions if dimension is not None)
+            < MIN_SVG_DIMENSION
+        ):
+            errors.append("icon_large SVG must declare at least 48 x 48 pixels")
     if any(token in normalized for token in FORBIDDEN_SVG_TOKENS):
         errors.append("icon_large SVG must not contain scripts or external resources")
     return errors

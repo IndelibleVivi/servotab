@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-labelledby="title desc" shape-rendering="crispEdges">
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 32 32" role="img" aria-labelledby="title desc" shape-rendering="crispEdges">
   <title id="title">Execute</title>
   <desc id="desc">Settled work moving through one forward stream.</desc>
   <rect x="26" y="2" width="2" height="2" fill="#315EFB"/>
