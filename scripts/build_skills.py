@@ -65,7 +65,7 @@ If a needed reference is unavailable, use the applicable safeguards above, discl
 ## Preserve outcome and permission boundaries
 
 - Choose the simplest mechanism that fulfills the complete accepted behavior, including its current consumers and integration. Do not silently replace the result with an MVP, placeholder, or backend-only slice.
-- Evaluate a proposed mechanism independently while respecting user-selected meaning. Do not widen trust, change programme order, or introduce infrastructure with no present consumer.
+- Evaluate a proposed mechanism independently while respecting user-selected meaning. Do not widen trust, change programme order, or introduce infrastructure without a current requirement or explicit foundational authorization.
 - Keep the existing task record or complete plan current after a material correction. Preserve deferred scope and why it remains. Create a persistent record only when the work needs continuity; do not create a second tracker.
 - Stop only at an unresolved authority boundary. Continue other safe, in-scope work. Research, file presence, reviewer advice, and test success confer no additional permission.
 - Keep Git operations, deployment, publication, secret access, and paid or live-provider operations within their applicable authorization. No method grants them by itself.
@@ -74,7 +74,7 @@ If a needed reference is unavailable, use the applicable safeguards above, discl
 
 - A meaningful check distinguishes the relevant failure from success. For a bug, use a reproducer that fails on the old behavior when this can be done safely in a disposable copy; do not revert unrelated live work.
 - Inspect the failure families the change actually exposes. A timer needs repeated/interleaved activation; recovery needs interrupted or partial state; an input validator needs malformed inputs; UI motion needs its applicable accessibility behavior. Do not run every family for every edit.
-- Do not weaken assertions, drop accepted scenarios, or edit only expected outputs to make a test green. Establish changed requirements before changing their oracle.
+- Do not weaken assertions, drop accepted scenarios, or edit only expected outputs to make a test green. Establish changed requirements before changing the expected result.
 - After a check fails, distinguish patch regression, existing baseline failure, and environment failure. Repeated same-mechanism failures require a new causal investigation, not another cosmetic retry.
 - When review findings arrive, resolve each material finding as fixed with evidence, rejected with evidence, or explicitly deferred under applicable authority. An open blocker cannot disappear behind a later summary or green CI.
 
@@ -179,9 +179,24 @@ def expected_files(root: Path = ROOT) -> dict[Path, bytes]:
     return files
 
 
+def symlink_errors(root: Path) -> list[str]:
+    errors = []
+    for name in ("assets", "methods", "plugins"):
+        base = root / name
+        if base.is_symlink():
+            errors.append(f"source/generated tree must not contain symlinks: {name}")
+            continue
+        for path in base.rglob("*"):
+            if path.is_symlink():
+                errors.append(f"source/generated tree must not contain symlinks: {path.relative_to(root)}")
+    return errors
+
+
 def check(root: Path = ROOT) -> list[str]:
     _, skills_dir, legacy_skills_dir, plugin_assets_dir = locations(root)
-    errors: list[str] = []
+    errors: list[str] = symlink_errors(root)
+    if errors:
+        return errors
     try:
         expected = expected_files(root)
     except FileNotFoundError as exc:
@@ -199,7 +214,7 @@ def check(root: Path = ROOT) -> list[str]:
             if item.is_file() and item.resolve() not in allowed:
                 errors.append(f"unexpected generated payload file: {item.relative_to(root)}")
 
-    if legacy_skills_dir.exists():
+    if legacy_skills_dir.exists() or legacy_skills_dir.is_symlink():
         errors.append("retired root skills/ projection still exists")
 
     root_assets_dir = root / "assets"
@@ -221,32 +236,26 @@ def check(root: Path = ROOT) -> list[str]:
 
 def write(root: Path = ROOT) -> None:
     _, skills_dir, legacy_skills_dir, plugin_assets_dir = locations(root)
-    if legacy_skills_dir.exists():
+    if legacy_skills_dir.exists() or legacy_skills_dir.is_symlink():
         raise FileExistsError(
             f"retired root skills/ projection still exists: {legacy_skills_dir}; "
             "remove it through the reviewed migration change, not the generator"
         )
+    errors = symlink_errors(root)
+    if errors:
+        raise ValueError("; ".join(errors))
     expected = expected_files(root)
+    owned = set(expected) | {plugin_assets_dir / name for name in ASSET_NAMES}
+    directories = {parent for path in owned for parent in path.parents}
+    for base in (skills_dir, plugin_assets_dir):
+        for item in base.rglob("*"):
+            if item not in owned and (not item.is_dir() or item not in directories):
+                raise ValueError(f"unowned generated path requires explicit removal: {item.relative_to(root)}")
     for path, content in expected.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(content)
 
-    allowed = {path.resolve() for path in expected}
-    if skills_dir.is_dir():
-        for item in sorted(skills_dir.rglob("*"), reverse=True):
-            if item.is_file() and item.resolve() not in allowed:
-                item.unlink()
-            elif item.is_dir() and not any(item.iterdir()):
-                item.rmdir()
-
     plugin_assets_dir.mkdir(parents=True, exist_ok=True)
-    for item in plugin_assets_dir.iterdir():
-        if item.name in ASSET_NAMES:
-            continue
-        if item.is_dir() and not item.is_symlink():
-            shutil.rmtree(item)
-        else:
-            item.unlink()
     for name in ASSET_NAMES:
         source = root / "assets" / name
         if not source.is_file():

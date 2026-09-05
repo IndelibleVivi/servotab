@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
+import re
 import unicodedata
 from pathlib import Path
 from typing import Any
@@ -62,12 +64,32 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate JSON object key")
+        result[key] = value
+    return result
+
+
+def reject_constant(value):
+    raise ValueError("non-finite JSON number")
+
+
+def finite_float(value):
+    number = float(value)
+    if not math.isfinite(number):
+        raise ValueError("non-finite JSON number")
+    return number
+
+
 def load_json_object(path: Path, label: str) -> dict[str, Any]:
     try:
-        value = json.loads(path.read_text(encoding="utf-8"))
+        value = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_object, parse_constant=reject_constant, parse_float=finite_float)
     except FileNotFoundError as exc:
         raise ValueError(f"missing {label}: {path}") from exc
-    except json.JSONDecodeError as exc:
+    except (ValueError, UnicodeError) as exc:
         raise ValueError(f"invalid {label} JSON: {exc}") from exc
     if not isinstance(value, dict):
         raise ValueError(f"{label} root must be an object")
@@ -76,7 +98,7 @@ def load_json_object(path: Path, label: str) -> dict[str, Any]:
 
 def load_pack_manifest(path: Path = PACK_MANIFEST) -> dict[str, Any]:
     data = load_json_object(path, "pack manifest")
-    if data.get("schema_version") != 1:
+    if type(data.get("schema_version")) is not int or data["schema_version"] != 1:
         raise ValueError(f"unsupported pack manifest schema: {data.get('schema_version')!r}")
     if data.get("pack") != "servotab":
         raise ValueError(f"unexpected pack id: {data.get('pack')!r}")
@@ -109,9 +131,9 @@ def load_pack_manifest(path: Path = PACK_MANIFEST) -> dict[str, Any]:
             raise ValueError(f"unsafe or invalid manifest path: {relative!r}")
         if relative in seen:
             raise ValueError(f"duplicate manifest path: {relative}")
-        if not isinstance(digest, str) or len(digest) != 64:
+        if not isinstance(digest, str) or re.fullmatch(r"[0-9a-f]{64}", digest) is None:
             raise ValueError(f"invalid sha256 for {relative}")
-        if not isinstance(size, int) or size < 0:
+        if type(size) is not int or size < 0:
             raise ValueError(f"invalid size for {relative}")
         seen.add(relative)
     if seen != EXPECTED_PAYLOAD_FILES:
@@ -129,6 +151,9 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
     except ValueError as exc:
         return [str(exc)]
 
+    allowed = {"name", "version", "description", "author", "homepage", "repository", "keywords", "skills", "interface"}
+    if set(manifest) != allowed:
+        errors.append("plugin manifest must contain exactly the skills-only contract fields")
     if manifest.get("name") != "servotab":
         errors.append("plugin manifest name must be servotab")
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
@@ -229,6 +254,8 @@ def validate_marketplace(root: Path = ROOT) -> list[str]:
     except ValueError as exc:
         return [str(exc)]
     errors: list[str] = []
+    if set(marketplace) != {"name", "interface", "plugins"} or marketplace.get("name") != "personal":
+        errors.append("repo marketplace name and fields must match personal")
     plugins = marketplace.get("plugins")
     if not isinstance(plugins, list) or len(plugins) != 1:
         return ["repo marketplace must contain exactly one Servotab entry"]
@@ -258,6 +285,29 @@ def validate_package(
         manifest = load_pack_manifest(manifest_path)
     except ValueError as exc:
         return [str(exc)]
+
+    plugin = root / PLUGIN_RELATIVE
+    expected_directories = {
+        parent.as_posix()
+        for relative in EXPECTED_PAYLOAD_FILES
+        for parent in Path(relative).parents
+        if parent.as_posix().startswith("plugins/servotab")
+    }
+    # Inspect lexical paths before following any expected file or its parents.
+    for parent in (root / "plugins", plugin):
+        if parent.is_symlink():
+            return ["package directory must not be a symlink"]
+    for path in plugin.rglob("*"):
+        relative = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            errors.append(f"package payload must not contain symlinks: {relative}")
+        elif path.is_dir():
+            if relative not in expected_directories:
+                errors.append(f"unexpected package directory: {relative}")
+        elif not path.is_file() or relative not in EXPECTED_PAYLOAD_FILES:
+            errors.append(f"unexpected package payload: {relative}")
+    if errors:
+        return errors
 
     entries = {entry["path"]: entry for entry in manifest["files"]}
     for relative in sorted(EXPECTED_PAYLOAD_FILES):

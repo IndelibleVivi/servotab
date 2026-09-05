@@ -9,7 +9,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-当前 source candidate：`0.6.0`。Servotab 已通过[官方 OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94)公开上线，但仍是 independent、community-maintained project，不是 OpenAI 官方产品。本轮 repo candidate 增强 natural-language method selection、依赖有序的 decision/reuse reasoning 与 evidence closure，保留每个 skill 的 icon，并补上 race-safe、经过测试的 reduced-motion website behavior；它尚未 tagged、没有 GitHub Release，也没有作为 directory update 提交。Published payload、candidate、package、GitHub、website 与 Cloudflare 的精确边界见 [docs/current-state.md](docs/current-state.md)。
+此 checkout 的源码版本：`0.6.1`。本次补丁加强图标与包结构校验，澄清验证判据，并加入可重复构建的发布归档。[GitHub Releases](https://github.com/IndelibleVivi/servotab/releases) 记录带 tag 的分发；[OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 是独立的分发渠道。源码版本或 GitHub release 均不能证明目录中的包已更新。Servotab 继续保持独立、社区维护的定位。具体证据和边界见 [current state](docs/current-state.md) 与 [0.6.1 更新说明](docs/releases/0.6.1.md)。
 
 ## 它做什么
 
@@ -47,10 +47,10 @@ codex plugin add servotab@personal
 codex plugin list --marketplace personal
 ```
 
-输出中应出现：
+当 checkout 的 `VERSION` 为 `0.6.1` 时，输出中应出现：
 
 ```text
-servotab@personal  installed, enabled  0.6.0
+servotab@personal  installed, enabled  0.6.1
 ```
 
 如果本机同时有 `jq` 与 `rg`，可以进一步检查 fresh-process prompt input：
@@ -61,9 +61,9 @@ codex debug prompt-input "Check Servotab discovery." \
   | rg 'servotab:servotab'
 ```
 
-命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，`0.4.0-rc1` 在 macOS 与 `codex-cli 0.147.0` 上完成过 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。2026-09-05，当前 maintainer machine 又安装了 `0.6.0` source candidate，取得 69-file source/cache exact match，并在 fresh-process prompt input 中观察到 `servotab:servotab`。这些只是针对具名 payload 的 compatibility / discovery receipts，不是猜测的最低版本承诺、每个任务都发生 implicit use 的证明，也不代表所有 Codex client 都已验证。
+命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，`0.4.0-rc1` 在 macOS 与 `codex-cli 0.147.0` 上完成过 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。2026-09-05，当前 maintainer machine 又安装了 `0.6.0` source candidate，取得 69-file source/cache exact match，并在 fresh-process prompt input 中观察到 `servotab:servotab`。这些历史记录不验证 `0.6.1` 的安装或模型行为；它们只是针对具名 payload 的 compatibility / discovery receipts，不是猜测的最低版本承诺、每个任务都发生 implicit use 的证明，也不代表所有 Codex client 都已验证。
 
-这条 source-checkout 路径与已经公开的 directory payload 是两个状态；它取代旧版 `install.sh` / root `skills/` global installer。当前 maintainer environment 对 `0.4.0-rc1` 留有 43-file source/cache exact diff 与 representative fresh-task behavior smoke receipt；这些历史 receipt 不会自动覆盖新的 69-file `0.6.0` candidate。Source-checkout install 也不会把 candidate 自动变成 directory update、tag、GitHub Release 或其他机器上的 acceptance receipt。
+这条 source-checkout 路径与已经公开的 directory payload 是两个状态；它取代旧版 `install.sh` / root `skills/` global installer。当前 maintainer environment 对 `0.4.0-rc1` 留有 43-file source/cache exact diff 与 representative fresh-task behavior smoke receipt；这些历史 receipt 不会自动覆盖新的 69-file `0.6.1` candidate。Source-checkout install 也不会把 candidate 自动变成 directory update、tag、GitHub Release 或其他机器上的 acceptance receipt。
 
 如果其他本机仍有 manifest-owned Softpowers `0.3.0-rc5` 或更早 global layer，请先读 [迁移指南](docs/migration-from-softpowers.md) 和 [current state](docs/current-state.md)。当前 maintainer roots 已完成 manifest-driven retirement 并验证为 clear；不要把这条 receipt 当成手动删除其他机器旧目录的许可。
 
@@ -168,9 +168,10 @@ Fresh deterministic gate：
 ```bash
 python3 scripts/build_skills.py --check
 python3 scripts/validate_sync.py
-uv run --with PyYAML==6.0.3 python3 scripts/validate.py plugins/servotab/skills
-uv run --with PyYAML==6.0.3 python3 scripts/generate_pack_manifest.py --check
-uv run --with PyYAML==6.0.3 python3 scripts/selftest.py
+uv run --with-requirements requirements-dev.txt python3 scripts/validate.py plugins/servotab/skills
+uv run --with-requirements requirements-dev.txt python3 scripts/generate_pack_manifest.py --check
+uv run --with-requirements requirements-dev.txt python3 scripts/selftest.py
+uv run --with-requirements requirements-dev.txt python3 -m unittest discover -s scripts -p 'test_*.py' -q
 python3 scripts/audit_public_tree.py
 python3 -m py_compile scripts/*.py
 ```
@@ -185,6 +186,14 @@ npm ci
 npm test
 npm run build
 ```
+
+## 发布产物与验证边界
+
+源码 checkout 或 `servotab-0.6.1-source.zip` 提供完整仓库和 marketplace 路径。`servotab-0.6.1-plugin.zip` 仅含 69 个受 manifest 管理的插件文件，供 owner 自行上传目录；它不含仓库 marketplace。归档不会自动安装依赖或改动宿主。
+
+`release-receipt.json` 将两个 ZIP 绑定到同一源码 commit、tree 与包 manifest；`SHA256SUMS` 覆盖两个 ZIP 和 receipt。摘要只能核对一致性，不能单独认证发布者身份，仍需检查 GitHub 来源。完整操作见 [Releasing](docs/releasing.md)。
+
+维护校验使用 Python 3.10+，依赖固定在 `requirements-dev.txt`：PyYAML 与 Pillow 均不进入插件 payload。校验覆盖实际 PNG 解码、被动 SVG XML 解析、包结构与发布回归、源码/生成物一致性及网站测试和构建。Field Lab subject pack 现有 11 个 case；新增两个复用与假绿灯 fixture 已有基线/修正对照测试，但这不等于执行过目标模型，更不能推导出模型效果提升。Live eval 仍需独立的计划和调用预算。
 
 ## Feedback
 

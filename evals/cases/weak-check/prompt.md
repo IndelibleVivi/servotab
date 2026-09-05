@@ -1,0 +1,1 @@
+The unit test is green. Check whether publication policy is ready: a blocked item must never publish, even when approved. Fix any confirmed defect, preserve the existing cases, and add the missing regression. Do not add a new workflow or service.

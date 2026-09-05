@@ -1,6 +1,6 @@
 {
   "name": "servotab",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A quiet, risk-scaled engineering method layer for Codex.",
   "author": {
     "name": "Yifei Fang",

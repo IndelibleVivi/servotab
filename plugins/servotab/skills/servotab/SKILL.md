@@ -56,7 +56,7 @@ If a needed reference is unavailable, use the applicable safeguards above, discl
 ## Preserve outcome and permission boundaries
 
 - Choose the simplest mechanism that fulfills the complete accepted behavior, including its current consumers and integration. Do not silently replace the result with an MVP, placeholder, or backend-only slice.
-- Evaluate a proposed mechanism independently while respecting user-selected meaning. Do not widen trust, change programme order, or introduce infrastructure with no present consumer.
+- Evaluate a proposed mechanism independently while respecting user-selected meaning. Do not widen trust, change programme order, or introduce infrastructure without a current requirement or explicit foundational authorization.
 - Keep the existing task record or complete plan current after a material correction. Preserve deferred scope and why it remains. Create a persistent record only when the work needs continuity; do not create a second tracker.
 - Stop only at an unresolved authority boundary. Continue other safe, in-scope work. Research, file presence, reviewer advice, and test success confer no additional permission.
 - Keep Git operations, deployment, publication, secret access, and paid or live-provider operations within their applicable authorization. No method grants them by itself.
@@ -65,7 +65,7 @@ If a needed reference is unavailable, use the applicable safeguards above, discl
 
 - A meaningful check distinguishes the relevant failure from success. For a bug, use a reproducer that fails on the old behavior when this can be done safely in a disposable copy; do not revert unrelated live work.
 - Inspect the failure families the change actually exposes. A timer needs repeated/interleaved activation; recovery needs interrupted or partial state; an input validator needs malformed inputs; UI motion needs its applicable accessibility behavior. Do not run every family for every edit.
-- Do not weaken assertions, drop accepted scenarios, or edit only expected outputs to make a test green. Establish changed requirements before changing their oracle.
+- Do not weaken assertions, drop accepted scenarios, or edit only expected outputs to make a test green. Establish changed requirements before changing the expected result.
 - After a check fails, distinguish patch regression, existing baseline failure, and environment failure. Repeated same-mechanism failures require a new causal investigation, not another cosmetic retry.
 - When review findings arrive, resolve each material finding as fixed with evidence, rejected with evidence, or explicitly deferred under applicable authority. An open blocker cannot disappear behind a later summary or green CI.
 
