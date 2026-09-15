@@ -91,7 +91,7 @@ def release_artifacts(root: Path = ROOT) -> dict[str, bytes]:
             for entry in manifest['files']
         }
         # Source ZIP carries the marketplace and maintainer tooling. The portal ZIP
-        # contains ONLY the manifest-owned 69-file plugin payload.
+        # contains only the exact manifest-owned plugin payload.
         outputs = {
             f'servotab-{version}-plugin.zip': zip_bytes(plugin_files),
             f'servotab-{version}-source.zip': zip_bytes({f'servotab-{version}/{name}': item for name, item in source.items()}),

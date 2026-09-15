@@ -121,7 +121,8 @@ methods/*.md + scripts/skill_catalog.py        canonical method + metadata sourc
                     │
                     ▼
 plugins/servotab/
-├── .codex-plugin/plugin.json                 plugin manifest
+├── plugin.json                               portable Agent Plugins manifest
+├── .codex-plugin/plugin.json                 compatibility fallback
 ├── LICENSE + NOTICE.md                       package-local rights boundary
 ├── skills/servotab/                          implicit router + 12 references
 ├── skills/{design,...,finish}/               12 explicit leaves
@@ -131,7 +132,11 @@ plugins/servotab/
 PACK_MANIFEST.json                            exact derived payload identity
 ```
 
+根目录的 `plugins/servotab/plugin.json` 是 portable package entry point；`.codex-plugin/plugin.json` 作为旧版 Codex package reader 的同步 compatibility fallback 保留。验证会拒绝两份 manifest 在 identity 或 OpenAI interface 上发生漂移。
+
 `methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions、invocation 与 skill-icon source metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存 canonical identity assets 与十二枚 method glyph sources；generator 会把每个 skill 的透明 SVG / 400px PNG，以及 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。Paper-backed icon fallback 保留在 canonical assets 中，不进入默认 runtime payload。
+
+已发布的 0.6.1 release 仍是 69-file manifest-owned payload。当前未发布 source candidate 新增 portable root manifest，同时保留 compatibility fallback，因此 package identity 为 70 个文件；skill topology 与 runtime behavior 未改变。文本身份以 canonical LF 计算，binary assets 仍逐字节核验，因此 Git for Windows 的新检出以及旧 worktree 遗留的等价 CRLF 都不会再触发虚假的 stale/package mismatch。
 
 以下路径各有不同责任：
 

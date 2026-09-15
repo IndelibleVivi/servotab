@@ -122,6 +122,13 @@ def openai_yaml(entry: dict[str, object], *, implicit: bool) -> str:
     )
 
 
+def canonical_generated_bytes(path: Path, data: bytes) -> bytes:
+    """Return the canonical bytes used for generated text and assets."""
+    if path.suffix.lower() == ".png":
+        return data
+    return data.replace(b"\r\n", b"\n")
+
+
 def add_skill_icons(
     files: dict[Path, bytes],
     *,
@@ -132,7 +139,9 @@ def add_skill_icons(
     sources = SKILL_ICON_SOURCES[skill_name]
     for source_kind, output_name in (("svg", "icon.svg"), ("png", "icon-400.png")):
         source = root / "assets" / sources[source_kind]
-        files[skill_dir / "assets" / output_name] = source.read_bytes()
+        files[skill_dir / "assets" / output_name] = canonical_generated_bytes(
+            source, source.read_bytes()
+        )
 
 
 def expected_files(root: Path = ROOT) -> dict[Path, bytes]:
@@ -205,7 +214,7 @@ def check(root: Path = ROOT) -> list[str]:
     for path, content in expected.items():
         if not path.is_file():
             errors.append(f"missing generated file: {path.relative_to(root)}")
-        elif path.read_bytes() != content:
+        elif canonical_generated_bytes(path, path.read_bytes()) != content:
             errors.append(f"generated file is stale: {path.relative_to(root)}")
 
     allowed = {path.resolve() for path in expected}

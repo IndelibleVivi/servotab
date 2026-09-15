@@ -8,6 +8,7 @@ import zlib
 import os
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -15,7 +16,7 @@ import unittest
 # Allows an isolated red run against a prior source snapshot.
 sys.path.insert(0, os.environ.get("SERVOTAB_TEST_SCRIPTS", str(Path(__file__).parent)))
 from build_skills import check, write
-from runtime_validate import load_json_object, load_pack_manifest, validate_marketplace, validate_package, validate_plugin_manifest
+from runtime_validate import EXPECTED_PAYLOAD_FILES, load_json_object, load_pack_manifest, validate_marketplace, validate_package, validate_plugin_manifest
 from selftest import contract_copy
 from validate import load_yaml, validate_icon_asset
 from PIL import Image
@@ -192,6 +193,83 @@ class ContractTests(unittest.TestCase):
         path=self.root/'.agents/plugins/marketplace.json'
         data=json.loads(path.read_text());data['name']='other';path.write_text(json.dumps(data))
         self.assertTrue(validate_marketplace(self.root))
+
+    def test_crlf_payload_representation_keeps_canonical_identity(self):
+        for relative in EXPECTED_PAYLOAD_FILES:
+            path = self.root / relative
+            if path.suffix.lower() == '.png':
+                continue
+            data = path.read_bytes()
+            self.assertNotIn(b'\r\n', data, relative)
+            path.write_bytes(data.replace(b'\n', b'\r\n'))
+        self.assertEqual(check(self.root), [])
+        self.assertEqual(validate_package(self.root), [])
+
+
+class LineEndingPolicyTests(unittest.TestCase):
+    def test_autocrlf_checkout_keeps_generated_payload_lf(self):
+        if not (ROOT / ".git").exists():
+            self.skipTest("requires a Git checkout")
+        with tempfile.TemporaryDirectory(prefix="servotab-autocrlf-") as raw:
+            clone = Path(raw) / "checkout"
+            env = os.environ.copy()
+            env["GIT_CONFIG_NOSYSTEM"] = "1"
+            result = subprocess.run(
+                [
+                    "git",
+                    "-c",
+                    "core.autocrlf=true",
+                    "clone",
+                    "--quiet",
+                    "--no-hardlinks",
+                    str(ROOT),
+                    str(clone),
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+                env=env,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = (
+                clone / "plugins/servotab/skills/servotab/SKILL.md"
+            ).read_bytes()
+            self.assertNotIn(b"\r\n", payload)
+            check_result = subprocess.run(
+                [sys.executable, "scripts/build_skills.py", "--check"],
+                cwd=clone,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(check_result.returncode, 0, check_result.stderr)
+
+            legacy_text_paths = {
+                *(path.relative_to(clone) for path in (clone / "methods").glob("*.md")),
+                *(path.relative_to(clone) for path in (clone / "assets").glob("*.svg")),
+                *(Path(relative) for relative in EXPECTED_PAYLOAD_FILES if not relative.endswith(".png")),
+                Path("PACK_MANIFEST.json"),
+                Path(".agents/plugins/marketplace.json"),
+                Path("VERSION"),
+            }
+            for relative in legacy_text_paths:
+                path = clone / relative
+                data = path.read_bytes()
+                path.write_bytes(data.replace(b"\n", b"\r\n"))
+
+            for command in (
+                [sys.executable, "scripts/build_skills.py", "--check"],
+                [sys.executable, "scripts/generate_pack_manifest.py", "--check"],
+            ):
+                with self.subTest(command=command[1]):
+                    result = subprocess.run(
+                        command,
+                        cwd=clone,
+                        check=False,
+                        capture_output=True,
+                        text=True,
+                    )
+                    self.assertEqual(result.returncode, 0, result.stderr)
 
 
 if __name__ == '__main__':

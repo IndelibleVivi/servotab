@@ -1,0 +1,7 @@
+# Check out tracked text as canonical LF on every platform. Maintainer checks
+# also canonicalize legacy CRLF worktrees before comparing text identities.
+* text=auto eol=lf
+
+# Preserve opaque assets byte-for-byte.
+*.png binary
+*.ico binary

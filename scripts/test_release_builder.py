@@ -40,11 +40,11 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(first, release_artifacts(self.root))
         receipt = json.loads(first['release-receipt.json'])
         self.assertEqual(receipt['source_commit'], self.git('rev-parse', 'HEAD').decode().strip())
-        self.assertEqual(receipt['package_file_count'], 69)
+        self.assertEqual(receipt['package_file_count'], 70)
         with zipfile.ZipFile(io.BytesIO(first['servotab-0.6.1-plugin.zip'])) as archive:
             names = archive.namelist()
-            self.assertEqual(len(names), 69)
-            self.assertEqual(len(set(names)), 69)
+            self.assertEqual(len(names), 70)
+            self.assertEqual(len(set(names)), 70)
             manifest = json.loads((self.root/'PACK_MANIFEST.json').read_text())
             for entry in manifest['files']:
                 name = entry['path'].removeprefix('plugins/')

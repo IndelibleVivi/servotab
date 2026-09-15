@@ -103,9 +103,27 @@ jobs:
       - name: Check script syntax
         run: python -m py_compile scripts/*.py
 
+  windows-generated-sync:
+    runs-on: windows-latest
+
+    steps:
+      - name: Use the Git for Windows default text conversion
+        run: git config --global core.autocrlf true
+
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Prove generated payload identity after Windows checkout
+        run: python scripts/build_skills.py --check
+
   release-artifacts:
     if: github.event_name == 'push'
-    needs: [public-tree, site-build, validate]
+    needs: [public-tree, site-build, validate, windows-generated-sync]
     runs-on: ubuntu-latest
     steps:
       - name: Check out exact source
