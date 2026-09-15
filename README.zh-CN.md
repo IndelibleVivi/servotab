@@ -73,7 +73,7 @@ codex debug prompt-input "Check Servotab discovery." \
 修复移动端输入时消息气泡上移的问题，找到根因后直接实现并验证。
 ```
 
-Router 会按任务的真实 pressure 决定保持 direct，还是读取一份相关 reference。它不会宣布内部分类，也不会因为 method 可用就制造 plan、worktree、TDD、subagent 或第二轮 review。
+Router 会按任务的真实 pressure 决定保持 direct，还是读取一份相关 reference。它不会宣布内部分类，也不会因为 method 可用就制造 plan、worktree、TDD、subagent 或第二轮 review。进入深层执行前，它还会先确定 responsibility：有界、noisy 或足够实质的 lane 可以交给一个 worker；显式 solo request 留在主 session；trivial 工作或频繁的 cross-owner 决策不会为了 coordination benefit 被拆分。Coupling 本身从不强制走主 session，一个 responsibility 内部耦合的部分只需留在同一个 lane 里。
 
 明确需要某个 method 时可以直接调用：
 
@@ -106,7 +106,7 @@ Plugin 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit l
 | `review-feedback` | explicit only | 先核实 external feedback，再采纳、调整或拒绝 |
 | `verify` | explicit only | 用 fresh、risk-matched evidence 支撑 completion claim |
 | `worktree` | explicit only | 只在 dirty state、风险、时长或并发写入值得时隔离 workspace |
-| `delegate` | explicit only | 给少量独立 lanes 明确 ownership、authority 与 return contract |
+| `delegate` | explicit only | 在深层执行前确定 responsibility；只在值得时把 bounded lane 交给一个 worker |
 | `finish` | explicit only | 检查 final tree，并只执行已授权的 Git / PR / cleanup action |
 
 Method 不创造权限，也不把 source-complete、installed、deployed、live、submitted 与 published 混成同一个状态。
@@ -136,7 +136,7 @@ PACK_MANIFEST.json                            exact derived payload identity
 
 `methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions、invocation 与 skill-icon source metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存 canonical identity assets 与十二枚 method glyph sources；generator 会把每个 skill 的透明 SVG / 400px PNG，以及 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。Paper-backed icon fallback 保留在 canonical assets 中，不进入默认 runtime payload。
 
-已发布的 0.6.1 release 仍是 69-file manifest-owned payload。当前未发布 source candidate 新增 portable root manifest，同时保留 compatibility fallback，因此 package identity 为 70 个文件；skill topology 与 runtime behavior 未改变。文本身份以 canonical LF 计算，binary assets 仍逐字节核验，因此 Git for Windows 的新检出以及旧 worktree 遗留的等价 CRLF 都不会再触发虚假的 stale/package mismatch。
+已发布的 0.6.1 release 仍是 69-file manifest-owned payload。当前未发布 source candidate 新增 portable root manifest，同时保留 compatibility fallback，因此 package identity 为 70 个文件；one-router/twelve-leaf 的 skill topology 未改变。该 candidate 修订了 `delegate`、`execute`、`debug` 与 implicit router 的 responsibility-choice contract；installed / activated 的 0.6.1 package 尚未包含这些指引。正向 canary 现已有一次 accepted workspace-scoped synthetic attempt 与独立 review；它只支持该 pinned case，不能外推为普遍 host effectiveness。文本身份以 canonical LF 计算，binary assets 仍逐字节核验，因此 Git for Windows 的新检出以及旧 worktree 遗留的等价 CRLF 都不会再触发虚假的 stale/package mismatch。
 
 以下路径各有不同责任：
 
@@ -196,7 +196,7 @@ npm run build
 
 `release-receipt.json` 将两个 ZIP 绑定到同一源码 commit、tree 与包 manifest；`SHA256SUMS` 覆盖两个 ZIP 和 receipt。摘要只能核对一致性，不能单独认证发布者身份，仍需检查 GitHub 来源。完整操作见 [Releasing](docs/releasing.md)。
 
-维护校验使用 Python 3.10+，依赖固定在 `requirements-dev.txt`：PyYAML 与 Pillow 均不进入插件 payload。校验覆盖实际 PNG 解码、被动 SVG XML 解析、包结构与发布回归、源码/生成物一致性及网站测试和构建。当前 source pack 现有 13 个 case：0.6.1 release 已包含 11 个，未发布的 source candidate 新增显式 tranche planning 与跨进程 complete-delivery controls。全部 13 个 case 都有基线/修正对照检查，但这既不等于执行过目标模型，也不能关闭已声明的 semantic review requirements。已检查的 Field Lab 0.2 baseline source `d9f717a` 缺少所需 public input；Field Lab main `b87b14b` 现已提供 `fieldlab review --requirement-outcomes`，并通过该 CLI 证明当前 9 个 human-required cases 可被 Servotab 的 synthetic producer-consumer contract check 接受。这不等于已完成 human review 或 live model run；compatible source 已 merge，但不因此等于已 release、install 或 activate。Live eval 仍需独立的计划和调用预算。
+维护校验使用 Python 3.10+，依赖固定在 `requirements-dev.txt`：PyYAML 与 Pillow 均不进入插件 payload。校验覆盖实际 PNG 解码、被动 SVG XML 解析、包结构与发布回归、源码/生成物一致性及网站测试和构建。当前 source pack 现有 17 个 case：0.6.1 release 已包含 11 个，未发布的 source candidate 新增显式 tranche planning、跨进程 complete-delivery controls，以及 4 个 delegation responsibility-choice canaries。全部 17 个 case 都有基线/修正对照检查，但这不能自动关闭已声明的 semantic review requirements。正向 delegation 无法用 trace ceiling（`max_subagent_events`）断言，因此该 canary 把有界上限与要求提供真实 dispatch 与 integration 证据的 review requirements 配对；trivial、explicit-solo 与 capability-unavailable 三个 canary 继续保持 `max_subagent_events: 0`。已检查的 Field Lab 0.2 baseline source `d9f717a` 缺少所需 public input；Field Lab main `b87b14b` 现已提供 `fieldlab review --requirement-outcomes`，并通过该 CLI 证明当时的 9 个 human-required cases 可被 Servotab 的 synthetic producer-consumer contract check 接受。`delegate-bounded-investigation` 的第一次 live attempt 虽获得三条 semantic support，却因重复的 fixed-label assertions 被拒；移除这些 literal checks、保留原 semantic review boundary 后，第二次独立预算的 attempt 通过 deterministic verification，新 reviewer 也支持全部三条 requirement，Servotab acceptance 返回 `accepted`。该证据只覆盖这一个 pinned workspace-scoped case；compatible source 已 merge，但不因此等于已 release、install 或 activate。任何后续 live eval 仍需新的计划和显式调用预算，Field Lab 不会自动 retry。
 
 ## Feedback
 

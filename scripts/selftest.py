@@ -239,7 +239,25 @@ def main() -> int:
     feedback = (ROOT / "methods" / "review-feedback.md").read_text(encoding="utf-8")
     delegate = (ROOT / "methods" / "delegate.md").read_text(encoding="utf-8")
     design = (ROOT / "methods" / "design.md").read_text(encoding="utf-8")
+    debug = (ROOT / "methods" / "debug.md").read_text(encoding="utf-8")
     assert_true("`delegate` reference" in execute, "execute lost the delegation phase change")
+    assert_true(
+        "Choose responsibility before deep execution" in router,
+        "router lost the responsibility choice",
+    )
+    assert_true(
+        "Choose responsibility before deep execution" in execute,
+        "execute lost the responsibility choice",
+    )
+    assert_true("Serial delegation is valid" in delegate, "delegate lost serial delegation")
+    assert_true(
+        "worker does not delegate again" in delegate,
+        "delegate lost the no-recursion boundary",
+    )
+    assert_true(
+        "worker lane before localization" in debug,
+        "debug lost the bounded pre-localization lane",
+    )
     for verdict in ("advances", "research-only", "diverges", "authority unclear"):
         assert_true(verdict in review, f"review lost goal-integrity verdict: {verdict}")
     assert_true("not authority by authorship" in feedback, "review-feedback lost authority boundary")

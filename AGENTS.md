@@ -23,7 +23,8 @@ Servotab is independent and community-maintained. Do not claim it is an official
 | `assets/` | Canonical repository identity assets and usage notes; `servotab-mark-ink*` plus `skill-icons/*` own the 13 skill icon sources |
 | `plugins/servotab/assets/` | Generated curated package copies, not a second asset authority |
 | `plugins/servotab/skills/*/assets/` | Generated local skill-icon copies; never edit directly |
-| `plugins/servotab/.codex-plugin/plugin.json` | Plugin package metadata and public interface contract |
+| `plugins/servotab/plugin.json` | Canonical portable plugin package metadata and public interface contract |
+| `plugins/servotab/.codex-plugin/plugin.json` | Synchronized compatibility fallback for older Codex package readers; never an independent authority |
 | `plugins/servotab/LICENSE` and `NOTICE.md` | Package-local functional-material and identity-asset rights boundary |
 | `.agents/plugins/marketplace.json` | Repository marketplace route |
 | `PACK_MANIFEST.json` | Exact generated package identity; regenerate, do not hand-edit |

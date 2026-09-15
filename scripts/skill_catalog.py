@@ -166,14 +166,17 @@ METHODS = (
         "skill": "delegate",
         "method": "delegate",
         "description": (
-            "Delegate a small number of bounded engineering lanes when parallelism, clean "
-            "context, independent review, or coordinator attention materially improves the work."
+            "Choose responsibility for substantial work before deep execution: keep one "
+            "responsibility's coupled parts in a single lane, and hand a bounded or independent "
+            "lane to a worker when clean context, an unknown cause, independent review, or "
+            "coordinator attention materially improves the outcome."
         ),
         "display_name": "Delegate",
-        "short_description": "Delegate bounded lanes with explicit ownership",
+        "short_description": "Choose responsibility before deep work",
         "default_prompt": (
-            "Use $delegate to define bounded worker lanes, dispatch the fewest useful agents "
-            "with explicit authority, and verify their returns before integration."
+            "Use $delegate to choose responsibility before deep work, define bounded worker "
+            "lanes, dispatch or reuse the fewest useful agents with explicit authority, and "
+            "verify their returns before integration."
         ),
     },
     {

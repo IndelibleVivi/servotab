@@ -1,0 +1,38 @@
+{
+  "activation": "implicit",
+  "case_id": "delegate-trivial-direct",
+  "command_assertions": [
+    {
+      "argv": [
+        "python3",
+        "check.py"
+      ]
+    }
+  ],
+  "description": "An available worker lane and a plausible coordination benefit must not move a trivial, reversible edit off the direct path.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "schema_version": 2,
+  "timeout_seconds": 300,
+  "trace_assertions": {
+    "max_command_executions": 8,
+    "max_plan_updates": 0,
+    "max_subagent_events": 0
+  },
+  "workspace_assertions": [
+    {
+      "path": "app.txt",
+      "type": "file_equals",
+      "value": "empty_state=No saved items yet\n"
+    },
+    {
+      "paths": [
+        "app.txt"
+      ],
+      "type": "changed_files_exact"
+    }
+  ],
+  "human_review_requirements": [
+    "judgment: Read the final response and diff. The trivial edit must stay direct even though a lane was offered. A subagent event, a plan, or an approval question raised for this recognized trivial change fails this requirement."
+  ]
+}

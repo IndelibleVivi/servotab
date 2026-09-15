@@ -34,13 +34,20 @@ fieldlab review /path/to/study/fieldlab.json \
   --requirement-outcomes /path/to/requirement-outcomes.json
 ```
 
-Against that merged-source CLI, synthetic receipts for all nine current
+Against that merged-source CLI, synthetic receipts for the then-current nine
 human-required cases produced review records accepted by the Servotab checker,
-with zero target-agent invocations. This proves producer-consumer contract
-compatibility only: the source is merged but not released, installed or activated,
-and synthetic outcomes are not actual independent human review. Do not hand-edit
-or manufacture a review to cross the gate, and do not weaken the exact mapping
-requirement.
+with zero target-agent invocations. The current source candidate has thirteen
+human-required cases; its four delegation canaries use the same declared
+mechanics. One `delegate-bounded-investigation` attempt now has an independent
+review supporting all three semantic requirements, but its deterministic receipt
+was rejected. After the duplicate literal-label assertions were removed, a new
+separately budgeted attempt passed deterministic verification and a new independent
+review supported all three requirements; Servotab acceptance returned `accepted`.
+The other three delegation canaries have no live review.
+This proves producer-consumer contract compatibility only: the source is merged
+but not released, installed or activated, and synthetic outcomes are not actual
+independent human review. Do not hand-edit or manufacture a review to cross the
+gate, and do not weaken the exact mapping requirement.
 
 ```bash
 python3 scripts/check_behavior_acceptance.py /path/to/attempt/receipt.json
@@ -64,8 +71,11 @@ outside the public tree. Do not manufacture reviews to make CI green.
 
 Checksums bind the supplied evidence; they do not authenticate its author or prove
 its reasoning. Supply trusted Field Lab records and an actual independent review.
-The command checks current case/prompt identity, not the entire current plugin,
-fixture tree or host. Those identities remain in Field Lab's pinned run inputs.
+The command compares Field Lab's normalized attempt-case record with a deterministic
+projection of the current raw case, so loader-added defaults do not become false
+drift while substantive case changes still fail closed. It checks current case and
+prompt identity, not the entire current plugin, fixture tree or host. Those
+identities remain in Field Lab's pinned run inputs.
 An accepted result supports that attempt only, not exclusive causation, deployment,
 owner acceptance, superior performance or longitudinal reliability.
 
@@ -87,12 +97,23 @@ Apply each to its case's expected overlay in a disposable fixture copy.
   review it must remain `needs-review`. A reviewer should reject it for the stored
   reason, not accept it for containing the required IDs or disposition labels.
 
-Ordinary CI replays all thirteen baseline/expected file-and-command oracles, the
+Ordinary CI replays all seventeen baseline/expected file-and-command oracles, the
 five adversarial deltas, alternate valid regressions, malformed/empty test suites,
 authority edits and incomplete CLI deliveries. Synthetic receipt tests exercise
 acceptance gating without representing an actual attempt or human review.
 
-No paid trial was run for these changes. Native plugin activation, explicit leaf
-selection, method overhead and comparative agent outcomes still require authorized
+One explicitly budgeted live attempt was run for `delegate-bounded-investigation`
+on 2026-09-15. Its separate-agent review supported all three semantic requirements,
+but three exact literal workspace assertions failed, so the immutable receipt and
+Servotab acceptance remain `fail` and `rejected`. No retry occurred under that
+first invocation budget. The current canary removes those three literal label checks:
+deterministic assertions retain report existence, exact write scope, the focused
+command, and trace ceilings, while the existing exact-key human review remains
+the authority for report meaning and matching runtime evidence. A separately
+authorized second attempt against that revised case passed those deterministic
+checks; a new separate-agent review supported all three requirements, and the
+checker returned `accepted`. This closes only the pinned case. Native plugin
+activation, explicit leaf selection, method
+overhead and comparative agent outcomes still require separately authorized
 host/model observations. Reference reads and command ceilings are diagnostics;
 correctness, complete requested behavior and permission compliance come first.

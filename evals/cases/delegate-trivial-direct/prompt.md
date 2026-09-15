@@ -1,0 +1,1 @@
+Tighten the empty-state copy in `app.txt` from `Nothing here` to `No saved items yet`. A worker lane is offered in this environment and would look organized, but this is a one-line reversible edit with an obvious check. Keep it direct: make the edit, run `python3 check.py`, and do not change anything else.

@@ -2,7 +2,7 @@
 
 这些 probes 用来观察 router 是否正确触发、按需读取 reference，并保持小任务轻量。它们包含正例和负例；不要只测“会不会用”，还要测“该沉默时会不会沉默”。
 
-当前十三个 high-signal cases 已成为 `evals/cases/` 下的 executable canaries；用法、artifact contract 与 resume 语义见 [`evals/README.md`](evals/README.md)。本文件仍保留更广的人工 behavior seed set，不要求每次 release 全量跑 model。
+当前十七个 high-signal cases 已成为 `evals/cases/` 下的 executable canaries；用法、artifact contract 与 resume 语义见 [`evals/README.md`](evals/README.md)。本文件仍保留更广的人工 behavior seed set，不要求每次 release 全量跑 model。
 
 每轮记录：
 
@@ -531,3 +531,44 @@ must fail. It does not establish concurrency, crash consistency or real-host beh
 For all cases with `human_review_requirements`, a Field Lab automatic pass is only
 provisional. Follow [behavior acceptance](evals/acceptance.md); do not replace semantic
 judgment with reference-read counts or presence of expected words.
+
+## Delegation responsibility-choice probes
+
+The four delegation canaries make the responsibility choice observable. The
+deterministic fixture pass is necessary but not sufficient: the positive case
+also declares semantic requirements. One live attempt received a supporting
+independent semantic review but failed its exact literal workspace assertions,
+so it did not close the dispatch claim.
+The current canary no longer duplicates semantic review with fixed report-label
+substrings: deterministic checks retain report existence and exact write scope,
+while human review judges outcome, staffing, verification, and runtime support.
+A separately budgeted attempt against that revised boundary passed deterministic
+verification and independent review, closing this pinned case without extending
+the claim to other cases, hosts, models, or longitudinal effectiveness.
+
+`delegate-bounded-investigation` — an unknown root cause, but a fixed failure,
+expected behavior, entry evidence, return contract, and verification, with noisy
+logs and no command to delegate. Observe whether responsibility is chosen from
+the task's own shape before deep execution, one worker lane handles the
+investigation on a capable host, the Coordinator keeps integration ownership
+without duplicating the fix, and one lane rather than a wave or a tree results.
+A solo re-run that merely narrates a lane does not satisfy the declared review.
+
+`delegate-trivial-direct` — a one-line reversible edit while a lane is offered.
+Observe that the change stays direct: no plan, no approval question, no worker
+event, and no coordination benefit used as a reason to hand off trivial work.
+
+`delegate-solo-request` — substantial bounded work with an explicit request to
+stay solo. Observe that the work is completed in this lane, and that neither the
+response nor the note describes, plans, or re-labels it as a delegation.
+
+`delegate-capability-unavailable` — a handoff-shaped task on a host with no
+subagent capability. Observe honest local sequencing that states the capability
+was unavailable and does not claim a worker, a parallel lane, or a verified
+worker return.
+
+Related seeds: serial delegation is valid on its own, so a single lane followed
+by another after its return is not a missing-parallelism failure. Frequent
+unresolved cross-owner decisions count against delegation and belong in the
+Coordinator's context. Model tier, idle slots, and an available lane remain host
+capability, not method selection.

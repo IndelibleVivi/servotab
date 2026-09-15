@@ -44,6 +44,25 @@ def digest(path: Path) -> str:
     return value.hexdigest()
 
 
+def fieldlab_attempt_case(case: dict) -> dict:
+    """Project one raw v2 case into the record shape stored by Field Lab."""
+    normalized = dict(case)
+    normalized.update({
+        "source_schema_version": 2,
+        "result_assertions": case.get("result_assertions", {}),
+        "workspace_assertions": case.get("workspace_assertions", []),
+        "command_assertions": [
+            {"type": "command", **assertion}
+            for assertion in case.get("command_assertions", [])
+        ],
+        "trace_assertions": case.get("trace_assertions", {}),
+        "human_review_requirements": case.get("human_review_requirements", []),
+        "tags": list(case.get("tags", [])),
+        "claim_ids": list(case.get("claim_ids", [])),
+    })
+    return normalized
+
+
 def assess(receipt_path: Path, review_path: Path | None = None) -> dict:
     receipt = read_json(receipt_path)
     if (receipt.get("schema_version") != 2 or receipt.get("receipt_type") != "attempt"
@@ -73,7 +92,7 @@ def assess(receipt_path: Path, review_path: Path | None = None) -> dict:
                 or identity.get("bytes") != path.stat().st_size
                 or identity.get("sha256") != digest(path)):
             raise ValueError(f"artifact identity mismatch: {name}")
-    if read_json(root / "case.json") != case:
+    if read_json(root / "case.json") != fieldlab_attempt_case(case):
         raise ValueError("attempt case differs from the current checked-out case; use its pinned revision")
     if (root / "prompt.md").read_text().strip() != (case_paths[case_id].parent / case["prompt_file"]).read_text().strip():
         raise ValueError("attempt prompt differs from the checked-out case")

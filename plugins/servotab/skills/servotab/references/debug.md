@@ -68,7 +68,7 @@ Test the smallest discriminating change or observation. Avoid changing several v
 
 This is a guard against thrashing, not a reason to stop at an arbitrary number when new evidence is strong.
 
-Do not delegate a vague symptom. Delegate only after localization reveals distinct evidence questions; before dispatch, treat that as a phase change and apply the `delegate` reference. Then verify returned claims against the primary artifacts.
+Do not delegate a vague symptom. A bounded investigation may be one worker lane before localization when the failure, expected behavior, entry evidence, return contract, and verification are already fixed and clean context or coordinator attention has material value; otherwise delegate only after localization reveals distinct evidence questions. Treat dispatch as a phase change and apply the `delegate` reference, then verify returned claims against the primary artifacts.
 
 ## Reset the mechanism when patches multiply
 
