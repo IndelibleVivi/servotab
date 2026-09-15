@@ -1,6 +1,6 @@
 # Migrating from a legacy Softpowers install
 
-This guide moves an active, manifest-owned Softpowers `0.3.0-rc5` or earlier global-skill layer to the current Servotab `0.6.2` source-candidate plugin package without manually deleting installed skills or rewriting legacy manifests. Use the tagged `v0.6.1` release instead when a published release rather than candidate source is required.
+This guide moves an active, manifest-owned Softpowers `0.3.0-rc5` or earlier global-skill layer to the tagged Servotab `0.6.2` plugin package without manually deleting installed skills or rewriting legacy manifests.
 
 > **Maintainer migration receipt — 2026-08-30:** Independent integrated review closed with no actionable P0–P2 findings. `servotab@personal` was freshly reinstalled with an exact 43-file source/cache match, then all 13 reachable manifest-owned layers under `~/.codex/skills` were retired one at a time with a fresh preflight before each invocation. Both supported roots now report `CLEAR`; no modified-skill snapshot was needed. This is a receipt for the inspected maintainer machine, not blanket authority to retire an uninspected root elsewhere.
 
@@ -17,7 +17,7 @@ Do not collapse them. A generated plugin package does not prove it is installed,
 
 ## Before you begin
 
-Use a clean or intentionally reviewed Servotab checkout. Confirm the candidate identity before touching live Codex state, and confirm `docs/current-state.md` does not carry an active retirement hold:
+Use a clean or intentionally reviewed Servotab checkout. Confirm the release identity before touching live Codex state, and confirm `docs/current-state.md` does not carry an active retirement hold:
 
 ```bash
 git status --short
@@ -30,7 +30,7 @@ uv run --with-requirements requirements-dev.txt python3 scripts/selftest.py
 uv run --with-requirements requirements-dev.txt python3 -m unittest discover -s scripts -p 'test_*.py' -q
 ```
 
-Expected candidate version: `0.6.2`. Do not continue from an unknown generated tree or stale manifest.
+Expected release version: `0.6.2`. Do not continue from an unknown generated tree or stale manifest.
 
 Close or pause active Codex tasks that could load or write the old skill directories during the cutover. Do not delete plugin caches, skill roots, manifests, backups, or snapshots by hand.
 
