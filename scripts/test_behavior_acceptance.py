@@ -27,7 +27,21 @@ class BehaviorAcceptanceTests(unittest.TestCase):
         case_path = ROOT / "evals/cases" / self.case_id / "case.json"
         self.case = json.loads(case_path.read_text())
         requirements = self.case.get("human_review_requirements", [])
-        write_json(self.work / "case.json", self.case)
+        attempt_case = dict(self.case)
+        attempt_case.update({
+            "source_schema_version": 2,
+            "result_assertions": self.case.get("result_assertions", {}),
+            "workspace_assertions": self.case.get("workspace_assertions", []),
+            "command_assertions": [
+                {"type": "command", **assertion}
+                for assertion in self.case.get("command_assertions", [])
+            ],
+            "trace_assertions": self.case.get("trace_assertions", {}),
+            "human_review_requirements": requirements,
+            "tags": list(self.case.get("tags", [])),
+            "claim_ids": list(self.case.get("claim_ids", [])),
+        })
+        write_json(self.work / "case.json", attempt_case)
         (self.work / "prompt.md").write_text(case_path.with_name("prompt.md").read_text())
         (self.work / "trace.jsonl").write_text('{"test_fixture": true}\n')
         (self.work / "stderr.log").write_text("")
@@ -69,6 +83,13 @@ class BehaviorAcceptanceTests(unittest.TestCase):
 
     def test_independent_supported_review_accepts(self):
         self.assertEqual(assess(self.receipt_path, self.review())["status"], "accepted")
+
+    def test_real_fieldlab_case_defaults_are_part_of_attempt_identity(self):
+        attempt_case = json.loads((self.work / "case.json").read_text())
+        self.assertEqual(attempt_case["source_schema_version"], 2)
+        self.assertEqual(attempt_case["result_assertions"], {})
+        self.assertEqual(attempt_case["tags"], [])
+        self.assertEqual(attempt_case["claim_ids"], [])
 
     def test_rejected_or_inconclusive_judgment_cannot_pass(self):
         for value, expected in (("not-supported", "rejected"), ("inconclusive", "needs-review")):

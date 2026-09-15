@@ -538,10 +538,13 @@ The four delegation canaries make the responsibility choice observable. The
 deterministic fixture pass is necessary but not sufficient: the positive case
 also declares semantic requirements. One live attempt received a supporting
 independent semantic review but failed its exact literal workspace assertions,
-so an accepted attempt remains necessary before any dispatch claim is closed.
+so it did not close the dispatch claim.
 The current canary no longer duplicates semantic review with fixed report-label
 substrings: deterministic checks retain report existence and exact write scope,
 while human review judges outcome, staffing, verification, and runtime support.
+A separately budgeted attempt against that revised boundary passed deterministic
+verification and independent review, closing this pinned case without extending
+the claim to other cases, hosts, models, or longitudinal effectiveness.
 
 `delegate-bounded-investigation` — an unknown root cause, but a fixed failure,
 expected behavior, entry evidence, return contract, and verification, with noisy

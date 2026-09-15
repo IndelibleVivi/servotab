@@ -63,11 +63,16 @@ topology（prompt 未命令时的真实 worker lane）、integration ownership �
 delegation 证明。2026-09-15 的一次授权 attempt 产生了一个 worker event，focused
 test 与三条独立 semantic review 均获支持，但报告标题没有包含 case 要求的三条
 exact literal strings，故 immutable receipt 为 `fail`，Servotab acceptance 为
-`rejected`。它是 bounded host observation，不是 accepted evidence；没有自动 retry
-或第二次 target invocation。当前 canary 已移除这三条 literal label assertions；
+`rejected`。它是 bounded host observation，不是 accepted evidence；第一次预算内
+没有 retry。当前 canary 已移除这三条 literal label assertions；
 deterministic workspace gate 只检查报告存在和 exact changed-file scope，报告中的
 outcome、staffing 与 verification 是否有真实 runtime evidence 继续由三条逐项
 `human_review_requirements` 判断，避免两个不同证据层重复裁同一语义。
+在这一修订后的 case 上，另一次单独授权预算的 attempt 通过全部 deterministic
+assertions；新的 separate-agent review 逐项支持 topology、integration 与 evidence，
+Servotab acceptance 返回 `accepted`。该 receipt 只支持这一个 pinned
+workspace-scoped attempt，不证明 exclusive causation、一般模型效果、安装激活或
+长期改进。
 
 任何 synthetic live attempt 都必须先生成 saved plan，再显式跨过 Field Lab 的
 `run --live --max-invocations N` gate。Servotab 不把 live model eval 设为普通

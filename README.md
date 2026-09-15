@@ -148,7 +148,7 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The tagged 0.6.1 release contains exactly 69 manifest-owned package files. The current unreleased source candidate adds the portable root manifest while retaining the compatibility fallback, so its package identity contains 70 files; the one-router/twelve-leaf skill topology remains unchanged. The candidate revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router; installed or activated 0.6.1 packages do not yet contain that guidance. One workspace-scoped candidate attempt now exists, but its immutable receipt remains rejected despite a supporting semantic review, so it does not close the host-behavior claim. Repository checks use canonical LF identity for text and exact bytes for binary assets, so fresh Git for Windows checkouts and equivalent CRLF left in an existing worktree do not create false stale-package reports. They also cover exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
+The tagged 0.6.1 release contains exactly 69 manifest-owned package files. The current unreleased source candidate adds the portable root manifest while retaining the compatibility fallback, so its package identity contains 70 files; the one-router/twelve-leaf skill topology remains unchanged. The candidate revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router; installed or activated 0.6.1 packages do not yet contain that guidance. One workspace-scoped positive canary now has an accepted synthetic attempt and independent review, supporting that pinned case without establishing general host effectiveness. Repository checks use canonical LF identity for text and exact bytes for binary assets, so fresh Git for Windows checkouts and equivalent CRLF left in an existing worktree do not create false stale-package reports. They also cover exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
 
 Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, a website deployment, an OpenAI directory update, or owner acceptance on those separate surfaces. The GitHub Release is public; the existing official directory listing remains a separately observed distribution state.
 
@@ -173,13 +173,16 @@ capability-unavailable canaries keep `max_subagent_events: 0`. The inspected
 Field Lab 0.2 baseline source at `d9f717a` lacks the required public input; Field
 Lab main at `b87b14b` now exposes `fieldlab review --requirement-outcomes`. The
 then-current nine human-required cases pass Servotab's synthetic
-producer-consumer contract check through that CLI. A separately reviewed live
-attempt for `delegate-bounded-investigation` supported its three semantic
-requirements but failed three exact literal workspace assertions, so its receipt
-remains rejected and the candidate's human-required cases still have no accepted
-live evidence. The compatible source is merged but not thereby released,
-installed or activated. Any further live synthetic attempt requires a new plan
-and explicit invocation budget; Field Lab does not retry automatically.
+producer-consumer contract check through that CLI. An initial live attempt for
+`delegate-bounded-investigation` supported its three semantic requirements but
+failed duplicate literal report-label assertions. After those assertions were
+removed in favor of the existing semantic review boundary, a separately budgeted
+attempt passed deterministic verification, and a new independent review supported
+all three requirements; Servotab acceptance returned `accepted`. This evidence is
+limited to that pinned workspace-scoped case. The compatible source is merged but
+not thereby released, installed or activated. Any further live synthetic attempt
+still requires a new plan and explicit invocation budget; Field Lab does not retry
+automatically.
 
 ## Release artifacts
 
