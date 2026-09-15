@@ -9,7 +9,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-此 checkout 的源码版本：`0.6.1`。0.6.1 release 加强图标与包结构校验，澄清验证判据，并加入可重复构建的发布归档；带 tag 的 [Servotab 0.6.1 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.1) 已公开。[OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 是独立的分发渠道；源码版本或 GitHub Release 均不能证明目录中的包已更新。Servotab 继续保持独立、社区维护的定位。具体证据和边界见 [current state](docs/current-state.md) 与 [0.6.1 更新说明](docs/releases/0.6.1.md)。
+此 checkout 的源码版本：`0.6.2`（release candidate）。该 candidate 修复 Windows 文本身份校验，采用 portable Agent Plugins manifest，并以有界证据强化 delegation responsibility routing。带 tag 的 [Servotab 0.6.1 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.1) 仍是当前最新公开 GitHub release；[OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 是独立分发渠道。源码版本、candidate ZIP 或 GitHub Release 都不能证明目录 payload 已更新。具体证据和边界见 [current state](docs/current-state.md)、[0.6.2 candidate notes](docs/releases/0.6.2.md) 与历史 [0.6.1 release notes](docs/releases/0.6.1.md)。
 
 ## 它做什么
 
@@ -136,7 +136,7 @@ PACK_MANIFEST.json                            exact derived payload identity
 
 `methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions、invocation 与 skill-icon source metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存 canonical identity assets 与十二枚 method glyph sources；generator 会把每个 skill 的透明 SVG / 400px PNG，以及 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。Paper-backed icon fallback 保留在 canonical assets 中，不进入默认 runtime payload。
 
-已发布的 0.6.1 release 仍是 69-file manifest-owned payload。当前未发布 source candidate 新增 portable root manifest，同时保留 compatibility fallback，因此 package identity 为 70 个文件；one-router/twelve-leaf 的 skill topology 未改变。该 candidate 修订了 `delegate`、`execute`、`debug` 与 implicit router 的 responsibility-choice contract；installed / activated 的 0.6.1 package 尚未包含这些指引。正向 canary 现已有一次 accepted workspace-scoped synthetic attempt 与独立 review；它只支持该 pinned case，不能外推为普遍 host effectiveness。文本身份以 canonical LF 计算，binary assets 仍逐字节核验，因此 Git for Windows 的新检出以及旧 worktree 遗留的等价 CRLF 都不会再触发虚假的 stale/package mismatch。
+已发布的 0.6.1 release 仍是 69-file manifest-owned payload。0.6.2 source candidate 新增 portable root manifest，同时保留 compatibility fallback，因此 package identity 为 70 个文件；one-router/twelve-leaf 的 skill topology 未改变。该 candidate 修订了 `delegate`、`execute`、`debug` 与 implicit router 的 responsibility-choice contract；installed / activated 的 0.6.1 package 尚未包含这些指引。正向 canary 现已有一次 accepted workspace-scoped synthetic attempt 与独立 review；它只支持该 pinned case，不能外推为普遍 host effectiveness。文本身份以 canonical LF 计算，binary assets 仍逐字节核验，因此 Git for Windows 的新检出以及旧 worktree 遗留的等价 CRLF 都不会再触发虚假的 stale/package mismatch。
 
 以下路径各有不同责任：
 
@@ -192,11 +192,11 @@ npm run build
 
 ## 发布产物与验证边界
 
-源码 checkout 或 `servotab-0.6.1-source.zip` 提供完整仓库和 marketplace 路径。`servotab-0.6.1-plugin.zip` 仅含 69 个受 manifest 管理的插件文件，供 owner 自行上传目录；它不含仓库 marketplace。归档不会自动安装依赖或改动宿主。
+构建当前 candidate 会产出用于 repository marketplace 的 `servotab-0.6.2-source.zip`，以及仅含 70 个 manifest-owned plugin 文件、供 owner 自行上传目录的 `servotab-0.6.2-plugin.zip`。在 exact revision 被 tag 和公开发布前，它们只是 release-preparation artifacts，不是 GitHub Release；现有 0.6.1 公开 assets 保持不可变历史。归档不会自动安装依赖或改动宿主。
 
 `release-receipt.json` 将两个 ZIP 绑定到同一源码 commit、tree 与包 manifest；`SHA256SUMS` 覆盖两个 ZIP 和 receipt。摘要只能核对一致性，不能单独认证发布者身份，仍需检查 GitHub 来源。完整操作见 [Releasing](docs/releasing.md)。
 
-维护校验使用 Python 3.10+，依赖固定在 `requirements-dev.txt`：PyYAML 与 Pillow 均不进入插件 payload。校验覆盖实际 PNG 解码、被动 SVG XML 解析、包结构与发布回归、源码/生成物一致性及网站测试和构建。当前 source pack 现有 17 个 case：0.6.1 release 已包含 11 个，未发布的 source candidate 新增显式 tranche planning、跨进程 complete-delivery controls，以及 4 个 delegation responsibility-choice canaries。全部 17 个 case 都有基线/修正对照检查，但这不能自动关闭已声明的 semantic review requirements。正向 delegation 无法用 trace ceiling（`max_subagent_events`）断言，因此该 canary 把有界上限与要求提供真实 dispatch 与 integration 证据的 review requirements 配对；trivial、explicit-solo 与 capability-unavailable 三个 canary 继续保持 `max_subagent_events: 0`。已检查的 Field Lab 0.2 baseline source `d9f717a` 缺少所需 public input；Field Lab main `b87b14b` 现已提供 `fieldlab review --requirement-outcomes`，并通过该 CLI 证明当时的 9 个 human-required cases 可被 Servotab 的 synthetic producer-consumer contract check 接受。`delegate-bounded-investigation` 的第一次 live attempt 虽获得三条 semantic support，却因重复的 fixed-label assertions 被拒；移除这些 literal checks、保留原 semantic review boundary 后，第二次独立预算的 attempt 通过 deterministic verification，新 reviewer 也支持全部三条 requirement，Servotab acceptance 返回 `accepted`。该证据只覆盖这一个 pinned workspace-scoped case；compatible source 已 merge，但不因此等于已 release、install 或 activate。任何后续 live eval 仍需新的计划和显式调用预算，Field Lab 不会自动 retry。
+维护校验使用 Python 3.10+，依赖固定在 `requirements-dev.txt`：PyYAML 与 Pillow 均不进入插件 payload。校验覆盖实际 PNG 解码、被动 SVG XML 解析、包结构与发布回归、源码/生成物一致性及网站测试和构建。0.6.2 source candidate 现有 17 个 case：0.6.1 release 已包含 11 个，该 candidate 新增显式 tranche planning、跨进程 complete-delivery controls，以及 4 个 delegation responsibility-choice canaries。全部 17 个 case 都有基线/修正对照检查，但这不能自动关闭已声明的 semantic review requirements。正向 delegation 无法用 trace ceiling（`max_subagent_events`）断言，因此该 canary 把有界上限与要求提供真实 dispatch 与 integration 证据的 review requirements 配对；trivial、explicit-solo 与 capability-unavailable 三个 canary 继续保持 `max_subagent_events: 0`。已检查的 Field Lab 0.2 baseline source `d9f717a` 缺少所需 public input；Field Lab main `b87b14b` 现已提供 `fieldlab review --requirement-outcomes`，并通过该 CLI 证明当时的 9 个 human-required cases 可被 Servotab 的 synthetic producer-consumer contract check 接受。`delegate-bounded-investigation` 的第一次 live attempt 虽获得三条 semantic support，却因重复的 fixed-label assertions 被拒；移除这些 literal checks、保留原 semantic review boundary 后，第二次独立预算的 attempt 通过 deterministic verification，新 reviewer 也支持全部三条 requirement，Servotab acceptance 返回 `accepted`。该证据只覆盖这一个 pinned workspace-scoped case；compatible source 已 merge，但不因此等于已 release、install 或 activate。任何后续 live eval 仍需新的计划和显式调用预算，Field Lab 不会自动 retry。
 
 ## Feedback
 
@@ -216,6 +216,6 @@ Field Lab 同样是 standalone companion：Servotab 拥有自己的 subject case
 
 Servotab 从历史 Softpowers codebase 迁移而来，保留原有 Git history、release records 和 provenance；rename 不会把旧版本改写成新的历史。项目是独立重写，理念上受 Jesse Vincent / obra 的 [`superpowers`](https://github.com/obra/superpowers) 启发，也参考过 Worker Lanes、Better Harness 及其他明确登记的外部 mechanisms。具体 attribution 和不采用的 machinery 见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)、[docs/external-patterns.md](docs/external-patterns.md) 与 [docs/pattern-intake.md](docs/pattern-intake.md)。
 
-Created by Faye & Cove. Faye ([@IndelibleVivi](https://github.com/IndelibleVivi)) maintains the project and is the legal licensor only for project-original material she controls；external contributors 与 third-party rights 仍归相应 rights holders。
+Created by Faye & Cove. Published and maintained by Yifei Fang ([@IndelibleVivi](https://github.com/IndelibleVivi))；她只对自己控制的 project-original material 作为 legal licensor，external contributors 与 third-party rights 仍归相应 rights holders。
 
 从 `0.3.0-rc1` 起，project-original functional materials 与 original documentation 使用分层 terms。这是 source-available / fair-code distribution，不是 OSI open source。逐路径 terms、历史 MIT boundary 与第三方例外分别见 [LICENSING.md](LICENSING.md)、[LICENSE-HISTORY.md](LICENSE-HISTORY.md) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。Repository、website 或 package metadata 不会为未明确覆盖的 assets 或 third-party material 创造额外 public grant。

@@ -9,7 +9,7 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Source version in this checkout: `0.6.1`. Release 0.6.1 hardens asset and package validation, clarifies evidence checks, and adds reproducible release archives. The tagged [Servotab 0.6.1 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.1) is public; the [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) is a separate distribution surface. A source version or GitHub release does not prove that the directory payload has been updated. Servotab remains independent and community-maintained. See [current state](docs/current-state.md) and the [0.6.1 notes](docs/releases/0.6.1.md) for evidence and limits.
+Source version in this checkout: `0.6.2` (release candidate). This candidate fixes Windows text-identity checks, adopts the portable Agent Plugins manifest, and strengthens delegation responsibility routing with bounded evidence. The tagged [Servotab 0.6.1 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.1) remains the latest published GitHub release; the [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) is a separate distribution surface. A source version, candidate ZIP, or GitHub release does not prove that the directory payload has been updated. See [current state](docs/current-state.md), the [0.6.2 candidate notes](docs/releases/0.6.2.md), and the historical [0.6.1 release notes](docs/releases/0.6.1.md) for evidence and limits.
 
 ## What Servotab changes
 
@@ -148,7 +148,7 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The tagged 0.6.1 release contains exactly 69 manifest-owned package files. The current unreleased source candidate adds the portable root manifest while retaining the compatibility fallback, so its package identity contains 70 files; the one-router/twelve-leaf skill topology remains unchanged. The candidate revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router; installed or activated 0.6.1 packages do not yet contain that guidance. One workspace-scoped positive canary now has an accepted synthetic attempt and independent review, supporting that pinned case without establishing general host effectiveness. Repository checks use canonical LF identity for text and exact bytes for binary assets, so fresh Git for Windows checkouts and equivalent CRLF left in an existing worktree do not create false stale-package reports. They also cover exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
+The tagged 0.6.1 release contains exactly 69 manifest-owned package files. The 0.6.2 source candidate adds the portable root manifest while retaining the compatibility fallback, so its package identity contains 70 files; the one-router/twelve-leaf skill topology remains unchanged. The candidate revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router; installed or activated 0.6.1 packages do not yet contain that guidance. One workspace-scoped positive canary now has an accepted synthetic attempt and independent review, supporting that pinned case without establishing general host effectiveness. Repository checks use canonical LF identity for text and exact bytes for binary assets, so fresh Git for Windows checkouts and equivalent CRLF left in an existing worktree do not create false stale-package reports. They also cover exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
 
 Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, a website deployment, an OpenAI directory update, or owner acceptance on those separate surfaces. The GitHub Release is public; the existing official directory listing remains a separately observed distribution state.
 
@@ -160,8 +160,8 @@ fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-The current source pack contains seventeen cases. Eleven shipped with the 0.6.1
-release; the unreleased source candidate adds explicit tranche-planning and
+The 0.6.2 source candidate contains seventeen cases. Eleven shipped with the 0.6.1
+release; this candidate adds explicit tranche-planning and
 cross-process complete-delivery controls, and now four delegation
 responsibility-choice canaries. All seventeen have deterministic
 baseline/expected-overlay checks, but those checks do not execute a target model
@@ -186,7 +186,7 @@ automatically.
 
 ## Release artifacts
 
-Use the source checkout or the `servotab-0.6.1-source.zip` asset for the repository marketplace route. `servotab-0.6.1-plugin.zip` contains only the 69-file plugin payload for an owner-controlled directory upload; it has no repository marketplace. Neither archive installs dependencies or changes a host automatically.
+Building the current candidate produces `servotab-0.6.2-source.zip` for the repository marketplace route and `servotab-0.6.2-plugin.zip` with the 70-file plugin payload for an owner-controlled directory upload. Until an exact revision is tagged and published, those files are release-preparation artifacts rather than a GitHub release. The currently published 0.6.1 assets remain immutable historical artifacts. Neither archive installs dependencies or changes a host automatically.
 
 `release-receipt.json` binds both archives to one source commit/tree and the package manifest. `SHA256SUMS` covers both ZIPs and the receipt. Checksums establish consistency, not publisher authentication. Verify the release source and GitHub provenance as well. Maintainer preparation and draft/publish steps are in [Releasing](docs/releasing.md).
 
@@ -232,6 +232,6 @@ Servotab migrated from the historical Softpowers codebase while preserving its G
 
 The project is an independent rewrite inspired conceptually by Jesse Vincent / obra's [`superpowers`](https://github.com/obra/superpowers) and by other mechanisms recorded in [third-party notices](THIRD_PARTY_NOTICES.md) and the repository's public pattern-intake documents. Those sources are not bundled dependencies merely because they informed the design.
 
-Created by Faye & Cove. Faye ([@IndelibleVivi](https://github.com/IndelibleVivi)) maintains the project and is the legal licensor only for project-original material she controls. External contributors and third-party rights holders retain their respective rights.
+Created by Faye & Cove. Published and maintained by Yifei Fang ([@IndelibleVivi](https://github.com/IndelibleVivi)), who is the legal licensor only for project-original material she controls. External contributors and third-party rights holders retain their respective rights.
 
 Project-original functional materials and original documentation use layered terms beginning with the `0.3.0-rc1` line. This is source-available / fair-code distribution, not OSI open source. See [LICENSING.md](LICENSING.md), [LICENSE-HISTORY.md](LICENSE-HISTORY.md), and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for exact path-level terms, the historical MIT boundary, and third-party exceptions.

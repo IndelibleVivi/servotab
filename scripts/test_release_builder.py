@@ -41,7 +41,7 @@ class ReleaseTests(unittest.TestCase):
         receipt = json.loads(first['release-receipt.json'])
         self.assertEqual(receipt['source_commit'], self.git('rev-parse', 'HEAD').decode().strip())
         self.assertEqual(receipt['package_file_count'], 70)
-        with zipfile.ZipFile(io.BytesIO(first['servotab-0.6.1-plugin.zip'])) as archive:
+        with zipfile.ZipFile(io.BytesIO(first['servotab-0.6.2-plugin.zip'])) as archive:
             names = archive.namelist()
             self.assertEqual(len(names), 70)
             self.assertEqual(len(set(names)), 70)
@@ -57,7 +57,8 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(digest, sha256(first[name]))
 
     def test_dirty_worktree_rejected_without_output(self):
-        (self.root/'VERSION').write_text('0.6.2\n')
+        current = (self.root/'VERSION').read_text().strip()
+        (self.root/'VERSION').write_text(f'{current}-dirty\n')
         with self.assertRaisesRegex(ValueError, 'clean'):
             build(self.root, self.output)
         self.assertFalse(self.output.exists())
