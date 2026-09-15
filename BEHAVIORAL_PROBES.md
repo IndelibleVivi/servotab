@@ -539,6 +539,9 @@ deterministic fixture pass is necessary but not sufficient: the positive case
 also declares semantic requirements. One live attempt received a supporting
 independent semantic review but failed its exact literal workspace assertions,
 so an accepted attempt remains necessary before any dispatch claim is closed.
+The current canary no longer duplicates semantic review with fixed report-label
+substrings: deterministic checks retain report existence and exact write scope,
+while human review judges outcome, staffing, verification, and runtime support.
 
 `delegate-bounded-investigation` — an unknown root cause, but a fixed failure,
 expected behavior, entry evidence, return contract, and verification, with noisy

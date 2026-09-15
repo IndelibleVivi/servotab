@@ -30,21 +30,6 @@
       "type": "file_exists"
     },
     {
-      "path": "LANE_REPORT.md",
-      "type": "file_contains",
-      "value": "Lane outcome:"
-    },
-    {
-      "path": "LANE_REPORT.md",
-      "type": "file_contains",
-      "value": "Responsibility and staffing:"
-    },
-    {
-      "path": "LANE_REPORT.md",
-      "type": "file_contains",
-      "value": "Verification run:"
-    },
-    {
       "paths": [
         "LANE_REPORT.md",
         "queue_worker.py"

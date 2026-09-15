@@ -101,7 +101,11 @@ One explicitly budgeted live attempt was run for `delegate-bounded-investigation
 on 2026-09-15. Its separate-agent review supported all three semantic requirements,
 but three exact literal workspace assertions failed, so the immutable receipt and
 Servotab acceptance remain `fail` and `rejected`. No retry or second target
-invocation was run. Native plugin activation, explicit leaf selection, method
+invocation was run. The current canary removes those three literal label checks:
+deterministic assertions retain report existence, exact write scope, the focused
+command, and trace ceilings, while the existing exact-key human review remains
+the authority for report meaning and matching runtime evidence. Native plugin
+activation, explicit leaf selection, method
 overhead and comparative agent outcomes still require separately authorized
 host/model observations. Reference reads and command ceilings are diagnostics;
 correctness, complete requested behavior and permission compliance come first.
