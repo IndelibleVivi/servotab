@@ -1,9 +1,12 @@
 # OpenAI directory test-case draft
 
-Status: reviewer material originally prepared for the published `0.4.0-rc1`
-behavior payload and still applicable to the `0.5.0` icon update because method
-bodies are unchanged. This document is not an update-portal receipt, review
-result, update-submission claim, or update-publication claim.
+Status: refreshed on 2026-09-15 against the current `0.6.1` source line and
+the unreleased portable-manifest candidate in PR #30. The five positive cases
+still point at repository-owned fixtures retained by current deterministic
+acceptance, and the three negative cases remain explicit router exclusions.
+This document is reviewer input only. It is not a final-bundle host receipt,
+portal validation result, update-submission claim, approval, or publication
+claim.
 
 These cases translate existing Servotab behavior fixtures into the compact
 five-positive / three-negative format requested for directory review. The
@@ -128,6 +131,10 @@ receive ordinary Codex help without activating Servotab.
 
 ## Use boundary
 
-Before portal entry, recheck these cases against the exact final bundle and the
-current submission form. Portal execution, identity selection, availability,
-attestations, review, and publication remain separate owner-controlled steps.
+Before portal entry, recheck these cases against the exact final, versioned
+bundle and the current submission form. Run all eight through the intended local
+marketplace and host surface, record activation plus result shape, and keep that
+host receipt separate from deterministic fixture acceptance. Reconfirm the
+listing URLs and publisher identity, then prepare release notes for the exact
+candidate. Portal execution, identity selection, availability, attestations,
+review, approval, and publication remain separate owner-controlled steps.
