@@ -22,21 +22,22 @@ CI's `release-artifacts` job runs only after the five existing required validati
 
 Before creating any tag or release, verify that the intended commit is reviewed, is on the accepted main history, and has successful required checks. Read existing tags and releases first; stop on a conflicting existing tag. Do not move a published tag or replace an existing release's assets silently.
 
-For the current 0.6.2 candidate, with the artifacts built in `dist/release`, this example deliberately creates a draft at the receipt's exact source SHA:
+With the artifacts built in `dist/release`, derive the release version from the source and create the draft at the receipt's exact source SHA:
 
 ```bash
 set -e
+VERSION=$(tr -d '\r\n' < VERSION)
 SOURCE_SHA=$(python3 -c 'import json; print(json.load(open("dist/release/release-receipt.json"))["source_commit"])')
 test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
 git fetch origin main
 git merge-base --is-ancestor "$SOURCE_SHA" origin/main
 python3 scripts/build_release.py --output dist/release --check
-gh release create v0.6.2 \
-  dist/release/servotab-0.6.2-plugin.zip \
-  dist/release/servotab-0.6.2-source.zip \
+gh release create "v$VERSION" \
+  "dist/release/servotab-$VERSION-plugin.zip" \
+  "dist/release/servotab-$VERSION-source.zip" \
   dist/release/release-receipt.json dist/release/SHA256SUMS \
   --repo IndelibleVivi/servotab --target "$SOURCE_SHA" \
-  --title 'Servotab 0.6.2' --notes-file docs/releases/0.6.2.md --draft
+  --title "Servotab $VERSION" --notes-file "docs/releases/$VERSION.md" --draft
 ```
 
 Run these commands with failure-stop behavior (`set -e`) so a failed identity, ancestry, or verification check cannot fall through to release creation. `--target` prevents an absent tag from being silently created at a different default-branch tip. If the tag already exists, independently resolve it to its commit and require an exact receipt match before using the existing tag.
@@ -45,6 +46,6 @@ Read back the draft, target/tag, notes, and all four assets. Download the assets
 
 ## Publish and separate later surfaces
 
-Only after owner-authorized draft inspection should publication occur. An explicit `gh release edit v0.6.2 --draft=false --repo IndelibleVivi/servotab` is a publication action, not part of the builder or normal tests. Verify the public tag/asset readback after publication and update the volatile state record with observed facts.
+Only after owner-authorized draft inspection should publication occur. An explicit `gh release edit "v$(tr -d '\r\n' < VERSION)" --draft=false --repo IndelibleVivi/servotab` is a publication action, not part of the builder or normal tests. Verify the public tag/asset readback after publication and update the volatile state record with observed facts.
 
 A GitHub release supplies no evidence that a Codex host installed or activated the new version. An OpenAI directory update uses the plugin ZIP and requires its own upload, declarations, review, and publication. Website deployment uses a separately built source revision and requires canonical-host verification. Never promote source/fixture/CI evidence into these later claims.
