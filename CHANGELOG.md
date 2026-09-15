@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Unreleased — 0.6.2 candidate
 
 - Define LF as the canonical generated/package text identity under the Git for Windows default `core.autocrlf=true` checkout, accept equivalent CRLF left in existing worktrees, add end-to-end regressions and Windows CI proof, and retain exact binary-asset checks.
 - Add the portable Agent Plugins root `plugin.json` with `extensions.com.openai`, retain the synchronized `.codex-plugin/plugin.json` compatibility fallback, and validate both manifests plus final-directory metadata limits as one package contract.
@@ -10,6 +10,8 @@
 - Add explicit tranche-planning and cross-process complete-delivery cases, plus four delegation responsibility-choice canaries; replay all seventeen fixture oracles in ordinary CI without model calls, and declare the dispatch evidence a trace ceiling cannot prove.
 - Declare semantic review requirements and add a read-only Field Lab receipt/review acceptance check. Deterministic pass, pending review, rejection and accepted evidence remain distinct; merged Field Lab main source now supplies exact per-requirement CLI outcomes and passes the synthetic producer-consumer check for the then-nine human-required cases with zero model calls, without establishing a companion release, installation, actual human review or model effectiveness.
 - Remove duplicate literal report-label assertions from the positive delegation canary, retain report semantics in its exact-key independent review, and accept one separately budgeted workspace-scoped attempt after deterministic and semantic review passed. Normalize only Field Lab's declared loader defaults when checking attempt-case identity so substantive case drift still fails closed.
+
+This versioned source and any locally or CI-built 0.6.2 archives remain release-preparation artifacts until an exact revision is tagged and published. They do not assert installation, activation, website deployment, or an OpenAI directory update.
 
 
 ## 0.6.1 — release preparation, 2026-09-05

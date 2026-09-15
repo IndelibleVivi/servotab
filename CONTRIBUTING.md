@@ -1,6 +1,6 @@
 # Contributing to Servotab
 
-Thank you for bringing evidence back from real work. Servotab `0.6.1` is a plugin-native source candidate. Activation misses, false positives, wrong routing, lost scope, package or icon failures, and unnecessary process are more useful than an abstract request for another workflow.
+Thank you for bringing evidence back from real work. Servotab `0.6.2` is a plugin-native source candidate. Activation misses, false positives, wrong routing, lost scope, package or icon failures, and unnecessary process are more useful than an abstract request for another workflow.
 
 ## Choose the right feedback path
 

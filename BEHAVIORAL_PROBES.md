@@ -1,4 +1,4 @@
-# Behavioral Probes — Servotab 0.6.1
+# Behavioral Probes — Servotab 0.6.2 candidate
 
 这些 probes 用来观察 router 是否正确触发、按需读取 reference，并保持小任务轻量。它们包含正例和负例；不要只测“会不会用”，还要测“该沉默时会不会沉默”。
 
@@ -506,7 +506,7 @@ Expected:
 - current review 保持一个 integrated bounded pass，不启动 provider panel、second reviewer、fix loop、PR/release gate 或 repo-wide audit
 - exact disposition labels 只服务 eval assertions，不成为 ordinary review response schema
 
-## 0.6.1 focused probes — unrun model checks
+## 0.6.2 focused probes — unrun model checks
 
 The following are manual observation seeds, not execution receipts or new mandatory phases.
 
@@ -514,7 +514,7 @@ The following are manual observation seeds, not execution receipts or new mandat
 
 **Review closure.** Supply one reproducible blocker, one disproved claim, and one explicitly deferred non-blocker against a final revision. Observe whether each gets an evidence-backed disposition without rewriting the accepted scope or manufacturing another review loop.
 
-**Authorized foundation.** Pair the existing adopted-foundation case with an otherwise identical unapproved infrastructure proposal. The agent must preserve the explicit authorization in the former and avoid inventing it in the latter. The router's 0.6.1 wording clarifies this distinction; existing fixture records are not new model outcomes.
+**Authorized foundation.** Pair the existing adopted-foundation case with an otherwise identical unapproved infrastructure proposal. The agent must preserve the explicit authorization in the former and avoid inventing it in the latter. The router's 0.6.2 wording clarifies this distinction; existing fixture records are not new model outcomes.
 
 ## Bounded tranche and complete-delivery controls
 

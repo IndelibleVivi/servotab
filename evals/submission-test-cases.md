@@ -1,12 +1,11 @@
 # OpenAI directory test-case draft
 
-Status: refreshed on 2026-09-15 against the current `0.6.1` source line and
-the unreleased portable-manifest candidate in PR #30. The current unreleased
-candidate also revises the delegation responsibility-choice contract and adds
-four delegation canaries; that guidance is not part of the tagged `0.6.1`
-payload. The five positive cases still point at repository-owned fixtures
-retained by current deterministic acceptance, and the three negative cases
-remain explicit router exclusions.
+Status: refreshed on 2026-09-15 against the current `0.6.2` source candidate.
+The candidate includes the portable root manifest, revises the delegation
+responsibility-choice contract, and adds four delegation canaries; none of that
+guidance is part of the tagged `0.6.1` payload. The five positive cases still
+point at repository-owned fixtures retained by current deterministic acceptance,
+and the three negative cases remain explicit router exclusions.
 This document is reviewer input only. It is not a final-bundle host receipt,
 portal validation result, update-submission claim, approval, or publication
 claim.
