@@ -1,0 +1,46 @@
+{
+  "activation": "implicit",
+  "case_id": "delegate-solo-request",
+  "command_assertions": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "-q"
+      ]
+    }
+  ],
+  "description": "An explicit solo request forbids delegation even for substantial bounded work that would otherwise qualify for a worker lane.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "schema_version": 2,
+  "timeout_seconds": 600,
+  "trace_assertions": {
+    "max_command_executions": 12,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0
+  },
+  "workspace_assertions": [
+    {
+      "path": "SOLO_NOTE.md",
+      "type": "file_contains",
+      "value": "Solo request:"
+    },
+    {
+      "path": "SOLO_NOTE.md",
+      "type": "file_contains",
+      "value": "Sequenced locally:"
+    },
+    {
+      "paths": [
+        "SOLO_NOTE.md",
+        "scheduler.py"
+      ],
+      "type": "changed_files_exact"
+    }
+  ],
+  "human_review_requirements": [
+    "request: Confirm the final response and SOLO_NOTE.md honor the explicit solo request. No worker or subagent event may occur, and the work must not be described, planned, or re-labeled as a delegation."
+  ]
+}

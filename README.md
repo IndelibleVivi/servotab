@@ -75,7 +75,7 @@ For ordinary work, ask directly:
 Fix the mobile message-bubble shift, identify the root cause, implement the repair, and verify the affected behavior.
 ```
 
-The router may keep a clear, reversible change direct or read one relevant method when the work carries material pressure. It does not manufacture a plan, worktree, test ritual, subagent, or second review merely because those mechanisms exist.
+The router may keep a clear, reversible change direct or read one relevant method when the work carries material pressure. It does not manufacture a plan, worktree, test ritual, subagent, or second review merely because those mechanisms exist. Before deep work it also settles responsibility: a bounded, noisy, or otherwise substantial lane can go to one worker, explicit solo requests stay in the main session, and trivial work or frequent cross-owner decisions are not split for coordination benefit. Coupling alone never forces the main session; the coupled parts of one responsibility simply stay together in whichever single lane owns them.
 
 Invoke a method explicitly when you want precise control:
 
@@ -108,7 +108,7 @@ The plugin contains thirteen skills: one implicit router and twelve explicit lea
 | `review-feedback` | explicit only | Verify external feedback before accepting, adjusting, or rejecting it |
 | `verify` | explicit only | Match completion claims to fresh, proportionate evidence |
 | `worktree` | explicit only | Isolate work only when dirt, risk, duration, or parallel writes justify it |
-| `delegate` | explicit only | Give a small number of independent lanes explicit ownership and return contracts |
+| `delegate` | explicit only | Choose responsibility before deep work; hand a bounded lane to a worker only when it pays |
 | `finish` | explicit only | Inspect the final tree and perform only authorized Git or cleanup actions |
 
 Methods do not create authority. Source-complete, installed, activated, committed, deployed, live, submitted, and published remain separate states.
@@ -148,7 +148,7 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The tagged 0.6.1 release contains exactly 69 manifest-owned package files. The current unreleased source candidate adds the portable root manifest while retaining the compatibility fallback, so its package identity contains 70 files; skill topology and runtime behavior remain unchanged. Repository checks use canonical LF identity for text and exact bytes for binary assets, so fresh Git for Windows checkouts and equivalent CRLF left in an existing worktree do not create false stale-package reports. They also cover exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
+The tagged 0.6.1 release contains exactly 69 manifest-owned package files. The current unreleased source candidate adds the portable root manifest while retaining the compatibility fallback, so its package identity contains 70 files; the one-router/twelve-leaf skill topology remains unchanged. The candidate revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router; installed or activated 0.6.1 packages do not yet contain that guidance, and no host observation of the change exists. Repository checks use canonical LF identity for text and exact bytes for binary assets, so fresh Git for Windows checkouts and equivalent CRLF left in an existing worktree do not create false stale-package reports. They also cover exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
 
 Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, a website deployment, an OpenAI directory update, or owner acceptance on those separate surfaces. The GitHub Release is public; the existing official directory listing remains a separately observed distribution state.
 
@@ -160,17 +160,24 @@ fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-The current source pack contains thirteen cases. Eleven shipped with the 0.6.1
+The current source pack contains seventeen cases. Eleven shipped with the 0.6.1
 release; the unreleased source candidate adds explicit tranche-planning and
-cross-process complete-delivery controls. All thirteen have deterministic
+cross-process complete-delivery controls, and now four delegation
+responsibility-choice canaries. All seventeen have deterministic
 baseline/expected-overlay checks, but those checks do not execute a target model
-or close declared semantic-review requirements. The inspected Field Lab 0.2
-baseline source at `d9f717a` lacks the required public input; Field Lab main at
-`b87b14b` now exposes `fieldlab review --requirement-outcomes`. The nine current
-human-required cases pass Servotab's synthetic producer-consumer contract check
-through that CLI. This does not constitute human review or a live model result.
-The compatible source is merged but not thereby released, installed or activated.
-Any live synthetic attempt requires its own plan and explicit invocation budget.
+or close declared semantic-review requirements. Positive delegation cannot be
+asserted by the trace ceiling (`max_subagent_events`), so its canary pairs a
+bounded maximum with review requirements that demand evidence of an actual
+dispatch and integration; the trivial, explicit-solo, and
+capability-unavailable canaries keep `max_subagent_events: 0`. The inspected
+Field Lab 0.2 baseline source at `d9f717a` lacks the required public input; Field
+Lab main at `b87b14b` now exposes `fieldlab review --requirement-outcomes`. The
+then-current nine human-required cases pass Servotab's synthetic
+producer-consumer contract check through that CLI; the candidate's thirteen
+human-required cases remain open until an independent review occurs. This does
+not constitute human review or a live model result. The compatible source is
+merged but not thereby released, installed or activated. Any live synthetic
+attempt requires its own plan and explicit invocation budget.
 
 ## Release artifacts
 

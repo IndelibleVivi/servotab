@@ -1,0 +1,60 @@
+{
+  "activation": "implicit",
+  "case_id": "delegate-bounded-investigation",
+  "command_assertions": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "-q"
+      ]
+    }
+  ],
+  "description": "A bounded unknown-root-cause investigation with noisy evidence should lead the agent to choose a worker lane from the task's own shape, not to obey a dispatch command or narrate solo work as a handoff.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "schema_version": 2,
+  "timeout_seconds": 900,
+  "trace_assertions": {
+    "max_command_executions": 20,
+    "max_plan_updates": 1,
+    "max_subagent_events": 1,
+    "reference_reads_include": [
+      "delegate.md"
+    ]
+  },
+  "workspace_assertions": [
+    {
+      "path": "LANE_REPORT.md",
+      "type": "file_exists"
+    },
+    {
+      "path": "LANE_REPORT.md",
+      "type": "file_contains",
+      "value": "Lane outcome:"
+    },
+    {
+      "path": "LANE_REPORT.md",
+      "type": "file_contains",
+      "value": "Responsibility and staffing:"
+    },
+    {
+      "path": "LANE_REPORT.md",
+      "type": "file_contains",
+      "value": "Verification run:"
+    },
+    {
+      "paths": [
+        "LANE_REPORT.md",
+        "queue_worker.py"
+      ],
+      "type": "changed_files_exact"
+    }
+  ],
+  "human_review_requirements": [
+    "topology: Confirm the agent settled responsibility from the task's own shape before deep execution. The prompt gives no dispatch command, so a capable host must show one real worker lane (a new dispatch or a continued worker session) for this bounded investigation, and a narrated lane over solo work fails.",
+    "integration: Compare the repaired queue_worker.py and LANE_REPORT.md with the worker's returned evidence. The coordinator owns integration, must not re-implement the worker's fix in its own lane, and must verify the returned claim against the focused test.",
+    "evidence: LANE_REPORT.md must state the lane outcome, the responsibility and staffing that were chosen, and the verification actually run. Correct field labels with no matching runtime evidence do not satisfy this requirement, and a second lane or delegation tree fails."
+  ]
+}

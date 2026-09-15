@@ -10,7 +10,7 @@ PR #27 merged the release-preparation revision as `863ac30850dc6d7558e824c519b92
 
 For this patch's current integration and publication state, inspect the [pull requests](https://github.com/IndelibleVivi/servotab/pulls), [Validate runs](https://github.com/IndelibleVivi/servotab/actions/workflows/validate.yml), and [GitHub Releases](https://github.com/IndelibleVivi/servotab/releases). A version number, successful build, or prepared archive is not a tag or published release. Each release artifact's `release-receipt.json` names its exact source commit and tree; a later merge requires a newly built receipt for that merge.
 
-The tagged 0.6.1 package remains one implicit router, twelve explicit-only leaves, twelve router references, and 69 manifest-owned files. The current unreleased source candidate adds a portable root `plugin.json` beside the synchronized `.codex-plugin/plugin.json` fallback, bringing its package identity to 70 files without changing skill topology. Text identity is canonical LF and binary identity remains byte-exact, including compatibility for equivalent CRLF left in an existing Windows worktree. Per-skill icons, publisher identity, public creator credit, licensing, and the skills-only runtime boundary are retained. There is no new workflow engine, hook payload, or runtime service.
+The tagged 0.6.1 package remains one implicit router, twelve explicit-only leaves, twelve router references, and 69 manifest-owned files. The current unreleased source candidate adds a portable root `plugin.json` beside the synchronized `.codex-plugin/plugin.json` fallback, bringing its package identity to 70 files without changing skill topology. It also revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router, and adds four delegation behavior canaries. That guidance exists only in this source candidate: the installed, activated, and live 0.6.1 packages still carry the previous delegation wording, and no host observation of the change exists yet. Text identity is canonical LF and binary identity remains byte-exact, including compatibility for equivalent CRLF left in an existing Windows worktree. Per-skill icons, publisher identity, public creator credit, licensing, and the skills-only runtime boundary are retained. There is no new workflow engine, hook payload, or runtime service.
 
 ## Evidence for 0.6.1
 
@@ -20,14 +20,18 @@ The deterministic gate covers canonical/generated identity; strict metadata and 
 
 The published 0.6.1 Field Lab subject pack contains eleven cases: the nine earlier
 cases plus existing-normalizer reuse and misleading-green-test controls. The
-current unreleased source candidate contains thirteen cases, adding explicit
-tranche-planning and cross-process complete-delivery controls. Its deterministic
-fixture checks pass. Field Lab feature commit `57eb9ac` is merged into main at
+current unreleased source candidate contains seventeen cases, adding explicit
+tranche-planning, cross-process complete-delivery, and four delegation
+responsibility-choice canaries. Its deterministic fixture checks pass. The
+positive delegation canary cannot be asserted by a trace ceiling, so it relies on
+declared review requirements for real dispatch and integration evidence; no live
+attempt has been run. Field Lab feature commit `57eb9ac` is merged into main at
 `b87b14b`; the main push validate run `34393492283` completed successfully. That
 source adds public `fieldlab review --requirement-outcomes` input with exact-key
-and bounded-file validation. Synthetic receipts for all nine current
+and bounded-file validation. Synthetic receipts for the then-current nine
 human-required cases produced CLI review records accepted by the Servotab checker
-with zero target-agent invocations. The compatible companion source is merged but
+with zero target-agent invocations; the candidate's thirteen human-required cases
+remain open until an independent review occurs. The compatible companion source is merged but
 not released, installed or activated; this contract check is not evidence that
 the semantic requirements passed. Standalone Field Lab validation remains optional. No live
 target-model evaluation was run for this release or the current candidate; the

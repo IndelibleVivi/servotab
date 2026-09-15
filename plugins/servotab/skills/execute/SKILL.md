@@ -114,9 +114,13 @@ At minimum:
 
 ## Delegation
 
-Stay in the main agent for small, coupled work. Delegate only when a bounded worker lane creates material value through parallelism, clean context, independent evidence, or protected coordinator attention. Keep the main agent as coordinator and integration owner. Give every worker an explicit outcome, scope, context, authority, and return contract; do not spawn a fresh implementer for every checklist item, duplicate reviewers, or competing writers.
+Choose responsibility before deep execution. Stay in the main agent for trivial or nearly completed work, work whose handoff and acceptance would largely repeat direct execution, or frequent unresolved cross-owner decisions. Delegate when a bounded lane creates material value through clean context, serial sequencing, parallel independence, or protected coordinator attention, and the task has already left the clear/direct path. The coupled parts or likely-common-cause symptoms of one responsibility stay together in whichever single lane owns them; coupling, reversibility, and a likely common cause do not force that lane to be the main agent.
 
-Before the first dispatch, treat delegation as a genuine phase change and apply the `delegate` reference. Subagent-tool availability or a higher model/reasoning tier is only host capability, not evidence that delegation is appropriate.
+Keep the main agent as coordinator and integration owner. Reuse an active worker or session that owns the lane instead of creating another, and do not implement the same work in the main agent while a worker owns it. If the user asks you to work solo, or subagent tools are unavailable, keep the same ownership boundaries and sequence the work locally instead of claiming a lane that did not run.
+
+Give every worker an explicit outcome, scope, context, authority, and return contract; do not spawn a fresh implementer for every checklist item, duplicate reviewers, or competing writers. Workers do not delegate again.
+
+Before the first dispatch, treat delegation as a genuine phase change and apply the `delegate` reference. Subagent-tool availability, a higher model/reasoning tier, or an idle slot is only host capability, not evidence that delegation is appropriate.
 
 ## Checkpoints
 

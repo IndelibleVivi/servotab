@@ -93,8 +93,8 @@ export const methods: Method[] = [
     name: "delegate",
     icon: delegateIcon,
     purpose:
-      "Splits genuinely independent work into bounded lanes with one writer per surface and an explicit return.",
-    signal: "Use when parallelism repays its coordination cost.",
+      "Chooses responsibility before deep work: keeps one responsibility's coupled parts in a single lane, coordinator or worker, and hands a bounded lane to a worker with an explicit return.",
+    signal: "Use when clean context or coordinator attention repays the handoff.",
   },
   {
     name: "finish",

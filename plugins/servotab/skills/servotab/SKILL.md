@@ -13,6 +13,7 @@ Use ordinary repository requests to select and apply engineering methods. The us
 - Size risk from the affected behavior, not confidence, file count, or patch size. Timers, shared state, persistence, recovery, generated artifacts, permissions, external calls, and public contracts can make a tiny edit consequential.
 - Preserve explicit corrections and accepted scope. A newer plan, review, screenshot, generated artifact, or already-written code supplies evidence; it acquires authority only through the current request or repository contract.
 - Keep clear local work direct. Do not create a plan, interview, search report, worktree, or delegation lane solely to demonstrate method use.
+- Choose responsibility before deep execution. Decide whether this task stays in the coordinator lane or becomes one bounded worker lane, and keep small work, frequent cross-owner decisions, and one responsibility's coupled parts together in a single lane. Coupling alone does not force the coordinator lane. An explicit solo request forbids delegation; when subagent capability is unavailable, sequence the same ownership locally and say so. Reuse a worker that already owns the lane instead of duplicating it.
 
 ## Resolve decisions at their dependencies
 
@@ -46,7 +47,7 @@ Use the safeguards here directly for clear, bounded work. Load a reference when 
 - External review feedback to validate and apply: `references/review-feedback.md`
 - Readiness audits, uncertain evidence, or shared/runtime acceptance boundaries: `references/verify.md`
 - Isolation justified by dirty state, risk, duration, or parallel writes: `references/worktree.md`
-- Bounded worker lanes that materially improve the work: `references/delegate.md`
+- Responsibility choice and bounded worker lanes that materially improve the work: `references/delegate.md`
 - Final integration, Git, PR, or cleanup decisions: `references/finish.md`
 
 Investigate bugs and verify changes even when no extra reference is needed. Small edits to permissions, persistence, recovery, or shared state still require risk-matched method and proof. Review feedback requires adjudication before editing. Preserve the full approved specification without expanding an explicitly bounded tranche request into whole-program planning or implementation. Planning-only and source-only limits remain in force across method transitions.

@@ -36,10 +36,12 @@ For delegation behavior, distinguish host capability from method selection:
 
 - whether the host/runtime exposed subagent tools;
 - whether the router read `delegate.md`;
-- whether the task actually contained independent lanes;
+- whether the task actually left the clear/direct path, or held a bounded unknown-root-cause, independent, or noisy lane that justified one worker;
+- whether an active worker or session was reused instead of duplicated by the coordinator;
+- whether a solo request, unavailable capability, or cross-owner decisions kept the work local;
 - whether the coordinator verified worker output.
 
-A subagent event alone does not prove that Servotab selected the `delegate` method. Token count alone is not a quality verdict; first inspect whether the requested outcome, authority, and necessary boundaries survived.
+A subagent event alone does not prove that Servotab selected the `delegate` method, and a missing event does not by itself prove the method was skipped when the host exposed no delegation capability. Token count alone is not a quality verdict; first inspect whether the requested outcome, authority, and necessary boundaries survived.
 
 ## Canonical source and generated package
 

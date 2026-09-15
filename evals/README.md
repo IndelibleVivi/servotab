@@ -6,7 +6,7 @@ containment、receipt contract 与 quota gate 已由 standalone Skill Field Lab 
 
 Servotab 继续拥有：
 
-- `cases/`：十三个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
+- `cases/`：十七个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
 - `activation-prompts.csv`：较宽的 routing seed set；
 - [`submission-test-cases.md`](submission-test-cases.md)：把现有 fixtures 整理成
   reviewer-ready 的 5 positive / 3 negative draft；它不是 portal receipt 或 submission claim；
@@ -43,9 +43,24 @@ fieldlab list fieldlab-pack.json
 - `missing-host-test-seam`：material host boundary 缺少 cheap reproducer 时建立一个 bounded local surrogate，同时保留 named-host acceptance。
 - `review-evidence-boundaries`：同一 bounded review corpus 同时保护 clean control、negative-space spec omission、false-green test 与 conditional finding 的 evidence boundary。
 
-新增的 `local-reuse` 检查现有 normalizer 的真实复用；`weak-check` 保留一个原本绿色却不完整的测试，再用独立行为断言揭示缺陷。`scripts/test_behavior_fixtures.py` 现在对全部十三个 fixture 复放文件/命令断言：基线必须失败，expected overlay 必须通过。`weak-check` 的实际候选测试也必须能拒绝旧实现；同时保留五个审查反例与部分交付控制。它不复放 raw trace，不替代 Field Lab，也不执行模型。
+新增的 `local-reuse` 检查现有 normalizer 的真实复用；`weak-check` 保留一个原本绿色却不完整的测试，再用独立行为断言揭示缺陷。`scripts/test_behavior_fixtures.py` 现在对全部十七个 fixture 复放文件/命令断言：基线必须失败，expected overlay 必须通过。`weak-check` 的实际候选测试也必须能拒绝旧实现；同时保留五个审查反例与部分交付控制。它不复放 raw trace，不替代 Field Lab，也不执行模型。
 
 新增 `tranche-only-plan` 覆盖显式 leaf 的阶段范围；`complete-notes` 用独立跨进程检查覆盖完整 CLI、持久化、迁移及失败路径。声明了 `human_review_requirements` 的 case 还必须经过 [最终验收](acceptance.md)：Field Lab 的自动 `pass` 本身不能关闭语义要求。
+
+Delegate responsibility choice 由四个 canary 覆盖：
+
+- `delegate-bounded-investigation`：failure、expected behavior、entry evidence、return contract 与 verification 都有界的 unknown-root-cause investigation，prompt 不命令 dispatch，agent 应从任务本身的 shape 选出一个 worker lane，Coordinator 保留 integration ownership 且不重复实现；
+- `delegate-trivial-direct`：即使 lane 可用且协调收益看起来合理，trivial、可逆改动仍留在 direct path；
+- `delegate-solo-request`：显式 solo request 禁止 delegation，即使工作本身达到 lane 门槛；
+- `delegate-capability-unavailable`：host 不提供 subagent capability 时如实本地排序，不声称一个不存在的 lane。
+
+正向 delegation 无法由当前 trace schema 的 ceiling 断言（只有 `max_*`，没有
+`min_subagent_events`），因此 `delegate-bounded-investigation` 使用有界
+`max_subagent_events: 1` 加 `reference_reads_include: ["delegate.md"]`，并把
+topology（prompt 未命令时的真实 worker lane）、integration ownership 与证据边界
+写成 `human_review_requirements`。这三个 negative canary 保持
+`max_subagent_events: 0`。deterministic fixture pass 因此是必要条件而非
+delegation 证明；真实 worker lane 仍需要一次授权的 host attempt 与独立 review。
 
 任何 synthetic live attempt 都必须先生成 saved plan，再显式跨过 Field Lab 的
 `run --live --max-invocations N` gate。Servotab 不把 live model eval 设为普通

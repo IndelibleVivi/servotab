@@ -34,13 +34,15 @@ fieldlab review /path/to/study/fieldlab.json \
   --requirement-outcomes /path/to/requirement-outcomes.json
 ```
 
-Against that merged-source CLI, synthetic receipts for all nine current
+Against that merged-source CLI, synthetic receipts for the then-current nine
 human-required cases produced review records accepted by the Servotab checker,
-with zero target-agent invocations. This proves producer-consumer contract
-compatibility only: the source is merged but not released, installed or activated,
-and synthetic outcomes are not actual independent human review. Do not hand-edit
-or manufacture a review to cross the gate, and do not weaken the exact mapping
-requirement.
+with zero target-agent invocations. The current source candidate has thirteen
+human-required cases; its four delegation canaries use the same declared
+mechanics, but their outcomes remain open until an independent review occurs.
+This proves producer-consumer contract compatibility only: the source is merged
+but not released, installed or activated, and synthetic outcomes are not actual
+independent human review. Do not hand-edit or manufacture a review to cross the
+gate, and do not weaken the exact mapping requirement.
 
 ```bash
 python3 scripts/check_behavior_acceptance.py /path/to/attempt/receipt.json
@@ -87,7 +89,7 @@ Apply each to its case's expected overlay in a disposable fixture copy.
   review it must remain `needs-review`. A reviewer should reject it for the stored
   reason, not accept it for containing the required IDs or disposition labels.
 
-Ordinary CI replays all thirteen baseline/expected file-and-command oracles, the
+Ordinary CI replays all seventeen baseline/expected file-and-command oracles, the
 five adversarial deltas, alternate valid regressions, malformed/empty test suites,
 authority edits and incomplete CLI deliveries. Synthetic receipt tests exercise
 acceptance gating without representing an actual attempt or human review.

@@ -1,0 +1,8 @@
+2026-09-13T01:14:02Z collector pass=1 accepted=6 delivered=6 retry=1 status=noisy
+2026-09-13T01:21:47Z collector pass=2 accepted=6 delivered=6 retry=1 status=noisy
+2026-09-13T01:29:11Z collector pass=3 accepted=3 delivered=2 retry=1 status=retry-expected
+2026-09-13T01:36:55Z collector pass=4 accepted=6 delivered=6 retry=1 status=noisy
+2026-09-13T01:44:20Z collector pass=5 accepted=3 delivered=2 retry=1 status=retry-expected
+2026-09-13T01:52:03Z collector pass=6 accepted=6 delivered=6 retry=1 status=noisy
+2026-09-13T02:01:38Z collector pass=7 accepted=6 delivered=6 retry=1 status=noisy
+2026-09-13T02:09:12Z collector pass=8 accepted=3 delivered=2 retry=1 status=retry-expected
