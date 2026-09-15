@@ -123,7 +123,8 @@ methods/*.md + scripts/skill_catalog.py        canonical method + metadata sourc
                     │
                     ▼
 plugins/servotab/
-├── .codex-plugin/plugin.json                 plugin manifest
+├── plugin.json                               portable Agent Plugins manifest
+├── .codex-plugin/plugin.json                 compatibility fallback
 ├── LICENSE + NOTICE.md                       package-local rights boundary
 ├── skills/servotab/                          implicit router + 12 references
 ├── skills/{design,...,finish}/               12 explicit leaves
@@ -132,6 +133,8 @@ plugins/servotab/
 .agents/plugins/marketplace.json              repository marketplace entry
 PACK_MANIFEST.json                            exact derived payload identity
 ```
+
+Root `plugins/servotab/plugin.json` is the portable package entry point. The `.codex-plugin/plugin.json` file remains a synchronized compatibility fallback for older Codex package readers; validation rejects identity or OpenAI-interface drift between them.
 
 The twelve method bodies under `methods/*.md` are canonical. `scripts/skill_catalog.py` owns names, descriptions, prompts, activation metadata, and skill-icon source routing. Root `assets/` owns the router projections and twelve leaf-glyph sources. `plugins/servotab/skills/**` is generated projection—including two icon assets per skill—and must not be edited directly. Paper-backed contrast fallbacks remain canonical source assets but are not shipped in the default runtime payload.
 
@@ -145,7 +148,7 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The 0.6.1 release contains exactly 69 manifest-owned package files, including two generated icon assets for each of its thirteen skills. Repository checks cover canonical/generated sync, exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
+The tagged 0.6.1 release contains exactly 69 manifest-owned package files. The current unreleased source candidate adds the portable root manifest while retaining the compatibility fallback, so its package identity contains 70 files; skill topology and runtime behavior remain unchanged. Repository checks use canonical LF identity for text and exact bytes for binary assets, so fresh Git for Windows checkouts and equivalent CRLF left in an existing worktree do not create false stale-package reports. They also cover exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
 
 Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, a website deployment, an OpenAI directory update, or owner acceptance on those separate surfaces. The GitHub Release is public; the existing official directory listing remains a separately observed distribution state.
 

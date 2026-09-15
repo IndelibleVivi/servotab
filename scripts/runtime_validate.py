@@ -16,6 +16,9 @@ VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 PUBLISHER_NAME = "Yifei Fang"
 PLUGIN_RELATIVE = Path("plugins/servotab")
 PLUGIN_ROOT = ROOT / PLUGIN_RELATIVE
+PORTABLE_PLUGIN_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
+PORTABLE_PLUGIN_MANIFEST = PLUGIN_RELATIVE / "plugin.json"
+COMPAT_PLUGIN_MANIFEST = PLUGIN_RELATIVE / ".codex-plugin/plugin.json"
 PACK_MANIFEST = ROOT / "PACK_MANIFEST.json"
 MARKETPLACE = ROOT / ".agents/plugins/marketplace.json"
 ASSET_NAMES = ("composer-icon.png", "logo.png")
@@ -32,7 +35,7 @@ RETIRED_REPO_PATHS = (
 
 
 def expected_payload_files() -> frozenset[str]:
-    files = {f"plugins/servotab/.codex-plugin/plugin.json"}
+    files = {PORTABLE_PLUGIN_MANIFEST.as_posix(), COMPAT_PLUGIN_MANIFEST.as_posix()}
     files |= {f"plugins/servotab/{name}" for name in LEGAL_FILES}
     files |= {f"plugins/servotab/assets/{name}" for name in ASSET_NAMES}
     files |= {
@@ -54,14 +57,28 @@ def expected_payload_files() -> frozenset[str]:
 
 
 EXPECTED_PAYLOAD_FILES = expected_payload_files()
+BINARY_PAYLOAD_SUFFIXES = frozenset({".png"})
+
+
+def payload_bytes(path: Path) -> bytes:
+    """Read one payload file in its canonical package representation.
+
+    Text payloads are canonically LF. This lets package verification remain
+    truthful in Windows worktrees that still contain CRLF from an earlier
+    checkout, while PNG assets retain strict byte identity.
+    """
+    data = path.read_bytes()
+    if path.suffix.lower() in BINARY_PAYLOAD_SUFFIXES:
+        return data
+    return data.replace(b"\r\n", b"\n")
+
+
+def payload_size(path: Path) -> int:
+    return len(payload_bytes(path))
 
 
 def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return hashlib.sha256(payload_bytes(path)).hexdigest()
 
 
 def unique_object(pairs):
@@ -143,52 +160,62 @@ def load_pack_manifest(path: Path = PACK_MANIFEST) -> dict[str, Any]:
     return data
 
 
-def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
+def _validate_plugin_identity(
+    manifest: dict[str, Any],
+    *,
+    root: Path,
+    label: str,
+) -> list[str]:
     errors: list[str] = []
-    plugin_root = root / PLUGIN_RELATIVE
-    try:
-        manifest = load_json_object(plugin_root / ".codex-plugin/plugin.json", "plugin manifest")
-    except ValueError as exc:
-        return [str(exc)]
-
-    allowed = {"name", "version", "description", "author", "homepage", "repository", "keywords", "skills", "interface"}
-    if set(manifest) != allowed:
-        errors.append("plugin manifest must contain exactly the skills-only contract fields")
     if manifest.get("name") != "servotab":
-        errors.append("plugin manifest name must be servotab")
+        errors.append(f"{label} name must be servotab")
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
     if manifest.get("version") != version:
-        errors.append("plugin manifest version must match VERSION")
-    if manifest.get("skills") != "./skills/":
-        errors.append("plugin manifest skills path must be ./skills/")
+        errors.append(f"{label} version must match VERSION")
     if manifest.get("description") != "A quiet, risk-scaled engineering method layer for Codex.":
-        errors.append("plugin manifest description drifted from the product contract")
+        errors.append(f"{label} description drifted from the product contract")
     expected_public_urls = {
         "homepage": "https://servotab.com",
         "repository": "https://github.com/IndelibleVivi/servotab",
     }
     for field, expected in expected_public_urls.items():
         if manifest.get(field) != expected:
-            errors.append(f"plugin manifest {field} must be {expected!r}")
-    for name in LEGAL_FILES:
-        if not (plugin_root / name).is_file():
-            errors.append(f"plugin package is missing {name}")
+            errors.append(f"{label} {field} must be {expected!r}")
     author = manifest.get("author")
     if not isinstance(author, dict):
-        errors.append("plugin manifest author must be an object")
+        errors.append(f"{label} author must be an object")
     else:
+        if set(author) != {"name", "url"}:
+            errors.append(f"{label} author must contain exactly name and url")
         if author.get("name") != PUBLISHER_NAME:
-            errors.append(f"plugin manifest author.name must be {PUBLISHER_NAME!r}")
+            errors.append(f"{label} author.name must be {PUBLISHER_NAME!r}")
         if author.get("url") != "https://servotab.com":
-            errors.append("plugin manifest author.url must be 'https://servotab.com'")
+            errors.append(f"{label} author.url must be 'https://servotab.com'")
+    keywords = manifest.get("keywords")
+    if keywords != ["codex", "engineering", "methods", "verification"]:
+        errors.append(f"{label} keywords drifted from the package contract")
+    return errors
 
-    interface = manifest.get("interface")
+
+def _validate_plugin_interface(
+    interface: object,
+    *,
+    plugin_root: Path,
+    label: str,
+) -> list[str]:
+    errors: list[str] = []
     if not isinstance(interface, dict):
-        return errors + ["plugin manifest interface must be an object"]
+        return [f"{label} interface must be an object"]
     expected_values = {
         "displayName": "Servotab",
         "shortDescription": "Risk-scaled repository methods",
         "developerName": PUBLISHER_NAME,
+        "category": "Developer Tools",
+        "capabilities": [
+            "Repository engineering",
+            "Risk-scaled methods",
+            "Fresh verification",
+        ],
         "websiteURL": "https://servotab.com",
         "supportURL": "https://servotab.com/support",
         "privacyPolicyURL": "https://servotab.com/privacy",
@@ -197,20 +224,33 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
         "composerIcon": "./assets/composer-icon.png",
         "logo": "./assets/logo.png",
     }
+    allowed_fields = set(expected_values) | {"longDescription", "defaultPrompt"}
+    if set(interface) != allowed_fields:
+        errors.append(f"{label} interface must contain exactly the approved listing fields")
     for field, expected in expected_values.items():
         if interface.get(field) != expected:
-            errors.append(f"plugin manifest interface.{field} must be {expected!r}")
+            errors.append(f"{label} interface.{field} must be {expected!r}")
+
+    display_name = interface.get("displayName")
+    if isinstance(display_name, str) and len(display_name) > 30:
+        errors.append(
+            f"{label} interface.displayName must be no longer than 30 characters "
+            "for final directory submission"
+        )
     long_description = interface.get("longDescription")
     if not isinstance(long_description, str) or not long_description.strip():
-        errors.append("plugin manifest interface.longDescription must be non-empty")
+        errors.append(f"{label} interface.longDescription must be non-empty")
     elif len(long_description) > 4000:
-        errors.append("plugin manifest interface.longDescription must be no longer than 4000 characters")
+        errors.append(
+            f"{label} interface.longDescription must be no longer than 4000 characters"
+        )
     short_description = interface.get("shortDescription")
     if isinstance(short_description, str) and len(short_description) > 30:
         errors.append(
-            "plugin manifest interface.shortDescription must be no longer than "
+            f"{label} interface.shortDescription must be no longer than "
             "30 characters for final directory submission"
         )
+
     default_prompts = interface.get("defaultPrompt")
     if (
         not isinstance(default_prompts, list)
@@ -225,26 +265,138 @@ def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
         )
     ):
         errors.append(
-            "plugin manifest interface.defaultPrompt must be an array of 1-3 "
+            f"{label} interface.defaultPrompt must be an array of 1-3 "
             "non-empty single-line strings no longer than 128 characters"
         )
     elif not any("$servotab" in prompt for prompt in default_prompts):
-        errors.append("plugin manifest defaultPrompt must invoke $servotab")
+        errors.append(f"{label} defaultPrompt must invoke $servotab")
     else:
         normalized_prompts = [
             " ".join(unicodedata.normalize("NFKC", prompt).split())
             for prompt in default_prompts
         ]
         if len(normalized_prompts) != len(set(normalized_prompts)):
-            errors.append("plugin manifest defaultPrompt entries must be unique")
+            errors.append(f"{label} defaultPrompt entries must be unique")
         if any("@" in prompt for prompt in default_prompts):
-            errors.append("plugin manifest defaultPrompt must not contain app @mentions")
-    if "logoDark" in interface:
-        errors.append("plugin manifest interface.logoDark must remain omitted until dark-mode acceptance")
+            errors.append(f"{label} defaultPrompt must not contain app @mentions")
+
     for field in ("composerIcon", "logo"):
         raw = interface.get(field)
         if isinstance(raw, str) and not (plugin_root / raw).is_file():
-            errors.append(f"plugin manifest interface.{field} points to a missing file")
+            errors.append(f"{label} interface.{field} points to a missing file")
+    return errors
+
+
+def validate_plugin_manifest(root: Path = ROOT) -> list[str]:
+    errors: list[str] = []
+    plugin_root = root / PLUGIN_RELATIVE
+    for name in LEGAL_FILES:
+        if not (plugin_root / name).is_file():
+            errors.append(f"plugin package is missing {name}")
+
+    try:
+        portable = load_json_object(
+            root / PORTABLE_PLUGIN_MANIFEST, "portable plugin manifest"
+        )
+    except ValueError as exc:
+        return errors + [str(exc)]
+    portable_allowed = {
+        "$schema",
+        "name",
+        "version",
+        "description",
+        "author",
+        "homepage",
+        "repository",
+        "keywords",
+        "extensions",
+    }
+    if set(portable) != portable_allowed:
+        errors.append(
+            "portable plugin manifest must contain exactly the Agent Plugins "
+            "identity and OpenAI extension fields"
+        )
+    if portable.get("$schema") != PORTABLE_PLUGIN_SCHEMA:
+        errors.append("portable plugin manifest must declare the Agent Plugins 1.0 schema")
+    errors.extend(
+        _validate_plugin_identity(portable, root=root, label="portable plugin manifest")
+    )
+    extensions = portable.get("extensions")
+    if not isinstance(extensions, dict) or set(extensions) != {"com.openai"}:
+        errors.append("portable plugin manifest extensions must contain only com.openai")
+        portable_interface: object = None
+    else:
+        openai_extension = extensions.get("com.openai")
+        if not isinstance(openai_extension, dict) or set(openai_extension) != {"interface"}:
+            errors.append(
+                "portable plugin manifest extensions.com.openai must contain only interface"
+            )
+            portable_interface = None
+        else:
+            portable_interface = openai_extension.get("interface")
+    errors.extend(
+        _validate_plugin_interface(
+            portable_interface,
+            plugin_root=plugin_root,
+            label="portable plugin manifest",
+        )
+    )
+
+    try:
+        compatibility = load_json_object(
+            root / COMPAT_PLUGIN_MANIFEST, "compatibility plugin manifest"
+        )
+    except ValueError as exc:
+        return errors + [str(exc)]
+    compatibility_allowed = {
+        "name",
+        "version",
+        "description",
+        "author",
+        "homepage",
+        "repository",
+        "keywords",
+        "skills",
+        "interface",
+    }
+    if set(compatibility) != compatibility_allowed:
+        errors.append(
+            "compatibility plugin manifest must contain exactly the skills-only "
+            "fallback fields"
+        )
+    if compatibility.get("skills") != "./skills/":
+        errors.append("compatibility plugin manifest skills path must be ./skills/")
+    errors.extend(
+        _validate_plugin_identity(
+            compatibility, root=root, label="compatibility plugin manifest"
+        )
+    )
+    compatibility_interface = compatibility.get("interface")
+    errors.extend(
+        _validate_plugin_interface(
+            compatibility_interface,
+            plugin_root=plugin_root,
+            label="compatibility plugin manifest",
+        )
+    )
+
+    identity_fields = (
+        "name",
+        "version",
+        "description",
+        "author",
+        "homepage",
+        "repository",
+        "keywords",
+    )
+    if any(portable.get(field) != compatibility.get(field) for field in identity_fields):
+        errors.append(
+            "portable and compatibility plugin manifests must carry identical identity metadata"
+        )
+    if portable_interface != compatibility_interface:
+        errors.append(
+            "portable OpenAI interface and compatibility plugin interface must be identical"
+        )
     return errors
 
 
@@ -319,7 +471,7 @@ def validate_package(
             errors.append(f"missing package payload file: {relative}")
             continue
         entry = entries[relative]
-        if path.stat().st_size != entry["size"]:
+        if payload_size(path) != entry["size"]:
             errors.append(f"size mismatch for {relative}")
         elif file_sha256(path) != entry["sha256"]:
             errors.append(f"sha256 mismatch for {relative}")

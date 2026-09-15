@@ -13,6 +13,7 @@ from runtime_validate import (
     ROOT,
     VERSION,
     file_sha256,
+    payload_size,
     validate_marketplace,
     validate_plugin_manifest,
 )
@@ -42,7 +43,7 @@ def build_manifest(root: Path = ROOT) -> dict[str, object]:
         files.append(
             {
                 "path": relative.as_posix(),
-                "size": absolute.stat().st_size,
+                "size": payload_size(absolute),
                 "sha256": file_sha256(absolute),
             }
         )

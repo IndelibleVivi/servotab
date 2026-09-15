@@ -10,7 +10,7 @@ PR #27 merged the release-preparation revision as `863ac30850dc6d7558e824c519b92
 
 For this patch's current integration and publication state, inspect the [pull requests](https://github.com/IndelibleVivi/servotab/pulls), [Validate runs](https://github.com/IndelibleVivi/servotab/actions/workflows/validate.yml), and [GitHub Releases](https://github.com/IndelibleVivi/servotab/releases). A version number, successful build, or prepared archive is not a tag or published release. Each release artifact's `release-receipt.json` names its exact source commit and tree; a later merge requires a newly built receipt for that merge.
 
-The canonical package remains one implicit router, twelve explicit-only leaves, twelve router references, and 69 manifest-owned files. Per-skill icons, publisher identity, public creator credit, licensing, and the skills-only runtime boundary are retained. There is no new workflow engine, hook payload, or runtime service.
+The tagged 0.6.1 package remains one implicit router, twelve explicit-only leaves, twelve router references, and 69 manifest-owned files. The current unreleased source candidate adds a portable root `plugin.json` beside the synchronized `.codex-plugin/plugin.json` fallback, bringing its package identity to 70 files without changing skill topology. Text identity is canonical LF and binary identity remains byte-exact, including compatibility for equivalent CRLF left in an existing Windows worktree. Per-skill icons, publisher identity, public creator credit, licensing, and the skills-only runtime boundary are retained. There is no new workflow engine, hook payload, or runtime service.
 
 ## Evidence for 0.6.1
 

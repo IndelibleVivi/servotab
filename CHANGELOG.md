@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Define LF as the canonical generated/package text identity under the Git for Windows default `core.autocrlf=true` checkout, accept equivalent CRLF left in existing worktrees, add end-to-end regressions and Windows CI proof, and retain exact binary-asset checks.
+- Add the portable Agent Plugins root `plugin.json` with `extensions.com.openai`, retain the synchronized `.codex-plugin/plugin.json` compatibility fallback, and validate both manifests plus final-directory metadata limits as one package contract.
 - Keep explicitly requested tranches bounded without requiring a new whole-program plan; align router loading with risk and uncertainty, and qualify normative screenshot authority.
 - Check actual candidate regressions against the known old defect and protect the complete review-fixture write scope. Preserve five deliberately invalid outputs as adversarial controls.
 - Add explicit tranche-planning and cross-process complete-delivery cases; replay all thirteen fixture oracles in ordinary CI without model calls.

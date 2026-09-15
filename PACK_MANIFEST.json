@@ -45,13 +45,13 @@
     },
     {
       "path": "plugins/servotab/LICENSE",
-      "size": 4166,
-      "sha256": "850737e1e2775fdb503556b45acd10f635030f63d020488f38d835da47ed96f7"
+      "size": 4214,
+      "sha256": "3ba1e1d57c33ca52781b865674dd82a3dc65d4568f3de2945543acba28e818c4"
     },
     {
       "path": "plugins/servotab/NOTICE.md",
-      "size": 1969,
-      "sha256": "d950be5836b8789bd9addcdbfa76cfbe961598496f7c8abfd3edd91b1f15678b"
+      "size": 2019,
+      "sha256": "818e264214338f5f66e96391cda2212bc3c6039e40a19e10482b5b89b447337e"
     },
     {
       "path": "plugins/servotab/assets/composer-icon.png",
@@ -62,6 +62,11 @@
       "path": "plugins/servotab/assets/logo.png",
       "size": 23252,
       "sha256": "ecb32061ffd4b5b1e8a456239ec35e6bd44e85cb675325a370f0eea68b425e21"
+    },
+    {
+      "path": "plugins/servotab/plugin.json",
+      "size": 1902,
+      "sha256": "24d87938b5979819aba19a13478c60b1a07d79a952fe3bb1018a561c2cce16fd"
     },
     {
       "path": "plugins/servotab/skills/debug/SKILL.md",

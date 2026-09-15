@@ -73,6 +73,7 @@ The retired root `skills/`, `install.sh`, `uninstall.sh`, `scripts/install.py`, 
 The plugin and marketplace contracts are:
 
 ```text
+plugins/servotab/plugin.json
 plugins/servotab/.codex-plugin/plugin.json
 plugins/servotab/LICENSE
 plugins/servotab/NOTICE.md

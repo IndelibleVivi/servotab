@@ -221,7 +221,7 @@ def main() -> int:
     manifest = load_pack_manifest(PACK_MANIFEST)
     assert_true(manifest["pack"] == "servotab", "pack identity drifted")
     assert_true(manifest["skills"] == list(EXPECTED_SKILLS), "pack skill order drifted")
-    assert_true(len(manifest["files"]) == 69, "v0.6 package must contain exactly 69 files")
+    assert_true(len(manifest["files"]) == 70, "current package must contain exactly 70 files")
     for path in RETIRED_REPO_PATHS:
         assert_true(not (ROOT / path).exists(), f"retired global installer path remains: {path}")
     for filename in RETIRED_METHOD_FILES:
@@ -248,6 +248,30 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory(prefix="servotab-selftest-") as raw:
         base = Path(raw)
+
+        portable_schema_root = contract_copy(ROOT, base / "portable-schema")
+        portable_schema_manifest = portable_schema_root / "plugins/servotab/plugin.json"
+        mutate_json(
+            portable_schema_manifest,
+            lambda data: data.__setitem__("$schema", "https://example.invalid/schema.json"),
+        )
+        assert_detected(
+            validate_plugin_manifest(portable_schema_root),
+            "broken portable plugin schema was accepted",
+        )
+
+        portable_interface_root = contract_copy(ROOT, base / "portable-interface")
+        portable_interface_manifest = portable_interface_root / "plugins/servotab/plugin.json"
+        mutate_json(
+            portable_interface_manifest,
+            lambda data: data["extensions"]["com.openai"]["interface"].__setitem__(
+                "displayName", "Not Servotab"
+            ),
+        )
+        assert_detected(
+            validate_plugin_manifest(portable_interface_root),
+            "portable and compatibility interface drift was accepted",
+        )
 
         identity_root = contract_copy(ROOT, base / "identity")
         identity_manifest = identity_root / "plugins/servotab/.codex-plugin/plugin.json"

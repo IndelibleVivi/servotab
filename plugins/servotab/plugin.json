@@ -1,0 +1,46 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "servotab",
+  "version": "0.6.1",
+  "description": "A quiet, risk-scaled engineering method layer for Codex.",
+  "author": {
+    "name": "Yifei Fang",
+    "url": "https://servotab.com"
+  },
+  "homepage": "https://servotab.com",
+  "repository": "https://github.com/IndelibleVivi/servotab",
+  "keywords": [
+    "codex",
+    "engineering",
+    "methods",
+    "verification"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Servotab",
+        "shortDescription": "Risk-scaled repository methods",
+        "longDescription": "Servotab helps Codex plan, implement, debug, review, and verify repository work. It keeps clear changes direct, adds stronger method only when risk or uncertainty requires it, and closes claims with fresh evidence while preserving the complete requested outcome.",
+        "developerName": "Yifei Fang",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Repository engineering",
+          "Risk-scaled methods",
+          "Fresh verification"
+        ],
+        "websiteURL": "https://servotab.com",
+        "supportURL": "https://servotab.com/support",
+        "privacyPolicyURL": "https://servotab.com/privacy",
+        "termsOfServiceURL": "https://servotab.com/terms",
+        "defaultPrompt": [
+          "Use $servotab to fix this repository bug, identify the root cause, implement the complete repair, and verify it.",
+          "Use $review to inspect this diff and report only verified, actionable correctness and regression findings.",
+          "Use $spec-chain to turn this approved specification into a complete implementation plan without shrinking its scope."
+        ],
+        "brandColor": "#315EFB",
+        "composerIcon": "./assets/composer-icon.png",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}
