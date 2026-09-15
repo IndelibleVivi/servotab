@@ -38,7 +38,10 @@ Against that merged-source CLI, synthetic receipts for the then-current nine
 human-required cases produced review records accepted by the Servotab checker,
 with zero target-agent invocations. The current source candidate has thirteen
 human-required cases; its four delegation canaries use the same declared
-mechanics, but their outcomes remain open until an independent review occurs.
+mechanics. One `delegate-bounded-investigation` attempt now has an independent
+review supporting all three semantic requirements, but its deterministic receipt
+was rejected; the other three delegation canaries have no live review. None of
+the thirteen has accepted live evidence from this candidate.
 This proves producer-consumer contract compatibility only: the source is merged
 but not released, installed or activated, and synthetic outcomes are not actual
 independent human review. Do not hand-edit or manufacture a review to cross the
@@ -94,7 +97,11 @@ five adversarial deltas, alternate valid regressions, malformed/empty test suite
 authority edits and incomplete CLI deliveries. Synthetic receipt tests exercise
 acceptance gating without representing an actual attempt or human review.
 
-No paid trial was run for these changes. Native plugin activation, explicit leaf
-selection, method overhead and comparative agent outcomes still require authorized
+One explicitly budgeted live attempt was run for `delegate-bounded-investigation`
+on 2026-09-15. Its separate-agent review supported all three semantic requirements,
+but three exact literal workspace assertions failed, so the immutable receipt and
+Servotab acceptance remain `fail` and `rejected`. No retry or second target
+invocation was run. Native plugin activation, explicit leaf selection, method
+overhead and comparative agent outcomes still require separately authorized
 host/model observations. Reference reads and command ceilings are diagnostics;
 correctness, complete requested behavior and permission compliance come first.

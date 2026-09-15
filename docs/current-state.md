@@ -1,6 +1,6 @@
 # Servotab release state
 
-Source and release state reconciled on 2026-09-06 for `0.6.1`. This file records evidence boundaries, not a substitute for GitHub's current branch, checks, tags, or Releases API.
+Source and release state reconciled through 2026-09-15 for `0.6.1`. This file records evidence boundaries, not a substitute for GitHub's current branch, checks, tags, or Releases API.
 
 ## Source and GitHub
 
@@ -10,7 +10,7 @@ PR #27 merged the release-preparation revision as `863ac30850dc6d7558e824c519b92
 
 For this patch's current integration and publication state, inspect the [pull requests](https://github.com/IndelibleVivi/servotab/pulls), [Validate runs](https://github.com/IndelibleVivi/servotab/actions/workflows/validate.yml), and [GitHub Releases](https://github.com/IndelibleVivi/servotab/releases). A version number, successful build, or prepared archive is not a tag or published release. Each release artifact's `release-receipt.json` names its exact source commit and tree; a later merge requires a newly built receipt for that merge.
 
-The tagged 0.6.1 package remains one implicit router, twelve explicit-only leaves, twelve router references, and 69 manifest-owned files. The current unreleased source candidate adds a portable root `plugin.json` beside the synchronized `.codex-plugin/plugin.json` fallback, bringing its package identity to 70 files without changing skill topology. It also revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router, and adds four delegation behavior canaries. That guidance exists only in this source candidate: the installed, activated, and live 0.6.1 packages still carry the previous delegation wording, and no host observation of the change exists yet. Text identity is canonical LF and binary identity remains byte-exact, including compatibility for equivalent CRLF left in an existing Windows worktree. Per-skill icons, publisher identity, public creator credit, licensing, and the skills-only runtime boundary are retained. There is no new workflow engine, hook payload, or runtime service.
+The tagged 0.6.1 package remains one implicit router, twelve explicit-only leaves, twelve router references, and 69 manifest-owned files. The current unreleased source candidate adds a portable root `plugin.json` beside the synchronized `.codex-plugin/plugin.json` fallback, bringing its package identity to 70 files without changing skill topology. It also revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router, and adds four delegation behavior canaries. That guidance exists only in this source candidate: the installed and activated 0.6.1 package still carries the previous delegation wording. One workspace-scoped synthetic host attempt has exercised the candidate, but its immutable receipt was rejected and does not establish accepted host behavior. Text identity is canonical LF and binary identity remains byte-exact, including compatibility for equivalent CRLF left in an existing Windows worktree. Per-skill icons, publisher identity, public creator credit, licensing, and the skills-only runtime boundary are retained. There is no new workflow engine, hook payload, or runtime service.
 
 ## Evidence for 0.6.1
 
@@ -24,17 +24,28 @@ current unreleased source candidate contains seventeen cases, adding explicit
 tranche-planning, cross-process complete-delivery, and four delegation
 responsibility-choice canaries. Its deterministic fixture checks pass. The
 positive delegation canary cannot be asserted by a trace ceiling, so it relies on
-declared review requirements for real dispatch and integration evidence; no live
-attempt has been run. Field Lab feature commit `57eb9ac` is merged into main at
-`b87b14b`; the main push validate run `34393492283` completed successfully. That
-source adds public `fieldlab review --requirement-outcomes` input with exact-key
-and bounded-file validation. Synthetic receipts for the then-current nine
-human-required cases produced CLI review records accepted by the Servotab checker
-with zero target-agent invocations; the candidate's thirteen human-required cases
-remain open until an independent review occurs. The compatible companion source is merged but
-not released, installed or activated; this contract check is not evidence that
-the semantic requirements passed. Standalone Field Lab validation remains optional. No live
-target-model evaluation was run for this release or the current candidate; the
+declared review requirements for real dispatch and integration evidence.
+
+One explicitly budgeted `delegate-bounded-investigation` attempt ran on
+2026-09-15 against source commit `0f747d5`, requesting `gpt-5.6-sol` with `xhigh`
+reasoning, one repeat, and network disabled. It produced one subagent event, read
+the delegation reference, changed exactly `queue_worker.py` and `LANE_REPORT.md`,
+and passed the focused test. A separate read-only agent supported all three
+semantic review requirements. The immutable attempt still recorded `fail`
+because its Markdown headings did not contain the three exact literal strings
+required by the workspace assertions; the Servotab acceptance checker therefore
+returned `rejected`. No retry or second target invocation was run. Raw trace and
+review records remain local-only. This is a bounded host observation, not accepted
+behavior evidence, exclusive causation, deployment, or owner acceptance.
+
+Field Lab feature commit `57eb9ac` is merged into main at `b87b14b`; the main push
+validate run `34393492283` completed successfully. That source adds public
+`fieldlab review --requirement-outcomes` input with exact-key and bounded-file
+validation. Synthetic receipts for the then-current nine human-required cases
+produced CLI review records accepted by the Servotab checker with zero target-agent
+invocations. The candidate's thirteen human-required cases still have no accepted
+live receipt. The compatible companion source is merged but not released,
+installed or activated. Standalone Field Lab validation remains optional. The
 named-host installation and discovery receipt below is a separate runtime-identity
 observation, not a model-effectiveness claim.
 

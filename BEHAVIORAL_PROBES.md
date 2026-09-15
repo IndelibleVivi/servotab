@@ -536,8 +536,9 @@ judgment with reference-read counts or presence of expected words.
 
 The four delegation canaries make the responsibility choice observable. The
 deterministic fixture pass is necessary but not sufficient: the positive case
-also declares semantic requirements, and a live attempt plus independent review
-remains necessary before any dispatch claim is closed.
+also declares semantic requirements. One live attempt received a supporting
+independent semantic review but failed its exact literal workspace assertions,
+so an accepted attempt remains necessary before any dispatch claim is closed.
 
 `delegate-bounded-investigation` — an unknown root cause, but a fixed failure,
 expected behavior, entry evidence, return contract, and verification, with noisy

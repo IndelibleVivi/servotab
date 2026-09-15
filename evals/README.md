@@ -60,7 +60,11 @@ Delegate responsibility choice 由四个 canary 覆盖：
 topology（prompt 未命令时的真实 worker lane）、integration ownership 与证据边界
 写成 `human_review_requirements`。这三个 negative canary 保持
 `max_subagent_events: 0`。deterministic fixture pass 因此是必要条件而非
-delegation 证明；真实 worker lane 仍需要一次授权的 host attempt 与独立 review。
+delegation 证明。2026-09-15 的一次授权 attempt 产生了一个 worker event，focused
+test 与三条独立 semantic review 均获支持，但报告标题没有包含 case 要求的三条
+exact literal strings，故 immutable receipt 为 `fail`，Servotab acceptance 为
+`rejected`。它是 bounded host observation，不是 accepted evidence；没有自动 retry
+或第二次 target invocation。
 
 任何 synthetic live attempt 都必须先生成 saved plan，再显式跨过 Field Lab 的
 `run --live --max-invocations N` gate。Servotab 不把 live model eval 设为普通
