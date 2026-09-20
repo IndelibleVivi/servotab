@@ -72,9 +72,9 @@ class BehaviorFixtureTests(unittest.TestCase):
                 self.assertTrue(all(check_workspace(case, work, before)))
                 self.assertTrue(all(check_commands(case, work)))
 
-    def test_original_audit_counterexamples(self):
+    def test_adversarial_decision_controls(self):
         controls = json.loads((ROOT / "evals/adversarial-controls.json").read_text())
-        self.assertEqual(len(controls), 5)
+        self.assertEqual(len(controls), 8)
         for control in controls:
             name = control["case_id"]
             with self.subTest(case=name), tempfile.TemporaryDirectory() as raw:

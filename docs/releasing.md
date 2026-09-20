@@ -46,6 +46,6 @@ Read back the draft, target/tag, notes, and all four assets. Download the assets
 
 ## Publish and separate later surfaces
 
-Only after owner-authorized draft inspection should publication occur. An explicit `gh release edit "v$(tr -d '\r\n' < VERSION)" --draft=false --repo IndelibleVivi/servotab` is a publication action, not part of the builder or normal tests. Verify the public tag/asset readback after publication and update the volatile state record with observed facts.
+Only after owner-authorized draft inspection should publication occur. An explicit `gh release edit "v$(tr -d '\r\n' < VERSION)" --draft=false --repo IndelibleVivi/servotab` is a publication action, not part of the builder or normal tests. Verify the public tag/asset readback after publication and update the volatile state record with observed facts. Reconcile both README editions, the changelog, and the website: `site/src/config.ts` keeps `publishedVersion` separate from the manifest source version so candidate builds do not invent published tags in install examples. Update it and the candidate status copy only after publication is observed.
 
 A GitHub release supplies no evidence that a Codex host installed or activated the new version. An OpenAI directory update uses the plugin ZIP and requires its own upload, declarations, review, and publication. Website deployment uses a separately built source revision and requires canonical-host verification. Never promote source/fixture/CI evidence into these later claims.

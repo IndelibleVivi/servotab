@@ -1,6 +1,6 @@
 ---
 name: servotab
-description: "Use for hands-on repository work when a quiet, risk-scaled engineering method can improve design, implementation, debugging, review, delegation, or verification. Keep clear local changes direct, preserve the complete requested outcome, and add method only where risk or uncertainty justifies it. Do not use for general technical explanations, simple file lookup, casual discussion, or non-engineering writing."
+description: "Use for hands-on repository work when a quiet, risk-scaled engineering method can improve design, implementation, debugging, review, delegation, workspace lifecycle, or verification. Keep clear local changes direct, preserve the complete requested outcome, and add method only where risk or uncertainty justifies it. Do not use for general technical explanations, simple file lookup, casual discussion, or non-engineering writing."
 ---
 
 # Servotab
@@ -46,9 +46,11 @@ Use the safeguards here directly for clear, bounded work. Load a reference when 
 - Diff, commit, branch, PR, or implementation review: `references/review.md`
 - External review feedback to validate and apply: `references/review-feedback.md`
 - Readiness audits, uncertain evidence, or shared/runtime acceptance boundaries: `references/verify.md`
-- Isolation justified by dirty state, risk, duration, or parallel writes: `references/worktree.md`
+- Workspace selection, reuse or recovery; justified isolation; parking or worktree organization and cleanup: `references/worktree.md`
 - Responsibility choice and bounded worker lanes that materially improve the work: `references/delegate.md`
-- Final integration, Git, PR, or cleanup decisions: `references/finish.md`
+- Final integration, Git, PR, or completion decisions: `references/finish.md`
+
+Read `references/worktree.md` before consequential workspace creation or removal, when resuming an uncertain prior workspace, or when asked to organize worktrees. Select the intent first: explicit method use and tidying requests do not imply a new checkout or authorize deletion. Reuse suitable task state; do not map workers one-to-one to worktrees. Clear in-place edits need no workspace inventory.
 
 Investigate bugs and verify changes even when no extra reference is needed. Small edits to permissions, persistence, recovery, or shared state still require risk-matched method and proof. Review feedback requires adjudication before editing. Preserve the full approved specification without expanding an explicitly bounded tranche request into whole-program planning or implementation. Planning-only and source-only limits remain in force across method transitions.
 

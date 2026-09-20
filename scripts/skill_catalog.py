@@ -5,7 +5,7 @@ ROUTER = {
     "name": "servotab",
     "description": (
         "Use for hands-on repository work when a quiet, risk-scaled engineering method "
-        "can improve design, implementation, debugging, review, delegation, or verification. "
+        "can improve design, implementation, debugging, review, delegation, workspace lifecycle, or verification. "
         "Keep clear local changes direct, preserve the complete requested outcome, and add "
         "method only where risk or uncertainty justifies it. Do not use for general technical "
         "explanations, simple file lookup, casual discussion, or non-engineering writing."
@@ -152,14 +152,15 @@ METHODS = (
         "skill": "worktree",
         "method": "worktree",
         "description": (
-            "Create or use an isolated Git workspace when risk, duration, dirty state, or "
-            "parallel writes justify it. Do not require isolation for every edit."
+            "Choose, reuse, restore, park, or clean up Git workspaces while preserving work and "
+            "host ownership. Create isolation only when it resolves a real conflict; inspection "
+            "does not authorize creation or deletion."
         ),
         "display_name": "Worktree",
-        "short_description": "Use Git isolation only when it adds value",
+        "short_description": "Choose and manage the workspace lifecycle",
         "default_prompt": (
-            "Use $worktree to create or select a safe isolated workspace for this task and "
-            "report its baseline state."
+            "Use $worktree to identify this task’s workspace intent, reuse suitable existing state, "
+            "and carry out the authorized creation, recovery, parking, or cleanup with evidence."
         ),
     },
     {

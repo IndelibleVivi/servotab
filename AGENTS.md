@@ -72,6 +72,8 @@ For a method or metadata change:
 4. Run the package validation gate.
 5. Update documentation whose current contract changed.
 
+Workspace lifecycle guidance is owned by `methods/worktree.md`; `finish` shares its removal contract and `delegate` must not equate branch names with isolated write surfaces. Changes to these decisions require matching activation seeds and semantic canaries; disposable Git tests establish mechanisms only, not model behavior.
+
 For a canonical package asset change:
 
 1. Edit or replace only the intended file under `assets/` with rights and provenance understood.
@@ -170,6 +172,8 @@ One state never proves the next.
 Record volatile outcomes in `docs/current-state.md` only after observing them. Do not put account ids, tokens, personal paths, local cache data, or private deployment traces in the public repository.
 
 ## Documentation closure
+
+`site/src/config.ts` separates the source version from the observed published release used by install examples. Update the published version only after exact tag/release evidence; a manifest bump is not publication.
 
 Update current-facing docs whenever method ids, plugin routes, install commands, supported surfaces, domain behavior, privacy boundaries, or status claims change. Preserve historical changelog and provenance wording; add a transition entry instead of rewriting old Softpowers releases as Servotab releases.
 

@@ -71,7 +71,7 @@ Reuse an active worker or session that already owns the lane. Do not create a se
 
 Create each lane once. If creation returns an error, timeout, or ambiguous result, inspect existing agents once before retrying; an error does not prove that no worker exists.
 
-Keep one writer for every overlapping file, branch, database, or live-state surface. For concurrent writes, use non-overlapping ownership, separate worktrees or branches, or a stable interface fixed before dispatch. Otherwise sequence the work. Workers do not commit, push, merge, deploy, mutate production, or change public contracts unless the order explicitly grants that action.
+Keep one writer for every overlapping file, branch, database, or live-state surface. For concurrent writes, use genuinely non-overlapping file and index operations, or separate worktrees with clear ownership. Different branch names in one checkout do not isolate working files or the index; a stable interface alone does not prevent write collisions. Reuse a suitable existing task workspace before creating another, and apply the Worktree method when selecting or retiring one. Read-only workers normally need no extra checkout. Worktrees still share refs and may share ports, databases, services, or output directories; allocate those resources or sequence the work. Workers do not commit, push, merge, deploy, mutate production, or change public contracts unless the order explicitly grants that action.
 
 After confirmed dispatch, continue a non-overlapping Coordinator responsibility or wait. Do not repeatedly poll healthy workers; resume on an explicit return, a concrete delivery problem, or a user status request.
 

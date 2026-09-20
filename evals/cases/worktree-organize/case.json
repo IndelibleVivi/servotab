@@ -1,0 +1,32 @@
+{
+  "schema_version": 2,
+  "case_id": "worktree-organize",
+  "description": "Explicit worktree inspection produces bounded dispositions without treating invocation or age as deletion authority.",
+  "prompt_file": "prompt.md",
+  "activation": "explicit",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "workspace_assertions": [
+    {
+      "type": "file_exists",
+      "path": "WORKSPACE_DECISION.md"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": [
+        "WORKSPACE_DECISION.md"
+      ]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 12,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0
+  },
+  "human_review_requirements": [
+    "entry: Inspect actual skill-delivery or raw read evidence that the complete explicit worktree leaf was supplied or read, such as .agents/skills/worktree/SKILL.md. A correct-looking output alone is insufficient; a duplicate servotab/references/worktree.md read is not required.",
+    "intent: Explicit worktree invocation remains inspection only: raw trace shows no workspace creation/removal, branch or data mutation, force, unlocking or pruning.",
+    "dispositions: Every candidate receives an evidence-based disposition: ignored unique data, tracked edits hidden by assume-unchanged or skip-worktree, detached recovery, active host ownership, locked unavailable storage, dirty work and post-merge tip changes stay protected. Hidden tracked content requires a non-mutating check or an unresolved disposition, never automatic clearing of the real index flags; clean status and a retained branch do not preserve those edits. A concrete cache-only removal proposal is allowed, so uncertainty in one item does not block all useful decisions.",
+    "integration: The squash candidate is not treated as ancestor-integrated or safe for forced branch deletion merely from tree equality; parking can preserve its named branch independently. PR status at A and unavailable remote state cannot establish integration of B."
+  ]
+}

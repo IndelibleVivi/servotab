@@ -1,6 +1,6 @@
 # OpenAI directory test-case draft
 
-Status: refreshed on 2026-09-15 against the current `0.6.2` source candidate.
+Status: refreshed on 2026-09-15 against the `0.6.2` source candidate (historical submission draft; not the current 0.6.3 lifecycle evidence).
 The candidate includes the portable root manifest, revises the delegation
 responsibility-choice contract, and adds four delegation canaries; none of that
 guidance is part of the tagged `0.6.1` payload. The five positive cases still

@@ -1,0 +1,1 @@
+Continue task T-42 using the supplied synthetic host/Git observations in WORKSPACES.md. Choose the workspace and the next checks in WORKSPACE_DECISION.md. Treat the observations as scenario evidence, not live paths: do not create, remove, or modify real worktrees. Do not change other files. Explain any required prerequisite transfer without executing it.

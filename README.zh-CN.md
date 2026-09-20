@@ -9,7 +9,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-当前源码与 tagged release：[`0.6.2`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.2)。该 release 修复 Windows 文本身份校验，采用 portable Agent Plugins manifest，并以有界证据强化 delegation responsibility routing。[OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 是独立分发渠道；GitHub Release 不能证明目录 payload 已更新。具体证据和边界见 [current state](docs/current-state.md)、[0.6.2 release notes](docs/releases/0.6.2.md) 与历史 [0.6.1 release notes](docs/releases/0.6.1.md)。
+当前源码为 **0.6.3 candidate**，将 `worktree` 扩展到现场选择、复用、恢复、收起和按授权清理，见 [0.6.3 candidate notes](docs/releases/0.6.3.md)。最近已发布的 tagged release 为 [`0.6.2`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.2)。该 release 修复 Windows 文本身份校验，采用 portable Agent Plugins manifest，并以有界证据强化 delegation responsibility routing。[OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 是独立分发渠道；GitHub Release 不能证明目录 payload 已更新。具体证据和边界见 [current state](docs/current-state.md)、[0.6.2 release notes](docs/releases/0.6.2.md) 与历史 [0.6.1 release notes](docs/releases/0.6.1.md)。
 
 ## 它做什么
 
@@ -89,6 +89,18 @@ $tdd 为这个 stale cursor bug 建立严格 red-green 回归证据。
 $spec-chain 依据这份 approved spec 建立完整 implementation plan；当前 tranche 不得替代完整 scope。
 ```
 
+0.6.3 source candidate 还会从普通请求里识别 workspace 生命周期：
+
+```text
+找回昨天实验的现场，先复用同一任务的 workspace，再判断是否需要另建。
+```
+
+```text
+$worktree 盘点这个 repo 的 worktrees，建议哪些保留或收起；现在不要删除。
+```
+
+调用 `$worktree` 不等于要求新建 checkout。暂停的未合并实验可以保留 durable named branch 和恢复入口，再按授权移除目录。移除目录、删分支、丢弃数据和 prune 登记是不同动作；ignored 本地数据、被 index 标记隐藏的 tracked 修改、detached 成果、活跃宿主任务和暂时离线的存储都需要分别处理。已获明确授权且状态没变的批量项可以执行，不确定项单独保留。这版不新增 cleanup daemon、runtime dependency 或全局 workspace 数据库。
+
 ## Method set
 
 Plugin 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit leaves。
@@ -105,7 +117,7 @@ Plugin 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit l
 | `review` | explicit only | 做一轮 findings-first、evidence-backed review |
 | `review-feedback` | explicit only | 先核实 external feedback，再采纳、调整或拒绝 |
 | `verify` | explicit only | 用 fresh、risk-matched evidence 支撑 completion claim |
-| `worktree` | explicit only | 只在 dirty state、风险、时长或并发写入值得时隔离 workspace |
+| `worktree` | explicit only | 选择、复用、恢复、收起和按明确授权清理 workspace |
 | `delegate` | explicit only | 在深层执行前确定 responsibility；只在值得时把 bounded lane 交给一个 worker |
 | `finish` | explicit only | 检查 final tree，并只执行已授权的 Git / PR / cleanup action |
 
@@ -137,6 +149,8 @@ PACK_MANIFEST.json                            exact derived payload identity
 `methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions、invocation 与 skill-icon source metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存 canonical identity assets 与十二枚 method glyph sources；generator 会把每个 skill 的透明 SVG / 400px PNG，以及 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。Paper-backed icon fallback 保留在 canonical assets 中，不进入默认 runtime payload。
 
 已发布的 0.6.2 release 是 70-file manifest-owned payload：它新增 portable root manifest，同时保留 compatibility fallback；one-router/twelve-leaf 的 skill topology 未改变。该 release 修订了 `delegate`、`execute`、`debug` 与 implicit router 的 responsibility-choice contract；现有 0.6.1 installation 在更新前尚未包含这些指引。正向 canary 已有一次 accepted workspace-scoped synthetic attempt 与独立 review；它只支持该 pinned case，不能外推为普遍 host effectiveness。文本身份以 canonical LF 计算，binary assets 仍逐字节核验，因此 Git for Windows 的新检出以及旧 worktree 遗留的等价 CRLF 都不会再触发虚假的 stale/package mismatch。
+
+0.6.3 candidate 保持同样的 70-file topology，新增 3 个 worktree 判断演练，source pack 共 20 个 case。一次性 Git 仓库回归检验删除、恢复、基线、lock 与登记机制；演练输出仍需 semantic review，不能证明实际清理已经执行。本版没有 live target-model outcome claim。
 
 以下路径各有不同责任：
 

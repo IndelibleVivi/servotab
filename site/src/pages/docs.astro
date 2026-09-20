@@ -23,14 +23,14 @@ import { PROJECT_LINKS, repoFile, SITE } from "../config";
           Servotab is publicly available in the official OpenAI Plugins Directory.{" "}
           <a href={PROJECT_LINKS.pluginDirectory}>Open the Servotab listing</a> to add the
           published plugin. The repository route below installs the separate tagged
-          {" "}<code>{SITE.version}</code> source release for inspection or maintainer testing;
+          {" "}<code>{SITE.publishedVersion}</code> source release for inspection or maintainer testing;
           it is not a readback of the currently published directory payload.
         </p>
 
         <div class="quickstart-grid">
           <article>
             <span class="rail-label">01 / source checkout</span>
-            <pre><code>{`git clone --branch v${SITE.version} --depth 1 https://github.com/IndelibleVivi/servotab.git
+            <pre><code>{`git clone --branch v${SITE.publishedVersion} --depth 1 https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal`}</code></pre>
@@ -56,7 +56,7 @@ codex plugin add servotab@personal`}</code></pre>
         <pre><code>codex plugin list --marketplace personal</code></pre>
         <p>
           The receipt should show <code>servotab@personal</code> as{" "}
-          <code>installed, enabled</code> at version <code>{SITE.version}</code>. On
+          <code>installed, enabled</code> at version <code>{SITE.publishedVersion}</code>. On
           2026-08-31 this source-checkout route and fresh-process router discovery were
           verified on macOS with <code>codex-cli 0.147.0</code>. That is an observed
           compatibility receipt, not a guessed minimum-version guarantee.
@@ -206,7 +206,7 @@ codex plugin add servotab@personal`}</code></pre>
       <div class="content-prose">
         <h2 id="availability-heading">Verified to the boundary we can prove.</h2>
         <p>
-          The current <code>{SITE.version}</code> release is generated from canonical
+          The <code>{SITE.version}</code> source candidate is generated from canonical
           method and icon sources into an exact 70-file plugin package. Public checks cover
           source/generated sync, skill validation, manifest freshness, package self-tests,
           public-tree audit, Python compilation, website motion behavior, and the production
@@ -216,9 +216,11 @@ codex plugin add servotab@personal`}</code></pre>
         </p>
         <p>
           The <a href={PROJECT_LINKS.pluginDirectory}>official Servotab listing</a> is live.
-          The current <code>{SITE.version}</code> GitHub release strengthens the router,
-          design, execution, verification, and race-safe motion contracts while retaining the
-          per-skill icons. It remains distinct from that published payload until OpenAI publishes
+          The published <code>{SITE.publishedVersion}</code> GitHub release remains the install
+          target. Source <code>{SITE.version}</code> adds worktree lifecycle guidance: reuse
+          and recover an existing task, park preserved work, and separate directory removal
+          from branch or data deletion. Its three synthetic decision rehearsals and disposable
+          Git regressions do not establish live model behavior. It remains distinct from that published payload until OpenAI publishes
           the directory update. GitHub release availability is recorded on the repository Releases page.
           The same repository preserves earlier Softpowers commits, release records,
           licensing history, and provenance without relabelling those historical versions.
