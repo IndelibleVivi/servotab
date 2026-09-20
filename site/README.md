@@ -50,6 +50,8 @@ use trailing slashes to match the directory URLs served by Cloudflare Pages,
 keep it aligned with navigation, and exclude the noindex 404 page. The sitemap is
 advertised by `public/robots.txt`. Search Console verification and submission are
 separate owner-controlled operations; these files do not establish indexing.
+The public Google verification meta tag in `BaseLayout.astro` preserves the
+owner's Search Console verification and must remain present after verification.
 
 The canonical domain is defined in `astro.config.mjs` and `src/config.ts`.
 The current Servotab source, issue tracker, and official OpenAI Plugins
