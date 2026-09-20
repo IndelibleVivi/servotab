@@ -8,9 +8,11 @@ Website SEO source follow-up (2026-09-21): the homepage, Docs, and Methods now
 carry purpose-specific search/share titles. Canonical URLs, sitemap entries, and
 internal navigation use trailing slashes to match Cloudflare Pages' observed
 directory redirects. The local build and seven-route metadata/link inspection
-passed. These changes are a website candidate; the production receipt below
-still describes the earlier deployment. Search Console verification, submission,
-and indexing are not established by this source change.
+passed, and [PR #39](https://github.com/IndelibleVivi/servotab/pull/39) merged as
+`b611806`. The resulting site is deployed as recorded below. Google Search
+Console ownership was verified and its sitemap report successfully read all seven
+canonical routes on 2026-09-21. Sitemap ingestion does not establish that every
+page is indexed or that new search metadata has been reflected in results.
 
 The source and latest tagged GitHub release are `0.6.3`, with workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals bring the Field Lab source pack to twenty cases. The package remains one router, twelve leaves, and 70 manifest-owned files. See [release notes](releases/0.6.3.md).
 
@@ -97,6 +99,6 @@ Previous 0.4/0.5 submission archives and the tagged 0.6.1/0.6.2 assets remain hi
 
 ## Website and infrastructure
 
-The current 0.6.3 website was deployed to the existing Cloudflare Pages project from the exact `servotab-site` artifact produced by main Validate run `35502059074` for source `047825179421636cf6414e0430e479ff9195861b`. Cloudflare deployment `5faa2045-390f-4a59-b9a6-2578ecaac268` records environment `Production`, branch `main`, and source `0478251`; the earlier `ce89e9d5` production deployment remains in Pages history. Fresh canonical-host checks returned the 0.6.3 release and directory-publication status from `https://servotab.com/` and its Docs surface. HTTP, `www`, and `servotab.pages.dev` redirect to the canonical HTTPS host; an unknown apex path returns a true 404 with `no-store`; the expected CSP, framing, content-type, referrer, permissions, and cross-origin headers remain present; and page source contains no Cloudflare Insights script or beacon. Real-browser checks at 1280 px and 390 px found no horizontal overflow and zero console errors or warnings on the homepage and Docs. No DNS, telemetry, account topology, redirect configuration, or OpenAI directory state was changed during this website deployment.
+The current 0.6.3 website was deployed to the existing Cloudflare Pages project from the exact `servotab-site` artifact produced by main Validate run `35536678568` for source `b6118064e084f014c553e178e256b9eee425916e`. Cloudflare deployment `8f4f6d42-6f42-4ec3-80ca-c00bd80aea91` records environment `Production`, branch `main`, and source `b611806`; the previous `5faa2045` production deployment remains in Pages history. Fresh canonical-host checks returned the 0.6.3 release and directory-publication status from `https://servotab.com/` and its Docs surface. HTTP, `www`, and `servotab.pages.dev` redirect to the canonical HTTPS host; an unknown apex path returns a true 404 with `no-store`; the expected CSP, framing, content-type, referrer, permissions, and cross-origin headers remain present; and page source contains no Cloudflare Insights script or beacon. The SEO source passed desktop/mobile navigation, fragment, and no-JavaScript browser checks before deployment. Fresh live HTTP checks covered all seven content routes, canonical URLs, both alias redirects with path/query preservation, the sitemap, robots.txt, and the true 404. Earlier release browser checks at 1280 px and 390 px remain historical evidence, not a fresh browser receipt for this deployment. No DNS, telemetry, account topology, redirect configuration, or OpenAI directory state was changed during this website deployment.
 
 Keep private operational identifiers, personal cache paths, account details, and raw host traces outside this public state document. Historical source/install/provenance receipts remain available in [the pre-0.6.1 snapshot](https://github.com/IndelibleVivi/servotab/tree/04552977d5f6262c4f625fe71bd28090c056f1d0); do not repurpose them as current release proof.
