@@ -4,6 +4,14 @@ Servotab `0.6.3` was published on GitHub, deployed to the production website, an
 
 ## 0.6.3 release
 
+Website SEO source follow-up (2026-09-21): the homepage, Docs, and Methods now
+carry purpose-specific search/share titles. Canonical URLs, sitemap entries, and
+internal navigation use trailing slashes to match Cloudflare Pages' observed
+directory redirects. The local build and seven-route metadata/link inspection
+passed. These changes are a website candidate; the production receipt below
+still describes the earlier deployment. Search Console verification, submission,
+and indexing are not established by this source change.
+
 The source and latest tagged GitHub release are `0.6.3`, with workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals bring the Field Lab source pack to twenty cases. The package remains one router, twelve leaves, and 70 manifest-owned files. See [release notes](releases/0.6.3.md).
 
 Fresh local validation passed canonical/generated sync, 13-skill and 70-file package validation, manifest freshness, packaging selftest, all 72 Python regressions (including nine disposable Git tests; the two new parameterized tests each cover assume-unchanged and skip-worktree), public-tree audit, and Python compilation. Standalone Field Lab validate/selftest/list passed all twenty cases with zero target-agent invocations. Main Validate run `35499926427` passed Windows generated sync, public-tree, site build, Ubuntu Python 3.10/3.13, macOS Python 3.13, and exact-source release artifacts for merge commit `6a57dbb`. These checks establish source, package, fixture, and build consistency, not runtime effectiveness. No 0.6.3 live target-model attempt, installed activation, or directory update is established by the GitHub release itself. The production website and public directory have separate receipts below.
