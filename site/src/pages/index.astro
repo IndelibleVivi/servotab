@@ -17,7 +17,7 @@ import { methods } from "../data/methods";
       </p>
       <div class="hero-actions">
         <a class="action action-primary" href={PROJECT_LINKS.pluginDirectory}>Open official listing</a>
-        <a class="action action-secondary" href="/methods">Explore methods</a>
+        <a class="action action-secondary" href="/methods/">Explore methods</a>
       </div>
     </div>
     <MethodMotion />
@@ -105,7 +105,7 @@ import { methods } from "../data/methods";
           {methods.map((method) => <span>{method.name}</span>)}
         </div>
       </div>
-      <a class="action action-secondary" href="/methods">See all methods</a>
+      <a class="action action-secondary" href="/methods/">See all methods</a>
     </div>
 
     <div class="availability-note">
@@ -116,7 +116,7 @@ import { methods } from "../data/methods";
         Worktree. GitHub {SITE.publishedVersion} remains the source release and artifact
         receipt; the directory listing does not expose package bytes. <a href={PROJECT_LINKS.pluginDirectory}>Open listing</a>
         {" · "}<a href={`${PROJECT_LINKS.source}/releases`}>GitHub releases</a>
-        {" · "}<a href="/docs#get-started-heading">Source install</a>
+        {" · "}<a href="/docs/#get-started-heading">Source install</a>
         {" · "}<a href={repoFile("CHANGELOG.md")}>Changelog</a>
       </p>
     </div>

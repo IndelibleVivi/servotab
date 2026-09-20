@@ -42,6 +42,17 @@ inspect the rendered card before changing metadata dimensions or alt text.
 
 ## Public URLs
 
+The homepage, Docs, and Methods search/share titles describe the plugin's purpose;
+the visible brand headline remains independent. `src/layouts/BaseLayout.astro`
+renders each page's title, description, canonical URL, and social metadata into
+static HTML. `public/sitemap.xml` lists the seven indexable canonical routes;
+use trailing slashes to match the directory URLs served by Cloudflare Pages,
+keep it aligned with navigation, and exclude the noindex 404 page. The sitemap is
+advertised by `public/robots.txt`. Search Console verification and submission are
+separate owner-controlled operations; these files do not establish indexing.
+The public Google verification meta tag in `BaseLayout.astro` preserves the
+owner's Search Console verification and must remain present after verification.
+
 The canonical domain is defined in `astro.config.mjs` and `src/config.ts`.
 The current Servotab source, issue tracker, and official OpenAI Plugins
 Directory listing URLs are centralized in `src/config.ts`. Candidate-version

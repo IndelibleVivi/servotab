@@ -8,12 +8,12 @@ type Props = {
 const { pathname } = Astro.props;
 
 const links = [
-  { href: "/docs", label: "Docs" },
-  { href: "/methods", label: "Methods" },
-  { href: "/lineage", label: "Lineage" },
+  { href: "/docs/", label: "Docs" },
+  { href: "/methods/", label: "Methods" },
+  { href: "/lineage/", label: "Lineage" },
 ];
 
-const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+const isCurrent = (href: string) => pathname === href || pathname.startsWith(href);
 ---
 
 <header class="site-header">
@@ -29,7 +29,7 @@ const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${
           {link.label}
         </a>
       ))}
-      <a class="nav-source" href="/support" aria-current={isCurrent("/support") ? "page" : undefined}>Support</a>
+      <a class="nav-source" href="/support/" aria-current={isCurrent("/support/") ? "page" : undefined}>Support</a>
     </nav>
 
     <details class="mobile-nav">
@@ -40,7 +40,7 @@ const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${
             {link.label}
           </a>
         ))}
-        <a href="/support" aria-current={isCurrent("/support") ? "page" : undefined}>Support</a>
+        <a href="/support/" aria-current={isCurrent("/support/") ? "page" : undefined}>Support</a>
       </nav>
     </details>
   </div>

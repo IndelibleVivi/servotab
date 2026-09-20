@@ -8,7 +8,7 @@ export const SITE = {
   // Observed publication, independent of the source manifest version.
   publishedVersion: "0.6.3",
   description:
-    "Adaptive engineering methods for planning, implementation, debugging, review, and verification in Codex.",
+    "A Codex plugin for planning, implementation, debugging, code review, and verification. Keep clear changes direct and match engineering methods to the work.",
 } as const;
 
 // Keep the public source and issue tracker on the same repository identity.
