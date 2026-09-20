@@ -237,6 +237,11 @@ npm run build
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for canonical edit paths, generated projections, behavior evidence, documentation closure, and contribution terms.
 
+## Related projects
+
+- [MCP Boundary](https://indeliblevivi.github.io/mcp-boundary/) — an MCP engineering skill, Guide, and executable Lab for designing, reviewing, and verifying MCP servers and apps.
+- [Worker Routing](https://indeliblevivi.github.io/codex-worker-routing/) — delegate bounded responsibilities to native or optional ACP workers, with a local Dispatch dashboard for inspecting the work.
+
 ## Lineage, authorship, and licensing
 
 Servotab migrated from the historical Softpowers codebase while preserving its Git history, release records, licensing boundaries, and provenance. The rename does not relabel earlier versions as Servotab releases.
