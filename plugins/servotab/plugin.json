@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "servotab",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "A quiet, risk-scaled engineering method layer for Codex.",
   "author": {
     "name": "Yifei Fang",

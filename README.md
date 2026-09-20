@@ -9,7 +9,7 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Current source and tagged release: [`0.6.2`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.2). This release fixes Windows text-identity checks, adopts the portable Agent Plugins manifest, and strengthens delegation responsibility routing with bounded evidence. The [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) is a separate distribution surface; a GitHub release does not prove that the directory payload has been updated. See [current state](docs/current-state.md), the [0.6.2 release notes](docs/releases/0.6.2.md), and the historical [0.6.1 release notes](docs/releases/0.6.1.md) for evidence and limits.
+Current source: **0.6.3 candidate**, expanding `worktree` into workspace selection, reuse, recovery, parking, and authorized cleanup. See the [0.6.3 candidate notes](docs/releases/0.6.3.md). Latest published tagged release: [`0.6.2`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.2). This release fixes Windows text-identity checks, adopts the portable Agent Plugins manifest, and strengthens delegation responsibility routing with bounded evidence. The [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) is a separate distribution surface; a GitHub release does not prove that the directory payload has been updated. See [current state](docs/current-state.md), the [0.6.2 release notes](docs/releases/0.6.2.md), and the historical [0.6.1 release notes](docs/releases/0.6.1.md) for evidence and limits.
 
 ## What Servotab changes
 
@@ -91,6 +91,18 @@ $tdd establish strict red-green evidence for this stale-cursor regression.
 $spec-chain turn this approved specification into a complete implementation plan; the current tranche must not replace the full scope.
 ```
 
+The 0.6.3 source candidate also handles workspace lifecycle in ordinary language:
+
+```text
+Find the workspace for yesterday’s experiment and resume it before creating another checkout.
+```
+
+```text
+$worktree inspect this repository’s worktrees and recommend what to retain or park; do not delete anything yet.
+```
+
+Calling `$worktree` does not request a new checkout. Parking can remove an inactive, unmerged checkout while retaining a durable named branch and restoration route. Directory removal, branch deletion, data disposal, and registration pruning are separate actions. The method protects ignored local data, detached work, active host tasks, and unavailable storage; already authorized unchanged batch items can proceed while uncertain items remain pending. It adds no cleanup daemon, runtime dependency, or global workspace database.
+
 ## Method set
 
 The plugin contains thirteen skills: one implicit router and twelve explicit leaves.
@@ -107,7 +119,7 @@ The plugin contains thirteen skills: one implicit router and twelve explicit lea
 | `review` | explicit only | Produce one findings-first, evidence-backed implementation review |
 | `review-feedback` | explicit only | Verify external feedback before accepting, adjusting, or rejecting it |
 | `verify` | explicit only | Match completion claims to fresh, proportionate evidence |
-| `worktree` | explicit only | Isolate work only when dirt, risk, duration, or parallel writes justify it |
+| `worktree` | explicit only | Choose, reuse, restore, park, and clean up workspaces within explicit authority |
 | `delegate` | explicit only | Choose responsibility before deep work; hand a bounded lane to a worker only when it pays |
 | `finish` | explicit only | Inspect the final tree and perform only authorized Git or cleanup actions |
 
@@ -149,6 +161,8 @@ Other surfaces have separate jobs:
 ## Evidence and claim boundaries
 
 The tagged 0.6.2 release contains exactly 70 manifest-owned package files, adding the portable root manifest while retaining the compatibility fallback; the one-router/twelve-leaf skill topology remains unchanged. It revises the responsibility-choice contract in `delegate`, `execute`, `debug`, and the implicit router. Existing 0.6.1 installations do not contain that newer guidance until they are updated. One workspace-scoped positive canary has an accepted synthetic attempt and independent review, supporting that pinned case without establishing general host effectiveness. Repository checks use canonical LF identity for text and exact bytes for binary assets, so fresh Git for Windows checkouts and equivalent CRLF left in an existing worktree do not create false stale-package reports. They also cover exact skill and icon validation, manifest freshness, packaging and migration self-tests, public-tree safety, Python syntax, decoded PNGs, parsed passive SVGs, package/release regressions, website motion behavior tests, and the website production build.
+
+The 0.6.3 candidate retains the same 70-file topology and adds three worktree decision rehearsals, bringing the source pack to twenty cases. Disposable Git regressions check the underlying removal, recovery, baseline, lock, and registration mechanisms. Rehearsal outputs require semantic review and do not prove executed cleanup; no live 0.6.3 target-model result is claimed.
 
 Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, a website deployment, an OpenAI directory update, or owner acceptance on those separate surfaces. The GitHub Release is public; the existing official directory listing remains a separately observed distribution state.
 

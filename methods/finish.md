@@ -93,9 +93,9 @@ When work remains local, report the branch and workspace path.
 
 ## Destructive cleanup
 
-Deleting a branch, worktree, uncommitted changes, generated data, or stash requires explicit confirmation. State what will be deleted. Clean only resources created for this task and owned by this workflow.
+For workspace cleanup, read and apply the Worktree method’s shared removal and authorization contract before acting. From the router use `references/worktree.md`; from the explicit finish leaf use `../worktree/SKILL.md`. Incidental cleanup covers only this workflow’s resources; an explicit request can also select pre-existing worktrees. Present exact targets and actions, protect ignored/local data and current tips, recheck each candidate immediately before removal, and verify preserved refs afterward. Existing authorization for the exact batch is sufficient; do not request it again.
 
-Host-managed worktrees should be left to the host unless it exposes an explicit cleanup action.
+Parking may remove an unmerged checkout while preserving a durable named ref and restoration route. Removing a checkout does not authorize deleting its branch, discarding data, or pruning registrations. Deletion of branches, changes, generated data, or stashes requires explicit authority for that action. Respect active tasks, locks, and the host’s lifecycle; use supported host cleanup for host-managed worktrees. Leave uncertain items pending while completing independent authorized items.
 
 ## Completion report
 

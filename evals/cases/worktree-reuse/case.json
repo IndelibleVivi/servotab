@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "case_id": "worktree-reuse",
+  "description": "Resume a suitable existing workspace and resolve ambiguous creation before adding a duplicate.",
+  "prompt_file": "prompt.md",
+  "activation": "implicit",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "workspace_assertions": [
+    {
+      "type": "file_exists",
+      "path": "WORKSPACE_DECISION.md"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": [
+        "WORKSPACE_DECISION.md"
+      ]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 12,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0,
+    "reference_reads_include": [
+      "worktree.md"
+    ]
+  },
+  "human_review_requirements": [
+    "reuse: The decision selects task-42 based on current task identity, required content and host evidence; it resolves the ambiguous create outcome without retrying creation, taking over old-task-42, or allocating a worktree to the read-only reviewer.",
+    "baseline: The decision distinguishes ordinary revision checkout from transfer of dirty prerequisites, and neither auto-commits/stashes nor copies unrelated/private state.",
+    "evidence: Inspect the raw trace and final report. Only the decision file is changed; no real workspace or host mutation is attempted, and synthetic observations are not claimed as fresh live verification."
+  ]
+}

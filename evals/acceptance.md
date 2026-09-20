@@ -97,8 +97,10 @@ Apply each to its case's expected overlay in a disposable fixture copy.
   review it must remain `needs-review`. A reviewer should reject it for the stored
   reason, not accept it for containing the required IDs or disposition labels.
 
-Ordinary CI replays all seventeen baseline/expected file-and-command oracles, the
-five adversarial deltas, alternate valid regressions, malformed/empty test suites,
+The three worktree rehearsals add contradictory decision outputs that deliberately pass structural assertions. Review must reject unsafe deletion, duplicate creation, and refusal of already authorized safe parking; their file existence is not behavior proof. No rehearsal receipt may be promoted to real cleanup evidence.
+
+Ordinary CI replays all twenty baseline/expected file-and-command oracles, the
+eight adversarial deltas, alternate valid regressions, malformed/empty test suites,
 authority edits and incomplete CLI deliveries. Synthetic receipt tests exercise
 acceptance gating without representing an actual attempt or human review.
 

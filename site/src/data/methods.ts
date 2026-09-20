@@ -86,8 +86,8 @@ export const methods: Method[] = [
     name: "worktree",
     icon: worktreeIcon,
     purpose:
-      "Creates isolation when it reduces real risk while preserving ownership, existing work, and cleanup boundaries.",
-    signal: "Use for long, risky, or concurrent repository work.",
+      "Chooses, reuses, restores, and parks workspaces while preserving work, host ownership, and explicit cleanup authority.",
+    signal: "Use to resume, isolate, organize, or safely retire a workspace.",
   },
   {
     name: "delegate",

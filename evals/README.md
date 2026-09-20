@@ -6,7 +6,7 @@ containment、receipt contract 与 quota gate 已由 standalone Skill Field Lab 
 
 Servotab 继续拥有：
 
-- `cases/`：十七个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
+- `cases/`：二十个 repository-owned canaries 及其 fixtures、assertions、expected overlays；
 - `activation-prompts.csv`：较宽的 routing seed set；
 - [`submission-test-cases.md`](submission-test-cases.md)：把现有 fixtures 整理成
   reviewer-ready 的 5 positive / 3 negative draft；它不是 portal receipt 或 submission claim；
@@ -43,7 +43,7 @@ fieldlab list fieldlab-pack.json
 - `missing-host-test-seam`：material host boundary 缺少 cheap reproducer 时建立一个 bounded local surrogate，同时保留 named-host acceptance。
 - `review-evidence-boundaries`：同一 bounded review corpus 同时保护 clean control、negative-space spec omission、false-green test 与 conditional finding 的 evidence boundary。
 
-新增的 `local-reuse` 检查现有 normalizer 的真实复用；`weak-check` 保留一个原本绿色却不完整的测试，再用独立行为断言揭示缺陷。`scripts/test_behavior_fixtures.py` 现在对全部十七个 fixture 复放文件/命令断言：基线必须失败，expected overlay 必须通过。`weak-check` 的实际候选测试也必须能拒绝旧实现；同时保留五个审查反例与部分交付控制。它不复放 raw trace，不替代 Field Lab，也不执行模型。
+新增的 `local-reuse` 检查现有 normalizer 的真实复用；`weak-check` 保留一个原本绿色却不完整的测试，再用独立行为断言揭示缺陷。`scripts/test_behavior_fixtures.py` 现在对全部二十个 fixture 复放文件/命令断言：基线必须失败，expected overlay 必须通过。`weak-check` 的实际候选测试也必须能拒绝旧实现；同时保留八个审查反例与部分交付控制。它不复放 raw trace，不替代 Field Lab，也不执行模型。
 
 新增 `tranche-only-plan` 覆盖显式 leaf 的阶段范围；`complete-notes` 用独立跨进程检查覆盖完整 CLI、持久化、迁移及失败路径。声明了 `human_review_requirements` 的 case 还必须经过 [最终验收](acceptance.md)：Field Lab 的自动 `pass` 本身不能关闭语义要求。
 
@@ -80,6 +80,12 @@ release gate，也不自动增加 baseline、retry、repeat、full suite 或 LLM
 
 Raw trace 是 authority；receipt 与 summary 是 derived evidence。只有经过脱敏、确有
 长期价值的 receipt 才进入版本库；`.fieldlab/` raw artifacts 保持 local-only。
+
+## Worktree lifecycle evidence
+
+0.6.3 增加三个 synthetic decision rehearsals：`worktree-reuse`（同任务复用、创建结果不明与 dirty prerequisite）、`worktree-organize`（显式调用只盘点及混合风险候选）、`worktree-authorized-park`（已有授权、保留未合并分支、状态变化只阻塞该项）。输入全部是合成观察；prompt 只授权写判断文件，不授权操作真实 workspace。
+
+确定性 gate 检查输出存在及精确写入范围，三个反向对照证明错误决策文字仍可能通过结构检查；正确选择、可执行顺序和证据边界由 `human_review_requirements` 裁定。它们没有回放真实 agent 清理动作，也没有 live receipt。`scripts/test_worktree_git.py` 另外在一次性真实 Git 仓库验证底层机制；Git regression 不能替代模型行为验收。需要实际执行清理的 target-agent evidence 时，另行定义可操作的 synthetic workspace case、saved plan 和显式调用预算；不要把这三个 rehearsal 的 pass 升格为该证据。
 
 ## Activation seed set
 

@@ -1,6 +1,12 @@
 # Servotab release state
 
-Source, release, directory-upload, and website state reconciled through 2026-09-15 for the `0.6.2` release. This file records evidence boundaries, not a substitute for GitHub's current branch, checks, tags, Releases API, OpenAI portal, or Cloudflare deployment state.
+Source candidate updated on 2026-09-20 for `0.6.3`; published release, directory-upload, and website observations below remain the 2026-09-15 `0.6.2` receipts. This file records evidence boundaries, not a substitute for GitHub's current branch, checks, tags, Releases API, OpenAI portal, or Cloudflare deployment state.
+
+## 0.6.3 source candidate
+
+The source version is `0.6.3`, with workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals bring the Field Lab source pack to twenty cases. The package remains one router, twelve leaves, and 70 manifest-owned files. See [candidate notes](releases/0.6.3.md).
+
+Fresh local validation passed canonical/generated sync, 13-skill and 70-file package validation, manifest freshness, packaging selftest, all 70 Python regressions (including seven disposable Git mechanisms), public-tree audit, and Python compilation. Standalone Field Lab validate/selftest/list passed all twenty cases with zero target-agent invocations. Website dependency install, nine behavior tests, and production build passed; the worktree catalog rendered without overflow at 1280px and 390px, and mobile docs/home preserved the candidate-versus-published distinction. These are local candidate checks, not remote CI or runtime effectiveness evidence. No 0.6.3 live target-model attempt, installed activation, GitHub tag/release, production deployment, or directory update is established. Website source separates the candidate version from the observed published version; install examples remain pinned to `v0.6.2`.
 
 ## Source and GitHub
 

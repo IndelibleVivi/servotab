@@ -41,7 +41,7 @@ class ReleaseTests(unittest.TestCase):
         receipt = json.loads(first['release-receipt.json'])
         self.assertEqual(receipt['source_commit'], self.git('rev-parse', 'HEAD').decode().strip())
         self.assertEqual(receipt['package_file_count'], 70)
-        with zipfile.ZipFile(io.BytesIO(first['servotab-0.6.2-plugin.zip'])) as archive:
+        with zipfile.ZipFile(io.BytesIO(first['servotab-0.6.3-plugin.zip'])) as archive:
             names = archive.namelist()
             self.assertEqual(len(names), 70)
             self.assertEqual(len(set(names)), 70)

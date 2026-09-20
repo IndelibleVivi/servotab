@@ -1,0 +1,1 @@
+$worktree Inspect the supplied synthetic inventory in WORKSPACES.md and organize the recommendations in WORKSPACE_DECISION.md. This is inspection only. For each candidate say what can be kept, parked, removed after authorization, or remains unresolved, with the missing evidence. Do not operate on actual worktrees or change other files.
