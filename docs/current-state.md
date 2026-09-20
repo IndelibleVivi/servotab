@@ -2,6 +2,11 @@
 
 Servotab `0.6.3` was published on GitHub, deployed to the production website, and observed on the public OpenAI Plugins Directory on 2026-09-20. Installation, OpenAI directory, GitHub release, and production website observations remain separate states described below. This file records evidence boundaries, not a substitute for GitHub's current branch, checks, tags, Releases API, OpenAI portal, or Cloudflare deployment state.
 
+Related-project discovery source follow-up (2026-09-21): both README editions
+and the Docs page now link to MCP Boundary for MCP engineering and Worker
+Routing for bounded delegation. The website links are static HTML and remain
+available without JavaScript. Publication of this follow-up is pending.
+
 ## 0.6.3 release
 
 Website SEO source follow-up (2026-09-21): the homepage, Docs, and Methods now

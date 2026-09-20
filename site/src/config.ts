@@ -27,5 +27,10 @@ export const PROJECT_LINKS = {
     "https://github.com/IndelibleVivi/servotab/security/advisories/new",
 } as const;
 
+export const RELATED_PROJECTS = {
+  mcpBoundary: "https://indeliblevivi.github.io/mcp-boundary/",
+  workerRouting: "https://indeliblevivi.github.io/codex-worker-routing/",
+} as const;
+
 export const repoFile = (path: string) =>
   `${PROJECT_LINKS.source}/blob/HEAD/${path}`;

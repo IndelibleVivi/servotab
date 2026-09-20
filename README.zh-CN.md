@@ -218,6 +218,11 @@ npm run build
 
 GitHub Issues 是公开的。请删掉 credentials、tokens、private source、聊天、个人数据、account details、local absolute paths 与无关 trace；保留最小可复现 evidence。
 
+## 相关项目
+
+- [MCP Boundary](https://indeliblevivi.github.io/mcp-boundary/zh/) — 面向 MCP server 与 app 的工程 skill、Guide 和可执行 Lab，用于设计、审查与验证。
+- [Worker Routing](https://indeliblevivi.github.io/codex-worker-routing/zh/) — 将有明确边界的完整责任交给 native 或可选 ACP worker，并通过本地 Dispatch 面板查看工作记录。
+
 ## Companion boundaries
 
 Repository licensing selection 不属于 Servotab router。需要具体 license 选择、audit 或 forward-only transition 时，使用独立维护的 [`IndelibleVivi/license-boundary`](https://github.com/IndelibleVivi/license-boundary)。Servotab 不 bundle、安装、替换或更新它。

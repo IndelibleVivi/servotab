@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { PROJECT_LINKS, repoFile, SITE } from "../config";
+import { PROJECT_LINKS, RELATED_PROJECTS, repoFile, SITE } from "../config";
 ---
 
 <BaseLayout
@@ -196,6 +196,25 @@ codex plugin add servotab@personal`}</code></pre>
           <li>It does not turn an explicit complete request into a scaffold, placeholder, or unnamed partial result.</li>
           <li>The public directory listing proves availability; it does not make Servotab an official OpenAI product or transfer repository authority to the directory surface.</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band" aria-labelledby="related-projects-heading">
+    <div class="shell content-layout">
+      <p class="section-index">Related projects</p>
+      <div class="content-prose">
+        <h2 id="related-projects-heading">For MCP engineering and worker delegation.</h2>
+        <h3><a href={RELATED_PROJECTS.mcpBoundary}>MCP Boundary</a></h3>
+        <p>
+          An MCP engineering skill, Guide, and executable Lab for designing,
+          reviewing, and verifying MCP servers and apps.
+        </p>
+        <h3><a href={RELATED_PROJECTS.workerRouting}>Worker Routing</a></h3>
+        <p>
+          Delegate bounded responsibilities to native or optional ACP workers,
+          with a local Dispatch dashboard for inspecting the work.
+        </p>
       </div>
     </div>
   </section>
