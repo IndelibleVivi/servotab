@@ -305,8 +305,8 @@
     },
     {
       "path": "plugins/servotab/skills/servotab/references/worktree.md",
-      "size": 10653,
-      "sha256": "4c1d187c87108353e82315c5ac755aca1c5af97b2241d7c3b291845181771451"
+      "size": 11494,
+      "sha256": "d330fcaf9296536d1a3bc5628a90a8c703274693d12e8291a52c98cdc0f6d8bb"
     },
     {
       "path": "plugins/servotab/skills/spec-chain/SKILL.md",
@@ -370,8 +370,8 @@
     },
     {
       "path": "plugins/servotab/skills/worktree/SKILL.md",
-      "size": 10899,
-      "sha256": "f5dfaef14d1e8a122b1e2ebc5dd12b045238eaf5b216e17904dc5bc1a2795884"
+      "size": 11740,
+      "sha256": "87ae146d4a87ab41940e028588c6e6a56d0770f0f6bffc9e3c2e943a53767082"
     },
     {
       "path": "plugins/servotab/skills/worktree/agents/openai.yaml",

@@ -2,8 +2,9 @@
 
 All identifiers below are synthetic, not live paths. The intended integration target is main.
 
-- cache-only: manually managed, inactive linked tree created by this workflow; current tip is an ancestor of current main; no changes/untracked files; only a proven rebuildable build cache is ignored. No deletion authorized.
+- cache-only: manually managed, inactive linked tree created by this workflow; current tip is an ancestor of current main; no changes/untracked files; index inventory has no assume-unchanged or skip-worktree entries; only a proven rebuildable build cache is ignored. No deletion authorized.
 - local-db: ordinary status clean, branch integrated, but ignored local-state.sqlite contains the only local database; retention unknown.
+- hidden-tracked: manually managed and inactive; ordinary status and ignored-file inventory are both empty, and a named branch preserves the integrated tip. Index inventory reports `h local-config.txt` (assume-unchanged) and `S notes.txt` (skip-worktree). Both tracked files are present; read-only content inspection found unique uncommitted edits in each. No preservation or discard authority; do not change the real index flags.
 - detached-lab: clean detached HEAD with unique commits and no named ref preserving its tip.
 - hosted: host-managed, active task awaiting PR feedback, no supported host cleanup tool exposed.
 - offline: missing registered path, locked with reason external disk temporarily disconnected.

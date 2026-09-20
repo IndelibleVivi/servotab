@@ -3,9 +3,9 @@
 ## Unreleased — 0.6.3 candidate
 
 - Expand `worktree` from isolation setup to intent-based workspace selection, reuse, recovery, parking, and authorized organization. Explicit invocation no longer implies creation; repeated or ambiguous creation checks existing state first.
-- Preserve unmerged work through durable named refs when parking; inspect ignored/local data, detached tips, active ownership, current integration targets, locks and missing storage before removal. Separate directory, branch, data, and registration actions; honor existing exact authorization and recheck each batch item.
+- Preserve unmerged work through durable named refs when parking; inspect ignored/local data, tracked edits hidden by index flags, detached tips, active ownership, current integration targets, locks and missing storage before removal. Separate directory, branch, data, and registration actions; honor existing exact authorization and recheck each batch item.
 - Share cleanup authority with `finish`, correct concurrent-write guidance in `delegate`, and update router entry points and skill metadata without adding leaves, dependencies, or a cleanup service.
-- Add three semantic worktree rehearsals and disposable Git regressions. These are deterministic mechanism and fixture checks, not live model-effectiveness evidence.
+- Add three semantic worktree rehearsals and disposable Git regressions, including both `assume-unchanged` and `skip-worktree`. Explicit leaf delivery/read evidence belongs to required semantic review, without demanding a duplicate router reference read. These are deterministic mechanism and fixture checks, not live model-effectiveness evidence.
 
 0.6.3 remains a source candidate. No tag, GitHub release, installation, activation, deployment, or directory update is asserted.
 

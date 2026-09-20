@@ -85,7 +85,9 @@ Raw trace 是 authority；receipt 与 summary 是 derived evidence。只有经�
 
 0.6.3 增加三个 synthetic decision rehearsals：`worktree-reuse`（同任务复用、创建结果不明与 dirty prerequisite）、`worktree-organize`（显式调用只盘点及混合风险候选）、`worktree-authorized-park`（已有授权、保留未合并分支、状态变化只阻塞该项）。输入全部是合成观察；prompt 只授权写判断文件，不授权操作真实 workspace。
 
-确定性 gate 检查输出存在及精确写入范围，三个反向对照证明错误决策文字仍可能通过结构检查；正确选择、可执行顺序和证据边界由 `human_review_requirements` 裁定。它们没有回放真实 agent 清理动作，也没有 live receipt。`scripts/test_worktree_git.py` 另外在一次性真实 Git 仓库验证底层机制；Git regression 不能替代模型行为验收。需要实际执行清理的 target-agent evidence 时，另行定义可操作的 synthetic workspace case、saved plan 和显式调用预算；不要把这三个 rehearsal 的 pass 升格为该证据。
+`worktree-organize` 包含 `assume-unchanged` / `skip-worktree` 隐藏 tracked 修改的候选。其显式入口由 required semantic review 核对实际 leaf 交付或读取证据（例如 `.agents/skills/worktree/SKILL.md`）；不要求重复读取 router reference，输出正确本身也不能证明方法已交付。
+
+确定性 gate 检查输出存在及精确写入范围，三个反向对照证明错误决策文字仍可能通过结构检查；正确选择、可执行顺序和证据边界由 `human_review_requirements` 裁定。它们没有回放真实 agent 清理动作，也没有 live receipt。`scripts/test_worktree_git.py` 另外在一次性真实 Git 仓库验证底层机制，包括两条各覆盖上述两种 index 标记的参数化回归：只读内容核验不改真实 index，以及普通删除后保留分支仍无法恢复隐藏修改；Git regression 不能替代模型行为验收。需要实际执行清理的 target-agent evidence 时，另行定义可操作的 synthetic workspace case、saved plan 和显式调用预算；不要把这三个 rehearsal 的 pass 升格为该证据。
 
 ## Activation seed set
 

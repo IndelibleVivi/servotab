@@ -6,6 +6,7 @@ Inspection only: zero creation, deletion, branch updates, unlocks or pruning.
 | --- | --- | --- |
 | cache-only | Remove candidate, awaiting exact authorization | Current-tip integration and rebuildable cache evidence are sufficient for a proposal; refresh state before any approved directory removal; keep branch. |
 | local-db | Unresolved / preserve | Clean status hides the unique ignored database; establish retention and an authorized preservation route first. |
+| hidden-tracked | Unresolved / preserve | Index flags hide unique tracked edits despite empty status and ignored inventories. The supplied non-mutating content check establishes local work that the named branch cannot restore. Preserve files and real index flags; establish an authorized preservation route before any removal. |
 | detached-lab | Unresolved / preserve | Commit existence alone is not a durable recovery anchor; obtain authority for a named ref before parking. |
 | hosted | Keep | Active host task; respect host lifecycle, no manual fallback removal when host cleanup is unavailable. |
 | offline | Keep registration | Disconnected disk and lock explain missing path; no unlock/prune; inspect after storage returns. |

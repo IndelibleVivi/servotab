@@ -101,7 +101,7 @@ Find the workspace for yesterday’s experiment and resume it before creating an
 $worktree inspect this repository’s worktrees and recommend what to retain or park; do not delete anything yet.
 ```
 
-Calling `$worktree` does not request a new checkout. Parking can remove an inactive, unmerged checkout while retaining a durable named branch and restoration route. Directory removal, branch deletion, data disposal, and registration pruning are separate actions. The method protects ignored local data, detached work, active host tasks, and unavailable storage; already authorized unchanged batch items can proceed while uncertain items remain pending. It adds no cleanup daemon, runtime dependency, or global workspace database.
+Calling `$worktree` does not request a new checkout. Parking can remove an inactive, unmerged checkout while retaining a durable named branch and restoration route. Directory removal, branch deletion, data disposal, and registration pruning are separate actions. The method protects ignored local data, tracked edits hidden by index flags, detached work, active host tasks, and unavailable storage; already authorized unchanged batch items can proceed while uncertain items remain pending. It adds no cleanup daemon, runtime dependency, or global workspace database.
 
 ## Method set
 

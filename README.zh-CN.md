@@ -99,7 +99,7 @@ $spec-chain 依据这份 approved spec 建立完整 implementation plan；当前
 $worktree 盘点这个 repo 的 worktrees，建议哪些保留或收起；现在不要删除。
 ```
 
-调用 `$worktree` 不等于要求新建 checkout。暂停的未合并实验可以保留 durable named branch 和恢复入口，再按授权移除目录。移除目录、删分支、丢弃数据和 prune 登记是不同动作；ignored 本地数据、detached 成果、活跃宿主任务和暂时离线的存储都需要分别处理。已获明确授权且状态没变的批量项可以执行，不确定项单独保留。这版不新增 cleanup daemon、runtime dependency 或全局 workspace 数据库。
+调用 `$worktree` 不等于要求新建 checkout。暂停的未合并实验可以保留 durable named branch 和恢复入口，再按授权移除目录。移除目录、删分支、丢弃数据和 prune 登记是不同动作；ignored 本地数据、被 index 标记隐藏的 tracked 修改、detached 成果、活跃宿主任务和暂时离线的存储都需要分别处理。已获明确授权且状态没变的批量项可以执行，不确定项单独保留。这版不新增 cleanup daemon、runtime dependency 或全局 workspace 数据库。
 
 ## Method set
 

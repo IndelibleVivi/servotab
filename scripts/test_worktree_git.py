@@ -16,6 +16,7 @@ import uuid
 
 STAMP = '2020-01-01T00:00:00Z'
 REQUIRED_GIT = (2, 30, 0)
+HIDDEN_STATE_FLAGS = (('--assume-unchanged', 'h'), ('--skip-worktree', 'S'))
 NEUTRAL = {
     'GIT_AUTHOR_NAME': 'Servotab fixture',
     'GIT_AUTHOR_EMAIL': 'fixture@example.invalid',
@@ -141,6 +142,13 @@ class WorktreeGitMechanismTests(unittest.TestCase):
 
     def assert_registered(self, path: Path) -> None:
         self.assertIn(path.resolve(), self.worktree_paths())
+
+    def flagged_worktree(self, flag: str) -> tuple[Path, str]:
+        branch = self.unique_name('flagged')
+        worktree = self.register(self.root / branch)
+        self.git('worktree', 'add', '-q', '-b', branch, str(worktree))
+        self.git('update-index', flag, 'a.txt', cwd=worktree)
+        return worktree, branch
 
     # -- 1. ordinary removal tolerates clean status plus ignored state -----
 
@@ -291,6 +299,48 @@ class WorktreeGitMechanismTests(unittest.TestCase):
         finally:
             self._git('worktree', 'remove', '--force', str(relocated))
             shutil.rmtree(relocated, ignore_errors=True)
+
+    # -- 8-9. index flags can hide content that ordinary removal loses -----
+
+    def test_hidden_tracked_content_can_be_checked_without_changing_index(self):
+        for flag, tag in HIDDEN_STATE_FLAGS:
+            with self.subTest(flag=flag):
+                worktree, _ = self.flagged_worktree(flag)
+                index = Path(self.git('rev-parse', '--git-path', 'index', cwd=worktree).strip())
+                index_before = index.read_bytes()
+                self.assertEqual(self.git('ls-files', '-v', '-z', cwd=worktree), f'{tag} a.txt\0')
+
+                # This fixture is a regular UTF-8 file without filters. Reading
+                # its indexed blob and actual bytes bypasses status suppression;
+                # it is not a general comparator for filtered files or symlinks.
+                indexed = self.git('show', ':a.txt', cwd=worktree).encode('utf-8')
+                self.assertEqual((worktree / 'a.txt').read_bytes(), indexed)
+                (worktree / 'a.txt').write_bytes(b'unique uncommitted content\n')
+                self.assertNotEqual((worktree / 'a.txt').read_bytes(), indexed)
+                self.assertEqual(index.read_bytes(), index_before)
+                self.assertEqual(self.git('ls-files', '-v', '-z', cwd=worktree), f'{tag} a.txt\0')
+
+    def test_normal_removal_loses_hidden_edits_despite_preserved_branch(self):
+        for flag, tag in HIDDEN_STATE_FLAGS:
+            with self.subTest(flag=flag):
+                worktree, branch = self.flagged_worktree(flag)
+                tip = self.rev_in(worktree)
+                unique_content = b'unique uncommitted content\n'
+                (worktree / 'a.txt').write_bytes(unique_content)
+                self.assertEqual(self.git('status', '--short', '--untracked-files=all', cwd=worktree), '')
+                self.assertEqual(self.git('ls-files', '--others', '--ignored', '--exclude-standard', cwd=worktree), '')
+                self.assertEqual(self.git('ls-files', '-v', '-z', cwd=worktree), f'{tag} a.txt\0')
+                self.assertEqual((worktree / 'a.txt').read_bytes(), unique_content)
+
+                # Deliberately demonstrate the loss only in this disposable
+                # repository; the operation under test must not use --force.
+                self.git('worktree', 'remove', str(worktree))
+                self.assertFalse(worktree.exists())
+                self.assertEqual(self.git('rev-parse', f'refs/heads/{branch}').strip(), tip)
+                self.git('worktree', 'add', '-q', str(worktree), branch)
+                restored = (worktree / 'a.txt').read_bytes()
+                self.assertEqual(restored, b'base\n')
+                self.assertNotEqual(restored, unique_content)
 
 
 if __name__ == '__main__':
