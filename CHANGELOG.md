@@ -1,13 +1,13 @@
 # Changelog
 
-## Unreleased — 0.6.3 candidate
+## 0.6.3 — published 2026-09-20
 
 - Expand `worktree` from isolation setup to intent-based workspace selection, reuse, recovery, parking, and authorized organization. Explicit invocation no longer implies creation; repeated or ambiguous creation checks existing state first.
 - Preserve unmerged work through durable named refs when parking; inspect ignored/local data, tracked edits hidden by index flags, detached tips, active ownership, current integration targets, locks and missing storage before removal. Separate directory, branch, data, and registration actions; honor existing exact authorization and recheck each batch item.
 - Share cleanup authority with `finish`, correct concurrent-write guidance in `delegate`, and update router entry points and skill metadata without adding leaves, dependencies, or a cleanup service.
 - Add three semantic worktree rehearsals and disposable Git regressions, including both `assume-unchanged` and `skip-worktree`. Explicit leaf delivery/read evidence belongs to required semantic review, without demanding a duplicate router reference read. These are deterministic mechanism and fixture checks, not live model-effectiveness evidence.
 
-0.6.3 remains a source candidate. No tag, GitHub release, installation, activation, deployment, or directory update is asserted.
+The exact `v0.6.3` revision and four release assets were published on 2026-09-20. Installation, activation, website deployment, and OpenAI directory publication remain separate observed states.
 
 ## 0.6.2 — published 2026-09-15
 
