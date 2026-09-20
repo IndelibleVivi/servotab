@@ -20,11 +20,11 @@ import { PROJECT_LINKS, repoFile, SITE } from "../config";
       <div class="content-prose">
         <h2 id="get-started-heading">Add the public plugin. Or inspect the tagged source release.</h2>
         <p>
-          Servotab is publicly available in the official OpenAI Plugins Directory.{" "}
+          Servotab <code>{SITE.publishedVersion}</code> is publicly available in the official OpenAI Plugins Directory.{" "}
           <a href={PROJECT_LINKS.pluginDirectory}>Open the Servotab listing</a> to add the
-          published plugin. The repository route below installs the separate tagged
-          {" "}<code>{SITE.publishedVersion}</code> source release for inspection or maintainer testing;
-          it is not a readback of the currently published directory payload.
+          published plugin. The repository route below installs the separately receipted tagged
+          source release for inspection or maintainer testing. Both surfaces report the same
+          version, but the public listing does not expose an archive digest.
         </p>
 
         <div class="quickstart-grid">
@@ -212,16 +212,18 @@ codex plugin add servotab@personal`}</code></pre>
           public-tree audit, Python compilation, website motion behavior, and the production
           build. Those gates establish source and package consistency plus the checked UI
           behavior; they do not prove behavior on every machine or publication of the same
-          version in the directory.
+          version in the directory. A separate public listing readback supplies that publication receipt.
         </p>
         <p>
-          The <a href={PROJECT_LINKS.pluginDirectory}>official Servotab listing</a> is live.
-          The published <code>{SITE.publishedVersion}</code> GitHub release remains the install
-          target. Release <code>{SITE.version}</code> adds worktree lifecycle guidance: reuse
+          The <a href={PROJECT_LINKS.pluginDirectory}>official Servotab listing</a> reports
+          version <code>{SITE.publishedVersion}</code>, developer <code>Yifei Fang</code>, and
+          all thirteen Servotab skills, including <code>Worktree</code>. The published GitHub
+          release remains the source install target. Release <code>{SITE.version}</code> adds worktree lifecycle guidance: reuse
           and recover an existing task, park preserved work, and separate directory removal
           from branch or data deletion. Its three synthetic decision rehearsals and disposable
-          Git regressions do not establish live model behavior. It remains distinct from that published payload until OpenAI publishes
-          the directory update. GitHub release availability is recorded on the repository Releases page.
+          Git regressions do not establish live model behavior. The listing does not expose
+          package bytes, so directory publication does not prove byte identity with the GitHub asset.
+          GitHub release availability is recorded on the repository Releases page.
           The same repository preserves earlier Softpowers commits, release records,
           licensing history, and provenance without relabelling those historical versions.
         </p>

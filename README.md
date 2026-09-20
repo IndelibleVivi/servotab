@@ -9,7 +9,7 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Current source and tagged release: [`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3), expanding `worktree` into workspace selection, reuse, recovery, parking, and authorized cleanup. See the [0.6.3 release notes](docs/releases/0.6.3.md). The [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) is a separate distribution surface; a GitHub release does not prove that the directory payload has been updated. See [current state](docs/current-state.md) and the historical [0.6.2 release notes](docs/releases/0.6.2.md) for evidence and limits.
+Current source and tagged release: [`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3), expanding `worktree` into workspace selection, reuse, recovery, parking, and authorized cleanup. See the [0.6.3 release notes](docs/releases/0.6.3.md). A separate public readback of the [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) reports version `0.6.3`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. See [current state](docs/current-state.md) and the historical [0.6.2 release notes](docs/releases/0.6.2.md) for evidence and limits.
 
 ## What Servotab changes
 
@@ -65,7 +65,7 @@ The command must return a skill entry named `servotab:servotab` from the install
 
 On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. On 2026-09-06, that machine refreshed `servotab@personal` from the clean 0.6.1 release source and verified installed/enabled version 0.6.1, an exact 69-file source/cache match with no symlinks, and fresh-process `servotab:servotab` discovery. These are bounded compatibility and discovery receipts for the named payloads on the inspected machine; they are not a guessed minimum-version guarantee, proof of implicit use or model effectiveness, or a claim about every Codex client.
 
-This source-checkout route is distinct from the officially published directory payload. It replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
+This source-checkout route is distinct from the officially published directory payload even though both currently report version `0.6.3`. The public listing does not expose an archive digest, so the directory payload is not claimed to be byte-identical to the GitHub asset. The source route replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
 
 ## Use
 
@@ -162,7 +162,7 @@ Other surfaces have separate jobs:
 
 The tagged 0.6.3 release contains exactly 70 manifest-owned package files with one implicit router and twelve explicit-only leaves. It retains the portable root manifest, Windows-safe text identity, and responsibility-routing improvements from 0.6.2, then adds worktree lifecycle guidance and three decision rehearsals, bringing the source pack to twenty cases. Disposable Git regressions check removal, recovery, dirty baselines, locks, registrations, and tracked edits hidden by index flags. Rehearsal outputs require semantic review and do not prove executed cleanup; no live 0.6.3 target-model result is claimed.
 
-Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, a website deployment, an OpenAI directory update, or owner acceptance on those separate surfaces. The GitHub Release is public; the existing official directory listing remains a separately observed distribution state.
+Those gates prove current source and package consistency under the observed checks. They do not prove behavior on every machine, a website deployment, directory publication, or owner acceptance on those separate surfaces. Separate receipts now establish the public GitHub Release, production website, local installed/enabled inventory, and an official directory listing that reports version `0.6.3` with the complete thirteen-skill inventory. The listing does not expose package bytes or establish live model effectiveness.
 
 Maintainers with the standalone `fieldlab` CLI may inspect the source-owned subject pack without invoking a target model:
 

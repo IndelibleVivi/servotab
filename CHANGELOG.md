@@ -7,7 +7,7 @@
 - Share cleanup authority with `finish`, correct concurrent-write guidance in `delegate`, and update router entry points and skill metadata without adding leaves, dependencies, or a cleanup service.
 - Add three semantic worktree rehearsals and disposable Git regressions, including both `assume-unchanged` and `skip-worktree`. Explicit leaf delivery/read evidence belongs to required semantic review, without demanding a duplicate router reference read. These are deterministic mechanism and fixture checks, not live model-effectiveness evidence.
 
-The exact `v0.6.3` revision and four release assets were published on 2026-09-20. Installation, activation, website deployment, and OpenAI directory publication remain separate observed states.
+The exact `v0.6.3` revision and four release assets were published on 2026-09-20. Installation, activation, website deployment, and OpenAI directory publication remain separate observed states. A fresh public directory readback later that day reported version `0.6.3`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`; the listing does not expose an archive digest or prove live model behavior.
 
 ## 0.6.2 — published 2026-09-15
 

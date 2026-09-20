@@ -9,7 +9,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-当前源码与 tagged release：[`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3)，将 `worktree` 扩展到现场选择、复用、恢复、收起和按授权清理，见 [0.6.3 release notes](docs/releases/0.6.3.md)。[OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 是独立分发渠道；GitHub Release 不能证明目录 payload 已更新。具体证据和边界见 [current state](docs/current-state.md) 与历史 [0.6.2 release notes](docs/releases/0.6.2.md)。
+当前源码与 tagged release：[`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3)，将 `worktree` 扩展到现场选择、复用、恢复、收起和按授权清理，见 [0.6.3 release notes](docs/releases/0.6.3.md)。对 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 的独立公开 readback 显示版本为 `0.6.3`、开发者为 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。具体证据和边界见 [current state](docs/current-state.md) 与历史 [0.6.2 release notes](docs/releases/0.6.2.md)。
 
 ## 它做什么
 
@@ -61,7 +61,7 @@ codex debug prompt-input "Check Servotab discovery." \
 
 命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，`0.4.0-rc1` 在 macOS 与 `codex-cli 0.147.0` 上完成过 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。2026-09-05，当前 maintainer machine 又安装了 `0.6.0` source candidate，取得 69-file source/cache exact match，并在 fresh-process prompt input 中观察到 `servotab:servotab`。2026-09-06，同一台机器从 clean 的 0.6.1 release source 刷新 `servotab@personal`，核验 installed/enabled version 0.6.1、无 symlink 的 69-file source/cache exact match，以及 fresh-process `servotab:servotab` discovery。这些都是针对具名 payload 与具名机器的有限 compatibility / discovery receipts，不是猜测的最低版本承诺、implicit use 或模型效果的证明，也不代表所有 Codex client 都已验证。
 
-这条 source-checkout 路径与已经公开的 directory payload 是两个状态；它取代旧版 `install.sh` / root `skills/` global installer。Source-checkout install、本机 acceptance、GitHub Release 与 directory publication 也是彼此独立的状态；前述 receipt 不会外推到其他机器，也不会证明 directory payload 已更新。
+这条 source-checkout 路径与已经公开的 directory payload 仍是两个独立状态，即使两边当前都报告版本 `0.6.3`。公开 listing 不暴露 archive digest，因此这里不声称 directory payload 与 GitHub asset byte-identical。它取代旧版 `install.sh` / root `skills/` global installer；前述本机 receipt 也不会外推到其他机器或证明 live model behavior。
 
 如果其他本机仍有 manifest-owned Softpowers `0.3.0-rc5` 或更早 global layer，请先读 [迁移指南](docs/migration-from-softpowers.md) 和 [current state](docs/current-state.md)。当前 maintainer roots 已完成 manifest-driven retirement 并验证为 clear；不要把这条 receipt 当成手动删除其他机器旧目录的许可。
 
