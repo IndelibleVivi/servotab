@@ -74,7 +74,7 @@ class BehaviorFixtureTests(unittest.TestCase):
 
     def test_adversarial_decision_controls(self):
         controls = json.loads((ROOT / "evals/adversarial-controls.json").read_text())
-        self.assertEqual(len(controls), 8)
+        self.assertEqual(len(controls), 12)
         for control in controls:
             name = control["case_id"]
             with self.subTest(case=name), tempfile.TemporaryDirectory() as raw:
@@ -155,6 +155,27 @@ class BehaviorFixtureTests(unittest.TestCase):
                 before = snapshot(work)
                 self.assertEqual(check_commands(assertion, work), [name in {"valid", "alternate_valid"}])
                 self.assertEqual(snapshot(work), before, "counterfactual checks must not mutate the candidate")
+
+    def test_discussion_intake_structural_gate_limits(self):
+        # Semantic counterexamples live in adversarial-controls.json. This check
+        # protects honest alternate wording and the actual single-file boundary.
+        root = CASES / "discussion-intake"
+        case = json.loads((root / "case.json").read_text())
+        for variant in ("alternate-wording", "edited-source", "extra-file"):
+            with self.subTest(variant=variant), tempfile.TemporaryDirectory() as raw:
+                work = Path(raw) / "workspace"
+                shutil.copytree(root / "fixture", work)
+                before = snapshot(work)
+                shutil.copytree(root / "expected", work, dirs_exist_ok=True)
+                assessment = work / "INTAKE.md"
+                assessment.write_text(assessment.read_text().replace("one key", "a single key")
+                                      + "\nPosting is not authorized; parser changes are out of scope.\n")
+                if variant == "edited-source":
+                    (work / "DISCUSSION.md").write_text("Replaced the source discussion.\n")
+                elif variant == "extra-file":
+                    (work / "MARKETING_POST.md").write_text("Unrequested artifact.\n")
+                passes = all(check_workspace(case, work, before) + check_commands(case, work))
+                self.assertEqual(passes, variant == "alternate-wording")
 
 
 if __name__ == "__main__":

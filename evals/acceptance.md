@@ -81,9 +81,10 @@ owner acceptance, superior performance or longitudinal reliability.
 
 ## Adversarial controls
 
-`adversarial-controls.json` preserves five deliberately wrong output deltas from
-the audit. They are test material, never instructions or genuine model outcomes.
-Apply each to its case's expected overlay in a disposable fixture copy.
+`adversarial-controls.json` preserves twelve deliberately wrong output deltas from
+the audit and later rehearsals. They are test material, never instructions or
+genuine model outcomes. Apply each to its case's expected overlay in a disposable
+fixture copy.
 
 - `weak-check`: comment-only tests must fail the candidate regression check. The
   check runs the candidate's own suite with repaired and known-bad policy in fresh
@@ -99,8 +100,18 @@ Apply each to its case's expected overlay in a disposable fixture copy.
 
 The three worktree rehearsals add contradictory decision outputs that deliberately pass structural assertions. Review must reject unsafe deletion, duplicate creation, and refusal of already authorized safe parking; their file existence is not behavior proof. No rehearsal receipt may be promoted to real cleanup evidence.
 
-Ordinary CI replays all twenty baseline/expected file-and-command oracles, the
-eight adversarial deltas, alternate valid regressions, malformed/empty test suites,
+The `discussion-intake` rehearsal adds four incorrect assessments: selecting only
+the final theme, retaining a superseded mechanism, treating embedded proposals as
+execution permission, and reporting permission honestly while losing other important
+content. All four pass the structural file checks and must be rejected by review
+for their stored reasons. Intake coverage, outcome/mechanism separation and the
+permission boundary are semantic; a passing file-existence and write-scope gate
+does not establish them. Alternate valid wording may explicitly say "not authorized"
+or "out of scope"; structural checks must not reject those phrases. Separate tests
+reject changes to the source discussion or an extra file.
+
+Ordinary CI replays all twenty-one baseline/expected file-and-command oracles, the
+twelve adversarial deltas, alternate valid regressions, malformed/empty test suites,
 authority edits and incomplete CLI deliveries. Synthetic receipt tests exercise
 acceptance gating without representing an actual attempt or human review.
 

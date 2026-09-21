@@ -8,6 +8,34 @@ Routing for bounded delegation. The website links are static HTML and remain
 available without JavaScript. [PR #41](https://github.com/IndelibleVivi/servotab/pull/41)
 merged as `5627bc9`; production publication and live checks are recorded below.
 
+## Unreleased source follow-up
+
+Discussion intake (2026-09-22): the router, `design`, and `execute` now preserve
+material goals, constraints, rationale, examples, and unresolved items before
+selecting implementation focus. Reading coverage, adoption judgment, and execution
+permission are separate; rejecting a suggested mechanism does not silently discard
+its underlying need. Corrections can supersede earlier proposals, and explicitly
+bounded requests do not require a whole-source audit or a mandatory ledger.
+
+The synthetic `discussion-intake` rehearsal brings the source pack to 21 cases.
+Its structural gate checks file existence and exact write scope; four deliberately
+wrong assessments still pass that gate and require semantic rejection. A separate
+test accepts alternate permission wording and rejects edits to the discussion or
+extra files. The trace contract checks a command-path mention of `design.md`, not
+content reads or host selection. Reading quality and authority judgment remain
+explicit semantic review requirements.
+
+Fresh deterministic checks passed generated sync, 13-skill/70-file package and
+manifest validation, packaging selftest, all 73 Python tests, public-tree audit,
+Python compilation, and Field Lab validate/selftest/list for all 21 cases. Field
+Lab invoked zero target agents; no live attempt or completed semantic review is
+claimed. The package topology and runtime dependencies are unchanged.
+
+This is a source-only change after the tagged `0.6.3` release. `VERSION` remains
+`0.6.3`; the revised generated package is not the immutable tagged payload.
+No installation, activation, release, directory update, or deployment of this
+follow-up is established.
+
 ## 0.6.3 release
 
 Website SEO source follow-up (2026-09-21): the homepage, Docs, and Methods now
@@ -20,7 +48,7 @@ Console ownership was verified and its sitemap report successfully read all seve
 canonical routes on 2026-09-21. Sitemap ingestion does not establish that every
 page is indexed or that new search metadata has been reflected in results.
 
-The source and latest tagged GitHub release are `0.6.3`, with workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals bring the Field Lab source pack to twenty cases. The package remains one router, twelve leaves, and 70 manifest-owned files. See [release notes](releases/0.6.3.md).
+The tagged `0.6.3` source has workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals brought that release's Field Lab pack to twenty cases. The package remains one router, twelve leaves, and 70 manifest-owned files. See [release notes](releases/0.6.3.md).
 
 Fresh local validation passed canonical/generated sync, 13-skill and 70-file package validation, manifest freshness, packaging selftest, all 72 Python regressions (including nine disposable Git tests; the two new parameterized tests each cover assume-unchanged and skip-worktree), public-tree audit, and Python compilation. Standalone Field Lab validate/selftest/list passed all twenty cases with zero target-agent invocations. Main Validate run `35499926427` passed Windows generated sync, public-tree, site build, Ubuntu Python 3.10/3.13, macOS Python 3.13, and exact-source release artifacts for merge commit `6a57dbb`. These checks establish source, package, fixture, and build consistency, not runtime effectiveness. No 0.6.3 live target-model attempt, installed activation, or directory update is established by the GitHub release itself. The production website and public directory have separate receipts below.
 

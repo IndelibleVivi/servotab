@@ -9,7 +9,7 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Current source and tagged release: [`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3), expanding `worktree` into workspace selection, reuse, recovery, parking, and authorized cleanup. See the [0.6.3 release notes](docs/releases/0.6.3.md). A separate public readback of the [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) reports version `0.6.3`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. See [current state](docs/current-state.md) and the historical [0.6.2 release notes](docs/releases/0.6.2.md) for evidence and limits.
+Latest tagged release: [`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3), expanding `worktree` into workspace selection, reuse, recovery, parking, and authorized cleanup. See the [0.6.3 release notes](docs/releases/0.6.3.md). A separate public readback of the [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) reports version `0.6.3`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. See [current state](docs/current-state.md) for unreleased source changes and evidence boundaries, and the historical [0.6.2 release notes](docs/releases/0.6.2.md).
 
 ## What Servotab changes
 
@@ -23,6 +23,8 @@ Servotab keeps four stable promises:
 Describe ordinary repository work normally. The only implicit-eligible skill is the `servotab` router; twelve method leaves remain explicit-only shortcuts. Servotab does not replace your prompt, `AGENTS.md`, repository rules, permission boundaries, Git decisions, or deployment authority.
 
 A log, screenshot, review, old plan, or generated artifact may be useful evidence. It does not authorize itself or silently become the current specification.
+
+The unreleased source also makes discussion intake explicit: when asked to absorb a body of material, cover its important goals and constraints before selecting implementation priorities. Separate the needs from proposed mechanisms, retain reasons for important omissions or deferrals, and distinguish reading coverage from adoption and execution authority. Bounded requests stay bounded; no new method, mandatory ledger, or approval round is added. See [Design](methods/design.md).
 
 ## Install
 

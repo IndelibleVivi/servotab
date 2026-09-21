@@ -45,4 +45,6 @@ explicit-worktree-inspect,true,worktree,$worktree 看看这些旧现场分别在
 implicit-worktree-park,true,worktree,暂停这个未合并实验，保留分支和恢复入口；检查后按我已确认的目录移除范围收起现场。
 implicit-worktree-approved-batch,true,worktree,执行刚才已经确认的两项目录清理；保留分支；其中状态变了的单独留下，安全项继续。
 implicit-worktree-trivial-control,true,none,就在当前专用 checkout 修正这一行拼写，不涉及共享状态或并发写入。
+implicit-discussion-intake,true,design,我把一长段关于下一步做什么的产品讨论全文贴在 DISCUSSION.md 了；请完整吸收整段讨论（含中段的更正、后半的延后项和底部补充内容），再判断先做什么，并说明哪些重要项不采纳、为什么。只做只读判断，不要改别的文件。
+negative-discussion-reference-only,false,none,我只需要参考 DISCUSSION.md 里第 14 项提到的按 item revision 做预览缓存这一条，其它都不用管；给我一句话确认就行，不要建跟踪表或做完整规格演练。
 negative-worktree-explanation,false,none,只解释 Git worktree 和 branch 有什么区别，不检查或操作仓库。

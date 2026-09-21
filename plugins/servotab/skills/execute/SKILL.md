@@ -39,6 +39,7 @@ Choose the simplest implementation that satisfies the whole contract. Do not tur
 
 For reference-led work:
 
+- Carry forward the material dispositions established during design, including remaining accepted scope and unresolved items. A selected first slice does not replace the whole request; if source material still needs synthesis to establish scope, use `design` before narrowing execution.
 - Treat product descriptions and tutorials as inspiration unless the user makes named behavior normative.
 - Treat screenshots and mockups as contracts for visible details only when the user or accepted specification makes them normative. Otherwise use them as reference material. They do not prove hidden data or interaction behavior.
 - Let explicit written instructions, corrections, and accepted specifications override inferred reference details.
