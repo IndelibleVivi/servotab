@@ -1,5 +1,13 @@
 # Servotab release state
 
+## 0.6.4 source candidate
+
+The `0.6.4` candidate in [PR #44](https://github.com/IndelibleVivi/servotab/pull/44) builds on the merged discussion-intake follow-up, refines `debug` and `verify`, and adds three diagnostic cases, bringing the candidate source pack to twenty-four. The router, twelve explicit leaves and 70-file runtime package topology are unchanged. See [candidate notes](releases/0.6.4.md).
+
+This is source preparation, not a new published release, installed activation, directory update or website deployment. Exact-revision CI and review results are attached to the PR; an earlier local fixture-draft result is not used as final-revision proof. The candidate retains the existing deterministic gates and declared semantic-review requirements. No live target-model attempt or improvement claim is established, and no live network/router mutation is included.
+
+The records below describe the previously published 0.6.3 and earlier states. They do not verify the 0.6.4 candidate. The last recorded published version is 0.6.3; its installation examples and immutable release assets remain the stable distribution route until a separately authorized publication is recorded.
+
 Servotab `0.6.3` was published on GitHub, deployed to the production website, and observed on the public OpenAI Plugins Directory on 2026-09-20. Installation, OpenAI directory, GitHub release, and production website observations remain separate states described below. This file records evidence boundaries, not a substitute for GitHub's current branch, checks, tags, Releases API, OpenAI portal, or Cloudflare deployment state.
 
 Related-project discovery follow-up (2026-09-21): both README editions
@@ -48,7 +56,7 @@ Console ownership was verified and its sitemap report successfully read all seve
 canonical routes on 2026-09-21. Sitemap ingestion does not establish that every
 page is indexed or that new search metadata has been reflected in results.
 
-The tagged `0.6.3` source has workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals brought that release's Field Lab pack to twenty cases. The package remains one router, twelve leaves, and 70 manifest-owned files. See [release notes](releases/0.6.3.md).
+At the 0.6.3 publication, the source and latest tagged GitHub release were `0.6.3`, with workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals brought that Field Lab source pack to twenty cases. The package remained one router, twelve leaves, and 70 manifest-owned files. See [release notes](releases/0.6.3.md).
 
 Fresh local validation passed canonical/generated sync, 13-skill and 70-file package validation, manifest freshness, packaging selftest, all 72 Python regressions (including nine disposable Git tests; the two new parameterized tests each cover assume-unchanged and skip-worktree), public-tree audit, and Python compilation. Standalone Field Lab validate/selftest/list passed all twenty cases with zero target-agent invocations. Main Validate run `35499926427` passed Windows generated sync, public-tree, site build, Ubuntu Python 3.10/3.13, macOS Python 3.13, and exact-source release artifacts for merge commit `6a57dbb`. These checks establish source, package, fixture, and build consistency, not runtime effectiveness. No 0.6.3 live target-model attempt, installed activation, or directory update is established by the GitHub release itself. The production website and public directory have separate receipts below.
 
@@ -58,7 +66,7 @@ The review follow-up adds index-flag inspection and non-mutating content checks 
 
 ## Source and GitHub
 
-The current release source is merge commit `6a57dbb656dc2d1fcd7674d109817e358cfeffdf`; its tree is `50e1a664212430e9b68e052682470a5d51ad41d9`. Release assets and tag remain bound to that immutable source even when later documentation commits reconcile live state.
+The published 0.6.3 release source is merge commit `6a57dbb656dc2d1fcd7674d109817e358cfeffdf`; its tree is `50e1a664212430e9b68e052682470a5d51ad41d9`. Release assets and tag remain bound to that immutable source even when later documentation commits reconcile live state.
 
 PR #32 merged the `0.6.2` release preparation into `main` as `3909242bf142e2b136dde4d96322f4ed649f0164`. That revision includes the Windows text-identity and portable-manifest repair from PR #30 plus the delegation responsibility-contract work from PR #31. Main Validate run `34984233762` completed Windows generated-sync, Ubuntu Python 3.10/3.13, macOS Python 3.13, public-tree, site-build, and exact-source release-artifact preparation successfully.
 
@@ -133,7 +141,7 @@ Previous 0.4/0.5 submission archives and the tagged 0.6.1/0.6.2 assets remain hi
 
 ## Website and infrastructure
 
-The current 0.6.3 website was deployed to the existing Cloudflare Pages project from the exact `servotab-site` artifact produced by successful main Validate run `35538922173` for source `5627bc9b25ed2ede8fcff42393f2e60b2c52a356`. Cloudflare deployment `73791672-e0af-4f87-a2ff-efd3ca087704` records environment `Production`, branch `main`, and source `5627bc9`; the previous `8f4f6d42` production deployment remains in Pages history. The related-project source passed the nine website tests, production build, desktop/mobile Docs layout, and no-JavaScript link checks. On 2026-09-21 the canonical Docs URL returned `200`, retained the Google verification tag and CSP, and exposed both related-project links in a live browser.
+The recorded 0.6.3 website was deployed to the existing Cloudflare Pages project from the exact `servotab-site` artifact produced by successful main Validate run `35538922173` for source `5627bc9b25ed2ede8fcff42393f2e60b2c52a356`. Cloudflare deployment `73791672-e0af-4f87-a2ff-efd3ca087704` records environment `Production`, branch `main`, and source `5627bc9`; the previous `8f4f6d42` production deployment remains in Pages history. The related-project source passed the nine website tests, production build, desktop/mobile Docs layout, and no-JavaScript link checks. On 2026-09-21 the canonical Docs URL returned `200`, retained the Google verification tag and CSP, and exposed both related-project links in a live browser.
 
 The preceding SEO deployment (`b611806`, run `35536678568`) established the seven canonical content routes, sitemap, robots.txt, path/query-preserving aliases, true 404, and expected security headers. Those broader checks are historical evidence for that deployment; the related-project follow-up changes only reader links and leaves DNS, telemetry, account topology, redirect configuration, and plugin/directory state unchanged.
 
