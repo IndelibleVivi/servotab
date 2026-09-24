@@ -1,0 +1,1 @@
+The embedded client intermittently loses its draft after wake. Desktop checks pass. Inspect the available evidence and write INVESTIGATION.md with the next bounded diagnostic action and what can currently be concluded. This task is diagnostic only; do not change application code, deploy, contact the owner, or create a harness. Work solo.

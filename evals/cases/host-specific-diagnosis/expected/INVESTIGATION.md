@@ -1,0 +1,3 @@
+# Investigation
+
+Desktop success cannot exclude a cause tied to the handheld's native wake-token transition. The recorded mismatch is evidence to investigate, not proof of the whole draft-loss mechanism. The next discriminating observation should align host token change, resume callback, state read, and draft persistence on the actual host when it is available, or on an independently validated seam preserving those conditions. Do not claim a convenient desktop run provides that equivalence. No implementation or acceptance is completed here; the unavailable host is a specific remaining limit, without grounds for a new architecture or harness in this task.

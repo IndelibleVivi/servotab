@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "case_id": "diagnosis-progress",
+  "activation": "implicit",
+  "description": "Incomplete overall recovery does not invalidate experiments that continue to isolate failure boundaries.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 300,
+  "trace_assertions": {"max_subagent_events": 0},
+  "workspace_assertions": [
+    {"type": "file_exists", "path": "INVESTIGATION.md"},
+    {"type": "changed_files_exact", "paths": ["INVESTIGATION.md"]}
+  ],
+  "command_assertions": [],
+  "human_review_requirements": [
+    "progress: Require a next action directed at the observed acknowledgement boundary, preserving the verified admission and encoding improvements. Reject an automatic restart or redesign justified only by two incomplete repairs.",
+    "claims: Confirm that complete delivery remains open and that the handoff respects diagnostic-only authority without fabricating a third experiment. A compact remaining-path check is allowed and should not be rejected just for using the word reset."
+  ]
+}
