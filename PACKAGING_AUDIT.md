@@ -1,10 +1,10 @@
-# Packaging audit — Servotab 0.6.3 candidate
+# Packaging audit — Servotab 0.6.4 release candidate
 
 Maintainer release-preparation audit. This defines checked source/package properties and their limits; it is not an independent security certification, directory approval, deployment receipt, or target-model effectiveness result. Exact CI and release identities are recorded by their run and `release-receipt.json`, not inferred from this filename.
 
 ## Identity and ownership
 
-Product/plugin `servotab`; source version `0.6.3`; publisher and maintainer `Yifei Fang`; public creator credit `Faye & Cove`. The repository marketplace is `personal`, selecting `servotab@personal` from `plugins/servotab`. The current source candidate contains 70 manifest-owned files: one portable root manifest, one synchronized compatibility manifest, two rights files, two curated assets, 13 skill bodies, 13 metadata files, 26 skill icons, and 12 router references. The published 0.6.2 release remains the immutable 70-file artifact recorded by its receipt; this candidate does not replace it.
+Product/plugin `servotab`; source version `0.6.4`; publisher and maintainer `Yifei Fang`; public creator credit `Faye & Cove`. The repository marketplace is `personal`, selecting `servotab@personal` from `plugins/servotab`. The current source candidate contains 70 manifest-owned files: one portable root manifest, one synchronized compatibility manifest, two rights files, two curated assets, 13 skill bodies, 13 metadata files, 26 skill icons, and 12 router references. The published 0.6.3 release remains the immutable 70-file artifact recorded by its receipt until a separately verified 0.6.4 publication replaces it as Latest.
 
 `methods/*.md` owns method bodies, `skill_catalog.py` owns metadata/icon routing, `build_skills.py` owns the router and generation rules, and root `assets/` owns icon bytes. Generated files and `PACK_MANIFEST.json` are projections. The sole implicit-eligible skill is `servotab`; all twelve method leaves remain explicit-only. No hook, MCP server, hidden runtime, global instruction file, telemetry, or account is added to the package.
 
@@ -14,11 +14,11 @@ The current gate verifies canonical LF source/generated text, exact binary bytes
 
 SVGs are parsed as XML with a real SVG namespace root and a narrow passive-geometry/paint allowlist. The observed upload scanner requires a viewBox of at least 48 × 48 even when explicit dimensions are larger. Non-finite dimensions, malformed XML, event attributes, external resources, and declarations are rejected. This does not claim to validate every aspect of SVG rendering.
 
-Pillow verifies PNG structure and decodes image pixels. Exact dimensions, source 8-bit RGBA, one frame, bounded size, and complete termination are required. Skill icons are 400 × 400; the release builder also checks the 512 × 512 composer and 1024 × 1024 logo. Pillow and PyYAML are pinned maintainer-only dependencies, absent from the skill payload. No icon geometry or raster image changes are part of the 0.6.3 candidate.
+Pillow verifies PNG structure and decodes image pixels. Exact dimensions, source 8-bit RGBA, one frame, bounded size, and complete termination are required. Skill icons are 400 × 400; the release builder also checks the 512 × 512 composer and 1024 × 1024 logo. Pillow and PyYAML are pinned maintainer-only dependencies, absent from the skill payload. No icon geometry or raster image changes are part of the 0.6.4 candidate.
 
-Regressions cover the previously accepted malformed SVG/PNG inputs, metadata ambiguity, package expansion, generator writes through symlinks, archive reproducibility, dirty/staged/untracked source, output tampering, and exact payload membership. Two new public behavior fixtures check existing-normalizer reuse and a false-green publication test: their baseline must fail the independent assertion and their expected repair must pass. The latter also proves its new test rejects the old implementation. These are fixture controls, not model runs.
+Regressions cover the previously accepted malformed SVG/PNG inputs, metadata ambiguity, package expansion, generator writes through symlinks, archive reproducibility, dirty/staged/untracked source, output tampering, and exact payload membership. Public behavior fixtures retain the existing-normalizer and false-green publication controls, add discussion-intake coverage, and exercise cross-boundary diagnosis, missing native-host conditions, and information-bearing diagnostic progress. Their baselines and expected repairs are checked independently where executable; these are fixture controls, not model runs.
 
-The 0.6.3 source pack contains twenty behavior cases, including three worktree decision rehearsals with required semantic review, plus eight adversarial controls. Disposable Git regressions establish removal/recovery mechanisms separately. Rehearsal file assertions and Git tests do not establish target-agent cleanup behavior or general method effectiveness.
+The 0.6.4 source pack contains twenty-four behavior cases. Twenty declare non-empty human-review requirements, and twelve adversarial controls are retained. The four cases added since 0.6.3 cover discussion intake plus three evidence-scoped diagnostic decisions. Disposable Git regressions establish removal/recovery mechanisms separately. Rehearsal file assertions, fixture controls, and Git tests do not establish target-agent behavior or general method effectiveness.
 
 ## Run the gate
 
