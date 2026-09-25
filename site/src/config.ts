@@ -7,7 +7,7 @@ export const SITE = {
   version: pluginManifest.version,
   // Observed public surfaces; advance each only after its own readback.
   githubReleaseVersion: "0.6.4",
-  directoryVersion: "0.6.3",
+  directoryVersion: "0.6.4",
   description:
     "A Codex plugin for planning, implementation, debugging, code review, and verification. Keep clear changes direct and match engineering methods to the work.",
 } as const;

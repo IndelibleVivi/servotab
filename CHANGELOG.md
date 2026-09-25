@@ -7,7 +7,7 @@
 - Align `execute` with the same evidence rule instead of a mechanical two-attempt reset, and strengthen `verify` so disappearing errors are paired with successful outcomes and state-preservation claims use structured or demonstrably stable comparisons.
 - Expand the source pack to twenty-four cases, including twenty with semantic-review requirements and twelve adversarial controls, without changing the one-router/twelve-leaf or 70-file runtime topology.
 
-The exact `v0.6.4` revision `877496f460c673c7468d2120e4b6a18fe90fbec0` and four release assets were published on 2026-09-25. A fresh public download passed the complete release-builder check and matched the verified originals byte for byte. Installation, activation, website deployment, OpenAI directory publication and live model effectiveness remain separate states; the directory was still observed at 0.6.3 when this release was recorded.
+The exact `v0.6.4` revision `877496f460c673c7468d2120e4b6a18fe90fbec0` and four release assets were published on 2026-09-25. A fresh public download passed the complete release-builder check and matched the verified originals byte for byte. Installation, activation, website deployment and live model effectiveness remain separate states. The OpenAI directory listing was still observed at 0.6.3 when this release was recorded; a later public readback that day reported `0.6.4`, developer `Yifei Fang`, and all thirteen skills, which establishes public listing metadata only and no package digest or host installation.
 
 ## 0.6.3 — published 2026-09-20
 

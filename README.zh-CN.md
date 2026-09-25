@@ -11,7 +11,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 最新 GitHub release：**[`0.6.4`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.4)**，把已合并的 discussion-intake rehearsal 一起纳入 24 个 case 的 source pack，集中改进 `debug` 与 `verify` 的跨边界实验选择和结论范围，并小幅对齐 `execute` 的失败处理交接。其中 20 个 case 声明了非空的 semantic-review requirements，并保留十二个对抗控制；router／十二个 leaves／70 个文件的 package topology 不变。见 [0.6.4 release notes](docs/releases/0.6.4.md)。Tag 与 release receipt 证明 exact source 和 package identity，但不证明已安装、部署网站、更新目录或改善 live model behavior。
 
-另行观察的 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 目前仍显示版本 `0.6.3`、开发者 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。GitHub release 与 Directory publication 被刻意记录为不同状态。具体证据和边界见 [current state](docs/current-state.md) 与历史 [0.6.3 release notes](docs/releases/0.6.3.md)。
+另行观察的 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 现在显示版本 `0.6.4`、开发者 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。tag 当时的 Directory 仍显示 `0.6.3`，那次观察作为历史保留。GitHub release 与 Directory publication 依旧被刻意记录为不同状态，listing 本身也不暴露 package digest。具体证据和边界见 [current state](docs/current-state.md) 与历史 [0.6.3 release notes](docs/releases/0.6.3.md)。
 
 ## 它做什么
 
@@ -65,7 +65,7 @@ codex debug prompt-input "Check Servotab discovery." \
 
 命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，`0.4.0-rc1` 在 macOS 与 `codex-cli 0.147.0` 上完成过 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。2026-09-05，当前 maintainer machine 又安装了 `0.6.0` source candidate，取得 69-file source/cache exact match，并在 fresh-process prompt input 中观察到 `servotab:servotab`。2026-09-06，同一台机器从 clean 的 0.6.1 release source 刷新 `servotab@personal`，核验 installed/enabled version 0.6.1、无 symlink 的 69-file source/cache exact match，以及 fresh-process `servotab:servotab` discovery。这些都是针对具名 payload 与具名机器的有限 compatibility / discovery receipts，不是猜测的最低版本承诺、implicit use 或模型效果的证明，也不代表所有 Codex client 都已验证。
 
-这条 source-checkout 路径与已经公开的 directory payload 仍是两个独立状态。Tagged GitHub source 现在是 `0.6.4`，最近观察到的 directory listing 仍是 `0.6.3`；这里不声称已经取得 0.6.4 的安装或目录回执。公开 listing 不暴露 archive digest，因此也不声称 directory payload 与任一 GitHub asset byte-identical。它取代旧版 `install.sh` / root `skills/` global installer；前述本机 receipt 也不会外推到其他机器或证明 live model behavior。
+这条 source-checkout 路径与已经公开的 directory payload 始终是两个独立状态。Tagged GitHub source 与最近观察到的 directory listing 现在都是 `0.6.4`，但两者互不证明，这里也不声称本机安装了 directory package。公开 listing 不暴露 archive digest，因此也不声称 directory payload 与任一 GitHub asset byte-identical。它取代旧版 `install.sh` / root `skills/` global installer；前述本机 receipt 也不会外推到其他机器或证明 live model behavior。
 
 如果其他本机仍有 manifest-owned Softpowers `0.3.0-rc5` 或更早 global layer，请先读 [迁移指南](docs/migration-from-softpowers.md) 和 [current state](docs/current-state.md)。当前 maintainer roots 已完成 manifest-driven retirement 并验证为 clear；不要把这条 receipt 当成手动删除其他机器旧目录的许可。
 
@@ -152,7 +152,7 @@ PACK_MANIFEST.json                            exact derived payload identity
 
 `methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions、invocation 与 skill-icon source metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存 canonical identity assets 与十二枚 method glyph sources；generator 会把每个 skill 的透明 SVG / 400px PNG，以及 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。Paper-backed icon fallback 保留在 canonical assets 中，不进入默认 runtime payload。
 
-已发布的 0.6.4 release 是 70-file manifest-owned payload，保持 one-router/twelve-leaf topology。它保留既有 portable root manifest、Windows-safe 文本身份、responsibility routing 与 worktree 生命周期指引，再加入 discussion-intake coverage 和 evidence-scoped diagnosis。Source pack 共 24 个 case，其中 20 个需要 semantic review，12 个是 adversarial controls。Release receipt 与 public asset readback 证明 tagged revision 的 source/package consistency；它们不证明 live model behavior、安装、生效、网站部署或 Directory 更新。相关证据和缺口在 release notes 与 current state 中分别记录。
+已发布的 0.6.4 release 是 70-file manifest-owned payload，保持 one-router/twelve-leaf topology。它保留既有 portable root manifest、Windows-safe 文本身份、responsibility routing 与 worktree 生命周期指引，再加入 discussion-intake coverage 和 evidence-scoped diagnosis。Source pack 共 24 个 case，其中 20 个需要 semantic review，12 个是 adversarial controls。Release receipt 与 public asset readback 证明 tagged revision 的 source/package consistency；它们不证明 live model behavior、安装、生效或网站部署。公开 Directory listing 已单独观察到 `0.6.4`，这只说明 listing 层面的公开可见，不代表本机安装或行为效果。相关证据和缺口在 release notes 与 current state 中分别记录。
 
 以下路径各有不同责任：
 
