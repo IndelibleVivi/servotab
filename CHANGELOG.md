@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.4 — published 2026-09-25
+
+- Preserve the important goals, constraints, rationale, examples and unresolved items from supplied discussions before implementation priorities are selected. Keep reading coverage, adoption judgment and execution permission separate without imposing a mandatory ledger on bounded requests.
+- Make cross-boundary diagnosis evidence-scoped: choose probes by the path and conditions they actually exercise, preserve independently observed contributing defects, retain inconclusive trials as uncertainty, and separate mechanism repair from complete user-experience recovery.
+- Align `execute` with the same evidence rule instead of a mechanical two-attempt reset, and strengthen `verify` so disappearing errors are paired with successful outcomes and state-preservation claims use structured or demonstrably stable comparisons.
+- Expand the source pack to twenty-four cases, including twenty with semantic-review requirements and twelve adversarial controls, without changing the one-router/twelve-leaf or 70-file runtime topology.
+
+The exact `v0.6.4` revision `877496f460c673c7468d2120e4b6a18fe90fbec0` and four release assets were published on 2026-09-25. A fresh public download passed the complete release-builder check and matched the verified originals byte for byte. Installation, activation, website deployment, OpenAI directory publication and live model effectiveness remain separate states; the directory was still observed at 0.6.3 when this release was recorded.
+
 ## 0.6.3 — published 2026-09-20
 
 - Expand `worktree` from isolation setup to intent-based workspace selection, reuse, recovery, parking, and authorized organization. Explicit invocation no longer implies creation; repeated or ambiguous creation checks existing state first.

@@ -23,9 +23,10 @@ repeated activation, timer cancellation, reduced-motion preference changes,
 DOM selector contracts, and accessible button/status state. The repository CI
 job runs these behavior checks before the production build.
 
-The build expects the full repository checkout. `src/config.ts` reads the current
-candidate version from `../plugins/servotab/.codex-plugin/plugin.json` so the
-website status rail and Quickstart do not maintain a second version string.
+The build expects the full repository checkout. `src/config.ts` reads source
+identity from `../plugins/servotab/.codex-plugin/plugin.json` and keeps separately
+observed GitHub release and Directory versions explicit so a staged publication
+cannot make one surface impersonate another.
 
 Cloudflare Pages build settings:
 
@@ -55,8 +56,9 @@ owner's Search Console verification and must remain present after verification.
 
 The canonical domain is defined in `astro.config.mjs` and `src/config.ts`.
 The current Servotab source, issue tracker, and official OpenAI Plugins
-Directory listing URLs are centralized in `src/config.ts`. Candidate-version
-copy derives from the plugin manifest rather than a website-local constant.
+Directory listing URLs are centralized in `src/config.ts`. Source identity
+derives from the plugin manifest; the separately observed GitHub release and
+Directory versions advance only after their own public readbacks.
 
 ## Design authority
 
@@ -64,7 +66,7 @@ The implementation uses the approved Servotab `sᵗ` geometry and the v0 day-fir
 
 The website links the live official Plugins Directory listing and separately
 documents the source-checkout repository marketplace route for the current
-candidate. Keep the published directory payload, a later directory update,
+tagged release. Keep the published directory payload, a later directory update,
 source-checkout installation, and any tagged GitHub release as separate states.
 Directory availability does not make Servotab an official OpenAI product.
 
