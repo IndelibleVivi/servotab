@@ -32,7 +32,7 @@ Prefer the cheapest reliable reproducer:
 - A deterministic UI sequence
 - A targeted log or state inspection
 
-Choose the experiment for the causal claim, and keep final acceptance on the actual user surface. A mechanism surrogate may use another device, process, or local seam when it preserves the relevant path, identity, configuration, protocol, and load conditions. State the material equivalence and its limits; a surrogate that omits a suspected host-specific condition cannot exclude that cause. The affected device need not reproduce every shared mechanism.
+Choose the experiment for the causal claim, and keep final acceptance on the actual user surface. A mechanism surrogate may use another device, process, or local seam when it preserves the conditions material to the tested claim: the relevant path, configuration, protocol, and load, plus any identity the claim itself concerns. The surrogate need not reproduce attributes the claim does not depend on. State the material equivalence and its limits; a surrogate that omits a suspected host-specific condition cannot exclude that cause. The affected device need not reproduce every shared mechanism.
 
 For a cross-boundary failure, check where each decisive probe starts, which relevant boundaries it traverses, and under what conditions. A green check that bypasses the suspected boundary cannot establish that boundary's health. Inspect inputs and outputs where they distinguish hypotheses; retain temporary instrumentation only when it remains useful observability.
 

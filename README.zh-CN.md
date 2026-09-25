@@ -9,7 +9,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-当前源码候选：**0.6.4**，集中改进 `debug` 与 `verify` 的跨边界实验选择和结论范围；三个诊断案例与已合并的 discussion-intake rehearsal 一起把候选 source pack 扩展到 24 个 case。见 [0.6.4 候选说明](docs/releases/0.6.4.md)。这份候选不代表已打 tag、安装、部署网站或更新目录，也没有已改善实际模型行为的证据。
+当前源码候选：**0.6.4**，把已合并的 discussion-intake rehearsal 一起纳入 24 个 case 的 source pack，集中改进 `debug` 与 `verify` 的跨边界实验选择和结论范围，并小幅对齐 `execute` 的失败处理交接。候选 source pack 共 24 个 case，其中 20 个声明了非空的 semantic-review requirements，并保留十二个对抗控制；router／十二个 leaves／70 个文件的 package topology 不变。见 [0.6.4 候选说明](docs/releases/0.6.4.md)。这份候选不代表已打 tag、安装、部署网站、更新目录、exact-head CI 或 exact-head review，也没有已改善实际模型行为的证据。
 
 最近记录的已发布版本：[`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3)，将 `worktree` 扩展到现场选择、复用、恢复、收起和按授权清理，见 [0.6.3 release notes](docs/releases/0.6.3.md)。对 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 的独立公开 readback 显示版本为 `0.6.3`、开发者为 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。具体证据和边界见 [current state](docs/current-state.md) 与历史 [0.6.2 release notes](docs/releases/0.6.2.md)。
 

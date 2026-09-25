@@ -2,11 +2,17 @@
 
 ## 0.6.4 source candidate
 
-The `0.6.4` candidate in [PR #44](https://github.com/IndelibleVivi/servotab/pull/44) builds on the merged discussion-intake follow-up, refines `debug` and `verify`, and adds three diagnostic cases, bringing the candidate source pack to twenty-four. The router, twelve explicit leaves and 70-file runtime package topology are unchanged. See [candidate notes](releases/0.6.4.md).
+The `0.6.4` candidate in [PR #44](https://github.com/IndelibleVivi/servotab/pull/44) builds on the merged discussion-intake follow-up, refines `debug` and `verify`, aligns the `execute` failure-handling handoff with the same evidence rule, and adds three diagnostic cases, bringing the candidate source pack from twenty-one to twenty-four. Of the twenty-four cases, twenty declare non-empty `human_review_requirements`, and twelve adversarial controls are retained. The router, twelve explicit leaves and 70-file runtime package topology are unchanged. See [candidate notes](releases/0.6.4.md).
 
-This is source preparation, not a new published release, installed activation, directory update or website deployment. Exact-revision CI and review results are attached to the PR; an earlier local fixture-draft result is not used as final-revision proof. The candidate retains the existing deterministic gates and declared semantic-review requirements. No live target-model attempt or improvement claim is established, and no live network/router mutation is included.
+This is source preparation, not a new published release, installed activation, directory update or website deployment. The [pull request](https://github.com/IndelibleVivi/servotab/pull/44) is the authority for current exact-head CI and review status; this source file does not claim those outcomes. CI on an earlier standalone head does not validate a later rebased head, and no reviews or comments are established here. The candidate retains the existing deterministic gates and declared semantic-review requirements. No live target-model attempt or improvement claim is established, and no live network/router mutation is included.
 
 The records below describe the previously published 0.6.3 and earlier states. They do not verify the 0.6.4 candidate. The last recorded published version is 0.6.3; its installation examples and immutable release assets remain the stable distribution route until a separately authorized publication is recorded.
+
+### Merged precursor: discussion intake (2026-09-22)
+
+[PR #43](https://github.com/IndelibleVivi/servotab/pull/43) merged into `main` as `4ce64cb` and is now included in the 0.6.4 candidate. The router, `design`, and `execute` preserve material goals, constraints, rationale, examples, and unresolved items before selecting implementation focus. Reading coverage, adoption judgment, and execution permission are separate; rejecting a suggested mechanism does not silently discard its underlying need. Corrections can supersede earlier proposals, and explicitly bounded requests do not require a whole-source audit or a mandatory ledger.
+
+The synthetic `discussion-intake` rehearsal brought the source pack to twenty-one cases at that merge. Its structural gate checks file existence and exact write scope; four deliberately wrong assessments still pass that gate and require semantic rejection. A separate test accepts alternate permission wording and rejects edits to the discussion or extra files. The trace contract checks a command-path mention of `design.md`, not content reads or host selection. Reading quality and authority judgment remain explicit semantic review requirements. That merge's fresh deterministic checks and the Field Lab validate/selftest/list run covered all twenty-one cases with zero target agents; no live attempt or completed semantic review was claimed. The 0.6.4 candidate inherits this precursor and does not restate it as current publication truth.
 
 Servotab `0.6.3` was published on GitHub, deployed to the production website, and observed on the public OpenAI Plugins Directory on 2026-09-20. Installation, OpenAI directory, GitHub release, and production website observations remain separate states described below. This file records evidence boundaries, not a substitute for GitHub's current branch, checks, tags, Releases API, OpenAI portal, or Cloudflare deployment state.
 
@@ -15,34 +21,6 @@ and the Docs page now link to MCP Boundary for MCP engineering and Worker
 Routing for bounded delegation. The website links are static HTML and remain
 available without JavaScript. [PR #41](https://github.com/IndelibleVivi/servotab/pull/41)
 merged as `5627bc9`; production publication and live checks are recorded below.
-
-## Unreleased source follow-up
-
-Discussion intake (2026-09-22): the router, `design`, and `execute` now preserve
-material goals, constraints, rationale, examples, and unresolved items before
-selecting implementation focus. Reading coverage, adoption judgment, and execution
-permission are separate; rejecting a suggested mechanism does not silently discard
-its underlying need. Corrections can supersede earlier proposals, and explicitly
-bounded requests do not require a whole-source audit or a mandatory ledger.
-
-The synthetic `discussion-intake` rehearsal brings the source pack to 21 cases.
-Its structural gate checks file existence and exact write scope; four deliberately
-wrong assessments still pass that gate and require semantic rejection. A separate
-test accepts alternate permission wording and rejects edits to the discussion or
-extra files. The trace contract checks a command-path mention of `design.md`, not
-content reads or host selection. Reading quality and authority judgment remain
-explicit semantic review requirements.
-
-Fresh deterministic checks passed generated sync, 13-skill/70-file package and
-manifest validation, packaging selftest, all 73 Python tests, public-tree audit,
-Python compilation, and Field Lab validate/selftest/list for all 21 cases. Field
-Lab invoked zero target agents; no live attempt or completed semantic review is
-claimed. The package topology and runtime dependencies are unchanged.
-
-This is a source-only change after the tagged `0.6.3` release. `VERSION` remains
-`0.6.3`; the revised generated package is not the immutable tagged payload.
-No installation, activation, release, directory update, or deployment of this
-follow-up is established.
 
 ## 0.6.3 release
 
