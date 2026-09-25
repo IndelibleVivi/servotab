@@ -5,8 +5,9 @@ export const SITE = {
   wordmark: "servotab",
   origin: "https://servotab.com",
   version: pluginManifest.version,
-  // Observed publication, independent of the source manifest version.
-  publishedVersion: "0.6.3",
+  // Observed public surfaces; advance each only after its own readback.
+  githubReleaseVersion: "0.6.4",
+  directoryVersion: "0.6.3",
   description:
     "A Codex plugin for planning, implementation, debugging, code review, and verification. Keep clear changes direct and match engineering methods to the work.",
 } as const;

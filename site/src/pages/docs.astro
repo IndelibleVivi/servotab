@@ -20,17 +20,18 @@ import { PROJECT_LINKS, RELATED_PROJECTS, repoFile, SITE } from "../config";
       <div class="content-prose">
         <h2 id="get-started-heading">Add the public plugin. Or inspect the tagged source release.</h2>
         <p>
-          Servotab <code>{SITE.publishedVersion}</code> is publicly available in the official OpenAI Plugins Directory.{" "}
+          Servotab <code>{SITE.directoryVersion}</code> is publicly available in the official OpenAI Plugins Directory.{" "}
           <a href={PROJECT_LINKS.pluginDirectory}>Open the Servotab listing</a> to add the
           published plugin. The repository route below installs the separately receipted tagged
-          source release for inspection or maintainer testing. Both surfaces report the same
-          version, but the public listing does not expose an archive digest.
+          {" "}<code>{SITE.githubReleaseVersion}</code> source release for inspection or maintainer testing.
+          The directory and GitHub versions are recorded separately, and the public listing does
+          not expose an archive digest.
         </p>
 
         <div class="quickstart-grid">
           <article>
             <span class="rail-label">01 / source checkout</span>
-            <pre><code>{`git clone --branch v${SITE.publishedVersion} --depth 1 https://github.com/IndelibleVivi/servotab.git
+            <pre><code>{`git clone --branch v${SITE.githubReleaseVersion} --depth 1 https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal`}</code></pre>
@@ -56,7 +57,7 @@ codex plugin add servotab@personal`}</code></pre>
         <pre><code>codex plugin list --marketplace personal</code></pre>
         <p>
           The receipt should show <code>servotab@personal</code> as{" "}
-          <code>installed, enabled</code> at version <code>{SITE.publishedVersion}</code>. On
+          <code>installed, enabled</code> at version <code>{SITE.githubReleaseVersion}</code>. On
           2026-08-31 this source-checkout route and fresh-process router discovery were
           verified on macOS with <code>codex-cli 0.147.0</code>. That is an observed
           compatibility receipt, not a guessed minimum-version guarantee.
@@ -235,12 +236,11 @@ codex plugin add servotab@personal`}</code></pre>
         </p>
         <p>
           The <a href={PROJECT_LINKS.pluginDirectory}>official Servotab listing</a> reports
-          version <code>{SITE.publishedVersion}</code>, developer <code>Yifei Fang</code>, and
-          all thirteen Servotab skills, including <code>Worktree</code>. The published GitHub
-          release remains the source install target. Release <code>{SITE.version}</code> adds worktree lifecycle guidance: reuse
-          and recover an existing task, park preserved work, and separate directory removal
-          from branch or data deletion. Its three synthetic decision rehearsals and disposable
-          Git regressions do not establish live model behavior. The listing does not expose
+          version <code>{SITE.directoryVersion}</code>, developer <code>Yifei Fang</code>, and
+          all thirteen Servotab skills, including <code>Worktree</code>. GitHub release{" "}
+          <code>{SITE.githubReleaseVersion}</code> is the current source install target. It adds
+          discussion-intake coverage and evidence-scoped diagnosis across a twenty-four-case
+          source pack; its deterministic fixtures do not establish live model behavior. The listing does not expose
           package bytes, so directory publication does not prove byte identity with the GitHub asset.
           GitHub release availability is recorded on the repository Releases page.
           The same repository preserves earlier Softpowers commits, release records,
