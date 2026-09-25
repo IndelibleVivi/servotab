@@ -9,7 +9,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-当前源码与 tagged release：[`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3)，将 `worktree` 扩展到现场选择、复用、恢复、收起和按授权清理，见 [0.6.3 release notes](docs/releases/0.6.3.md)。对 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 的独立公开 readback 显示版本为 `0.6.3`、开发者为 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。具体证据和边界见 [current state](docs/current-state.md) 与历史 [0.6.2 release notes](docs/releases/0.6.2.md)。
+最新 tagged release：[`0.6.3`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.3)，将 `worktree` 扩展到现场选择、复用、恢复、收起和按授权清理，见 [0.6.3 release notes](docs/releases/0.6.3.md)。对 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 的独立公开 readback 显示版本为 `0.6.3`、开发者为 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。未发布源码改动与证据边界见 [current state](docs/current-state.md)，历史版本见 [0.6.2 release notes](docs/releases/0.6.2.md)。
 
 ## 它做什么
 
@@ -23,6 +23,8 @@ Servotab 保持四个稳定承诺：
 日常 repository work 只需正常描述任务，不必先挑 method。唯一具备 implicit-invocation eligibility 的 router 是 `servotab`；其余 12 个 leaf skills 都是 explicit-only shortcuts。它们不会覆盖你的 prompt、`AGENTS.md`、repo rules、权限边界、Git decision 或 deployment authority。
 
 Servotab 也不会把日志、截图、review、旧计划或 generated artifact 自动当成指令。它们可能是 evidence；当前用户意图、accepted specification 与 canonical source 才决定工作方向。
+
+未发布源码进一步明确了讨论材料的吸收方式：先覆盖重要目标与约束，再选择实施重点；分开看待需求与建议机制，为重要内容的舍弃或延后保留理由，并区分阅读覆盖、采纳判断和执行权限。明确限定的小任务仍保持有界，不新增 method、强制台账或审批轮次，见 [Design](methods/design.md)。
 
 ## 安装
 
