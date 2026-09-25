@@ -36,9 +36,9 @@ fieldlab review /path/to/study/fieldlab.json \
 
 Against that merged-source CLI, synthetic receipts for the then-current nine
 human-required cases produced review records accepted by the Servotab checker,
-with zero target-agent invocations. The current source candidate has thirteen
-human-required cases; its four delegation canaries use the same declared
-mechanics. One `delegate-bounded-investigation` attempt now has an independent
+with zero target-agent invocations. The current source candidate has twenty
+human-required cases out of twenty-four; its four delegation canaries use the same
+declared mechanics. One `delegate-bounded-investigation` attempt now has an independent
 review supporting all three semantic requirements, but its deterministic receipt
 was rejected. After the duplicate literal-label assertions were removed, a new
 separately budgeted attempt passed deterministic verification and a new independent
@@ -110,7 +110,7 @@ does not establish them. Alternate valid wording may explicitly say "not authori
 or "out of scope"; structural checks must not reject those phrases. Separate tests
 reject changes to the source discussion or an extra file.
 
-Ordinary CI replays all twenty-one baseline/expected file-and-command oracles, the
+Ordinary CI replays all twenty-four baseline/expected file-and-command oracles, the
 twelve adversarial deltas, alternate valid regressions, malformed/empty test suites,
 authority edits and incomplete CLI deliveries. Synthetic receipt tests exercise
 acceptance gating without representing an actual attempt or human review.

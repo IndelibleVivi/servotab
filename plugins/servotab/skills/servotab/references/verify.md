@@ -14,7 +14,7 @@ List the claims that matter, such as:
 - A migration is safe.
 - The branch is ready to integrate.
 
-For each claim, identify the command, inspection, or manual scenario that proves it.
+For each claim, identify the command, inspection, or manual scenario that proves it. For decisive cross-boundary probes, name their entry point, relevant path, and material conditions. Freshness and a shared environment do not make a check that bypasses the failing boundary evidence of that boundary's health. A brief coverage note is enough; do not create a second ledger.
 
 ## Evidence budget
 
@@ -29,7 +29,7 @@ Keep capability and effectiveness claims separate:
 
 - A file, rule, tool, or configured capability proves that it exists, not that the task can reach it.
 - A reachable route proves wiring, not successful use or delivery.
-- A focused exercise or passing test proves current behavior under its observed conditions, not general runtime effectiveness.
+- A focused exercise or passing test proves current behavior under its observed conditions, not general runtime effectiveness. Keep mechanism repair and whole-user-experience recovery separate; residual symptoms do not automatically invalidate a verified contributing fix.
 - A repair verified in the current task proves repair state. Only a later comparable outcome can support a claim that the workflow improved over time.
 - Missing observation is `Not verified`, not automatically a defect.
 
@@ -115,7 +115,7 @@ For a bug fix, prefer a reproducer or test that would fail under the old behavio
 
 ## Check the test criterion and close review findings
 
-Before relying on a green result, consider a plausible incorrect implementation that this check would reject. This is a check on the existing evidence, not a mandatory mutation-testing stage or an extra reviewer loop. Schema presence, file signatures, compilation, a mocked success path, and expected-output updates can all miss the behavior being claimed. Use the nearest available behavioral check or full parser where that is the contract. Keep static checks as static evidence.
+Before relying on a green result, consider a plausible incorrect implementation that this check would reject. This is a check on the existing evidence, not a mandatory mutation-testing stage or an extra reviewer loop. Schema presence, file signatures, compilation, a mocked success path, and expected-output updates can all miss the behavior being claimed. Use the nearest available behavioral check or full parser where that is the contract. Pair disappearing errors with the intended successful outcome so that suppressing work or bypassing the observed path cannot masquerade as repair. For state-preservation claims, prefer structured comparison or a demonstrably stable normalized before-image over scattered substring checks; retain semantic fields and ordering, and exclude only understood volatile fields. Keep static checks as static evidence.
 
 For timing, ownership, recovery, or optional-host changes, inspect the relevant repeated, interrupted, stale, malformed, denied, or accessibility path. Select from these by the actual changed boundary; this is not an exhaustive test matrix for every task.
 

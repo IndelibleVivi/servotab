@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "case_id": "host-specific-diagnosis",
+  "activation": "implicit",
+  "description": "A host-only condition must not be excluded by a convenient but non-equivalent desktop probe.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 300,
+  "trace_assertions": {"max_subagent_events": 0},
+  "workspace_assertions": [
+    {"type": "file_exists", "path": "INVESTIGATION.md"},
+    {"type": "changed_files_exact", "paths": ["INVESTIGATION.md"]}
+  ],
+  "command_assertions": [],
+  "human_review_requirements": [
+    "equivalence: Reject claims that the desktop green excludes the host-specific cause. Require identification of the missing wake-token condition and a bounded experiment that would retain it, with no fabricated host observation.",
+    "scope: Confirm the agent distinguishes an observed mismatch from established causality and respects diagnostic-only authority. It should not create a surrogate whose missing host condition makes its result self-confirming."
+  ]
+}

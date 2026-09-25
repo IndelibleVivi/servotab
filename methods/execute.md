@@ -135,10 +135,10 @@ If focused verification fails:
 1. Read the full failure.
 2. Decide whether it is caused by the current slice, an existing baseline issue, or the environment.
 3. Fix current-slice regressions before proceeding.
-4. When the cause is uncertain, stop speculative implementation and switch to evidence-driven debugging with one active hypothesis.
+4. When the cause is uncertain, stop speculative implementation and move to evidence-driven debugging: test one discriminating causal claim at a time, as in `debug`, without duplicating its full procedure here.
 5. Do not stack speculative fixes.
 
-After two failed attempts based on the same idea, reset the hypothesis instead of adding another patch.
+Retain independently observed defects; one failed repair does not erase a defect that separate evidence still supports. Reset the diagnosis when repeated attempts based on the same idea stop adding discriminating evidence, rather than after a fixed number of tries.
 
 ## Completion
 

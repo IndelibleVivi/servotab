@@ -1,0 +1,1 @@
+Two repairs have not restored complete delivery. Review HANDOFF.md and write INVESTIGATION.md with the next bounded action and the conclusions the existing evidence permits. This is a diagnostic handoff, not authorization to modify the application or redesign it. Work solo.

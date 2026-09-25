@@ -1,5 +1,19 @@
 # Servotab release state
 
+## 0.6.4 source candidate
+
+The `0.6.4` candidate in [PR #44](https://github.com/IndelibleVivi/servotab/pull/44) builds on the merged discussion-intake follow-up, refines `debug` and `verify`, aligns the `execute` failure-handling handoff with the same evidence rule, and adds three diagnostic cases, bringing the candidate source pack from twenty-one to twenty-four. Of the twenty-four cases, twenty declare non-empty `human_review_requirements`, and twelve adversarial controls are retained. The router, twelve explicit leaves and 70-file runtime package topology are unchanged. See [candidate notes](releases/0.6.4.md).
+
+This is source preparation, not a new published release, installed activation, directory update or website deployment. The [pull request](https://github.com/IndelibleVivi/servotab/pull/44) is the authority for current exact-head CI and review status; this source file does not claim those outcomes. CI on an earlier standalone head does not validate a later rebased head, and no reviews or comments are established here. The candidate retains the existing deterministic gates and declared semantic-review requirements. No live target-model attempt or improvement claim is established, and no live network/router mutation is included.
+
+The records below describe the previously published 0.6.3 and earlier states. They do not verify the 0.6.4 candidate. The last recorded published version is 0.6.3; its installation examples and immutable release assets remain the stable distribution route until a separately authorized publication is recorded.
+
+### Merged precursor: discussion intake (2026-09-22)
+
+[PR #43](https://github.com/IndelibleVivi/servotab/pull/43) merged into `main` as `4ce64cb` and is now included in the 0.6.4 candidate. The router, `design`, and `execute` preserve material goals, constraints, rationale, examples, and unresolved items before selecting implementation focus. Reading coverage, adoption judgment, and execution permission are separate; rejecting a suggested mechanism does not silently discard its underlying need. Corrections can supersede earlier proposals, and explicitly bounded requests do not require a whole-source audit or a mandatory ledger.
+
+The synthetic `discussion-intake` rehearsal brought the source pack to twenty-one cases at that merge. Its structural gate checks file existence and exact write scope; four deliberately wrong assessments still pass that gate and require semantic rejection. A separate test accepts alternate permission wording and rejects edits to the discussion or extra files. The trace contract checks a command-path mention of `design.md`, not content reads or host selection. Reading quality and authority judgment remain explicit semantic review requirements. That merge's fresh deterministic checks and the Field Lab validate/selftest/list run covered all twenty-one cases with zero target agents; no live attempt or completed semantic review was claimed. The 0.6.4 candidate inherits this precursor and does not restate it as current publication truth.
+
 Servotab `0.6.3` was published on GitHub, deployed to the production website, and observed on the public OpenAI Plugins Directory on 2026-09-20. Installation, OpenAI directory, GitHub release, and production website observations remain separate states described below. This file records evidence boundaries, not a substitute for GitHub's current branch, checks, tags, Releases API, OpenAI portal, or Cloudflare deployment state.
 
 Related-project discovery follow-up (2026-09-21): both README editions
@@ -7,34 +21,6 @@ and the Docs page now link to MCP Boundary for MCP engineering and Worker
 Routing for bounded delegation. The website links are static HTML and remain
 available without JavaScript. [PR #41](https://github.com/IndelibleVivi/servotab/pull/41)
 merged as `5627bc9`; production publication and live checks are recorded below.
-
-## Unreleased source follow-up
-
-Discussion intake (2026-09-22): the router, `design`, and `execute` now preserve
-material goals, constraints, rationale, examples, and unresolved items before
-selecting implementation focus. Reading coverage, adoption judgment, and execution
-permission are separate; rejecting a suggested mechanism does not silently discard
-its underlying need. Corrections can supersede earlier proposals, and explicitly
-bounded requests do not require a whole-source audit or a mandatory ledger.
-
-The synthetic `discussion-intake` rehearsal brings the source pack to 21 cases.
-Its structural gate checks file existence and exact write scope; four deliberately
-wrong assessments still pass that gate and require semantic rejection. A separate
-test accepts alternate permission wording and rejects edits to the discussion or
-extra files. The trace contract checks a command-path mention of `design.md`, not
-content reads or host selection. Reading quality and authority judgment remain
-explicit semantic review requirements.
-
-Fresh deterministic checks passed generated sync, 13-skill/70-file package and
-manifest validation, packaging selftest, all 73 Python tests, public-tree audit,
-Python compilation, and Field Lab validate/selftest/list for all 21 cases. Field
-Lab invoked zero target agents; no live attempt or completed semantic review is
-claimed. The package topology and runtime dependencies are unchanged.
-
-This is a source-only change after the tagged `0.6.3` release. `VERSION` remains
-`0.6.3`; the revised generated package is not the immutable tagged payload.
-No installation, activation, release, directory update, or deployment of this
-follow-up is established.
 
 ## 0.6.3 release
 
@@ -48,7 +34,7 @@ Console ownership was verified and its sitemap report successfully read all seve
 canonical routes on 2026-09-21. Sitemap ingestion does not establish that every
 page is indexed or that new search metadata has been reflected in results.
 
-The tagged `0.6.3` source has workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals brought that release's Field Lab pack to twenty cases. The package remains one router, twelve leaves, and 70 manifest-owned files. See [release notes](releases/0.6.3.md).
+At the 0.6.3 publication, the source and latest tagged GitHub release were `0.6.3`, with workspace lifecycle guidance in `worktree`, shared cleanup authority in `finish`, corrected write-surface guidance in `delegate`, and corresponding router/metadata projections. Three new synthetic decision rehearsals brought that Field Lab source pack to twenty cases. The package remained one router, twelve leaves, and 70 manifest-owned files. See [release notes](releases/0.6.3.md).
 
 Fresh local validation passed canonical/generated sync, 13-skill and 70-file package validation, manifest freshness, packaging selftest, all 72 Python regressions (including nine disposable Git tests; the two new parameterized tests each cover assume-unchanged and skip-worktree), public-tree audit, and Python compilation. Standalone Field Lab validate/selftest/list passed all twenty cases with zero target-agent invocations. Main Validate run `35499926427` passed Windows generated sync, public-tree, site build, Ubuntu Python 3.10/3.13, macOS Python 3.13, and exact-source release artifacts for merge commit `6a57dbb`. These checks establish source, package, fixture, and build consistency, not runtime effectiveness. No 0.6.3 live target-model attempt, installed activation, or directory update is established by the GitHub release itself. The production website and public directory have separate receipts below.
 
@@ -58,7 +44,7 @@ The review follow-up adds index-flag inspection and non-mutating content checks 
 
 ## Source and GitHub
 
-The current release source is merge commit `6a57dbb656dc2d1fcd7674d109817e358cfeffdf`; its tree is `50e1a664212430e9b68e052682470a5d51ad41d9`. Release assets and tag remain bound to that immutable source even when later documentation commits reconcile live state.
+The published 0.6.3 release source is merge commit `6a57dbb656dc2d1fcd7674d109817e358cfeffdf`; its tree is `50e1a664212430e9b68e052682470a5d51ad41d9`. Release assets and tag remain bound to that immutable source even when later documentation commits reconcile live state.
 
 PR #32 merged the `0.6.2` release preparation into `main` as `3909242bf142e2b136dde4d96322f4ed649f0164`. That revision includes the Windows text-identity and portable-manifest repair from PR #30 plus the delegation responsibility-contract work from PR #31. Main Validate run `34984233762` completed Windows generated-sync, Ubuntu Python 3.10/3.13, macOS Python 3.13, public-tree, site-build, and exact-source release-artifact preparation successfully.
 
@@ -133,7 +119,7 @@ Previous 0.4/0.5 submission archives and the tagged 0.6.1/0.6.2 assets remain hi
 
 ## Website and infrastructure
 
-The current 0.6.3 website was deployed to the existing Cloudflare Pages project from the exact `servotab-site` artifact produced by successful main Validate run `35538922173` for source `5627bc9b25ed2ede8fcff42393f2e60b2c52a356`. Cloudflare deployment `73791672-e0af-4f87-a2ff-efd3ca087704` records environment `Production`, branch `main`, and source `5627bc9`; the previous `8f4f6d42` production deployment remains in Pages history. The related-project source passed the nine website tests, production build, desktop/mobile Docs layout, and no-JavaScript link checks. On 2026-09-21 the canonical Docs URL returned `200`, retained the Google verification tag and CSP, and exposed both related-project links in a live browser.
+The recorded 0.6.3 website was deployed to the existing Cloudflare Pages project from the exact `servotab-site` artifact produced by successful main Validate run `35538922173` for source `5627bc9b25ed2ede8fcff42393f2e60b2c52a356`. Cloudflare deployment `73791672-e0af-4f87-a2ff-efd3ca087704` records environment `Production`, branch `main`, and source `5627bc9`; the previous `8f4f6d42` production deployment remains in Pages history. The related-project source passed the nine website tests, production build, desktop/mobile Docs layout, and no-JavaScript link checks. On 2026-09-21 the canonical Docs URL returned `200`, retained the Google verification tag and CSP, and exposed both related-project links in a live browser.
 
 The preceding SEO deployment (`b611806`, run `35536678568`) established the seven canonical content routes, sitemap, robots.txt, path/query-preserving aliases, true 404, and expected security headers. Those broader checks are historical evidence for that deployment; the related-project follow-up changes only reader links and leaves DNS, telemetry, account topology, redirect configuration, and plugin/directory state unchanged.
 

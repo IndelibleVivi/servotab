@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "case_id": "cross-boundary-diagnosis",
+  "activation": "implicit",
+  "description": "Select and run a discriminating shared-boundary experiment despite green bypass probes, confounded trials, and a real residual defect.",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "trace_assertions": {
+    "max_subagent_events": 0
+  },
+  "workspace_assertions": [
+    {"type": "file_exists", "path": "INCIDENT.md"},
+    {"type": "file_exists", "path": "test_gateway.py"},
+    {"type": "changed_files_exact", "paths": ["gateway.py", "test_gateway.py", "INCIDENT.md"]}
+  ],
+  "command_assertions": [
+    {"argv": ["python3", "-c", "from gateway import admit\nfrom probe import run\nfor origin in ('local','client'):\n for active in (False,True):\n  for tag in (False,True):\n   for slot in (1,4,5,8):\n    assert admit(origin=origin,relay_active=active,relay_tag=tag,slot=slot) == (origin=='local' or (active and tag) or slot<=4)\na=run(origin='client',requests=8); b=run(origin='client',requests=8,access='noisy')\nassert (a['admission_dropped'],a['delivered'],a['within_deadline'])==(0,8,8)\nassert (b['admission_dropped'],b['delivered'],b['within_deadline'])==(0,8,4)\n"]},
+    {"argv": ["python3", "-m", "unittest", "-q", "test_gateway"]}
+  ],
+  "human_review_requirements": [
+    "experiment: Inspect the actual attempt trace and probe outputs. Require a pre-repair client-origin workload that reaches and fails the admission boundary and a comparable post-repair workload with improved delivery as well as reduced rejections. A written proposal, copied report, post-repair-only check, or local-origin green is insufficient. Do not require a specific command spelling or request count.",
+    "scope: Confirm the agent distinguishes shared mechanism evidence from named-handheld acceptance, explains the surrogate conditions, retains the independent access-delay observation, and treats the unmatched prior trial as inconclusive. Reject full recovery claims based only on the simulated repair.",
+    "ownership: Confirm the fix follows active relay/tag/client-entry ownership, preserves ordinary and disabled-relay admission, and that the agent actually runs its new regression. Do not accept a per-client exception, disabled limiter, edited probe, or report-only implementation."
+  ]
+}
