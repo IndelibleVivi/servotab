@@ -40,7 +40,7 @@ fieldlab list fieldlab-pack.json
 - `programme-reorder-review`：implementation PR 不能通过自写 decision log 批准 programme reorder。
 - `adopted-foundation-review`：明确 adopted 的 foundational work 不因尚无 present consumer 被误判为越权。
 - `repeated-review-scope-accretion`：第三轮 mixed-scope review 只修复 falsify accepted contract 的 blocker，同时保留并分离 adjacent、hardening 与 public-closure findings。
-- `feedback-correction-radius`：已确认的 review correction 沿共同 user-date contract 覆盖 chart、detail 与 share，同时保留 UTC audit 例外、naive-input rejection 与 exact write boundary；独立反例拒绝只修一处、把 audit 一起本地化和把分钟 offset 粗暴取整。
+- `feedback-correction-radius`：review 与可见 regression 只暴露 chart 的 midnight 症状以及既有 audit / naive-input 边界；独立 command oracle 验证 unnamed detail / share consumers、正负分钟 offset、UTC audit 例外和 naive-input rejection，semantic review 则检查 agent 是否真的沿实现找到 shared owner 与 sibling consumers。独立反例继续拒绝只修一处、把 audit 一起本地化和把分钟 offset 粗暴取整。
 - `missing-host-test-seam`：material host boundary 缺少 cheap reproducer 时建立一个 bounded local surrogate，同时保留 named-host acceptance。
 - `review-evidence-boundaries`：同一 bounded review corpus 同时保护 clean control、negative-space spec omission、false-green test 与 conditional finding 的 evidence boundary。
 
@@ -50,7 +50,7 @@ fieldlab list fieldlab-pack.json
 
 `discussion-intake` 检验“先完整吸收讨论、再决定范围”：fixture 是一段完全合成的产品讨论，重要目标和约束分布在前后，包含机制更正、吸引人的后段 subtopic，以及讨论内部提出但用户并未授权的对外动作。deterministic workspace gate 只检查 `INTAKE.md` 是否存在及写入范围是否精确；不以关键词裁定理解质量或权限判断。实际 trace 另外检查命令是否提及 `design.md` 路径；这不证明内容读取或 host selection，本地 fixture checks 也不复放这一层。完整覆盖、outcome 与 mechanism 的区分、更正和延后项的处理、以及阅读/采纳/执行许可的边界，均由 `human_review_requirements` 裁定。四个错误文本仍会通过结构检查，必须由语义审查拒绝；独立的写入反例验证修改原材料或额外文件会失败。没有 live target-model attempt 或已完成语义审查的声明。
 
-新增 `tranche-only-plan` 覆盖显式 leaf 的阶段范围；`complete-notes` 用独立跨进程检查覆盖完整 CLI、持久化、迁移及失败路径，并用 semantic review 观察 agent 是否在完成前真正走过 selected CLI / persistence path。声明了 `human_review_requirements` 的 case 还必须经过 [最终验收](acceptance.md)：Field Lab 的自动 `pass` 本身不能关闭语义要求。
+新增 `tranche-only-plan` 覆盖显式 leaf 的阶段范围；`complete-notes` 用独立跨进程检查覆盖完整 CLI、持久化、迁移及失败路径，并用 semantic review 观察 agent 是否在 broad migration / error-path expansion 前真正走过 selected CLI / persistence path，使该 observation 仍能影响后续实现；末尾补跑 CLI 不满足这项 sequencing requirement。声明了 `human_review_requirements` 的 case 还必须经过 [最终验收](acceptance.md)：Field Lab 的自动 `pass` 本身不能关闭语义要求。
 
 Delegate responsibility choice 由四个 canary 覆盖：
 

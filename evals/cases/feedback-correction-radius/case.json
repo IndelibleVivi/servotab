@@ -9,11 +9,21 @@
         "unittest",
         "-q"
       ]
+    },
+    {
+      "argv": [
+        "python3",
+        "-I",
+        "-S",
+        "-B",
+        "-c",
+        "from pathlib import Path\nimport importlib.util, inspect\npath = Path('days.py').resolve()\nspec = importlib.util.spec_from_file_location('candidate_days', path)\nassert spec is not None and spec.loader is not None\ndays = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(days)\nfor name in ('chart_day', 'detail_day', 'share_day'):\n    projection = getattr(days, name)\n    assert list(inspect.signature(projection).parameters) == ['timestamp', 'offset_minutes']\n    assert projection('2027-01-01T18:45:00Z', 330) == '2027-01-02', name + ' must preserve exact positive-minute offsets'\n    assert projection('2027-01-01T04:15:00Z', -480) == '2026-12-31', name + ' must preserve exact negative-minute offsets'\nassert list(inspect.signature(days.audit_day).parameters) == ['timestamp']\nassert days.audit_day('2027-01-01T18:45:00Z') == '2027-01-01', 'audit day must remain UTC'\nfor name, args in (('chart_day', ('2027-01-01T18:45:00', 330)), ('detail_day', ('2027-01-01T18:45:00', 330)), ('share_day', ('2027-01-01T18:45:00', 330)), ('audit_day', ('2027-01-01T18:45:00',))):\n    try:\n        getattr(days, name)(*args)\n    except ValueError:\n        pass\n    else:\n        raise AssertionError(name + ' must reject naive timestamps')\nprint('shared user-date projections and UTC audit exception verified')\n"
+      ]
     }
   ],
   "description": "A confirmed review correction must reach every consumer of the same user-date contract while preserving the UTC audit exception and the exact write boundary.",
   "human_review_requirements": [
-    "radius: Verify the repair follows the common user-date contract across chart, detail and share output, rather than fixing only the named chart occurrence or sweeping unrelated date semantics into the change.",
+    "radius: Inspect the trace for evidence that the agent followed the named chart symptom through days.py, inspected the unnamed sibling consumers and identified their shared user-date owner before choosing the repair radius. Correct final code or merely following the visible regression does not establish this method behavior.",
     "exception: Verify the UTC-only audit contract, naive-input rejection, public signatures and exact days.py write boundary remain intact; a broad all-local-time rewrite does not satisfy this requirement."
   ],
   "prompt_file": "prompt.md",

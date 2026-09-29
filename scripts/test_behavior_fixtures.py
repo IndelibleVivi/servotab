@@ -159,7 +159,13 @@ class BehaviorFixtureTests(unittest.TestCase):
                 work = Path(raw)
                 shutil.copytree(root / "fixture", work, dirs_exist_ok=True)
                 (work / "days.py").write_text(source)
-                self.assertEqual(check_commands(case, work), [name == "correct"])
+                expected_results = {
+                    "correct": [True, True],
+                    "chart-only": [True, False],
+                    "localized-audit": [False, False],
+                    "rounded-offset": [False, False],
+                }
+                self.assertEqual(check_commands(case, work), expected_results[name])
 
     def test_candidate_regression_requires_failure_not_broken_or_empty_suite(self):
         root = CASES / "weak-check"
