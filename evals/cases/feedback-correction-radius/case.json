@@ -1,0 +1,39 @@
+{
+  "activation": "implicit",
+  "case_id": "feedback-correction-radius",
+  "command_assertions": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "-q"
+      ]
+    }
+  ],
+  "description": "A confirmed review correction must reach every consumer of the same user-date contract while preserving the UTC audit exception and the exact write boundary.",
+  "human_review_requirements": [
+    "radius: Verify the repair follows the common user-date contract across chart, detail and share output, rather than fixing only the named chart occurrence or sweeping unrelated date semantics into the change.",
+    "exception: Verify the UTC-only audit contract, naive-input rejection, public signatures and exact days.py write boundary remain intact; a broad all-local-time rewrite does not satisfy this requirement."
+  ],
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "schema_version": 2,
+  "timeout_seconds": 600,
+  "trace_assertions": {
+    "max_command_executions": 16,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0,
+    "command_reference_mentions_include": [
+      "review-feedback.md"
+    ]
+  },
+  "workspace_assertions": [
+    {
+      "paths": [
+        "days.py"
+      ],
+      "type": "changed_files_exact"
+    }
+  ]
+}

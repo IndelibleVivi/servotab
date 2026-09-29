@@ -4,6 +4,7 @@ implicit-debug,true,debug,"Learnt mutation 后旧 cursor 混入新 consistency�
 implicit-ui,true,none_or_execute,"修正手机 composer 多行时发送键位置，直接实现并做合适的交互验证。"
 implicit-review,true,review,"审查当前 dirty diff，只报告真实可操作的 P0-P2 findings。"
 implicit-review-feedback,true,review-feedback,"逐项核实这份 code review，落实有效意见并对错误建议给出技术理由。"
+implicit-feedback-radius,true,review-feedback,"Review 指出了 chart 的跨午夜日期错误。核实后把同一 user-date contract 修到 detail 与 share consumer，同时保留 UTC audit 例外和明确写入范围。"
 implicit-verify,true,verify,"检查当前 branch 是否 ready，并准确区分 verified 与 not verified。"
 implicit-contract,true,plan_or_execute,"把 source_chunk_id 贯穿 artifact contract、producer、consumer 和 projection。"
 implicit-spec-chain,true,spec-chain,"这份 approved spec 是大重构的 authority。写完整 implementation plan 并执行，不能拿当前阶段替代全部 scope。"

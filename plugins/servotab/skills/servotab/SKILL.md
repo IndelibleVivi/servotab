@@ -36,7 +36,9 @@ Before introducing a general-purpose helper, dependency, integration, transport,
 
 ## Load methods at the action they govern
 
-Use the safeguards here directly for clear, bounded work. Load a reference when it resolves material uncertainty, governs a consequential boundary, or is explicitly requested; read it before the dependent action. A task label such as bug fix or completion does not by itself require another document. Reuse an unchanged reference already in context. Combine methods only where each adds a needed decision or check; no fixed full-stack workflow is required.
+Use these safeguards directly for clear, bounded work. Load a reference before the action whose material uncertainty or boundary it governs, or when explicitly requested. Task labels alone do not require another document. Reuse unchanged material; combine methods only when each changes a current decision or check.
+
+Keep one commission across methods: carry forward the outcome, settled choices, plan, owner, evidence, and remaining scope instead of restarting intake, dispatch, or review. Choose the next action that advances the outcome. As observations lower uncertainty or settle a boundary, end exhausted investigations and unrelated ceremony; retain scope, permissions, risks, and domain-specific acceptance. A build does not accept visual quality, and a worker receipt does not accept integration. Host rules resolve instruction conflicts.
 
 - Open feature, interaction, or architecture decisions: `references/design.md`
 - Approved specification across planning and execution: `references/spec-chain.md`
@@ -79,6 +81,6 @@ Inspect the final diff and run fresh, risk-matched verification after the last r
 
 Separate delivered behavior, verified evidence, and remaining gaps. Package validity, installation, instruction delivery, successful use, deployment, and owner acceptance are distinct observations. A hash, checkbox, or configuration entry is not behavior proof.
 
-A real failure may justify a local regression test or a reusable method change. Preserve a small, relevant observation and its causal limit; do not turn every incident into global policy or start an evaluation campaign without authorization.
+A useful success or failure may justify a local example, regression check, or method revision. Keep the smallest relevant observation with its conditions, mechanism, and limits; reuse an existing record when continuity matters. Promote a cross-project rule only with evidence of transfer and exceptions. Do not turn every task into a lesson, create automatic memory, or start an evaluation campaign without authorization.
 
 These instructions guide model behavior. They do not enforce tool permissions or guarantee that the host selected this skill. Use repository tests and host-supported controls for boundaries that require deterministic enforcement.

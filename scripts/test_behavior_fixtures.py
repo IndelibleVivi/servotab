@@ -132,6 +132,35 @@ class BehaviorFixtureTests(unittest.TestCase):
                     (work / "notes.py").write_text(code)
                 self.assertEqual(check_commands({"command_assertions": case["command_assertions"][:1]}, work), [False])
 
+    def test_feedback_radius_rejects_narrow_broad_and_rounded_repairs(self):
+        root = CASES / "feedback-correction-radius"
+        case = json.loads((root / "case.json").read_text())
+        expected = (root / "expected/days.py").read_text()
+        variants = {
+            "correct": expected,
+            "chart-only": expected.replace(
+                "def detail_day(timestamp, offset_minutes):\n    return _local_day(timestamp, offset_minutes)\n",
+                "def detail_day(timestamp, offset_minutes):\n    return _utc_day(timestamp)\n",
+            ).replace(
+                "def share_day(timestamp, offset_minutes):\n    return _local_day(timestamp, offset_minutes)\n",
+                "def share_day(timestamp, offset_minutes):\n    return timestamp[:10]\n",
+            ),
+            "localized-audit": expected.replace(
+                "def audit_day(timestamp):\n    return _utc_day(timestamp)\n",
+                "def audit_day(timestamp):\n    return _local_day(timestamp, 330)\n",
+            ),
+            "rounded-offset": expected.replace(
+                "offset = timezone(timedelta(minutes=offset_minutes))",
+                "offset = timezone(timedelta(hours=int(offset_minutes / 60)))",
+            ),
+        }
+        for name, source in variants.items():
+            with self.subTest(variant=name), tempfile.TemporaryDirectory() as raw:
+                work = Path(raw)
+                shutil.copytree(root / "fixture", work, dirs_exist_ok=True)
+                (work / "days.py").write_text(source)
+                self.assertEqual(check_commands(case, work), [name == "correct"])
+
     def test_candidate_regression_requires_failure_not_broken_or_empty_suite(self):
         root = CASES / "weak-check"
         case = json.loads((root / "case.json").read_text())

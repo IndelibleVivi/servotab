@@ -67,11 +67,11 @@ METHODS = (
         "skill": "execute",
         "method": "execute",
         "description": (
-            "Execute an existing implementation plan or settled multi-step request in coherent "
-            "batches with targeted checks and controlled plan drift."
+            "Execute an existing implementation plan or settled multi-step request through "
+            "connected slices with targeted checks and controlled plan drift."
         ),
         "display_name": "Execute",
-        "short_description": "Execute settled work in coherent slices",
+        "short_description": "Execute settled work through connected slices",
         "default_prompt": (
             "Use $execute to implement the settled request or plan, verify each meaningful "
             "slice, and finish without unnecessary process."
@@ -125,13 +125,14 @@ METHODS = (
         "description": (
             "Evaluate and act on code-review feedback with technical judgment. Use before "
             "applying external suggestions, especially when feedback is ambiguous, broad, or "
-            "may conflict with repository constraints."
+            "may conflict with repository constraints, and carry confirmed corrections to "
+            "relevant consumers without widening scope."
         ),
         "display_name": "Review Feedback",
-        "short_description": "Verify review feedback before applying it",
+        "short_description": "Verify and propagate review corrections",
         "default_prompt": (
             "Use $review-feedback to verify each review item against the repository, implement "
-            "valid feedback, and push back where needed."
+            "valid feedback across the affected behavior, and push back where needed."
         ),
     },
     {

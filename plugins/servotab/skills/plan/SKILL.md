@@ -111,6 +111,14 @@ Weak:
 
 Do not include complete production code in a plan unless a subtle algorithm, schema, or protocol requires a precise example. Pseudocode and data shapes are usually enough.
 
+## Choose the first executable path
+
+For work crossing components, identify the shortest useful path from the real entry point, through the material state or boundary, to an observable result. Within accepted programme order, arrange an early run through that path before multiplying peer features around an untested assumption.
+
+If one capability question could invalidate the implementation, settle it with the cheapest discriminating probe first. If the path is already understood, connect it directly; do not manufacture a separate spike. For a new product, establish the first real entry and state owner rather than planning every layer independently.
+
+Name what the first run can establish and what remains. Saving and reopening through the selected command can reveal wiring and persistence defects that helper tests miss; it does not establish unrelated host behavior. Use an authorized surrogate when necessary and preserve its limits. An unavailable external step blocks only dependent work. Keep the rest of the accepted outcome in the existing plan and carry it through; this first run is an implementation ordering choice, not a smaller delivery contract.
+
 ## Plan review
 
 Review the plan once against the requirements:

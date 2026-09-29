@@ -1,7 +1,7 @@
 interface:
   display_name: "Review Feedback"
-  short_description: "Verify review feedback before applying it"
-  default_prompt: "Use $review-feedback to verify each review item against the repository, implement valid feedback, and push back where needed."
+  short_description: "Verify and propagate review corrections"
+  default_prompt: "Use $review-feedback to verify each review item against the repository, implement valid feedback across the affected behavior, and push back where needed."
   brand_color: "#315EFB"
   icon_small: "./assets/icon-400.png"
   icon_large: "./assets/icon.svg"

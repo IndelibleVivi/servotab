@@ -28,6 +28,8 @@ A log, screenshot, review, old plan, or generated artifact may be useful evidenc
 
 The current release also makes discussion intake explicit: when asked to absorb a body of material, cover its important goals and constraints before selecting implementation priorities. Separate the needs from proposed mechanisms, retain reasons for important omissions or deferrals, and distinguish reading coverage from adoption and execution authority. Bounded requests stay bounded; no new method, mandatory ledger, or approval round is added. See [Design](methods/design.md).
 
+Current source after `0.6.4` develops that same complete-outcome thesis at execution time. Cross-component plans identify an early path through the real entry point and material state boundary; execution connects and observes that path before multiplying peer features; and a confirmed review correction follows the shared contract to affected consumers while protecting legitimate exceptions and explicit write limits. When several methods participate, the goal, plan, responsibility owner, evidence, and remaining scope stay continuous instead of restarting the commission. The source pack now contains twenty-five canaries, including `feedback-correction-radius`; these source and deterministic checks do not establish improved target-model behavior, installation, or a new release.
+
 ## Install
 
 Open the [official Servotab listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) in ChatGPT to add the publicly available plugin.
@@ -116,12 +118,12 @@ The plugin contains thirteen skills: one implicit router and twelve explicit lea
 | `servotab` | implicit eligible | Quiet router for ordinary repository work |
 | `design` | explicit only | Resolve open feature, interaction, or architecture decisions |
 | `spec-chain` | explicit only | Preserve an approved specification across planning and execution |
-| `plan` | explicit only | Sequence settled multi-step work |
-| `execute` | explicit only | Implement a clear request or plan as a complete outcome |
+| `plan` | explicit only | Sequence settled work and choose its first useful executable path |
+| `execute` | explicit only | Implement a clear request or plan through connected slices as a complete outcome |
 | `debug` | explicit only | Localize the first violated assumption and repair the root cause |
 | `tdd` | explicit only | Apply risk-based test-first work to contracts, state, and regressions |
 | `review` | explicit only | Produce one findings-first, evidence-backed implementation review |
-| `review-feedback` | explicit only | Verify external feedback before accepting, adjusting, or rejecting it |
+| `review-feedback` | explicit only | Verify feedback and carry confirmed corrections to the right consumers without widening scope |
 | `verify` | explicit only | Match completion claims to fresh, proportionate evidence |
 | `worktree` | explicit only | Choose, reuse, restore, park, and clean up workspaces within explicit authority |
 | `delegate` | explicit only | Choose responsibility before deep work; hand a bounded lane to a worker only when it pays |
