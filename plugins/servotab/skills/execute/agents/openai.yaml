@@ -1,6 +1,6 @@
 interface:
   display_name: "Execute"
-  short_description: "Execute settled work in coherent slices"
+  short_description: "Execute settled work through connected slices"
   default_prompt: "Use $execute to implement the settled request or plan, verify each meaningful slice, and finish without unnecessary process."
   brand_color: "#315EFB"
   icon_small: "./assets/icon-400.png"

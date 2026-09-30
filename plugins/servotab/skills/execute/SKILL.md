@@ -1,6 +1,6 @@
 ---
 name: execute
-description: "Execute an existing implementation plan or settled multi-step request in coherent batches with targeted checks and controlled plan drift."
+description: "Execute an existing implementation plan or settled multi-step request through connected slices with targeted checks and controlled plan drift."
 ---
 
 # Execute
@@ -62,18 +62,18 @@ Use a short inline rationale or the existing design record for a consequential c
 - A second path needs a real caller or supported contract plus explicit precedence and failure behavior.
 - Choose each additional search or check because its result can change the implementation or confidence. Stop when the settled request and risk-matched proof are complete.
 
-## Execute in coherent slices
+## Execute connected slices
 
-For each slice:
+Use the accepted dependency order. For a cross-component outcome, make the earliest useful run traverse the real entry point and material boundary before expanding similar features around it. When the path is settled, implement it directly; use a bounded probe only for an assumption that could change the approach. Do not create a prototype phase or new infrastructure just to demonstrate this method.
 
-1. Mark the intended outcome.
-2. Inspect the relevant implementation and existing tests.
-3. Make the simplest coherent change that completely achieves the slice outcome.
-4. Add or update high-value tests.
-5. Run focused verification.
-6. Inspect the resulting diff before moving on.
+For each coherent slice:
 
-A slice may span several files. Do not create one task per file or one subagent per checklist item.
+1. Identify the behavior being completed and inspect its current callers, state owner, selected delivery path, and relevant tests. Follow only relationships that can affect this change.
+2. Make the simplest complete change, including required wiring, persistence, generated projections, or current consumers. When the accepted outcome depends on a selected caller, a helper with no selected caller is an integration checkpoint, not completion.
+3. Add or update a check that distinguishes the relevant failure. Preserve strict red-green where bugs, state transitions, contracts, parsers, migrations, concurrency, or security make it useful; for cross-component work, exercise the entry path at the earliest useful point. A focused compiler or unit check remains enough when risk is genuinely local. Inspect the result and diff before multiplying the pattern.
+4. Use the observation to choose the next action: continue a sound implementation; investigate a violated assumption; or revise only the dependent choices invalidated by new evidence. Keep independent safe work moving.
+
+A slice may span several files. Do not create one task per file or one subagent per checklist item. A working first path leaves the remaining accepted behavior due; continue through those requirements and final risk-matched verification. A surrogate, fixture, or source-only result closes only its named boundary, not an unavailable runtime or user surface.
 
 ## Plan drift
 
@@ -122,6 +122,10 @@ Keep the main agent as coordinator and integration owner. Reuse an active worker
 Give every worker an explicit outcome, scope, context, authority, and return contract; do not spawn a fresh implementer for every checklist item, duplicate reviewers, or competing writers. Workers do not delegate again.
 
 Before the first dispatch, treat delegation as a genuine phase change and apply the `delegate` reference. Subagent-tool availability, a higher model/reasoning tier, or an idle slot is only host capability, not evidence that delegation is appropriate.
+
+## Continue across methods
+
+A domain method can contribute to this execution without starting a new commission. Carry forward settled choices, the existing plan, the current responsibility owner, useful evidence, and remaining scope. Reuse an already-owned worker lane and applicable checks; retain domain-specific acceptance. As a blocking question is settled, stop that investigation and continue the next useful action. Do not carry its ceremony into unrelated small work or discard a still-relevant check merely because the latest edit is small.
 
 ## Checkpoints
 

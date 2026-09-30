@@ -28,6 +28,8 @@ Servotab 也不会把日志、截图、review、旧计划或 generated artifact 
 
 当前 release 进一步明确了讨论材料的吸收方式：先覆盖重要目标与约束，再选择实施重点；分开看待需求与建议机制，为重要内容的舍弃或延后保留理由，并区分阅读覆盖、采纳判断和执行权限。明确限定的小任务仍保持有界，不新增 method、强制台账或审批轮次，见 [Design](methods/design.md)。
 
+`0.6.4` 之后的 current source 把同一条 complete-outcome 主线继续推进到执行阶段：跨组件计划先识别穿过真实 entry point 与关键 state boundary 的早期路径；执行在批量扩展 peer features 前先接通并观察它；已经核实的 review correction 会沿共享 contract 到达受影响的 consumers，同时保护合法例外与明确写入限制。多个 methods 共同参与时，goal、plan、responsibility owner、evidence 与 remaining scope 延续在同一项工作里，而不是重新开场。Source pack 现有 25 个 canaries，新增 `feedback-correction-radius`；这些 source 与 deterministic checks 不证明 target model 已改善、本机已安装或新版本已经发布。
+
 ## 安装
 
 在 ChatGPT 打开 [Servotab 官方 listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94)，即可添加已公开上线的 plugin。
@@ -114,12 +116,12 @@ Plugin 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit l
 | `servotab` | implicit eligible | 日常 repo work 的 quiet router |
 | `design` | explicit only | 把仍有关键开放决策的 idea 变成可实现方向 |
 | `spec-chain` | explicit only | 让 approved spec 的完整 scope 穿过 plan 与 execution |
-| `plan` | explicit only | 为 settled multi-step work 建立实际 sequencing |
-| `execute` | explicit only | 按清楚的 request 或 plan 完整实现 |
+| `plan` | explicit only | 为 settled work 建立 sequencing，并选出第一个有用的 executable path |
+| `execute` | explicit only | 通过 connected slices 把清楚的 request 或 plan 完整实现 |
 | `debug` | explicit only | 用 bounded hypotheses 和 boundary localization 修复根因 |
 | `tdd` | explicit only | 对适合 test-first 的 contract、state 与 regression 做 risk-based TDD |
 | `review` | explicit only | 做一轮 findings-first、evidence-backed review |
-| `review-feedback` | explicit only | 先核实 external feedback，再采纳、调整或拒绝 |
+| `review-feedback` | explicit only | 核实 feedback，并在不扩张 scope 的前提下把已确认修正带到正确 consumers |
 | `verify` | explicit only | 用 fresh、risk-matched evidence 支撑 completion claim |
 | `worktree` | explicit only | 选择、复用、恢复、收起和按明确授权清理 workspace |
 | `delegate` | explicit only | 在深层执行前确定 responsibility；只在值得时把 bounded lane 交给一个 worker |

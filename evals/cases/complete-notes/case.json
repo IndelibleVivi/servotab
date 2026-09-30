@@ -44,6 +44,7 @@
     "max_subagent_events": 0
   },
   "human_review_requirements": [
+    "connected-path: Inspect the trace for an actual Notes CLI entry-path check before broad migration and error-path expansion, early enough that the persistence observation could inform later implementation choices. A helper-only test, final report claim or CLI run performed only after implementation and tests are already complete does not satisfy this process requirement; the first path remains only sequencing evidence and does not reduce the full SPEC scope.",
     "coverage: Inspect test_notes.py for substantive add/list, blank input, migration, rollback and malformed-data coverage. The independent command proves implementation behavior, not that the candidate wrote adequate regressions.",
     "claim: Compare the final response with the actual changed code and command evidence. Reject a plan-only or first-slice delivery and claims of concurrency, crash consistency, deployment or owner acceptance not exercised here."
   ]

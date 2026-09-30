@@ -235,6 +235,7 @@ def main() -> int:
     assert_true("$soft" not in router and "Softpowers" not in router, "router retains old branding")
 
     execute = (ROOT / "methods" / "execute.md").read_text(encoding="utf-8")
+    plan = (ROOT / "methods" / "plan.md").read_text(encoding="utf-8")
     review = (ROOT / "methods" / "review.md").read_text(encoding="utf-8")
     feedback = (ROOT / "methods" / "review-feedback.md").read_text(encoding="utf-8")
     delegate = (ROOT / "methods" / "delegate.md").read_text(encoding="utf-8")
@@ -261,6 +262,22 @@ def main() -> int:
     for verdict in ("advances", "research-only", "diverges", "authority unclear"):
         assert_true(verdict in review, f"review lost goal-integrity verdict: {verdict}")
     assert_true("not authority by authorship" in feedback, "review-feedback lost authority boundary")
+    assert_true(
+        "Choose the first executable path" in plan,
+        "plan lost first executable path guidance",
+    )
+    assert_true(
+        "Continue across methods" in execute,
+        "execute lost cross-method continuity",
+    )
+    assert_true(
+        "repair radius separately from repair depth" in feedback,
+        "review-feedback lost bounded correction propagation",
+    )
+    assert_true(
+        "Keep one commission across methods" in router,
+        "router lost cross-method continuity",
+    )
     assert_true("harness-initiated spawn" in delegate, "delegate lost host attribution boundary")
     assert_true("capability boundary" in design.lower(), "design lost supported-path pressure test")
 

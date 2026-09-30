@@ -4,13 +4,7 @@ Treat review feedback as technical input to verify, not commands to obey blindly
 
 ## Normalize the feedback
 
-Break feedback into independent items. For each item record:
-
-- Requested change
-- Claimed problem
-- Affected files or behavior
-- Whether it is blocking, optional, or unclear
-- Any dependency on another item
+Identify the requested change, claimed problem, affected behavior, urgency, and dependencies. Keep a single obvious correction inline; group related items by the behavior they change. Use the existing task record only when several dispositions need to remain reachable.
 
 Do not implement a vague bundle such as “clean this up” without identifying the concrete behavior or quality concern.
 
@@ -43,6 +37,15 @@ Classify the item:
 Ask for clarification only when the missing answer materially changes behavior or scope and cannot be inferred safely.
 
 Otherwise state the interpretation, choose the safest reversible implementation, and proceed.
+
+## Carry a confirmed correction to its relevant consumers
+
+A report may name one visible occurrence of a shared defect. After validating the concern:
+
+- Identify the invariant and its real owner. Trace relevant callers, duplicated implementations, generated projections, and acceptance checks; matching text alone does not prove shared semantics.
+- Choose repair radius separately from repair depth. A shallow correction may belong across several views; a deeper repair may belong in one owner. Preserve legitimate exceptions and unaffected accepted work. Start from the implicated path and expand only along evidence of the same defect, not into a repository-wide cleanup.
+- Apply the fix at the shared owner where that satisfies the contract, update affected consumers coherently, and regenerate owned projections through their source. A precise single-surface write limit remains binding; report relevant siblings outside it without changing them.
+- Check a sibling that should change and a relevant exception that should stay unchanged when those cases exist. Propagate the accepted correction to the existing plan and tests only where their expectations were invalidated; do not lower acceptance to match the patch.
 
 ## Implementation order
 
