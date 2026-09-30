@@ -30,6 +30,8 @@ The current release also makes discussion intake explicit: when asked to absorb 
 
 Current source after `0.6.4` develops that same complete-outcome thesis at execution time. Cross-component plans identify an early path through the real entry point and material state boundary; execution connects and observes that path before multiplying peer features; and a confirmed review correction follows the shared contract to affected consumers while protecting legitimate exceptions and explicit write limits. When several methods participate, the goal, plan, responsibility owner, evidence, and remaining scope stay continuous instead of restarting the commission. The source pack now contains twenty-five canaries, including `feedback-correction-radius`; these source and deterministic checks do not establish improved target-model behavior, installation, or a new release.
 
+`0.6.5` is a **prepared source release candidate, not a published release**. It connects those same decision points, brings the source pack to twenty-five cases (twenty-one with non-empty semantic-review requirements) while keeping the twelve adversarial controls and the 70-file one-router/twelve-leaf package, and adds the `feedback-correction-radius` canary. See the [0.6.5 release notes](docs/releases/0.6.5.md). The published Latest GitHub Release and the observed public directory listing both remain `0.6.4`; installing the tagged `v0.6.4` package below still installs `0.6.4`. No 0.6.5 tag, release, website deployment, directory update, installation, activation, or live model effectiveness is claimed.
+
 ## Install
 
 Open the [official Servotab listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) in ChatGPT to add the publicly available plugin.
