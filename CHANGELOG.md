@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.6.5 — candidate, unreleased
+## 0.6.5 — published 2026-10-01
 
-This entry records a prepared source release candidate. It is not a publication record: no tag, GitHub Release, website deployment, or OpenAI directory update is established by this candidate, and the published Latest GitHub Release and the observed public directory listing both remain `0.6.4`.
+The exact `v0.6.5` revision `c9fe5e6e773adb6ea99f349244f0fe3f5dadffdb` and four release assets were published on 2026-10-01 Singapore time. Main CI, local build, draft download and fresh public download passed the complete release-artifact check. The observed OpenAI directory listing remains `0.6.4`; GitHub publication does not update that separate surface.
 
 - Connect the complete-outcome method across four existing decision points without adding a skill, runtime service, dependency, report, or evaluation runner. `plan` selects an early executable path through the real entry point and material state boundary, and `execute` connects and observes that path before expanding peer features while preserving risk-appropriate red-green work and the remaining accepted scope.
 - Carry a confirmed review correction to every consumer of the same shared contract while protecting legitimate exceptions and explicit write limits in `review-feedback`. The router and the explicit `execute` leaf keep one goal, plan, responsibility owner, evidence set, and remaining scope continuous across participating methods, then withdraw investigation or ceremony whose purpose has ended.
@@ -10,7 +10,7 @@ This entry records a prepared source release candidate. It is not a publication 
 - Reserve semantic review in the existing `complete-notes` case for whether the selected CLI and persistence path was actually exercised before broad migration and error-path expansion, early enough to inform implementation rather than only final verification; its deterministic complete-delivery oracle is unchanged.
 - Extend the source pack to twenty-five cases, twenty-one with non-empty semantic-review requirements, keeping the twelve unchanged adversarial controls, one router, twelve explicit leaves, and the 70-file runtime package topology.
 
-Fresh deterministic source/package checks, the 80 Python regressions, and the standalone Field Lab validate/selftest/list pass with zero target-agent invocations. These establish source, generated-package, and deterministic fixture consistency only; no live target-model effectiveness, installation, activation, deployment, or owner acceptance is claimed.
+Fresh deterministic source/package checks, the 80 Python regressions, and the standalone Field Lab validate/selftest/list pass with zero target-agent invocations. These establish source, generated-package, and deterministic fixture consistency only; installation, activation and website deployment require separate receipts, and no live target-model effectiveness is claimed.
 
 ## 0.6.4 — published 2026-09-25
 

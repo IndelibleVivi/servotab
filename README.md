@@ -9,9 +9,9 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Latest GitHub release: **[`0.6.4`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.4)**, building the merged discussion-intake rehearsal into a 24-case source pack and refining cross-boundary experiment selection and evidence scope in `debug` and `verify`, plus a narrow alignment of the `execute` failure-handling handoff. Twenty cases declare non-empty semantic-review requirements, twelve adversarial controls are retained, and the router/twelve-leaf/70-file package topology is unchanged. See the [0.6.4 release notes](docs/releases/0.6.4.md). The tagged release and its receipt establish exact source and package identity; they do not establish installation, website deployment, directory update, or improved live model behavior.
+Latest GitHub release: **[`0.6.5`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.5)**, connecting planning, execution, review correction, and cross-method continuity without adding runtime machinery. Its source pack contains twenty-five cases, twenty-one with non-empty semantic-review requirements, and retains the twelve adversarial controls and router/twelve-leaf/70-file package topology. See the [0.6.5 release notes](docs/releases/0.6.5.md). The tagged release and its receipt establish exact source and package identity; they do not establish installation, website deployment, directory update, or improved live model behavior.
 
-The separately observed [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) now reports version `0.6.4`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. The directory still exposed `0.6.3` when the release was tagged, so the earlier observation is preserved as history. GitHub release and directory publication remain intentionally recorded as different states, and the listing exposes no package digest. See [current state](docs/current-state.md) and the historical [0.6.3 release notes](docs/releases/0.6.3.md) for evidence and limits.
+The separately observed [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) still reports version `0.6.4`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. GitHub release and directory publication remain intentionally recorded as different states, and the listing exposes no package digest. The 0.6.5 plugin ZIP is available for an owner-controlled directory update; its availability does not establish that update. See [current state](docs/current-state.md) for evidence and limits.
 
 ## What Servotab changes
 
@@ -28,18 +28,16 @@ A log, screenshot, review, old plan, or generated artifact may be useful evidenc
 
 The current release also makes discussion intake explicit: when asked to absorb a body of material, cover its important goals and constraints before selecting implementation priorities. Separate the needs from proposed mechanisms, retain reasons for important omissions or deferrals, and distinguish reading coverage from adoption and execution authority. Bounded requests stay bounded; no new method, mandatory ledger, or approval round is added. See [Design](methods/design.md).
 
-Current source after `0.6.4` develops that same complete-outcome thesis at execution time. Cross-component plans identify an early path through the real entry point and material state boundary; execution connects and observes that path before multiplying peer features; and a confirmed review correction follows the shared contract to affected consumers while protecting legitimate exceptions and explicit write limits. When several methods participate, the goal, plan, responsibility owner, evidence, and remaining scope stay continuous instead of restarting the commission. The source pack now contains twenty-five canaries, including `feedback-correction-radius`; these source and deterministic checks do not establish improved target-model behavior, installation, or a new release.
-
-`0.6.5` is a **prepared source release candidate, not a published release**. It connects those same decision points, brings the source pack to twenty-five cases (twenty-one with non-empty semantic-review requirements) while keeping the twelve adversarial controls and the 70-file one-router/twelve-leaf package, and adds the `feedback-correction-radius` canary. See the [0.6.5 release notes](docs/releases/0.6.5.md). The published Latest GitHub Release and the observed public directory listing both remain `0.6.4`; installing the tagged `v0.6.4` package below still installs `0.6.4`. No 0.6.5 tag, release, website deployment, directory update, installation, activation, or live model effectiveness is claimed.
+Release `0.6.5` develops that same complete-outcome thesis at execution time. Cross-component plans identify an early path through the real entry point and material state boundary; execution connects and observes that path before multiplying peer features, preserving risk-appropriate red-green work and the full accepted scope; and a confirmed review correction follows the shared contract to affected consumers while protecting legitimate exceptions and explicit write limits. When several methods participate, the goal, plan, responsibility owner, evidence, and remaining scope stay continuous instead of restarting the commission. The new `feedback-correction-radius` canary separates visible regression checks from an independent complete-contract oracle and semantic review; these checks do not establish improved target-model behavior.
 
 ## Install
 
 Open the [official Servotab listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) in ChatGPT to add the publicly available plugin.
 
-For source inspection or maintainer testing, install the tagged 0.6.4 package from a public checkout:
+For source inspection or maintainer testing, install the tagged 0.6.5 package from a public checkout:
 
 ```bash
-git clone --branch v0.6.4 --depth 1 https://github.com/IndelibleVivi/servotab.git
+git clone --branch v0.6.5 --depth 1 https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal
@@ -53,10 +51,10 @@ Open a fresh Codex task or process after installation so skill discovery is rebu
 codex plugin list --marketplace personal
 ```
 
-For a checkout whose `VERSION` is `0.6.4`, the receipt should contain:
+For a checkout whose `VERSION` is `0.6.5`, the receipt should contain:
 
 ```text
-servotab@personal  installed, enabled  0.6.4
+servotab@personal  installed, enabled  0.6.5
 ```
 
 For a machine-readable discovery check on a system with `jq` and `rg`:
@@ -73,7 +71,7 @@ The command must return a skill entry named `servotab:servotab` from the install
 
 On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. On 2026-09-06, that machine refreshed `servotab@personal` from the clean 0.6.1 release source and verified installed/enabled version 0.6.1, an exact 69-file source/cache match with no symlinks, and fresh-process `servotab:servotab` discovery. These are bounded compatibility and discovery receipts for the named payloads on the inspected machine; they are not a guessed minimum-version guarantee, proof of implicit use or model effectiveness, or a claim about every Codex client.
 
-This source-checkout route is distinct from the officially published directory payload. The tagged GitHub source and the observed directory listing now both report `0.6.4`, but neither observation proves the other, and no local installation of the directory package is claimed here. The public listing does not expose an archive digest, so the directory payload is not claimed to be byte-identical to either GitHub asset. The source route replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
+This source-checkout route is distinct from the officially published directory payload: tagged GitHub source is `0.6.5`, while the observed directory listing remains `0.6.4`. Neither observation proves the other, and no local installation of the directory package is claimed here. The public listing does not expose an archive digest, so the directory payload is not claimed to be byte-identical to either GitHub asset. The source route replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
 
 ## Use
 
@@ -168,9 +166,9 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The tagged 0.6.4 release contains exactly 70 manifest-owned package files with one implicit router and twelve explicit-only leaves. It retains the portable root manifest, Windows-safe text identity, responsibility-routing and worktree lifecycle guidance from earlier releases, then adds discussion-intake coverage and evidence-scoped diagnostic decisions. Its source pack contains twenty-four cases; twenty require semantic review and twelve are adversarial controls. Deterministic fixtures and repository tests do not establish live model behavior.
+The tagged 0.6.5 release contains exactly 70 manifest-owned package files with one implicit router and twelve explicit-only leaves. It retains the portable root manifest, Windows-safe text identity, responsibility-routing, worktree lifecycle, discussion-intake and evidence-scoped diagnostic guidance from earlier releases, then connects execution and correction across methods. Its source pack contains twenty-five cases; twenty-one require semantic review and twelve adversarial controls are retained. Deterministic fixtures and repository tests do not establish live model behavior.
 
-The 0.6.4 release receipt and public asset readback prove source and package consistency for the tagged revision under the observed checks. They do not prove behavior on every machine, website deployment, installation, activation, or owner acceptance on those separate surfaces. The official directory listing is separately observed at `0.6.4`, which establishes public availability of that listing surface only; it does not expose package bytes, prove local installation, or establish live model effectiveness. Exact checks and remaining behavioral evidence are recorded in the release notes and current state.
+The 0.6.5 release receipt and public asset readback prove source and package consistency for the tagged revision under the observed checks. They do not prove behavior on every machine, website deployment, installation, activation, or owner acceptance on those separate surfaces. The official directory listing is separately observed at `0.6.4`, which establishes public availability of that listing surface only; it does not expose package bytes, prove local installation, or establish live model effectiveness. Exact checks and remaining behavioral evidence are recorded in the release notes and current state.
 
 Maintainers with the standalone `fieldlab` CLI may inspect the source-owned subject pack without invoking a target model:
 
@@ -180,8 +178,8 @@ fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-The 0.6.4 release contains twenty-four cases; twenty declare non-empty
-semantic-review requirements and twelve are adversarial controls. All have
+The 0.6.5 release contains twenty-five cases; twenty-one declare non-empty
+semantic-review requirements, and twelve adversarial controls remain unchanged. All cases have
 deterministic fixture checks, but those checks do not execute a target model or
 close declared semantic-review requirements. Positive delegation cannot be
 asserted by the trace ceiling (`max_subagent_events`), so its canary pairs a
@@ -198,7 +196,7 @@ removed in favor of the existing semantic review boundary, a separately budgeted
 attempt passed deterministic verification, and a new independent review supported
 all three requirements; Servotab acceptance returned `accepted`. This evidence is
 limited to that pinned workspace-scoped case. The compatible Servotab source is
-released, but no 0.6.4 discussion-intake or diagnostic case has a live target-model
+released, but no 0.6.5 connected-execution or correction-radius case has a live target-model
 acceptance receipt, and the release does not itself establish installation or activation.
 Any further live synthetic attempt
 still requires a new plan and explicit invocation budget; Field Lab does not retry
@@ -206,7 +204,7 @@ automatically.
 
 ## Release artifacts
 
-The published [Servotab 0.6.4 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.4) provides `servotab-0.6.4-source.zip` for the repository marketplace route and `servotab-0.6.4-plugin.zip` with the 70-file plugin payload for an owner-controlled directory upload. Earlier release assets remain immutable historical artifacts. Neither archive installs dependencies or changes a host automatically.
+The published [Servotab 0.6.5 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.5) provides `servotab-0.6.5-source.zip` for the repository marketplace route and `servotab-0.6.5-plugin.zip` with the 70-file plugin payload for an owner-controlled directory upload. Earlier release assets remain immutable historical artifacts. Neither archive installs dependencies or changes a host automatically.
 
 `release-receipt.json` binds both archives to one source commit/tree and the package manifest. `SHA256SUMS` covers both ZIPs and the receipt. Checksums establish consistency, not publisher authentication. Verify the release source and GitHub provenance as well. Maintainer preparation and draft/publish steps are in [Releasing](docs/releasing.md).
 
