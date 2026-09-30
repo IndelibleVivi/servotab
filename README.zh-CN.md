@@ -30,6 +30,8 @@ Servotab 也不会把日志、截图、review、旧计划或 generated artifact 
 
 `0.6.4` 之后的 current source 把同一条 complete-outcome 主线继续推进到执行阶段：跨组件计划先识别穿过真实 entry point 与关键 state boundary 的早期路径；执行在批量扩展 peer features 前先接通并观察它；已经核实的 review correction 会沿共享 contract 到达受影响的 consumers，同时保护合法例外与明确写入限制。多个 methods 共同参与时，goal、plan、responsibility owner、evidence 与 remaining scope 延续在同一项工作里，而不是重新开场。Source pack 现有 25 个 canaries，新增 `feedback-correction-radius`；这些 source 与 deterministic checks 不证明 target model 已改善、本机已安装或新版本已经发布。
 
+`0.6.5` 是一个**已准备的 source release candidate，尚未发布**。它接通同样的几个决策点，把 source pack 扩充到 25 个 case（其中 21 个声明了非空的 semantic-review requirements），同时保留 12 个 adversarial controls 与 70 文件的 one-router／twelve-leaf package，并新增 `feedback-correction-radius` canary。见 [0.6.5 release notes](docs/releases/0.6.5.md)。已发布 Latest GitHub Release 与公开 directory listing 仍为 `0.6.4`；下面安装 tagged `v0.6.4` package 装的仍是 `0.6.4`。这里不声称任何 0.6.5 的 tag、release、网站部署、directory 更新、安装、生效或 live model 效果。
+
 ## 安装
 
 在 ChatGPT 打开 [Servotab 官方 listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94)，即可添加已公开上线的 plugin。

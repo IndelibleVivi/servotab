@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.5 — candidate, unreleased
+
+This entry records a prepared source release candidate. It is not a publication record: no tag, GitHub Release, website deployment, or OpenAI directory update is established by this candidate, and the published Latest GitHub Release and the observed public directory listing both remain `0.6.4`.
+
+- Connect the complete-outcome method across four existing decision points without adding a skill, runtime service, dependency, report, or evaluation runner. `plan` selects an early executable path through the real entry point and material state boundary, and `execute` connects and observes that path before expanding peer features while preserving risk-appropriate red-green work and the remaining accepted scope.
+- Carry a confirmed review correction to every consumer of the same shared contract while protecting legitimate exceptions and explicit write limits in `review-feedback`. The router and the explicit `execute` leaf keep one goal, plan, responsibility owner, evidence set, and remaining scope continuous across participating methods, then withdraw investigation or ceremony whose purpose has ended.
+- Add the `feedback-correction-radius` canary: the prompt and visible regression expose the chart symptom without naming sibling consumers, an independent command oracle checks the complete user-date contract, and semantic review requires trace evidence that the agent derived the repair radius from the implementation. Chart, detail, and share output move together, UTC audit semantics stay unchanged, exact minute offsets are preserved, and only `days.py` may change.
+- Reserve semantic review in the existing `complete-notes` case for whether the selected CLI and persistence path was actually exercised before broad migration and error-path expansion, early enough to inform implementation rather than only final verification; its deterministic complete-delivery oracle is unchanged.
+- Extend the source pack to twenty-five cases, twenty-one with non-empty semantic-review requirements, keeping the twelve unchanged adversarial controls, one router, twelve explicit leaves, and the 70-file runtime package topology.
+
+Fresh deterministic source/package checks, the 80 Python regressions, and the standalone Field Lab validate/selftest/list pass with zero target-agent invocations. These establish source, generated-package, and deterministic fixture consistency only; no live target-model effectiveness, installation, activation, deployment, or owner acceptance is claimed.
+
 ## 0.6.4 — published 2026-09-25
 
 - Preserve the important goals, constraints, rationale, examples and unresolved items from supplied discussions before implementation priorities are selected. Keep reading coverage, adoption judgment and execution permission separate without imposing a mandatory ledger on bounded requests.

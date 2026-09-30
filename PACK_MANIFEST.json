@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "pack": "servotab",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "plugin": "plugins/servotab",
   "skills": [
     "servotab",
@@ -41,7 +41,7 @@
     {
       "path": "plugins/servotab/.codex-plugin/plugin.json",
       "size": 1708,
-      "sha256": "8984641e376f1a1fc219f078573ea385b3de3ec4602774abd0ca5b1133801249"
+      "sha256": "643c688a95ce4a0899cc6f844832ffa0f65b9d611d1f5429839e688a21d4110f"
     },
     {
       "path": "plugins/servotab/LICENSE",
@@ -66,7 +66,7 @@
     {
       "path": "plugins/servotab/plugin.json",
       "size": 1902,
-      "sha256": "89419048d0ded0b283ae3bdda800da26742a152aef37c7cb0743f3907b044f62"
+      "sha256": "f75868436a98001062aec1908c56d67c049d161952b8e4417cdeac48bcfbc70c"
     },
     {
       "path": "plugins/servotab/skills/debug/SKILL.md",
