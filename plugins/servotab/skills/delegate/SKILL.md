@@ -63,6 +63,8 @@ The order must support independent judgment without hidden parent context. Deleg
 
 Keep the order proportional: normally one to three bullets per field. Link canonical sources instead of restating whole plans or global rules, and include a constraint only when this lane needs it to judge or act correctly. A work order is not a second specification.
 
+When a durable plan exists, pass its explicit task entry, relevant stages, settled choices, material conditions, evidence and unfinished scope. Name one shared-plan maintainer, usually the Coordinator; workers return changes or write only assigned records. A new lane does not create another main plan. Inspect current content and diff before integrating a return.
+
 Before dispatch, the Coordinator checks that outcome, acceptance criteria, dependencies, authority, stop conditions, writer ownership, and return evidence are compatible. Ask the worker to validate that chain at entry, then make normal in-scope decisions without escalating trivia.
 
 ## Dispatch and write ownership

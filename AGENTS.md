@@ -62,6 +62,10 @@ Root `skills/`, `install.sh`, `uninstall.sh`, `scripts/install.py`, and `scripts
 
 `scripts/build_skills.py` fails closed if the retired root `skills/` path exists. The generator must never recursively delete that path: remove known tracked legacy projection files through the reviewed migration diff, and preserve any unknown or untracked content for explicit disposition.
 
+## Task plans
+
+Shared engineering specifications may live in `docs/specs/`; task-specific plans live in `docs/plans/` when continuity warrants them. The Plan strategy upgrade uses `docs/specs/plan-strategy.md` and the single current entry `docs/plans/plan-strategy.md`. The specification owns the outcome; the plan owns route, coverage, evidence and continuation. `docs/current-state.md` links candidate state without duplicating task progress. Recover through the explicitly selected task entry and current implementation, never a global active pointer or file modification time. One coordinator maintains the shared plan; private source discussions and raw model traces stay outside the public tree.
+
 ## Editing workflow
 
 For a method or metadata change:

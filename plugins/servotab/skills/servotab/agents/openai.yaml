@@ -1,7 +1,7 @@
 interface:
   display_name: "Servotab"
   short_description: "Risk-scaled repository methods"
-  default_prompt: "Use $servotab to deliver the complete repository outcome with proportional method and fresh, risk-matched verification."
+  default_prompt: "Use $servotab to deliver the complete repository outcome with proportional method and execution strategy where consequential choices remain, then verify with fresh, risk-matched evidence."
   brand_color: "#315EFB"
   icon_small: "./assets/icon-400.png"
   icon_large: "./assets/icon.svg"

@@ -1,153 +1,116 @@
 ---
 name: plan
-description: "Create an implementation plan sized to settled work. Use when a multi-step change benefits from sequencing, file targets, and explicit verification."
+description: "Form and maintain execution strategy when order, effort, evidence timing or recovery materially affects the outcome, even with a settled goal. Reuse durable task records when continuity needs them; keep clear work direct."
 ---
 
 # Plan
 
-Create a plan that helps implementation, review, and recovery. Avoid plans that are longer than the work or split one coherent change into dozens of mechanical steps.
+Form and maintain an execution strategy: choose order, effort, evidence timing and continuity to improve the complete requested result. A settled goal can still leave those choices open. Clear local work and mature routes with applicable evidence can proceed directly.
 
-## Inputs
+## Enter with the current commission
 
-Before planning, establish:
+Recover the requested outcome, acceptance, settled choices, permissions, selected task record, relevant implementation and important unknowns. Inspect enough code to name real touchpoints; use an identified area when exact paths remain unknown. Distinguish the user's chosen result, a proposed mechanism, observed facts and ordinary details left to the implementer. A polished brief is not verified repository design. Investigate searchable facts yourself without re-interviewing settled goals.
 
-- The requested outcome and acceptance criteria
-- Relevant repository instructions
-- Current implementation and nearby patterns
-- Known constraints or decisions
-- Verification commands or test locations
+Use this method when an unresolved execution choice materially affects downstream work, quality, evidence or handoff: a shared unverified assumption, consequential ordering, meaningful stages or recovery, or new evidence invalidating the current route. Explicit planning requests also enter here. File count, tool count, prompt length and the label “complex” are not sufficient triggers. An ongoing causal investigation stays with Debug; add Plan only for the resulting execution or recovery arrangement.
 
-Inspect enough code to name realistic touchpoints. Do not invent exact file paths when the repository does not support them.
+Keep existing owners and lanes. Plan organizes execution; Design resolves material product/architecture choices, Spec Chain owns approved-spec coverage, Execute implements and returns observations, Delegate owns actual dispatch, and Verify/Finish govern acceptance and closure. Do not turn this into a new supervisory pipeline.
 
-## Preserve the requested outcome
+## Preserve outcome and authority
 
-- Plan the complete usable outcome the user asked for, including necessary end-to-end integration, states, and verification.
-- Treat `MVP`, prototype, proof of concept, scaffold, or partial slice as scope choices that require the user or governing specification to make them explicit.
-- Use the least complex implementation that covers the full contract. Do not use “minimal” to drop behavior, integrations, or acceptance criteria.
-- Order work by real dependencies. Preserve the user's or specification's sequence when it expresses product meaning; record and explain any necessary reorder instead of silently optimizing for the easiest first slice.
+- Plan the complete usable outcome, including integrations, states and acceptance. A prototype, MVP or partial slice is a scope choice for the user or governing specification, not a shortcut for the implementer.
+- Use the least complex implementation that satisfies that contract. Preserve accepted programme order when it carries product meaning; record a proposed scope/order delta and obtain applicable authority before adopting it. A newer plan, evidence or already-written code cannot approve itself.
+- With an approved specification, reuse Spec Chain's complete coverage ledger and stable requirement IDs. Keep the current tranche inside that full scope. An explicitly bounded tranche needs only its applicable requirements, dependencies and existing complete-plan link; do not rebuild the programme or claim full completion.
+- Only block work that depends on a missing decision. Make ordinary reversible implementation choices within current authority; return unresolved product meaning, consequential tradeoffs or external actions to the appropriate owner. Planning-only and read-only limits remain in force. Saving a permitted document does not authorize commit or publication.
 
-## Approved specifications
+## Choose an actionable strategy
 
-When an approved specification governs the work:
+Resolve the judgments that can change the next meaningful result. These are not mandatory form fields:
 
-- Treat it as the authority for scope, settled semantics, and acceptance.
-- When planning the full specification, cover its complete accepted scope, even when execution will span phases, PRs, or sessions.
-- Keep the current phase or tranche inside that full plan. Never present a partial tranche as the implementation plan for the specification.
-- In that full plan, map every normative requirement to a slice and verification outcome, and state every proposed scope or order delta explicitly.
-- If the user explicitly requests only a tranche plan, label it `Execution Tranche` and link the applicable specification requirements, dependencies, and existing complete plan. If no complete plan exists, note that absence without creating one by default. Resolve only missing dependencies that block safe planning of this tranche; preserve other requirements without replanning or claiming to deliver them.
-
-Use compact specification IDs or heading anchors rather than repeating the source document.
-
-## Goal authority
-
-- Before a plan changes product meaning, programme order, trust boundaries, or shared infrastructure, identify the applicable current authority and accepted goal.
-- A plan may propose and explain a programme or scope delta, but recording the delta does not approve it. Direct current instructions, repository governance, or an explicitly adopted specification may provide the required authority.
-- When authority for a material delta is unresolved, keep it as an explicit decision gate and preserve the accepted baseline in every executable slice.
-
-## Choose plan depth
-
-### Inline plan
-
-Use for a moderate change that can be completed in the current session.
-
-Use as few coherent steps as the dependencies need. Each step should produce a meaningful, testable increment.
-
-### Durable plan
-
-Use when:
-
-- The work will span sessions,
-- Several subsystems must coordinate,
-- A migration or rollout exists,
-- Another agent or developer may execute it, or
-- The user explicitly requests a plan document.
-
-Store it where the repository expects design or implementation plans. Do not create a new planning directory without checking local conventions.
-
-## Plan structure
-
-Include only what is useful:
-
-1. **Goal and boundaries**
-   - Intended behavior
-   - Explicit non-goals
-   - Material assumptions
-
-2. **Implementation slices**
-   - Outcome of the slice
-   - Files or areas likely to change
-   - Core logic or data-flow change
-   - Tests or checks for that slice
-   - Dependencies on earlier slices
-
-3. **Cross-cutting concerns**
-   - Compatibility or migration
-   - Error handling
-   - Security/privacy
-   - Performance or concurrency
-   - Rollback or feature flag, when applicable
-
-4. **Acceptance verification**
-   - Targeted tests
-   - Broader checks justified by risk
-   - Manual or visual verification where automation is not sufficient
-
-## Granularity
-
-A good task is independently understandable and verifiable. Prefer vertical slices over file-by-file chores.
-
-Good:
-
-- Add stale-cursor validation across backend mutation and pagination paths; cover it with regression tests.
-- Introduce the new note artifact contract, update producers and consumers, then validate existing fixtures.
-
-Weak:
-
-- Open file A.
-- Add import.
-- Write ten lines.
-- Run tests.
-- Commit.
-
-Do not include complete production code in a plan unless a subtle algorithm, schema, or protocol requires a precise example. Pseudocode and data shapes are usually enough.
+- **Value and effort:** identify where additional making, understanding or validation most improves the outcome. Quality can justify substantial early effort, not just risk reduction. Allocate unevenly while retaining all acceptance requirements.
+- **Dependencies:** include implementation dependencies and judgment dependencies. Real content, decisive assets and an interaction lifecycle may need to appear together before quality is assessable. Respect necessary infrastructure and migration prerequisites.
+- **Commitment:** preserve accepted decisions, ground choices with expensive downstream consequences, and leave ordinary internals to the executor near implementation. Do not exhaust every future branch for “decision complete.”
+- **Near-term path:** identify the next observable result, relevant implementation areas and checks. A task should be independently understandable and verifiable, not a sequence of opening files, adding imports and committing each step. Include exact algorithms or schemas only when the contract needs them.
+- **Conditions:** for a consequential assumption, retain its basis, a distinguishing observation and the work that depends on it. Do not inventory every possible assumption.
+- **Available capacity:** account for actual tools, current owners, domain production costs and explicit invocation budgets. Unknown quotas and capabilities remain unknown. Missing tools constrain dependent work; do not silently narrow the outcome.
 
 ## Choose the first executable path
 
-For work crossing components, identify the shortest useful path from the real entry point, through the material state or boundary, to an observable result. Within accepted programme order, arrange an early run through that path before multiplying peer features around an untested assumption.
+Choose the first useful path through the real entry point and material state or boundary. If the route is understood, connect it and observe directly. Only investigate separately when the result could change the route; do not create a mandatory spike.
 
-If one capability question could invalidate the implementation, settle it with the cheapest discriminating probe first. If the path is already understood, connect it directly; do not manufacture a separate spike. For a new product, establish the first real entry and state owner rather than planning every layer independently.
+Match the observation's completeness to the judgment. A CLI success cannot accept a GUI interaction; blank placeholders cannot accept a composition whose result depends on image, title and feedback together. High-quality assets and production work can be early dependencies. A fixture or surrogate proves its named boundary only. The first observation informs the remaining work; it does not replace the complete delivery. An explicitly commissioned prototype stays within that prototype scope.
 
-Name what the first run can establish and what remains. Saving and reopening through the selected command can reveal wiring and persistence defects that helper tests miss; it does not establish unrelated host behavior. Use an authorized surrogate when necessary and preserve its limits. An unavailable external step blocks only dependent work. Keep the rest of the accepted outcome in the existing plan and carry it through; this first run is an implementation ordering choice, not a smaller delivery contract.
+Examples:
 
-## Plan review
+- Three exports share a source believed to return all records. Inspect that source before multiplying formats, connect one real command across the state boundary, then complete and check every format. If the API is paged, revise the shared collection route rather than reopen the export goal.
+- A proven renderer supports the required output size. Bring the actual subject, longest title, editing feedback and undo together before spreading the component pattern. Spend craft effort on their relationship; keep export and remaining states in scope. Do not re-prototype the proven renderer.
+- A valid plan has one moved file. Find the current owner, correct the touchpoint and continue. Several homogeneous edits with a proven route may need no additional plan at all.
 
-Review the plan once against the requirements:
+## Revise locally and stop planning when ready
 
-- Every acceptance criterion maps to a task or verification step.
-- The plan covers the complete requested outcome rather than a scaffold or convenient subset.
-- A full-spec plan keeps every accepted requirement visible. An explicitly requested tranche maps its applicable requirements and prerequisites, linking other accepted scope without replanning it.
-- Dependencies are ordered correctly.
-- Any narrowing, removal, deferral outside the plan, or reordering is an explicit specification delta rather than an implementation convenience.
-- No hidden migration or compatibility issue is ignored.
-- The plan does not add speculative infrastructure.
-- The verification scope matches the risk.
+Keep the complete scope visible, with near-term work concrete and later details conditional on relevant observations. Refine the next stage at a meaningful boundary, not every future function at the outset.
 
-Fix gaps directly. Do not dispatch a separate plan reviewer by default.
+Important observations, user corrections, changed capabilities or invalid assumptions revise the affected decisions, stages and verification. Preserve independent goals and work. Correct a moved path or reuse an existing function directly. A disproved architectural premise needs the appropriate Design or Debug work before its dependents continue; it does not restart the entire intake. When repeated probes add no distinguishing evidence, change the investigation or making approach rather than perpetually “exploring once more.”
 
-## Implementation handoff
+Review the strategy once for full coverage, genuine dependencies, authority, representative evidence, compatibility and unnecessary machinery. Fix gaps directly; do not add a reviewer by default. When the next path, permission and acceptance are sufficiently clear, end this planning intervention. For an implementation request, continue executing to the requested endpoint without another “continue?” gate.
 
-When another agent or session will execute the plan, include:
+## Persist when continuity needs it
 
-- Current branch or workspace assumptions
-- Commands needed to start
-- Important files and repository guidance
-- Known risks and stopping conditions
-- Exact expected final report
+Actively create or update a durable record when work crosses sessions or executors, meaningful stages have dependencies or decisions not recoverable from a diff, migration/rollout/interruption needs exact boundaries, lanes share status, or the user requests a document. A routine locate/fix/test sequence is not three independent stages. A clear session-sized task can keep an inline strategy.
 
-Do not paste large source files into the plan.
+Reuse the selected task record and repository convention first. Add a missing section rather than rewrite a valid plan to fit a template. Without an existing convention, `docs/plans/<task-slug>.md` is a fallback for shared engineering plans; a specification can live in `docs/specs/`. These are not required directories.
 
-## Exit behavior
+Choose visibility deliberately: share engineering goals, consequential decisions and evidence pointers appropriate to the repository audience; keep private conversations, account details, sensitive local context and raw session traces in the established private location. A shared plan must support its public scope without hidden private prerequisites. In a read-only task, do not write the target repository; deliver a requested document in an allowed output location and identify that boundary.
 
-- If the user asked for a plan only, stop after the plan.
-- If the user asked for implementation, proceed into coherent, independently verifiable slices without waiting for ritual approval.
-- Ask before proceeding only when the plan exposes an unresolved, material product or destructive decision.
+## Keep one current task entry
+
+Default to one main plan with stages inside it. Split a stage only for a distinct owner/context or evidence volume that makes the split useful. The main entry retains the complete outcome, stage dependencies, selected continuation and unfinished scope.
+
+Bind by explicit task path or established task entry, never by a repository-wide mutable `active_plan.md` or newest modification time. Concurrent tasks keep their selected entries. Existing issues, stage tables or native task lists can supply information by link or projection; do not duplicate synonymous progress sources or Spec Chain's ledger.
+
+Use repository vocabulary to express:
+
+- Task identity, current status, responsibility and applicable baseline.
+- Settled goal and acceptance, with specification links when present.
+- Current strategy, significant assumptions and stage dependencies.
+- Complete remaining scope; evidence, its baseline and location.
+- Next meaningful result, real blockers and independent work that can continue.
+- Material route changes and reasons; eventual closure or successor.
+
+Distinguish planned, in progress, implemented but unverified, verified under stated conditions, blocked, cancelled and superseded states. These are semantic distinctions, not a new parser schema. One “done” cannot simultaneously mean source, installed, deployed and owner accepted.
+
+A compact shape may be sufficient:
+
+```markdown
+# <Task>
+Status / owner / baseline: ...
+Goal and acceptance: <request or spec link>
+Current route: <why this order and effort; material conditions>
+Stages and remaining scope: <results, dependencies, states or existing ledger>
+Evidence: <observation, applicable baseline and location>
+Continue here: <next result; blockers and independent work>
+Changes / closure: <material reason, actual outcome or successor>
+```
+
+## Read, update, recover and close
+
+Update after a material result, invalidated assumption, stage transition, decision affecting later work, or deliberate handoff/ending. Keep current effective content first, revise superseded instructions, and retain concise reasons or historical links. Do not log every tool call, update on a timer, or spawn `final-v2-revised` documents. Unexpected interruption can leave stale records; recovery must tolerate that.
+
+On resumption:
+
+1. Locate this task's selected plan from the commission, repository convention and workspace evidence. If several entries remain genuinely ambiguous, resolve that before dependent writes; continue independent safe work.
+2. Read current goals, route, relevant stages and continuation, plus the spec/decisions/evidence needed for the next action. Do not indiscriminately load all history.
+3. Compare related Git state, implementation, tests and necessary environment. A checked box locates a claim; it is not fresh proof.
+4. Reconcile code ahead of the plan, plan ahead of code, stale tests and partial execution. Preserve uncertainty and do not automatically replay actions that may already have produced external effects.
+5. Continue authorized work without re-interviewing settled goals. If the plan is missing but valid scope and source suffice, reconstruct what is needed, distinguishing recovered facts from assumptions. Shortening a long record must preserve remaining scope and material change reasons.
+
+One designated maintainer, usually the current coordinator, owns shared-plan writes. Workers return results or write only their assigned files. Before updating, inspect current content and relevant diff so another writer's changes are not overwritten. Use existing ownership and workspace rules; do not add locks or a tracking service.
+
+At completion record actual results, evidence and residual unverified state. On replacement link the successor; on pause or cancellation retain the reason rather than mark complete. Move lasting architecture or usage conclusions into the authoritative maintained docs and link them. Historical plans are not permanent runbooks and need not be deleted in bulk.
+
+## Continue across domain methods and hosts
+
+Carry goal, settled choices, current route, conditions, evidence, permission and unfinished scope across methods or executors in the same commission. Soundings Search/Study can supply facts; Shape can resolve material interpretations; Explore can supply judgeable candidates. Frontend Craft or another domain method owns representative content, assets, renderer and experience acceptance. Incorporate their consequences into this plan rather than start another brief, tracker or fixed pipeline. Do not copy their specialty into Plan or require their installation.
+
+Keep user-facing output to meaningful route reasons, results and discoveries. Planning depth, output length, persistence and waiting for the user are separate choices. Native plan/task tools may display the same current stages but cannot substitute for necessary durable records; do not duplicate the whole plan in the UI. Without those tools, use available means. Automatic method use does not switch the harness into Plan Mode, justify a shim/hook, or prove support on an untested host.
+
+If the request is planning only, deliver that artifact and stop. Otherwise continue the authorized implementation; unresolved authority blocks only the affected work.

@@ -49,3 +49,8 @@ implicit-worktree-trivial-control,true,none,就在当前专用 checkout 修正�
 implicit-discussion-intake,true,design,我把一长段关于下一步做什么的产品讨论全文贴在 DISCUSSION.md 了；请完整吸收整段讨论（含中段的更正、后半的延后项和底部补充内容），再判断先做什么，并说明哪些重要项不采纳、为什么。只做只读判断，不要改别的文件。
 negative-discussion-reference-only,false,none,我只需要参考 DISCUSSION.md 里第 14 项提到的按 item revision 做预览缓存这一条，其它都不用管；给我一句话确认就行，不要建跟踪表或做完整规格演练。
 negative-worktree-explanation,false,none,只解释 Git worktree 和 branch 有什么区别，不检查或操作仓库。
+implicit-plan-assumption,true,plan,三个导出格式都要完整实现；brief 里说现有接口返回全部记录，你先结合仓库把事情做完。
+implicit-plan-resume,true,plan,接着 docs/plans/export.md 的任务做，旧勾选可能过时；旁边最新修改的文件属于另一项任务。
+implicit-plan-domain,true,plan,方向已定。现有 renderer 已验证；这次成败在真实图像、长标题和操作反馈的组合，把完整编辑体验做出来。
+implicit-plan-mature,true,none_or_execute,现有 adapter 和回归已验证，依照同一成熟路径补齐另外三个同构字段。
+implicit-plan-causal-control,true,debug,目前还不知道保存丢失的原因，先用现有日志定位并修复，不要把因果调查改成规划文档。

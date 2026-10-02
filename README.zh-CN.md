@@ -81,6 +81,10 @@ codex debug prompt-input "Check Servotab discovery." \
 
 Router 会按任务的真实 pressure 决定保持 direct，还是读取一份相关 reference。它不会宣布内部分类，也不会因为 method 可用就制造 plan、worktree、TDD、subagent 或第二轮 review。进入深层执行前，它还会先确定 responsibility：有界、noisy 或足够实质的 lane 可以交给一个 worker；显式 solo request 留在主 session；trivial 工作或频繁的 cross-owner 决策不会为了 coordination benefit 被拆分。Coupling 本身从不强制走主 session，一个 responsibility 内部耦合的部分只需留在同一个 lane 里。
 
+当前源码候选把 `plan` 扩展为持续的执行策略：目标已定，仍可能需要安排顺序、投入、证据时机与恢复。它复用同一任务记录，新证据只修订受影响的工作；需要跨阶段或跨会话接续时主动保存。没有 repo 约定时，可使用 `docs/plans/<task-slug>.md`；清楚的小改允许只保留行内策略。恢复时从明确任务入口核对当前代码与证据，不盲信旧的完成勾选。规划不会切换 harness 的 Plan Mode，也不增加实施、提交或发布权限。
+
+这项 Plan 升级尚未发布，亦无已接受的 live 行为对照结论。见[规格](docs/specs/plan-strategy.md)、[当前实施计划](docs/plans/plan-strategy.md)与[场景覆盖](evals/plan-strategy.md)。安装示例中的 tagged `0.6.5` 仍指向已发布行为。
+
 明确需要某个 method 时可以直接调用：
 
 ```text
@@ -116,7 +120,7 @@ Plugin 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit l
 | `servotab` | implicit eligible | 日常 repo work 的 quiet router |
 | `design` | explicit only | 把仍有关键开放决策的 idea 变成可实现方向 |
 | `spec-chain` | explicit only | 让 approved spec 的完整 scope 穿过 plan 与 execution |
-| `plan` | explicit only | 为 settled work 建立 sequencing，并选出第一个有用的 executable path |
+| `plan` | explicit only | 形成并维护执行策略、证据时机与持久任务连续性 |
 | `execute` | explicit only | 通过 connected slices 把清楚的 request 或 plan 完整实现 |
 | `debug` | explicit only | 用 bounded hypotheses 和 boundary localization 修复根因 |
 | `tdd` | explicit only | 对适合 test-first 的 contract、state 与 regression 做 risk-based TDD |

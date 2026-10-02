@@ -5,7 +5,7 @@ ROUTER = {
     "name": "servotab",
     "description": (
         "Use for hands-on repository work when a quiet, risk-scaled engineering method "
-        "can improve design, implementation, debugging, review, delegation, workspace lifecycle, or verification. "
+        "can improve design, execution strategy, implementation, debugging, review, delegation, workspace lifecycle, or verification. "
         "Keep clear local changes direct, preserve the complete requested outcome, and add "
         "method only where risk or uncertainty justifies it. Do not use for general technical "
         "explanations, simple file lookup, casual discussion, or non-engineering writing."
@@ -14,7 +14,7 @@ ROUTER = {
     "short_description": "Risk-scaled repository methods",
     "default_prompt": (
         "Use $servotab to deliver the complete repository outcome with proportional method "
-        "and fresh, risk-matched verification."
+        "and execution strategy where consequential choices remain, then verify with fresh, risk-matched evidence."
     ),
     "implicit": True,
 }
@@ -53,22 +53,23 @@ METHODS = (
         "skill": "plan",
         "method": "plan",
         "description": (
-            "Create an implementation plan sized to settled work. Use when a multi-step change "
-            "benefits from sequencing, file targets, and explicit verification."
+            "Form and maintain execution strategy when order, effort, evidence timing or recovery "
+            "materially affects the outcome, even with a settled goal. Reuse durable task records "
+            "when continuity needs them; keep clear work direct."
         ),
         "display_name": "Plan",
-        "short_description": "Create a practical implementation plan",
+        "short_description": "Maintain execution strategy and continuity",
         "default_prompt": (
-            "Use $plan to produce a concise, repository-grounded implementation plan sized "
-            "to this change."
+            "Use $plan to ground the execution strategy in current evidence, preserve the complete "
+            "outcome and task continuity, and continue within the request’s permissions."
         ),
     },
     {
         "skill": "execute",
         "method": "execute",
         "description": (
-            "Execute an existing implementation plan or settled multi-step request through "
-            "connected slices with targeted checks and controlled plan drift."
+            "Implement a settled request or current execution strategy through connected slices, "
+            "feed observations into the same task record, and revise affected work when evidence changes."
         ),
         "display_name": "Execute",
         "short_description": "Execute settled work through connected slices",

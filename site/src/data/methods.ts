@@ -37,8 +37,8 @@ export const methods: Method[] = [
     name: "plan",
     icon: planIcon,
     purpose:
-      "Structures settled multi-step work when no adopted specification already owns the complete plan.",
-    signal: "Use when sequencing matters before edits begin.",
+      "Forms and maintains execution strategy, effort and evidence timing; keeps a durable task record when continuity needs it.",
+    signal: "Use when meaningful execution choices remain or evidence changes the route.",
   },
   {
     name: "execute",

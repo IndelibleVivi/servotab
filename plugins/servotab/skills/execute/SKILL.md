@@ -1,11 +1,11 @@
 ---
 name: execute
-description: "Execute an existing implementation plan or settled multi-step request through connected slices with targeted checks and controlled plan drift."
+description: "Implement a settled request or current execution strategy through connected slices, feed observations into the same task record, and revise affected work when evidence changes."
 ---
 
 # Execute
 
-Turn a settled plan into working code. Preserve momentum while maintaining evidence and scope control.
+Turn a settled request or current strategy into working code. Preserve momentum while maintaining evidence and scope control.
 
 ## Load and sanity-check
 
@@ -28,6 +28,8 @@ Perform one sanity check before editing:
 - What present consumer, current requirement, or explicit authorization justifies any generalized protocol or infrastructure it introduces?
 
 Correct small stale details yourself. Surface a concern only when it changes the approach materially.
+
+A settled goal does not settle order, effort or evidence timing. Before dependent edits, use Plan when a consequential execution choice remains, a route has become invalid, or durable recovery needs reconciliation. Continue a mature applicable route directly. From the router read `references/plan.md`; from this explicit leaf read `../plan/SKILL.md`. On resumption use the selected task entry and current implementation/tests, not the newest nearby plan or old completion marks. Do not replay uncertain external effects.
 
 When an approved specification governs the work, it remains the scope and acceptance authority throughout execution. A tranche controls what is being worked on now; it does not remove later scope from the complete plan. Repair a partial plan that claims full-spec coverage before relying on that claim. An explicitly requested tranche can proceed from its applicable requirements and settled dependencies without first creating a whole-program plan. Record scope or order changes as explicit deltas, and report tranche completion separately from full-spec completion.
 
@@ -98,7 +100,7 @@ Pause or explicitly flag the choice when:
 - A derived artifact changes programme order or widens the trust model without applicable approval.
 - Infrastructure displaces a narrower accepted path without applicable authorization, especially when it has no present consumer or current requirement.
 
-When a safe reversible choice exists, take it and continue.
+When a safe reversible choice exists, take it and continue. Material results, invalidated assumptions, stage transitions and handoffs update the same task record through its designated maintainer. Keep source, verification and external-state claims separate. A changed architecture returns only dependent work to Design or Debug; independent authorized work continues. Stop planning when the next path and acceptance are clear; repeated probes without new evidence need a different approach.
 
 Do not treat already-written code as authority to cross these boundaries. Preserve it as `research-only` evidence when useful, return to the applicable authorized baseline, and continue only within the accepted goal.
 

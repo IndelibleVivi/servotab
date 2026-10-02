@@ -83,6 +83,10 @@ Fix the mobile message-bubble shift, identify the root cause, implement the repa
 
 The router may keep a clear, reversible change direct or read one relevant method when the work carries material pressure. It does not manufacture a plan, worktree, test ritual, subagent, or second review merely because those mechanisms exist. Before deep work it also settles responsibility: a bounded, noisy, or otherwise substantial lane can go to one worker, explicit solo requests stay in the main session, and trivial work or frequent cross-owner decisions are not split for coordination benefit. Coupling alone never forces the main session; the coupled parts of one responsibility simply stay together in whichever single lane owns them.
 
+The current source candidate extends `plan` to form and maintain execution strategy: a settled goal can still leave meaningful sequencing, effort, evidence or recovery decisions. It reuses the current task record, revises only affected work when evidence changes, and saves a durable plan when continuity needs it. With no repository convention, `docs/plans/<task-slug>.md` is a fallback; small clear work can stay inline. Resume from the explicit task entry and check current code and evidence before trusting old completion marks. Planning does not switch the host into Plan Mode or add permission to implement, commit or publish.
+
+This Plan upgrade is unreleased and has no accepted live behavior comparison yet. See the [specification](docs/specs/plan-strategy.md), [current implementation plan](docs/plans/plan-strategy.md) and [scenario coverage](evals/plan-strategy.md). Tagged `0.6.5` installation examples still install the published behavior.
+
 Invoke a method explicitly when you want precise control:
 
 ```text
@@ -118,7 +122,7 @@ The plugin contains thirteen skills: one implicit router and twelve explicit lea
 | `servotab` | implicit eligible | Quiet router for ordinary repository work |
 | `design` | explicit only | Resolve open feature, interaction, or architecture decisions |
 | `spec-chain` | explicit only | Preserve an approved specification across planning and execution |
-| `plan` | explicit only | Sequence settled work and choose its first useful executable path |
+| `plan` | explicit only | Form and maintain execution strategy, evidence timing and durable task continuity |
 | `execute` | explicit only | Implement a clear request or plan through connected slices as a complete outcome |
 | `debug` | explicit only | Localize the first violated assumption and repair the root cause |
 | `tdd` | explicit only | Apply risk-based test-first work to contracts, state, and regressions |

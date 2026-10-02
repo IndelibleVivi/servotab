@@ -6,7 +6,7 @@ containment、receipt contract 与 quota gate 已由 standalone Skill Field Lab 
 
 Servotab 继续拥有：
 
-- `cases/`：二十五个 repository-owned canaries 及其 fixtures、assertions、expected overlays；其中二十一个声明了非空的 `human_review_requirements`；
+- `cases/`：二十八个 repository-owned canaries 及其 fixtures、assertions、expected overlays；其中二十四个声明了非空的 `human_review_requirements`；
 - `activation-prompts.csv`：较宽的 routing seed set；
 - [`submission-test-cases.md`](submission-test-cases.md)：把现有 fixtures 整理成
   reviewer-ready 的 5 positive / 3 negative draft；它不是 portal receipt 或 submission claim；
@@ -44,7 +44,7 @@ fieldlab list fieldlab-pack.json
 - `missing-host-test-seam`：material host boundary 缺少 cheap reproducer 时建立一个 bounded local surrogate，同时保留 named-host acceptance。
 - `review-evidence-boundaries`：同一 bounded review corpus 同时保护 clean control、negative-space spec omission、false-green test 与 conditional finding 的 evidence boundary。
 
-新增的 `local-reuse` 检查现有 normalizer 的真实复用；`weak-check` 保留一个原本绿色却不完整的测试，再用独立行为断言揭示缺陷。`scripts/test_behavior_fixtures.py` 现在对全部二十五个 fixture 复放文件/命令断言：基线必须失败，expected overlay 必须通过。`weak-check` 的实际候选测试也必须能拒绝旧实现；同时保留十二个审查反例与部分交付控制。它不复放 raw trace，不替代 Field Lab，也不执行模型。
+新增的 `local-reuse` 检查现有 normalizer 的真实复用；`weak-check` 保留一个原本绿色却不完整的测试，再用独立行为断言揭示缺陷。`scripts/test_behavior_fixtures.py` 现在对全部二十八个 fixture 复放文件/命令断言：基线必须失败，expected overlay 必须通过。`weak-check` 的实际候选测试也必须能拒绝旧实现；同时保留十五个审查反例与部分交付控制。它不复放 raw trace，不替代 Field Lab，也不执行模型。
 
 0.6.4 候选新增三个诊断 case：`cross-boundary-diagnosis` 提供一个可执行的共享边界 admission 模型，包含健康 bypass 探针、一次被混淆的早期试验和一个独立残留延迟，验收要求真实的可比 pre/post 实验与成功交付，而不是计划或改过的计数器；`host-specific-diagnosis` 的桌面探针缺少 material native-host condition，因此无法排除该原因；`diagnosis-progress` 展示连续实验带来真实 causal progress 但整体尚未恢复，numeric failure count 不应触发无谓重启。它们沿用现有 Field Lab schema、baseline/expected overlay 与 semantic-review 边界；`scripts/test_diagnostic_fixtures.py` 提供确定性红/绿、残留症状、非绕过路径与错误修复的对照，不执行模型。
 
@@ -93,6 +93,10 @@ Raw trace 是 authority；receipt 与 summary 是 derived evidence。只有经�
 `worktree-organize` 包含 `assume-unchanged` / `skip-worktree` 隐藏 tracked 修改的候选。其显式入口由 required semantic review 核对实际 leaf 交付或读取证据（例如 `.agents/skills/worktree/SKILL.md`）；不要求重复读取 router reference，输出正确本身也不能证明方法已交付。
 
 确定性 gate 检查输出存在及精确写入范围，三个反向对照证明错误决策文字仍可能通过结构检查；正确选择、可执行顺序和证据边界由 `human_review_requirements` 裁定。它们没有回放真实 agent 清理动作，也没有 live receipt。`scripts/test_worktree_git.py` 另外在一次性真实 Git 仓库验证底层机制，包括两条各覆盖上述两种 index 标记的参数化回归：只读内容核验不改真实 index，以及普通删除后保留分支仍无法恢复隐藏修改；Git regression 不能替代模型行为验收。需要实际执行清理的 target-agent evidence 时，另行定义可操作的 synthetic workspace case、saved plan 和显式调用预算；不要把这三个 rehearsal 的 pass 升格为该证据。
+
+## Plan strategy candidate
+
+Three new canaries cover shared-assumption ordering, stale-record recovery and domain handoff. Their complete scope, existing negative controls, uncovered boundaries and proposed live budget are in [Plan strategy evidence](plan-strategy.md). The 28-case source pack has 24 semantic-review cases and 15 adversarial controls; those are current-source counts, not changes to the immutable 0.6.5 release. No new live target invocation is implied.
 
 ## Activation seed set
 

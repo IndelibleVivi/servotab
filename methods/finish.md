@@ -71,6 +71,8 @@ Update durable documentation when the change affects:
 
 Do not add changelog noise for invisible local refactors unless repository policy requires it.
 
+Close the existing task record with actual results, evidence and remaining unverified scope. Distinguish completed, paused, cancelled and superseded work; link a successor when replaced. Move lasting usage or architecture facts into their maintained documentation and link them from the plan. Do not turn historical plans into live runbooks or delete them in bulk.
+
 ## 6. Git and integration
 
 Only commit, push, merge, or create a PR when the user requests that action or applicable repository/global instructions delegate it.

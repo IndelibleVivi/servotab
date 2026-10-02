@@ -74,7 +74,7 @@ class BehaviorFixtureTests(unittest.TestCase):
 
     def test_adversarial_decision_controls(self):
         controls = json.loads((ROOT / "evals/adversarial-controls.json").read_text())
-        self.assertEqual(len(controls), 12)
+        self.assertEqual(len(controls), 15)
         for control in controls:
             name = control["case_id"]
             with self.subTest(case=name), tempfile.TemporaryDirectory() as raw:
