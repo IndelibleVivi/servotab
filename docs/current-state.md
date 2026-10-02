@@ -2,11 +2,27 @@
 
 ## Plan strategy source candidate (2026-10-02)
 
-The current unversioned source candidate develops execution strategy and durable task continuity within the existing `plan` leaf. Router/catalog and `execute` select meaningful strategy or recovery work even with a settled goal; `spec-chain`, `delegate` and `finish` share one task record and maintainer. The single implementation entry is [Plan strategy](plans/plan-strategy.md), with the separate [specification](specs/plan-strategy.md). There is no new leaf, runtime service, hook, dependency or version bump. The candidate payload differs from tagged 0.6.5 even though release metadata remains at that version; it is not an installed or published update.
+The current unversioned source candidate develops execution strategy and durable task continuity within the existing `plan` leaf. Router/catalog and `execute` select meaningful strategy or recovery work even with a settled goal; `spec-chain`, `delegate` and `finish` share one task record and maintainer. The single implementation entry is [Plan strategy](plans/plan-strategy.md), with the separate [specification](specs/plan-strategy.md). There is no new leaf, runtime service, hook, dependency or version bump. The candidate payload differs from tagged 0.6.5 even though release metadata remains at that version. It is now installed on the maintainer host as described below, but remains unreleased.
 
 Fresh local checks passed generated sync, 13-skill validation, 70-file manifest identity, packaging selftest and all 82 Python tests. The source evidence pack now has 28 cases, 24 with semantic-review requirements, and 15 adversarial controls. Field Lab validate/selftest/list ran with zero target-model invocations. [Scenario coverage and results](../evals/plan-strategy.md) now record the separately authorized 12-attempt comparison and eight independent semantic reviews, requesting `gpt-6.1-sol` / `xhigh`. All twelve deterministic checks passed; receipt-bound acceptance accepted six candidate attempts and five baseline attempts. One baseline recovery omitted unknown historical publication state. The checker now accepts an explicitly named study with `--lab-id` while preserving its default identity and all existing evidence requirements; all 19 focused checker tests passed after this follow-up. No general effectiveness or efficiency gain, independent ordinary-use receipt or complete REQ-12 acceptance is established.
 
-Both README editions and local website source distinguish the candidate from published installation targets. Website `npm ci`, all nine tests and the static build passed. Before the evidence-status wording update, local Methods/Docs checks at 1280 px and 390 px found no horizontal overflow; inspected renders were readable and the browser reported no console errors or warnings. The later wording-only update passed a fresh install/test/build check; rendered checks were not repeated. The install audit reported one high-severity indirect dependency entry for the existing `devalue` version; no dependency update is included in this Plan change. This is an observed audit result, not a demonstrated production exploit. Website deployment, local plugin installation, activation, release and Directory publication were not changed.
+Both README editions and local website source distinguish the candidate from published installation targets. Website `npm ci`, all nine tests and the static build passed. Before the evidence-status wording update, local Methods/Docs checks at 1280 px and 390 px found no horizontal overflow; inspected renders were readable and the browser reported no console errors or warnings. The later wording-only update passed a fresh install/test/build check; rendered checks were not repeated. The install audit reported one high-severity indirect dependency entry for the existing `devalue` version; no dependency update is included in this Plan change. This is an observed audit result, not a demonstrated production exploit. Website deployment, release and Directory publication were not changed. The later local installation is recorded separately below.
+
+### Local candidate installation (2026-10-03)
+
+With owner authorization, `codex plugin add servotab@personal --json` refreshed the
+local installation from clean candidate source `cd03673`. Inventory reports
+installed and enabled with unchanged `0.6.5` metadata. All 70 installed regular
+package files match that candidate byte for byte, with no missing files, extra
+files or symlinks. The installed content now includes the Plan strategy upgrade;
+the version label alone no longer identifies the tagged release on this host.
+The separately installed Directory package was not updated.
+
+A fresh `codex debug prompt-input` process discovers `servotab:servotab` with the
+updated execution-strategy description and the 0.6.5 skill entry.
+This verifies installation identity and fresh-process discovery, not automatic
+context refresh inside an existing conversation or a new live behavior attempt.
+No target-model calls, merge, release or deployment accompanied installation.
 
 ## Current release: 0.6.5 (published 2026-10-01)
 
