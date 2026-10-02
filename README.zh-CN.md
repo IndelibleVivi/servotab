@@ -83,7 +83,7 @@ Router 会按任务的真实 pressure 决定保持 direct，还是读取一份�
 
 当前源码候选把 `plan` 扩展为持续的执行策略：目标已定，仍可能需要安排顺序、投入、证据时机与恢复。它复用同一任务记录，新证据只修订受影响的工作；需要跨阶段或跨会话接续时主动保存。没有 repo 约定时，可使用 `docs/plans/<task-slug>.md`；清楚的小改允许只保留行内策略。恢复时从明确任务入口核对当前代码与证据，不盲信旧的完成勾选。规划不会切换 harness 的 Plan Mode，也不增加实施、提交或发布权限。
 
-这项 Plan 升级尚未发布，亦无已接受的 live 行为对照结论。见[规格](docs/specs/plan-strategy.md)、[当前实施计划](docs/plans/plan-strategy.md)与[场景覆盖](evals/plan-strategy.md)。安装示例中的 tagged `0.6.5` 仍指向已发布行为。
+这项 Plan 升级尚未发布。首轮有界 live 对照中，候选六次全部 accepted，基线六次中五次 accepted；一次基线恢复遗漏了历史发布状态仍未知的信息。这组小规模合成试验不证明普遍效果或效率提升，完整行为验收仍未关闭。见[规格](docs/specs/plan-strategy.md)、[当前实施计划](docs/plans/plan-strategy.md)与[场景覆盖](evals/plan-strategy.md)。安装示例中的 tagged `0.6.5` 仍指向已发布行为。
 
 明确需要某个 method 时可以直接调用：
 

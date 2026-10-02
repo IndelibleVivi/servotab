@@ -55,6 +55,13 @@ python3 scripts/check_behavior_acceptance.py /path/to/attempt/receipt.json \
   --review /path/to/separate-review.json
 ```
 
+The expected `lab_id` defaults to `servotab`. For a separately named study, pass
+`--lab-id <study-lab-id>` using the identity chosen in its authorized plan. This
+changes only the expected study identity: current Servotab case/prompt equality,
+artifact integrity and receipt-bound semantic review remain required. Do not edit
+an immutable receipt to fit the default, and do not infer the expected study from
+an untrusted receipt. A matching lab ID is not author authentication.
+
 The command prints JSON and exits with:
 
 | Code | Status | Meaning |

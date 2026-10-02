@@ -85,7 +85,7 @@ The router may keep a clear, reversible change direct or read one relevant metho
 
 The current source candidate extends `plan` to form and maintain execution strategy: a settled goal can still leave meaningful sequencing, effort, evidence or recovery decisions. It reuses the current task record, revises only affected work when evidence changes, and saves a durable plan when continuity needs it. With no repository convention, `docs/plans/<task-slug>.md` is a fallback; small clear work can stay inline. Resume from the explicit task entry and check current code and evidence before trusting old completion marks. Planning does not switch the host into Plan Mode or add permission to implement, commit or publish.
 
-This Plan upgrade is unreleased and has no accepted live behavior comparison yet. See the [specification](docs/specs/plan-strategy.md), [current implementation plan](docs/plans/plan-strategy.md) and [scenario coverage](evals/plan-strategy.md). Tagged `0.6.5` installation examples still install the published behavior.
+This Plan upgrade is unreleased. Its first bounded live comparison accepted all six candidate attempts and five of six baseline attempts; one baseline recovery omitted unknown historical publication state. This small synthetic study does not establish general effectiveness or an efficiency gain, and full behavioral acceptance remains open. See the [specification](docs/specs/plan-strategy.md), [current implementation plan](docs/plans/plan-strategy.md) and [scenario coverage](evals/plan-strategy.md). Tagged `0.6.5` installation examples still install the published behavior.
 
 Invoke a method explicitly when you want precise control:
 
