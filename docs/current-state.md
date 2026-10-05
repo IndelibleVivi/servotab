@@ -1,5 +1,26 @@
 # Servotab release state
 
+## Method judgment source follow-up (2026-10-05)
+
+The unversioned source candidate now also refines three existing decisions:
+`debug` constrains causal explanations with the closest verified working case;
+`design` distinguishes a recommendation from its nearest viable alternative by
+the deciding condition, and optionally separates conflicting technical properties
+by time, location, condition or scale. The latter is not a required exercise for
+ordinary tasks. No leaf, dependency, runtime service or version was added.
+
+The current source pack still has 28 cases, 24 with semantic-review requirements.
+The `cross-boundary-diagnosis` and `discussion-intake` requirements now cover the
+new judgments, and the intake reference answer was reconciled with them. These
+are revised evidence contracts, not new observed model outcomes; earlier pinned
+attempts do not establish acceptance of the revised case definitions. Fresh
+canonical/generated sync, 13-skill validation, 70-file manifest generation and
+check, packaging selftest, all 84 Python tests, public-tree audit and compilation
+passed. This follow-up is source-complete and validated locally; it has not been
+installed, activated, released, deployed or evaluated with a target model. The
+October 3 installation below remains evidence for its explicitly named source,
+not for this follow-up.
+
 ## Plan strategy source candidate (2026-10-02)
 
 The current unversioned source candidate develops execution strategy and durable task continuity within the existing `plan` leaf. Router/catalog and `execute` select meaningful strategy or recovery work even with a settled goal; `spec-chain`, `delegate` and `finish` share one task record and maintainer. The single implementation entry is [Plan strategy](plans/plan-strategy.md), with the separate [specification](specs/plan-strategy.md). There is no new leaf, runtime service, hook, dependency or version bump. The candidate payload differs from tagged 0.6.5 even though release metadata remains at that version. It is now installed on the maintainer host as described below, but remains unreleased.

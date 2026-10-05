@@ -45,6 +45,32 @@ action was taken.
   (items 4, 7, 11, 20).
 - The corrected preview mechanism, item revision keyed (item 14).
 
+## Why this order and how the apparent conflict changes
+
+Core filing with explicit state handling should precede the optional suggestions
+panel. The closest viable alternative is to deliver that same complete filing
+path plus suggestions in this cycle. The deciding condition is that filing does
+not yet produce entries, whereas suggestions have no selected mechanism or
+established benefit against the offline and latency requirements. Adding them
+now widens the work before resolving the stated outcome. Evidence that a small
+existing suggestion capability is necessary to make category handling meet the
+one-key goal, or an owner decision making suggestions part of this cycle, would
+reopen that ordering. Neither is established here. Suggestions alone and blanket
+manual confirmation are not viable substitutes: the former leaves filing absent,
+and the latter removes the single-key ordinary path.
+
+The "file or trust" complaint need not imply that all items face the same tradeoff.
+Uncategorized items need a category decision; duplicate receipts need a merge
+path; locked items must remain protected; out-of-period items cannot cause silent
+writes outside the current period. Ordinary eligible items can retain the fast
+path, while an empty current period can be created as requested. Offline operation
+applies across these paths, so a network-only validation step would not resolve the
+conflict. The split adds state handling and undo interactions that still need
+implementation and verification against the latency target. The log establishes
+requirements and the item-revision preview decision, not proof that a suitable
+implementation already exists. Check available code before adding new machinery;
+the unresolved target-label choice remains an owner decision.
+
 ## Deliberately not adopted (with disposition)
 
 - Item 18 "smart suggestions": attractive and the most exciting subtopic, but it
