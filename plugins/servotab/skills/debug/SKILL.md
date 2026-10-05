@@ -55,6 +55,8 @@ Trace bad state backward:
 - Is there a nearby working path to compare?
 - Could several visible failures share one upstream cause?
 
+When you compare against a case that works, constrain the explanation with the closest verified-normal case rather than an arbitrary one. A shared factor can still contribute to the failure; the comparison is only useful when it explains why exposure, timing, state, or interaction makes one side fail while the other does not. Absence of a failure report is not a verified normal control.
+
 For an unclear cross-boundary failure, sketch only the shortest relevant path. At each boundary, name the assumption about input shape, identity, version, configuration, state, ordering, availability, or output. Compare cheap boundary evidence with a known-good case when available, and stop at the first violated assumption. Do not map the whole architecture before inspecting the failing path.
 
 State the causal claim being tested:

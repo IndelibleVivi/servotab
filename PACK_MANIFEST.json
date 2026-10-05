@@ -70,8 +70,8 @@
     },
     {
       "path": "plugins/servotab/skills/debug/SKILL.md",
-      "size": 11159,
-      "sha256": "5dfdc6985c102dea55707e66899a93b530c713f93f95ff7c193a22b5afba8652"
+      "size": 11550,
+      "sha256": "e630b0ce9eb62a6c774155fb93dbea63040e87fa2d4d425ad20eaf48901ca16c"
     },
     {
       "path": "plugins/servotab/skills/debug/agents/openai.yaml",
@@ -110,8 +110,8 @@
     },
     {
       "path": "plugins/servotab/skills/design/SKILL.md",
-      "size": 9811,
-      "sha256": "cf2b31e005a0fa32c253bd712f2ee33addc395f612b7106f4ed3b5b3cfad2253"
+      "size": 10800,
+      "sha256": "d881c7704e2e43a61015e9587761fe5b2dce7f6c13864473ae862f2d3c6dcbde"
     },
     {
       "path": "plugins/servotab/skills/design/agents/openai.yaml",
@@ -250,8 +250,8 @@
     },
     {
       "path": "plugins/servotab/skills/servotab/references/debug.md",
-      "size": 10967,
-      "sha256": "d435f65732ea1bcb1bead0626924a6425f720b077790b4281618f4c6662eb395"
+      "size": 11358,
+      "sha256": "210fa3911b3910150426582814ad3207b71c2041100356a4de405581a20d2360"
     },
     {
       "path": "plugins/servotab/skills/servotab/references/delegate.md",
@@ -260,8 +260,8 @@
     },
     {
       "path": "plugins/servotab/skills/servotab/references/design.md",
-      "size": 9606,
-      "sha256": "a4ff114d1ee5b512157033aa4087a6d0672851582e5b6e5df1613df85a1ace30"
+      "size": 10595,
+      "sha256": "ef3a75a834b965bed7720ed3b4ac0ec7ac4426deab0556f271a1f2de7925e1d1"
     },
     {
       "path": "plugins/servotab/skills/servotab/references/execute.md",
