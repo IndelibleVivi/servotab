@@ -16,10 +16,37 @@ are revised evidence contracts, not new observed model outcomes; earlier pinned
 attempts do not establish acceptance of the revised case definitions. Fresh
 canonical/generated sync, 13-skill validation, 70-file manifest generation and
 check, packaging selftest, all 84 Python tests, public-tree audit and compilation
-passed. This follow-up is source-complete and validated locally; it has not been
-installed, activated, released, deployed or evaluated with a target model. The
-October 3 installation below remains evidence for its explicitly named source,
-not for this follow-up.
+passed. This follow-up is source-complete, validated locally and installed as
+recorded below. Fresh-process discovery and one bounded method-use observation
+are recorded below; broader effectiveness of the new design/debug judgments is
+not established. It remains unreleased and undeployed.
+
+### Local candidate refresh (2026-10-05)
+
+With owner authorization, `codex plugin add servotab@personal --json` refreshed
+the local installation from clean candidate source `b19fbbc`, preserving the
+previously installed Plan strategy capability. Inventory reports installed and
+enabled with unchanged `0.6.5` metadata; this is not a new release. All 70
+installed package files match that source byte for byte. Relative to the
+previous installation, only four files changed: the explicit `debug` and `design`
+leaves and their router references. The rest of the payload, including Plan,
+is unchanged. The October 3 receipt below remains historical evidence for
+`cd03673`; its discovery result does not establish discovery of this refresh.
+A separate fresh Codex process now resolves this installed router from its
+skill catalog. One small documentation task read the installed router and Verify
+method and completed its assigned state reconciliation. This is bounded method
+use, not a general efficacy comparison or a refresh of all ongoing conversations.
+
+The method judgments were separately integrated from `main` baseline `128cd20`
+through [PR #53](https://github.com/IndelibleVivi/servotab/pull/53), merged as
+`93c5904`, without carrying the Plan strategy candidate into that change.
+That integration's source/package gate passed generated sync,
+13-skill validation, the 70-file manifest, packaging selftest, 80 Python tests
+and a 383-file public-tree audit. Its baseline differs from this candidate's
+84-test baseline. Required GitHub checks passed; the automatic review completed
+with no findings. Plan retains its separate acceptance and integration scope.
+Public releases, the Directory package and the production website were not
+changed by the local installation.
 
 ## Plan strategy source candidate (2026-10-02)
 
@@ -31,11 +58,14 @@ Both README editions and local website source distinguish the candidate from pub
 
 ### Local candidate installation (2026-10-03)
 
+Historical receipt: the October 5 refresh above supersedes this installed
+payload while retaining its Plan capability.
+
 With owner authorization, `codex plugin add servotab@personal --json` refreshed the
 local installation from clean candidate source `cd03673`. Inventory reports
 installed and enabled with unchanged `0.6.5` metadata. All 70 installed regular
 package files match that candidate byte for byte, with no missing files, extra
-files or symlinks. The installed content now includes the Plan strategy upgrade;
+files or symlinks. The installed content at that observation included the Plan strategy upgrade;
 the version label alone no longer identifies the tagged release on this host.
 The separately installed Directory package was not updated.
 
