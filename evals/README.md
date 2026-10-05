@@ -48,7 +48,9 @@ fieldlab list fieldlab-pack.json
 
 0.6.4 候选新增三个诊断 case：`cross-boundary-diagnosis` 提供一个可执行的共享边界 admission 模型，包含健康 bypass 探针、一次被混淆的早期试验和一个独立残留延迟，验收要求真实的可比 pre/post 实验与成功交付，而不是计划或改过的计数器；`host-specific-diagnosis` 的桌面探针缺少 material native-host condition，因此无法排除该原因；`diagnosis-progress` 展示连续实验带来真实 causal progress 但整体尚未恢复，numeric failure count 不应触发无谓重启。它们沿用现有 Field Lab schema、baseline/expected overlay 与 semantic-review 边界；`scripts/test_diagnostic_fixtures.py` 提供确定性红/绿、残留症状、非绕过路径与错误修复的对照，不执行模型。
 
-`discussion-intake` 检验“先完整吸收讨论、再决定范围”：fixture 是一段完全合成的产品讨论，重要目标和约束分布在前后，包含机制更正、吸引人的后段 subtopic，以及讨论内部提出但用户并未授权的对外动作。deterministic workspace gate 只检查 `INTAKE.md` 是否存在及写入范围是否精确；不以关键词裁定理解质量或权限判断。实际 trace 另外检查命令是否提及 `design.md` 路径；这不证明内容读取或 host selection，本地 fixture checks 也不复放这一层。完整覆盖、outcome 与 mechanism 的区分、更正和延后项的处理、以及阅读/采纳/执行许可的边界，均由 `human_review_requirements` 裁定。四个错误文本仍会通过结构检查，必须由语义审查拒绝；独立的写入反例验证修改原材料或额外文件会失败。没有 live target-model attempt 或已完成语义审查的声明。
+当前未发布源码候选进一步增强上述 `cross-boundary-diagnosis` 的 control 语义要求：绿色 local-origin 是已验证可用、但绕过 admission 的路径，不能证明相同 client load 下 admission 正常。解释应受最近可用的正常对照约束，说明暴露、时序、状态或交互差异；没有失败报告本身不构成正常对照。
+
+`discussion-intake` 检验“先完整吸收讨论、再决定范围”：fixture 是一段完全合成的产品讨论，重要目标和约束分布在前后，包含机制更正、吸引人的后段 subtopic，以及讨论内部提出但用户并未授权的对外动作。deterministic workspace gate 只检查 `INTAKE.md` 是否存在及写入范围是否精确；不以关键词裁定理解质量或权限判断。实际 trace 另外检查命令是否提及 `design.md` 路径；这不证明内容读取或 host selection，本地 fixture checks 也不复放这一层。完整覆盖、outcome 与 mechanism 的区分、更正和延后项的处理、推荐理由（决定当前胜出的条件，以及何种变化会翻转选择）、表面冲突的条件分离、以及阅读/采纳/执行许可的边界，均由 `human_review_requirements` 裁定。四个错误文本仍会通过结构检查，必须由语义审查拒绝；独立的写入反例验证修改原材料或额外文件会失败。没有 live target-model attempt 或已完成语义审查的声明。
 
 新增 `tranche-only-plan` 覆盖显式 leaf 的阶段范围；`complete-notes` 用独立跨进程检查覆盖完整 CLI、持久化、迁移及失败路径，并用 semantic review 观察 agent 是否在 broad migration / error-path expansion 前真正走过 selected CLI / persistence path，使该 observation 仍能影响后续实现；末尾补跑 CLI 不满足这项 sequencing requirement。声明了 `human_review_requirements` 的 case 还必须经过 [最终验收](acceptance.md)：Field Lab 的自动 `pass` 本身不能关闭语义要求。
 

@@ -91,6 +91,8 @@ For each real decision:
 
 Do not provide three cosmetic variants merely to satisfy a format.
 
+Ground the recommendation in the condition that actually makes it win over the nearest viable alternative, not in a general virtue of the approach. If the choice rests on an uncertain assumption or priority, name it and what change would reverse the decision. Do not invent alternatives, scores, or causal benefits to justify the pick, and do not treat a lighter option as sufficient unless it still meets the complete behavior.
+
 ## Work the decision frontier
 
 Use dependency ordering when decisions remain unsettled. Track only material decisions for the current outcome, their prerequisites, and facts that could invalidate them. Keep settled owner choices separate from provisional mechanisms and reversible choices delegated to the agent.
@@ -100,6 +102,8 @@ First investigate facts available from the repository, installed runtime, tools,
 After each answer or material new fact, revisit only the affected descendants. In a continuing task, update the existing decision or plan record rather than reopening the whole interview. Stop when the current approach and acceptance criteria can be chosen without silently guessing a material owner decision. Unrelated future branches may remain deferred.
 
 For authorized best-effort work, make reversible assumptions and proceed. An explicit request for design only remains design only; discovering a good solution does not grant implementation authority.
+
+When a technical requirement appears to demand the same property in conflicting states, test whether it must actually hold at the same time, location, condition, or scale. Prefer separating these with existing capability before inventing a mechanism; count any new complexity the separation adds. Adopt a cheap measurement or known supported route directly when it settles the conflict. Stop once a useful candidate or a real residual trade-off appears; not every value disagreement has to be dissolved, and this check is not a required step for every task.
 
 ## Questions
 

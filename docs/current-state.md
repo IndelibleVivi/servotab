@@ -1,5 +1,34 @@
 # Servotab release state
 
+## Method judgment integration (2026-10-05)
+
+The unversioned source change is prepared separately from `main` baseline
+`128cd20`, without the Plan strategy candidate. `debug` constrains selective
+failure explanations with the closest verified working case; `design` names
+the deciding condition relative to the nearest viable alternative and can
+optionally separate conflicting properties by time, location, condition or
+scale. The two existing case review contracts and the discussion-intake
+reference answer are synchronized. No skill, dependency or version was added.
+The source/package gate passed generated sync, 13-skill validation, the 70-file
+manifest, packaging selftest, 80 Python tests and the 383-file public-tree audit.
+These are deterministic source checks, not observed target-model outcomes.
+The Plan strategy candidate retains its separate acceptance and integration scope.
+
+The local installation is a distinct payload: the owner-authorized
+`codex plugin add servotab@personal --json` refresh used clean candidate
+`b19fbbc` to retain the previously installed Plan strategy capability alongside
+these judgments. All 70 installed files match that candidate byte for byte;
+only the explicit `debug`/`design` leaves and their router references changed
+from the prior installation. Inventory still reports `0.6.5`. The installed
+candidate's 84-test baseline is separate from this integration's 80-test
+baseline. A fresh Codex process resolves the installed router from its skill
+catalog; one small documentation task read the installed router and Verify
+method and completed its assigned state reconciliation. These observations do
+not establish broader effectiveness of the new design/debug judgments or refresh
+every already-running conversation. Installation changed no public release, Directory
+package or website deployment; the historical receipts below retain their
+named source and observation boundaries.
+
 ## Current release: 0.6.5 (published 2026-10-01)
 
 [Servotab 0.6.5](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.5) is the public Latest, non-prerelease GitHub release. [PR #50](https://github.com/IndelibleVivi/servotab/pull/50) merged the release preparation as `c9fe5e6e773adb6ea99f349244f0fe3f5dadffdb`, and tag `v0.6.5` resolves exactly to that source and tree `a3afab72613ed40ae9f9eaf50009865e220623de`. `VERSION`, both plugin manifests and the generated `PACK_MANIFEST.json` are `0.6.5`. The production website now shows the 0.6.5 GitHub install target while the independently observed public OpenAI directory listing remains `0.6.4`. See the [0.6.5 release notes](releases/0.6.5.md).
