@@ -28,6 +28,12 @@ identity from `../plugins/servotab/.codex-plugin/plugin.json` and keeps separate
 observed GitHub release and Directory versions explicit so a staged publication
 cannot make one surface impersonate another.
 
+The Methods catalog uses `SITE.methodContractsRef` for its contract links. While
+the catalog describes an unreleased candidate, pin that field to a pushed source
+revision containing the advertised contracts; the default branch may not contain
+them yet. Advance it to the matching source revision or tag when the catalog is
+updated. Published installation examples continue to use `githubReleaseVersion`.
+
 Cloudflare Pages build settings:
 
 - Root directory: `site`

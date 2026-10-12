@@ -119,12 +119,15 @@ does not establish them. Alternate valid wording may explicitly say "not authori
 or "out of scope"; structural checks must not reject those phrases. Separate tests
 reject changes to the source discussion or an extra file.
 
-The current source candidate changes only the method trace path in three existing
+Relative to the retained local Plan strategy baseline `ef48a03`, Incorporate
+changes only the method trace path in three existing
 cases: `discussion-intake` moves its command-reference mention from `design.md`
 to `incorporate.md`; `feedback-correction-radius` and
 `repeated-review-scope-accretion` move their respective command-reference and
 reference-read paths from `review-feedback.md` to `incorporate.md`. Their fixtures,
-prompts, expected overlays, and existing behavior requirements are unchanged. A
+prompts, expected overlays, and existing behavior requirements retain that local
+baseline, including the independently developed discussion judgments; this does
+not claim identity with an earlier GitHub snapshot. A
 path mention alone does not establish source reading or method use.
 
 The two new cases, `incorporate-reader-handoff` and `incorporate-mixed-sources`,

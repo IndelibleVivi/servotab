@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { repoFile } from "../config";
+import { repoFile, SITE } from "../config";
 import { methods } from "../data/methods";
 ---
 
@@ -45,7 +45,7 @@ import { methods } from "../data/methods";
           <div class="method-copy">
             <p>{method.purpose}</p>
             <p>{method.signal}</p>
-            <a class="method-contract" href={repoFile(`methods/${method.name}.md`)}>
+            <a class="method-contract" href={repoFile(`methods/${method.name}.md`, SITE.methodContractsRef)}>
               Read method contract <span class="contract-arrow" aria-hidden="true">↗</span>
             </a>
           </div>

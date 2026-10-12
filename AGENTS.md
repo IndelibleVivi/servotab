@@ -181,6 +181,11 @@ Record volatile outcomes in `docs/current-state.md` only after observing them. D
 
 `site/src/config.ts` separates the source version from the observed published release used by install examples. Update the published version only after exact tag/release evidence; a manifest bump is not publication.
 
+The Methods catalog links through `SITE.methodContractsRef`. Keep that ref bound
+to a pushed revision containing the catalog's advertised contracts; a candidate
+method may not exist on the default branch. Update it when the catalog's contract
+changes, independently of published installation targets.
+
 Update current-facing docs whenever method ids, plugin routes, install commands, supported surfaces, domain behavior, privacy boundaries, or status claims change. Preserve historical changelog and provenance wording; add a transition entry instead of rewriting old Softpowers releases as Servotab releases.
 
 The two README editions require factual parity, not mechanical translation. Reconcile installation, topology, version, availability, security/privacy, licensing, and public claims in both files while allowing each language to use natural structure and explanation.

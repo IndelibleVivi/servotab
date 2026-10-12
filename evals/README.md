@@ -53,7 +53,7 @@ fieldlab list fieldlab-pack.json
 
 `discussion-intake` 检验“先完整吸收讨论、再决定范围”：fixture 是一段完全合成的产品讨论，重要目标和约束分布在前后，包含机制更正、吸引人的后段 subtopic，以及讨论内部提出但用户并未授权的对外动作。deterministic workspace gate 只检查 `INTAKE.md` 是否存在及写入范围是否精确；不以关键词裁定理解质量或权限判断。实际 trace 另外检查命令是否提及 `incorporate.md` 路径；这不证明内容读取或 host selection，本地 fixture checks 也不复放这一层。完整覆盖、outcome 与 mechanism 的区分、更正和延后项的处理、推荐理由（决定当前胜出的条件，以及何种变化会翻转选择）、表面冲突的条件分离、以及阅读/采纳/执行许可的边界，均由 `human_review_requirements` 裁定。四个错误文本仍会通过结构检查，必须由语义审查拒绝；独立的写入反例验证修改原材料或额外文件会失败。没有 live target-model attempt 或已完成语义审查的声明。
 
-本候选只迁移三个既有 case 的 method trace 路径：`discussion-intake` 的 command reference 从 `design.md` 改为 `incorporate.md`；`feedback-correction-radius` 的 command reference 与 `repeated-review-scope-accretion` 的 reference-read 路径从 `review-feedback.md` 改为 `incorporate.md`。它们的原 fixture、prompt、expected overlay 与既有行为要求均未改写；路径迁移本身不证明方法已被读取或使用。
+相对本地 Plan strategy 基线 `ef48a03`，本次 Incorporate 迁移只改变三个既有 case 的 method trace 路径：`discussion-intake` 的 command reference 从 `design.md` 改为 `incorporate.md`；`feedback-correction-radius` 的 command reference 与 `repeated-review-scope-accretion` 的 reference-read 路径从 `review-feedback.md` 改为 `incorporate.md`。保留该本地基线的 fixture、prompt、expected overlay 与既有行为要求，包括此前独立发展的 discussion 判断；这不声称它们与更早的 GitHub snapshot 相同。路径迁移本身不证明方法已被读取或使用。
 
 新增两个 incorporation cases：
 

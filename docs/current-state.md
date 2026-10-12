@@ -15,10 +15,30 @@ limited acceptance evidence are preserved. See [candidate and local acceptance](
 The integrated source pack has thirty cases, twenty-six with semantic-review
 requirements, sixty-three activation seeds and nineteen adversarial controls.
 The original twelve and three Plan controls remain alongside four Incorporate
-controls. Existing discussion and technical-feedback cases retain their fixtures,
+controls. Relative to the retained local Plan baseline, existing discussion and
+technical-feedback cases retain their fixtures,
 prompts and substantive oracles; only their method trace paths migrate.
 
-Local acceptance is in progress. The supplied handoff reports two isolated
+Source integration `05e3360` is committed and pushed on `feat/incorporate`.
+Its [GitHub Validate run](https://github.com/IndelibleVivi/servotab/actions/runs/38190957423)
+passed. Fresh local source/package checks passed generated sync, thirteen-skill
+validation, seventy-file manifest freshness, packaging selftest, all 87 Python
+regressions, a 436-file public-tree audit and compilation. Field Lab
+validate/selftest/list covered all thirty cases with zero target-model invocations.
+An independent bounded review found no blocking fixture/oracle defect; count and
+migration-baseline wording were reconciled. The reader oracle does not claim
+receipt-internal alias isolation across repeated undos.
+
+Website `npm ci`, all nine tests and the eight-route build passed under the pinned
+Node `22.16.0`. Local Chromium checks of Home, Methods and Docs at 1280 px and
+390 px found no horizontal overflow, broken images or browser errors/warnings;
+the Incorporate row rendered readably. The Methods contract links now pin the
+pushed integration source, because the default-branch Incorporate link returned
+404. The existing lockfile emitted an `undici@8.11.2` engine warning requiring
+Node >=22.19.0, and npm audit reported five vulnerabilities (one moderate, four
+high). No dependency or deployment-runtime update is included.
+
+The supplied handoff reports two isolated
 cold-start trials; their raw traces are absent from the bundle and were not
 independently inspected here. No local live-model invocation, formal semantic
 acceptance or ordinary-language activation result is established for Incorporate.
