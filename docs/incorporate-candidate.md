@@ -2,7 +2,9 @@
 
 The supplied candidate starts from `93c59048a37d5ac7a25afcbc78106f6280499410`.
 `VERSION` remains `0.6.5`; source identity must include the commit and working-tree state.
-It is not a replacement for the published `v0.6.5` archive or evidence of local installation.
+The source candidate is not a replacement for the published `v0.6.5` archive.
+Named-host installation and discovery have their own receipt in
+[current state](current-state.md#local-incorporate-candidate-installation-2026-10-12).
 
 ## Local integration (2026-10-12)
 
@@ -15,6 +17,13 @@ source reconciliation directly to Incorporate while Design retains open choices.
 The coordinator owns this integration and its acceptance record in
 [current state](current-state.md); the work order below describes possible
 acceptance steps and does not grant live-model, installation or external actions.
+
+The owner subsequently authorized a local installation. The clean integrated
+payload at `1425ae2` is installed and enabled on the maintainer host: all seventy
+package files match source byte for byte, and a fresh app-server discovers all
+thirteen enabled skills including `servotab:incorporate`. Plan strategy remains
+installed. This receipt establishes package identity and discovery, not live
+method behavior or automatic context refresh in an existing conversation.
 
 The supplied handoff reports two isolated cold-start trials, one with a real reader
 and one with mixed sources. Their raw traces are not part of this bundle and have

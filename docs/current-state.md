@@ -42,9 +42,32 @@ The supplied handoff reports two isolated
 cold-start trials; their raw traces are absent from the bundle and were not
 independently inspected here. No local live-model invocation, formal semantic
 acceptance or ordinary-language activation result is established for Incorporate.
-`VERSION` remains `0.6.5`. This integration has not refreshed the installed plugin,
-published a release, updated the Directory or deployed the website. The historical
-local installation below still describes its own Plan-containing payload.
+`VERSION` remains `0.6.5`. The owner-authorized local refresh is recorded below;
+this integration has not published a release, updated the Directory or deployed
+the website. Earlier installation receipts describe their own historical payloads.
+
+### Local Incorporate candidate installation (2026-10-12)
+
+With owner authorization, `codex plugin add servotab@personal --json` refreshed
+the existing personal installation from clean integrated source `1425ae2`, using
+`codex-cli 0.159.1`. Inventory reports installed and enabled with unchanged
+`0.6.5` metadata. All seventy regular package files match that source byte for
+byte, with no missing, extra, differing or symlink entries. The installed package
+preserves Plan strategy and the design/debug judgments; `incorporate` replaces
+the active `review-feedback` entry.
+
+A fresh app-server `skills/list` request discovers all thirteen enabled skills,
+including `servotab:incorporate` with its Incorporate interface and `$incorporate`
+default prompt. It reports no package skill-loading errors. A separate fresh
+`codex debug prompt-input` process discovers the router with both execution
+strategy and material incorporation in its description. The explicit-only leaf
+is absent from that implicit catalog, as its package policy requires.
+
+These observations establish installed identity and fresh-process discovery.
+Automatic context refresh inside an existing conversation, ordinary-language
+selection and live method behavior remain unverified. No target-model call,
+merge, release, Directory update or deployment accompanied this installation.
+Use a fresh Codex task or process for ordinary local trials.
 
 ## Method judgment source follow-up (2026-10-05)
 
@@ -68,6 +91,9 @@ are recorded below; broader effectiveness of the new design/debug judgments is
 not established. It remains unreleased and undeployed.
 
 ### Local candidate refresh (2026-10-05)
+
+Historical receipt: the October 12 refresh above supersedes this installed
+payload while retaining its Plan strategy and design/debug judgments.
 
 With owner authorization, `codex plugin add servotab@personal --json` refreshed
 the local installation from clean candidate source `b19fbbc`, preserving the
