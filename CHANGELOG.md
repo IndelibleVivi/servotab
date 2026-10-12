@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — incorporation candidate
+
+`VERSION` remains `0.6.5`. These source changes are not part of the published `v0.6.5` tag or its release assets, and do not establish an installation, directory update, deployment, or live behavioral result.
+
+- Replace the active `review-feedback` method with `incorporate`, retaining one implicit router, twelve explicit leaves, and thirteen skills. Technical feedback verification and correction across shared-contract consumers remain conditional work inside the same method.
+- Own the effect of specified discussions, feedback, research, and references on the target work: cover material contributions, preserve corrections and explicitly selected forms, judge applicability, and carry accepted implications through the authorized result and its verification. Evidence, inspiration, and adopted requirements can coexist within a source.
+- Keep design choices with `design` and responsibility choice with `delegate`. Permit a reading lane before narrowing implementation focus, or a worker that owns a complete bounded incorporation task. Open ideas can sharpen a design or check without becoming mandatory features or disappearing into a backlog.
+- Migrate current skill metadata, generated paths, documentation, and the site method catalog to `incorporate`. Reuse the existing leaf glyph unchanged; add no helper runtime, mandatory report, ledger, or approval round.
+
 ## 0.6.5 — published 2026-10-01
 
 The exact `v0.6.5` revision `c9fe5e6e773adb6ea99f349244f0fe3f5dadffdb` and four release assets were published on 2026-10-01 Singapore time. Main CI, local build, draft download and fresh public download passed the complete release-artifact check. The observed OpenAI directory listing remains `0.6.4`; GitHub publication does not update that separate surface.

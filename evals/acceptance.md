@@ -36,8 +36,9 @@ fieldlab review /path/to/study/fieldlab.json \
 
 Against that merged-source CLI, synthetic receipts for the then-current nine
 human-required cases produced review records accepted by the Servotab checker,
-with zero target-agent invocations. The current source candidate has twenty-four
-human-required cases out of twenty-eight; its four delegation canaries use the same
+with zero target-agent invocations. The current source candidate has twenty-six
+human-required cases out of thirty, sixty-three activation seeds, and nineteen
+adversarial controls; the original twelve controls are preserved unchanged. Its four delegation canaries use the same
 declared mechanics. One `delegate-bounded-investigation` attempt now has an independent
 review supporting all three semantic requirements, but its deterministic receipt
 was rejected. After the duplicate literal-label assertions were removed, a new
@@ -88,8 +89,9 @@ owner acceptance, superior performance or longitudinal reliability.
 
 ## Adversarial controls
 
-`adversarial-controls.json` preserves fifteen deliberately wrong output deltas from
-the audit and later rehearsals. They are test material, never instructions or
+`adversarial-controls.json` contains nineteen deliberately wrong output deltas. It
+preserves the original twelve from the audit and earlier rehearsals, three Plan controls, and four
+incorporation controls. They are test material, never instructions or
 genuine model outcomes. Apply each to its case's expected overlay in a disposable
 fixture copy.
 
@@ -117,8 +119,26 @@ does not establish them. Alternate valid wording may explicitly say "not authori
 or "out of scope"; structural checks must not reject those phrases. Separate tests
 reject changes to the source discussion or an extra file.
 
-Ordinary CI replays all twenty-eight baseline/expected file-and-command oracles, the
-fifteen adversarial deltas, alternate valid regressions, malformed/empty test suites,
+The current source candidate changes only the method trace path in three existing
+cases: `discussion-intake` moves its command-reference mention from `design.md`
+to `incorporate.md`; `feedback-correction-radius` and
+`repeated-review-scope-accretion` move their respective command-reference and
+reference-read paths from `review-feedback.md` to `incorporate.md`. Their fixtures,
+prompts, expected overlays, and existing behavior requirements are unchanged. A
+path mention alone does not establish source reading or method use.
+
+The two new cases, `incorporate-reader-handoff` and `incorporate-mixed-sources`,
+require semantic evidence for the real reader-to-Coordinator handoff, consequential
+source checks, correction scope, source applicability, adaptation, and honest
+closure. Three new adversarial deltas deliberately pass structural checks while
+misrepresenting interpretation, delegation, or source evidence; the fourth copies
+incompatible reference behavior and must fail the behavior oracle. Green code
+alone does not close the semantic requirements. Cold-start trials do not become
+formal Field Lab acceptance or local installation evidence without their respective
+records.
+
+Ordinary CI replays all thirty baseline/expected file-and-command oracles, the
+nineteen adversarial deltas, alternate valid regressions, malformed/empty test suites,
 authority edits and incomplete CLI deliveries. Synthetic receipt tests exercise
 acceptance gating without representing an actual attempt or human review.
 

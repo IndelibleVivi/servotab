@@ -13,6 +13,8 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 另行观察的 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 仍显示版本 `0.6.4`、开发者 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。GitHub release 与 Directory publication 依旧被刻意记录为不同状态，listing 本身也不暴露 package digest。0.6.5 plugin ZIP 已提供给 owner 更新目录，但 ZIP 可用不等于 Directory 已更新。具体证据和边界见 [current state](docs/current-state.md)。
 
+**未发布的 source candidate：** 本 checkout 以 `incorporate` 替代 active `review-feedback` method，`VERSION` 仍为 `0.6.5`。下方 method 表描述这一候选；已发布的 `v0.6.5` 归档与单独观察的 Directory listing 保留各自发布时的 method set，下方 tagged 安装命令仍选择已发布版本。
+
 ## 它做什么
 
 Servotab 保持四个稳定承诺：
@@ -24,9 +26,9 @@ Servotab 保持四个稳定承诺：
 
 日常 repository work 只需正常描述任务，不必先挑 method。唯一具备 implicit-invocation eligibility 的 router 是 `servotab`；其余 12 个 leaf skills 都是 explicit-only shortcuts。它们不会覆盖你的 prompt、`AGENTS.md`、repo rules、权限边界、Git decision 或 deployment authority。
 
-Servotab 也不会把日志、截图、review、旧计划或 generated artifact 自动当成指令。它们可能是 evidence；当前用户意图、accepted specification 与 canonical source 才决定工作方向。
+日志、截图、review、旧计划或 generated artifact 中可以同时包含 evidence、inspiration 和已经采纳的要求。具体作用由当前请求决定；材料不会自动授权自己，也不会因为被写进文件就变成当前 specification。
 
-当前 release 进一步明确了讨论材料的吸收方式：先覆盖重要目标与约束，再选择实施重点；分开看待需求与建议机制，为重要内容的舍弃或延后保留理由，并区分阅读覆盖、采纳判断和执行权限。明确限定的小任务仍保持有界，不新增 method、强制台账或审批轮次，见 [Design](methods/design.md)。
+Source candidate 的 [Incorporate](methods/incorporate.md) 负责让指定讨论、反馈、研究和参考对目标项目产生恰当影响：先覆盖重要贡献，再选择实施重点；结合上下文理解纠正，同时保留用户明确选择的形式及其目的。尚未定论的想法可以改善设计、例子或验证，无须自动变成功能。用户要求落实时，它会把采纳后的影响带到相关工作中并核验结果；技术 review 的代码核实仍在同一 method 内完成。明确限定的小任务保持有界，不增加强制摘要文件、台账或审批轮次。
 
 Release `0.6.5` 把同一条 complete-outcome 主线继续推进到执行阶段：跨组件计划先识别穿过真实 entry point 与关键 state boundary 的早期路径；执行在批量扩展 peer features 前先接通并观察它，同时保留 risk-appropriate red-green 工作与完整 accepted scope；已经核实的 review correction 会沿共享 contract 到达受影响的 consumers，同时保护合法例外与明确写入限制。多个 methods 共同参与时，goal、plan、responsibility owner、evidence 与 remaining scope 延续在同一项工作里，而不是重新开场。新增的 `feedback-correction-radius` canary 分开 visible regression、独立 complete-contract oracle 与 semantic review；这些检查不证明 target model 已改善。
 
@@ -99,6 +101,14 @@ $tdd 为这个 stale cursor bug 建立严格 red-green 回归证据。
 $spec-chain 依据这份 approved spec 建立完整 implementation plan；当前 tranche 不得替代完整 scope。
 ```
 
+使用尚未发布的 source candidate 时，可以明确调用新的材料吸收入口：
+
+```text
+$incorporate 把这份讨论和反馈吸收到当前项目里；保留已经作出的选择，独立判断其余提案，落实并验证有依据的改动。
+```
+
+同样的责任也可以由普通请求触发。长材料可以先交给一个阅读 worker，也可以把完整、有界的吸收任务交给一个 worker；task owner 仍须核实证据并集成结果。只有请求的结果就是阅读或评估时，阅读报告才足以完成任务。
+
 0.6.3 release 还会从普通请求里识别 workspace 生命周期：
 
 ```text
@@ -113,7 +123,7 @@ $worktree 盘点这个 repo 的 worktrees，建议哪些保留或收起；现在
 
 ## Method set
 
-Plugin 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit leaves。
+本 source candidate 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit leaves。`incorporate` 接替原 `review-feedback` 的位置，不增加第十三个 leaf；已发布的归档保留其 exact tag 对应的 method set。
 
 | Skill | Activation | 用途 |
 |---|---|---|
@@ -125,7 +135,7 @@ Plugin 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit l
 | `debug` | explicit only | 用 bounded hypotheses 和 boundary localization 修复根因 |
 | `tdd` | explicit only | 对适合 test-first 的 contract、state 与 regression 做 risk-based TDD |
 | `review` | explicit only | 做一轮 findings-first、evidence-backed review |
-| `review-feedback` | explicit only | 核实 feedback，并在不扩张 scope 的前提下把已确认修正带到正确 consumers |
+| `incorporate` | explicit only | 把指定材料吸收到目标工作中，判断其贡献并核验采纳后的实际效果 |
 | `verify` | explicit only | 用 fresh、risk-matched evidence 支撑 completion claim |
 | `worktree` | explicit only | 选择、复用、恢复、收起和按明确授权清理 workspace |
 | `delegate` | explicit only | 在深层执行前确定 responsibility；只在值得时把 bounded lane 交给一个 worker |
@@ -218,7 +228,11 @@ npm run build
 
 `release-receipt.json` 将两个 ZIP 绑定到同一源码 commit、tree 与包 manifest；`SHA256SUMS` 覆盖两个 ZIP 和 receipt。摘要只能核对一致性，不能单独认证发布者身份，仍需检查 GitHub 来源。完整操作见 [Releasing](docs/releasing.md)。
 
-维护校验使用 Python 3.10+，依赖固定在 `requirements-dev.txt`：PyYAML 与 Pillow 均不进入插件 payload。校验覆盖实际 PNG 解码、被动 SVG XML 解析、包结构与发布回归、源码/生成物一致性及网站测试和构建。0.6.5 release 有 25 个 case，其中 21 个声明了非空的 semantic-review requirements，12 个 adversarial controls 不变。全部 case 都有 deterministic fixture checks，但这不能自动关闭 semantic review requirements。正向 delegation 无法用 trace ceiling（`max_subagent_events`）断言，因此该 canary 把有界上限与要求提供真实 dispatch 与 integration 证据的 review requirements 配对；trivial、explicit-solo 与 capability-unavailable 三个 canary 继续保持 `max_subagent_events: 0`。已检查的 Field Lab 0.2 baseline source `d9f717a` 缺少所需 public input；Field Lab main `b87b14b` 已提供 `fieldlab review --requirement-outcomes`，并通过该 CLI 证明当时的 9 个 human-required cases 可被 Servotab 的 synthetic producer-consumer contract check 接受。`delegate-bounded-investigation` 的第一次 live attempt 虽获得三条 semantic support，却因重复的 fixed-label assertions 被拒；移除这些 literal checks、保留原 semantic review boundary 后，第二次独立预算的 attempt 通过 deterministic verification，新 reviewer 也支持全部三条 requirement，Servotab acceptance 返回 `accepted`。该证据只覆盖这一个 pinned workspace-scoped case；0.6.5 的 connected-execution 与 correction-radius cases 尚无 live target-model acceptance receipt，release 本身也不等于 install 或 activate。任何后续 live eval 仍需新的计划和显式 invocation budget；Field Lab 不会自动 retry。
+维护校验使用 Python 3.10+，依赖固定在 `requirements-dev.txt`：PyYAML 与 Pillow 均不进入插件 payload。校验覆盖实际 PNG 解码、被动 SVG XML 解析、包结构与发布回归、源码/生成物一致性及网站测试和构建。
+
+当前整合后未发布的 source candidate 有 30 个 case，其中 26 个声明了非空的 semantic-review requirements，另有 63 条 activation seeds 和 19 个 adversarial controls：原有 12 个和 3 个 Plan 对照完整保留，新增 4 个 incorporation 对照。两个新增 case 及既有 case 的 method trace 路径迁移见 [field evidence pack](evals/README.md)；这些当前源码计数不替换上文已发布 release 的历史计数。全部 case 都有 deterministic fixture checks，但这不能自动关闭 semantic review requirements。
+
+正向 delegation 无法用 trace ceiling（`max_subagent_events`）断言，因此该 canary 把有界上限与要求提供真实 dispatch 与 integration 证据的 review requirements 配对；trivial、explicit-solo 与 capability-unavailable 三个 canary 继续保持 `max_subagent_events: 0`。已检查的 Field Lab 0.2 baseline source `d9f717a` 缺少所需 public input；Field Lab main `b87b14b` 已提供 `fieldlab review --requirement-outcomes`，并通过该 CLI 证明当时的 9 个 human-required cases 可被 Servotab 的 synthetic producer-consumer contract check 接受。`delegate-bounded-investigation` 的第一次 live attempt 虽获得三条 semantic support，却因重复的 fixed-label assertions 被拒；移除这些 literal checks、保留原 semantic review boundary 后，第二次独立预算的 attempt 通过 deterministic verification，新 reviewer 也支持全部三条 requirement，Servotab acceptance 返回 `accepted`。该证据只覆盖这一个 pinned workspace-scoped case；0.6.5 的 connected-execution 与 correction-radius cases 尚无 live target-model acceptance receipt，release 本身也不等于 install 或 activate。Incorporation candidate 的 fixtures 与冷启动试做也不构成正式 Field Lab acceptance receipt 或本地安装验收。任何后续 live eval 仍需新的计划和显式 invocation budget；Field Lab 不会自动 retry。
 
 ## Feedback
 

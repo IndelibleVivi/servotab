@@ -1,5 +1,31 @@
 # Servotab release state
 
+## Integrated Incorporate source candidate (2026-10-12)
+
+The supplied Incorporate implementation `20a6340` and handoff tip `016b34a` are
+integrated onto the local Plan strategy candidate `ef48a03`. The active
+`incorporate` leaf replaces `review-feedback` while retaining one implicit router,
+twelve explicit leaves, twelve router references and seventy runtime package
+files. Technical review verification, scoped finding dispositions and correction
+propagation remain in Incorporate. Design retains open choices; Delegate retains
+responsibility allocation. Execute routes unresolved source reconciliation to
+Incorporate. The Plan strategy contracts, cases, controls, checker and prior
+limited acceptance evidence are preserved. See [candidate and local acceptance](incorporate-candidate.md).
+
+The integrated source pack has thirty cases, twenty-six with semantic-review
+requirements, sixty-three activation seeds and nineteen adversarial controls.
+The original twelve and three Plan controls remain alongside four Incorporate
+controls. Existing discussion and technical-feedback cases retain their fixtures,
+prompts and substantive oracles; only their method trace paths migrate.
+
+Local acceptance is in progress. The supplied handoff reports two isolated
+cold-start trials; their raw traces are absent from the bundle and were not
+independently inspected here. No local live-model invocation, formal semantic
+acceptance or ordinary-language activation result is established for Incorporate.
+`VERSION` remains `0.6.5`. This integration has not refreshed the installed plugin,
+published a release, updated the Directory or deployed the website. The historical
+local installation below still describes its own Plan-containing payload.
+
 ## Method judgment source follow-up (2026-10-05)
 
 The unversioned source candidate now also refines three existing decisions:
@@ -9,7 +35,7 @@ the deciding condition, and optionally separates conflicting technical propertie
 by time, location, condition or scale. The latter is not a required exercise for
 ordinary tasks. No leaf, dependency, runtime service or version was added.
 
-The current source pack still has 28 cases, 24 with semantic-review requirements.
+At this follow-up, the source pack had 28 cases, 24 with semantic-review requirements.
 The `cross-boundary-diagnosis` and `discussion-intake` requirements now cover the
 new judgments, and the intake reference answer was reconciled with them. These
 are revised evidence contracts, not new observed model outcomes; earlier pinned
@@ -52,7 +78,7 @@ changed by the local installation.
 
 The current unversioned source candidate develops execution strategy and durable task continuity within the existing `plan` leaf. Router/catalog and `execute` select meaningful strategy or recovery work even with a settled goal; `spec-chain`, `delegate` and `finish` share one task record and maintainer. The single implementation entry is [Plan strategy](plans/plan-strategy.md), with the separate [specification](specs/plan-strategy.md). There is no new leaf, runtime service, hook, dependency or version bump. The candidate payload differs from tagged 0.6.5 even though release metadata remains at that version. It is now installed on the maintainer host as described below, but remains unreleased.
 
-Fresh local checks passed generated sync, 13-skill validation, 70-file manifest identity, packaging selftest and all 82 Python tests. The source evidence pack now has 28 cases, 24 with semantic-review requirements, and 15 adversarial controls. Field Lab validate/selftest/list ran with zero target-model invocations. [Scenario coverage and results](../evals/plan-strategy.md) now record the separately authorized 12-attempt comparison and eight independent semantic reviews, requesting `gpt-6.1-sol` / `xhigh`. All twelve deterministic checks passed; receipt-bound acceptance accepted six candidate attempts and five baseline attempts. One baseline recovery omitted unknown historical publication state. The checker now accepts an explicitly named study with `--lab-id` while preserving its default identity and all existing evidence requirements; all 19 focused checker tests passed after this follow-up. No general effectiveness or efficiency gain, independent ordinary-use receipt or complete REQ-12 acceptance is established.
+Fresh local checks passed generated sync, 13-skill validation, 70-file manifest identity, packaging selftest and all 82 Python tests. At that observation, the source evidence pack had 28 cases, 24 with semantic-review requirements, and 15 adversarial controls. Field Lab validate/selftest/list ran with zero target-model invocations. [Scenario coverage and results](../evals/plan-strategy.md) now record the separately authorized 12-attempt comparison and eight independent semantic reviews, requesting `gpt-6.1-sol` / `xhigh`. All twelve deterministic checks passed; receipt-bound acceptance accepted six candidate attempts and five baseline attempts. One baseline recovery omitted unknown historical publication state. The checker now accepts an explicitly named study with `--lab-id` while preserving its default identity and all existing evidence requirements; all 19 focused checker tests passed after this follow-up. No general effectiveness or efficiency gain, independent ordinary-use receipt or complete REQ-12 acceptance is established.
 
 Both README editions and local website source distinguish the candidate from published installation targets. Website `npm ci`, all nine tests and the static build passed. Before the evidence-status wording update, local Methods/Docs checks at 1280 px and 390 px found no horizontal overflow; inspected renders were readable and the browser reported no console errors or warnings. The later wording-only update passed a fresh install/test/build check; rendered checks were not repeated. The install audit reported one high-severity indirect dependency entry for the existing `devalue` version; no dependency update is included in this Plan change. This is an observed audit result, not a demonstrated production exploit. Website deployment, release and Directory publication were not changed. The later local installation is recorded separately below.
 

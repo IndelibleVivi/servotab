@@ -5,7 +5,7 @@ ROUTER = {
     "name": "servotab",
     "description": (
         "Use for hands-on repository work when a quiet, risk-scaled engineering method "
-        "can improve design, execution strategy, implementation, debugging, review, delegation, workspace lifecycle, or verification. "
+        "can improve design, execution strategy, implementation, material incorporation, debugging, review, delegation, workspace lifecycle, or verification. "
         "Keep clear local changes direct, preserve the complete requested outcome, and add "
         "method only where risk or uncertainty justifies it. Do not use for general technical "
         "explanations, simple file lookup, casual discussion, or non-engineering writing."
@@ -121,19 +121,20 @@ METHODS = (
         ),
     },
     {
-        "skill": "review-feedback",
-        "method": "review-feedback",
+        "skill": "incorporate",
+        "method": "incorporate",
         "description": (
-            "Evaluate and act on code-review feedback with technical judgment. Use before "
-            "applying external suggestions, especially when feedback is ambiguous, broad, or "
-            "may conflict with repository constraints, and carry confirmed corrections to "
-            "relevant consumers without widening scope."
+            "Assess, adapt, and apply specified discussions, feedback, findings, or references "
+            "to existing project work. Preserve coverage, corrections, and selected intent; "
+            "judge fit and carry adopted effects through the authorized result. Includes "
+            "technical review feedback; incidental sources or understanding material without "
+            "a target-work adoption question need no separate incorporation workflow."
         ),
-        "display_name": "Review Feedback",
-        "short_description": "Verify and propagate review corrections",
+        "display_name": "Incorporate",
+        "short_description": "Carry source contributions into existing work",
         "default_prompt": (
-            "Use $review-feedback to verify each review item against the repository, implement "
-            "valid feedback across the affected behavior, and push back where needed."
+            "Use $incorporate to reconcile the specified material with this project, judge "
+            "its relevant contributions, and carry adopted effects through the requested work."
         ),
     },
     {

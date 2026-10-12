@@ -1,6 +1,6 @@
 ---
 name: servotab
-description: "Use for hands-on repository work when a quiet, risk-scaled engineering method can improve design, execution strategy, implementation, debugging, review, delegation, workspace lifecycle, or verification. Keep clear local changes direct, preserve the complete requested outcome, and add method only where risk or uncertainty justifies it. Do not use for general technical explanations, simple file lookup, casual discussion, or non-engineering writing."
+description: "Use for hands-on repository work when a quiet, risk-scaled engineering method can improve design, execution strategy, implementation, material incorporation, debugging, review, delegation, workspace lifecycle, or verification. Keep clear local changes direct, preserve the complete requested outcome, and add method only where risk or uncertainty justifies it. Do not use for general technical explanations, simple file lookup, casual discussion, or non-engineering writing."
 ---
 
 # Servotab
@@ -12,7 +12,7 @@ Use ordinary repository requests to select and apply engineering methods. The us
 - Read applicable instructions and the smallest relevant implementation, tests, and accepted contract. Establish the requested result, current behavior, and evidence needed to distinguish success from a plausible-looking patch.
 - Size risk from the affected behavior, not confidence, file count, or patch size. Timers, shared state, persistence, recovery, generated artifacts, permissions, external calls, and public contracts can make a tiny edit consequential.
 - Preserve explicit corrections and accepted scope. A newer plan, review, screenshot, generated artifact, or already-written code supplies evidence; it acquires authority only through the current request or repository contract.
-- When asked to absorb supplied discussions or feedback into the work, cover their material content before choosing implementation focus or dispatching it. Read `references/design.md` when forming scope from that material; distinguish reading coverage, adoption judgment, and execution permission. A first slice must not silently become the whole request.
+- When asked to incorporate specified discussions, feedback, or references into existing work, read `references/incorporate.md` when reconciliation governs the result. Establish relevant coverage before narrowing implementation focus; a reader may establish that coverage first. Preserve corrections and explicitly selected forms, distinguish adoption from permission, and carry adopted effects through the current commission. Incidental sources do not create a separate intake workflow.
 - Keep clear local work direct. Before consequential action, a settled goal can still leave material choices about order, effort, evidence or continuity. Read `references/plan.md` for those choices, meaningful recovery or a route invalidated by new evidence; reuse a sound route instead of manufacturing a plan or probe.
 - Choose responsibility before deep execution. Decide whether this task stays in the coordinator lane or becomes one bounded worker lane, and keep small work, frequent cross-owner decisions, and one responsibility's coupled parts together in a single lane. Coupling alone does not force the coordinator lane. An explicit solo request forbids delegation; when subagent capability is unavailable, sequence the same ownership locally and say so. Reuse a worker that already owns the lane instead of duplicating it.
 
@@ -47,7 +47,7 @@ Keep one commission across methods: carry forward the outcome, settled choices, 
 - Unknown cause, conflicting evidence, or repeated failure: `references/debug.md`
 - Contracts and behavior that benefit from test-first work: `references/tdd.md`
 - Diff, commit, branch, PR, or implementation review: `references/review.md`
-- External review feedback to validate and apply: `references/review-feedback.md`
+- Specified discussions, feedback, findings, or references to assess, adapt, and apply to existing work, including technical review feedback: `references/incorporate.md`
 - Readiness audits, uncertain evidence, or shared/runtime acceptance boundaries: `references/verify.md`
 - Workspace selection, reuse or recovery; justified isolation; parking or worktree organization and cleanup: `references/worktree.md`
 - Responsibility choice and bounded worker lanes that materially improve the work: `references/delegate.md`

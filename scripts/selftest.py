@@ -37,7 +37,7 @@ EXPECTED_SKILLS = (
     "debug",
     "tdd",
     "review",
-    "review-feedback",
+    "incorporate",
     "verify",
     "worktree",
     "delegate",
@@ -230,14 +230,14 @@ def main() -> int:
     router = (skills_root / "servotab" / "SKILL.md").read_text(encoding="utf-8")
     assert_true("# Servotab" in router, "router identity is wrong")
     assert_true("references/delegate.md" in router, "router lost delegate routing")
-    assert_true("references/review-feedback.md" in router, "router lost feedback routing")
+    assert_true("references/incorporate.md" in router, "router lost incorporation routing")
     assert_true("references/design.md" in router, "router lost design routing")
     assert_true("$soft" not in router and "Softpowers" not in router, "router retains old branding")
 
     execute = (ROOT / "methods" / "execute.md").read_text(encoding="utf-8")
     plan = (ROOT / "methods" / "plan.md").read_text(encoding="utf-8")
     review = (ROOT / "methods" / "review.md").read_text(encoding="utf-8")
-    feedback = (ROOT / "methods" / "review-feedback.md").read_text(encoding="utf-8")
+    incorporate = (ROOT / "methods" / "incorporate.md").read_text(encoding="utf-8")
     delegate = (ROOT / "methods" / "delegate.md").read_text(encoding="utf-8")
     design = (ROOT / "methods" / "design.md").read_text(encoding="utf-8")
     debug = (ROOT / "methods" / "debug.md").read_text(encoding="utf-8")
@@ -261,7 +261,7 @@ def main() -> int:
     )
     for verdict in ("advances", "research-only", "diverges", "authority unclear"):
         assert_true(verdict in review, f"review lost goal-integrity verdict: {verdict}")
-    assert_true("not authority by authorship" in feedback, "review-feedback lost authority boundary")
+    assert_true("not authority by authorship" in incorporate, "incorporate lost authority boundary")
     assert_true(
         "Choose the first executable path" in plan,
         "plan lost first executable path guidance",
@@ -271,8 +271,8 @@ def main() -> int:
         "execute lost cross-method continuity",
     )
     assert_true(
-        "repair radius separately from repair depth" in feedback,
-        "review-feedback lost bounded correction propagation",
+        "repair radius separately from repair depth" in incorporate,
+        "incorporate lost bounded correction propagation",
     )
     assert_true(
         "Keep one commission across methods" in router,

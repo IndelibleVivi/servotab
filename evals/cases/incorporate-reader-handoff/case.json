@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "case_id": "incorporate-reader-handoff",
+  "description": "A real single-reader handoff must preserve distant partial corrections and unfinished ideas while the coordinator checks source windows and current code, then implements the bounded local outcome.",
+  "activation": "implicit",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 900,
+  "workspace_assertions": [
+    {
+      "type": "file_exists",
+      "path": "READER.md"
+    },
+    {
+      "type": "file_exists",
+      "path": "IMPLEMENTATION.md"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": [
+        "filing.py",
+        "READER.md",
+        "IMPLEMENTATION.md"
+      ]
+    }
+  ],
+  "command_assertions": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "-q"
+      ]
+    },
+    {
+      "argv": [
+        "python3",
+        "-I",
+        "-S",
+        "-B",
+        "-c",
+        "from pathlib import Path\nimport copy, importlib.util, inspect\nspec = importlib.util.spec_from_file_location(\"candidate_filing\", Path(\"filing.py\").resolve())\nassert spec is not None and spec.loader is not None\nmod = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(mod)\nassert list(inspect.signature(mod.archive_clip).parameters) == [\"inbox\", \"clip_id\", \"window_id\", \"online\"]\nassert list(inspect.signature(mod.undo_archive).parameters) == [\"inbox\", \"receipt\", \"window_id\"]\nseed = [\n    {\"id\": \"first\", \"text\": \"First\", \"annotations\": [{\"note\": \"keep me\"}]},\n    {\"id\": \"middle\", \"text\": \"Middle\", \"source\": {\"author\": None, \"correction\": \"Anonymous\"}, \"tags\": [\"later\"], \"annotations\": [{\"quote\": \"Q\", \"note\": \"N\"}]},\n    {\"id\": \"last\", \"text\": \"Last\", \"extra\": {\"nested\": [1, 2, 3]}},\n]\nfor index, selected in enumerate(seed):\n    inbox = copy.deepcopy(seed)\n    before = copy.deepcopy(inbox)\n    remaining, receipt = mod.archive_clip(inbox, selected[\"id\"], window_id=\"west\", online=False)\n    assert inbox == before, \"archive must preserve caller state\"\n    assert remaining is not inbox\n    assert remaining == before[:index] + before[index + 1:], \"remove only the selected record\"\n    remaining_before = copy.deepcopy(remaining)\n    restored = mod.undo_archive(remaining, receipt, window_id=\"east\")\n    assert restored == before, \"restore the whole record at its original position across windows\"\n    assert restored is not remaining\n    assert remaining == remaining_before, \"undo must preserve caller state\"\nfor inbox, selected in [([], \"missing\"), ([{\"id\": \"locked\", \"text\": \"L\", \"locked\": True}], \"locked\")]:\n    before = copy.deepcopy(inbox)\n    try:\n        mod.archive_clip(inbox, selected, online=False)\n    except ValueError:\n        pass\n    else:\n        raise AssertionError(\"missing and locked items must fail explicitly\")\n    assert inbox == before, \"a rejected action must not change input\"\nprint(\"archive, record preservation, position, offline, cross-window and rejection paths verified\")\n"
+      ]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 32,
+    "max_plan_updates": 1
+  },
+  "human_review_requirements": [
+    "reader-topology: On a capable host, inspect actual dispatch, reader return and coordinator activity for exactly one logical reader lane that writes only READER.md while the coordinator owns filing.py and integration. This prompt explicitly requests the reader, so success does not prove spontaneous delegation selection. A narrated worker or a coordinator-written packet is insufficient. If capability is absent, honest local completion may preserve the product outcome but this reader-path requirement remains inconclusive. Collaboration event counts do not establish the number or responsibilities of logical workers.",
+    "interpretation: Check the packet against the whole discussion: the late operation-owned receipt correction replaces the earlier window restriction while retaining complete saved records, exact immediate position and offline behavior; scoped assent does not adopt surrounding proposals. Preserve locked-item protection, the already-covered label, and the reasons for open artwork, categories, duplicates, bulk Undo, sorting and ribbon ideas. The stale launch paragraph must not replace that interpretation. Important conclusions need usable source anchors, and actual unread or truncated coverage must be disclosed.",
+    "coordinator-integration: Before changing filing.py, the coordinator must check decisive source windows including the cross-window correction with its retained record/position context and the stale draft, and inspect relevant current code rather than treating the packet as normative authority. Verify the actual implementation and fresh checks against those decisions. A correct patch without evidence of the reader-to-coordinator handoff and consequential back-checks does not establish this method behavior; a second complete reread is not required.",
+    "closure: The final response and artifacts must distinguish reader interpretation, current repository observations and chosen implementation. Keep current signatures and the exact write boundary, retain useful unresolved contributions without making them requirements or blocking independent work, and report the commands and results actually observed. Expected overlays, file existence and passing behavior oracles do not prove delegation, source-reading order, external actions or owner acceptance."
+  ]
+}

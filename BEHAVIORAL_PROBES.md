@@ -91,8 +91,8 @@ Prompt:
 
 Expected:
 
-- 读取 `review-feedback.md`
-- 每项 Accept / Accept with adjustment / Verify further / Reject / Defer
+- 读取 `incorporate.md`，按其中的技术反馈检查核实代码与约束
+- 对重要意见给出有依据的采纳、调整、待核实、拒绝或延后判断，不要求固定标签
 - 不表演式全盘同意
 - 不为一个反馈列表自动启动多个 reviewer
 

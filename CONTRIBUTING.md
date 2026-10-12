@@ -1,6 +1,6 @@
 # Contributing to Servotab
 
-Thank you for bringing evidence back from real work. Servotab `0.6.2` is a plugin-native source candidate. Activation misses, false positives, wrong routing, lost scope, package or icon failures, and unnecessary process are more useful than an abstract request for another workflow.
+Thank you for bringing evidence back from real work. Servotab is a plugin-native engineering method layer. Activation misses, false positives, wrong routing, lost scope, package or icon failures, and unnecessary process are more useful than an abstract request for another workflow. For an unreleased source candidate, include the source revision and working-tree status alongside `VERSION`; its version may still match a published release.
 
 ## Choose the right feedback path
 
@@ -24,7 +24,7 @@ Preserve the smallest reproduction that still supports the report. Use placehold
 
 When available, include:
 
-1. Servotab version or commit;
+1. Servotab version and source revision when available, including whether it is an unreleased or modified checkout;
 2. Codex surface, relevant model, operating system, and repository type;
 3. a sanitized original prompt;
 4. expected and observed behavior;
@@ -42,6 +42,15 @@ For delegation behavior, distinguish host capability from method selection:
 - whether the coordinator verified worker output.
 
 A subagent event alone does not prove that Servotab selected the `delegate` method, and a missing event does not by itself prove the method was skipped when the host exposed no delegation capability. Token count alone is not a quality verdict; first inspect whether the requested outcome, authority, and necessary boundaries survived.
+
+For incorporation behavior, show the difference between material received and its effect on the target work:
+
+- whether the requested material was covered before implementation focus narrowed, while an explicitly bounded request stayed bounded;
+- whether corrections, important rationale, open ideas, and explicitly selected forms survived interpretation;
+- whether evidence, proposals, and accepted requirements were distinguished within mixed sources;
+- whether the authorized effect was completed and verified, or a grounded reason supported leaving the work unchanged.
+
+A reading worker is optional. A useful report can show where its evidence helped the task owner decide; it does not require a separate summary document, a second full reading, or a private transcript.
 
 ## Canonical source and generated package
 
@@ -89,10 +98,10 @@ PACK_MANIFEST.json
 
 - Make a method serve an observable engineering task rather than method ceremony.
 - Preserve the complete requested usable outcome; do not default it to an MVP, scaffold, placeholder, or convenient tranche.
-- Classify logs, screenshots, reviews, plans, and generated outputs as instruction, evidence, or inspiration under current intent and authority.
+- Judge the relevant content of logs, screenshots, reviews, plans, and generated outputs under current intent and authority. Evidence, inspiration, and adopted requirements can coexist in one source; preserve explicitly selected forms as well as their purpose.
 - Add a guard, fallback, hash, or test only for an observed failure, explicit contract, or real boundary.
 - Keep the router quiet. Only `servotab` is implicit eligible; the twelve leaves remain explicit-only unless an authorized release proposal changes the topology.
-- Keep current semantic IDs such as `design`, `review-feedback`, and `delegate`. Do not restore the retired `brainstorm`, `receive-review`, or `parallel` IDs to current source.
+- Keep current semantic IDs such as `design`, `incorporate`, and `delegate`. `incorporate` replaces the active `review-feedback` method and retains technical feedback checks within that method. Do not restore the retired `brainstorm`, `receive-review`, `review-feedback`, or `parallel` IDs to current source; keep historical release and migration records accurate.
 
 ## Field Lab and behavior evidence
 

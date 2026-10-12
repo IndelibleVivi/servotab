@@ -4,7 +4,7 @@ import designIcon from "../../../assets/skill-icons/design/icon.svg?url";
 import executeIcon from "../../../assets/skill-icons/execute/icon.svg?url";
 import finishIcon from "../../../assets/skill-icons/finish/icon.svg?url";
 import planIcon from "../../../assets/skill-icons/plan/icon.svg?url";
-import reviewFeedbackIcon from "../../../assets/skill-icons/review-feedback/icon.svg?url";
+import incorporateIcon from "../../../assets/skill-icons/incorporate/icon.svg?url";
 import reviewIcon from "../../../assets/skill-icons/review/icon.svg?url";
 import specChainIcon from "../../../assets/skill-icons/spec-chain/icon.svg?url";
 import tddIcon from "../../../assets/skill-icons/tdd/icon.svg?url";
@@ -69,11 +69,11 @@ export const methods: Method[] = [
     signal: "Use when another pair of eyes should challenge the change.",
   },
   {
-    name: "review-feedback",
-    icon: reviewFeedbackIcon,
+    name: "incorporate",
+    icon: incorporateIcon,
     purpose:
-      "Validates external review feedback against current source before applying a narrow, justified correction.",
-    signal: "Use when feedback arrives from a reviewer or bot.",
+      "Carries supplied discussions, feedback, research, and references into justified, verified effects on the target work.",
+    signal: "Use when asked to absorb specified material into a project.",
   },
   {
     name: "verify",

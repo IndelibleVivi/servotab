@@ -79,6 +79,8 @@ After confirmed dispatch, continue a non-overlapping Coordinator responsibility 
 
 ## Return packet
 
+For a material-reading lane, state whether the worker owns source reconciliation only or the complete incorporation task. Give the reader the relevant whole where feasible; if material must be split, assign reconciliation of cross-part corrections and dependencies. Require supported interpretations with decisive source anchors, consequential corrections, unresolved contributions, and coverage limits. A clean summary must not silently turn proposals into approved requirements. The Coordinator checks the source windows and project facts that determine consequential choices before integration; a second complete reading is not a prerequisite to delegation. Use the Incorporate method for these material judgments, without imposing a fixed return template on every worker.
+
 Require one explicit return containing:
 
 - Outcome and completion status

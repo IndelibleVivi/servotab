@@ -13,6 +13,8 @@ Latest GitHub release: **[`0.6.5`](https://github.com/IndelibleVivi/servotab/rel
 
 The separately observed [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) still reports version `0.6.4`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. GitHub release and directory publication remain intentionally recorded as different states, and the listing exposes no package digest. The 0.6.5 plugin ZIP is available for an owner-controlled directory update; its availability does not establish that update. See [current state](docs/current-state.md) for evidence and limits.
 
+**Unreleased source candidate:** `incorporate` replaces the active `review-feedback` method in this checkout, while `VERSION` remains `0.6.5`. The method table below describes that candidate. The published `v0.6.5` archives and the separately observed directory listing retain their published method sets; the tagged install command below continues to select the published release.
+
 ## What Servotab changes
 
 Servotab keeps four stable promises:
@@ -24,9 +26,9 @@ Servotab keeps four stable promises:
 
 Describe ordinary repository work normally. The only implicit-eligible skill is the `servotab` router; twelve method leaves remain explicit-only shortcuts. Servotab does not replace your prompt, `AGENTS.md`, repository rules, permission boundaries, Git decisions, or deployment authority.
 
-A log, screenshot, review, old plan, or generated artifact may be useful evidence. It does not authorize itself or silently become the current specification.
+A log, screenshot, review, old plan, or generated artifact can contribute evidence, inspiration, and accepted requirements together. Its role follows the current request; it does not authorize itself or silently become the current specification.
 
-The current release also makes discussion intake explicit: when asked to absorb a body of material, cover its important goals and constraints before selecting implementation priorities. Separate the needs from proposed mechanisms, retain reasons for important omissions or deferrals, and distinguish reading coverage from adoption and execution authority. Bounded requests stay bounded; no new method, mandatory ledger, or approval round is added. See [Design](methods/design.md).
+The source candidate's [Incorporate](methods/incorporate.md) method carries specified discussions, feedback, research, and references into appropriate effects on the target work. It covers important contributions before selecting implementation priorities, follows corrections in context, and preserves explicitly selected forms as well as their purpose. Open ideas can sharpen a design, example, or verification without automatically becoming features. When implementation is requested, the method carries adopted implications through the affected work and checks the result. Technical review retains its code-based verification within the same method. Bounded requests stay bounded, with no mandatory summary document, ledger, or new approval round.
 
 Release `0.6.5` develops that same complete-outcome thesis at execution time. Cross-component plans identify an early path through the real entry point and material state boundary; execution connects and observes that path before multiplying peer features, preserving risk-appropriate red-green work and the full accepted scope; and a confirmed review correction follows the shared contract to affected consumers while protecting legitimate exceptions and explicit write limits. When several methods participate, the goal, plan, responsibility owner, evidence, and remaining scope stay continuous instead of restarting the commission. The new `feedback-correction-radius` canary separates visible regression checks from an independent complete-contract oracle and semantic review; these checks do not establish improved target-model behavior.
 
@@ -101,6 +103,14 @@ $tdd establish strict red-green evidence for this stale-cursor regression.
 $spec-chain turn this approved specification into a complete implementation plan; the current tranche must not replace the full scope.
 ```
 
+With the unreleased source candidate, a material-led task can use the new shortcut:
+
+```text
+$incorporate absorb this discussion and feedback into the current project; preserve the choices already made, judge the remaining proposals, and implement and verify the supported changes.
+```
+
+The same responsibility can be selected from an ordinary request. Long material may be read in a worker lane, or one worker may own the complete bounded task; the task owner still checks evidence and integrates the result. A reading report is enough only when reading or assessment is the requested outcome.
+
 The 0.6.3 release also handles workspace lifecycle in ordinary language:
 
 ```text
@@ -115,7 +125,7 @@ Calling `$worktree` does not request a new checkout. Parking can remove an inact
 
 ## Method set
 
-The plugin contains thirteen skills: one implicit router and twelve explicit leaves.
+This source candidate contains thirteen skills: one implicit router and twelve explicit leaves. `incorporate` takes the former `review-feedback` slot; it does not add a thirteenth leaf. Published release artifacts retain the method set recorded for their exact tags.
 
 | Skill | Activation | Purpose |
 |---|---|---|
@@ -127,7 +137,7 @@ The plugin contains thirteen skills: one implicit router and twelve explicit lea
 | `debug` | explicit only | Localize the first violated assumption and repair the root cause |
 | `tdd` | explicit only | Apply risk-based test-first work to contracts, state, and regressions |
 | `review` | explicit only | Produce one findings-first, evidence-backed implementation review |
-| `review-feedback` | explicit only | Verify feedback and carry confirmed corrections to the right consumers without widening scope |
+| `incorporate` | explicit only | Absorb specified material into the target work, judge its contribution, and verify the adopted effects |
 | `verify` | explicit only | Match completion claims to fresh, proportionate evidence |
 | `worktree` | explicit only | Choose, reuse, restore, park, and clean up workspaces within explicit authority |
 | `delegate` | explicit only | Choose responsibility before deep work; hand a bounded lane to a worker only when it pays |
@@ -182,8 +192,12 @@ fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-The 0.6.5 release contains twenty-five cases; twenty-one declare non-empty
-semantic-review requirements, and twelve adversarial controls remain unchanged. All cases have
+The integrated unreleased source candidate contains thirty cases; twenty-six declare
+non-empty semantic-review requirements. It has sixty-three activation seeds and
+nineteen adversarial controls: the original twelve and three Plan controls remain, with four new
+incorporation controls. See the [field evidence pack](evals/README.md) for the two
+new cases and the existing cases whose method trace paths moved to `incorporate`.
+These source counts do not replace the published release counts above. All cases have
 deterministic fixture checks, but those checks do not execute a target model or
 close declared semantic-review requirements. Positive delegation cannot be
 asserted by the trace ceiling (`max_subagent_events`), so its canary pairs a
@@ -202,6 +216,8 @@ all three requirements; Servotab acceptance returned `accepted`. This evidence i
 limited to that pinned workspace-scoped case. The compatible Servotab source is
 released, but no 0.6.5 connected-execution or correction-radius case has a live target-model
 acceptance receipt, and the release does not itself establish installation or activation.
+The incorporation candidate's fixtures and cold-start trials do not constitute a
+formal Field Lab acceptance receipt or local installation acceptance.
 Any further live synthetic attempt
 still requires a new plan and explicit invocation budget; Field Lab does not retry
 automatically.
