@@ -1,0 +1,9 @@
+interface:
+  display_name: "Incorporate"
+  short_description: "Carry source contributions into existing work"
+  default_prompt: "Use $incorporate to reconcile the specified material with this project, judge its relevant contributions, and carry adopted effects through the requested work."
+  brand_color: "#315EFB"
+  icon_small: "./assets/icon-400.png"
+  icon_large: "./assets/icon.svg"
+policy:
+  allow_implicit_invocation: false

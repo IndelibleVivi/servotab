@@ -24,7 +24,7 @@ MARKETPLACE = ROOT / ".agents/plugins/marketplace.json"
 ASSET_NAMES = ("composer-icon.png", "logo.png")
 SKILL_ICON_NAMES = ("icon.svg", "icon-400.png")
 LEGAL_FILES = ("LICENSE", "NOTICE.md")
-RETIRED_METHOD_FILES = ("brainstorm.md", "receive-review.md", "parallel.md")
+RETIRED_METHOD_FILES = ("brainstorm.md", "receive-review.md", "parallel.md", "review-feedback.md")
 RETIRED_REPO_PATHS = (
     "skills",
     "install.sh",

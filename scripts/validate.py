@@ -33,6 +33,9 @@ RETIRED_ACTIVE_TOKENS = (
     "references/brainstorm.md",
     "references/receive-review.md",
     "references/parallel.md",
+    "$review-feedback",
+    "references/review-feedback.md",
+    "../review-feedback/SKILL.md",
 )
 ICON_INTERFACE = {
     "icon_small": "./assets/icon-400.png",

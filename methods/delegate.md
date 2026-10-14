@@ -58,6 +58,8 @@ The order must support independent judgment without hidden parent context. Deleg
 
 Keep the order proportional: normally one to three bullets per field. Link canonical sources instead of restating whole plans or global rules, and include a constraint only when this lane needs it to judge or act correctly. A work order is not a second specification.
 
+When a durable plan exists, pass its explicit task entry, relevant stages, settled choices, material conditions, evidence and unfinished scope. Name one shared-plan maintainer, usually the Coordinator; workers return changes or write only assigned records. A new lane does not create another main plan. Inspect current content and diff before integrating a return.
+
 Before dispatch, the Coordinator checks that outcome, acceptance criteria, dependencies, authority, stop conditions, writer ownership, and return evidence are compatible. Ask the worker to validate that chain at entry, then make normal in-scope decisions without escalating trivia.
 
 ## Dispatch and write ownership
@@ -71,6 +73,8 @@ Keep one writer for every overlapping file, branch, database, or live-state surf
 After confirmed dispatch, continue a non-overlapping Coordinator responsibility or wait. Do not repeatedly poll healthy workers; resume on an explicit return, a concrete delivery problem, or a user status request.
 
 ## Return packet
+
+For a material-reading lane, state whether the worker owns source reconciliation only or the complete incorporation task. Give the reader the relevant whole where feasible; if material must be split, assign reconciliation of cross-part corrections and dependencies. Require supported interpretations with decisive source anchors, consequential corrections, unresolved contributions, and coverage limits. A clean summary must not silently turn proposals into approved requirements. The Coordinator checks the source windows and project facts that determine consequential choices before integration; a second complete reading is not a prerequisite to delegation. Use the Incorporate method for these material judgments, without imposing a fixed return template on every worker.
 
 Require one explicit return containing:
 

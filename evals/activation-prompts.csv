@@ -3,8 +3,8 @@ implicit-quick,true,none,"把空状态文案改成 No cards in this scope，直�
 implicit-debug,true,debug,"Learnt mutation 后旧 cursor 混入新 consistency，找到根因并修复。"
 implicit-ui,true,none_or_execute,"修正手机 composer 多行时发送键位置，直接实现并做合适的交互验证。"
 implicit-review,true,review,"审查当前 dirty diff，只报告真实可操作的 P0-P2 findings。"
-implicit-review-feedback,true,review-feedback,"逐项核实这份 code review，落实有效意见并对错误建议给出技术理由。"
-implicit-feedback-radius,true,review-feedback,"Review 指出了 chart 的跨午夜日期错误。核实后把同一 user-date contract 修到 detail 与 share consumer，同时保留 UTC audit 例外和明确写入范围。"
+implicit-incorporate-review,true,incorporate,"逐项核实这份 code review，落实有效意见并对错误建议给出技术理由。"
+implicit-feedback-radius,true,incorporate,"Review 指出了 chart 的跨午夜日期错误。核实后把同一 user-date contract 修到 detail 与 share consumer，同时保留 UTC audit 例外和明确写入范围。"
 implicit-verify,true,verify,"检查当前 branch 是否 ready，并准确区分 verified 与 not verified。"
 implicit-contract,true,plan_or_execute,"把 source_chunk_id 贯穿 artifact contract、producer、consumer 和 projection。"
 implicit-spec-chain,true,spec-chain,"这份 approved spec 是大重构的 authority。写完整 implementation plan 并执行，不能拿当前阶段替代全部 scope。"
@@ -46,6 +46,19 @@ explicit-worktree-inspect,true,worktree,$worktree 看看这些旧现场分别在
 implicit-worktree-park,true,worktree,暂停这个未合并实验，保留分支和恢复入口；检查后按我已确认的目录移除范围收起现场。
 implicit-worktree-approved-batch,true,worktree,执行刚才已经确认的两项目录清理；保留分支；其中状态变了的单独留下，安全项继续。
 implicit-worktree-trivial-control,true,none,就在当前专用 checkout 修正这一行拼写，不涉及共享状态或并发写入。
-implicit-discussion-intake,true,design,我把一长段关于下一步做什么的产品讨论全文贴在 DISCUSSION.md 了；请完整吸收整段讨论（含中段的更正、后半的延后项和底部补充内容），再判断先做什么，并说明哪些重要项不采纳、为什么。只做只读判断，不要改别的文件。
+implicit-discussion-intake,true,incorporate,我把一长段关于下一步做什么的产品讨论全文贴在 DISCUSSION.md 了；请完整吸收整段讨论（含中段的更正、后半的延后项和底部补充内容），再判断先做什么，并说明哪些重要项不采纳、为什么。只做只读判断，不要改别的文件。
 negative-discussion-reference-only,false,none,我只需要参考 DISCUSSION.md 里第 14 项提到的按 item revision 做预览缓存这一条，其它都不用管；给我一句话确认就行，不要建跟踪表或做完整规格演练。
 negative-worktree-explanation,false,none,只解释 Git worktree 和 branch 有什么区别，不检查或操作仓库。
+implicit-plan-assumption,true,plan,三个导出格式都要完整实现；brief 里说现有接口返回全部记录，你先结合仓库把事情做完。
+implicit-plan-resume,true,plan,接着 docs/plans/export.md 的任务做，旧勾选可能过时；旁边最新修改的文件属于另一项任务。
+implicit-plan-domain,true,plan,方向已定。现有 renderer 已验证；这次成败在真实图像、长标题和操作反馈的组合，把完整编辑体验做出来。
+implicit-plan-mature,true,none_or_execute,现有 adapter 和回归已验证，依照同一成熟路径补齐另外三个同构字段。
+implicit-plan-causal-control,true,debug,目前还不知道保存丢失的原因，先用现有日志定位并修复，不要把因果调查改成规划文档。
+implicit-incorporate-mixed,true,incorporate,结合这份用户反馈、查到的文档和参考项目代码，判断哪些实际适合当前仓库，把有效部分完整做到现有体验里，并说明没有采纳的重要内容。
+implicit-incorporate-reader,true,incorporate_or_delegate,这份长对话有前后改口和未展开的想法。交给一名reader完整阅读，返回能回查的判断；主线程核实关键原文和当前代码后继续实现，别把小弟总结直接当作已批准规格。
+explicit-incorporate,true,incorporate,$incorporate 判断这些资料和意见对当前项目有什么作用，把已授权采纳的影响落实到底。
+negative-sources-summary-only,false,none,只总结这三篇文章各自在讲什么，不涉及我的项目，也不需要提出改造方案。
+negative-reference-introduction,false,none,只介绍这个参考项目的机制，不看本地仓库，也不考虑往我们项目里采用。
+incorporate-control-settled-spec,true,spec-chain,这份完整规格已经批准，按它实施即可；不用重新投票评估各条要不要采纳，保持已有的计划和验收范围。
+incorporate-control-incidental-doc,true,debug,继续定位已复现的时区bug；这篇文档仅用于核实当前库的一个参数，别把它变成独立资料采纳任务。
+incorporate-control-obvious-correction,true,none_or_execute,用户只指出这一行按钮文字有拼写错，改成已指定的文字并检查即可，不需要意见归类报告。

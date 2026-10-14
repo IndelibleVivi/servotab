@@ -162,6 +162,27 @@ class BehaviorAcceptanceTests(unittest.TestCase):
         self.case_id = "tiny-copy"; self.make_receipt()
         self.assertEqual(assess(self.receipt_path)["status"], "accepted")
 
+    def test_named_study_requires_explicit_identity_and_preserves_semantic_gate(self):
+        self.receipt["lab_id"] = "servotab-plan-strategy"; self.seal()
+        for expected in ("servotab", "another-study", ""):
+            with self.subTest(expected=expected), self.assertRaisesRegex(ValueError, "lab_id"):
+                assess(self.receipt_path, lab_id=expected)
+        self.assertEqual(assess(self.receipt_path, lab_id="servotab-plan-strategy")["status"], "needs-review")
+        self.assertEqual(assess(self.receipt_path, self.review(), lab_id="servotab-plan-strategy")["status"], "accepted")
+        (self.work / "final-output.md").write_text("Tampered after review.\n")
+        with self.assertRaisesRegex(ValueError, "identity mismatch"):
+            assess(self.receipt_path, lab_id="servotab-plan-strategy")
+
+    def test_cli_accepts_explicit_study_without_rewriting_receipt(self):
+        self.case_id = "tiny-copy"; self.make_receipt()
+        self.receipt["lab_id"] = "servotab-plan-strategy"; self.seal()
+        before = self.receipt_path.read_bytes()
+        script = ROOT / "scripts/check_behavior_acceptance.py"
+        for args, expected in (([], 3), (["--lab-id", "servotab-plan-strategy"], 0)):
+            result = subprocess.run([sys.executable, "-S", str(script), str(self.receipt_path), *args], capture_output=True, text=True)
+            self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+        self.assertEqual(self.receipt_path.read_bytes(), before)
+
     def test_cli_exit_statuses_are_machine_usable(self):
         script = ROOT / "scripts/check_behavior_acceptance.py"
         for args, expected in (([], 2), (["--review", str(self.review())], 0)):

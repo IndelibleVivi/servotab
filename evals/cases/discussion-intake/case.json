@@ -23,7 +23,7 @@
     "max_plan_updates": 1,
     "max_subagent_events": 0,
     "command_reference_mentions_include": [
-      "design.md"
+      "incorporate.md"
     ]
   },
   "human_review_requirements": [

@@ -63,11 +63,12 @@ def fieldlab_attempt_case(case: dict) -> dict:
     return normalized
 
 
-def assess(receipt_path: Path, review_path: Path | None = None) -> dict:
+def assess(receipt_path: Path, review_path: Path | None = None, *, lab_id: str = "servotab") -> dict:
     receipt = read_json(receipt_path)
-    if (receipt.get("schema_version") != 2 or receipt.get("receipt_type") != "attempt"
-            or receipt.get("lab_id") != "servotab"):
+    if receipt.get("schema_version") != 2 or receipt.get("receipt_type") != "attempt":
         raise ValueError("expected a Servotab Field Lab v2 attempt receipt")
+    if not lab_id or receipt.get("lab_id") != lab_id:
+        raise ValueError("receipt lab_id differs from the explicitly expected study")
     case_id = receipt.get("case_id")
     case_paths = {p.parent.name: p for p in (ROOT / "evals/cases").glob("*/case.json")}
     if case_id not in case_paths:
@@ -138,9 +139,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("receipt", type=Path)
     parser.add_argument("--review", type=Path)
+    parser.add_argument("--lab-id", default="servotab",
+                        help="expected study lab_id; defaults to servotab")
     args = parser.parse_args()
     try:
-        result = assess(args.receipt, args.review)
+        result = assess(args.receipt, args.review, lab_id=args.lab_id)
     except (ValueError, OSError, TypeError, KeyError, AttributeError) as error:
         result = {"status": "invalid-evidence", "reason": str(error)}
     print(json.dumps(result, indent=2, ensure_ascii=False))

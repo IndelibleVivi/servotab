@@ -5,6 +5,8 @@ export const SITE = {
   wordmark: "servotab",
   origin: "https://servotab.com",
   version: pluginManifest.version,
+  // Bind the unreleased catalog to its pushed source contracts.
+  methodContractsRef: "05e3360f4604521ee94e2a887a3ff236c5690d94",
   // Observed public surfaces; advance each only after its own readback.
   githubReleaseVersion: "0.6.5",
   directoryVersion: "0.6.4",
@@ -33,5 +35,5 @@ export const RELATED_PROJECTS = {
   workerRouting: "https://indeliblevivi.github.io/codex-worker-routing/",
 } as const;
 
-export const repoFile = (path: string) =>
-  `${PROJECT_LINKS.source}/blob/HEAD/${path}`;
+export const repoFile = (path: string, ref = "HEAD") =>
+  `${PROJECT_LINKS.source}/blob/${ref}/${path}`;

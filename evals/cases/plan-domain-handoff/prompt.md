@@ -1,0 +1,1 @@
+Prepare the next executable package for the existing poster-editor commission using BRIEF.md, DOMAIN.md and docs/plans/editor.md. Update only that existing task record; the target implementation is read-only in this request. Preserve the complete result and resolve ordinary sequencing yourself. Only a shell is available; there is no native task tool or worker.

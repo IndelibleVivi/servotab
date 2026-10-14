@@ -1,33 +1,179 @@
 # Servotab release state
 
-## Method judgment integration (2026-10-05)
+## 0.7.0 release preparation (2026-10-14)
 
-The unversioned source change is prepared separately from `main` baseline
-`128cd20`, without the Plan strategy candidate. `debug` constrains selective
-failure explanations with the closest verified working case; `design` names
-the deciding condition relative to the nearest viable alternative and can
-optionally separate conflicting properties by time, location, condition or
-scale. The two existing case review contracts and the discussion-intake
-reference answer are synchronized. No skill, dependency or version was added.
-The source/package gate passed generated sync, 13-skill validation, the 70-file
-manifest, packaging selftest, 80 Python tests and the 383-file public-tree audit.
-These are deterministic source checks, not observed target-model outcomes.
-The Plan strategy candidate retains its separate acceptance and integration scope.
+The release candidate combines the integrated Incorporate and Plan strategy
+source with the Design/Debug judgments already merged through PR #53.
+`VERSION` and both plugin manifests are `0.7.0`. One implicit router, twelve
+explicit leaves and seventy package files remain; explicit `$review-feedback`
+calls migrate to `$incorporate`, with technical feedback verification retained.
+See the [release notes](releases/0.7.0.md) for changes and compatibility.
 
-The local installation is a distinct payload: the owner-authorized
-`codex plugin add servotab@personal --json` refresh used clean candidate
-`b19fbbc` to retain the previously installed Plan strategy capability alongside
-these judgments. All 70 installed files match that candidate byte for byte;
-only the explicit `debug`/`design` leaves and their router references changed
-from the prior installation. Inventory still reports `0.6.5`. The installed
-candidate's 84-test baseline is separate from this integration's 80-test
-baseline. A fresh Codex process resolves the installed router from its skill
-catalog; one small documentation task read the installed router and Verify
-method and completed its assigned state reconciliation. These observations do
-not establish broader effectiveness of the new design/debug judgments or refresh
-every already-running conversation. Installation changed no public release, Directory
-package or website deployment; the historical receipts below retain their
-named source and observation boundaries.
+The current published GitHub release remains `0.6.5` until exact tag and asset
+readback establishes the new publication. The last separately observed public
+Directory listing is `0.6.4`; no upload, installation or website deployment is
+part of this preparation. Historical candidate installation and behavioral
+evidence below retain their original payload identities and limits. Full Plan
+behavioral acceptance and receipt-bound Incorporate semantic acceptance remain
+open; release preparation does not close either.
+
+Fresh local preparation checks passed canonical/generated sync, thirteen-skill
+validation, seventy-file manifest identity, packaging selftest, all 87 Python
+regressions, public-tree audit and compilation. Field Lab validate/selftest/list
+covered all thirty fixture cases with zero target-model invocations. Website
+`npm ci`, all nine tests and the eight-route static build passed under the pinned
+Node `22.16.0`. The existing `undici@8.11.2` engine warning and five npm audit
+findings (one moderate, four high) remain; no website dependency update is part
+of this plugin release. An independent bounded source review confirmed the
+change coverage and migration; the stale SVG accessible label was corrected
+without changing glyph geometry or raster assets.
+
+## Integrated Incorporate source candidate (2026-10-12)
+
+The supplied Incorporate implementation `20a6340` and handoff tip `016b34a` are
+integrated onto the local Plan strategy candidate `ef48a03`. The active
+`incorporate` leaf replaces `review-feedback` while retaining one implicit router,
+twelve explicit leaves, twelve router references and seventy runtime package
+files. Technical review verification, scoped finding dispositions and correction
+propagation remain in Incorporate. Design retains open choices; Delegate retains
+responsibility allocation. Execute routes unresolved source reconciliation to
+Incorporate. The Plan strategy contracts, cases, controls, checker and prior
+limited acceptance evidence are preserved. See [candidate and local acceptance](incorporate-candidate.md).
+
+The integrated source pack has thirty cases, twenty-six with semantic-review
+requirements, sixty-three activation seeds and nineteen adversarial controls.
+The original twelve and three Plan controls remain alongside four Incorporate
+controls. Relative to the retained local Plan baseline, existing discussion and
+technical-feedback cases retain their fixtures,
+prompts and substantive oracles; only their method trace paths migrate.
+
+Source integration `05e3360` is committed and pushed on `feat/incorporate`.
+Its [GitHub Validate run](https://github.com/IndelibleVivi/servotab/actions/runs/38190957423)
+passed. Fresh local source/package checks passed generated sync, thirteen-skill
+validation, seventy-file manifest freshness, packaging selftest, all 87 Python
+regressions, a 436-file public-tree audit and compilation. Field Lab
+validate/selftest/list covered all thirty cases with zero target-model invocations.
+An independent bounded review found no blocking fixture/oracle defect; count and
+migration-baseline wording were reconciled. The reader oracle does not claim
+receipt-internal alias isolation across repeated undos.
+
+Website `npm ci`, all nine tests and the eight-route build passed under the pinned
+Node `22.16.0`. Local Chromium checks of Home, Methods and Docs at 1280 px and
+390 px found no horizontal overflow, broken images or browser errors/warnings;
+the Incorporate row rendered readably. The Methods contract links now pin the
+pushed integration source, because the default-branch Incorporate link returned
+404. The existing lockfile emitted an `undici@8.11.2` engine warning requiring
+Node >=22.19.0, and npm audit reported five vulnerabilities (one moderate, four
+high). No dependency or deployment-runtime update is included.
+
+The supplied handoff reports two isolated
+cold-start trials; their raw traces are absent from the bundle and were not
+independently inspected here. No local live-model invocation, formal semantic
+acceptance or ordinary-language activation result is established for Incorporate.
+`VERSION` remains `0.6.5`. The owner-authorized local refresh is recorded below;
+this integration has not published a release, updated the Directory or deployed
+the website. Earlier installation receipts describe their own historical payloads.
+
+### Local Incorporate candidate installation (2026-10-12)
+
+With owner authorization, `codex plugin add servotab@personal --json` refreshed
+the existing personal installation from clean integrated source `1425ae2`, using
+`codex-cli 0.159.1`. Inventory reports installed and enabled with unchanged
+`0.6.5` metadata. All seventy regular package files match that source byte for
+byte, with no missing, extra, differing or symlink entries. The installed package
+preserves Plan strategy and the design/debug judgments; `incorporate` replaces
+the active `review-feedback` entry.
+
+A fresh app-server `skills/list` request discovers all thirteen enabled skills,
+including `servotab:incorporate` with its Incorporate interface and `$incorporate`
+default prompt. It reports no package skill-loading errors. A separate fresh
+`codex debug prompt-input` process discovers the router with both execution
+strategy and material incorporation in its description. The explicit-only leaf
+is absent from that implicit catalog, as its package policy requires.
+
+These observations establish installed identity and fresh-process discovery.
+Automatic context refresh inside an existing conversation, ordinary-language
+selection and live method behavior remain unverified. No target-model call,
+merge, release, Directory update or deployment accompanied this installation.
+Use a fresh Codex task or process for ordinary local trials.
+
+## Method judgment source follow-up (2026-10-05)
+
+The unversioned source candidate now also refines three existing decisions:
+`debug` constrains causal explanations with the closest verified working case;
+`design` distinguishes a recommendation from its nearest viable alternative by
+the deciding condition, and optionally separates conflicting technical properties
+by time, location, condition or scale. The latter is not a required exercise for
+ordinary tasks. No leaf, dependency, runtime service or version was added.
+
+At this follow-up, the source pack had 28 cases, 24 with semantic-review requirements.
+The `cross-boundary-diagnosis` and `discussion-intake` requirements now cover the
+new judgments, and the intake reference answer was reconciled with them. These
+are revised evidence contracts, not new observed model outcomes; earlier pinned
+attempts do not establish acceptance of the revised case definitions. Fresh
+canonical/generated sync, 13-skill validation, 70-file manifest generation and
+check, packaging selftest, all 84 Python tests, public-tree audit and compilation
+passed. This follow-up is source-complete, validated locally and installed as
+recorded below. Fresh-process discovery and one bounded method-use observation
+are recorded below; broader effectiveness of the new design/debug judgments is
+not established. It remains unreleased and undeployed.
+
+### Local candidate refresh (2026-10-05)
+
+Historical receipt: the October 12 refresh above supersedes this installed
+payload while retaining its Plan strategy and design/debug judgments.
+
+With owner authorization, `codex plugin add servotab@personal --json` refreshed
+the local installation from clean candidate source `b19fbbc`, preserving the
+previously installed Plan strategy capability. Inventory reports installed and
+enabled with unchanged `0.6.5` metadata; this is not a new release. All 70
+installed package files match that source byte for byte. Relative to the
+previous installation, only four files changed: the explicit `debug` and `design`
+leaves and their router references. The rest of the payload, including Plan,
+is unchanged. The October 3 receipt below remains historical evidence for
+`cd03673`; its discovery result does not establish discovery of this refresh.
+A separate fresh Codex process now resolves this installed router from its
+skill catalog. One small documentation task read the installed router and Verify
+method and completed its assigned state reconciliation. This is bounded method
+use, not a general efficacy comparison or a refresh of all ongoing conversations.
+
+The method judgments were separately integrated from `main` baseline `128cd20`
+through [PR #53](https://github.com/IndelibleVivi/servotab/pull/53), merged as
+`93c5904`, without carrying the Plan strategy candidate into that change.
+That integration's source/package gate passed generated sync,
+13-skill validation, the 70-file manifest, packaging selftest, 80 Python tests
+and a 383-file public-tree audit. Its baseline differs from this candidate's
+84-test baseline. Required GitHub checks passed; the automatic review completed
+with no findings. Plan retains its separate acceptance and integration scope.
+Public releases, the Directory package and the production website were not
+changed by the local installation.
+
+## Plan strategy source candidate (2026-10-02)
+
+The current unversioned source candidate develops execution strategy and durable task continuity within the existing `plan` leaf. Router/catalog and `execute` select meaningful strategy or recovery work even with a settled goal; `spec-chain`, `delegate` and `finish` share one task record and maintainer. The single implementation entry is [Plan strategy](plans/plan-strategy.md), with the separate [specification](specs/plan-strategy.md). There is no new leaf, runtime service, hook, dependency or version bump. The candidate payload differs from tagged 0.6.5 even though release metadata remains at that version. It is now installed on the maintainer host as described below, but remains unreleased.
+
+Fresh local checks passed generated sync, 13-skill validation, 70-file manifest identity, packaging selftest and all 82 Python tests. At that observation, the source evidence pack had 28 cases, 24 with semantic-review requirements, and 15 adversarial controls. Field Lab validate/selftest/list ran with zero target-model invocations. [Scenario coverage and results](../evals/plan-strategy.md) now record the separately authorized 12-attempt comparison and eight independent semantic reviews, requesting `gpt-6.1-sol` / `xhigh`. All twelve deterministic checks passed; receipt-bound acceptance accepted six candidate attempts and five baseline attempts. One baseline recovery omitted unknown historical publication state. The checker now accepts an explicitly named study with `--lab-id` while preserving its default identity and all existing evidence requirements; all 19 focused checker tests passed after this follow-up. No general effectiveness or efficiency gain, independent ordinary-use receipt or complete REQ-12 acceptance is established.
+
+Both README editions and local website source distinguish the candidate from published installation targets. Website `npm ci`, all nine tests and the static build passed. Before the evidence-status wording update, local Methods/Docs checks at 1280 px and 390 px found no horizontal overflow; inspected renders were readable and the browser reported no console errors or warnings. The later wording-only update passed a fresh install/test/build check; rendered checks were not repeated. The install audit reported one high-severity indirect dependency entry for the existing `devalue` version; no dependency update is included in this Plan change. This is an observed audit result, not a demonstrated production exploit. Website deployment, release and Directory publication were not changed. The later local installation is recorded separately below.
+
+### Local candidate installation (2026-10-03)
+
+Historical receipt: the October 5 refresh above supersedes this installed
+payload while retaining its Plan capability.
+
+With owner authorization, `codex plugin add servotab@personal --json` refreshed the
+local installation from clean candidate source `cd03673`. Inventory reports
+installed and enabled with unchanged `0.6.5` metadata. All 70 installed regular
+package files match that candidate byte for byte, with no missing files, extra
+files or symlinks. The installed content at that observation included the Plan strategy upgrade;
+the version label alone no longer identifies the tagged release on this host.
+The separately installed Directory package was not updated.
+
+A fresh `codex debug prompt-input` process discovers `servotab:servotab` with the
+updated execution-strategy description and the 0.6.5 skill entry.
+This verifies installation identity and fresh-process discovery, not automatic
+context refresh inside an existing conversation or a new live behavior attempt.
+No target-model calls, merge, release or deployment accompanied installation.
 
 ## Current release: 0.6.5 (published 2026-10-01)
 
@@ -37,7 +183,7 @@ Main Validate run [`36769375703`](https://github.com/IndelibleVivi/servotab/acti
 
 The released source develops Servotab's complete-outcome method in four connected places without changing its one-router/twelve-leaf topology or adding runtime machinery. `plan` now chooses an early executable path through the real entry point and material state boundary; `execute` connects and observes that path while preserving risk-appropriate red-green work and the remaining accepted scope; `review-feedback` carries a confirmed correction to consumers of the same contract while protecting legitimate exceptions and explicit write limits; and the router plus explicit `execute` leaf keep one goal, plan, responsibility owner, evidence set and remaining scope continuous across participating methods, then withdraw investigation or ceremony whose purpose has ended.
 
-The source pack now contains twenty-five cases, twenty-one with non-empty `human_review_requirements`, while the twelve existing adversarial controls remain unchanged. `feedback-correction-radius` adds a distinct user-date contract canary: the prompt and visible regression expose the chart symptom without naming sibling consumers, an independent command oracle checks the complete user-date contract, and semantic review requires trace evidence that the agent derived the repair radius from the implementation. Chart, detail and share output must still move together, UTC audit semantics remain unchanged, exact minute offsets are preserved, and only `days.py` may change. The existing `complete-notes` case now reserves semantic review for whether the selected CLI and persistence path was actually exercised before broad migration and error-path expansion, early enough to inform later implementation rather than only during final verification; its deterministic complete-delivery oracle is unchanged.
+The released 0.6.5 source pack contains twenty-five cases, twenty-one with non-empty `human_review_requirements`, while the twelve existing adversarial controls remain unchanged. `feedback-correction-radius` adds a distinct user-date contract canary: the prompt and visible regression expose the chart symptom without naming sibling consumers, an independent command oracle checks the complete user-date contract, and semantic review requires trace evidence that the agent derived the repair radius from the implementation. Chart, detail and share output must still move together, UTC audit semantics remain unchanged, exact minute offsets are preserved, and only `days.py` may change. The existing `complete-notes` case now reserves semantic review for whether the selected CLI and persistence path was actually exercised before broad migration and error-path expansion, early enough to inform later implementation rather than only during final verification; its deterministic complete-delivery oracle is unchanged.
 
 Fresh local integration checks passed canonical/generated sync, exact 13-skill package validation, manifest freshness for the `0.6.5` bump, packaging selftest, all 80 Python regressions, public-tree audit and Python compilation. Standalone Field Lab validate/selftest/list covered all twenty-five cases with zero target-agent invocations. These checks establish source, generated-package and deterministic fixture consistency only; no live target-model comparison or improved behavior is claimed.
 

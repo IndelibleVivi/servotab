@@ -1,7 +1,7 @@
 interface:
   display_name: "Plan"
-  short_description: "Create a practical implementation plan"
-  default_prompt: "Use $plan to produce a concise, repository-grounded implementation plan sized to this change."
+  short_description: "Maintain execution strategy and continuity"
+  default_prompt: "Use $plan to ground the execution strategy in current evidence, preserve the complete outcome and task continuity, and continue within the request’s permissions."
   brand_color: "#315EFB"
   icon_small: "./assets/icon-400.png"
   icon_large: "./assets/icon.svg"

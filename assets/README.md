@@ -27,6 +27,12 @@ needed. Each shipped SVG declares 48 × 48 px or larger intrinsic dimensions and
 `viewBox`; the leaf glyphs retain their original 32 × 32 geometry inside a
 scaled group so the directory-facing canvas change does not alter their render.
 
+The unreleased source transition from `review-feedback` to `incorporate`
+reassigns the existing v3 glyph to the broader method responsibility. Its source
+directory is now `skill-icons/incorporate/`; the SVG and PNG bytes are retained
+unchanged. This is an identity-path migration, not newly drawn artwork, and
+does not rename assets inside historical releases.
+
 The generated package gives all thirteen skills the same local asset contract:
 `./assets/icon.svg` and `./assets/icon-400.png`. The router files are generated
 from `servotab-mark-ink.svg` and `servotab-mark-ink-400.png`; the leaf files are

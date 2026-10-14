@@ -35,7 +35,7 @@ Servotab is independent and community-maintained. Do not claim it is an official
 | `docs/current-state.md` | Volatile candidate, install, GitHub, deployment, domain, and submission state |
 | `docs/migration-from-softpowers.md` | Supported transition from manifest-owned legacy global layers |
 
-Logs, screenshots, design boards, reviews, external repositories, generated files, deployments, and previous plans are evidence or projections unless the current task explicitly gives them authority. They do not silently override current user intent, accepted specifications, or canonical source.
+Current intent and accepted specifications determine how supplied material is used. Logs, screenshots, design boards, reviews, external repositories, generated files, deployments, and previous plans can contain evidence, inspiration, and adopted requirements together; apply those roles to the relevant content rather than assigning one role to an entire source. Preserve explicitly selected forms and mechanisms. Material does not silently override current user intent, accepted specifications, or canonical source, or authorize additional actions.
 
 ## Current package topology
 
@@ -49,18 +49,24 @@ execute
 debug
 tdd
 review
-review-feedback
+incorporate
 verify
 worktree
 delegate
 finish
 ```
 
-Retired current IDs are `brainstorm`, `receive-review`, and `parallel`. Preserve them only in historical release records, provenance, and migration explanation. Do not restore them as active methods, skills, references, invocation examples, issue fields, or package paths.
+`incorporate` owns the requested absorption of supplied material into appropriate effects on the target work, including technical review feedback. `design` retains open design decisions; `delegate` retains responsibility choice and worker coordination. Reading can be delegated before implementation focus is chosen, and a worker may own a complete bounded incorporation responsibility.
+
+Retired current IDs are `brainstorm`, `receive-review`, `review-feedback`, and `parallel`. Preserve them only in historical release records, provenance, and migration explanation. Do not restore them as active methods, skills, references, invocation examples, issue fields, or package paths. The source transition to `incorporate` does not rewrite the method set in already-published release artifacts.
 
 Root `skills/`, `install.sh`, `uninstall.sh`, `scripts/install.py`, and `scripts/uninstall.py` are retired. Do not add a parallel global-skill installer around the plugin package.
 
 `scripts/build_skills.py` fails closed if the retired root `skills/` path exists. The generator must never recursively delete that path: remove known tracked legacy projection files through the reviewed migration diff, and preserve any unknown or untracked content for explicit disposition.
+
+## Task plans
+
+Shared engineering specifications may live in `docs/specs/`; task-specific plans live in `docs/plans/` when continuity warrants them. The Plan strategy upgrade uses `docs/specs/plan-strategy.md` and the single current entry `docs/plans/plan-strategy.md`. The specification owns the outcome; the plan owns route, coverage, evidence and continuation. `docs/current-state.md` links candidate state without duplicating task progress. Recover through the explicitly selected task entry and current implementation, never a global active pointer or file modification time. One coordinator maintains the shared plan; private source discussions and raw model traces stay outside the public tree.
 
 ## Editing workflow
 
@@ -174,6 +180,11 @@ Record volatile outcomes in `docs/current-state.md` only after observing them. D
 ## Documentation closure
 
 `site/src/config.ts` separates the source version from the observed published release used by install examples. Update the published version only after exact tag/release evidence; a manifest bump is not publication.
+
+The Methods catalog links through `SITE.methodContractsRef`. Keep that ref bound
+to a pushed revision containing the catalog's advertised contracts; a candidate
+method may not exist on the default branch. Update it when the catalog's contract
+changes, independently of published installation targets.
 
 Update current-facing docs whenever method ids, plugin routes, install commands, supported surfaces, domain behavior, privacy boundaries, or status claims change. Preserve historical changelog and provenance wording; add a transition entry instead of rewriting old Softpowers releases as Servotab releases.
 

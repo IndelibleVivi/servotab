@@ -1,0 +1,1 @@
+Finish the three export commands described in BRIEF.md and verify the actual CLI outputs. The outcome is settled; inspect the local implementation and complete all three commands. Work in this session with the available shell; no subagent or native task tool is provided. Change exporter.py only.

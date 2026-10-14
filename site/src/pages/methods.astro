@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { repoFile } from "../config";
+import { repoFile, SITE } from "../config";
 import { methods } from "../data/methods";
 ---
 
@@ -18,9 +18,11 @@ import { methods } from "../data/methods";
   <section class="shell content-band methods-catalog" aria-labelledby="method-list-heading">
     <h2 id="method-list-heading" class="visually-hidden">Servotab methods</h2>
     <div class="methods-usage">
+      <p><span>source candidate /</span> This catalog includes the unreleased <code>incorporate</code> method. Tagged installation examples still select the published release.</p>
       <p><span>ordinary /</span> Describe the complete outcome normally. Servotab may keep the work direct.</p>
       <p><span>explicit /</span> Use a name such as <code>$review</code> when you want precise control.</p>
     </div>
+    <p class="section-intro">The Plan contract below describes an unreleased source candidate. Published installation commands still target the released package; the first bounded behavior comparison is complete, with broader acceptance still open.</p>
     <div class="methods-list">
       {methods.map((method, index) => (
         <article class="method-row">
@@ -43,7 +45,7 @@ import { methods } from "../data/methods";
           <div class="method-copy">
             <p>{method.purpose}</p>
             <p>{method.signal}</p>
-            <a class="method-contract" href={repoFile(`methods/${method.name}.md`)}>
+            <a class="method-contract" href={repoFile(`methods/${method.name}.md`, SITE.methodContractsRef)}>
               Read method contract <span class="contract-arrow" aria-hidden="true">↗</span>
             </a>
           </div>

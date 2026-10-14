@@ -74,7 +74,7 @@ class BehaviorFixtureTests(unittest.TestCase):
 
     def test_adversarial_decision_controls(self):
         controls = json.loads((ROOT / "evals/adversarial-controls.json").read_text())
-        self.assertEqual(len(controls), 12)
+        self.assertEqual(len(controls), 19)
         for control in controls:
             name = control["case_id"]
             with self.subTest(case=name), tempfile.TemporaryDirectory() as raw:
@@ -211,6 +211,107 @@ class BehaviorFixtureTests(unittest.TestCase):
                     (work / "MARKETING_POST.md").write_text("Unrequested artifact.\n")
                 passes = all(check_workspace(case, work, before) + check_commands(case, work))
                 self.assertEqual(passes, variant == "alternate-wording")
+
+    def test_reader_handoff_oracle_rejects_partial_repairs(self):
+        root = CASES / "incorporate-reader-handoff"
+        case = json.loads((root / "case.json").read_text())
+        expected = (root / "expected/filing.py").read_text()
+        variants = {
+            "correct": expected,
+            "kept-window-bound": expected.replace(
+                'return updated, {"clip": deepcopy(clip), "index": index}',
+                'return updated, {"clip": deepcopy(clip), "index": index, "window": window_id}',
+            ).replace(
+                'def undo_archive(inbox, receipt, window_id="main"):\n',
+                'def undo_archive(inbox, receipt, window_id="main"):\n'
+                '    if receipt["window"] != window_id:\n'
+                '        raise ValueError("wrong window")\n',
+            ),
+            "lost-position": expected.replace(
+                'updated.insert(receipt["index"], deepcopy(receipt["clip"]))',
+                'updated.append(deepcopy(receipt["clip"]))',
+            ),
+            "lost-record": expected.replace(
+                '{"clip": deepcopy(clip), "index": index}',
+                '{"clip": {"id": clip["id"], "text": clip["text"]}, "index": index}',
+            ),
+            "online-gate": expected.replace(
+                'def archive_clip(inbox, clip_id, window_id="main", online=True):\n',
+                'def archive_clip(inbox, clip_id, window_id="main", online=True):\n'
+                '    if not online:\n'
+                '        raise ConnectionError("offline")\n',
+            ),
+            "unprotected-lock": expected.replace('if clip.get("locked"):', "if False:"),
+        }
+        for name, source in variants.items():
+            with self.subTest(variant=name), tempfile.TemporaryDirectory() as raw:
+                work = Path(raw)
+                shutil.copytree(root / "fixture", work, dirs_exist_ok=True)
+                (work / "filing.py").write_text(source)
+                self.assertEqual(check_commands(case, work), [True, name == "correct"])
+
+    def test_mixed_sources_oracle_rejects_wrong_transfer_and_radius(self):
+        root = CASES / "incorporate-mixed-sources"
+        case = json.loads((root / "case.json").read_text())
+        expected = (root / "expected/summaries.py").read_text()
+        variants = {
+            "correct": expected,
+            "card-only": expected.replace(
+                "def search_excerpt(text, limit=80):\n    return _display_excerpt(text, limit)\n",
+                "def search_excerpt(text, limit=80):\n"
+                "    if limit <= 0:\n"
+                '        raise ValueError("positive limit required")\n'
+                "    return text[:limit]\n",
+            ),
+            "copied-ascii-policy": expected.replace(
+                'clean = " ".join(text.split())',
+                'clean = " ".join(text.encode("ascii", "ignore").decode().split())',
+            ),
+            "normalized-export": expected.replace(
+                "def export_text(text):\n    return text\n",
+                "def export_text(text):\n    return _display_excerpt(text, 80)\n",
+            ),
+        }
+        for name, source in variants.items():
+            with self.subTest(variant=name), tempfile.TemporaryDirectory() as raw:
+                work = Path(raw)
+                shutil.copytree(root / "fixture", work, dirs_exist_ok=True)
+                (work / "summaries.py").write_text(source)
+                expected_results = {
+                    "correct": [True, True],
+                    "card-only": [True, False],
+                    "copied-ascii-policy": [True, False],
+                    "normalized-export": [False, False],
+                }
+                self.assertEqual(check_commands(case, work), expected_results[name])
+
+    def test_incorporation_report_structure_does_not_grade_semantics(self):
+        # Real handoffs, source interpretation and adoption reasoning need
+        # receipt-bound independent review. These oracles protect behavior and
+        # write scope; they deliberately permit alternate or empty report prose.
+        for name, report, source in (
+            ("incorporate-reader-handoff", "READER.md", "DISCUSSION.md"),
+            ("incorporate-mixed-sources", "DECISIONS.md", "sources/skimlet.md"),
+        ):
+            root = CASES / name
+            case = json.loads((root / "case.json").read_text())
+            for variant in ("alternate-wording", "empty-report", "edited-source", "extra-file"):
+                with self.subTest(case=name, variant=variant), tempfile.TemporaryDirectory() as raw:
+                    work = Path(raw) / "workspace"
+                    shutil.copytree(root / "fixture", work)
+                    before = snapshot(work)
+                    shutil.copytree(root / "expected", work, dirs_exist_ok=True)
+                    (work / report).write_text(
+                        "" if variant == "empty-report" else "Different prose, judged through actual evidence.\n"
+                    )
+                    if variant == "edited-source":
+                        (work / source).write_text("Replaced the supplied material.\n")
+                    elif variant == "extra-file":
+                        (work / "UNREQUESTED.md").write_text("A new source registry.\n")
+                    passes = all(check_workspace(case, work, before) + check_commands(case, work))
+                    self.assertEqual(passes, variant in {"alternate-wording", "empty-report"})
+                    if passes:
+                        self.assertTrue(case.get("human_review_requirements"))
 
 
 if __name__ == "__main__":

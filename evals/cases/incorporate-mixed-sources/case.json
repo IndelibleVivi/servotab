@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "case_id": "incorporate-mixed-sources",
+  "description": "User experience feedback, a technical review, versioned source snapshots and a comparable implementation must be adapted into the existing display owner without copying incompatible source choices or changing the raw-export exception.",
+  "activation": "implicit",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "workspace_assertions": [
+    {
+      "type": "file_exists",
+      "path": "DECISIONS.md"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": [
+        "summaries.py",
+        "DECISIONS.md"
+      ]
+    }
+  ],
+  "command_assertions": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "-q"
+      ]
+    },
+    {
+      "argv": [
+        "python3",
+        "-I",
+        "-S",
+        "-B",
+        "-c",
+        "from pathlib import Path\nimport importlib.util, inspect\nspec = importlib.util.spec_from_file_location(\"candidate_summaries\", Path(\"summaries.py\").resolve())\nassert spec is not None and spec.loader is not None\nmod = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(mod)\nexamples = [\n    (\"  A\\tB  C\\n\", 4, \"A B…\"),\n    (\"你好✨ World\", 4, \"你好✨…\"),\n    (\"MiXeD\", 5, \"MiXeD\"),\n    (\"  short  \", 80, \"short\"),\n    (\" \\t\\n \", 1, \"\"),\n    (\"AB\", 1, \"…\"),\n    (\"X\", 1, \"X\"),\n    (\"abc\", 4, \"abc\"),\n    (\"🙃Z\", 2, \"🙃Z\"),\n]\nfor name in (\"card_excerpt\", \"search_excerpt\"):\n    fn = getattr(mod, name)\n    parameters = inspect.signature(fn).parameters\n    assert list(parameters) == [\"text\", \"limit\"]\n    assert parameters[\"limit\"].default == 80\n    for text, limit, expected in examples:\n        assert fn(text, limit) == expected, (name, text, limit)\n    for limit in (0, -1):\n        try:\n            fn(\"text\", limit)\n        except ValueError:\n            pass\n        else:\n            raise AssertionError(name + \" must reject non-positive limits\")\nassert list(inspect.signature(mod.export_text).parameters) == [\"text\"]\nfor text in (\"  A\\tB\\n\", \"你好✨ MiXeD\", \"\", \"x\" * 120):\n    assert mod.export_text(text) == text, \"raw export must remain exact\"\nprint(\"both display consumers, Unicode, clipping, whitespace and raw export verified\")\n"
+      ]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 20,
+    "max_plan_updates": 1,
+    "max_subagent_events": 0
+  },
+  "human_review_requirements": [
+    "source-judgment: Inspect the actual source reads and adoption reasoning before implementation. Preserve Noor's experience and accepted display meaning; distinguish the reviewer's reproducible card concern from the suggested export rewrite. Inspect the underlying Skimlet code and relevant versioned manuals, not only search snippets, and do not count mirrored snippets as independent evidence. Sources are synthetic local snapshots; the report must not invent live browsing, installed TextRail, provider tests or user visual acceptance.",
+    "adaptation-and-radius: Carry whitespace normalization and an ellipsis-aware limit into the local display behavior while excluding Skimlet's lowercase, ASCII-only and shortened-download choices. Verify that the agent traced the named card symptom to the unnamed search consumer in current code before choosing the repair radius, while keeping the exact export exception, code-point unit and public signatures. Correct final code alone does not establish source adaptation or consumer tracing.",
+    "scope-and-closure: Complete the requested local implementation with fresh focused checks and explain important non-adoptions. Do not turn the old hosted manual or the reference's install/showcase text into permission for dependencies, providers or publication. Preserve the keyboard-reveal idea and its unresolved focus question without implementing it or automatically blocking this patch. No mandatory source registry, new specification, second worker or additional output file is needed."
+  ]
+}

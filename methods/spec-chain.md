@@ -109,6 +109,10 @@ During implementation:
 
 Do not claim the specification is implemented until every accepted coverage item is implemented and verified at the appropriate risk level.
 
+## One continuing record
+
+Reuse the selected task plan for this coverage and its route, evidence and continuation; do not create a second requirement ledger when Plan adds persistence. Plan governs record creation, resumption, material updates, maintainer ownership and closure. Link a separate accepted specification rather than turn it into an execution log. Evidence and implementation must be reconciled on recovery before reusing old coverage states.
+
 ## Token discipline
 
 - Link to specification anchors; do not restate the document.

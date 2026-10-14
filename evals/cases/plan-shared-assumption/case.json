@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "case_id": "plan-shared-assumption",
+  "description": "An accepted multi-consumer brief contains a false all-rows assumption; inspect the shared boundary before widening implementation and complete every CLI consumer.",
+  "activation": "implicit",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "command_assertions": [
+    {
+      "argv": [
+        "python3",
+        "test_exports.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "workspace_assertions": [
+    {
+      "type": "file_exists",
+      "path": "exporter.py"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": [
+        "exporter.py"
+      ]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 30,
+    "max_subagent_events": 0
+  },
+  "human_review_requirements": [
+    "ordering: Inspect the actual trace, not the final narrative. Establish paged-source behavior from provider.py or a discriminating run before expanding separate JSON/CSV/count implementations. Reading a method alone is insufficient; no plan keyword was supplied in the request.",
+    "completion: Preserve all three outputs, opaque cursors, id identity, first-observed order and empty-source behavior. Exercise a real CLI path early enough to inform remaining work; do not stop after one format or helper tests.",
+    "proportionality: Inherit the settled outcome, correct the unverified proposal without re-interviewing the user, reuse standard-library serialization and the existing collector, and finish without artificial spikes, trackers or unavailable tools."
+  ]
+}

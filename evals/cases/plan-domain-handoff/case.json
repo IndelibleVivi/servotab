@@ -1,0 +1,31 @@
+{
+  "schema_version": 2,
+  "case_id": "plan-domain-handoff",
+  "description": "Domain acceptance changes effort and sequencing within one existing record while the implementation remains read-only.",
+  "activation": "implicit",
+  "prompt_file": "prompt.md",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 600,
+  "command_assertions": [],
+  "workspace_assertions": [
+    {
+      "type": "file_exists",
+      "path": "docs/plans/editor.md"
+    },
+    {
+      "type": "changed_files_exact",
+      "paths": [
+        "docs/plans/editor.md"
+      ]
+    }
+  ],
+  "trace_assertions": {
+    "max_command_executions": 30,
+    "max_subagent_events": 0
+  },
+  "human_review_requirements": [
+    "domain: Prioritize actual subject, longest title, real preview/text feedback and undo as judgment dependencies before multiplying generic components. Extra making effort must serve composition quality, not just risk checks; do not substitute placeholders or build success for visual evidence.",
+    "continuity: Keep the accepted four-capability outcome and existing entry/owner. The domain contribution changes order and acceptance without creating a new commission or repeating settled questions. Mature renderer evidence should end investigation, not trigger a mandatory spike.",
+    "boundary: Deliver planning only with no target source edits, renderer-success claim, new tool installation or approval loop. Name uninspected implementation regions honestly; lack of native task or worker capability does not prevent the package."
+  ]
+}
