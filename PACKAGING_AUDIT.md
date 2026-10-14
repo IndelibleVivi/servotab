@@ -18,6 +18,8 @@ Pillow verifies PNG structure and decodes image pixels. Exact dimensions, source
 
 Regressions cover the previously accepted malformed SVG/PNG inputs, metadata ambiguity, package expansion, generator writes through symlinks, archive reproducibility, dirty/staged/untracked source, output tampering, and exact payload membership. Public behavior fixtures retain the existing-normalizer and false-green publication controls, add discussion-intake coverage, and exercise cross-boundary diagnosis, missing native-host conditions, and information-bearing diagnostic progress. Their baselines and expected repairs are checked independently where executable; these are fixture controls, not model runs.
 
+Disposable release-test repositories disable automatic Git maintenance so detached maintenance cannot race their temporary-directory cleanup. The archive rejection and reproducibility assertions remain unchanged.
+
 The 0.7.0 source pack contains thirty behavior cases. Twenty-six declare non-empty human-review requirements, with sixty-three activation seeds and nineteen adversarial controls. Since 0.6.5, three Plan strategy and two Incorporate cases were added; the Design/Debug judgment contracts were refined. Disposable Git regressions establish removal/recovery mechanisms separately. Rehearsal file assertions, fixture controls, and Git tests do not establish target-agent behavior or general method effectiveness.
 
 ## Run the gate

@@ -26,6 +26,8 @@ class ReleaseTests(unittest.TestCase):
         self.git('config', 'user.email', 'fixture@example.invalid')
         self.git('config', 'commit.gpgsign', 'false')
         self.git('config', 'core.autocrlf', 'false')
+        # Detached auto-maintenance can recreate .git during TemporaryDirectory cleanup.
+        self.git('config', 'maintenance.auto', 'false')
         self.commit()
 
     def git(self, *args):
