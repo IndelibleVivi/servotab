@@ -1,13 +1,17 @@
 # Changelog
 
-## Unreleased — incorporation candidate
+## 0.7.0 — release preparation, 2026-10-14
 
-`VERSION` remains `0.6.5`. These source changes are not part of the published `v0.6.5` tag or its release assets, and do not establish an installation, directory update, deployment, or live behavioral result.
+This candidate brings the accumulated Plan strategy, Design/Debug judgments and Incorporate work into one version. Publication is recorded separately in [current state](docs/current-state.md); the immutable `v0.6.5` artifacts remain unchanged.
 
+- Extend `plan` to form and revise execution strategy even with a settled goal, arrange effort and evidence, and preserve durable task continuity through one explicit task entry and maintainer. Router, Execute, Spec Chain, Delegate and Finish share the same task rather than creating parallel progress records. Small clear work stays direct.
+- Ground selective-failure diagnosis in the closest verified working case. Distinguish a design recommendation from its nearest viable alternative by the deciding condition; optionally separate conflicting properties by time, location, condition or scale when useful.
 - Replace the active `review-feedback` method with `incorporate`, retaining one implicit router, twelve explicit leaves, and thirteen skills. Technical feedback verification and correction across shared-contract consumers remain conditional work inside the same method.
 - Own the effect of specified discussions, feedback, research, and references on the target work: cover material contributions, preserve corrections and explicitly selected forms, judge applicability, and carry accepted implications through the authorized result and its verification. Evidence, inspiration, and adopted requirements can coexist within a source.
 - Keep design choices with `design` and responsibility choice with `delegate`. Permit a reading lane before narrowing implementation focus, or a worker that owns a complete bounded incorporation task. Open ideas can sharpen a design or check without becoming mandatory features or disappearing into a backlog.
-- Migrate current skill metadata, generated paths, documentation, and the site method catalog to `incorporate`. Reuse the existing leaf glyph unchanged; add no helper runtime, mandatory report, ledger, or approval round.
+- Migrate current skill metadata, generated paths, documentation, and the site method catalog to `incorporate`. Update the SVG's accessible title and description while preserving the existing glyph geometry and raster assets; add no helper runtime, mandatory report, ledger, or approval round.
+
+Upgrade explicit `$review-feedback` calls to `$incorporate`; no compatibility alias ships. The package remains one implicit router, twelve explicit leaves and 70 files. The source evidence pack contains 30 cases, 26 with semantic-review requirements, 63 activation seeds and 19 adversarial controls. The limited Plan comparison does not establish general effectiveness; full Plan behavioral acceptance and receipt-bound Incorporate semantic acceptance remain open. See [0.7.0 release notes](docs/releases/0.7.0.md).
 
 ## 0.6.5 — published 2026-10-01
 

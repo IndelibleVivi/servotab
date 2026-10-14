@@ -1,5 +1,33 @@
 # Servotab release state
 
+## 0.7.0 release preparation (2026-10-14)
+
+The release candidate combines the integrated Incorporate and Plan strategy
+source with the Design/Debug judgments already merged through PR #53.
+`VERSION` and both plugin manifests are `0.7.0`. One implicit router, twelve
+explicit leaves and seventy package files remain; explicit `$review-feedback`
+calls migrate to `$incorporate`, with technical feedback verification retained.
+See the [release notes](releases/0.7.0.md) for changes and compatibility.
+
+The current published GitHub release remains `0.6.5` until exact tag and asset
+readback establishes the new publication. The last separately observed public
+Directory listing is `0.6.4`; no upload, installation or website deployment is
+part of this preparation. Historical candidate installation and behavioral
+evidence below retain their original payload identities and limits. Full Plan
+behavioral acceptance and receipt-bound Incorporate semantic acceptance remain
+open; release preparation does not close either.
+
+Fresh local preparation checks passed canonical/generated sync, thirteen-skill
+validation, seventy-file manifest identity, packaging selftest, all 87 Python
+regressions, public-tree audit and compilation. Field Lab validate/selftest/list
+covered all thirty fixture cases with zero target-model invocations. Website
+`npm ci`, all nine tests and the eight-route static build passed under the pinned
+Node `22.16.0`. The existing `undici@8.11.2` engine warning and five npm audit
+findings (one moderate, four high) remain; no website dependency update is part
+of this plugin release. An independent bounded source review confirmed the
+change coverage and migration; the stale SVG accessible label was corrected
+without changing glyph geometry or raster assets.
+
 ## Integrated Incorporate source candidate (2026-10-12)
 
 The supplied Incorporate implementation `20a6340` and handoff tip `016b34a` are

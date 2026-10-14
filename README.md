@@ -13,7 +13,7 @@ Latest GitHub release: **[`0.6.5`](https://github.com/IndelibleVivi/servotab/rel
 
 The separately observed [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) still reports version `0.6.4`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. GitHub release and directory publication remain intentionally recorded as different states, and the listing exposes no package digest. The 0.6.5 plugin ZIP is available for an owner-controlled directory update; its availability does not establish that update. See [current state](docs/current-state.md) for evidence and limits.
 
-**Unreleased source candidate:** `incorporate` replaces the active `review-feedback` method in this checkout, while `VERSION` remains `0.6.5`. The method table below describes that candidate. The published `v0.6.5` archives and the separately observed directory listing retain their published method sets; the tagged install command below continues to select the published release.
+**0.7.0 release candidate:** `incorporate` replaces the active `review-feedback` method in this checkout, alongside Plan strategy and refined Design/Debug judgments. Existing explicit `$review-feedback` calls must change to `$incorporate`; technical review verification remains within that method. The method table below describes this candidate. The published `v0.6.5` archives and the separately observed directory listing retain their published method sets; the tagged install command below continues to select the published release. See the [0.7.0 release notes](docs/releases/0.7.0.md).
 
 ## What Servotab changes
 

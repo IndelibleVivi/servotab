@@ -1,8 +1,10 @@
 # Incorporate candidate and local acceptance
 
 The supplied candidate starts from `93c59048a37d5ac7a25afcbc78106f6280499410`.
-`VERSION` remains `0.6.5`; source identity must include the commit and working-tree state.
-The source candidate is not a replacement for the published `v0.6.5` archive.
+Its integration and installation receipts below describe the historical `0.6.5`
+candidate payload. The integrated source is now in [0.7.0 release preparation](releases/0.7.0.md);
+source identity must still include the commit and working-tree state.
+The published `v0.6.5` archive remains immutable.
 Named-host installation and discovery have their own receipt in
 [current state](current-state.md#local-incorporate-candidate-installation-2026-10-12).
 

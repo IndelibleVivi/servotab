@@ -13,7 +13,7 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 另行观察的 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 仍显示版本 `0.6.4`、开发者 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。GitHub release 与 Directory publication 依旧被刻意记录为不同状态，listing 本身也不暴露 package digest。0.6.5 plugin ZIP 已提供给 owner 更新目录，但 ZIP 可用不等于 Directory 已更新。具体证据和边界见 [current state](docs/current-state.md)。
 
-**未发布的 source candidate：** 本 checkout 以 `incorporate` 替代 active `review-feedback` method，`VERSION` 仍为 `0.6.5`。下方 method 表描述这一候选；已发布的 `v0.6.5` 归档与单独观察的 Directory listing 保留各自发布时的 method set，下方 tagged 安装命令仍选择已发布版本。
+**0.7.0 release candidate：** 本 checkout 以 `incorporate` 替代 active `review-feedback` method，同时保留 Plan strategy 与 Design/Debug 判断改进。旧的显式 `$review-feedback` 调用需改为 `$incorporate`，技术 review 核实仍在同一 method 内。下方 method 表描述这一候选；已发布的 `v0.6.5` 归档与单独观察的 Directory listing 保留各自发布时的 method set，下方 tagged 安装命令仍选择已发布版本。见 [0.7.0 release notes](docs/releases/0.7.0.md)。
 
 ## 它做什么
 
