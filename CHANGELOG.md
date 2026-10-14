@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.7.0 — release preparation, 2026-10-14
+## 0.7.0 — published 2026-10-14
 
-This candidate brings the accumulated Plan strategy, Design/Debug judgments and Incorporate work into one version. Publication is recorded separately in [current state](docs/current-state.md); the immutable `v0.6.5` artifacts remain unchanged.
+The exact `v0.7.0` revision `0c79fac18628f97a5b22db932e69f7aa3859b373` and four release assets were published as GitHub Latest on 2026-10-14 Singapore time. Main CI, local build, draft download and fresh public download passed the complete release-artifact check. This brings the accumulated Plan strategy, Design/Debug judgments and Incorporate work into one version. The last separately observed Directory listing remains `0.6.4`; the immutable `v0.6.5` artifacts are unchanged. See [current state](docs/current-state.md).
 
 - Extend `plan` to form and revise execution strategy even with a settled goal, arrange effort and evidence, and preserve durable task continuity through one explicit task entry and maintainer. Router, Execute, Spec Chain, Delegate and Finish share the same task rather than creating parallel progress records. Small clear work stays direct.
 - Ground selective-failure diagnosis in the closest verified working case. Distinguish a design recommendation from its nearest viable alternative by the deciding condition; optionally separate conflicting properties by time, location, condition or scale when useful.

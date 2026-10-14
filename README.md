@@ -9,11 +9,11 @@ Servotab is an independent, community-maintained engineering-method plugin for C
 
 > Method as exponent, not machinery.
 
-Latest GitHub release: **[`0.6.5`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.5)**, connecting planning, execution, review correction, and cross-method continuity without adding runtime machinery. Its source pack contains twenty-five cases, twenty-one with non-empty semantic-review requirements, and retains the twelve adversarial controls and router/twelve-leaf/70-file package topology. See the [0.6.5 release notes](docs/releases/0.6.5.md). The tagged release and its receipt establish exact source and package identity; they do not establish installation, website deployment, directory update, or improved live model behavior.
+Latest GitHub release: **[`0.7.0`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.7.0)**, bringing Plan strategy, durable task continuity, comparative Design/Debug judgments and Incorporate into one release. The package remains one implicit router, twelve explicit leaves and 70 files, with no added runtime machinery. See the [0.7.0 release notes](docs/releases/0.7.0.md). The tagged release and its receipt establish exact source and package identity; they do not establish installation, website deployment, directory update, or improved live model behavior.
 
-The separately observed [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) still reports version `0.6.4`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. GitHub release and directory publication remain intentionally recorded as different states, and the listing exposes no package digest. The 0.6.5 plugin ZIP is available for an owner-controlled directory update; its availability does not establish that update. See [current state](docs/current-state.md) for evidence and limits.
+The last separately observed [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) reports version `0.6.4`, developer `Yifei Fang`, and all thirteen Servotab skills, including `Worktree`. GitHub release and directory publication remain intentionally recorded as different states, and the listing exposes no package digest. The 0.7.0 plugin ZIP is available for an owner-controlled directory update; its availability does not establish that update. See [current state](docs/current-state.md) for evidence and limits.
 
-**0.7.0 release candidate:** `incorporate` replaces the active `review-feedback` method in this checkout, alongside Plan strategy and refined Design/Debug judgments. Existing explicit `$review-feedback` calls must change to `$incorporate`; technical review verification remains within that method. The method table below describes this candidate. The published `v0.6.5` archives and the separately observed directory listing retain their published method sets; the tagged install command below continues to select the published release. See the [0.7.0 release notes](docs/releases/0.7.0.md).
+**Upgrade to 0.7.0:** change explicit `$review-feedback` calls and saved method-path references to `$incorporate`. No compatibility alias ships; technical review verification and shared-contract correction remain within Incorporate. Older tagged archives and the separately observed directory payload retain their published method sets.
 
 ## What Servotab changes
 
@@ -28,7 +28,7 @@ Describe ordinary repository work normally. The only implicit-eligible skill is 
 
 A log, screenshot, review, old plan, or generated artifact can contribute evidence, inspiration, and accepted requirements together. Its role follows the current request; it does not authorize itself or silently become the current specification.
 
-The source candidate's [Incorporate](methods/incorporate.md) method carries specified discussions, feedback, research, and references into appropriate effects on the target work. It covers important contributions before selecting implementation priorities, follows corrections in context, and preserves explicitly selected forms as well as their purpose. Open ideas can sharpen a design, example, or verification without automatically becoming features. When implementation is requested, the method carries adopted implications through the affected work and checks the result. Technical review retains its code-based verification within the same method. Bounded requests stay bounded, with no mandatory summary document, ledger, or new approval round.
+The [Incorporate](methods/incorporate.md) method carries specified discussions, feedback, research, and references into appropriate effects on the target work. It covers important contributions before selecting implementation priorities, follows corrections in context, and preserves explicitly selected forms as well as their purpose. Open ideas can sharpen a design, example, or verification without automatically becoming features. When implementation is requested, the method carries adopted implications through the affected work and checks the result. Technical review retains its code-based verification within the same method. Bounded requests stay bounded, with no mandatory summary document, ledger, or new approval round.
 
 Release `0.6.5` develops that same complete-outcome thesis at execution time. Cross-component plans identify an early path through the real entry point and material state boundary; execution connects and observes that path before multiplying peer features, preserving risk-appropriate red-green work and the full accepted scope; and a confirmed review correction follows the shared contract to affected consumers while protecting legitimate exceptions and explicit write limits. When several methods participate, the goal, plan, responsibility owner, evidence, and remaining scope stay continuous instead of restarting the commission. The new `feedback-correction-radius` canary separates visible regression checks from an independent complete-contract oracle and semantic review; these checks do not establish improved target-model behavior.
 
@@ -36,10 +36,10 @@ Release `0.6.5` develops that same complete-outcome thesis at execution time. Cr
 
 Open the [official Servotab listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) in ChatGPT to add the publicly available plugin.
 
-For source inspection or maintainer testing, install the tagged 0.6.5 package from a public checkout:
+For source inspection or maintainer testing, install the tagged 0.7.0 package from a public checkout:
 
 ```bash
-git clone --branch v0.6.5 --depth 1 https://github.com/IndelibleVivi/servotab.git
+git clone --branch v0.7.0 --depth 1 https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal
@@ -53,10 +53,10 @@ Open a fresh Codex task or process after installation so skill discovery is rebu
 codex plugin list --marketplace personal
 ```
 
-For a checkout whose `VERSION` is `0.6.5`, the receipt should contain:
+For a checkout whose `VERSION` is `0.7.0`, the receipt should contain:
 
 ```text
-servotab@personal  installed, enabled  0.6.5
+servotab@personal  installed, enabled  0.7.0
 ```
 
 For a machine-readable discovery check on a system with `jq` and `rg`:
@@ -73,7 +73,7 @@ The command must return a skill entry named `servotab:servotab` from the install
 
 On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. On 2026-09-06, that machine refreshed `servotab@personal` from the clean 0.6.1 release source and verified installed/enabled version 0.6.1, an exact 69-file source/cache match with no symlinks, and fresh-process `servotab:servotab` discovery. These are bounded compatibility and discovery receipts for the named payloads on the inspected machine; they are not a guessed minimum-version guarantee, proof of implicit use or model effectiveness, or a claim about every Codex client.
 
-This source-checkout route is distinct from the officially published directory payload: tagged GitHub source is `0.6.5`, while the observed directory listing remains `0.6.4`. Neither observation proves the other, and no local installation of the directory package is claimed here. The public listing does not expose an archive digest, so the directory payload is not claimed to be byte-identical to either GitHub asset. The source route replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
+This source-checkout route is distinct from the officially published directory payload: tagged GitHub source is `0.7.0`, while the observed directory listing remains `0.6.4`. Neither observation proves the other, and no local installation of the directory package is claimed here. The public listing does not expose an archive digest, so the directory payload is not claimed to be byte-identical to either GitHub asset. The source route replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
 
 ## Use
 
@@ -85,9 +85,9 @@ Fix the mobile message-bubble shift, identify the root cause, implement the repa
 
 The router may keep a clear, reversible change direct or read one relevant method when the work carries material pressure. It does not manufacture a plan, worktree, test ritual, subagent, or second review merely because those mechanisms exist. Before deep work it also settles responsibility: a bounded, noisy, or otherwise substantial lane can go to one worker, explicit solo requests stay in the main session, and trivial work or frequent cross-owner decisions are not split for coordination benefit. Coupling alone never forces the main session; the coupled parts of one responsibility simply stay together in whichever single lane owns them.
 
-The current source candidate extends `plan` to form and maintain execution strategy: a settled goal can still leave meaningful sequencing, effort, evidence or recovery decisions. It reuses the current task record, revises only affected work when evidence changes, and saves a durable plan when continuity needs it. With no repository convention, `docs/plans/<task-slug>.md` is a fallback; small clear work can stay inline. Resume from the explicit task entry and check current code and evidence before trusting old completion marks. Planning does not switch the host into Plan Mode or add permission to implement, commit or publish.
+Release `0.7.0` extends `plan` to form and maintain execution strategy: a settled goal can still leave meaningful sequencing, effort, evidence or recovery decisions. It reuses the current task record, revises only affected work when evidence changes, and saves a durable plan when continuity needs it. With no repository convention, `docs/plans/<task-slug>.md` is a fallback; small clear work can stay inline. Resume from the explicit task entry and check current code and evidence before trusting old completion marks. Planning does not switch the host into Plan Mode or add permission to implement, commit or publish.
 
-This Plan upgrade is unreleased. Its first bounded live comparison accepted all six candidate attempts and five of six baseline attempts; one baseline recovery omitted unknown historical publication state. This small synthetic study does not establish general effectiveness or an efficiency gain, and full behavioral acceptance remains open. See the [specification](docs/specs/plan-strategy.md), [current implementation plan](docs/plans/plan-strategy.md) and [scenario coverage](evals/plan-strategy.md). Tagged `0.6.5` installation examples still install the published behavior.
+This Plan upgrade ships in 0.7.0. Its first bounded live comparison accepted all six candidate attempts and five of six baseline attempts; one baseline recovery omitted unknown historical publication state. This small synthetic study does not establish general effectiveness or an efficiency gain, and full behavioral acceptance remains open. See the [specification](docs/specs/plan-strategy.md), [current implementation plan](docs/plans/plan-strategy.md) and [scenario coverage](evals/plan-strategy.md). Tagged `0.7.0` installation examples select this released source contract.
 
 Invoke a method explicitly when you want precise control:
 
@@ -103,7 +103,7 @@ $tdd establish strict red-green evidence for this stale-cursor regression.
 $spec-chain turn this approved specification into a complete implementation plan; the current tranche must not replace the full scope.
 ```
 
-With the unreleased source candidate, a material-led task can use the new shortcut:
+A material-led task can use Incorporate directly:
 
 ```text
 $incorporate absorb this discussion and feedback into the current project; preserve the choices already made, judge the remaining proposals, and implement and verify the supported changes.
@@ -125,7 +125,7 @@ Calling `$worktree` does not request a new checkout. Parking can remove an inact
 
 ## Method set
 
-This source candidate contains thirteen skills: one implicit router and twelve explicit leaves. `incorporate` takes the former `review-feedback` slot; it does not add a thirteenth leaf. Published release artifacts retain the method set recorded for their exact tags.
+Release `0.7.0` contains thirteen skills: one implicit router and twelve explicit leaves. `incorporate` takes the former `review-feedback` slot; it does not add a thirteenth leaf. Published release artifacts retain the method set recorded for their exact tags.
 
 | Skill | Activation | Purpose |
 |---|---|---|
@@ -180,9 +180,9 @@ Other surfaces have separate jobs:
 
 ## Evidence and claim boundaries
 
-The tagged 0.6.5 release contains exactly 70 manifest-owned package files with one implicit router and twelve explicit-only leaves. It retains the portable root manifest, Windows-safe text identity, responsibility-routing, worktree lifecycle, discussion-intake and evidence-scoped diagnostic guidance from earlier releases, then connects execution and correction across methods. Its source pack contains twenty-five cases; twenty-one require semantic review and twelve adversarial controls are retained. Deterministic fixtures and repository tests do not establish live model behavior.
+The tagged 0.7.0 release contains exactly 70 manifest-owned package files with one implicit router and twelve explicit-only leaves. It retains the portable root manifest, Windows-safe text identity, responsibility routing, workspace lifecycle and connected execution guarantees from earlier releases, then adds Plan strategy, comparative Design/Debug judgments and Incorporate. Its source pack contains thirty cases; twenty-six require semantic review, with sixty-three activation seeds and nineteen adversarial controls. Deterministic fixtures and repository tests do not establish live model behavior.
 
-The 0.6.5 release receipt and public asset readback prove source and package consistency for the tagged revision under the observed checks. They do not prove behavior on every machine, website deployment, installation, activation, or owner acceptance on those separate surfaces. The official directory listing is separately observed at `0.6.4`, which establishes public availability of that listing surface only; it does not expose package bytes, prove local installation, or establish live model effectiveness. Exact checks and remaining behavioral evidence are recorded in the release notes and current state.
+The 0.7.0 release receipt and public asset readback prove source and package consistency for the tagged revision under the observed checks. They do not prove behavior on every machine, website deployment, installation, activation, or owner acceptance on those separate surfaces. The last separately observed official directory listing was at `0.6.4`, which establishes public availability of that listing surface only; it does not expose package bytes, prove local installation, or establish live model effectiveness. Exact checks and remaining behavioral evidence are recorded in the release notes and current state.
 
 Maintainers with the standalone `fieldlab` CLI may inspect the source-owned subject pack without invoking a target model:
 
@@ -192,12 +192,10 @@ fieldlab selftest fieldlab-pack.json
 fieldlab list fieldlab-pack.json
 ```
 
-The integrated unreleased source candidate contains thirty cases; twenty-six declare
-non-empty semantic-review requirements. It has sixty-three activation seeds and
-nineteen adversarial controls: the original twelve and three Plan controls remain, with four new
-incorporation controls. See the [field evidence pack](evals/README.md) for the two
+The source pack retains the original twelve controls and three Plan controls, with
+four new incorporation controls. See the [field evidence pack](evals/README.md) for the two
 new cases and the existing cases whose method trace paths moved to `incorporate`.
-These source counts do not replace the published release counts above. All cases have
+All cases have
 deterministic fixture checks, but those checks do not execute a target model or
 close declared semantic-review requirements. Positive delegation cannot be
 asserted by the trace ceiling (`max_subagent_events`), so its canary pairs a

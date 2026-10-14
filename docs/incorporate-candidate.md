@@ -2,7 +2,7 @@
 
 The supplied candidate starts from `93c59048a37d5ac7a25afcbc78106f6280499410`.
 Its integration and installation receipts below describe the historical `0.6.5`
-candidate payload. The integrated source is now in [0.7.0 release preparation](releases/0.7.0.md);
+candidate payload. The integrated source ships in [0.7.0](releases/0.7.0.md);
 source identity must still include the commit and working-tree state.
 The published `v0.6.5` archive remains immutable.
 Named-host installation and discovery have their own receipt in

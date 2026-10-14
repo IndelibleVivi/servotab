@@ -1,21 +1,26 @@
 # Servotab release state
 
-## 0.7.0 release preparation (2026-10-14)
+## Current release: 0.7.0 (published 2026-10-14)
 
-The release candidate combines the integrated Incorporate and Plan strategy
-source with the Design/Debug judgments already merged through PR #53.
-`VERSION` and both plugin manifests are `0.7.0`. One implicit router, twelve
-explicit leaves and seventy package files remain; explicit `$review-feedback`
-calls migrate to `$incorporate`, with technical feedback verification retained.
-See the [release notes](releases/0.7.0.md) for changes and compatibility.
+[Servotab 0.7.0](https://github.com/IndelibleVivi/servotab/releases/tag/v0.7.0)
+is the public Latest, non-prerelease GitHub release. [PR #54](https://github.com/IndelibleVivi/servotab/pull/54)
+merged Plan strategy, comparative Design/Debug judgments and Incorporate as
+`0c79fac18628f97a5b22db932e69f7aa3859b373`; tag `v0.7.0` resolves exactly to
+that commit and tree `ce8d088368ab760dfef52ea193284e9618244843`.
+`VERSION`, both plugin manifests and `PACK_MANIFEST.json` are `0.7.0`.
+The package remains one implicit router, twelve explicit leaves and seventy
+files. Upgrade explicit `$review-feedback` calls to `$incorporate`; no alias
+ships, and technical feedback verification remains within Incorporate.
+See the [release notes](releases/0.7.0.md) for the complete changes and limits.
 
-The current published GitHub release remains `0.6.5` until exact tag and asset
-readback establishes the new publication. The last separately observed public
-Directory listing is `0.6.4`; no upload, installation or website deployment is
-part of this preparation. Historical candidate installation and behavioral
-evidence below retain their original payload identities and limits. Full Plan
-behavioral acceptance and receipt-bound Incorporate semantic acceptance remain
-open; release preparation does not close either.
+Main Validate run [38564454579](https://github.com/IndelibleVivi/servotab/actions/runs/38564454579)
+passed all seven jobs. The four public assets are `servotab-0.7.0-plugin.zip`,
+`servotab-0.7.0-source.zip`, `release-receipt.json` and `SHA256SUMS`.
+Local exact-commit build, main-CI artifact, downloaded draft and fresh public
+download passed the complete release-builder check. The 339,822-byte plugin
+ZIP has SHA-256 `b6f4a5a185ebf1bb8d41357894c8fa2d8dcf3bc3d6991cb46fa4ece66bcf90f1`.
+The owner-controlled manual upload copy is byte-identical to that public asset.
+Later documentation commits do not replace the immutable release artifacts.
 
 Fresh local preparation checks passed canonical/generated sync, thirteen-skill
 validation, seventy-file manifest identity, packaging selftest, all 87 Python
@@ -26,7 +31,26 @@ Node `22.16.0`. The existing `undici@8.11.2` engine warning and five npm audit
 findings (one moderate, four high) remain; no website dependency update is part
 of this plugin release. An independent bounded source review confirmed the
 change coverage and migration; the stale SVG accessible label was corrected
-without changing glyph geometry or raster assets.
+without changing glyph geometry or raster assets. Two earlier CI jobs exposed
+a disposable release-fixture cleanup race. Fixtures now disable automatic Git
+maintenance; the focused nine-test suite passed with zero maintenance launches,
+and subsequent PR and exact-main cross-platform gates passed.
+
+The last separately observed public Directory version is `0.6.4`; no OpenAI
+upload or publication is established by this release. The production website
+remains at its separately observed 0.6.5 deployment below. Website source now
+targets the 0.7.0 GitHub install and method contracts; source updates do not deploy
+that site. No new local installation or activation was performed. The October 12
+installation receipt below retains its `0.6.5` candidate identity. Full Plan
+behavioral acceptance and receipt-bound Incorporate semantic acceptance remain
+open; publication does not close either, and no new live-model evaluation ran.
+
+The publication documentation follow-up passed a fresh pinned-Node dependency
+install, all nine website tests and the eight-route build. Local headless Chromium
+checks of Home, Methods and Docs at 1280 px and 390 px found no horizontal overflow,
+broken images or browser errors/warnings. Inspected Methods and Docs renders were
+readable; all twelve method links target `v0.7.0`. These checks do not update the
+production deployment observation.
 
 ## Integrated Incorporate source candidate (2026-10-12)
 
@@ -175,7 +199,7 @@ This verifies installation identity and fresh-process discovery, not automatic
 context refresh inside an existing conversation or a new live behavior attempt.
 No target-model calls, merge, release or deployment accompanied installation.
 
-## Current release: 0.6.5 (published 2026-10-01)
+## Previous release: 0.6.5 (published 2026-10-01)
 
 [Servotab 0.6.5](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.5) is the public Latest, non-prerelease GitHub release. [PR #50](https://github.com/IndelibleVivi/servotab/pull/50) merged the release preparation as `c9fe5e6e773adb6ea99f349244f0fe3f5dadffdb`, and tag `v0.6.5` resolves exactly to that source and tree `a3afab72613ed40ae9f9eaf50009865e220623de`. `VERSION`, both plugin manifests and the generated `PACK_MANIFEST.json` are `0.6.5`. The production website now shows the 0.6.5 GitHub install target while the independently observed public OpenAI directory listing remains `0.6.4`. See the [0.6.5 release notes](releases/0.6.5.md).
 

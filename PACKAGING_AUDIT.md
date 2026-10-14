@@ -1,6 +1,6 @@
-# Packaging audit — Servotab 0.7.0 release candidate
+# Packaging audit — Servotab 0.7.0 release
 
-Maintainer release-preparation audit. This defines checked source/package properties and their limits; it is not an independent security certification, directory approval, deployment receipt, or target-model effectiveness result. Exact CI and release identities are recorded by their run and `release-receipt.json`, not inferred from this filename.
+Maintainer release audit. This defines checked source/package properties and their limits; it is not an independent security certification, directory approval, deployment receipt, or target-model effectiveness result. Exact CI and release identities are recorded by their run and `release-receipt.json`, not inferred from this filename.
 
 ## Identity and ownership
 
@@ -14,7 +14,7 @@ The current gate verifies canonical LF source/generated text, exact binary bytes
 
 SVGs are parsed as XML with a real SVG namespace root and a narrow passive-geometry/paint allowlist. The observed upload scanner requires a viewBox of at least 48 × 48 even when explicit dimensions are larger. Non-finite dimensions, malformed XML, event attributes, external resources, and declarations are rejected. This does not claim to validate every aspect of SVG rendering.
 
-Pillow verifies PNG structure and decodes image pixels. Exact dimensions, source 8-bit RGBA, one frame, bounded size, and complete termination are required. Skill icons are 400 × 400; the release builder also checks the 512 × 512 composer and 1024 × 1024 logo. Pillow and PyYAML are pinned maintainer-only dependencies, absent from the skill payload. No icon geometry or raster image changes are part of the 0.7.0 candidate.
+Pillow verifies PNG structure and decodes image pixels. Exact dimensions, source 8-bit RGBA, one frame, bounded size, and complete termination are required. Skill icons are 400 × 400; the release builder also checks the 512 × 512 composer and 1024 × 1024 logo. Pillow and PyYAML are pinned maintainer-only dependencies, absent from the skill payload. No icon geometry or raster image changes are part of the 0.7.0 release.
 
 Regressions cover the previously accepted malformed SVG/PNG inputs, metadata ambiguity, package expansion, generator writes through symlinks, archive reproducibility, dirty/staged/untracked source, output tampering, and exact payload membership. Public behavior fixtures retain the existing-normalizer and false-green publication controls, add discussion-intake coverage, and exercise cross-boundary diagnosis, missing native-host conditions, and information-bearing diagnostic progress. Their baselines and expected repairs are checked independently where executable; these are fixture controls, not model runs.
 
