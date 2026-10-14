@@ -5,10 +5,10 @@ export const SITE = {
   wordmark: "servotab",
   origin: "https://servotab.com",
   version: pluginManifest.version,
-  // Bind the unreleased catalog to its pushed source contracts.
-  methodContractsRef: "05e3360f4604521ee94e2a887a3ff236c5690d94",
+  // Bind the catalog to the immutable release containing its contracts.
+  methodContractsRef: "v0.7.0",
   // Observed public surfaces; advance each only after its own readback.
-  githubReleaseVersion: "0.6.5",
+  githubReleaseVersion: "0.7.0",
   directoryVersion: "0.6.4",
   description:
     "A Codex plugin for planning, implementation, debugging, code review, and verification. Keep clear changes direct and match engineering methods to the work.",

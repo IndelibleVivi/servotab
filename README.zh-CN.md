@@ -9,11 +9,11 @@ Servotab 是一个 independent、community-maintained 的 Codex engineering plug
 
 > Method as exponent, not machinery.
 
-最新 GitHub release：**[`0.6.5`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.5)**，接通 planning、execution、review correction 与跨 method 连续性，不新增 runtime machinery。Source pack 共 25 个 case，其中 21 个声明了非空的 semantic-review requirements，保留 12 个 adversarial controls；router／十二个 leaves／70 个文件的 package topology 不变。见 [0.6.5 release notes](docs/releases/0.6.5.md)。Tag 与 release receipt 证明 exact source 和 package identity，但不证明已安装、部署网站、更新目录或改善 live model behavior。
+最新 GitHub release：**[`0.7.0`](https://github.com/IndelibleVivi/servotab/releases/tag/v0.7.0)**，汇总 Plan strategy、持久任务连续性、Design/Debug 对照判断与 Incorporate。Package 仍为一个 implicit router、十二个 explicit leaves、70 个文件，不新增 runtime machinery。见 [0.7.0 release notes](docs/releases/0.7.0.md)。Tag 与 release receipt 证明 exact source 和 package identity，但不证明已安装、部署网站、更新目录或改善 live model behavior。
 
-另行观察的 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 仍显示版本 `0.6.4`、开发者 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。GitHub release 与 Directory publication 依旧被刻意记录为不同状态，listing 本身也不暴露 package digest。0.6.5 plugin ZIP 已提供给 owner 更新目录，但 ZIP 可用不等于 Directory 已更新。具体证据和边界见 [current state](docs/current-state.md)。
+最近一次另行观察的 [OpenAI Plugins Directory listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) 显示版本 `0.6.4`、开发者 `Yifei Fang`，并列出包含 `Worktree` 在内的完整 13 个 Servotab skills。GitHub release 与 Directory publication 依旧被刻意记录为不同状态，listing 本身也不暴露 package digest。0.7.0 plugin ZIP 已提供给 owner 更新目录，但 ZIP 可用不等于 Directory 已更新。具体证据和边界见 [current state](docs/current-state.md)。
 
-**0.7.0 release candidate：** 本 checkout 以 `incorporate` 替代 active `review-feedback` method，同时保留 Plan strategy 与 Design/Debug 判断改进。旧的显式 `$review-feedback` 调用需改为 `$incorporate`，技术 review 核实仍在同一 method 内。下方 method 表描述这一候选；已发布的 `v0.6.5` 归档与单独观察的 Directory listing 保留各自发布时的 method set，下方 tagged 安装命令仍选择已发布版本。见 [0.7.0 release notes](docs/releases/0.7.0.md)。
+**升级到 0.7.0：** 把旧的显式 `$review-feedback` 调用与保存的 method-path references 改为 `$incorporate`。新包不提供 compatibility alias；技术 review 核实与 shared-contract correction 继续保留在 Incorporate 内。旧 tagged archives 与另行观察的 Directory payload 保留各自发布时的 method set。
 
 ## 它做什么
 
@@ -28,7 +28,7 @@ Servotab 保持四个稳定承诺：
 
 日志、截图、review、旧计划或 generated artifact 中可以同时包含 evidence、inspiration 和已经采纳的要求。具体作用由当前请求决定；材料不会自动授权自己，也不会因为被写进文件就变成当前 specification。
 
-Source candidate 的 [Incorporate](methods/incorporate.md) 负责让指定讨论、反馈、研究和参考对目标项目产生恰当影响：先覆盖重要贡献，再选择实施重点；结合上下文理解纠正，同时保留用户明确选择的形式及其目的。尚未定论的想法可以改善设计、例子或验证，无须自动变成功能。用户要求落实时，它会把采纳后的影响带到相关工作中并核验结果；技术 review 的代码核实仍在同一 method 内完成。明确限定的小任务保持有界，不增加强制摘要文件、台账或审批轮次。
+[Incorporate](methods/incorporate.md) 负责让指定讨论、反馈、研究和参考对目标项目产生恰当影响：先覆盖重要贡献，再选择实施重点；结合上下文理解纠正，同时保留用户明确选择的形式及其目的。尚未定论的想法可以改善设计、例子或验证，无须自动变成功能。用户要求落实时，它会把采纳后的影响带到相关工作中并核验结果；技术 review 的代码核实仍在同一 method 内完成。明确限定的小任务保持有界，不增加强制摘要文件、台账或审批轮次。
 
 Release `0.6.5` 把同一条 complete-outcome 主线继续推进到执行阶段：跨组件计划先识别穿过真实 entry point 与关键 state boundary 的早期路径；执行在批量扩展 peer features 前先接通并观察它，同时保留 risk-appropriate red-green 工作与完整 accepted scope；已经核实的 review correction 会沿共享 contract 到达受影响的 consumers，同时保护合法例外与明确写入限制。多个 methods 共同参与时，goal、plan、responsibility owner、evidence 与 remaining scope 延续在同一项工作里，而不是重新开场。新增的 `feedback-correction-radius` canary 分开 visible regression、独立 complete-contract oracle 与 semantic review；这些检查不证明 target model 已改善。
 
@@ -36,10 +36,10 @@ Release `0.6.5` 把同一条 complete-outcome 主线继续推进到执行阶段�
 
 在 ChatGPT 打开 [Servotab 官方 listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94)，即可添加已公开上线的 plugin。
 
-如果要 inspect source 或做 maintainer testing，可以从 public checkout 通过 repository marketplace 安装 tagged 0.6.5 package：
+如果要 inspect source 或做 maintainer testing，可以从 public checkout 通过 repository marketplace 安装 tagged 0.7.0 package：
 
 ```bash
-git clone --branch v0.6.5 --depth 1 https://github.com/IndelibleVivi/servotab.git
+git clone --branch v0.7.0 --depth 1 https://github.com/IndelibleVivi/servotab.git
 cd servotab
 codex plugin marketplace add .
 codex plugin add servotab@personal
@@ -53,10 +53,10 @@ codex plugin add servotab@personal
 codex plugin list --marketplace personal
 ```
 
-当 checkout 的 `VERSION` 为 `0.6.5` 时，输出中应出现：
+当 checkout 的 `VERSION` 为 `0.7.0` 时，输出中应出现：
 
 ```text
-servotab@personal  installed, enabled  0.6.5
+servotab@personal  installed, enabled  0.7.0
 ```
 
 如果本机同时有 `jq` 与 `rg`，可以进一步检查 fresh-process prompt input：
@@ -69,7 +69,7 @@ codex debug prompt-input "Check Servotab discovery." \
 
 命令应返回名为 `servotab:servotab` 的 installed plugin skill entry。2026-08-31，`0.4.0-rc1` 在 macOS 与 `codex-cli 0.147.0` 上完成过 source-checkout marketplace route、installed/enabled receipt 与 fresh-process router discovery。2026-09-05，当前 maintainer machine 又安装了 `0.6.0` source candidate，取得 69-file source/cache exact match，并在 fresh-process prompt input 中观察到 `servotab:servotab`。2026-09-06，同一台机器从 clean 的 0.6.1 release source 刷新 `servotab@personal`，核验 installed/enabled version 0.6.1、无 symlink 的 69-file source/cache exact match，以及 fresh-process `servotab:servotab` discovery。这些都是针对具名 payload 与具名机器的有限 compatibility / discovery receipts，不是猜测的最低版本承诺、implicit use 或模型效果的证明，也不代表所有 Codex client 都已验证。
 
-这条 source-checkout 路径与已经公开的 directory payload 始终是两个独立状态：tagged GitHub source 是 `0.6.5`，最近观察到的 directory listing 仍为 `0.6.4`。两者互不证明，这里也不声称本机安装了 directory package。公开 listing 不暴露 archive digest，因此也不声称 directory payload 与任一 GitHub asset byte-identical。它取代旧版 `install.sh` / root `skills/` global installer；前述本机 receipt 也不会外推到其他机器或证明 live model behavior。
+这条 source-checkout 路径与已经公开的 directory payload 始终是两个独立状态：tagged GitHub source 是 `0.7.0`，最近观察到的 directory listing 仍为 `0.6.4`。两者互不证明，这里也不声称本机安装了 directory package。公开 listing 不暴露 archive digest，因此也不声称 directory payload 与任一 GitHub asset byte-identical。它取代旧版 `install.sh` / root `skills/` global installer；前述本机 receipt 也不会外推到其他机器或证明 live model behavior。
 
 如果其他本机仍有 manifest-owned Softpowers `0.3.0-rc5` 或更早 global layer，请先读 [迁移指南](docs/migration-from-softpowers.md) 和 [current state](docs/current-state.md)。当前 maintainer roots 已完成 manifest-driven retirement 并验证为 clear；不要把这条 receipt 当成手动删除其他机器旧目录的许可。
 
@@ -83,9 +83,9 @@ codex debug prompt-input "Check Servotab discovery." \
 
 Router 会按任务的真实 pressure 决定保持 direct，还是读取一份相关 reference。它不会宣布内部分类，也不会因为 method 可用就制造 plan、worktree、TDD、subagent 或第二轮 review。进入深层执行前，它还会先确定 responsibility：有界、noisy 或足够实质的 lane 可以交给一个 worker；显式 solo request 留在主 session；trivial 工作或频繁的 cross-owner 决策不会为了 coordination benefit 被拆分。Coupling 本身从不强制走主 session，一个 responsibility 内部耦合的部分只需留在同一个 lane 里。
 
-当前源码候选把 `plan` 扩展为持续的执行策略：目标已定，仍可能需要安排顺序、投入、证据时机与恢复。它复用同一任务记录，新证据只修订受影响的工作；需要跨阶段或跨会话接续时主动保存。没有 repo 约定时，可使用 `docs/plans/<task-slug>.md`；清楚的小改允许只保留行内策略。恢复时从明确任务入口核对当前代码与证据，不盲信旧的完成勾选。规划不会切换 harness 的 Plan Mode，也不增加实施、提交或发布权限。
+Release `0.7.0` 把 `plan` 扩展为持续的执行策略：目标已定，仍可能需要安排顺序、投入、证据时机与恢复。它复用同一任务记录，新证据只修订受影响的工作；需要跨阶段或跨会话接续时主动保存。没有 repo 约定时，可使用 `docs/plans/<task-slug>.md`；清楚的小改允许只保留行内策略。恢复时从明确任务入口核对当前代码与证据，不盲信旧的完成勾选。规划不会切换 harness 的 Plan Mode，也不增加实施、提交或发布权限。
 
-这项 Plan 升级尚未发布。首轮有界 live 对照中，候选六次全部 accepted，基线六次中五次 accepted；一次基线恢复遗漏了历史发布状态仍未知的信息。这组小规模合成试验不证明普遍效果或效率提升，完整行为验收仍未关闭。见[规格](docs/specs/plan-strategy.md)、[当前实施计划](docs/plans/plan-strategy.md)与[场景覆盖](evals/plan-strategy.md)。安装示例中的 tagged `0.6.5` 仍指向已发布行为。
+这项 Plan 升级随 0.7.0 发布。首轮有界 live 对照中，候选六次全部 accepted，基线六次中五次 accepted；一次基线恢复遗漏了历史发布状态仍未知的信息。这组小规模合成试验不证明普遍效果或效率提升，完整行为验收仍未关闭。见[规格](docs/specs/plan-strategy.md)、[当前实施计划](docs/plans/plan-strategy.md)与[场景覆盖](evals/plan-strategy.md)。安装示例中的 tagged `0.7.0` 指向这份已发布 source contract。
 
 明确需要某个 method 时可以直接调用：
 
@@ -101,7 +101,7 @@ $tdd 为这个 stale cursor bug 建立严格 red-green 回归证据。
 $spec-chain 依据这份 approved spec 建立完整 implementation plan；当前 tranche 不得替代完整 scope。
 ```
 
-使用尚未发布的 source candidate 时，可以明确调用新的材料吸收入口：
+材料驱动的任务可以明确调用 Incorporate：
 
 ```text
 $incorporate 把这份讨论和反馈吸收到当前项目里；保留已经作出的选择，独立判断其余提案，落实并验证有依据的改动。
@@ -123,7 +123,7 @@ $worktree 盘点这个 repo 的 worktrees，建议哪些保留或收起；现在
 
 ## Method set
 
-本 source candidate 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit leaves。`incorporate` 接替原 `review-feedback` 的位置，不增加第十三个 leaf；已发布的归档保留其 exact tag 对应的 method set。
+Release `0.7.0` 一共包含 13 个 skills：一个 implicit router 和 12 个 explicit leaves。`incorporate` 接替原 `review-feedback` 的位置，不增加第十三个 leaf；已发布的归档保留其 exact tag 对应的 method set。
 
 | Skill | Activation | 用途 |
 |---|---|---|
@@ -168,7 +168,7 @@ PACK_MANIFEST.json                            exact derived payload identity
 
 `methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions、invocation 与 skill-icon source metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存 canonical identity assets 与十二枚 method glyph sources；generator 会把每个 skill 的透明 SVG / 400px PNG，以及 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。Paper-backed icon fallback 保留在 canonical assets 中，不进入默认 runtime payload。
 
-已发布的 0.6.5 release 是 70-file manifest-owned payload，保持 one-router/twelve-leaf topology。它保留既有 portable root manifest、Windows-safe 文本身份、responsibility routing、worktree 生命周期、discussion-intake 与 evidence-scoped diagnosis 指引，再接通跨 method 的 execution 与 correction。Source pack 共 25 个 case，其中 21 个需要 semantic review，12 个 adversarial controls 不变。Release receipt 与 public asset readback 证明 tagged revision 的 source/package consistency；它们不证明 live model behavior、安装、生效或网站部署。公开 Directory listing 已单独观察到 `0.6.4`，这只说明 listing 层面的公开可见，不代表本机安装或行为效果。相关证据和缺口在 release notes 与 current state 中分别记录。
+已发布的 0.7.0 release 是 70-file manifest-owned payload，保持 one-router/twelve-leaf topology。它保留既有 portable root manifest、Windows-safe 文本身份、responsibility routing、worktree 生命周期与 connected execution 保证，再加入 Plan strategy、Design/Debug 对照判断与 Incorporate。Source pack 共 30 个 case，其中 26 个需要 semantic review，另有 63 activation seeds 和 19 adversarial controls。Release receipt 与 public asset readback 证明 tagged revision 的 source/package consistency；它们不证明 live model behavior、安装、生效或网站部署。最近一次另行观察的公开 Directory listing 为 `0.6.4`，这只说明对应 listing 的公开可见，不代表本机安装或行为效果。相关证据和缺口在 release notes 与 current state 中分别记录。
 
 以下路径各有不同责任：
 
@@ -224,13 +224,13 @@ npm run build
 
 ## 发布产物与验证边界
 
-已公开的 [Servotab 0.6.5 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.5) 提供用于 repository marketplace 的 `servotab-0.6.5-source.zip`，以及仅含 70 个 manifest-owned plugin 文件、供 owner 自行上传目录的 `servotab-0.6.5-plugin.zip`。较早 release assets 保持不可变历史。归档不会自动安装依赖或改动宿主。
+已公开的 [Servotab 0.7.0 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.7.0) 提供用于 repository marketplace 的 `servotab-0.7.0-source.zip`，以及仅含 70 个 manifest-owned plugin 文件、供 owner 自行上传目录的 `servotab-0.7.0-plugin.zip`。较早 release assets 保持不可变历史。归档不会自动安装依赖或改动宿主。
 
 `release-receipt.json` 将两个 ZIP 绑定到同一源码 commit、tree 与包 manifest；`SHA256SUMS` 覆盖两个 ZIP 和 receipt。摘要只能核对一致性，不能单独认证发布者身份，仍需检查 GitHub 来源。完整操作见 [Releasing](docs/releasing.md)。
 
 维护校验使用 Python 3.10+，依赖固定在 `requirements-dev.txt`：PyYAML 与 Pillow 均不进入插件 payload。校验覆盖实际 PNG 解码、被动 SVG XML 解析、包结构与发布回归、源码/生成物一致性及网站测试和构建。
 
-当前整合后未发布的 source candidate 有 30 个 case，其中 26 个声明了非空的 semantic-review requirements，另有 63 条 activation seeds 和 19 个 adversarial controls：原有 12 个和 3 个 Plan 对照完整保留，新增 4 个 incorporation 对照。两个新增 case 及既有 case 的 method trace 路径迁移见 [field evidence pack](evals/README.md)；这些当前源码计数不替换上文已发布 release 的历史计数。全部 case 都有 deterministic fixture checks，但这不能自动关闭 semantic review requirements。
+0.7.0 source pack 有 30 个 case，其中 26 个声明了非空的 semantic-review requirements，另有 63 条 activation seeds 和 19 个 adversarial controls：原有 12 个和 3 个 Plan 对照完整保留，新增 4 个 incorporation 对照。两个新增 case 及既有 case 的 method trace 路径迁移见 [field evidence pack](evals/README.md)；这些计数对应 0.7.0，较早 release 保留其历史计数。全部 case 都有 deterministic fixture checks，但这不能自动关闭 semantic review requirements。
 
 正向 delegation 无法用 trace ceiling（`max_subagent_events`）断言，因此该 canary 把有界上限与要求提供真实 dispatch 与 integration 证据的 review requirements 配对；trivial、explicit-solo 与 capability-unavailable 三个 canary 继续保持 `max_subagent_events: 0`。已检查的 Field Lab 0.2 baseline source `d9f717a` 缺少所需 public input；Field Lab main `b87b14b` 已提供 `fieldlab review --requirement-outcomes`，并通过该 CLI 证明当时的 9 个 human-required cases 可被 Servotab 的 synthetic producer-consumer contract check 接受。`delegate-bounded-investigation` 的第一次 live attempt 虽获得三条 semantic support，却因重复的 fixed-label assertions 被拒；移除这些 literal checks、保留原 semantic review boundary 后，第二次独立预算的 attempt 通过 deterministic verification，新 reviewer 也支持全部三条 requirement，Servotab acceptance 返回 `accepted`。该证据只覆盖这一个 pinned workspace-scoped case；0.6.5 的 connected-execution 与 correction-radius cases 尚无 live target-model acceptance receipt，release 本身也不等于 install 或 activate。Incorporation candidate 的 fixtures 与冷启动试做也不构成正式 Field Lab acceptance receipt 或本地安装验收。任何后续 live eval 仍需新的计划和显式 invocation budget；Field Lab 不会自动 retry。
 
