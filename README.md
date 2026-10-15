@@ -222,7 +222,7 @@ automatically.
 
 ## Release artifacts
 
-The published [Servotab 0.6.5 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.6.5) provides `servotab-0.6.5-source.zip` for the repository marketplace route and `servotab-0.6.5-plugin.zip` with the 70-file plugin payload for an owner-controlled directory upload. Earlier release assets remain immutable historical artifacts. Neither archive installs dependencies or changes a host automatically.
+The published [Servotab 0.7.0 GitHub Release](https://github.com/IndelibleVivi/servotab/releases/tag/v0.7.0) provides `servotab-0.7.0-source.zip` for the repository marketplace route and `servotab-0.7.0-plugin.zip` with the 70-file plugin payload for an owner-controlled directory upload. Earlier release assets remain immutable historical artifacts. Neither archive installs dependencies or changes a host automatically.
 
 `release-receipt.json` binds both archives to one source commit/tree and the package manifest. `SHA256SUMS` covers both ZIPs and the receipt. Checksums establish consistency, not publisher authentication. Verify the release source and GitHub provenance as well. Maintainer preparation and draft/publish steps are in [Releasing](docs/releasing.md).
 
