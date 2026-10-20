@@ -49,6 +49,12 @@ A proposed mechanism is not automatically a settled decision. Unless the user ex
 
 When the user asks to build, adapt, or borrow a named behavior, preserve that direction and explore only the decisions still needed to implement it. Do not turn an implementation request into an open-ended product workshop.
 
+## Let references inform open choices
+
+After enough local context to understand the commission, seek relevant external possibilities before settling a substantial open product, interaction, visual, architecture, or implementation choice. Reuse still-applicable references; a clear goal does not settle the means. Preserve accepted choices even in an empty repo, and distinguish implemented from accepted when revisiting a mature or repeatedly rejected work.
+
+Use the available inquiry method at the point of need. When Soundings is available, its Search method owns discovery and purpose-matched reading; Study, Explore, or Shape can contribute without a mandatory sequence. Compare multiple sources around the same live question, inspect the medium needed for the intended claim, and carry a locally justified relationship into the design. Retain the existing solution when comparison supports it. Findings do not expand authority, and a completed report does not finish an authorized implementation.
+
 ## Check the capability boundary
 
 Before designing a new integration, transport, fallback, or abstraction, verify the assumption that makes it necessary:

@@ -34,6 +34,12 @@ When a material decision remains open, read `references/design.md` before commit
 - Use delegated reversible choices and explicit best-effort assumptions where authorized. Do not turn the absence of a prewritten design into a request for approval.
 - Stop questioning when the current work is decision-ready. Do not exhaust unrelated future branches or reopen settled product decisions without contradictory evidence.
 
+## Discover before settling open choices
+
+When a substantial product, interaction, visual, architecture, or implementation choice remains open, inspect relevant external solutions and observable references before substantial commitment. A clear goal or confidence in a first implementation is not evidence that the choice is settled. Reuse applicable prior references; clear small changes and faithful implementation of accepted choices stay direct.
+
+Use an available inquiry capability when it helps. Soundings Search supports proactive discovery, Study explains returned material, Explore develops a candidate, and Shape makes a consequential choice judgeable; none is a required dependency or sequence. Keep the same outcome and authority, form a local judgment from findings, and continue the engineering work through the initiating use scene.
+
 ## Search before new common machinery
 
 Before introducing a general-purpose helper, dependency, integration, transport, adapter, parser, validator, or fallback, inspect the existing repository path and installed dependencies or runtime first.

@@ -32,6 +32,8 @@ The [Incorporate](methods/incorporate.md) method carries specified discussions, 
 
 Release `0.6.5` develops that same complete-outcome thesis at execution time. Cross-component plans identify an early path through the real entry point and material state boundary; execution connects and observes that path before multiplying peer features, preserving risk-appropriate red-green work and the full accepted scope; and a confirmed review correction follows the shared contract to affected consumers while protecting legitimate exceptions and explicit write limits. When several methods participate, the goal, plan, responsibility owner, evidence, and remaining scope stay continuous instead of restarting the commission. The new `feedback-correction-radius` canary separates visible regression checks from an independent complete-contract oracle and semantic review; these checks do not establish improved target-model behavior.
 
+The current source candidate adds proactive external discovery before substantial open product, interaction, visual, architecture, or implementation choices. It reuses applicable references, preserves settled small changes, and can use Soundings when available without making it a dependency. The task owner carries findings into the original engineering work. This is a source follow-up to the tagged release; see [current state](docs/current-state.md) for validation and activation limits.
+
 ## Install
 
 Open the [official Servotab listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94) in ChatGPT to add the publicly available plugin.

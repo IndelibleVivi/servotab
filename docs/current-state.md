@@ -1,5 +1,13 @@
 # Servotab release state
 
+## Open-choice discovery source candidate (2026-10-21)
+
+The router source and Design method now call for relevant external discovery before a substantial open product, interaction, visual, architecture, or implementation choice hardens. Existing applicable references can be reused; clear small changes and faithful work on accepted choices stay direct. Soundings is an optional available inquiry capability, not a dependency or required sequence. The engineering owner continues the original commission after research returns.
+
+Canonical changes are in `scripts/build_skills.py` and `methods/design.md`; the router, explicit Design leaf, and router's Design reference were regenerated. Version metadata remains `0.7.0`; this candidate differs from the immutable tagged release. Generated sync, thirteen-skill validation, seventy-file manifest identity, packaging selftest, all 94 Python regressions, public-tree audit and compilation passed. Field Lab validate/selftest/list also passed without target-model calls.
+
+A separately authorized [four-run source-catalog comparison](https://github.com/IndelibleVivi/soundings/blob/main/docs/dogfood-0.4.0.md) used one configured dsf/ACP model and harness, an open task and a settled small change. Both small repairs stayed direct and both open-task artifacts functioned in a bounded coordinator browser check. The candidate read the revised router, Design and Explore guidance but still implemented its open-task direction without external discovery. That criterion failed; no behavior improvement or independent contribution by either package is established. No installation, activation, new release, directory update, or deployment is established by the source change.
+
 ## Current release: 0.7.0 (published 2026-10-14)
 
 [Servotab 0.7.0](https://github.com/IndelibleVivi/servotab/releases/tag/v0.7.0)

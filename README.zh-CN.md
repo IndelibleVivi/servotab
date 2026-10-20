@@ -32,6 +32,8 @@ Servotab 保持四个稳定承诺：
 
 Release `0.6.5` 把同一条 complete-outcome 主线继续推进到执行阶段：跨组件计划先识别穿过真实 entry point 与关键 state boundary 的早期路径；执行在批量扩展 peer features 前先接通并观察它，同时保留 risk-appropriate red-green 工作与完整 accepted scope；已经核实的 review correction 会沿共享 contract 到达受影响的 consumers，同时保护合法例外与明确写入限制。多个 methods 共同参与时，goal、plan、responsibility owner、evidence 与 remaining scope 延续在同一项工作里，而不是重新开场。新增的 `feedback-correction-radius` canary 分开 visible regression、独立 complete-contract oracle 与 semantic review；这些检查不证明 target model 已改善。
 
+当前源码候选在重要的产品、交互、视觉、架构或实现选择仍开放时，要求在大量投入前主动接触外部可能性。已有适用参考可以复用，明确小修保持直接；Soundings 可在可用时参与，不成为依赖。任务负责人继续把发现落实到原工程委托。这是 tagged release 之后的源码增量，验证与激活边界见 [current state](docs/current-state.md)。
+
 ## 安装
 
 在 ChatGPT 打开 [Servotab 官方 listing](https://chatgpt.com/plugins/plugins_6a952d7c729c819196646fda7ec9ad94)，即可添加已公开上线的 plugin。
