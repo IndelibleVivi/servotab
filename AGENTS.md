@@ -56,6 +56,8 @@ delegate
 finish
 ```
 
+Router discovery metadata covers engineering work inside and outside repositories. The router body decides method depth from the requested behavior and risk. The documented single-skill layout for file-based hosts uses the same generated `servotab/SKILL.md` and `servotab/references/`, with the package license and notice. Maintain both forms from the canonical catalog, generator, and methods.
+
 `incorporate` owns the requested absorption of supplied material into appropriate effects on the target work, including technical review feedback. `design` retains open design decisions; `delegate` retains responsibility choice and worker coordination. Reading can be delegated before implementation focus is chosen, and a worker may own a complete bounded incorporation responsibility.
 
 Retired current IDs are `brainstorm`, `receive-review`, `review-feedback`, and `parallel`. Preserve them only in historical release records, provenance, and migration explanation. Do not restore them as active methods, skills, references, invocation examples, issue fields, or package paths. The source transition to `incorporate` does not rewrite the method set in already-published release artifacts.

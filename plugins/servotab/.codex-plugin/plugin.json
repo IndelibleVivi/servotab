@@ -17,12 +17,12 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Servotab",
-    "shortDescription": "Risk-scaled repository methods",
-    "longDescription": "Servotab helps Codex plan, implement, debug, review, and verify repository work. It keeps clear changes direct, adds stronger method only when risk or uncertainty requires it, and closes claims with fresh evidence while preserving the complete requested outcome.",
+    "shortDescription": "Risk-scaled engineering",
+    "longDescription": "Servotab helps Codex plan, change, debug, review, and verify code, scripts, configuration, hooks, automation, and services, inside or outside a repository. Clear changes stay direct. Risk and uncertainty determine method depth, and fresh evidence verifies the complete requested outcome.",
     "developerName": "Yifei Fang",
     "category": "Developer Tools",
     "capabilities": [
-      "Repository engineering",
+      "Engineering guidance",
       "Risk-scaled methods",
       "Fresh verification"
     ],
@@ -31,7 +31,7 @@
     "privacyPolicyURL": "https://servotab.com/privacy",
     "termsOfServiceURL": "https://servotab.com/terms",
     "defaultPrompt": [
-      "Use $servotab to fix this repository bug, identify the root cause, implement the complete repair, and verify it.",
+      "Use $servotab to find why this local startup hook fails, fix the cause, and verify the repair.",
       "Use $review to inspect this diff and report only verified, actionable correctness and regression findings.",
       "Use $spec-chain to turn this approved specification into a complete implementation plan without shrinking its scope."
     ],

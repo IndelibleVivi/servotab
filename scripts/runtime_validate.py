@@ -208,11 +208,11 @@ def _validate_plugin_interface(
         return [f"{label} interface must be an object"]
     expected_values = {
         "displayName": "Servotab",
-        "shortDescription": "Risk-scaled repository methods",
+        "shortDescription": "Risk-scaled engineering",
         "developerName": PUBLISHER_NAME,
         "category": "Developer Tools",
         "capabilities": [
-            "Repository engineering",
+            "Engineering guidance",
             "Risk-scaled methods",
             "Fresh verification",
         ],

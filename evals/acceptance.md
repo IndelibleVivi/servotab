@@ -37,7 +37,7 @@ fieldlab review /path/to/study/fieldlab.json \
 Against that merged-source CLI, synthetic receipts for the then-current nine
 human-required cases produced review records accepted by the Servotab checker,
 with zero target-agent invocations. The current source candidate has twenty-six
-human-required cases out of thirty, sixty-three activation seeds, and nineteen
+human-required cases out of thirty, sixty-nine activation seeds, and nineteen
 adversarial controls; the original twelve controls are preserved unchanged. Its four delegation canaries use the same
 declared mechanics. One `delegate-bounded-investigation` attempt now has an independent
 review supporting all three semantic requirements, but its deterministic receipt

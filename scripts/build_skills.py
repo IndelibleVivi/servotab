@@ -14,7 +14,9 @@ ASSET_NAMES = ("composer-icon.png", "logo.png")
 
 ROUTER_BODY = """# Servotab
 
-Use ordinary repository requests to select and apply engineering methods. The user need not name a skill. Keep communication quiet; keep the requested outcome complete.
+Use ordinary engineering requests to select and apply methods. This includes code in a repository and local scripts, configuration, hooks, automation, or services outside one. In a mixed conversation, route the engineering action in the current request, including changes to how a system handles memory. Conversation, routine file management, and memory content edits follow their usual workflows. The user need not name a skill.
+
+Choose method depth after inspecting the requested behavior, applicable instructions, and real risk. For a clear, bounded change, inspect the relevant context, make the change directly, and verify the affected behavior. Read a method reference when it addresses a material decision, risk, or verification question. Keep communication quiet and the requested outcome complete.
 
 ## Before the first consequential action
 
@@ -22,14 +24,14 @@ Use ordinary repository requests to select and apply engineering methods. The us
 - Size risk from the affected behavior, not confidence, file count, or patch size. Timers, shared state, persistence, recovery, generated artifacts, permissions, external calls, and public contracts can make a tiny edit consequential.
 - Preserve explicit corrections and accepted scope. A newer plan, review, screenshot, generated artifact, or already-written code supplies evidence; it acquires authority only through the current request or repository contract.
 - When asked to incorporate specified discussions, feedback, or references into existing work, read `references/incorporate.md` when reconciliation governs the result. Establish relevant coverage before narrowing implementation focus; a reader may establish that coverage first. Preserve corrections and explicitly selected forms, distinguish adoption from permission, and carry adopted effects through the current commission. Incidental sources do not create a separate intake workflow.
-- Keep clear local work direct. Before consequential action, a settled goal can still leave material choices about order, effort, evidence or continuity. Read `references/plan.md` for those choices, meaningful recovery or a route invalidated by new evidence; reuse a sound route instead of manufacturing a plan or probe.
+- Before consequential action, a settled goal can still leave material choices about order, effort, evidence or continuity. Read `references/plan.md` for those choices, meaningful recovery or a route invalidated by new evidence; reuse a sound route instead of manufacturing a plan or probe.
 - Choose responsibility before deep execution. Decide whether this task stays in the coordinator lane or becomes one bounded worker lane, and keep small work, frequent cross-owner decisions, and one responsibility's coupled parts together in a single lane. Coupling alone does not force the coordinator lane. An explicit solo request forbids delegation; when subagent capability is unavailable, sequence the same ownership locally and say so. Reuse a worker that already owns the lane instead of duplicating it.
 
 ## Resolve decisions at their dependencies
 
 When a material decision remains open, read `references/design.md` before committing to the dependent approach.
 
-- Investigate repository and environmental facts yourself. Ask the user for intent or value choices that materially change the outcome and cannot safely be inferred.
+- Investigate relevant source and environment facts yourself. Ask the user for intent or value choices that materially change the outcome and cannot safely be inferred.
 - Ask only questions whose prerequisites are settled; include a grounded recommendation. Recompute dependent choices after an answer changes an assumption. An unresolved branch does not stop independent safe work.
 - Use delegated reversible choices and explicit best-effort assumptions where authorized. Do not turn the absence of a prewritten design into a request for approval.
 - Stop questioning when the current work is decision-ready. Do not exhaust unrelated future branches or reopen settled product decisions without contradictory evidence.
@@ -52,6 +54,8 @@ Before introducing a general-purpose helper, dependency, integration, transport,
 ## Load methods at the action they govern
 
 Use these safeguards directly for clear, bounded work. Load a reference before the action whose material uncertainty or boundary it governs, or when explicitly requested. Task labels alone do not require another document. Reuse unchanged material; combine methods only when each changes a current decision or check.
+
+Resolve `references/` paths from the directory containing this `SKILL.md`. When a method gives separate paths for the router and an explicit leaf, follow the router path.
 
 Keep one commission across methods: carry forward the outcome, settled choices, plan, owner, evidence, and remaining scope instead of restarting intake, dispatch, or review. Choose the next action that advances the outcome. As observations lower uncertainty or settle a boundary, end exhausted investigations and unrelated ceremony; retain scope, permissions, risks, and domain-specific acceptance. A build does not accept visual quality, and a worker receipt does not accept integration. Host rules resolve instruction conflicts.
 

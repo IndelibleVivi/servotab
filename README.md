@@ -24,7 +24,7 @@ Servotab keeps four stable promises:
 - Fresh evidence closes the loop.
 - The requested outcome stays whole.
 
-Describe ordinary repository work normally. The only implicit-eligible skill is the `servotab` router; twelve method leaves remain explicit-only shortcuts. Servotab does not replace your prompt, `AGENTS.md`, repository rules, permission boundaries, Git decisions, or deployment authority.
+Describe the engineering task in your own words. In the Codex plugin, `servotab` is the sole router eligible for implicit use. The twelve method leaves are explicit shortcuts. Your request, applicable instructions, and host permissions govern work, including Git and deployment decisions.
 
 A log, screenshot, review, old plan, or generated artifact can contribute evidence, inspiration, and accepted requirements together. Its role follows the current request; it does not authorize itself or silently become the current specification.
 
@@ -32,7 +32,9 @@ The [Incorporate](methods/incorporate.md) method carries specified discussions, 
 
 Release `0.6.5` develops that same complete-outcome thesis at execution time. Cross-component plans identify an early path through the real entry point and material state boundary; execution connects and observes that path before multiplying peer features, preserving risk-appropriate red-green work and the full accepted scope; and a confirmed review correction follows the shared contract to affected consumers while protecting legitimate exceptions and explicit write limits. When several methods participate, the goal, plan, responsibility owner, evidence, and remaining scope stay continuous instead of restarting the commission. The new `feedback-correction-radius` canary separates visible regression checks from an independent complete-contract oracle and semantic review; these checks do not establish improved target-model behavior.
 
-The current source candidate adds proactive external discovery before substantial open product, interaction, visual, architecture, or implementation choices. It reuses applicable references, preserves settled small changes, and can use Soundings when available without making it a dependency. The task owner carries findings into the original engineering work. This is a source follow-up to the tagged release; see [current state](docs/current-state.md) for validation and activation limits.
+The current source router names code, local scripts, configuration, hooks, automation, and services as engineering work, including small jobs outside a repository. Once opened, it keeps clear changes direct and reads a method only when the work warrants it. Routine computer use, standalone explanations, conversation, and memory content edits stay with their usual workflows.
+
+The current source also adds proactive external discovery before substantial open product, interaction, visual, architecture, or implementation choices. It reuses applicable references, preserves settled small changes, and can use Soundings when available without making it a dependency. The task owner carries findings into the original engineering work. These source updates follow the tagged release. See [current state](docs/current-state.md) for verification and availability.
 
 ## Install
 
@@ -76,6 +78,17 @@ The command must return a skill entry named `servotab:servotab` from the install
 On 2026-08-31, the `0.4.0-rc1` source-checkout marketplace route, installed/enabled package receipt, and fresh-process router discovery were verified on macOS with `codex-cli 0.147.0`. On 2026-09-05, the current maintainer machine installed the `0.6.0` source candidate with an exact 69-file source/cache match and observed `servotab:servotab` in fresh-process prompt input. On 2026-09-06, that machine refreshed `servotab@personal` from the clean 0.6.1 release source and verified installed/enabled version 0.6.1, an exact 69-file source/cache match with no symlinks, and fresh-process `servotab:servotab` discovery. These are bounded compatibility and discovery receipts for the named payloads on the inspected machine; they are not a guessed minimum-version guarantee, proof of implicit use or model effectiveness, or a claim about every Codex client.
 
 This source-checkout route is distinct from the officially published directory payload: tagged GitHub source is `0.7.0`, while the observed directory listing remains `0.6.4`. Neither observation proves the other, and no local installation of the directory package is claimed here. The public listing does not expose an archive digest, so the directory payload is not claimed to be byte-identical to either GitHub asset. The source route replaces the retired root `skills/` installer and the old `install.sh` / `uninstall.sh` flow. If another machine still has a manifest-owned Softpowers `0.3.0-rc5` or earlier global layer, follow the [migration guide](docs/migration-from-softpowers.md). Do not manually delete legacy directories based on the maintainer machine's completed retirement receipt.
+
+### Single-skill layout for file-based hosts
+
+For a host that discovers skill folders, use the generated `servotab` router. Use the `main` source checkout to try the expanded routing described above. The folder layout is verified from source. Host discovery and invocation outside Codex have yet to be verified on a running client.
+
+1. Copy `SKILL.md` and the entire `references/` directory from `plugins/servotab/skills/servotab/` into a `servotab/` skill folder. Include `LICENSE` and `NOTICE.md` from `plugins/servotab/` at the same revision. This provides one entry point and all twelve methods. The router follows the router-side paths in the references.
+2. Place that single directory where the host discovers skills. If you already sync the whole Servotab skill tree, select only this router layout in the sync. In local Claude Code, use `.claude/skills/servotab/` for a project or `~/.claude/skills/servotab/` for personal use. Confirm `/servotab` appears in the host's skill menu. [Claude Code skills documentation](https://code.claude.com/docs/en/skills).
+
+If the host lists the skill but regularly misses relevant requests, you can add this hint to its existing local instructions, such as `CLAUDE.md` or `AGENTS.md`.
+
+> Use the available Servotab skill for engineering tasks on code, scripts, configuration, hooks, automation, or services, including outside a repository. Keep clear changes direct. Leave ordinary computer use, conversation, and memory content edits to their usual workflows.
 
 ## Use
 
@@ -131,7 +144,7 @@ Release `0.7.0` contains thirteen skills: one implicit router and twelve explici
 
 | Skill | Activation | Purpose |
 |---|---|---|
-| `servotab` | implicit eligible | Quiet router for ordinary repository work |
+| `servotab` | implicit eligible | Quiet router for engineering work |
 | `design` | explicit only | Resolve open feature, interaction, or architecture decisions |
 | `spec-chain` | explicit only | Preserve an approved specification across planning and execution |
 | `plan` | explicit only | Form and maintain execution strategy, evidence timing and durable task continuity |

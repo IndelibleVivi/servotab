@@ -40,8 +40,8 @@
   "files": [
     {
       "path": "plugins/servotab/.codex-plugin/plugin.json",
-      "size": 1708,
-      "sha256": "d3f9c1ea6d62057d61f98860ff3a5c32dda26337b1d92a6aa54b14a4b0464905"
+      "size": 1706,
+      "sha256": "481bfc241efafbaf871281eeef43201c19d38843bcc24e2d748ee719052e501b"
     },
     {
       "path": "plugins/servotab/LICENSE",
@@ -65,8 +65,8 @@
     },
     {
       "path": "plugins/servotab/plugin.json",
-      "size": 1902,
-      "sha256": "ce753b381fc60f26daa3e11fd39b68a507537f2125becfb1f45f916d26afb0ac"
+      "size": 1900,
+      "sha256": "043471c6fd06692bd2c851aa1220b2cf0cd907d2b73b240fef2fa57785944c43"
     },
     {
       "path": "plugins/servotab/skills/debug/SKILL.md",
@@ -230,13 +230,13 @@
     },
     {
       "path": "plugins/servotab/skills/servotab/SKILL.md",
-      "size": 12051,
-      "sha256": "83945bb25602baa28f55bceb831f34cebb59181064c007f6861476ea891cb5e5"
+      "size": 12748,
+      "sha256": "918fc74caf1dbd33385ec1645c6405bd23a660125e287eb5d7ef1ab448c7c9a6"
     },
     {
       "path": "plugins/servotab/skills/servotab/agents/openai.yaml",
-      "size": 439,
-      "sha256": "e2953e38304b7f9d4263a01bbf26d32557ec910ab70a5ec9e7fbf219990a05b9"
+      "size": 433,
+      "sha256": "1aeefdc83f20776432a47293147d86270dc29cd5061c74555c0ba1ef2c56d26b"
     },
     {
       "path": "plugins/servotab/skills/servotab/assets/icon-400.png",

@@ -4,16 +4,16 @@ from __future__ import annotations
 ROUTER = {
     "name": "servotab",
     "description": (
-        "Use for hands-on repository work when a quiet, risk-scaled engineering method "
-        "can improve design, execution strategy, implementation, material incorporation, debugging, review, delegation, workspace lifecycle, or verification. "
-        "Keep clear local changes direct, preserve the complete requested outcome, and add "
-        "method only where risk or uncertainty justifies it. Do not use for general technical "
-        "explanations, simple file lookup, casual discussion, or non-engineering writing."
+        "Use for engineering work on code, scripts, configuration, hooks, automation, "
+        "services, or development workspaces, inside or outside a repository. Includes "
+        "small changes, technical design, planning, feedback incorporation, debugging, "
+        "review, verification, and delegation. Skip standalone explanations, simple lookups, "
+        "routine computer use, casual conversation, and non-engineering writing."
     ),
     "display_name": "Servotab",
-    "short_description": "Risk-scaled repository methods",
+    "short_description": "Risk-scaled engineering",
     "default_prompt": (
-        "Use $servotab to deliver the complete repository outcome with proportional method "
+        "Use $servotab to deliver the complete engineering outcome with proportional method "
         "and execution strategy where consequential choices remain, then verify with fresh, risk-matched evidence."
     ),
     "implicit": True,

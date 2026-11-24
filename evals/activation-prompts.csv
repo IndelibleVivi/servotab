@@ -62,3 +62,9 @@ negative-reference-introduction,false,none,只介绍这个参考项目的机制�
 incorporate-control-settled-spec,true,spec-chain,这份完整规格已经批准，按它实施即可；不用重新投票评估各条要不要采纳，保持已有的计划和验收范围。
 incorporate-control-incidental-doc,true,debug,继续定位已复现的时区bug；这篇文档仅用于核实当前库的一个参数，别把它变成独立资料采纳任务。
 incorporate-control-obvious-correction,true,none_or_execute,用户只指出这一行按钮文字有拼写错，改成已指定的文字并检查即可，不需要意见归类报告。
+implicit-local-script-direct,true,none,把这个没进 Git 的 PowerShell 脚本里一条成功提示改成 Sync complete，跑现有的 dry-run 看一下输出。
+implicit-local-hook-debug,true,debug,本机的登录 hook 偶尔在配置加载前启动同步服务，导致它使用旧目录。找出启动时序问题并修复；这些配置和脚本都不在 repo 里。
+implicit-local-automation-recovery,true,design_or_plan,这个独立目录里的备份自动化要改成失败后自动重跑，跑到一半留下的状态该怎么恢复还没定。先确定恢复策略，再修改对应配置和脚本。
+implicit-local-service-verify,true,verify,核对这台机器上的服务配置重启后会不会生效，以及待处理队列能否继续消费。只做读取和可用的离线检查，先别重启服务。
+negative-routine-file-organization,false,none,把下载目录里的三张截图放进已有的附件文件夹。
+negative-memory-content,false,none,把这段对话里我明确说过的称呼偏好整理成一条记忆。

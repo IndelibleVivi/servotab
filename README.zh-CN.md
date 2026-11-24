@@ -24,7 +24,7 @@ Servotab 保持四个稳定承诺：
 - Fresh evidence closes the loop.
 - The requested outcome stays whole.
 
-日常 repository work 只需正常描述任务，不必先挑 method。唯一具备 implicit-invocation eligibility 的 router 是 `servotab`；其余 12 个 leaf skills 都是 explicit-only shortcuts。它们不会覆盖你的 prompt、`AGENTS.md`、repo rules、权限边界、Git decision 或 deployment authority。
+用平常的话描述工程任务就好。Codex plugin 中只有 `servotab` router 可以隐式调用，其余 12 个 leaf 都是显式快捷入口。任务范围、Git 操作和部署仍由你的请求、适用规则和宿主权限决定。
 
 日志、截图、review、旧计划或 generated artifact 中可以同时包含 evidence、inspiration 和已经采纳的要求。具体作用由当前请求决定；材料不会自动授权自己，也不会因为被写进文件就变成当前 specification。
 
@@ -32,7 +32,9 @@ Servotab 保持四个稳定承诺：
 
 Release `0.6.5` 把同一条 complete-outcome 主线继续推进到执行阶段：跨组件计划先识别穿过真实 entry point 与关键 state boundary 的早期路径；执行在批量扩展 peer features 前先接通并观察它，同时保留 risk-appropriate red-green 工作与完整 accepted scope；已经核实的 review correction 会沿共享 contract 到达受影响的 consumers，同时保护合法例外与明确写入限制。多个 methods 共同参与时，goal、plan、responsibility owner、evidence 与 remaining scope 延续在同一项工作里，而不是重新开场。新增的 `feedback-correction-radius` canary 分开 visible regression、独立 complete-contract oracle 与 semantic review；这些检查不证明 target model 已改善。
 
-当前源码候选在重要的产品、交互、视觉、架构或实现选择仍开放时，要求在大量投入前主动接触外部可能性。已有适用参考可以复用，明确小修保持直接；Soundings 可在可用时参与，不成为依赖。任务负责人继续把发现落实到原工程委托。这是 tagged release 之后的源码增量，验证与激活边界见 [current state](docs/current-state.md)。
+当前源码的 router 明确覆盖代码、本机脚本、配置、hooks、自动化和服务，包括 Git 仓库之外的小改。读到入口后，清楚的小改直接做，遇到值得进一步判断的风险或不确定性再读对应 method。日常电脑操作、独立解释、闲聊和记忆内容维护仍走各自的流程。
+
+当前源码也在重要的产品、交互、视觉、架构或实现选择仍开放时，要求在大量投入前主动接触外部可能性。已有适用参考可以复用，明确小修保持直接。Soundings 可按需参与，任务负责人继续把发现落实到原工程委托。这些是 tagged release 之后的更新，验证和可用状态见 [current state](docs/current-state.md)。
 
 ## 安装
 
@@ -74,6 +76,17 @@ codex debug prompt-input "Check Servotab discovery." \
 这条 source-checkout 路径与已经公开的 directory payload 始终是两个独立状态：tagged GitHub source 是 `0.7.0`，最近观察到的 directory listing 仍为 `0.6.4`。两者互不证明，这里也不声称本机安装了 directory package。公开 listing 不暴露 archive digest，因此也不声称 directory payload 与任一 GitHub asset byte-identical。它取代旧版 `install.sh` / root `skills/` global installer；前述本机 receipt 也不会外推到其他机器或证明 live model behavior。
 
 如果其他本机仍有 manifest-owned Softpowers `0.3.0-rc5` 或更早 global layer，请先读 [迁移指南](docs/migration-from-softpowers.md) 和 [current state](docs/current-state.md)。当前 maintainer roots 已完成 manifest-driven retirement 并验证为 clear；不要把这条 receipt 当成手动删除其他机器旧目录的许可。
+
+### 文件式宿主的单入口用法
+
+宿主若支持从文件夹发现 skill，可以使用生成的 `servotab` router。要试上文扩展后的入口范围，请取 `main` 的源码。这份目录布局已通过源码核对。Codex 之外的客户端发现和调用仍待实测。
+
+1. 从 `plugins/servotab/skills/servotab/` 复制 `SKILL.md` 和整个 `references/` 到名为 `servotab/` 的 skill 目录，一并带上同一版本 `plugins/servotab/` 下的 `LICENSE` 和 `NOTICE.md`。这个目录包含一个入口和十二份方法。Router 按 reference 中给它的路径继续读。
+2. 把这一个目录放到宿主的 skill 发现路径下。如果之前同步了整棵 Servotab skill tree，将同步范围改为这里的单入口目录。本机 Claude Code 可以用项目内的 `.claude/skills/servotab/`，或个人目录 `~/.claude/skills/servotab/`。在宿主的 skill 菜单确认 `/servotab` 可见。[Claude Code skills 文档](https://code.claude.com/docs/en/skills)。
+
+如果宿主找得到 skill，却经常漏掉相关任务，可以在现有的 `CLAUDE.md` 或 `AGENTS.md` 等本地说明里加一句提示。
+
+> 工程任务涉及代码、脚本、配置、hooks、自动化或服务时，使用当前可用的 Servotab skill，仓库之外也一样。清楚的小改直接做。日常电脑操作、对话和记忆内容编辑走各自的流程。
 
 ## 怎么用
 
@@ -129,7 +142,7 @@ Release `0.7.0` 一共包含 13 个 skills：一个 implicit router 和 12 个 e
 
 | Skill | Activation | 用途 |
 |---|---|---|
-| `servotab` | implicit eligible | 日常 repo work 的 quiet router |
+| `servotab` | implicit eligible | 日常工程任务的入口 |
 | `design` | explicit only | 把仍有关键开放决策的 idea 变成可实现方向 |
 | `spec-chain` | explicit only | 让 approved spec 的完整 scope 穿过 plan 与 execution |
 | `plan` | explicit only | 形成并维护执行策略、证据时机与持久任务连续性 |
@@ -170,7 +183,7 @@ PACK_MANIFEST.json                            exact derived payload identity
 
 `methods/*.md` 是 12 个 method bodies 的唯一 canonical source；`scripts/skill_catalog.py` 是 names、descriptions、invocation 与 skill-icon source metadata 的 catalog。`plugins/servotab/skills/**` 是 generated projection，不要直接修改。Root `assets/` 保存 canonical identity assets 与十二枚 method glyph sources；generator 会把每个 skill 的透明 SVG / 400px PNG，以及 manifest 需要的 `composer-icon.png` 与 `logo.png` 投影进 plugin package。Paper-backed icon fallback 保留在 canonical assets 中，不进入默认 runtime payload。
 
-已发布的 0.7.0 release 是 70-file manifest-owned payload，保持 one-router/twelve-leaf topology。它保留既有 portable root manifest、Windows-safe 文本身份、responsibility routing、worktree 生命周期与 connected execution 保证，再加入 Plan strategy、Design/Debug 对照判断与 Incorporate。Source pack 共 30 个 case，其中 26 个需要 semantic review，另有 63 activation seeds 和 19 adversarial controls。Release receipt 与 public asset readback 证明 tagged revision 的 source/package consistency；它们不证明 live model behavior、安装、生效或网站部署。最近一次另行观察的公开 Directory listing 为 `0.6.4`，这只说明对应 listing 的公开可见，不代表本机安装或行为效果。相关证据和缺口在 release notes 与 current state 中分别记录。
+已发布的 0.7.0 release 是 70-file manifest-owned payload，保持 one-router/twelve-leaf topology。它保留既有 portable root manifest、Windows-safe 文本身份、responsibility routing、worktree 生命周期与 connected execution 保证，再加入 Plan strategy、Design/Debug 对照判断与 Incorporate。该 tag 的 source pack 共 30 个 case，其中 26 个需要 semantic review，另有 63 activation seeds 和 19 adversarial controls。Release receipt 与 public asset readback 证明 tagged revision 的 source/package consistency；它们不证明 live model behavior、安装、生效或网站部署。最近一次另行观察的公开 Directory listing 为 `0.6.4`，这只说明对应 listing 的公开可见，不代表本机安装或行为效果。相关证据和缺口在 release notes 与 current state 中分别记录。
 
 以下路径各有不同责任：
 

@@ -6,12 +6,12 @@ import { PROJECT_LINKS, RELATED_PROJECTS, repoFile, SITE } from "../config";
 
 <BaseLayout
   title="Install and use the Codex plugin"
-  description="Install Servotab in Codex and use its engineering methods for repository work, with practical prompts, verification guidance, and clear permission boundaries."
+  description="Install Servotab in Codex and use its engineering methods, with practical prompts, verification guidance, and clear permission boundaries."
 >
   <PageIntro
     index="01 / Docs"
     title="Method stays subordinate to the work."
-    description="Servotab is a skills-only engineering method layer for Codex. It calibrates how much process a repository task receives without taking ownership away from the task, the repo, or the user."
+    description="Servotab is a skills-only engineering method layer for Codex. It scales the work to the task's risk while keeping the requested outcome and user authority in view."
   />
 
   <section class="content-band" aria-labelledby="get-started-heading">
@@ -65,10 +65,16 @@ codex plugin add servotab@personal`}</code></pre>
 
         <h3>One implicit router. Twelve explicit shortcuts.</h3>
         <p>
-          Describe ordinary repository work normally. Servotab may keep a clear change
+          Describe the engineering task in your own words. Servotab may keep a clear change
           direct or load one relevant method when risk or uncertainty warrants it. Use
           names such as <code>$review</code>, <code>$tdd</code>, or <code>$spec-chain</code>{" "}
           when you want precise control; the twelve method leaves are not implicit workflows.
+        </p>
+        <p>
+          The current source candidate explicitly covers work on local scripts,
+          configuration, hooks, automation, and services outside a repository.
+          The install commands above use the tagged GitHub release. See the{" "}
+          <a href={repoFile("README.md")}>source README</a> for candidate usage and evidence.
         </p>
 
         <h3>A skills-only product boundary.</h3>

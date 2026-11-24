@@ -1,5 +1,15 @@
 # Servotab release state
 
+## Engineering router source candidate (2026-11-24)
+
+The router description now covers small engineering tasks, local scripts, configuration, hooks, automation, and services inside and outside repositories. The router body keeps clear work direct and applies additional method at the depth the task warrants. The [single-skill layout](../README.md#single-skill-layout-for-file-based-hosts) uses the generated router and its twelve references, with the package license and notice. The Codex package has one implicit router, twelve explicit leaves, and seventy files.
+
+Fresh `codex-cli 0.159.1` prompt input in a disposable non-Git directory showed the candidate router from the local skill mount. Its twelve explicit leaves were absent from the implicit catalog. The standalone copy passed skill validation and router reference checks. Generated sync, manifest validation, packaging selftest, all 94 Python regressions, and compilation passed. Field Lab validate/selftest/list covered 30 cases with zero target-agent invocations. The six added activation prompts bring the source seed set to 69 and record expected behavior.
+
+Website preparation under Node `22.16.0` passed all nine tests and built eight static routes. Local Chromium checks covered Home and Docs at 1280 px and 390 px, including the method control and Docs install and source links. `npm ci` reported the existing `undici` engine mismatch and eight audit findings (two moderate, six high).
+
+This is a source candidate with `0.7.0` metadata. Ordinary-language selection, Claude Code discovery, and method use remain unverified. The published release and separately observed host and deployment states are recorded below.
+
 ## Open-choice discovery source candidate (2026-10-21)
 
 The router source and Design method now call for relevant external discovery before a substantial open product, interaction, visual, architecture, or implementation choice hardens. Existing applicable references can be reused; clear small changes and faithful work on accepted choices stay direct. Soundings is an optional available inquiry capability, not a dependency or required sequence. The engineering owner continues the original commission after research returns.

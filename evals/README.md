@@ -7,7 +7,7 @@ containment、receipt contract 与 quota gate 已由 standalone Skill Field Lab 
 Servotab 继续拥有：
 
 - `cases/`：当前未发布源码候选的三十个 repository-owned canaries 及其 fixtures、assertions、expected overlays；其中二十六个声明了非空的 `human_review_requirements`；
-- `activation-prompts.csv`：六十三条 routing seeds；
+- `activation-prompts.csv`：六十九条 routing seeds；
 - `adversarial-controls.json`：十九个反向对照，保留原有十二个、三个 Plan 对照和四个 incorporation 对照；
 - [`submission-test-cases.md`](submission-test-cases.md)：把现有 fixtures 整理成
   reviewer-ready 的 5 positive / 3 negative draft；它不是 portal receipt 或 submission claim；
@@ -112,11 +112,13 @@ Three new canaries cover shared-assumption ordering, stale-record recovery and d
 
 ## Activation seed set
 
-当前未发布源码候选的 `activation-prompts.csv` 有六十三条 seeds，覆盖 implicit positive cases、contextual cases、explicit
+当前未发布源码候选的 `activation-prompts.csv` 有六十九条 seeds，覆盖 implicit positive cases、contextual cases、explicit
 controls 与 adjacent negative controls。不要为了通过 seed set 把 router description
 扩成无边界的万能匹配器。真实 routing claim 还需要相同 repo revision、prompt、
 model、effort、permissions 与可比较环境；一次 current exercise 不能冒充 later
 longitudinal improvement。
+
+入口范围新增六条 prompts，覆盖仓库外的脚本小改、hook 启动时序、自动化恢复决策、服务配置核查，以及普通文件整理和记忆内容维护两条 negative controls。脚本小改可以打开 router 并保持直接，不需要读取额外 method。这里记录预期行为，尚无对应的模型试跑结果。
 
 Delegate seeds 另外区分 host/runtime capability 与 Servotab method selection：
 Ultra、可用 slots 或已经发生的 harness spawn 都不能替代 independent-lane / clean-context
